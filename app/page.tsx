@@ -36,11 +36,46 @@ import {
   sitePhoneHref,
 } from "@/data/site"
 import { featuredMenuItems, formatPrice } from "@/lib/menu"
+import { cn } from "@/lib/utils"
 
 import heroImage from "@/images/food/table-food.png"
-import tastingImage from "@/images/food/kathmandu-tikka-masala.png"
-import grillImage from "@/images/food/mixed-grill.png"
 import startersImage from "@/images/food/samosas-with-salad.png"
+
+interface VenuePhotoPlaceholderProps {
+  title: string
+  alt: string
+  className?: string
+}
+
+function VenuePhotoPlaceholder({
+  title,
+  alt,
+  className,
+}: VenuePhotoPlaceholderProps) {
+  return (
+    <div
+      role="img"
+      aria-label={alt}
+      className={cn(
+        "relative overflow-hidden rounded-[2rem] bg-[linear-gradient(135deg,rgba(240,235,227,1),rgba(228,221,212,1))]",
+        className
+      )}
+    >
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(212,160,23,0.12),transparent_34%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.35),rgba(255,255,255,0))]" />
+      <div className="relative flex h-full items-end p-5 md:p-6">
+        <div className="rounded-2xl bg-[var(--color-surface-lowest)]/88 px-4 py-3 backdrop-blur-sm">
+          <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
+            Photo Placeholder
+          </p>
+          <p className="pt-1 font-heading text-2xl text-on-background">
+            {title}
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 export default function Page() {
   return (
@@ -93,7 +128,7 @@ export default function Page() {
                   asChild
                   size="lg"
                   variant="outline"
-                  className="border-white/14 bg-white/10 text-white hover:bg-white/16 hover:text-white"
+                  className="border-white/12 bg-black/16 text-white hover:bg-black/24 hover:text-white"
                 >
                   <Link href="/menu">
                     View menu
@@ -105,34 +140,39 @@ export default function Page() {
                 {heroSignals.map((signal) => (
                   <div
                     key={signal}
-                    className="rounded-2xl border border-white/10 bg-white/8 px-4 py-3 backdrop-blur-sm"
+                    className="rounded-2xl border border-white/10 bg-black/16 px-4 py-3 text-white/88 backdrop-blur-sm"
                   >
                     {signal}
                   </div>
                 ))}
               </div>
             </div>
-            <div className="paper-panel hidden bg-white/12 text-white/80 backdrop-blur-xl lg:block">
-              <div className="space-y-4">
-                <p className="text-xs font-semibold tracking-[0.22em] text-[var(--color-on-tertiary-container)] uppercase">
-                  Tonight at a glance
-                </p>
-                <div className="space-y-4 text-sm leading-7">
-                  <p className="flex items-start gap-3">
+            <div className="w-full max-w-sm rounded-[2rem] border border-white/10 bg-[linear-gradient(160deg,rgba(8,24,14,0.94),rgba(24,46,31,0.84))] p-5 text-white shadow-[0px_20px_60px_rgba(6,27,14,0.34)] backdrop-blur-md">
+              <div className="space-y-5">
+                <div className="space-y-3">
+                  <div className="h-px w-16 bg-[var(--color-on-tertiary-container)]/70" />
+                  <p className="text-xs font-semibold tracking-[0.22em] text-[var(--color-on-tertiary-container)] uppercase">
+                    Tonight at a glance
+                  </p>
+                </div>
+                <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-black/12">
+                  <p className="flex items-start gap-3 px-4 py-4 text-sm leading-7 text-white/88">
                     <Clock className="mt-1 size-4 shrink-0 text-[var(--color-on-tertiary-container)]" />
                     <span>
                       {openingHours[0].label}: {openingHours[0].hours}
                     </span>
                   </p>
-                  <p className="flex items-start gap-3">
+                  <div className="mx-4 h-px bg-white/8" />
+                  <p className="flex items-start gap-3 px-4 py-4 text-sm leading-7 text-white/88">
                     <MapPin className="mt-1 size-4 shrink-0 text-[var(--color-on-tertiary-container)]" />
                     <span>{siteLocation}</span>
                   </p>
-                  <p className="flex items-start gap-3">
+                  <div className="mx-4 h-px bg-white/8" />
+                  <p className="flex items-start gap-3 px-4 py-4 text-sm leading-7 text-white/88">
                     <Phone className="mt-1 size-4 shrink-0 text-[var(--color-on-tertiary-container)]" />
                     <a
                       href={sitePhoneHref}
-                      className="transition hover:text-white"
+                      className="transition hover:text-[var(--color-on-tertiary-container)]"
                     >
                       {sitePhone}
                     </a>
@@ -254,24 +294,26 @@ export default function Page() {
             title="Good food, easy company, and a setting made for lingering."
             description="Think exposed brick, wooden floors, generous plates, and the sort of room that works just as well for a quick lunch as it does for a longer evening with friends."
           />
-          <div className="grid gap-5 lg:grid-cols-[1.25fr_0.9fr_0.9fr]">
-            <Image
-              src={heroImage}
-              alt="A richly set dining table with dishes and drinks ready to share."
-              className="h-[22rem] w-full rounded-[2rem] object-cover md:h-[32rem]"
-              sizes="(min-width: 1024px) 42vw, 100vw"
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-[1.15fr_0.85fr_0.85fr]">
+            <VenuePhotoPlaceholder
+              title="Exterior"
+              alt="Placeholder for a future exterior photograph of The Old School House on London Road, showing the brick frontage and entrance."
+              className="h-[18rem] md:col-span-2 md:h-[22rem] lg:col-span-1 lg:row-span-2 lg:h-full lg:min-h-[32rem]"
             />
-            <Image
-              src={tastingImage}
-              alt="Kathmandu tikka masala plated with vibrant sauce and garnish."
-              className="h-[15rem] w-full rounded-[2rem] object-cover md:h-[32rem]"
-              sizes="(min-width: 1024px) 29vw, 100vw"
+            <VenuePhotoPlaceholder
+              title="Bar"
+              alt="Placeholder for a future bar photograph showing the single-bar setup inside The Old School House."
+              className="h-[15rem] md:h-[18rem]"
             />
-            <Image
-              src={grillImage}
-              alt="A mixed grill platter with skewers, grilled meats, and salad."
-              className="h-[15rem] w-full rounded-[2rem] object-cover md:h-[32rem]"
-              sizes="(min-width: 1024px) 29vw, 100vw"
+            <VenuePhotoPlaceholder
+              title="Dining Room"
+              alt="Placeholder for a future dining room photograph showing exposed brick, wooden floors, and guest seating inside The Old School House."
+              className="h-[15rem] md:h-[18rem]"
+            />
+            <VenuePhotoPlaceholder
+              title="Front Garden"
+              alt="Placeholder for a future front garden photograph showing the outdoor seating area at The Old School House."
+              className="h-[15rem] md:col-span-2 md:h-[16rem] lg:col-span-2"
             />
           </div>
           <div className="grid gap-6 lg:grid-cols-3">
@@ -317,22 +359,25 @@ export default function Page() {
               </Link>
             </Button>
           </div>
-          <div className="paper-panel bg-white/10 text-white/78 backdrop-blur-xl">
+          <div className="rounded-[2rem] border border-white/10 bg-[linear-gradient(160deg,rgba(8,24,14,0.9),rgba(26,50,35,0.82))] p-5 text-white shadow-[0px_20px_60px_rgba(6,27,14,0.26)] backdrop-blur-md md:p-6">
             <div className="space-y-5">
-              <p className="text-xs font-semibold tracking-[0.22em] text-[var(--color-on-tertiary-container)] uppercase">
-                Best-fit occasions
-              </p>
+              <div className="space-y-3">
+                <div className="h-px w-16 bg-[var(--color-on-tertiary-container)]/70" />
+                <p className="text-xs font-semibold tracking-[0.22em] text-[var(--color-on-tertiary-container)] uppercase">
+                  Best-fit occasions
+                </p>
+              </div>
               <div className="grid gap-3 text-sm leading-7 md:grid-cols-2">
-                <div className="rounded-2xl bg-white/8 px-4 py-4">
+                <div className="rounded-[1.4rem] border border-white/10 bg-white/6 px-4 py-4 text-white/88">
                   Birthday dinners and longer-table gatherings
                 </div>
-                <div className="rounded-2xl bg-white/8 px-4 py-4">
+                <div className="rounded-[1.4rem] border border-white/10 bg-white/6 px-4 py-4 text-white/88">
                   Work drinks and after-match socials
                 </div>
-                <div className="rounded-2xl bg-white/8 px-4 py-4">
+                <div className="rounded-[1.4rem] border border-white/10 bg-white/6 px-4 py-4 text-white/88">
                   Quiz-style nights and theme-led evenings
                 </div>
-                <div className="rounded-2xl bg-white/8 px-4 py-4">
+                <div className="rounded-[1.4rem] border border-white/10 bg-white/6 px-4 py-4 text-white/88">
                   Sports watch parties and team meetups
                 </div>
               </div>

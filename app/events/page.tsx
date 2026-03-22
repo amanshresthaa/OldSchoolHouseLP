@@ -162,7 +162,7 @@ export default function EventsPage() {
             description="If you already know the date, the guest list, or the kind of table you want, send it through and we will help put it together."
             invert
           />
-          <div className="space-y-4 text-sm leading-7 text-white/78 md:text-base">
+          <div className="night-panel space-y-4 text-sm leading-7 md:text-base">
             <p>
               Some gatherings only need a few tables and a round of drinks.
               Others need food, space, and a bit more planning. Either way, we
@@ -179,7 +179,7 @@ export default function EventsPage() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="border-white/16 bg-white/8 text-white hover:bg-white/12 hover:text-white"
+                className="border-white/12 bg-black/16 text-white hover:bg-black/24 hover:text-white"
               >
                 <a href={siteEmailHref}>
                   Email for private hire

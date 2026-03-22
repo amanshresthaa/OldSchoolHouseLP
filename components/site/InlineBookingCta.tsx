@@ -37,7 +37,7 @@ export function InlineBookingCta({
             asChild
             size="lg"
             variant="outline"
-            className="border-white/16 bg-white/8 text-white hover:bg-white/12 hover:text-white"
+            className="border-white/12 bg-black/16 text-white hover:bg-black/24 hover:text-white"
           >
             <a href={sitePhoneHref}>
               Call the pub

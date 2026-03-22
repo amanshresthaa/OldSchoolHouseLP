@@ -76,9 +76,7 @@ export function PageHero({
     >
       <div className="mx-auto grid max-w-7xl gap-8 px-5 py-16 sm:px-6 md:px-8 md:py-20 lg:grid-cols-[minmax(0,1fr)_18rem]">
         <div className="max-w-3xl space-y-6">
-          <p className="text-xs font-semibold tracking-[0.22em] text-[var(--color-on-tertiary-container)] uppercase">
-            {eyebrow}
-          </p>
+          <p className="night-kicker">{eyebrow}</p>
           <div className="space-y-4">
             <h1 className="max-w-4xl text-white">{title}</h1>
             <p className="max-w-2xl text-base leading-7 text-white/76 md:text-lg">
@@ -97,7 +95,7 @@ export function PageHero({
                 asChild
                 size="lg"
                 variant={secondaryAction.variant ?? "outline"}
-                className="border-white/15 bg-white/8 text-white hover:bg-white/14 hover:text-white"
+                className="border-white/12 bg-black/16 text-white hover:bg-black/24 hover:text-white"
               >
                 <HeroActionLink href={secondaryAction.href}>
                   {secondaryAction.label}
@@ -106,23 +104,31 @@ export function PageHero({
             ) : null}
           </div>
         </div>
-        <div className="paper-panel space-y-4 bg-white/10 text-sm text-white/80 backdrop-blur-xl">
-          <div className="flex items-center gap-3">
-            <Clock className="size-5 text-[var(--color-on-tertiary-container)]" />
-            <p>Mon-Sun 10:00-00:30</p>
+        <div className="night-panel space-y-5 text-sm">
+          <div className="space-y-3">
+            <div className="night-rule" />
+            <p className="night-kicker">Plan your visit</p>
           </div>
-          <div className="flex items-center gap-3">
-            <MapPin className="size-5 text-[var(--color-on-tertiary-container)]" />
-            <p>London Road, Stony Stratford</p>
-          </div>
-          <div className="flex items-center gap-3">
-            <Phone className="size-5 text-[var(--color-on-tertiary-container)]" />
-            <p>01908 561936</p>
+          <div className="night-list">
+            <div className="night-list-item">
+              <Clock className="mt-1 size-4 shrink-0 text-[var(--color-on-tertiary-container)]" />
+              <p>Mon-Sun 10:00-00:30</p>
+            </div>
+            <div className="night-divider" />
+            <div className="night-list-item">
+              <MapPin className="mt-1 size-4 shrink-0 text-[var(--color-on-tertiary-container)]" />
+              <p>London Road, Stony Stratford</p>
+            </div>
+            <div className="night-divider" />
+            <div className="night-list-item">
+              <Phone className="mt-1 size-4 shrink-0 text-[var(--color-on-tertiary-container)]" />
+              <p>01908 561936</p>
+            </div>
           </div>
           {highlights.length ? (
-            <ul className="space-y-3 pt-3 text-sm leading-6 text-white/76">
+            <ul className="grid gap-3">
               {highlights.map((highlight) => (
-                <li key={highlight} className="border-t border-white/10 pt-3">
+                <li key={highlight} className="night-tile">
                   {highlight}
                 </li>
               ))}

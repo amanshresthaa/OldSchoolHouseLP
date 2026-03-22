@@ -150,16 +150,13 @@ export default function MenuPage() {
             description="A few simple notes to make ordering drinks and food that bit easier."
             invert
           />
-          <div className="grid gap-3">
+          <div className="night-panel grid gap-3">
             {policyNotes.map((note) => (
-              <div
-                key={note}
-                className="rounded-[1.35rem] bg-white/8 px-5 py-4 text-sm leading-7 text-white/78"
-              >
+              <div key={note} className="night-tile">
                 {note}
               </div>
             ))}
-            <div className="rounded-[1.35rem] bg-white/8 px-5 py-4 text-sm leading-7 text-white/78">
+            <div className="night-tile">
               Beer and cider are available by the half pint, spirits in 25ml or
               35ml servings, and still wine in 125ml measures.
             </div>
@@ -167,7 +164,7 @@ export default function MenuPage() {
               asChild
               size="lg"
               variant="outline"
-              className="w-fit border-white/16 bg-white/8 text-white hover:bg-white/12 hover:text-white"
+              className="w-fit border-white/12 bg-black/16 text-white hover:bg-black/24 hover:text-white"
             >
               <a href={sitePhoneHref}>
                 Call the bar
