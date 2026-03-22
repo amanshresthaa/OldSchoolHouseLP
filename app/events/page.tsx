@@ -42,7 +42,7 @@ export default function EventsPage() {
       <PageHero
         eyebrow="Events and private hire"
         title="A venue shape that works for birthdays, match days, and longer-table gatherings."
-        description="From birthday dinners and sports socials to private gatherings with food and drinks, The Old School House has room to bring people together."
+        description="From birthday dinners and sports socials to private gatherings with food and drinks, The Old School House has room to bring everyone together."
         highlights={[
           "65 indoor covers and 60 outdoor covers",
           "Front garden, private courtyard, and open-plan bar space",
@@ -58,7 +58,7 @@ export default function EventsPage() {
             <SectionHeading
               eyebrow="Practical fit"
               title="Enough room to host groups without losing the pub feel."
-              description="Keep it relaxed with drinks in the garden, gather everyone around a longer table, or plan something that runs through the whole evening."
+              description="Keep it relaxed with drinks in the garden, gather everyone around a longer table, or plan something that carries on through the evening."
             />
             <Image
               src={eventsImage}
@@ -86,7 +86,7 @@ export default function EventsPage() {
             <SectionHeading
               eyebrow="Occasions"
               title="More than just formal private hire."
-              description="Big celebrations, casual get-togethers, match-day meetups, and tasting nights all feel at home here."
+              description="Big celebrations, casual get-togethers, match-day meetups, and tasting nights all feel right at home here."
             />
             <Button asChild size="lg">
               <a href={siteEmailHref}>
@@ -110,7 +110,7 @@ export default function EventsPage() {
 
       <InlineBookingCta
         title="Need a table first and an event later?"
-        description="If you are only sorting a meal this time, keep the route simple and book a table now. For private hire, tasting nights, or watch parties, come back and send the fuller enquiry."
+        description="If this visit is just drinks or dinner, book a table now. If you are planning something bigger, send us the details and we will help with the rest."
       />
 
       <section className="bg-background py-16 md:py-24">
@@ -159,7 +159,7 @@ export default function EventsPage() {
           <SectionHeading
             eyebrow="Start planning"
             title="Tell us what you have in mind and we will help shape the rest."
-            description="If you already know the date, the guest list, or the sort of table you want, send it through and the team can take it from there."
+            description="If you already know the date, the guest list, or the kind of table you want, send it through and we will help put it together."
             invert
           />
           <div className="space-y-4 text-sm leading-7 text-white/78 md:text-base">

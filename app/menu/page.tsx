@@ -21,7 +21,7 @@ import menuImage from "@/images/food/kathmandu-tikka-masala-2.png"
 export const metadata: Metadata = {
   title: "Menu",
   description:
-    "Explore the food and drink at The Old School House in Stony Stratford, from momo and mixed grills to pub classics, desserts, and drinks highlights.",
+    "Explore the food and drink at The Old School House in Stony Stratford, from pub favourites and Nepalese dishes to desserts, craft pours, and coffee.",
 }
 
 const featuredAnchors = menuCategories.slice(0, 6)
@@ -33,8 +33,8 @@ export default function MenuPage() {
     <main>
       <PageHero
         eyebrow="Food and drink menu"
-        title="A menu made for easy choosing, whether you are here for a pint or the full table."
-        description="Browse Nepalese favourites, pub classics, sharers, sides, desserts, and drinks before you arrive."
+        title="Food for a quick pint stop, a proper dinner, or a table that keeps growing."
+        description="Browse pub favourites, Nepalese dishes, sharers, desserts, and drinks before you come in."
         highlights={[
           "Classic pub food and Nepalese specialities",
           "Prices visible without zooming",
@@ -64,7 +64,7 @@ export default function MenuPage() {
             <SectionHeading
               eyebrow="House direction"
               title="Two menu moods, one pub."
-              description="Some tables come for familiar pub favourites, others for momo, grills, and richly spiced curries. Here, you can do both."
+              description="Come in for something familiar, try something a little different, or build the table around both."
             />
             <Image
               src={menuImage}
@@ -86,8 +86,8 @@ export default function MenuPage() {
                   available at the bar.
                 </p>
                 <p>
-                  For same-day meals or larger groups, the quickest option is to
-                  call{" "}
+                  For same-day tables or larger groups, the quickest option is
+                  to call{" "}
                   <a
                     href={sitePhoneHref}
                     className="text-secondary transition hover:text-secondary/80"
@@ -113,7 +113,7 @@ export default function MenuPage() {
             </div>
             <Button asChild size="lg">
               <Link href="/book">
-                Book around the menu
+                Book your table
                 <ForkKnife />
               </Link>
             </Button>
@@ -130,8 +130,8 @@ export default function MenuPage() {
       </section>
 
       <InlineBookingCta
-        title="Seen enough to choose a table?"
-        description="Keep the path short while someone is deciding what to order. Book a table now, then come back to the menu if you want to plan the rest."
+        title="Seen something you fancy?"
+        description="Pick your table now, then come back to the menu if you want a second look before you arrive."
       />
 
       <section className="bg-background py-16 md:py-24">
@@ -147,7 +147,7 @@ export default function MenuPage() {
           <SectionHeading
             eyebrow="Good to know"
             title="A few helpful details before you order."
-            description="If you are joining us for drinks as well as food, these notes are worth keeping in mind."
+            description="A few simple notes to make ordering drinks and food that bit easier."
             invert
           />
           <div className="grid gap-3">

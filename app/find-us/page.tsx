@@ -35,7 +35,7 @@ export default function FindUsPage() {
       <PageHero
         eyebrow="Find us"
         title="Everything you need before you set off."
-        description="Find the address, opening hours, phone number, and map all in one place so getting here feels easy."
+        description="Find the address, opening hours, phone number, and map all in one place so joining us feels easy from the start."
         highlights={[
           "London Road, Stony Stratford, Milton Keynes, MK11 1JA",
           "Small on-site car park plus town-centre parking nearby",
@@ -51,7 +51,7 @@ export default function FindUsPage() {
             <SectionHeading
               eyebrow="Address and contact"
               title="The Old School House sits on the busiest road in Stony Stratford."
-              description="Right on London Road, we are easy to spot whether you are visiting for a quick drink, dinner with friends, or a longer evening in town."
+              description="Right on London Road, we are easy to spot whether you are stopping by for a quick drink, dinner with friends, or a longer evening in town."
             />
             <div className="grid gap-4 text-sm leading-7 text-on-surface md:text-base">
               <p className="flex items-start gap-3">
@@ -104,7 +104,7 @@ export default function FindUsPage() {
 
       <InlineBookingCta
         title="Planning the route and the table at the same time?"
-        description="Book first if you know you are coming, then use the map and contact links for the rest of the journey."
+        description="If you know you are coming in, book first and keep the rest of the journey nice and easy."
       />
 
       <section className="bg-[var(--color-surface-low)] py-16 md:py-24">
@@ -139,7 +139,7 @@ export default function FindUsPage() {
           <SectionHeading
             eyebrow="Before you come"
             title="If you need anything else, give us a ring."
-            description="If you are checking the easiest route, planning your arrival time, or booking while you travel, the team is happy to help."
+            description="If you are checking the easiest route, planning your arrival time, or booking while you travel, just give us a call."
           />
           <div className="space-y-4 text-sm leading-7 text-on-surface md:text-base">
             <p>

@@ -28,7 +28,6 @@ import {
   openingHours,
   proofPoints,
   siteAddress,
-  siteDescription,
   siteEmail,
   siteEmailHref,
   siteLocation,
@@ -73,12 +72,15 @@ export default function Page() {
                   {siteName}
                 </p>
                 <h1 className="display-copy max-w-4xl text-white">
-                  Traditional pub energy, Nepalese kitchen depth, and a London
-                  Road address you can find in seconds.
+                  Pub favourites, Nepalese cooking, and a warm welcome in Stony
+                  Stratford.
                 </h1>
               </div>
               <p className="max-w-2xl text-base leading-7 text-white/78 md:text-lg">
-                {siteDescription}
+                Settle in on London Road for a pint, a table full of good food,
+                or an easy evening with friends. From laid-back lunches to
+                private celebrations, The Old School House is made for coming
+                back to.
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Button asChild size="lg">
@@ -113,7 +115,7 @@ export default function Page() {
             <div className="paper-panel hidden bg-white/12 text-white/80 backdrop-blur-xl lg:block">
               <div className="space-y-4">
                 <p className="text-xs font-semibold tracking-[0.22em] text-[var(--color-on-tertiary-container)] uppercase">
-                  Quick plan
+                  Tonight at a glance
                 </p>
                 <div className="space-y-4 text-sm leading-7">
                   <p className="flex items-start gap-3">
@@ -164,8 +166,8 @@ export default function Page() {
           <div className="space-y-6">
             <SectionHeading
               eyebrow="Why choose us"
-              title="A local-first pub with a kitchen that gives it its own voice."
-              description="Come by for a proper pint, settle in for dinner, or gather the table for something worth sharing. The Old School House keeps the comfort of a local pub and adds a kitchen full of colour and flavour."
+              title="A proper local with a little more flavour, a little more warmth, and plenty to come back for."
+              description="The Old School House keeps the feel of a characterful pub while giving you more reasons to stay: good food, easy drinks, a warm welcome, and a menu that goes beyond the expected."
             />
             <Image
               src={startersImage}
@@ -194,8 +196,8 @@ export default function Page() {
           <div className="space-y-6">
             <SectionHeading
               eyebrow="Menu preview"
-              title="Classic pub comfort on one side, momo and signature curries on the other."
-              description="From pub classics to Nepalese favourites, the menu is made for both easy midweek suppers and longer, more generous tables."
+              title="From familiar pub comfort to dishes worth passing around the table."
+              description="Whether you are keeping it classic or ordering across the Nepalese side of the menu, there is plenty here for a quick meal, a family table, or a longer dinner."
             />
             <div className="space-y-5">
               {homeMenuHighlights.map((highlight) => (
@@ -211,7 +213,7 @@ export default function Page() {
             </div>
             <Button asChild size="lg">
               <Link href="/menu">
-                See the full menu
+                Explore the menu
                 <ForkKnife />
               </Link>
             </Button>
@@ -241,8 +243,8 @@ export default function Page() {
       </section>
 
       <InlineBookingCta
-        title="Book before the evening rush or call ahead for the quickest answer."
-        description="The site keeps booking simple: use the booking page, call the pub directly, or send an email request if you are planning something a little bigger."
+        title="Book ahead for dinner, drinks, or an easy catch-up in town."
+        description="If you know when you want to come in, booking ahead is the easiest way to get the table sorted and the evening off to a smooth start."
       />
 
       <section className="bg-background py-16 md:py-24">
@@ -250,7 +252,7 @@ export default function Page() {
           <SectionHeading
             eyebrow="Atmosphere"
             title="Good food, easy company, and a setting made for lingering."
-            description="Think warm tables, generous plates, and the sort of space that suits a quick lunch just as well as a longer evening with friends."
+            description="Think exposed brick, wooden floors, generous plates, and the sort of room that works just as well for a quick lunch as it does for a longer evening with friends."
           />
           <div className="grid gap-5 lg:grid-cols-[1.25fr_0.9fr_0.9fr]">
             <Image
@@ -293,7 +295,7 @@ export default function Page() {
             <SectionHeading
               eyebrow="Events and offers"
               title="Private hire, tasting nights, sport, and repeat reasons to stop by."
-              description="Whether you are planning a birthday table, gathering friends for the match, or looking for an excuse to stay out a little longer, there is plenty happening here."
+              description="Round everyone up for a birthday table, meet at the bar for the match, or plan a bigger gathering with food, drinks, and room to settle in."
               invert
             />
             <div className="space-y-5">
@@ -310,7 +312,7 @@ export default function Page() {
             </div>
             <Button asChild size="lg" variant="secondary">
               <Link href="/events">
-                Plan an event
+                Ask about private hire
                 <UsersThree />
               </Link>
             </Button>
@@ -343,8 +345,8 @@ export default function Page() {
         <div className="section-shell space-y-8">
           <SectionHeading
             eyebrow="Neighbourhood fit"
-            title="Built for regular trade, not just the one-off booking."
-            description="The Old School House is the sort of place that fits easily into local life, whether you are dropping in for a quiet drink, bringing the family for supper, or meeting friends in town."
+            title="The sort of place that fits easily into local life."
+            description="Drop in for one drink, plan a family meal, meet friends in town, or make it your regular Sunday stop. It is built for the repeat visits as much as the one-off plans."
           />
           <div className="grid gap-6 lg:grid-cols-3">
             {communityNotes.map((note) => (
@@ -368,7 +370,7 @@ export default function Page() {
             <SectionHeading
               eyebrow="Visit"
               title="Easy to find, easy to call, and simple to plan."
-              description="If you are heading into Stony Stratford, all the essentials are here: where to find us, when we are open, and how to get in touch."
+              description="If you are heading into Stony Stratford, everything you need is here: where to find us, when we are open, and how to get in touch."
             />
             <div className="grid gap-4 text-sm leading-7 text-on-surface">
               <p className="flex items-start gap-3">
@@ -407,7 +409,7 @@ export default function Page() {
             </div>
             <div className="flex flex-col gap-3 sm:flex-row">
               <Button asChild size="lg">
-                <Link href="/find-us">Plan your visit</Link>
+                <Link href="/find-us">Find us</Link>
               </Button>
               <Button asChild size="lg" variant="outline">
                 <a href={mapHref} target="_blank" rel="noreferrer">

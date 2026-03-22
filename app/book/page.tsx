@@ -31,8 +31,8 @@ export default function BookPage() {
     <main>
       <PageHero
         eyebrow="Book a table"
-        title="Book your table, then let the evening take care of itself."
-        description="If you are planning ahead, getting in touch is simple. Call the pub for the quickest answer or send over your details by email."
+        title="Book your table and make it easy from the start."
+        description="Whether it is dinner for two, drinks with friends, or a bigger get-together, getting in touch is simple."
         highlights={[
           "Use the phone number for same-day plans",
           "Email works well for larger requests",
@@ -48,7 +48,7 @@ export default function BookPage() {
             <SectionHeading
               eyebrow="Booking now"
               title="A quick call or message is all it takes."
-              description="Whether you are booking dinner, checking on a same-day table, or planning something a little bigger, the team is easy to reach."
+              description="Call for the fastest answer, or send over your details by email and we will take it from there."
             />
             <div className="space-y-4 text-sm leading-7 text-on-surface md:text-base">
               {bookingNotes.map((note) => (
@@ -110,7 +110,7 @@ export default function BookPage() {
 
       <InlineBookingCta
         title="Booking for tonight or on the way through town?"
-        description="If you are already in Stony Stratford or you need a same-day answer, calling the pub is the simplest route."
+        description="If you are already in Stony Stratford or need a same-day answer, a quick call is the easiest way to get sorted."
       />
 
       <section className="bg-[var(--color-surface-low)] py-16 md:py-24">
@@ -118,18 +118,18 @@ export default function BookPage() {
           <div className="rounded-[1.75rem] bg-[var(--color-surface-lowest)] px-5 py-6 md:px-7">
             <h2 className="text-[2rem]">What to include</h2>
             <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
-              <p>Date and preferred arrival time.</p>
+              <p>Your preferred date and arrival time.</p>
               <p>How many guests are joining you.</p>
-              <p>Any celebration or private-hire context if relevant.</p>
-              <p>A callback number or email so the team can confirm quickly.</p>
+              <p>Any celebration or private-hire details worth knowing.</p>
+              <p>The best number or email to confirm everything quickly.</p>
             </div>
           </div>
           <div className="rounded-[1.75rem] bg-[var(--color-surface-lowest)] px-5 py-6 md:px-7">
             <h2 className="text-[2rem]">Good to know</h2>
             <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
               <p>
-                Walk in if you are nearby, or get in touch ahead of time if you
-                would rather have your table waiting for you.
+                Pop in if you are nearby, or get in touch ahead of time if you
+                would rather have your table ready and waiting.
               </p>
               <p>
                 If you are arranging a larger occasion, the{" "}
@@ -144,7 +144,7 @@ export default function BookPage() {
             </div>
             <Button asChild size="lg" className="mt-6">
               <Link href="/events">
-                Planning a bigger group?
+                Planning something bigger?
                 <CalendarDots />
               </Link>
             </Button>
