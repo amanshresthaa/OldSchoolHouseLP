@@ -22,7 +22,6 @@ import { Button } from "@/components/ui/button"
 import {
   arrivalNotes,
   atmosphereMoments,
-  communityNotes,
   eventOccasions,
   eventsHighlights,
   foodHours,
@@ -231,8 +230,7 @@ export default function Page() {
             </div>
             <p className="hero-entrance-delay-2 max-w-2xl text-base leading-7 text-white/78 md:text-lg">
               Come in for pub favourites, stay for Nepalese dishes, and settle
-              into a front garden, private courtyard, and bar built for the kind
-              of evenings that last a little longer.
+              into a bar, front garden, and courtyard built for longer evenings.
             </p>
             <div className="hero-entrance-delay-2 flex flex-col gap-3 sm:flex-row">
               <Button asChild size="lg">
@@ -296,7 +294,7 @@ export default function Page() {
         <div className="section-shell">
           <div className="surface-frame relative overflow-hidden">
             <div className="flex items-center">
-              <div className="shrink-0 bg-secondary px-4 py-3 text-[0.72rem] font-semibold tracking-[0.18em] text-white uppercase md:px-5">
+              <div className="shrink-0 bg-secondary px-3 py-2.5 text-[0.52rem] font-semibold tracking-[0.12em] text-white uppercase md:px-4 md:text-[0.58rem]">
                 At a glance
               </div>
               <div className="relative min-w-0 flex-1">
@@ -329,43 +327,33 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="bg-background py-16 md:py-24">
-        <div className="section-shell grid gap-10 lg:grid-cols-[0.72fr_0.9fr_1.08fr] lg:items-start">
-          <div className="space-y-6 lg:sticky lg:top-28">
+      <section className="bg-background py-14 md:py-20">
+        <div className="section-shell grid gap-8 lg:grid-cols-[0.72fr_0.9fr_1.08fr] lg:items-start">
+          <div className="space-y-4 lg:sticky lg:top-28">
             <SectionHeading
               eyebrow="Why choose us"
-              title="A proper local with a little more flavour, a little more warmth, and plenty to come back for."
-              description="The Old School House keeps the feel of a characterful pub while giving you more reasons to stay: good food, easy drinks, a warm welcome, and a menu that goes beyond the expected."
+              title="A proper pub with a Nepalese kitchen worth coming back for."
+              description="Familiar pub comfort, a stronger food story, and a room that stays relaxed from first drink to last bite."
             />
-            <div className="surface-frame">
-              <div className="surface-pane surface-pane-muted">
-                <p className="eyebrow">Why guests come back</p>
-                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
-                  Welcoming to one and all, with honest plates, a strong wet
-                  offer, and enough warmth to make one visit feel like the start
-                  of a habit.
-                </p>
-              </div>
-            </div>
           </div>
-          <div className="lg:pt-10">
+          <div className="lg:pt-6">
             <Image
               src={startersImage}
               alt="Samosas plated with salad and chutneys at The Old School House."
-              className="media-lift h-[22rem] w-full rounded-[2rem] object-cover md:h-[28rem] lg:h-[38rem]"
+              className="media-lift h-[20rem] w-full rounded-[2rem] object-cover md:h-[24rem] lg:h-[32rem]"
               sizes="(min-width: 1024px) 30vw, 100vw"
             />
           </div>
-          <div className="space-y-8 pt-1 lg:pt-18">
+          <div className="space-y-6 pt-1 lg:pt-10">
             {homeReasons.map((reason) => (
               <article
                 key={reason.title}
-                className="space-y-3 border-t border-[var(--color-outline-variant)]/30 pt-6 first:border-t-0 first:pt-0"
+                className="space-y-2.5 border-t border-[var(--color-outline-variant)]/30 pt-5 first:border-t-0 first:pt-0"
               >
                 <h3 className="font-sans text-2xl font-semibold text-secondary">
                   {reason.title}
                 </h3>
-                <p className="max-w-2xl text-sm leading-7 text-on-surface md:text-base">
+                <p className="max-w-2xl text-sm leading-6 text-on-surface md:text-base md:leading-7">
                   {reason.description}
                 </p>
               </article>
@@ -374,28 +362,22 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="bg-[var(--color-surface-low)] py-16 md:py-24">
-        <div className="section-shell space-y-8 md:space-y-10">
-          <div className="grid gap-10 lg:grid-cols-[0.74fr_1.26fr] lg:items-end">
-            <div className="min-w-0 space-y-6 lg:pb-4">
+      <section className="bg-[var(--color-surface-low)] py-14 md:py-20">
+        <div className="section-shell space-y-6 md:space-y-8">
+          <div className="grid gap-8 lg:grid-cols-[0.74fr_1.26fr] lg:items-end">
+            <div className="min-w-0 space-y-5 lg:pb-4">
               <SectionHeading
                 eyebrow="Menu preview"
                 title="If it is your first visit, start on the Nepalese side."
-                description="Momo, mixed grills, and richer house curries give the table something to talk about, while the pub favourites keep things easy for everyone coming in."
+                description="Start with momo, move into mixed grills or curry, and keep things easy for everyone else with familiar pub plates."
               />
               <div className="surface-frame overflow-hidden">
                 <MenuCategoryScroller links={menuPreviewLinks} />
               </div>
-              <div className="max-w-xl space-y-3 text-sm leading-7 text-on-surface md:text-base">
-                <p>
-                  This is the part of the menu that turns a straightforward pub
-                  meal into somewhere guests want to come back to.
-                </p>
-                <p>
-                  Start with something to share, go bigger in the middle, then
-                  settle into one of the kitchen favourites.
-                </p>
-              </div>
+              <p className="max-w-xl text-sm leading-6 text-on-surface md:text-base md:leading-7">
+                For a first visit, think one shareable opener, one bigger plate
+                for the middle, then one house favourite.
+              </p>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Button asChild size="lg" className="w-full sm:w-fit">
                   <Link href="/menu" className="w-full">
@@ -509,10 +491,7 @@ export default function Page() {
                   </p>
                   <div className="flex items-start justify-between gap-4">
                     <div
-                      className={cn(
-                        "min-w-0",
-                        index !== 0 && "max-w-[14rem]"
-                      )}
+                      className={cn("min-w-0", index !== 0 && "max-w-[14rem]")}
                     >
                       <h3
                         className={cn(
@@ -543,10 +522,9 @@ export default function Page() {
                 <h3 className="pt-3 font-heading text-[2rem] leading-none text-on-background md:text-4xl">
                   Order like this.
                 </h3>
-                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
-                  The easiest way in is one shareable opener, one bigger plate
-                  for the middle of the table, and one house favourite once
-                  everyone has settled in.
+                <p className="pt-3 text-sm leading-6 text-on-surface md:text-base md:leading-7">
+                  Keep it simple: one opener, one bigger middle plate, then a
+                  house favourite.
                 </p>
               </div>
               <div className="surface-pane bg-[var(--color-surface-lowest)]">
@@ -581,7 +559,7 @@ export default function Page() {
                             {formatPrice(step.item.price)}
                           </p>
                         </div>
-                        <p className="text-sm leading-7 text-on-surface">
+                        <p className="text-sm leading-6 text-on-surface">
                           {step.note}
                         </p>
                       </div>
@@ -602,26 +580,25 @@ export default function Page() {
       </section>
 
       <InlineBookingCta
-        title="Book ahead for dinner, drinks, or an easy catch-up in town."
-        description="If you know when you would like to come in, book ahead and arrive knowing your table is waiting."
+        title="Book ahead and arrive knowing your table is waiting."
+        description="Dinner, drinks, or an easy catch-up all start better when the table is already sorted."
       />
 
-      <section className="bg-background py-16 md:py-24">
-        <div className="section-shell grid gap-10 lg:grid-cols-[0.6fr_1.4fr] lg:items-start">
-          <div className="space-y-6 lg:sticky lg:top-28">
+      <section className="bg-background py-14 md:py-20">
+        <div className="section-shell grid gap-8 lg:grid-cols-[0.6fr_1.4fr] lg:items-start">
+          <div className="space-y-5 lg:sticky lg:top-28">
             <SectionHeading
               eyebrow="Guest reviews"
-              title="What guests remember most after dinner here."
-              description="Momo, Kathmandu tikka, goat curry, mixed grills, good drinks, and a room that makes it easy to stay for one more round all come up again and again."
+              title="What guests talk about after a visit."
+              description="Good food, good drinks, and a room that makes staying for another round easy."
             />
             <div className="surface-frame">
               <div className="surface-pane surface-pane-muted">
                 <p className="eyebrow">Share your visit</p>
-                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
-                  Been in for momo, mixed grills, or a longer Nepalese dinner?
-                  Leave a note on Google and help the next guest decide.
+                <p className="pt-3 text-sm leading-6 text-on-surface md:text-base md:leading-7">
+                  Leave a quick note on Google and help the next guest decide.
                 </p>
-                <div className="mt-5 flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
+                <div className="mt-4 flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
                   <Button asChild size="lg">
                     <a href={googleReviewHref} target="_blank" rel="noreferrer">
                       Write a Google review
@@ -703,46 +680,36 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="bg-background py-16 md:py-24">
-        <div className="section-shell grid gap-10 lg:grid-cols-[0.62fr_1.38fr] lg:items-start">
-          <div className="space-y-6 lg:sticky lg:top-28">
+      <section className="bg-background py-14 md:py-20">
+        <div className="section-shell grid gap-8 lg:grid-cols-[0.62fr_1.38fr] lg:items-start">
+          <div className="space-y-4 lg:sticky lg:top-28">
             <SectionHeading
               eyebrow="Atmosphere"
-              title="Good food, easy company, and a setting made for lingering."
-              description="Think exposed brick, wooden floors, generous plates, and the sort of room that works just as well for a quick lunch as it does for a longer evening with friends."
+              title="A setting made for easy lunches and longer evenings."
+              description="From the front garden to the dining room, it stays relaxed and easy to settle into."
             />
-            <div className="surface-frame">
-              <div className="surface-pane surface-pane-muted">
-                <p className="eyebrow">Around the pub</p>
-                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
-                  From the street outside to the bar, the dining room, and the
-                  garden, each part of the pub gives you a slightly different
-                  reason to settle in and stay a little longer.
-                </p>
-              </div>
-            </div>
           </div>
-          <div className="space-y-6">
+          <div className="space-y-5">
             <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-[1.2fr_0.8fr_0.8fr]">
               <VenuePhotoPlaceholder
                 title="Exterior"
                 alt="Placeholder for a future exterior photograph of The Old School House on London Road, showing the brick frontage and entrance."
-                className="media-lift h-[18rem] md:col-span-2 md:h-[22rem] lg:col-span-1 lg:row-span-2 lg:h-full lg:min-h-[32rem]"
+                className="media-lift h-[16rem] md:col-span-2 md:h-[20rem] lg:col-span-1 lg:row-span-2 lg:h-full lg:min-h-[28rem]"
               />
               <VenuePhotoPlaceholder
                 title="Bar"
                 alt="Placeholder for a future bar photograph showing the single-bar setup inside The Old School House."
-                className="media-lift h-[15rem] md:h-[18rem]"
+                className="media-lift h-[14rem] md:h-[16rem]"
               />
               <VenuePhotoPlaceholder
                 title="Dining Room"
                 alt="Placeholder for a future dining room photograph showing exposed brick, wooden floors, and guest seating inside The Old School House."
-                className="media-lift h-[15rem] md:h-[18rem]"
+                className="media-lift h-[14rem] md:h-[16rem]"
               />
               <VenuePhotoPlaceholder
                 title="Front Garden"
                 alt="Placeholder for a future front garden photograph showing the outdoor seating area at The Old School House."
-                className="media-lift h-[15rem] md:col-span-2 md:h-[16rem] lg:col-span-2"
+                className="media-lift h-[14rem] md:col-span-2 md:h-[15rem] lg:col-span-2"
               />
             </div>
             <div className="surface-frame grid gap-px bg-[rgba(196,189,181,0.22)] lg:grid-cols-[0.92fr_0.92fr_1.16fr]">
@@ -757,7 +724,7 @@ export default function Page() {
                   <h3 className="font-sans text-xl font-semibold text-secondary">
                     {moment.title}
                   </h3>
-                  <p className="pt-2 text-sm leading-7 text-on-surface md:text-base">
+                  <p className="pt-2 text-sm leading-6 text-on-surface md:text-base md:leading-7">
                     {moment.description}
                   </p>
                 </article>
@@ -767,65 +734,68 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="bg-primary py-16 text-white md:py-24">
-        <div className="section-shell grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:items-start">
-          <div className="space-y-6 lg:sticky lg:top-28">
-            <SectionHeading
-              eyebrow="Events and offers"
-              title="Private hire, tasting nights, sport, and repeat reasons to stop by."
-              description="Round everyone up for a birthday table, meet at the bar for the match, or plan a bigger gathering with food, drinks, and room to settle in."
-              invert
-            />
-            <Button asChild size="lg" variant="secondary">
-              <Link href="/events">
-                Ask about private hire
-                <UsersThree />
-              </Link>
-            </Button>
-          </div>
+      <section className="bg-primary py-12 text-white md:py-16">
+        <div className="section-shell">
           <div className="night-panel overflow-hidden p-0">
-            <div className="grid gap-px bg-white/10 lg:grid-cols-[0.78fr_1.22fr]">
-              <div className="bg-black/12 px-5 py-6 md:px-6 md:py-7">
-                <div className="space-y-3">
-                  <div className="night-rule" />
-                  <p className="night-kicker">Good for</p>
-                </div>
-                <div className="mt-5 grid gap-3 text-sm leading-7 sm:grid-cols-2 lg:grid-cols-1">
+            <div className="grid gap-px bg-white/10 lg:grid-cols-[0.92fr_1.08fr]">
+              <div className="bg-black/12 px-5 py-6 md:px-7 md:py-7">
+                <p className="night-kicker">Events and offers</p>
+                <h2 className="mt-3 max-w-xl text-white">
+                  Private hire, sport nights, and good reasons to come back.
+                </h2>
+                <p className="mt-3 max-w-lg text-sm leading-6 text-white/76 md:text-base md:leading-7">
+                  Good for birthday tables, work drinks, watch nights, and easy
+                  group plans that need food, drinks, and room to settle in.
+                </p>
+                <div className="mt-5 grid gap-3 sm:grid-cols-2">
                   {eventOccasions.slice(0, 4).map((occasion) => (
-                    <div key={occasion} className="night-tile">
+                    <div
+                      key={occasion}
+                      className="rounded-[1.35rem] bg-white/6 px-4 py-3 text-sm leading-6 text-white/84"
+                    >
                       {occasion}
                     </div>
                   ))}
                 </div>
-                <p className="mt-5 max-w-sm text-sm leading-7 text-white/72">
-                  From birthday dinners to match nights, the pub suits the kind
-                  of plans that start small and often grow once everyone says
-                  yes.
-                </p>
+                <Button asChild size="lg" variant="secondary" className="mt-5">
+                  <Link href="/events">
+                    Ask about private hire
+                    <UsersThree />
+                  </Link>
+                </Button>
               </div>
-              <div className="px-5 py-6 md:px-6 md:py-7">
-                <div className="space-y-3">
-                  <div className="night-rule" />
-                  <p className="night-kicker">Why it works</p>
-                </div>
-                <div className="mt-5 space-y-5">
+              <div className="px-5 py-6 md:px-7 md:py-7">
+                <div className="grid gap-3 xl:grid-cols-3">
                   {eventsHighlights.map((highlight) => (
                     <article
                       key={highlight.title}
-                      className="space-y-2 border-t border-white/10 pt-5 first:border-t-0 first:pt-0"
+                      className="rounded-[1.45rem] bg-white/6 px-4 py-4"
                     >
-                      <h3 className="font-sans text-xl font-semibold text-[var(--color-on-tertiary-container)]">
+                      <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-[var(--color-on-tertiary-container)] uppercase">
+                        Why it works
+                      </p>
+                      <h3 className="pt-3 font-sans text-lg font-semibold text-white">
                         {highlight.title}
                       </h3>
-                      <p className="max-w-2xl text-sm leading-7 text-white/76 md:text-base">
+                      <p className="pt-2 text-sm leading-6 text-white/76">
                         {highlight.description}
                       </p>
                     </article>
                   ))}
                 </div>
-                <div className="mt-6 border-t border-white/10 pt-5 text-sm leading-7 text-white/74">
-                  Front garden, private courtyard, and room inside mean the
-                  evening can feel relaxed from first drink to final round.
+                <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                  {eventOccasions.slice(4).map((occasion) => (
+                    <div
+                      key={occasion}
+                      className="rounded-[1.35rem] border border-white/10 px-4 py-3 text-sm leading-6 text-white/72"
+                    >
+                      {occasion}
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-4 rounded-[1.45rem] bg-[linear-gradient(135deg,rgba(212,160,23,0.14),rgba(255,255,255,0.04))] px-4 py-4 text-sm leading-6 text-white/78 md:px-5">
+                  Front garden, private courtyard, and room inside keep bigger
+                  plans feeling relaxed from first drink to last round.
                 </div>
               </div>
             </div>
@@ -833,18 +803,18 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="bg-background py-16 md:py-24">
-        <div className="section-shell grid gap-10 lg:grid-cols-[0.62fr_1.38fr] lg:items-start">
-          <div className="space-y-6 lg:sticky lg:top-28">
+      <section className="bg-background py-14 md:py-20">
+        <div className="section-shell grid gap-8 lg:grid-cols-[0.62fr_1.38fr] lg:items-start">
+          <div className="space-y-5 lg:sticky lg:top-28">
             <SectionHeading
               eyebrow="Before you visit"
-              title="Helpful local details guests often search for before choosing a pub in Stony Stratford."
-              description="Parking, dog-friendly space, Wi-Fi, food hours, and live sport are often part of the decision, so they are worth making clear on the page."
+              title="Helpful details before you choose a table."
+              description="Parking, dogs, Wi-Fi, food hours, and live sport."
             />
             <div className="surface-frame">
               <div className="surface-pane surface-pane-muted">
                 <p className="eyebrow">Food hours</p>
-                <div className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                <div className="pt-3 text-sm leading-6 text-on-surface md:text-base md:leading-7">
                   {foodHours.map((item) => (
                     <p key={item}>{item}</p>
                   ))}
@@ -871,7 +841,7 @@ export default function Page() {
                     <CaretDown className="faq-icon mt-1 size-5 shrink-0 text-secondary transition-transform duration-200" />
                   </summary>
                   <div className="px-5 pb-5 md:px-7 md:pb-6">
-                    <p className="text-sm leading-7 text-on-surface md:text-base">
+                    <p className="text-sm leading-6 text-on-surface md:text-base md:leading-7">
                       {faq.answer}
                     </p>
                   </div>
@@ -882,17 +852,17 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="bg-background py-16 md:py-24">
-        <div className="section-shell grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
-          <div className="space-y-6">
+      <section className="bg-background py-14 md:py-20">
+        <div className="section-shell grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+          <div className="space-y-5">
             <SectionHeading
               eyebrow="Visit"
-              title="Easy to find, easy to call, and well worth coming by."
-              description="If you are heading into Stony Stratford, everything you need is here: where to find us, when we are open, and how to get in touch."
+              title="Easy to find and easy to call."
+              description="Everything you need before you head over."
             />
             <div className="surface-frame">
               <div className="surface-pane">
-                <div className="grid gap-4 text-sm leading-7 text-on-surface">
+                <div className="grid gap-4 text-sm leading-6 text-on-surface md:leading-7">
                   <p className="flex items-start gap-3">
                     <MapPin className="mt-1 size-4 shrink-0 text-secondary" />
                     <span>{siteAddress}</span>
@@ -923,7 +893,7 @@ export default function Page() {
                   </p>
                 </div>
                 <div className="surface-divider my-5 h-px" />
-                <div className="space-y-3 text-sm leading-7 text-on-surface">
+                <div className="space-y-3 text-sm leading-6 text-on-surface md:leading-7">
                   {arrivalNotes.map((note) => (
                     <p key={note}>{note}</p>
                   ))}
@@ -943,33 +913,6 @@ export default function Page() {
             </div>
           </div>
           <MapEmbed />
-        </div>
-      </section>
-
-      <section className="bg-[var(--color-surface-low)] py-16 md:py-20">
-        <div className="section-shell grid gap-10 lg:grid-cols-[0.62fr_1.38fr] lg:items-start">
-          <SectionHeading
-            eyebrow="Neighbourhood fit"
-            title="The sort of place that fits easily into local life."
-            description="Drop in for one drink, plan a family meal, meet friends in town, or make it your regular Sunday stop. It is made for the repeat visits as much as the one-off plans."
-            className="lg:sticky lg:top-28"
-          />
-          <div className="surface-frame grid gap-px bg-[rgba(196,189,181,0.22)] lg:grid-cols-[0.95fr_0.95fr_1.1fr]">
-            {communityNotes.map((note, index) => (
-              <article
-                key={note.title}
-                className={cn(
-                  "surface-pane bg-[var(--color-surface-lowest)]",
-                  index === 2 && "surface-pane-muted"
-                )}
-              >
-                <h3 className="font-heading text-2xl">{note.title}</h3>
-                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
-                  {note.description}
-                </p>
-              </article>
-            ))}
-          </div>
         </div>
       </section>
     </main>

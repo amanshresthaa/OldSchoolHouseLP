@@ -25,11 +25,11 @@ export function SiteHeader() {
     <>
       <header className="sticky top-0 z-40 border-b border-black/5 bg-background/85 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3 sm:px-6 md:px-8">
-          <Link href="/" className="min-w-0">
-            <span className="block truncate font-heading text-2xl leading-none text-primary">
+          <Link href="/" className="min-w-0 flex-1 pr-1 md:flex-none md:pr-0">
+            <span className="block text-[clamp(1.08rem,5vw,1.5rem)] leading-[0.94] text-primary sm:text-2xl">
               {siteName}
             </span>
-            <span className="block truncate pt-1 text-[0.68rem] font-semibold tracking-[0.22em] text-on-surface uppercase">
+            <span className="block pt-1 text-[0.5rem] leading-[1.25] font-semibold tracking-[0.12em] text-on-surface uppercase sm:text-[0.68rem] sm:tracking-[0.22em]">
               {siteLocation}
             </span>
           </Link>
@@ -54,7 +54,7 @@ export function SiteHeader() {
               <Link href="/book">Book a table</Link>
             </Button>
           </nav>
-          <div className="flex items-center gap-2 md:hidden">
+          <div className="shrink-0 flex items-center gap-2 md:hidden">
             <Button asChild size="sm">
               <Link href="/book">Book</Link>
             </Button>
@@ -74,9 +74,11 @@ export function SiteHeader() {
       {isOpen ? (
         <div className="fixed inset-0 z-50 bg-primary/96 px-5 py-6 text-white backdrop-blur-md md:hidden">
           <div className="flex items-start justify-between gap-4">
-            <div>
-              <p className="font-heading text-3xl">{siteName}</p>
-              <p className="pt-2 text-xs font-semibold tracking-[0.22em] text-[var(--color-on-tertiary-container)] uppercase">
+            <div className="min-w-0 flex-1 pr-2">
+              <p className="text-[clamp(1.6rem,8vw,2.2rem)] leading-[0.95] text-white">
+                {siteName}
+              </p>
+              <p className="pt-2 text-[0.58rem] leading-[1.35] font-semibold tracking-[0.14em] text-[var(--color-on-tertiary-container)] uppercase">
                 {siteLocation}
               </p>
             </div>

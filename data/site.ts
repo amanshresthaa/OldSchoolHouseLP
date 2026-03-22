@@ -110,17 +110,17 @@ export const homeReasons: HighlightItem[] = [
   {
     title: "A proper pub, with more to discover on the menu",
     description:
-      "Settle in for the pub favourites you know, then stay for momo, mixed grills, and Nepalese dishes that make the table feel a little more exciting.",
+      "Come for the familiar pub plates, then add momo, mixed grills, and Nepalese dishes that make the meal feel more memorable.",
   },
   {
     title: "Warm, welcoming, and easy to settle into",
     description:
-      "Exposed brick, wooden floors, and a characterful setting give the pub its charm, while the welcome stays relaxed and unfussy from first drink to last bite.",
+      "Exposed brick, wooden floors, and a relaxed room make it easy to settle in from first drink to last bite.",
   },
   {
     title: "Good food, good drinks, and good value",
     description:
-      "Whether you are here for lunch, after-work drinks, Sunday plans, or a bigger get-together, the aim is simple: tasty food, a strong wet offer, and a place you feel good coming back to.",
+      "Lunch, drinks, or dinner all work for the same reason: honest food, a strong bar, and a place worth returning to.",
   },
 ]
 
@@ -146,17 +146,17 @@ export const atmosphereMoments: HighlightItem[] = [
   {
     title: "Front garden for brighter afternoons",
     description:
-      "The front garden with wooden seating is made for brighter afternoons, easy drinks, and the kind of stop-in that turns into another round.",
+      "A good spot for brighter afternoons, easy drinks, and one more round.",
   },
   {
     title: "A bar that can shift from lunch to live sport",
     description:
-      "A strong single-bar setup keeps service moving, whether you are here for lunch, a quick pint, or a bigger match-day crowd.",
+      "The bar works just as well for lunch, a quick pint, or a bigger match crowd.",
   },
   {
     title: "Corners for parties, tasting nights, and group dinners",
     description:
-      "With room inside, tables outside, and plenty of open-plan bar space, there is space for parties and group dinners without losing the feeling of a local.",
+      "There is enough room for parties and group dinners without losing the feel of a local.",
   },
 ]
 
@@ -164,17 +164,17 @@ export const eventsHighlights: HighlightItem[] = [
   {
     title: "Private hire with room to spread out",
     description:
-      "Bring everyone together across the dining room, front garden, and private courtyard for birthdays, work drinks, and longer-table celebrations.",
+      "Use the dining room, front garden, and courtyard for birthdays, work drinks, and longer-table plans.",
   },
   {
     title: "Sport, theme nights, and community trade",
     description:
-      "Live sport, theme nights, team meetups, and familiar local rituals all have a place here, whether you are dropping in for one round or staying for the full evening.",
+      "Live sport, theme nights, and local meetups all fit here without forcing the pub to feel overly busy.",
   },
   {
     title: "Tasting nights and seasonal reasons to come back",
     description:
-      "Tasting evenings and kitchen-led nights give you another excuse to gather the table when you fancy trying something new.",
+      "Kitchen-led nights and seasonal events give people a reason to come back.",
   },
 ]
 
@@ -309,10 +309,9 @@ export const visitDetails: InfoItem[] = [
 ]
 
 export const arrivalNotes = [
-  "You will find us on London Road, right in the heart of Stony Stratford.",
+  "You will find us on London Road in the heart of Stony Stratford.",
   "There is a small car park on site, with more parking around the town centre.",
-  "We are close to Horsefair Green, the shops, and the heart of town.",
-  "If you would like a hand finding us, give the pub a call and we will point you in the right direction.",
+  "If you need a hand finding us, give the pub a call.",
 ]
 
 export const openingHours: OpeningHoursItem[] = [

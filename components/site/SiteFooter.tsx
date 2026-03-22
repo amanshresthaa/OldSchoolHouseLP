@@ -27,12 +27,15 @@ export function SiteFooter() {
           </div>
           <div className="space-y-3 text-sm leading-7 text-white/74">
             <p>{siteAddress}</p>
-            <p>
+            <p className="break-words">
               <a className="transition hover:text-white" href={sitePhoneHref}>
                 {sitePhone}
               </a>
               {" · "}
-              <a className="transition hover:text-white" href={siteEmailHref}>
+              <a
+                className="break-all transition hover:text-white"
+                href={siteEmailHref}
+              >
                 {siteEmail}
               </a>
             </p>
