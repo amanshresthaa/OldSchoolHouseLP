@@ -6,7 +6,7 @@ import { SiteFooter } from "@/components/site/SiteFooter"
 import { SiteHeader } from "@/components/site/SiteHeader"
 import { StickyBookingBar } from "@/components/site/StickyBookingBar"
 import { ThemeProvider } from "@/components/theme-provider"
-import { siteDescription, siteName } from "@/data/site"
+import { siteDescription, siteName, siteOgImage, siteUrl } from "@/data/site"
 import { cn } from "@/lib/utils"
 
 const newsreader = Newsreader({
@@ -22,11 +22,37 @@ const manrope = Manrope({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: `${siteName} | Pub & Restaurant in Stony Stratford`,
     template: `%s | ${siteName}`,
   },
   description: siteDescription,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_GB",
+    url: siteUrl,
+    siteName,
+    title: `${siteName} | Pub & Restaurant in Stony Stratford`,
+    description: siteDescription,
+    images: [
+      {
+        url: siteOgImage,
+        width: 1080,
+        height: 720,
+        alt: `${siteName} in Stony Stratford`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${siteName} | Pub & Restaurant in Stony Stratford`,
+    description: siteDescription,
+    images: [siteOgImage],
+  },
 }
 
 export default function RootLayout({

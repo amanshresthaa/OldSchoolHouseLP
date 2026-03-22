@@ -4,10 +4,12 @@ import Script from "next/script"
 import {
   ArrowRight,
   CalendarDots,
+  ChatCircleDots,
   Clock,
   ForkKnife,
   MapPin,
   Phone,
+  Star,
   UsersThree,
 } from "@phosphor-icons/react/dist/ssr"
 
@@ -19,10 +21,15 @@ import {
   arrivalNotes,
   atmosphereMoments,
   communityNotes,
+  eventOccasions,
   eventsHighlights,
+  foodHours,
+  googleReviewHref,
+  guestReviews,
   heroSignals,
   homeMenuHighlights,
   homeReasons,
+  localFaqs,
   localBusinessSchema,
   mapHref,
   openingHours,
@@ -77,7 +84,38 @@ function VenuePhotoPlaceholder({
   )
 }
 
+function getInitials(name: string) {
+  return name
+    .split(" ")
+    .map((part) => part[0])
+    .join("")
+    .slice(0, 2)
+}
+
+function GoogleStars() {
+  return (
+    <div className="flex items-center gap-0.5 text-[#fbbc04]">
+      {Array.from({ length: 5 }).map((_, index) => (
+        <Star key={index} size={14} weight="fill" />
+      ))}
+    </div>
+  )
+}
+
 export default function Page() {
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: localFaqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  }
+
   return (
     <main>
       <Script
@@ -85,6 +123,13 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(localBusinessSchema),
+        }}
+      />
+      <Script
+        id="old-school-house-faq-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqSchema),
         }}
       />
 
@@ -99,126 +144,131 @@ export default function Page() {
         />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,27,14,0.28),rgba(6,27,14,0.88)_58%,rgba(6,27,14,0.96))]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(212,160,23,0.3),transparent_32%)]" />
-        <div className="section-shell relative flex min-h-[calc(100svh-4.25rem)] flex-col justify-end py-10 md:py-14">
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-end">
-            <div className="max-w-3xl space-y-6">
-              <div className="space-y-3">
-                <p className="text-xs font-semibold tracking-[0.22em] text-[var(--color-on-tertiary-container)] uppercase">
-                  {siteName}
-                </p>
-                <h1 className="display-copy max-w-4xl text-white">
-                  Pub favourites, Nepalese cooking, and a warm welcome in Stony
-                  Stratford.
-                </h1>
-              </div>
-              <p className="max-w-2xl text-base leading-7 text-white/78 md:text-lg">
-                Settle in on London Road for a pint, a table full of good food,
-                or an easy evening with friends. From laid-back lunches to
-                private celebrations, The Old School House is made for coming
-                back to.
-              </p>
-              <div className="flex flex-col gap-3 sm:flex-row">
-                <Button asChild size="lg">
-                  <Link href="/book">
-                    Book a table
-                    <CalendarDots />
-                  </Link>
-                </Button>
-                <Button
-                  asChild
-                  size="lg"
-                  variant="outline"
-                  className="border-white/12 bg-black/16 text-white hover:bg-black/24 hover:text-white"
-                >
-                  <Link href="/menu">
-                    View menu
-                    <ArrowRight />
-                  </Link>
-                </Button>
-              </div>
-              <div className="grid gap-3 text-sm text-white/78 sm:grid-cols-3">
-                {heroSignals.map((signal) => (
-                  <div
-                    key={signal}
-                    className="rounded-2xl border border-white/10 bg-black/16 px-4 py-3 text-white/88 backdrop-blur-sm"
-                  >
-                    {signal}
-                  </div>
-                ))}
-              </div>
+        <div className="relative flex min-h-[calc(100svh-4.25rem)] flex-col justify-end px-5 py-10 sm:px-6 md:px-8 md:py-14">
+          <div className="max-w-3xl space-y-6">
+            <p className="hero-entrance night-kicker">{siteName}</p>
+            <div className="hero-entrance-delay-1 space-y-4">
+              <h1 className="display-copy max-w-4xl text-white">
+                The Old School House
+              </h1>
+              <h2 className="max-w-2xl text-2xl leading-tight text-white md:text-3xl">
+                Traditional pub, Nepalese kitchen, and a warm welcome on London
+                Road.
+              </h2>
             </div>
-            <div className="w-full max-w-sm rounded-[2rem] border border-white/10 bg-[linear-gradient(160deg,rgba(8,24,14,0.94),rgba(24,46,31,0.84))] p-5 text-white shadow-[0px_20px_60px_rgba(6,27,14,0.34)] backdrop-blur-md">
-              <div className="space-y-5">
-                <div className="space-y-3">
-                  <div className="h-px w-16 bg-[var(--color-on-tertiary-container)]/70" />
-                  <p className="text-xs font-semibold tracking-[0.22em] text-[var(--color-on-tertiary-container)] uppercase">
-                    Tonight at a glance
-                  </p>
-                </div>
-                <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-black/12">
-                  <p className="flex items-start gap-3 px-4 py-4 text-sm leading-7 text-white/88">
-                    <Clock className="mt-1 size-4 shrink-0 text-[var(--color-on-tertiary-container)]" />
-                    <span>
-                      {openingHours[0].label}: {openingHours[0].hours}
-                    </span>
-                  </p>
-                  <div className="mx-4 h-px bg-white/8" />
-                  <p className="flex items-start gap-3 px-4 py-4 text-sm leading-7 text-white/88">
-                    <MapPin className="mt-1 size-4 shrink-0 text-[var(--color-on-tertiary-container)]" />
-                    <span>{siteLocation}</span>
-                  </p>
-                  <div className="mx-4 h-px bg-white/8" />
-                  <p className="flex items-start gap-3 px-4 py-4 text-sm leading-7 text-white/88">
-                    <Phone className="mt-1 size-4 shrink-0 text-[var(--color-on-tertiary-container)]" />
-                    <a
-                      href={sitePhoneHref}
-                      className="transition hover:text-[var(--color-on-tertiary-container)]"
-                    >
-                      {sitePhone}
-                    </a>
-                  </p>
-                </div>
+            <p className="hero-entrance-delay-2 max-w-2xl text-base leading-7 text-white/78 md:text-lg">
+              Come in for pub favourites, stay for Nepalese dishes, and settle
+              into a front garden, private courtyard, and bar built for the kind
+              of evenings that last a little longer.
+            </p>
+            <div className="hero-entrance-delay-2 flex flex-col gap-3 sm:flex-row">
+              <Button asChild size="lg">
+                <Link href="/book">
+                  Book a table
+                  <CalendarDots />
+                </Link>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="border-white/12 bg-black/16 text-white hover:bg-black/24 hover:text-white"
+              >
+                <Link href="/menu">
+                  View menu
+                  <ArrowRight />
+                </Link>
+              </Button>
+            </div>
+            <p className="hero-entrance-delay-3 max-w-2xl text-sm leading-7 text-[var(--color-on-tertiary-container)]">
+              Open daily from 10:00 to 00:30 · Stony Stratford, Milton Keynes ·
+              01908 561936
+            </p>
+          </div>
+          <div className="hero-entrance-delay-3 mt-8 grid gap-3 md:max-w-4xl md:grid-cols-3">
+            {heroSignals.map((signal) => (
+              <div
+                key={signal}
+                className="night-tile bg-black/20 text-white/88 backdrop-blur-sm"
+              >
+                {signal}
               </div>
+            ))}
+          </div>
+          <div className="hero-entrance-delay-3 mt-8 grid gap-3 md:max-w-5xl md:grid-cols-[1.05fr_0.95fr_0.95fr]">
+            <div className="night-tile flex items-start gap-3">
+              <Clock className="mt-1 size-4 shrink-0 text-[var(--color-on-tertiary-container)]" />
+              <span>
+                {openingHours[0].label}: {openingHours[0].hours}
+              </span>
+            </div>
+            <div className="night-tile flex items-start gap-3">
+              <MapPin className="mt-1 size-4 shrink-0 text-[var(--color-on-tertiary-container)]" />
+              <span>{siteLocation}</span>
+            </div>
+            <div className="night-tile flex items-start gap-3">
+              <Phone className="mt-1 size-4 shrink-0 text-[var(--color-on-tertiary-container)]" />
+              <a
+                href={sitePhoneHref}
+                className="transition hover:text-[var(--color-on-tertiary-container)]"
+              >
+                {sitePhone}
+              </a>
             </div>
           </div>
         </div>
       </section>
 
       <section className="bg-[var(--color-surface-low)] py-5">
-        <div className="section-shell overflow-x-auto">
-          <div className="flex min-w-max items-center gap-4 text-sm font-semibold tracking-[0.16em] text-on-surface uppercase">
-            {proofPoints.map((point, index) => (
-              <div key={point} className="flex items-center gap-4">
-                <span>{point}</span>
-                {index < proofPoints.length - 1 ? (
-                  <span className="text-[var(--color-tertiary-fixed-dim)]">
-                    /
-                  </span>
-                ) : null}
-              </div>
-            ))}
+        <div className="section-shell">
+          <div className="surface-frame overflow-x-auto">
+            <div className="flex min-w-max gap-px bg-[rgba(196,189,181,0.22)] p-px text-sm font-semibold tracking-[0.16em] text-on-surface uppercase">
+              {proofPoints.map((point) => (
+                <div
+                  key={point}
+                  className="bg-[var(--color-surface-lowest)] px-4 py-3 md:px-5"
+                >
+                  {point}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       <section className="bg-background py-16 md:py-24">
-        <div className="section-shell grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
-          <div className="space-y-6">
+        <div className="section-shell grid gap-10 lg:grid-cols-[0.72fr_0.9fr_1.08fr] lg:items-start">
+          <div className="space-y-6 lg:sticky lg:top-28">
             <SectionHeading
               eyebrow="Why choose us"
               title="A proper local with a little more flavour, a little more warmth, and plenty to come back for."
               description="The Old School House keeps the feel of a characterful pub while giving you more reasons to stay: good food, easy drinks, a warm welcome, and a menu that goes beyond the expected."
             />
+            <div className="surface-frame">
+              <div className="surface-pane surface-pane-muted">
+                <p className="eyebrow">Why guests come back</p>
+                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                  Welcoming to one and all, with honest plates, a strong wet
+                  offer, and enough warmth to make one visit feel like the start
+                  of a habit.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="lg:pt-10">
             <Image
               src={startersImage}
               alt="Samosas plated with salad and chutneys at The Old School House."
-              className="h-[22rem] w-full rounded-[2rem] object-cover md:h-[28rem]"
-              sizes="(min-width: 1024px) 40vw, 100vw"
+              className="media-lift h-[22rem] w-full rounded-[2rem] object-cover md:h-[28rem] lg:h-[38rem]"
+              sizes="(min-width: 1024px) 30vw, 100vw"
             />
           </div>
-          <div className="space-y-8 pt-1">
+          <div className="space-y-8 pt-1 lg:pt-18">
             {homeReasons.map((reason) => (
-              <article key={reason.title} className="space-y-3">
+              <article
+                key={reason.title}
+                className="space-y-3 border-t border-[var(--color-outline-variant)]/30 pt-6 first:border-t-0 first:pt-0"
+              >
                 <h3 className="font-sans text-2xl font-semibold text-secondary">
                   {reason.title}
                 </h3>
@@ -232,51 +282,111 @@ export default function Page() {
       </section>
 
       <section className="bg-[var(--color-surface-low)] py-16 md:py-24">
-        <div className="section-shell grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
-          <div className="space-y-6">
+        <div className="section-shell grid gap-10 lg:grid-cols-[1.26fr_0.74fr] lg:items-start">
+          <div className="order-2 space-y-6 lg:order-1">
+            <div className="surface-frame overflow-hidden">
+              <div className="grid gap-px bg-[rgba(196,189,181,0.22)] xl:grid-cols-[0.84fr_1.16fr]">
+                <div className="surface-pane surface-pane-muted">
+                  <p className="eyebrow">Across the menu</p>
+                  <div className="mt-4 space-y-5">
+                    {homeMenuHighlights.map((highlight) => (
+                      <article
+                        key={highlight.title}
+                        className="space-y-2 border-t border-[var(--color-outline-variant)]/25 pt-5 first:border-t-0 first:pt-0"
+                      >
+                        <h3 className="font-sans text-xl font-semibold text-secondary">
+                          {highlight.title}
+                        </h3>
+                        <p className="text-sm leading-7 text-on-surface md:text-base">
+                          {highlight.description}
+                        </p>
+                      </article>
+                    ))}
+                  </div>
+                </div>
+                <div className="surface-pane bg-[var(--color-surface-lowest)] xl:pt-12">
+                  <p className="eyebrow">Start here</p>
+                  <div className="mt-4 space-y-5">
+                    {featuredMenuItems.slice(0, 3).map((item) => (
+                      <article
+                        key={item.name}
+                        className="space-y-2 border-t border-[var(--color-outline-variant)]/25 pt-5 first:border-t-0 first:pt-0"
+                      >
+                        <div className="flex items-start justify-between gap-4">
+                          <h3 className="font-sans text-lg font-semibold text-secondary">
+                            {item.name}
+                          </h3>
+                          <p className="shrink-0 text-sm font-medium text-on-surface">
+                            {formatPrice(item.price)}
+                          </p>
+                        </div>
+                        {item.description ? (
+                          <p className="text-sm leading-6 text-on-surface">
+                            {item.description}
+                          </p>
+                        ) : null}
+                      </article>
+                    ))}
+                  </div>
+                </div>
+                <div className="surface-pane bg-[var(--color-surface-lowest)] xl:col-span-2">
+                  <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+                    <div className="max-w-xl">
+                      <p className="eyebrow">Kitchen favourites</p>
+                      <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                        A few plates guests are likely to come back for, whether
+                        the table is sharing, ordering across the menu, or just
+                        settling into a longer dinner.
+                      </p>
+                    </div>
+                    <Button asChild size="lg" className="w-fit">
+                      <Link href="/menu">
+                        Explore the menu
+                        <ForkKnife />
+                      </Link>
+                    </Button>
+                  </div>
+                  <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                    {featuredMenuItems.slice(3).map((item) => (
+                      <article
+                        key={item.name}
+                        className="rounded-[1.4rem] bg-[var(--color-surface-low)]/74 px-4 py-4"
+                      >
+                        <div className="flex items-start justify-between gap-4">
+                          <h3 className="font-sans text-lg font-semibold text-secondary">
+                            {item.name}
+                          </h3>
+                          <p className="shrink-0 text-sm font-medium text-on-surface">
+                            {formatPrice(item.price)}
+                          </p>
+                        </div>
+                        {item.description ? (
+                          <p className="pt-2 text-sm leading-6 text-on-surface">
+                            {item.description}
+                          </p>
+                        ) : null}
+                      </article>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="order-1 space-y-6 lg:sticky lg:top-28 lg:order-2">
             <SectionHeading
               eyebrow="Menu preview"
               title="From familiar pub comfort to dishes worth passing around the table."
               description="Whether you are keeping it classic or ordering across the Nepalese side of the menu, there is plenty here for a quick meal, a family table, or a longer dinner."
             />
-            <div className="space-y-5">
-              {homeMenuHighlights.map((highlight) => (
-                <article key={highlight.title} className="space-y-2">
-                  <h3 className="font-sans text-xl font-semibold text-secondary">
-                    {highlight.title}
-                  </h3>
-                  <p className="text-sm leading-7 text-on-surface md:text-base">
-                    {highlight.description}
-                  </p>
-                </article>
-              ))}
-            </div>
-            <Button asChild size="lg">
-              <Link href="/menu">
-                Explore the menu
-                <ForkKnife />
-              </Link>
-            </Button>
-          </div>
-          <div className="rounded-[2rem] bg-[var(--color-surface-lowest)] p-5 md:p-7">
-            <div className="grid gap-5">
-              {featuredMenuItems.map((item) => (
-                <article key={item.name} className="space-y-2">
-                  <div className="flex items-start justify-between gap-4">
-                    <h3 className="font-sans text-lg font-semibold text-secondary">
-                      {item.name}
-                    </h3>
-                    <p className="shrink-0 text-sm font-medium text-on-surface">
-                      {formatPrice(item.price)}
-                    </p>
-                  </div>
-                  {item.description ? (
-                    <p className="text-sm leading-6 text-on-surface">
-                      {item.description}
-                    </p>
-                  ) : null}
-                </article>
-              ))}
+            <div className="surface-frame">
+              <div className="surface-pane surface-pane-muted">
+                <p className="eyebrow">Why it lands well</p>
+                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                  Guests do not have to choose between familiar pub comfort and
+                  more vibrant plates. The menu gives the table a reason to keep
+                  ordering across both.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -284,74 +394,82 @@ export default function Page() {
 
       <InlineBookingCta
         title="Book ahead for dinner, drinks, or an easy catch-up in town."
-        description="If you know when you want to come in, booking ahead is the easiest way to get the table sorted and the evening off to a smooth start."
+        description="If you know when you would like to come in, book ahead and arrive knowing your table is waiting."
       />
 
       <section className="bg-background py-16 md:py-24">
-        <div className="section-shell space-y-10">
-          <SectionHeading
-            eyebrow="Atmosphere"
-            title="Good food, easy company, and a setting made for lingering."
-            description="Think exposed brick, wooden floors, generous plates, and the sort of room that works just as well for a quick lunch as it does for a longer evening with friends."
-          />
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-[1.15fr_0.85fr_0.85fr]">
-            <VenuePhotoPlaceholder
-              title="Exterior"
-              alt="Placeholder for a future exterior photograph of The Old School House on London Road, showing the brick frontage and entrance."
-              className="h-[18rem] md:col-span-2 md:h-[22rem] lg:col-span-1 lg:row-span-2 lg:h-full lg:min-h-[32rem]"
+        <div className="section-shell grid gap-10 lg:grid-cols-[0.62fr_1.38fr] lg:items-start">
+          <div className="space-y-6 lg:sticky lg:top-28">
+            <SectionHeading
+              eyebrow="Atmosphere"
+              title="Good food, easy company, and a setting made for lingering."
+              description="Think exposed brick, wooden floors, generous plates, and the sort of room that works just as well for a quick lunch as it does for a longer evening with friends."
             />
-            <VenuePhotoPlaceholder
-              title="Bar"
-              alt="Placeholder for a future bar photograph showing the single-bar setup inside The Old School House."
-              className="h-[15rem] md:h-[18rem]"
-            />
-            <VenuePhotoPlaceholder
-              title="Dining Room"
-              alt="Placeholder for a future dining room photograph showing exposed brick, wooden floors, and guest seating inside The Old School House."
-              className="h-[15rem] md:h-[18rem]"
-            />
-            <VenuePhotoPlaceholder
-              title="Front Garden"
-              alt="Placeholder for a future front garden photograph showing the outdoor seating area at The Old School House."
-              className="h-[15rem] md:col-span-2 md:h-[16rem] lg:col-span-2"
-            />
-          </div>
-          <div className="grid gap-6 lg:grid-cols-3">
-            {atmosphereMoments.map((moment) => (
-              <article key={moment.title} className="space-y-2">
-                <h3 className="font-sans text-xl font-semibold text-secondary">
-                  {moment.title}
-                </h3>
-                <p className="text-sm leading-7 text-on-surface md:text-base">
-                  {moment.description}
+            <div className="surface-frame">
+              <div className="surface-pane surface-pane-muted">
+                <p className="eyebrow">Around the pub</p>
+                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                  From the street outside to the bar, the dining room, and the
+                  garden, each part of the pub gives you a slightly different
+                  reason to settle in and stay a little longer.
                 </p>
-              </article>
-            ))}
+              </div>
+            </div>
+          </div>
+          <div className="space-y-6">
+            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-[1.2fr_0.8fr_0.8fr]">
+              <VenuePhotoPlaceholder
+                title="Exterior"
+                alt="Placeholder for a future exterior photograph of The Old School House on London Road, showing the brick frontage and entrance."
+                className="media-lift h-[18rem] md:col-span-2 md:h-[22rem] lg:col-span-1 lg:row-span-2 lg:h-full lg:min-h-[32rem]"
+              />
+              <VenuePhotoPlaceholder
+                title="Bar"
+                alt="Placeholder for a future bar photograph showing the single-bar setup inside The Old School House."
+                className="media-lift h-[15rem] md:h-[18rem]"
+              />
+              <VenuePhotoPlaceholder
+                title="Dining Room"
+                alt="Placeholder for a future dining room photograph showing exposed brick, wooden floors, and guest seating inside The Old School House."
+                className="media-lift h-[15rem] md:h-[18rem]"
+              />
+              <VenuePhotoPlaceholder
+                title="Front Garden"
+                alt="Placeholder for a future front garden photograph showing the outdoor seating area at The Old School House."
+                className="media-lift h-[15rem] md:col-span-2 md:h-[16rem] lg:col-span-2"
+              />
+            </div>
+            <div className="surface-frame grid gap-px bg-[rgba(196,189,181,0.22)] lg:grid-cols-[0.92fr_0.92fr_1.16fr]">
+              {atmosphereMoments.map((moment, index) => (
+                <article
+                  key={moment.title}
+                  className={cn(
+                    "surface-pane bg-[var(--color-surface-lowest)]",
+                    index === 2 && "surface-pane-muted"
+                  )}
+                >
+                  <h3 className="font-sans text-xl font-semibold text-secondary">
+                    {moment.title}
+                  </h3>
+                  <p className="pt-2 text-sm leading-7 text-on-surface md:text-base">
+                    {moment.description}
+                  </p>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       <section className="bg-primary py-16 text-white md:py-24">
-        <div className="section-shell grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
-          <div className="space-y-6">
+        <div className="section-shell grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:items-start">
+          <div className="space-y-6 lg:sticky lg:top-28">
             <SectionHeading
               eyebrow="Events and offers"
               title="Private hire, tasting nights, sport, and repeat reasons to stop by."
               description="Round everyone up for a birthday table, meet at the bar for the match, or plan a bigger gathering with food, drinks, and room to settle in."
               invert
             />
-            <div className="space-y-5">
-              {eventsHighlights.map((highlight) => (
-                <article key={highlight.title} className="space-y-2">
-                  <h3 className="font-sans text-xl font-semibold text-[var(--color-on-tertiary-container)]">
-                    {highlight.title}
-                  </h3>
-                  <p className="text-sm leading-7 text-white/74 md:text-base">
-                    {highlight.description}
-                  </p>
-                </article>
-              ))}
-            </div>
             <Button asChild size="lg" variant="secondary">
               <Link href="/events">
                 Ask about private hire
@@ -359,26 +477,49 @@ export default function Page() {
               </Link>
             </Button>
           </div>
-          <div className="rounded-[2rem] border border-white/10 bg-[linear-gradient(160deg,rgba(8,24,14,0.9),rgba(26,50,35,0.82))] p-5 text-white shadow-[0px_20px_60px_rgba(6,27,14,0.26)] backdrop-blur-md md:p-6">
-            <div className="space-y-5">
-              <div className="space-y-3">
-                <div className="h-px w-16 bg-[var(--color-on-tertiary-container)]/70" />
-                <p className="text-xs font-semibold tracking-[0.22em] text-[var(--color-on-tertiary-container)] uppercase">
-                  Best-fit occasions
+          <div className="night-panel overflow-hidden p-0">
+            <div className="grid gap-px bg-white/10 lg:grid-cols-[0.78fr_1.22fr]">
+              <div className="bg-black/12 px-5 py-6 md:px-6 md:py-7">
+                <div className="space-y-3">
+                  <div className="night-rule" />
+                  <p className="night-kicker">Good for</p>
+                </div>
+                <div className="mt-5 grid gap-3 text-sm leading-7 sm:grid-cols-2 lg:grid-cols-1">
+                  {eventOccasions.slice(0, 4).map((occasion) => (
+                    <div key={occasion} className="night-tile">
+                      {occasion}
+                    </div>
+                  ))}
+                </div>
+                <p className="mt-5 max-w-sm text-sm leading-7 text-white/72">
+                  From birthday dinners to match nights, the pub suits the kind
+                  of plans that start small and often grow once everyone says
+                  yes.
                 </p>
               </div>
-              <div className="grid gap-3 text-sm leading-7 md:grid-cols-2">
-                <div className="rounded-[1.4rem] border border-white/10 bg-white/6 px-4 py-4 text-white/88">
-                  Birthday dinners and longer-table gatherings
+              <div className="px-5 py-6 md:px-6 md:py-7">
+                <div className="space-y-3">
+                  <div className="night-rule" />
+                  <p className="night-kicker">Why it works</p>
                 </div>
-                <div className="rounded-[1.4rem] border border-white/10 bg-white/6 px-4 py-4 text-white/88">
-                  Work drinks and after-match socials
+                <div className="mt-5 space-y-5">
+                  {eventsHighlights.map((highlight) => (
+                    <article
+                      key={highlight.title}
+                      className="space-y-2 border-t border-white/10 pt-5 first:border-t-0 first:pt-0"
+                    >
+                      <h3 className="font-sans text-xl font-semibold text-[var(--color-on-tertiary-container)]">
+                        {highlight.title}
+                      </h3>
+                      <p className="max-w-2xl text-sm leading-7 text-white/76 md:text-base">
+                        {highlight.description}
+                      </p>
+                    </article>
+                  ))}
                 </div>
-                <div className="rounded-[1.4rem] border border-white/10 bg-white/6 px-4 py-4 text-white/88">
-                  Quiz-style nights and theme-led evenings
-                </div>
-                <div className="rounded-[1.4rem] border border-white/10 bg-white/6 px-4 py-4 text-white/88">
-                  Sports watch parties and team meetups
+                <div className="mt-6 border-t border-white/10 pt-5 text-sm leading-7 text-white/74">
+                  Front garden, private courtyard, and room inside mean the
+                  evening can feel relaxed from first drink to final round.
                 </div>
               </div>
             </div>
@@ -386,18 +527,105 @@ export default function Page() {
         </div>
       </section>
 
+      <section className="bg-background py-16 md:py-24">
+        <div className="section-shell grid gap-10 lg:grid-cols-[0.6fr_1.4fr] lg:items-start">
+          <div className="space-y-6 lg:sticky lg:top-28">
+            <SectionHeading
+              eyebrow="Guest reviews"
+              title="What guests remember most after dinner here."
+              description="Momo, Kathmandu tikka, goat curry, mixed grills, good drinks, and a room that makes it easy to stay for one more round all come up again and again."
+            />
+            <div className="surface-frame">
+              <div className="surface-pane surface-pane-muted">
+                <p className="eyebrow">Share your visit</p>
+                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                  Been in for momo, mixed grills, or a longer Nepalese dinner?
+                  Leave a note on Google and help the next guest decide.
+                </p>
+                <div className="mt-5 flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
+                  <Button asChild size="lg">
+                    <a href={googleReviewHref} target="_blank" rel="noreferrer">
+                      Write a Google review
+                      <ChatCircleDots />
+                    </a>
+                  </Button>
+                  <Button asChild size="lg" variant="outline">
+                    <a href={mapHref} target="_blank" rel="noreferrer">
+                      Open on Google Maps
+                      <ArrowRight />
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="surface-frame overflow-hidden">
+            <div className="grid gap-px bg-[rgba(196,189,181,0.22)] md:grid-cols-2 xl:grid-cols-3">
+              {guestReviews.map((review) => (
+                <article
+                  key={review.name}
+                  className="surface-pane bg-[var(--color-surface-lowest)]"
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex items-start gap-3">
+                      <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-[var(--color-surface-highest)] text-sm font-semibold text-primary">
+                        {getInitials(review.name)}
+                      </div>
+                      <div className="min-w-0">
+                        <h3 className="font-sans text-base font-semibold text-on-background">
+                          {review.name}
+                        </h3>
+                        <p className="pt-1 text-[0.72rem] font-semibold tracking-[0.14em] text-on-surface uppercase">
+                          {review.guestType}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="rounded-full bg-[var(--color-surface-low)] px-3 py-1 text-[0.7rem] font-semibold tracking-[0.14em] text-on-surface uppercase">
+                      Google review
+                    </div>
+                  </div>
+                  <div className="mt-4 flex items-center gap-3">
+                    <GoogleStars />
+                    <p className="text-xs font-medium text-on-surface/76">
+                      Shared by a guest
+                    </p>
+                  </div>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {review.focus.map((item) => (
+                      <span
+                        key={item}
+                        className="rounded-full bg-[var(--color-surface-low)] px-3 py-1 text-[0.7rem] font-semibold tracking-[0.12em] text-secondary uppercase"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                  <p className="mt-4 text-sm leading-7 text-on-surface">
+                    {review.summary}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="bg-[var(--color-surface-low)] py-16 md:py-20">
-        <div className="section-shell space-y-8">
+        <div className="section-shell grid gap-10 lg:grid-cols-[0.62fr_1.38fr] lg:items-start">
           <SectionHeading
             eyebrow="Neighbourhood fit"
             title="The sort of place that fits easily into local life."
-            description="Drop in for one drink, plan a family meal, meet friends in town, or make it your regular Sunday stop. It is built for the repeat visits as much as the one-off plans."
+            description="Drop in for one drink, plan a family meal, meet friends in town, or make it your regular Sunday stop. It is made for the repeat visits as much as the one-off plans."
+            className="lg:sticky lg:top-28"
           />
-          <div className="grid gap-6 lg:grid-cols-3">
-            {communityNotes.map((note) => (
+          <div className="surface-frame grid gap-px bg-[rgba(196,189,181,0.22)] lg:grid-cols-[0.95fr_0.95fr_1.1fr]">
+            {communityNotes.map((note, index) => (
               <article
                 key={note.title}
-                className="rounded-[1.6rem] bg-[var(--color-surface-lowest)] px-5 py-6"
+                className={cn(
+                  "surface-pane bg-[var(--color-surface-lowest)]",
+                  index === 2 && "surface-pane-muted"
+                )}
               >
                 <h3 className="font-heading text-2xl">{note.title}</h3>
                 <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
@@ -410,47 +638,94 @@ export default function Page() {
       </section>
 
       <section className="bg-background py-16 md:py-24">
+        <div className="section-shell grid gap-10 lg:grid-cols-[0.62fr_1.38fr] lg:items-start">
+          <div className="space-y-6 lg:sticky lg:top-28">
+            <SectionHeading
+              eyebrow="Before you visit"
+              title="Helpful local details guests often search for before choosing a pub in Stony Stratford."
+              description="Parking, dog-friendly space, Wi-Fi, food hours, and live sport are often part of the decision, so they are worth making clear on the page."
+            />
+            <div className="surface-frame">
+              <div className="surface-pane surface-pane-muted">
+                <p className="eyebrow">Food hours</p>
+                <div className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                  {foodHours.map((item) => (
+                    <p key={item}>{item}</p>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="surface-frame overflow-hidden">
+            <div className="grid gap-px bg-[rgba(196,189,181,0.22)] md:grid-cols-2">
+              {localFaqs.map((faq, index) => (
+                <article
+                  key={faq.question}
+                  className={cn(
+                    "surface-pane bg-[var(--color-surface-lowest)]",
+                    index % 2 === 0 && "surface-pane-muted"
+                  )}
+                >
+                  <h3 className="font-sans text-xl font-semibold text-secondary">
+                    {faq.question}
+                  </h3>
+                  <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                    {faq.answer}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-background py-16 md:py-24">
         <div className="section-shell grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
           <div className="space-y-6">
             <SectionHeading
               eyebrow="Visit"
-              title="Easy to find, easy to call, and simple to plan."
+              title="Easy to find, easy to call, and well worth coming by."
               description="If you are heading into Stony Stratford, everything you need is here: where to find us, when we are open, and how to get in touch."
             />
-            <div className="grid gap-4 text-sm leading-7 text-on-surface">
-              <p className="flex items-start gap-3">
-                <MapPin className="mt-1 size-4 shrink-0 text-secondary" />
-                <span>{siteAddress}</span>
-              </p>
-              <p className="flex items-start gap-3">
-                <Clock className="mt-1 size-4 shrink-0 text-secondary" />
-                <span>
-                  {openingHours[0].label}: {openingHours[0].hours}
-                </span>
-              </p>
-              <p className="flex items-start gap-3">
-                <Phone className="mt-1 size-4 shrink-0 text-secondary" />
-                <span>
-                  <a
-                    href={sitePhoneHref}
-                    className="transition hover:text-secondary"
-                  >
-                    {sitePhone}
-                  </a>
-                  {" · "}
-                  <a
-                    href={siteEmailHref}
-                    className="transition hover:text-secondary"
-                  >
-                    {siteEmail}
-                  </a>
-                </span>
-              </p>
-            </div>
-            <div className="space-y-3 text-sm leading-7 text-on-surface">
-              {arrivalNotes.map((note) => (
-                <p key={note}>{note}</p>
-              ))}
+            <div className="surface-frame">
+              <div className="surface-pane">
+                <div className="grid gap-4 text-sm leading-7 text-on-surface">
+                  <p className="flex items-start gap-3">
+                    <MapPin className="mt-1 size-4 shrink-0 text-secondary" />
+                    <span>{siteAddress}</span>
+                  </p>
+                  <p className="flex items-start gap-3">
+                    <Clock className="mt-1 size-4 shrink-0 text-secondary" />
+                    <span>
+                      {openingHours[0].label}: {openingHours[0].hours}
+                    </span>
+                  </p>
+                  <p className="flex items-start gap-3">
+                    <Phone className="mt-1 size-4 shrink-0 text-secondary" />
+                    <span>
+                      <a
+                        href={sitePhoneHref}
+                        className="transition hover:text-secondary"
+                      >
+                        {sitePhone}
+                      </a>
+                      {" · "}
+                      <a
+                        href={siteEmailHref}
+                        className="transition hover:text-secondary"
+                      >
+                        {siteEmail}
+                      </a>
+                    </span>
+                  </p>
+                </div>
+                <div className="surface-divider my-5 h-px" />
+                <div className="space-y-3 text-sm leading-7 text-on-surface">
+                  {arrivalNotes.map((note) => (
+                    <p key={note}>{note}</p>
+                  ))}
+                </div>
+              </div>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row">
               <Button asChild size="lg">

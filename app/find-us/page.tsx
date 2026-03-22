@@ -24,9 +24,12 @@ import {
 } from "@/data/site"
 
 export const metadata: Metadata = {
-  title: "Find Us",
+  title: "Find Us in Stony Stratford",
   description:
     "Find The Old School House on London Road in Stony Stratford, with opening hours, contact details, directions, parking notes, and a live map.",
+  alternates: {
+    canonical: "/find-us",
+  },
 }
 
 export default function FindUsPage() {
@@ -34,58 +37,62 @@ export default function FindUsPage() {
     <main>
       <PageHero
         eyebrow="Find us"
-        title="Everything you need before you set off."
+        title="Everything you need to find us easily."
         description="Find the address, opening hours, phone number, and map all in one place so joining us feels easy from the start."
         highlights={[
           "London Road, Stony Stratford, Milton Keynes, MK11 1JA",
           "Small on-site car park plus town-centre parking nearby",
-          "Map, phone, and email links ready for mobile taps",
+          "Map, phone, and email details all in one place",
         ]}
         primaryAction={{ href: mapHref, label: "Open map" }}
         secondaryAction={{ href: sitePhoneHref, label: "Call the pub" }}
       />
 
       <section className="bg-background py-16 md:py-24">
-        <div className="section-shell grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
-          <div className="space-y-6">
+        <div className="section-shell grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
+          <div className="space-y-6 lg:sticky lg:top-28">
             <SectionHeading
               eyebrow="Address and contact"
               title="The Old School House sits on the busiest road in Stony Stratford."
               description="Right on London Road, we are easy to spot whether you are stopping by for a quick drink, dinner with friends, or a longer evening in town."
             />
-            <div className="grid gap-4 text-sm leading-7 text-on-surface md:text-base">
-              <p className="flex items-start gap-3">
-                <MapPin className="mt-1 size-4 shrink-0 text-secondary" />
-                <span>{siteAddress}</span>
-              </p>
-              <p className="flex items-start gap-3">
-                <Phone className="mt-1 size-4 shrink-0 text-secondary" />
-                <span>
-                  <a
-                    href={sitePhoneHref}
-                    className="text-secondary transition hover:text-secondary/80"
-                  >
-                    {sitePhone}
-                  </a>
-                </span>
-              </p>
-              <p className="flex items-start gap-3">
-                <EnvelopeSimple className="mt-1 size-4 shrink-0 text-secondary" />
-                <span>
-                  <a
-                    href={siteEmailHref}
-                    className="text-secondary transition hover:text-secondary/80"
-                  >
-                    {siteEmail}
-                  </a>
-                </span>
-              </p>
-              <p className="flex items-start gap-3">
-                <Clock className="mt-1 size-4 shrink-0 text-secondary" />
-                <span>
-                  {openingHours[0].label}: {openingHours[0].hours}
-                </span>
-              </p>
+            <div className="surface-frame">
+              <div className="surface-pane">
+                <div className="grid gap-4 text-sm leading-7 text-on-surface md:text-base">
+                  <p className="flex items-start gap-3">
+                    <MapPin className="mt-1 size-4 shrink-0 text-secondary" />
+                    <span>{siteAddress}</span>
+                  </p>
+                  <p className="flex items-start gap-3">
+                    <Phone className="mt-1 size-4 shrink-0 text-secondary" />
+                    <span>
+                      <a
+                        href={sitePhoneHref}
+                        className="text-secondary transition hover:text-secondary/80"
+                      >
+                        {sitePhone}
+                      </a>
+                    </span>
+                  </p>
+                  <p className="flex items-start gap-3">
+                    <EnvelopeSimple className="mt-1 size-4 shrink-0 text-secondary" />
+                    <span>
+                      <a
+                        href={siteEmailHref}
+                        className="text-secondary transition hover:text-secondary/80"
+                      >
+                        {siteEmail}
+                      </a>
+                    </span>
+                  </p>
+                  <p className="flex items-start gap-3">
+                    <Clock className="mt-1 size-4 shrink-0 text-secondary" />
+                    <span>
+                      {openingHours[0].label}: {openingHours[0].hours}
+                    </span>
+                  </p>
+                </div>
+              </div>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row">
               <Button asChild size="lg">
@@ -98,18 +105,33 @@ export default function FindUsPage() {
               </Button>
             </div>
           </div>
-          <MapEmbed />
+          <div className="space-y-6">
+            <MapEmbed />
+            <div className="surface-frame overflow-hidden">
+              <div className="grid gap-px bg-[rgba(196,189,181,0.22)] md:grid-cols-3">
+                <div className="surface-pane surface-pane-muted text-sm leading-7 text-on-surface">
+                  London Road location in the heart of Stony Stratford.
+                </div>
+                <div className="surface-pane bg-[var(--color-surface-lowest)] text-sm leading-7 text-on-surface">
+                  Small on-site car park, plus town-centre parking nearby.
+                </div>
+                <div className="surface-pane surface-pane-muted text-sm leading-7 text-on-surface">
+                  Give us a ring if you would like a hand finding us.
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       <InlineBookingCta
-        title="Planning the route and the table at the same time?"
-        description="If you know you are coming in, book first and keep the rest of the journey nice and easy."
+        title="Thinking about dinner already?"
+        description="If you know you are joining us, book ahead and arrive with everything nicely sorted."
       />
 
       <section className="bg-[var(--color-surface-low)] py-16 md:py-24">
-        <div className="section-shell grid gap-8 lg:grid-cols-2">
-          <div className="rounded-[1.75rem] bg-[var(--color-surface-lowest)] px-5 py-6 md:px-7">
+        <div className="section-shell grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="rounded-[1.75rem] bg-[var(--color-surface-lowest)] px-5 py-6 md:px-7 lg:sticky lg:top-28">
             <h2 className="text-[2rem]">Getting here</h2>
             <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
               {arrivalNotes.map((note) => (
@@ -117,18 +139,39 @@ export default function FindUsPage() {
               ))}
             </div>
           </div>
-          <div className="rounded-[1.75rem] bg-[var(--color-surface-lowest)] px-5 py-6 md:px-7">
-            <h2 className="text-[2rem]">Opening hours</h2>
-            <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
-              {openingHours.map((item) => (
-                <div
-                  key={item.label}
-                  className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between"
-                >
-                  <span>{item.label}</span>
-                  <span className="text-on-background">{item.hours}</span>
-                </div>
-              ))}
+          <div className="surface-frame grid gap-px bg-[rgba(196,189,181,0.22)]">
+            <div className="surface-pane bg-[var(--color-surface-lowest)]">
+              <h2 className="text-[2rem]">Opening hours</h2>
+              <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
+                {openingHours.map((item) => (
+                  <div
+                    key={item.label}
+                    className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between"
+                  >
+                    <span>{item.label}</span>
+                    <span className="text-on-background">{item.hours}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="surface-pane surface-pane-muted lg:pt-12">
+              <h2 className="text-[2rem]">Need a hand?</h2>
+              <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
+                <p>
+                  If you are on your way, call ahead and we will help you find
+                  us.
+                </p>
+                <p>
+                  You can also{" "}
+                  <a
+                    href={sitePhoneHref}
+                    className="text-secondary transition hover:text-secondary/80"
+                  >
+                    ring the pub directly
+                  </a>{" "}
+                  before you head over.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -139,26 +182,30 @@ export default function FindUsPage() {
           <SectionHeading
             eyebrow="Before you come"
             title="If you need anything else, give us a ring."
-            description="If you are checking the easiest route, planning your arrival time, or booking while you travel, just give us a call."
+            description="If you want to check parking, opening hours, or anything else before you arrive, just give us a call."
           />
-          <div className="space-y-4 text-sm leading-7 text-on-surface md:text-base">
-            <p>
-              If you have questions before you visit, calling ahead is the
-              quickest way to make sure everything is just right.
-            </p>
-            <p>
-              For directions or last-minute questions, call the pub team on{" "}
-              <a
-                href={sitePhoneHref}
-                className="text-secondary transition hover:text-secondary/80"
-              >
-                {sitePhone}
-              </a>
-              .
-            </p>
-            <Button asChild size="lg">
-              <Link href="/book">Book after planning the route</Link>
-            </Button>
+          <div className="surface-frame">
+            <div className="surface-pane surface-pane-muted">
+              <div className="space-y-4 text-sm leading-7 text-on-surface md:text-base">
+                <p>
+                  If you have questions before you visit, give us a ring and we
+                  will help.
+                </p>
+                <p>
+                  For directions or last-minute questions, call the pub team on{" "}
+                  <a
+                    href={sitePhoneHref}
+                    className="text-secondary transition hover:text-secondary/80"
+                  >
+                    {sitePhone}
+                  </a>
+                  .
+                </p>
+                <Button asChild size="lg">
+                  <Link href="/book">Book a table</Link>
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </section>

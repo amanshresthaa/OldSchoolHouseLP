@@ -211,12 +211,38 @@
     a {
         text-decoration-thickness: 1px;
     }
+
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+    }
 }
 
 @layer utilities {
     .paper-panel {
         @apply rounded-[1.75rem] border border-transparent bg-[var(--color-surface-lowest)] p-6;
         box-shadow: 0px 12px 32px rgba(27, 28, 28, 0.06);
+    }
+
+    .surface-frame {
+        @apply overflow-hidden rounded-[2rem] bg-[var(--color-surface-lowest)];
+        box-shadow: 0px 18px 48px rgba(27, 28, 28, 0.07);
+    }
+
+    .surface-pane {
+        @apply px-5 py-6 md:px-7 md:py-7;
+    }
+
+    .surface-pane-muted {
+        background: color-mix(in srgb, var(--color-surface-low) 82%, white 18%);
+    }
+
+    .surface-divider {
+        background: rgba(196, 189, 181, 0.28);
     }
 
     .night-panel {
@@ -255,8 +281,32 @@
         @apply mx-4 h-px bg-white/8;
     }
 
+    .media-lift {
+        @apply transition-transform duration-[var(--duration-transition)] ease-[var(--easing-standard)];
+    }
+
+    .media-lift:hover {
+        transform: translateY(-4px);
+    }
+
+    .hero-entrance {
+        animation: rise-fade 700ms var(--easing-standard) both;
+    }
+
+    .hero-entrance-delay-1 {
+        animation: rise-fade 700ms 90ms var(--easing-standard) both;
+    }
+
+    .hero-entrance-delay-2 {
+        animation: rise-fade 700ms 180ms var(--easing-standard) both;
+    }
+
+    .hero-entrance-delay-3 {
+        animation: rise-fade 700ms 270ms var(--easing-standard) both;
+    }
+
     .section-shell {
-        @apply mx-auto max-w-7xl px-5 sm:px-6 md:px-8;
+        @apply mx-auto max-w-[84rem] px-5 sm:px-6 md:px-8;
     }
 
     .display-copy {
@@ -265,5 +315,17 @@
 
     .eyebrow {
         @apply text-xs font-semibold uppercase tracking-[0.22em] text-secondary;
+    }
+}
+
+@keyframes rise-fade {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }

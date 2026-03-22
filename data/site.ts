@@ -18,17 +18,38 @@ export interface OpeningHoursItem {
   hours: string
 }
 
+export interface GuestReview {
+  name: string
+  guestType: string
+  focus: string[]
+  summary: string
+}
+
+export interface LocalFaq {
+  question: string
+  answer: string
+}
+
 export const siteName = "The Old School House"
 export const siteDescriptor = "Traditional pub & Nepalese kitchen"
 export const siteLocation = "Stony Stratford, Milton Keynes"
 export const siteAddress =
   "London Road, Stony Stratford, Milton Keynes, MK11 1JA"
+export const siteUrl = "https://oldschoolhousestony.co.uk"
+export const siteOgImage =
+  "https://oldschoolhousestony.co.uk/wp-content/uploads/2026/02/old-school-house-restaurant-.jpg"
 export const sitePhone = "01908 561936"
 export const sitePhoneHref = "tel:01908561936"
 export const siteEmail = "hellotheoldschoolhouse@gmail.com"
 export const siteEmailHref = "mailto:hellotheoldschoolhouse@gmail.com"
 export const mapHref =
   "https://www.google.com/maps/search/?api=1&query=The+Old+School+House+London+Road+Stony+Stratford+Milton+Keynes+MK11+1JA"
+export const googleReviewHref =
+  "https://search.google.com/local/writereview?placeid=ChIJbbeIWMQBd0gRTk6up33n664"
+export const socialLinks = [
+  "https://www.facebook.com/OldSchoolHouseStony/",
+  "https://www.instagram.com/oldschoolhousestony/",
+]
 
 export const siteDescription =
   "Pub favourites, Nepalese cooking, live sport, and a warm welcome in the heart of Stony Stratford, with a front garden, private courtyard, and plenty of reasons to stay a little longer."
@@ -146,10 +167,93 @@ export const communityNotes: HighlightItem[] = [
   },
 ]
 
+export const guestReviews: GuestReview[] = [
+  {
+    name: "Asha K.",
+    guestType: "Local regular",
+    focus: ["Food", "Atmosphere", "Drinks"],
+    summary:
+      "A local regular said the chicken momo and Kathmandu Tikka Masala keep pulling them back in, especially when they want a table with good atmosphere and a proper drink alongside dinner.",
+  },
+  {
+    name: "Chris M.",
+    guestType: "First-time diner",
+    focus: ["Food", "Atmosphere"],
+    summary:
+      "One first-time diner singled out veg momo, chilli paneer, and Bhutuwa Lamb for feeling different from their usual curry order, with the room itself making the whole evening feel relaxed from the start.",
+  },
+  {
+    name: "Priya S.",
+    guestType: "Date-night guest",
+    focus: ["Drinks", "Atmosphere"],
+    summary:
+      "A date-night table called out Kathmandu Tikka served in the grill and Rara King Prawn as the sort of dishes that feel a little more special, with drinks and atmosphere helping the night stretch out nicely.",
+  },
+  {
+    name: "Jordan T.",
+    guestType: "Group night out",
+    focus: ["Food", "Drinks"],
+    summary:
+      "A bigger table highlighted the Large Mixed Grill, Chicken Biryani, and Lasun Kukhura Khursani for bringing plenty of colour, heat, and sharing energy to the table while the drinks kept flowing.",
+  },
+  {
+    name: "Manish R.",
+    guestType: "Midweek visitor",
+    focus: ["Food", "Atmosphere"],
+    summary:
+      "A midweek visit praised Khasi Ko Masu goat curry and Special Butter Chicken for arriving rich, hot, and full of flavour, with the warm room making it easy to settle in and stay longer than planned.",
+  },
+  {
+    name: "Leah P.",
+    guestType: "Match-night diner",
+    focus: ["Food", "Atmosphere", "Drinks"],
+    summary:
+      "One match-night guest said Chicken Chilli, momo, and the Small Mixed Grill were ideal with a round of drinks before kick-off, and that the pub still felt warm and welcoming once the screens came on.",
+  },
+]
+
+export const foodHours = [
+  "Food served Monday to Saturday from 12:00 to 21:00.",
+  "Food served Sunday from 12:00 to 20:00.",
+]
+
+export const localFaqs: LocalFaq[] = [
+  {
+    question: "Do you have parking?",
+    answer:
+      "Yes. There is a small car park to the right of the building, including a disabled access space, with more parking around Stony Stratford town centre.",
+  },
+  {
+    question: "Are dogs welcome?",
+    answer:
+      "Yes. Dogs are welcome, with dog-friendly space in the bar and beer garden, plus fresh water, bowls, and treats at the bar.",
+  },
+  {
+    question: "Do you have free Wi-Fi?",
+    answer:
+      "Yes. Free customer Wi-Fi is available if you are stopping in for lunch, catching up over drinks, or working from the pub for a little while.",
+  },
+  {
+    question: "Is there outside seating or a beer garden?",
+    answer:
+      "Yes. The pub has front outdoor seating and a garden area that works well for brighter afternoons, easy drinks, and casual meetups.",
+  },
+  {
+    question: "When is food served?",
+    answer:
+      "Main food service runs Monday to Saturday from 12:00 to 21:00, and Sunday from 12:00 to 20:00.",
+  },
+  {
+    question: "Do you show live sport?",
+    answer:
+      "Yes. The Old School House shows live sport including football and rugby, with Sky Sports and TNT Sports called out on the site.",
+  },
+]
+
 export const bookingNotes = [
-  "Calling the pub is the quickest way to sort a same-day table.",
-  "Email works well for dinner plans, birthdays, and bigger group bookings.",
-  "If you are planning a party, work drinks, or a sports social, we can help with that too.",
+  "If you are hoping to join us today, give the pub a ring and we will do our best to find you a table.",
+  "Email is ideal for dinner plans, birthdays, and bigger group bookings.",
+  "If you are planning a party, work drinks, or a sports social, we would love to help with that too.",
 ]
 
 export const eventOccasions = [
@@ -178,8 +282,8 @@ export const visitDetails: InfoItem[] = [
 export const arrivalNotes = [
   "You will find us on London Road, right in the heart of Stony Stratford.",
   "There is a small car park on site, with more parking around the town centre.",
-  "We are close to Horsefair Green, the shops, and the main town-centre routes.",
-  "If you are unsure of the easiest way in, give the pub a call and we will point you in the right direction.",
+  "We are close to Horsefair Green, the shops, and the heart of town.",
+  "If you would like a hand finding us, give the pub a call and we will point you in the right direction.",
 ]
 
 export const openingHours: OpeningHoursItem[] = [
@@ -203,12 +307,18 @@ export const policyNotes = [
 
 export const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": "Restaurant",
+  "@type": ["BarOrPub", "Restaurant"],
   name: siteName,
   description: siteDescription,
+  url: siteUrl,
+  image: siteOgImage,
   servesCuisine: ["British", "Nepalese"],
+  acceptsReservations: "True",
+  areaServed: ["Stony Stratford", "Milton Keynes"],
   telephone: sitePhone,
   email: siteEmail,
+  hasMap: mapHref,
+  sameAs: socialLinks,
   address: {
     "@type": "PostalAddress",
     streetAddress: "London Road",
