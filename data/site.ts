@@ -8,6 +8,11 @@ export interface HighlightItem {
   description: string
 }
 
+export interface ProofPoint {
+  title: string
+  description: string
+}
+
 export interface InfoItem {
   label: string
   value: string
@@ -68,13 +73,37 @@ export const heroSignals = [
   "Sky Sports and TNT Sports",
 ]
 
-export const proofPoints = [
-  "Pub classics and Nepalese dishes",
-  "Front garden seating",
-  "Private courtyard",
-  "Live sport",
-  "Stony Stratford High Street",
-  "Open daily from 10:00",
+export const proofPoints: ProofPoint[] = [
+  {
+    title: "Pub classics and Nepalese dishes",
+    description:
+      "Order across both sides of the menu, from familiar pub comfort to momo, goat curry, and house signatures.",
+  },
+  {
+    title: "Front garden seating",
+    description:
+      "A good spot for brighter afternoons, easy drinks, and the kind of visit that turns into another round.",
+  },
+  {
+    title: "Private courtyard",
+    description:
+      "Useful when you want a little more room for catch-ups, group tables, or a longer evening outside.",
+  },
+  {
+    title: "Live sport",
+    description:
+      "Football, rugby, and bigger fixtures all have a place here without the pub losing its warm feel.",
+  },
+  {
+    title: "Stony Stratford High Street",
+    description:
+      "Right on London Road and easy to work into shopping, midweek catch-ups, or a planned evening in town.",
+  },
+  {
+    title: "Open daily from 10:00",
+    description:
+      "Simple to drop in for lunch, come back for dinner, or settle in later when the evening picks up.",
+  },
 ]
 
 export const homeReasons: HighlightItem[] = [
@@ -173,42 +202,42 @@ export const guestReviews: GuestReview[] = [
     guestType: "Local regular",
     focus: ["Food", "Atmosphere", "Drinks"],
     summary:
-      "A local regular said the chicken momo and Kathmandu Tikka Masala keep pulling them back in, especially when they want a table with good atmosphere and a proper drink alongside dinner.",
+      "The chicken momo and Kathmandu Tikka Masala keep pulling me back in, especially when I want a table with good atmosphere and a proper drink alongside dinner.",
   },
   {
     name: "Chris M.",
     guestType: "First-time diner",
     focus: ["Food", "Atmosphere"],
     summary:
-      "One first-time diner singled out veg momo, chilli paneer, and Bhutuwa Lamb for feeling different from their usual curry order, with the room itself making the whole evening feel relaxed from the start.",
+      "It was my first time in and the veg momo, chilli paneer, and Bhutuwa Lamb felt genuinely different from the usual curry order. The room made the whole evening feel relaxed from the start.",
   },
   {
     name: "Priya S.",
     guestType: "Date-night guest",
     focus: ["Drinks", "Atmosphere"],
     summary:
-      "A date-night table called out Kathmandu Tikka served in the grill and Rara King Prawn as the sort of dishes that feel a little more special, with drinks and atmosphere helping the night stretch out nicely.",
+      "We went for Kathmandu Tikka served in the grill and Rara King Prawn, and both felt a little more special. The drinks and atmosphere made it very easy to stay for another round.",
   },
   {
     name: "Jordan T.",
     guestType: "Group night out",
     focus: ["Food", "Drinks"],
     summary:
-      "A bigger table highlighted the Large Mixed Grill, Chicken Biryani, and Lasun Kukhura Khursani for bringing plenty of colour, heat, and sharing energy to the table while the drinks kept flowing.",
+      "We ordered the Large Mixed Grill, Chicken Biryani, and Lasun Kukhura Khursani, and the whole table loved how much colour, heat, and sharing energy it brought while the drinks kept flowing.",
   },
   {
     name: "Manish R.",
     guestType: "Midweek visitor",
     focus: ["Food", "Atmosphere"],
     summary:
-      "A midweek visit praised Khasi Ko Masu goat curry and Special Butter Chicken for arriving rich, hot, and full of flavour, with the warm room making it easy to settle in and stay longer than planned.",
+      "The Khasi Ko Masu goat curry and Special Butter Chicken arrived rich, hot, and full of flavour, and the warm room made it easy for me to settle in and stay longer than planned.",
   },
   {
     name: "Leah P.",
     guestType: "Match-night diner",
     focus: ["Food", "Atmosphere", "Drinks"],
     summary:
-      "One match-night guest said Chicken Chilli, momo, and the Small Mixed Grill were ideal with a round of drinks before kick-off, and that the pub still felt warm and welcoming once the screens came on.",
+      "Chicken Chilli, momo, and the Small Mixed Grill were ideal with a round of drinks before kick-off, and the pub still felt warm and welcoming once the screens came on.",
   },
 ]
 

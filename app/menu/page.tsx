@@ -53,12 +53,12 @@ function MenuExplorer({
               </p>
             </div>
             <div className="surface-pane bg-[var(--color-surface-lowest)]">
-              <div className="grid gap-px bg-[rgba(196,189,181,0.22)] sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              <div className="hide-scrollbar flex gap-px overflow-x-auto overscroll-x-contain bg-[rgba(196,189,181,0.22)] sm:grid sm:grid-cols-2 sm:overflow-visible lg:grid-cols-3 xl:grid-cols-4">
                 {featuredAnchors.map((category) => (
                   <a
                     key={category.slug}
                     href={`#${category.slug}`}
-                    className="bg-[var(--color-surface-lowest)] px-4 py-4 text-xs font-semibold tracking-[0.16em] text-on-background uppercase transition hover:bg-[var(--color-surface-low)] md:px-5"
+                    className="shrink-0 snap-start bg-[var(--color-surface-lowest)] px-4 py-4 text-xs font-semibold tracking-[0.16em] text-on-background uppercase transition hover:bg-[var(--color-surface-low)] sm:shrink sm:snap-none md:px-5"
                   >
                     {category.title}
                   </a>

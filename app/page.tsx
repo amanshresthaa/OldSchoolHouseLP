@@ -4,6 +4,7 @@ import Script from "next/script"
 import {
   ArrowRight,
   CalendarDots,
+  CaretDown,
   ChatCircleDots,
   Clock,
   ForkKnife,
@@ -14,6 +15,7 @@ import {
 } from "@phosphor-icons/react/dist/ssr"
 
 import { InlineBookingCta } from "@/components/site/InlineBookingCta"
+import { MenuCategoryScroller } from "@/components/site/MenuCategoryScroller"
 import { MapEmbed } from "@/components/site/MapEmbed"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import { Button } from "@/components/ui/button"
@@ -27,7 +29,6 @@ import {
   googleReviewHref,
   guestReviews,
   heroSignals,
-  homeMenuHighlights,
   homeReasons,
   localFaqs,
   localBusinessSchema,
@@ -42,9 +43,12 @@ import {
   sitePhone,
   sitePhoneHref,
 } from "@/data/site"
-import { featuredMenuItems, formatPrice } from "@/lib/menu"
+import { formatPrice, menuCategories } from "@/lib/menu"
 import { cn } from "@/lib/utils"
 
+import goatCurryImage from "@/images/food/goat-curry.png"
+import mixedGrillImage from "@/images/food/mixed-grill.png"
+import momoImage from "@/images/food/chicken-momo-and-veg-momo.png"
 import heroImage from "@/images/food/table-food.png"
 import startersImage from "@/images/food/samosas-with-salad.png"
 
@@ -101,6 +105,75 @@ function GoogleStars() {
     </div>
   )
 }
+
+const allMenuItems = menuCategories.flatMap((category) => category.items)
+
+function requireMenuItem(name: string) {
+  const item = allMenuItems.find((menuItem) => menuItem.name === name)
+
+  if (!item) {
+    throw new Error(`Menu item not found: ${name}`)
+  }
+
+  return item
+}
+
+const menuPreviewLinks = [
+  { label: "Momo and starters", href: "/menu#starters" },
+  { label: "Mixed grills", href: "/menu#mixed-grills" },
+  { label: "House specialities", href: "/menu#speciality-dishes" },
+  { label: "Pub classics", href: "/menu#pub-classic" },
+  { label: "Desserts", href: "/menu#desserts" },
+]
+
+const menuPreviewShowcase = [
+  {
+    eyebrow: "First stop",
+    title: "Momo",
+    caption: "Traditional Nepalese dumplings that get the table started well.",
+    image: momoImage,
+    alt: "A plate of momo dumplings served with chutney at The Old School House.",
+    item: requireMenuItem("Momo (Veg)"),
+  },
+  {
+    eyebrow: "Best for sharing",
+    title: "Large Mixed Grill",
+    caption:
+      "A lively middle of the table when everyone wants a little of everything.",
+    image: mixedGrillImage,
+    alt: "A large mixed grill with assorted meats served on a sizzling platter at The Old School House.",
+    item: requireMenuItem("Large Mixed Grill"),
+  },
+  {
+    eyebrow: "Go richer",
+    title: "Goat Curry",
+    caption: "A slower, fuller plate for when dinner starts to settle in.",
+    image: goatCurryImage,
+    alt: "A bowl of goat curry from the Nepalese kitchen at The Old School House.",
+    item: requireMenuItem("Khasi Ko Masu (Goat Curry) (GF)"),
+  },
+]
+
+const menuPreviewJourney = [
+  {
+    label: "Start with",
+    note: "Bring something Nepalese to the table straight away and let everyone dip in.",
+    href: "/menu#starters",
+    item: menuPreviewShowcase[0].item,
+  },
+  {
+    label: "Share in the middle",
+    note: "When the table wants colour, heat, and a bit of theatre, this is the move.",
+    href: "/menu#mixed-grills",
+    item: menuPreviewShowcase[1].item,
+  },
+  {
+    label: "Finish with a house dish",
+    note: "Settle into one of the kitchen favourites and round it out with rice or naan.",
+    href: "/menu#speciality-dishes",
+    item: menuPreviewShowcase[2].item,
+  },
+]
 
 export default function Page() {
   const faqSchema = {
@@ -219,18 +292,38 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="bg-[var(--color-surface-low)] py-5">
+      <section className="bg-[var(--color-surface-low)] py-3">
         <div className="section-shell">
-          <div className="surface-frame overflow-x-auto">
-            <div className="flex min-w-max gap-px bg-[rgba(196,189,181,0.22)] p-px text-sm font-semibold tracking-[0.16em] text-on-surface uppercase">
-              {proofPoints.map((point) => (
-                <div
-                  key={point}
-                  className="bg-[var(--color-surface-lowest)] px-4 py-3 md:px-5"
-                >
-                  {point}
+          <div className="surface-frame relative overflow-hidden">
+            <div className="flex items-center">
+              <div className="shrink-0 bg-secondary px-4 py-3 text-[0.72rem] font-semibold tracking-[0.18em] text-white uppercase md:px-5">
+                At a glance
+              </div>
+              <div className="relative min-w-0 flex-1">
+                <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-[linear-gradient(90deg,var(--color-surface-lowest),rgba(255,255,255,0))] md:w-12" />
+                <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-[linear-gradient(270deg,var(--color-surface-lowest),rgba(255,255,255,0))] md:w-12" />
+                <div className="rail-marquee py-3 text-sm font-semibold tracking-[0.14em] text-on-surface uppercase md:text-[0.82rem]">
+                  <div className="rail-marquee-track">
+                    {[0, 1].map((groupIndex) => (
+                      <div
+                        key={groupIndex}
+                        className="rail-marquee-group"
+                        aria-hidden={groupIndex === 1}
+                      >
+                        {proofPoints.map((point) => (
+                          <div
+                            key={`${groupIndex}-${point.title}`}
+                            className="flex items-center gap-3 px-4 whitespace-nowrap md:px-5"
+                          >
+                            <span className="text-secondary">/</span>
+                            <span>{point.title}</span>
+                          </div>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </div>
@@ -282,110 +375,226 @@ export default function Page() {
       </section>
 
       <section className="bg-[var(--color-surface-low)] py-16 md:py-24">
-        <div className="section-shell grid gap-10 lg:grid-cols-[1.26fr_0.74fr] lg:items-start">
-          <div className="order-2 space-y-6 lg:order-1">
-            <div className="surface-frame overflow-hidden">
-              <div className="grid gap-px bg-[rgba(196,189,181,0.22)] xl:grid-cols-[0.84fr_1.16fr]">
-                <div className="surface-pane surface-pane-muted">
-                  <p className="eyebrow">Across the menu</p>
-                  <div className="mt-4 space-y-5">
-                    {homeMenuHighlights.map((highlight) => (
-                      <article
-                        key={highlight.title}
-                        className="space-y-2 border-t border-[var(--color-outline-variant)]/25 pt-5 first:border-t-0 first:pt-0"
-                      >
-                        <h3 className="font-sans text-xl font-semibold text-secondary">
-                          {highlight.title}
-                        </h3>
-                        <p className="text-sm leading-7 text-on-surface md:text-base">
-                          {highlight.description}
-                        </p>
-                      </article>
-                    ))}
-                  </div>
-                </div>
-                <div className="surface-pane bg-[var(--color-surface-lowest)] xl:pt-12">
-                  <p className="eyebrow">Start here</p>
-                  <div className="mt-4 space-y-5">
-                    {featuredMenuItems.slice(0, 3).map((item) => (
-                      <article
-                        key={item.name}
-                        className="space-y-2 border-t border-[var(--color-outline-variant)]/25 pt-5 first:border-t-0 first:pt-0"
-                      >
-                        <div className="flex items-start justify-between gap-4">
-                          <h3 className="font-sans text-lg font-semibold text-secondary">
-                            {item.name}
-                          </h3>
-                          <p className="shrink-0 text-sm font-medium text-on-surface">
-                            {formatPrice(item.price)}
-                          </p>
-                        </div>
-                        {item.description ? (
-                          <p className="text-sm leading-6 text-on-surface">
-                            {item.description}
-                          </p>
-                        ) : null}
-                      </article>
-                    ))}
-                  </div>
-                </div>
-                <div className="surface-pane bg-[var(--color-surface-lowest)] xl:col-span-2">
-                  <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
-                    <div className="max-w-xl">
-                      <p className="eyebrow">Kitchen favourites</p>
-                      <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
-                        A few plates guests are likely to come back for, whether
-                        the table is sharing, ordering across the menu, or just
-                        settling into a longer dinner.
+        <div className="section-shell space-y-8 md:space-y-10">
+          <div className="grid gap-10 lg:grid-cols-[0.74fr_1.26fr] lg:items-end">
+            <div className="min-w-0 space-y-6 lg:pb-4">
+              <SectionHeading
+                eyebrow="Menu preview"
+                title="If it is your first visit, start on the Nepalese side."
+                description="Momo, mixed grills, and richer house curries give the table something to talk about, while the pub favourites keep things easy for everyone coming in."
+              />
+              <div className="surface-frame overflow-hidden">
+                <MenuCategoryScroller links={menuPreviewLinks} />
+              </div>
+              <div className="max-w-xl space-y-3 text-sm leading-7 text-on-surface md:text-base">
+                <p>
+                  This is the part of the menu that turns a straightforward pub
+                  meal into somewhere guests want to come back to.
+                </p>
+                <p>
+                  Start with something to share, go bigger in the middle, then
+                  settle into one of the kitchen favourites.
+                </p>
+              </div>
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <Button asChild size="lg" className="w-full sm:w-fit">
+                  <Link href="/menu" className="w-full">
+                    See full menu
+                    <ForkKnife />
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="w-full sm:w-fit"
+                >
+                  <Link href="/book" className="w-full">
+                    Book for dinner
+                    <CalendarDots />
+                  </Link>
+                </Button>
+              </div>
+            </div>
+            <div className="hidden gap-4 lg:grid lg:grid-cols-[1.1fr_0.9fr]">
+              <figure className="group relative overflow-hidden rounded-[2.25rem] bg-primary text-white">
+                <Image
+                  src={menuPreviewShowcase[0].image}
+                  alt={menuPreviewShowcase[0].alt}
+                  className="media-lift h-[22rem] w-full object-cover md:h-[28rem] lg:h-[34rem]"
+                  sizes="(min-width: 1024px) 34vw, 100vw"
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,27,14,0.08),rgba(6,27,14,0.76))]" />
+                <figcaption className="absolute inset-x-0 bottom-0 space-y-2 p-5 md:p-6">
+                  <p className="night-kicker text-[var(--color-on-tertiary-container)]">
+                    {menuPreviewShowcase[0].eyebrow}
+                  </p>
+                  <div className="flex items-end justify-between gap-4">
+                    <div className="max-w-sm">
+                      <h3 className="font-heading text-4xl leading-none text-white">
+                        {menuPreviewShowcase[0].title}
+                      </h3>
+                      <p className="pt-2 text-sm leading-6 text-white/80">
+                        {menuPreviewShowcase[0].caption}
                       </p>
                     </div>
-                    <Button asChild size="lg" className="w-fit">
-                      <Link href="/menu">
-                        Explore the menu
-                        <ForkKnife />
-                      </Link>
-                    </Button>
+                    <p className="shrink-0 text-sm font-semibold text-white">
+                      {formatPrice(menuPreviewShowcase[0].item.price)}
+                    </p>
                   </div>
-                  <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                    {featuredMenuItems.slice(3).map((item) => (
-                      <article
-                        key={item.name}
-                        className="rounded-[1.4rem] bg-[var(--color-surface-low)]/74 px-4 py-4"
-                      >
-                        <div className="flex items-start justify-between gap-4">
-                          <h3 className="font-sans text-lg font-semibold text-secondary">
-                            {item.name}
+                </figcaption>
+              </figure>
+              <div className="grid gap-4">
+                {menuPreviewShowcase.slice(1).map((feature) => (
+                  <figure
+                    key={feature.title}
+                    className="group relative overflow-hidden rounded-[2rem] bg-primary text-white"
+                  >
+                    <Image
+                      src={feature.image}
+                      alt={feature.alt}
+                      className="media-lift h-[15rem] w-full object-cover md:h-[16.8rem]"
+                      sizes="(min-width: 1024px) 22vw, 100vw"
+                    />
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,27,14,0.06),rgba(6,27,14,0.8))]" />
+                    <figcaption className="absolute inset-x-0 bottom-0 space-y-2 p-5">
+                      <p className="night-kicker text-[var(--color-on-tertiary-container)]">
+                        {feature.eyebrow}
+                      </p>
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="max-w-[14rem]">
+                          <h3 className="font-sans text-2xl font-semibold text-white">
+                            {feature.title}
                           </h3>
-                          <p className="shrink-0 text-sm font-medium text-on-surface">
-                            {formatPrice(item.price)}
+                          <p className="pt-2 text-sm leading-6 text-white/76">
+                            {feature.caption}
                           </p>
                         </div>
-                        {item.description ? (
-                          <p className="pt-2 text-sm leading-6 text-on-surface">
-                            {item.description}
-                          </p>
-                        ) : null}
-                      </article>
-                    ))}
-                  </div>
-                </div>
+                        <p className="shrink-0 text-sm font-semibold text-white">
+                          {formatPrice(feature.item.price)}
+                        </p>
+                      </div>
+                    </figcaption>
+                  </figure>
+                ))}
               </div>
             </div>
           </div>
-          <div className="order-1 space-y-6 lg:sticky lg:top-28 lg:order-2">
-            <SectionHeading
-              eyebrow="Menu preview"
-              title="From familiar pub comfort to dishes worth passing around the table."
-              description="Whether you are keeping it classic or ordering across the Nepalese side of the menu, there is plenty here for a quick meal, a family table, or a longer dinner."
-            />
-            <div className="surface-frame">
+          <div className="grid gap-4 sm:grid-cols-2 lg:hidden">
+            {menuPreviewShowcase.map((feature, index) => (
+              <figure
+                key={feature.title}
+                className={cn(
+                  "relative overflow-hidden rounded-[2rem] bg-primary text-white",
+                  index === 0 && "sm:col-span-2"
+                )}
+              >
+                <Image
+                  src={feature.image}
+                  alt={feature.alt}
+                  className={cn(
+                    "w-full object-cover",
+                    index === 0 ? "h-[20rem] sm:h-[23rem]" : "h-[17rem]"
+                  )}
+                  sizes={
+                    index === 0
+                      ? "(min-width: 640px) 100vw, 100vw"
+                      : "(min-width: 640px) 50vw, 100vw"
+                  }
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,27,14,0.08),rgba(6,27,14,0.8))]" />
+                <figcaption className="absolute inset-x-0 bottom-0 space-y-2 p-5">
+                  <p className="night-kicker text-[var(--color-on-tertiary-container)]">
+                    {feature.eyebrow}
+                  </p>
+                  <div className="flex items-start justify-between gap-4">
+                    <div
+                      className={cn(
+                        "min-w-0",
+                        index !== 0 && "max-w-[14rem]"
+                      )}
+                    >
+                      <h3
+                        className={cn(
+                          "leading-none text-white",
+                          index === 0
+                            ? "font-heading text-[2rem]"
+                            : "font-sans text-2xl font-semibold"
+                        )}
+                      >
+                        {feature.title}
+                      </h3>
+                      <p className="pt-2 text-sm leading-6 text-white/78">
+                        {feature.caption}
+                      </p>
+                    </div>
+                    <p className="shrink-0 text-sm font-semibold text-white">
+                      {formatPrice(feature.item.price)}
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+          <div className="surface-frame overflow-hidden">
+            <div className="grid gap-px bg-[rgba(196,189,181,0.22)] xl:grid-cols-[0.64fr_1.36fr]">
               <div className="surface-pane surface-pane-muted">
-                <p className="eyebrow">Why it lands well</p>
+                <p className="eyebrow">A simple first order</p>
+                <h3 className="pt-3 font-heading text-[2rem] leading-none text-on-background md:text-4xl">
+                  Order like this.
+                </h3>
                 <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
-                  Guests do not have to choose between familiar pub comfort and
-                  more vibrant plates. The menu gives the table a reason to keep
-                  ordering across both.
+                  The easiest way in is one shareable opener, one bigger plate
+                  for the middle of the table, and one house favourite once
+                  everyone has settled in.
                 </p>
+              </div>
+              <div className="surface-pane bg-[var(--color-surface-lowest)]">
+                <div className="mb-4 flex items-center justify-between gap-4 lg:hidden">
+                  <p className="text-[0.72rem] font-semibold tracking-[0.18em] text-secondary uppercase">
+                    A simple way to order
+                  </p>
+                  <p className="text-xs leading-6 text-on-surface/70">
+                    Built for a first visit
+                  </p>
+                </div>
+                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+                  {menuPreviewJourney.map((step, index) => (
+                    <article
+                      key={step.label}
+                      className={cn(
+                        "space-y-3 rounded-[1.5rem] bg-[var(--color-surface-low)]/70 px-4 py-4 lg:rounded-none lg:bg-transparent lg:px-0 lg:py-0",
+                        index === 2 && "md:col-span-2 lg:col-span-1",
+                        index > 0 &&
+                          "lg:border-l lg:border-[var(--color-outline-variant)]/25 lg:pl-6"
+                      )}
+                    >
+                      <p className="text-[0.72rem] font-semibold tracking-[0.18em] text-secondary uppercase">
+                        {String(index + 1).padStart(2, "0")} · {step.label}
+                      </p>
+                      <div className="space-y-2">
+                        <div className="flex items-start justify-between gap-4">
+                          <h3 className="font-sans text-xl font-semibold text-secondary">
+                            {step.item.name}
+                          </h3>
+                          <p className="shrink-0 text-sm font-medium text-on-surface">
+                            {formatPrice(step.item.price)}
+                          </p>
+                        </div>
+                        <p className="text-sm leading-7 text-on-surface">
+                          {step.note}
+                        </p>
+                      </div>
+                      <Link
+                        href={step.href}
+                        className="inline-flex items-center gap-2 text-sm font-semibold text-secondary transition hover:text-primary"
+                      >
+                        See it on the full menu
+                        <ArrowRight className="size-4" />
+                      </Link>
+                    </article>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -396,6 +605,103 @@ export default function Page() {
         title="Book ahead for dinner, drinks, or an easy catch-up in town."
         description="If you know when you would like to come in, book ahead and arrive knowing your table is waiting."
       />
+
+      <section className="bg-background py-16 md:py-24">
+        <div className="section-shell grid gap-10 lg:grid-cols-[0.6fr_1.4fr] lg:items-start">
+          <div className="space-y-6 lg:sticky lg:top-28">
+            <SectionHeading
+              eyebrow="Guest reviews"
+              title="What guests remember most after dinner here."
+              description="Momo, Kathmandu tikka, goat curry, mixed grills, good drinks, and a room that makes it easy to stay for one more round all come up again and again."
+            />
+            <div className="surface-frame">
+              <div className="surface-pane surface-pane-muted">
+                <p className="eyebrow">Share your visit</p>
+                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                  Been in for momo, mixed grills, or a longer Nepalese dinner?
+                  Leave a note on Google and help the next guest decide.
+                </p>
+                <div className="mt-5 flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
+                  <Button asChild size="lg">
+                    <a href={googleReviewHref} target="_blank" rel="noreferrer">
+                      Write a Google review
+                      <ChatCircleDots />
+                    </a>
+                  </Button>
+                  <Button asChild size="lg" variant="outline">
+                    <a href={mapHref} target="_blank" rel="noreferrer">
+                      Open on Google Maps
+                      <ArrowRight />
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="surface-frame relative overflow-hidden">
+            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-[linear-gradient(90deg,var(--color-background),rgba(249,246,241,0))] md:w-20" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-[linear-gradient(270deg,var(--color-background),rgba(249,246,241,0))] md:w-20" />
+            <div className="review-marquee px-1 py-1">
+              <div className="review-marquee-track">
+                {[0, 1].map((groupIndex) => (
+                  <div
+                    key={groupIndex}
+                    className="review-marquee-group"
+                    aria-hidden={groupIndex === 1}
+                  >
+                    {guestReviews.map((review) => (
+                      <article
+                        key={`${groupIndex}-${review.name}`}
+                        className="w-[19.5rem] shrink-0 rounded-[1.9rem] bg-[var(--color-surface-lowest)] px-5 py-6 shadow-[0px_14px_34px_rgba(27,28,28,0.06)] md:w-[21rem] md:px-6 md:py-7"
+                      >
+                        <div className="flex items-start justify-between gap-4">
+                          <div className="flex items-start gap-3">
+                            <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-[var(--color-surface-highest)] text-sm font-semibold text-primary">
+                              {getInitials(review.name)}
+                            </div>
+                            <div className="min-w-0">
+                              <h3 className="font-sans text-base font-semibold text-on-background">
+                                {review.name}
+                              </h3>
+                              <p className="pt-1 text-[0.72rem] font-semibold tracking-[0.14em] text-on-surface uppercase">
+                                {review.guestType}
+                              </p>
+                            </div>
+                          </div>
+                          <div className="rounded-full bg-[var(--color-surface-low)] px-3 py-1 text-[0.7rem] font-semibold tracking-[0.14em] text-on-surface uppercase">
+                            Google review
+                          </div>
+                        </div>
+                        <div className="mt-4 flex items-center gap-3">
+                          <GoogleStars />
+                          <p className="text-xs font-medium text-on-surface/76">
+                            Shared by a guest
+                          </p>
+                        </div>
+                        <div className="mt-4 flex flex-wrap gap-2">
+                          {review.focus.map((item) => (
+                            <span
+                              key={item}
+                              className="rounded-full bg-[var(--color-surface-low)] px-3 py-1 text-[0.7rem] font-semibold tracking-[0.12em] text-secondary uppercase"
+                            >
+                              {item}
+                            </span>
+                          ))}
+                        </div>
+                        <p className="mt-4 text-sm leading-7 text-on-surface">
+                          {'"'}
+                          {review.summary}
+                          {'"'}
+                        </p>
+                      </article>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section className="bg-background py-16 md:py-24">
         <div className="section-shell grid gap-10 lg:grid-cols-[0.62fr_1.38fr] lg:items-start">
@@ -528,116 +834,6 @@ export default function Page() {
       </section>
 
       <section className="bg-background py-16 md:py-24">
-        <div className="section-shell grid gap-10 lg:grid-cols-[0.6fr_1.4fr] lg:items-start">
-          <div className="space-y-6 lg:sticky lg:top-28">
-            <SectionHeading
-              eyebrow="Guest reviews"
-              title="What guests remember most after dinner here."
-              description="Momo, Kathmandu tikka, goat curry, mixed grills, good drinks, and a room that makes it easy to stay for one more round all come up again and again."
-            />
-            <div className="surface-frame">
-              <div className="surface-pane surface-pane-muted">
-                <p className="eyebrow">Share your visit</p>
-                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
-                  Been in for momo, mixed grills, or a longer Nepalese dinner?
-                  Leave a note on Google and help the next guest decide.
-                </p>
-                <div className="mt-5 flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
-                  <Button asChild size="lg">
-                    <a href={googleReviewHref} target="_blank" rel="noreferrer">
-                      Write a Google review
-                      <ChatCircleDots />
-                    </a>
-                  </Button>
-                  <Button asChild size="lg" variant="outline">
-                    <a href={mapHref} target="_blank" rel="noreferrer">
-                      Open on Google Maps
-                      <ArrowRight />
-                    </a>
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="surface-frame overflow-hidden">
-            <div className="grid gap-px bg-[rgba(196,189,181,0.22)] md:grid-cols-2 xl:grid-cols-3">
-              {guestReviews.map((review) => (
-                <article
-                  key={review.name}
-                  className="surface-pane bg-[var(--color-surface-lowest)]"
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex items-start gap-3">
-                      <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-[var(--color-surface-highest)] text-sm font-semibold text-primary">
-                        {getInitials(review.name)}
-                      </div>
-                      <div className="min-w-0">
-                        <h3 className="font-sans text-base font-semibold text-on-background">
-                          {review.name}
-                        </h3>
-                        <p className="pt-1 text-[0.72rem] font-semibold tracking-[0.14em] text-on-surface uppercase">
-                          {review.guestType}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="rounded-full bg-[var(--color-surface-low)] px-3 py-1 text-[0.7rem] font-semibold tracking-[0.14em] text-on-surface uppercase">
-                      Google review
-                    </div>
-                  </div>
-                  <div className="mt-4 flex items-center gap-3">
-                    <GoogleStars />
-                    <p className="text-xs font-medium text-on-surface/76">
-                      Shared by a guest
-                    </p>
-                  </div>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {review.focus.map((item) => (
-                      <span
-                        key={item}
-                        className="rounded-full bg-[var(--color-surface-low)] px-3 py-1 text-[0.7rem] font-semibold tracking-[0.12em] text-secondary uppercase"
-                      >
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                  <p className="mt-4 text-sm leading-7 text-on-surface">
-                    {review.summary}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-[var(--color-surface-low)] py-16 md:py-20">
-        <div className="section-shell grid gap-10 lg:grid-cols-[0.62fr_1.38fr] lg:items-start">
-          <SectionHeading
-            eyebrow="Neighbourhood fit"
-            title="The sort of place that fits easily into local life."
-            description="Drop in for one drink, plan a family meal, meet friends in town, or make it your regular Sunday stop. It is made for the repeat visits as much as the one-off plans."
-            className="lg:sticky lg:top-28"
-          />
-          <div className="surface-frame grid gap-px bg-[rgba(196,189,181,0.22)] lg:grid-cols-[0.95fr_0.95fr_1.1fr]">
-            {communityNotes.map((note, index) => (
-              <article
-                key={note.title}
-                className={cn(
-                  "surface-pane bg-[var(--color-surface-lowest)]",
-                  index === 2 && "surface-pane-muted"
-                )}
-              >
-                <h3 className="font-heading text-2xl">{note.title}</h3>
-                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
-                  {note.description}
-                </p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-background py-16 md:py-24">
         <div className="section-shell grid gap-10 lg:grid-cols-[0.62fr_1.38fr] lg:items-start">
           <div className="space-y-6 lg:sticky lg:top-28">
             <SectionHeading
@@ -657,22 +853,29 @@ export default function Page() {
             </div>
           </div>
           <div className="surface-frame overflow-hidden">
-            <div className="grid gap-px bg-[rgba(196,189,181,0.22)] md:grid-cols-2">
+            <div className="grid gap-px bg-[rgba(196,189,181,0.22)]">
               {localFaqs.map((faq, index) => (
-                <article
+                <details
                   key={faq.question}
+                  name="before-you-visit-faq"
+                  open={index === 0}
                   className={cn(
-                    "surface-pane bg-[var(--color-surface-lowest)]",
+                    "faq-item bg-[var(--color-surface-lowest)]",
                     index % 2 === 0 && "surface-pane-muted"
                   )}
                 >
-                  <h3 className="font-sans text-xl font-semibold text-secondary">
-                    {faq.question}
-                  </h3>
-                  <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
-                    {faq.answer}
-                  </p>
-                </article>
+                  <summary className="flex cursor-pointer list-none items-start justify-between gap-4 px-5 py-5 md:px-7 md:py-6 [&::-webkit-details-marker]:hidden">
+                    <h3 className="font-sans text-xl font-semibold text-secondary">
+                      {faq.question}
+                    </h3>
+                    <CaretDown className="faq-icon mt-1 size-5 shrink-0 text-secondary transition-transform duration-200" />
+                  </summary>
+                  <div className="px-5 pb-5 md:px-7 md:pb-6">
+                    <p className="text-sm leading-7 text-on-surface md:text-base">
+                      {faq.answer}
+                    </p>
+                  </div>
+                </details>
               ))}
             </div>
           </div>
@@ -740,6 +943,33 @@ export default function Page() {
             </div>
           </div>
           <MapEmbed />
+        </div>
+      </section>
+
+      <section className="bg-[var(--color-surface-low)] py-16 md:py-20">
+        <div className="section-shell grid gap-10 lg:grid-cols-[0.62fr_1.38fr] lg:items-start">
+          <SectionHeading
+            eyebrow="Neighbourhood fit"
+            title="The sort of place that fits easily into local life."
+            description="Drop in for one drink, plan a family meal, meet friends in town, or make it your regular Sunday stop. It is made for the repeat visits as much as the one-off plans."
+            className="lg:sticky lg:top-28"
+          />
+          <div className="surface-frame grid gap-px bg-[rgba(196,189,181,0.22)] lg:grid-cols-[0.95fr_0.95fr_1.1fr]">
+            {communityNotes.map((note, index) => (
+              <article
+                key={note.title}
+                className={cn(
+                  "surface-pane bg-[var(--color-surface-lowest)]",
+                  index === 2 && "surface-pane-muted"
+                )}
+              >
+                <h3 className="font-heading text-2xl">{note.title}</h3>
+                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                  {note.description}
+                </p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
     </main>

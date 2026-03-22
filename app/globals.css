@@ -305,6 +305,100 @@
         animation: rise-fade 700ms 270ms var(--easing-standard) both;
     }
 
+    .review-marquee {
+        overflow: hidden;
+    }
+
+    .review-marquee-track {
+        display: flex;
+        width: max-content;
+        animation: review-marquee 42s linear infinite;
+        will-change: transform;
+    }
+
+    .review-marquee:hover .review-marquee-track {
+        animation-play-state: paused;
+    }
+
+    .review-marquee-group {
+        display: flex;
+        flex-shrink: 0;
+        gap: 1rem;
+        padding-right: 1rem;
+    }
+
+    .menu-category-marquee {
+        overflow: hidden;
+    }
+
+    .menu-category-marquee-track {
+        display: flex;
+        width: max-content;
+        animation: menu-category-marquee 60s linear infinite;
+        will-change: transform;
+    }
+
+    .menu-category-marquee:hover .menu-category-marquee-track {
+        animation-play-state: paused;
+    }
+
+    .menu-category-marquee-group {
+        display: flex;
+        flex-shrink: 0;
+        gap: 1px;
+        padding-right: 1px;
+        background: rgba(196, 189, 181, 0.22);
+    }
+
+    @media (min-width: 1024px) {
+        .menu-category-marquee-track {
+            animation: none;
+        }
+    }
+
+    .rail-marquee {
+        overflow: hidden;
+    }
+
+    .rail-marquee-track {
+        display: flex;
+        width: max-content;
+        animation: rail-marquee 30s linear infinite;
+        will-change: transform;
+    }
+
+    .rail-marquee:hover .rail-marquee-track {
+        animation-play-state: paused;
+    }
+
+    .rail-marquee-group {
+        display: flex;
+        flex-shrink: 0;
+        gap: 1px;
+        padding-right: 1px;
+    }
+
+    .hide-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .grab-scroll {
+        cursor: grab;
+    }
+
+    .grab-scroll:active {
+        cursor: grabbing;
+    }
+
+    .faq-item[open] .faq-icon {
+        transform: rotate(180deg);
+    }
+
     .section-shell {
         @apply mx-auto max-w-[84rem] px-5 sm:px-6 md:px-8;
     }
@@ -327,5 +421,35 @@
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@keyframes review-marquee {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes menu-category-marquee {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes rail-marquee {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
     }
 }
