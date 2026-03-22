@@ -39,11 +39,6 @@ export default function FindUsPage() {
         eyebrow="Find us"
         title="Everything you need to find us easily."
         description="Find the address, opening hours, phone number, and map all in one place so joining us feels easy from the start."
-        highlights={[
-          "London Road, Stony Stratford, Milton Keynes, MK11 1JA",
-          "Small on-site car park plus town-centre parking nearby",
-          "Map, phone, and email details all in one place",
-        ]}
         primaryAction={{ href: mapHref, label: "Open map" }}
         secondaryAction={{ href: sitePhoneHref, label: "Call the pub" }}
       />

@@ -79,11 +79,6 @@ export default function MenuPage() {
         eyebrow="Food and drink menu"
         title="Food for a quick pint stop, a proper dinner, or a table that keeps growing."
         description="Browse pub favourites, Nepalese dishes, sharers, desserts, and drinks before you come in."
-        highlights={[
-          "Classic pub food and Nepalese specialities",
-          "Prices visible without zooming",
-          "Give the pub a ring if you are joining us today",
-        ]}
         primaryAction={{ href: "/book", label: "Book a table" }}
         secondaryAction={{ href: sitePhoneHref, label: "Call 01908 561936" }}
       />

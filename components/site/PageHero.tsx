@@ -1,11 +1,6 @@
 import type { ComponentProps } from "react"
 import Link from "next/link"
-import {
-  ArrowRight,
-  Clock,
-  MapPin,
-  Phone,
-} from "@phosphor-icons/react/dist/ssr"
+import { ArrowRight } from "@phosphor-icons/react/dist/ssr"
 
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -20,7 +15,6 @@ interface PageHeroProps extends ComponentProps<"section"> {
   eyebrow: string
   title: string
   description: string
-  highlights?: string[]
   primaryAction: HeroAction
   secondaryAction?: HeroAction
 }
@@ -60,7 +54,6 @@ export function PageHero({
   eyebrow,
   title,
   description,
-  highlights = [],
   primaryAction,
   secondaryAction,
   ...props
@@ -75,67 +68,33 @@ export function PageHero({
       {...props}
     >
       <div className="mx-auto max-w-[84rem] px-5 py-16 sm:px-6 md:px-8 md:py-20">
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.06fr)_minmax(20rem,0.94fr)] lg:gap-14 xl:gap-16">
-          <div className="contents lg:block lg:max-w-3xl lg:space-y-6">
-            <div className="order-1 max-w-3xl space-y-6">
-              <p className="night-kicker hero-entrance">{eyebrow}</p>
-              <div className="hero-entrance-delay-1 space-y-4">
-                <h1 className="max-w-4xl text-white">{title}</h1>
-                <p className="max-w-2xl text-base leading-7 text-white/76 md:text-lg">
-                  {description}
-                </p>
-              </div>
-            </div>
-            <div className="hero-entrance-delay-2 order-3 mt-6 flex flex-col gap-3 sm:flex-row lg:mt-0">
-              <Button asChild size="lg">
-                <HeroActionLink href={primaryAction.href}>
-                  {primaryAction.label}
-                  <ArrowRight />
+        <div className="max-w-3xl space-y-6">
+          <p className="night-kicker hero-entrance">{eyebrow}</p>
+          <div className="hero-entrance-delay-1 space-y-4">
+            <h1 className="max-w-4xl text-white">{title}</h1>
+            <p className="max-w-2xl text-base leading-7 text-white/76 md:text-lg">
+              {description}
+            </p>
+          </div>
+          <div className="hero-entrance-delay-2 flex flex-col gap-3 sm:flex-row">
+            <Button asChild size="lg">
+              <HeroActionLink href={primaryAction.href}>
+                {primaryAction.label}
+                <ArrowRight />
+              </HeroActionLink>
+            </Button>
+            {secondaryAction ? (
+              <Button
+                asChild
+                size="lg"
+                variant={secondaryAction.variant ?? "outline"}
+                className="border-white/12 bg-black/16 text-white hover:bg-black/24 hover:text-white"
+              >
+                <HeroActionLink href={secondaryAction.href}>
+                  {secondaryAction.label}
                 </HeroActionLink>
               </Button>
-              {secondaryAction ? (
-                <Button
-                  asChild
-                  size="lg"
-                  variant={secondaryAction.variant ?? "outline"}
-                  className="border-white/12 bg-black/16 text-white hover:bg-black/24 hover:text-white"
-                >
-                  <HeroActionLink href={secondaryAction.href}>
-                    {secondaryAction.label}
-                  </HeroActionLink>
-                </Button>
-              ) : null}
-            </div>
-          </div>
-          <div className="hero-entrance-delay-3 order-2 lg:flex lg:flex-col lg:justify-end">
-            <div className="border-t border-white/10 pt-6 lg:border-t-0 lg:border-l lg:pt-2 lg:pl-8">
-              <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
-                <div className="night-tile flex items-start gap-3">
-                  <Clock className="mt-1 size-4 shrink-0 text-[var(--color-on-tertiary-container)]" />
-                  <p>Mon-Sun 10:00-00:30</p>
-                </div>
-                <div className="night-tile flex items-start gap-3">
-                  <MapPin className="mt-1 size-4 shrink-0 text-[var(--color-on-tertiary-container)]" />
-                  <p>London Road, Stony Stratford</p>
-                </div>
-                <div className="night-tile flex items-start gap-3">
-                  <Phone className="mt-1 size-4 shrink-0 text-[var(--color-on-tertiary-container)]" />
-                  <p>01908 561936</p>
-                </div>
-              </div>
-              {highlights.length ? (
-                <ul className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
-                  {highlights.map((highlight) => (
-                    <li key={highlight} className="night-tile">
-                      {highlight}
-                    </li>
-                  ))}
-                </ul>
-              ) : null}
-              <div className="mt-5 max-w-sm border-t border-white/10 pt-4 text-sm leading-6 text-white/68 md:leading-7">
-                Book a table, browse the menu, and get ready for an easy visit.
-              </div>
-            </div>
+            ) : null}
           </div>
         </div>
       </div>

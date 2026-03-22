@@ -27,7 +27,6 @@ import {
   foodHours,
   googleReviewHref,
   guestReviews,
-  heroSignals,
   homeReasons,
   localFaqs,
   localBusinessSchema,
@@ -37,7 +36,6 @@ import {
   siteAddress,
   siteEmail,
   siteEmailHref,
-  siteLocation,
   siteName,
   sitePhone,
   sitePhoneHref,
@@ -255,37 +253,6 @@ export default function Page() {
               Open daily from 10:00 to 00:30 · Stony Stratford, Milton Keynes ·
               01908 561936
             </p>
-          </div>
-          <div className="hero-entrance-delay-3 mt-8 grid gap-3 md:max-w-4xl md:grid-cols-3">
-            {heroSignals.map((signal) => (
-              <div
-                key={signal}
-                className="night-tile bg-black/20 text-white/88 backdrop-blur-sm"
-              >
-                {signal}
-              </div>
-            ))}
-          </div>
-          <div className="hero-entrance-delay-3 mt-8 grid gap-3 md:max-w-5xl md:grid-cols-[1.05fr_0.95fr_0.95fr]">
-            <div className="night-tile flex items-start gap-3">
-              <Clock className="mt-1 size-4 shrink-0 text-[var(--color-on-tertiary-container)]" />
-              <span>
-                {openingHours[0].label}: {openingHours[0].hours}
-              </span>
-            </div>
-            <div className="night-tile flex items-start gap-3">
-              <MapPin className="mt-1 size-4 shrink-0 text-[var(--color-on-tertiary-container)]" />
-              <span>{siteLocation}</span>
-            </div>
-            <div className="night-tile flex items-start gap-3">
-              <Phone className="mt-1 size-4 shrink-0 text-[var(--color-on-tertiary-container)]" />
-              <a
-                href={sitePhoneHref}
-                className="transition hover:text-[var(--color-on-tertiary-container)]"
-              >
-                {sitePhone}
-              </a>
-            </div>
           </div>
         </div>
       </section>

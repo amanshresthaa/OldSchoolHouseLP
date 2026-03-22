@@ -46,11 +46,6 @@ export default function EventsPage() {
         eyebrow="Events and private hire"
         title="A venue shape that works for birthdays, match days, and longer-table gatherings."
         description="From birthday dinners and sports socials to private gatherings with food and drinks, The Old School House has room to bring everyone together."
-        highlights={[
-          "65 indoor covers and 60 outdoor covers",
-          "Front garden, private courtyard, and open-plan bar space",
-          "Easy to enquire by phone or email",
-        ]}
         primaryAction={{ href: siteEmailHref, label: "Email an enquiry" }}
         secondaryAction={{ href: sitePhoneHref, label: "Call the pub" }}
       />

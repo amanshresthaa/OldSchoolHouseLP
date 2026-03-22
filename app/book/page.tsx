@@ -36,11 +36,6 @@ export default function BookPage() {
         eyebrow="Book a table"
         title="Book your table and make it easy from the start."
         description="Whether it is dinner for two, drinks with friends, or a bigger get-together, getting in touch is simple."
-        highlights={[
-          "Give the pub a ring if you are hoping to join us today",
-          "Email is ideal for bigger plans",
-          "Opening hours are here before you book",
-        ]}
         primaryAction={{ href: sitePhoneHref, label: "Call to book" }}
         secondaryAction={{ href: siteEmailHref, label: "Email a request" }}
       />
