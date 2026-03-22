@@ -327,37 +327,45 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="bg-background py-14 md:py-20">
-        <div className="section-shell grid gap-8 lg:grid-cols-[0.72fr_0.9fr_1.08fr] lg:items-start">
-          <div className="space-y-4 lg:sticky lg:top-28">
-            <SectionHeading
-              eyebrow="Why choose us"
-              title="A proper pub with a Nepalese kitchen worth coming back for."
-              description="Familiar pub comfort, a stronger food story, and a room that stays relaxed from first drink to last bite."
-            />
-          </div>
-          <div className="lg:pt-6">
-            <Image
-              src={startersImage}
-              alt="Samosas plated with salad and chutneys at The Old School House."
-              className="media-lift h-[20rem] w-full rounded-[2rem] object-cover md:h-[24rem] lg:h-[32rem]"
-              sizes="(min-width: 1024px) 30vw, 100vw"
-            />
-          </div>
-          <div className="space-y-6 pt-1 lg:pt-10">
-            {homeReasons.map((reason) => (
-              <article
-                key={reason.title}
-                className="space-y-2.5 border-t border-[var(--color-outline-variant)]/30 pt-5 first:border-t-0 first:pt-0"
-              >
-                <h3 className="font-sans text-2xl font-semibold text-secondary">
-                  {reason.title}
-                </h3>
-                <p className="max-w-2xl text-sm leading-6 text-on-surface md:text-base md:leading-7">
-                  {reason.description}
-                </p>
-              </article>
-            ))}
+      <section className="bg-background py-12 md:py-16">
+        <div className="section-shell">
+          <div className="surface-frame overflow-hidden">
+            <div className="grid gap-px bg-[rgba(196,189,181,0.22)] lg:grid-cols-[0.9fr_1.1fr]">
+              <div className="surface-pane surface-pane-muted order-1">
+                <SectionHeading
+                  eyebrow="Why choose us"
+                  title="A proper pub with a Nepalese kitchen worth coming back for."
+                  description="Familiar pub comfort, a stronger food story, and a room that stays relaxed from first drink to last bite."
+                />
+                <Image
+                  src={startersImage}
+                  alt="Samosas plated with salad and chutneys at The Old School House."
+                  className="media-lift mt-5 h-[16rem] w-full rounded-[1.9rem] object-cover md:h-[20rem] lg:h-[22rem]"
+                  sizes="(min-width: 1024px) 38vw, 100vw"
+                />
+              </div>
+              <div className="order-2 grid gap-px bg-[rgba(196,189,181,0.18)] sm:grid-cols-2 lg:order-3">
+                {homeReasons.map((reason, index) => (
+                  <article
+                    key={reason.title}
+                    className={cn(
+                      "surface-pane bg-[var(--color-surface-lowest)]",
+                      index === 0 && "sm:col-span-2"
+                    )}
+                  >
+                    <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
+                      Why it works
+                    </p>
+                    <h3 className="pt-3 font-sans text-xl font-semibold text-secondary md:text-2xl">
+                      {reason.title}
+                    </h3>
+                    <p className="pt-2 text-sm leading-6 text-on-surface md:text-base md:leading-7">
+                      {reason.description}
+                    </p>
+                  </article>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -378,7 +386,7 @@ export default function Page() {
                 For a first visit, think one shareable opener, one bigger plate
                 for the middle, then one house favourite.
               </p>
-              <div className="flex flex-col gap-3 sm:flex-row">
+              <div className="hidden flex-col gap-3 sm:flex-row lg:flex">
                 <Button asChild size="lg" className="w-full sm:w-fit">
                   <Link href="/menu" className="w-full">
                     See full menu
@@ -576,6 +584,25 @@ export default function Page() {
               </div>
             </div>
           </div>
+          <div className="flex flex-col gap-3 sm:flex-row lg:hidden">
+            <Button asChild size="lg" className="w-full sm:w-fit">
+              <Link href="/menu" className="w-full">
+                See full menu
+                <ForkKnife />
+              </Link>
+            </Button>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="w-full sm:w-fit"
+            >
+              <Link href="/book" className="w-full">
+                Book for dinner
+                <CalendarDots />
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
 
@@ -586,13 +613,14 @@ export default function Page() {
 
       <section className="bg-background py-14 md:py-20">
         <div className="section-shell grid gap-8 lg:grid-cols-[0.6fr_1.4fr] lg:items-start">
-          <div className="space-y-5 lg:sticky lg:top-28">
+          <div className="contents lg:sticky lg:top-28 lg:block lg:space-y-5">
             <SectionHeading
               eyebrow="Guest reviews"
               title="What guests talk about after a visit."
               description="Good food, good drinks, and a room that makes staying for another round easy."
+              className="order-1"
             />
-            <div className="surface-frame">
+            <div className="surface-frame order-3 lg:mt-5">
               <div className="surface-pane surface-pane-muted">
                 <p className="eyebrow">Share your visit</p>
                 <p className="pt-3 text-sm leading-6 text-on-surface md:text-base md:leading-7">
@@ -615,7 +643,7 @@ export default function Page() {
               </div>
             </div>
           </div>
-          <div className="surface-frame relative overflow-hidden">
+          <div className="surface-frame relative order-2 overflow-hidden lg:order-none">
             <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-[linear-gradient(90deg,var(--color-background),rgba(249,246,241,0))] md:w-20" />
             <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-[linear-gradient(270deg,var(--color-background),rgba(249,246,241,0))] md:w-20" />
             <div className="review-marquee px-1 py-1">
@@ -680,55 +708,64 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="bg-background py-14 md:py-20">
-        <div className="section-shell grid gap-8 lg:grid-cols-[0.62fr_1.38fr] lg:items-start">
-          <div className="space-y-4 lg:sticky lg:top-28">
-            <SectionHeading
-              eyebrow="Atmosphere"
-              title="A setting made for easy lunches and longer evenings."
-              description="From the front garden to the dining room, it stays relaxed and easy to settle into."
-            />
-          </div>
-          <div className="space-y-5">
-            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-[1.2fr_0.8fr_0.8fr]">
-              <VenuePhotoPlaceholder
-                title="Exterior"
-                alt="Placeholder for a future exterior photograph of The Old School House on London Road, showing the brick frontage and entrance."
-                className="media-lift h-[16rem] md:col-span-2 md:h-[20rem] lg:col-span-1 lg:row-span-2 lg:h-full lg:min-h-[28rem]"
-              />
-              <VenuePhotoPlaceholder
-                title="Bar"
-                alt="Placeholder for a future bar photograph showing the single-bar setup inside The Old School House."
-                className="media-lift h-[14rem] md:h-[16rem]"
-              />
-              <VenuePhotoPlaceholder
-                title="Dining Room"
-                alt="Placeholder for a future dining room photograph showing exposed brick, wooden floors, and guest seating inside The Old School House."
-                className="media-lift h-[14rem] md:h-[16rem]"
-              />
-              <VenuePhotoPlaceholder
-                title="Front Garden"
-                alt="Placeholder for a future front garden photograph showing the outdoor seating area at The Old School House."
-                className="media-lift h-[14rem] md:col-span-2 md:h-[15rem] lg:col-span-2"
-              />
-            </div>
-            <div className="surface-frame grid gap-px bg-[rgba(196,189,181,0.22)] lg:grid-cols-[0.92fr_0.92fr_1.16fr]">
-              {atmosphereMoments.map((moment, index) => (
-                <article
-                  key={moment.title}
-                  className={cn(
-                    "surface-pane bg-[var(--color-surface-lowest)]",
-                    index === 2 && "surface-pane-muted"
-                  )}
-                >
-                  <h3 className="font-sans text-xl font-semibold text-secondary">
-                    {moment.title}
-                  </h3>
-                  <p className="pt-2 text-sm leading-6 text-on-surface md:text-base md:leading-7">
-                    {moment.description}
-                  </p>
-                </article>
-              ))}
+      <section className="bg-background py-12 md:py-16">
+        <div className="section-shell">
+          <div className="surface-frame overflow-hidden">
+            <div className="grid gap-px bg-[rgba(196,189,181,0.22)]">
+              <div className="grid gap-px bg-[rgba(196,189,181,0.18)] xl:grid-cols-[0.92fr_1.08fr]">
+                <div className="surface-pane surface-pane-muted">
+                  <SectionHeading
+                    eyebrow="Atmosphere"
+                    title="A setting made for easy lunches and longer evenings."
+                    description="From the front garden to the dining room, it stays relaxed and easy to settle into."
+                  />
+                </div>
+                <div className="grid gap-px bg-[rgba(196,189,181,0.18)] sm:grid-cols-3">
+                  {atmosphereMoments.map((moment, index) => (
+                    <article
+                      key={moment.title}
+                      className={cn(
+                        "surface-pane bg-[var(--color-surface-lowest)]",
+                        index === 1 && "surface-pane-muted"
+                      )}
+                    >
+                      <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
+                        Around the pub
+                      </p>
+                      <h3 className="pt-3 font-sans text-lg font-semibold text-secondary md:text-xl">
+                        {moment.title}
+                      </h3>
+                      <p className="pt-2 text-sm leading-6 text-on-surface md:leading-7">
+                        {moment.description}
+                      </p>
+                    </article>
+                  ))}
+                </div>
+              </div>
+              <div className="surface-pane bg-[var(--color-surface-lowest)]">
+                <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                  <VenuePhotoPlaceholder
+                    title="Exterior"
+                    alt="Placeholder for a future exterior photograph of The Old School House on London Road, showing the brick frontage and entrance."
+                    className="media-lift h-[14rem] sm:col-span-2 xl:col-span-2 xl:row-span-2 xl:h-[23rem]"
+                  />
+                  <VenuePhotoPlaceholder
+                    title="Bar"
+                    alt="Placeholder for a future bar photograph showing the single-bar setup inside The Old School House."
+                    className="media-lift h-[11rem] xl:h-[11rem]"
+                  />
+                  <VenuePhotoPlaceholder
+                    title="Dining Room"
+                    alt="Placeholder for a future dining room photograph showing exposed brick, wooden floors, and guest seating inside The Old School House."
+                    className="media-lift h-[11rem] xl:h-[11rem]"
+                  />
+                  <VenuePhotoPlaceholder
+                    title="Front Garden"
+                    alt="Placeholder for a future front garden photograph showing the outdoor seating area at The Old School House."
+                    className="media-lift h-[11rem] sm:col-span-2 xl:col-span-2 xl:h-[11.5rem]"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -803,50 +840,63 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="bg-background py-14 md:py-20">
-        <div className="section-shell grid gap-8 lg:grid-cols-[0.62fr_1.38fr] lg:items-start">
-          <div className="space-y-5 lg:sticky lg:top-28">
-            <SectionHeading
-              eyebrow="Before you visit"
-              title="Helpful details before you choose a table."
-              description="Parking, dogs, Wi-Fi, food hours, and live sport."
-            />
-            <div className="surface-frame">
+      <section className="bg-background py-12 md:py-16">
+        <div className="section-shell">
+          <div className="surface-frame overflow-hidden">
+            <div className="grid gap-px bg-[rgba(196,189,181,0.22)] lg:grid-cols-[0.88fr_1.12fr]">
               <div className="surface-pane surface-pane-muted">
-                <p className="eyebrow">Food hours</p>
-                <div className="pt-3 text-sm leading-6 text-on-surface md:text-base md:leading-7">
-                  {foodHours.map((item) => (
-                    <p key={item}>{item}</p>
-                  ))}
+                <SectionHeading
+                  eyebrow="Before you visit"
+                  title="Helpful details before you choose a table."
+                  description="Parking, dogs, Wi-Fi, food hours, and live sport."
+                />
+                <div className="mt-5 rounded-[1.45rem] bg-[var(--color-surface-lowest)] px-4 py-4 md:px-5">
+                  <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
+                    Food hours
+                  </p>
+                  <div className="space-y-2 pt-3 text-sm leading-6 text-on-surface md:text-base md:leading-7">
+                    {foodHours.map((item) => (
+                      <p key={item}>{item}</p>
+                    ))}
+                  </div>
+                </div>
+                <div className="mt-4 flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
+                  <Button asChild size="lg">
+                    <Link href="/find-us">Find us</Link>
+                  </Button>
+                  <Button asChild size="lg" variant="outline">
+                    <a href={mapHref} target="_blank" rel="noreferrer">
+                      Open map
+                      <ArrowRight />
+                    </a>
+                  </Button>
                 </div>
               </div>
-            </div>
-          </div>
-          <div className="surface-frame overflow-hidden">
-            <div className="grid gap-px bg-[rgba(196,189,181,0.22)]">
-              {localFaqs.map((faq, index) => (
-                <details
-                  key={faq.question}
-                  name="before-you-visit-faq"
-                  open={index === 0}
-                  className={cn(
-                    "faq-item bg-[var(--color-surface-lowest)]",
-                    index % 2 === 0 && "surface-pane-muted"
-                  )}
-                >
-                  <summary className="flex cursor-pointer list-none items-start justify-between gap-4 px-5 py-5 md:px-7 md:py-6 [&::-webkit-details-marker]:hidden">
-                    <h3 className="font-sans text-xl font-semibold text-secondary">
-                      {faq.question}
-                    </h3>
-                    <CaretDown className="faq-icon mt-1 size-5 shrink-0 text-secondary transition-transform duration-200" />
-                  </summary>
-                  <div className="px-5 pb-5 md:px-7 md:pb-6">
-                    <p className="text-sm leading-6 text-on-surface md:text-base md:leading-7">
-                      {faq.answer}
-                    </p>
-                  </div>
-                </details>
-              ))}
+              <div className="grid gap-px bg-[rgba(196,189,181,0.18)]">
+                {localFaqs.map((faq, index) => (
+                  <details
+                    key={faq.question}
+                    name="before-you-visit-faq"
+                    open={index === 0}
+                    className={cn(
+                      "faq-item bg-[var(--color-surface-lowest)]",
+                      index % 2 === 0 && "surface-pane-muted"
+                    )}
+                  >
+                    <summary className="flex cursor-pointer list-none items-start justify-between gap-4 px-5 py-4 md:px-7 md:py-5 [&::-webkit-details-marker]:hidden">
+                      <h3 className="font-sans text-xl font-semibold text-secondary">
+                        {faq.question}
+                      </h3>
+                      <CaretDown className="faq-icon mt-1 size-5 shrink-0 text-secondary transition-transform duration-200" />
+                    </summary>
+                    <div className="px-5 pb-4 md:px-7 md:pb-5">
+                      <p className="text-sm leading-6 text-on-surface md:text-base md:leading-7">
+                        {faq.answer}
+                      </p>
+                    </div>
+                  </details>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -854,13 +904,14 @@ export default function Page() {
 
       <section className="bg-background py-14 md:py-20">
         <div className="section-shell grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
-          <div className="space-y-5">
+          <div className="contents lg:block lg:space-y-5">
             <SectionHeading
               eyebrow="Visit"
               title="Easy to find and easy to call."
               description="Everything you need before you head over."
+              className="order-1"
             />
-            <div className="surface-frame">
+            <div className="surface-frame order-3 lg:mt-5">
               <div className="surface-pane">
                 <div className="grid gap-4 text-sm leading-6 text-on-surface md:leading-7">
                   <p className="flex items-start gap-3">
@@ -900,7 +951,7 @@ export default function Page() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col gap-3 sm:flex-row">
+            <div className="order-4 flex flex-col gap-3 sm:flex-row lg:mt-5">
               <Button asChild size="lg">
                 <Link href="/find-us">Find us</Link>
               </Button>
@@ -912,7 +963,7 @@ export default function Page() {
               </Button>
             </div>
           </div>
-          <MapEmbed />
+          <MapEmbed className="order-2 lg:order-none" />
         </div>
       </section>
     </main>

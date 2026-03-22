@@ -28,9 +28,6 @@ export function InlineBookingCta({
             </p>
           </div>
           <div className="space-y-4 border-t border-white/10 pt-4 lg:border-t-0 lg:border-l lg:pt-1 lg:pl-8">
-            <p className="max-w-sm text-sm leading-6 text-white/72">
-              Prefer to speak first? Give the pub a ring.
-            </p>
             <div className="flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
               <Button asChild size="lg">
                 <Link href="/book">
@@ -50,6 +47,9 @@ export function InlineBookingCta({
                 </a>
               </Button>
             </div>
+            <p className="max-w-sm text-sm leading-6 text-white/72">
+              Prefer to speak first? Give the pub a ring.
+            </p>
           </div>
         </div>
       </div>

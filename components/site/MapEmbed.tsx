@@ -22,7 +22,7 @@ export function MapEmbed({
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
       />
-      <div className="flex items-center justify-between gap-4 bg-[var(--color-surface-lowest)] px-5 py-4 text-sm text-on-surface">
+      <div className="flex flex-col items-start gap-3 bg-[var(--color-surface-lowest)] px-5 py-4 text-sm text-on-surface sm:flex-row sm:items-center sm:justify-between">
         <p>Need turn-by-turn directions? Open the pub in Google Maps.</p>
         <a
           href={mapHref}

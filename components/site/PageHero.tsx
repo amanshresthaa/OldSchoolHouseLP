@@ -76,15 +76,17 @@ export function PageHero({
     >
       <div className="mx-auto max-w-[84rem] px-5 py-16 sm:px-6 md:px-8 md:py-20">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1.06fr)_minmax(20rem,0.94fr)] lg:gap-14 xl:gap-16">
-          <div className="max-w-3xl space-y-6">
-            <p className="night-kicker hero-entrance">{eyebrow}</p>
-            <div className="hero-entrance-delay-1 space-y-4">
-              <h1 className="max-w-4xl text-white">{title}</h1>
-              <p className="max-w-2xl text-base leading-7 text-white/76 md:text-lg">
-                {description}
-              </p>
+          <div className="contents lg:block lg:max-w-3xl lg:space-y-6">
+            <div className="order-1 max-w-3xl space-y-6">
+              <p className="night-kicker hero-entrance">{eyebrow}</p>
+              <div className="hero-entrance-delay-1 space-y-4">
+                <h1 className="max-w-4xl text-white">{title}</h1>
+                <p className="max-w-2xl text-base leading-7 text-white/76 md:text-lg">
+                  {description}
+                </p>
+              </div>
             </div>
-            <div className="hero-entrance-delay-2 flex flex-col gap-3 sm:flex-row">
+            <div className="hero-entrance-delay-2 order-3 mt-6 flex flex-col gap-3 sm:flex-row lg:mt-0">
               <Button asChild size="lg">
                 <HeroActionLink href={primaryAction.href}>
                   {primaryAction.label}
@@ -105,7 +107,7 @@ export function PageHero({
               ) : null}
             </div>
           </div>
-          <div className="hero-entrance-delay-3 lg:flex lg:flex-col lg:justify-end">
+          <div className="hero-entrance-delay-3 order-2 lg:flex lg:flex-col lg:justify-end">
             <div className="border-t border-white/10 pt-6 lg:border-t-0 lg:border-l lg:pt-2 lg:pl-8">
               <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
                 <div className="night-tile flex items-start gap-3">
@@ -130,7 +132,7 @@ export function PageHero({
                   ))}
                 </ul>
               ) : null}
-              <div className="mt-6 max-w-sm border-t border-white/10 pt-4 text-sm leading-7 text-white/68">
+              <div className="mt-5 max-w-sm border-t border-white/10 pt-4 text-sm leading-6 text-white/68 md:leading-7">
                 Book a table, browse the menu, and get ready for an easy visit.
               </div>
             </div>

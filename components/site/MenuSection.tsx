@@ -29,7 +29,7 @@ export function MenuSection({ category, ...props }: MenuSectionProps) {
                 key={`${category.slug}-${item.name}`}
                 className="space-y-3 border-t border-[var(--color-outline-variant)]/24 pt-5 first:border-t-0 first:pt-0"
               >
-                <div className="flex items-start justify-between gap-4">
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
                   <div className="min-w-0 space-y-2">
                     <h3 className="font-sans text-lg font-semibold text-secondary">
                       {item.name}
@@ -40,7 +40,7 @@ export function MenuSection({ category, ...props }: MenuSectionProps) {
                       </p>
                     ) : null}
                   </div>
-                  <p className="shrink-0 pt-1 text-sm font-medium text-on-surface">
+                  <p className="shrink-0 text-sm font-medium text-on-surface sm:pt-1">
                     {formatPrice(item.price)}
                   </p>
                 </div>
