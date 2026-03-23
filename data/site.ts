@@ -47,6 +47,7 @@ export const sitePhone = "01908 561936"
 export const sitePhoneHref = "tel:01908561936"
 export const siteEmail = "hellotheoldschoolhouse@gmail.com"
 export const siteEmailHref = "mailto:hellotheoldschoolhouse@gmail.com"
+export const lapenInnsHref = "https://lapeninns.com"
 export const mapHref =
   "https://www.google.com/maps/search/?api=1&query=The+Old+School+House+London+Road+Stony+Stratford+Milton+Keynes+MK11+1JA"
 export const googleReviewHref =
@@ -63,6 +64,7 @@ export const siteDescription =
 
 export const siteNav: NavItem[] = [
   { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
   { href: "/menu", label: "Menu" },
   { href: "/events", label: "Events" },
   { href: "/find-us", label: "Find Us" },
@@ -134,6 +136,81 @@ export const homeReasons: HighlightItem[] = [
     title: "Good food, good drinks, and good value",
     description:
       "Lunch, drinks, or dinner all work for the same reason: honest food, a strong bar, and a place worth returning to.",
+  },
+]
+
+export const aboutReasons: HighlightItem[] = [
+  {
+    title: "A proper pub setting with real character",
+    description:
+      "Exposed brick, wooden floors, and an open-plan bar give the place the sort of warmth that feels established the moment you walk in.",
+  },
+  {
+    title: "A wider food story than the usual pub stop",
+    description:
+      "The mix of classic pub comfort and Nepalese cooking gives couples, families, and mixed groups more reasons to agree on this table.",
+  },
+  {
+    title: "Room for everyday visits and bigger plans",
+    description:
+      "With 65 covers inside, around 60 outside, a front seating area, and a private courtyard, it works for a quick pint, a proper dinner, or a larger get-together.",
+  },
+]
+
+export const aboutPubFacts: InfoItem[] = [
+  { label: "Inside", value: "65 covers across the main pub space" },
+  {
+    label: "Outside",
+    value: "Around 60 covers split between the front area and courtyard",
+  },
+  {
+    label: "Bar",
+    value: "One open-plan bar that keeps the room feeling together",
+  },
+  {
+    label: "Kitchen",
+    value: "A full commercial kitchen behind the food offer",
+  },
+  { label: "Parking", value: "A small on-site car park for easier arrival" },
+  {
+    label: "Outdoor feel",
+    value: "Front wooden seating made for near year-round trade",
+  },
+]
+
+export const aboutStoryNotes = [
+  "Previously known as The Plough, the building is a familiar Stony Stratford address on busy London Road.",
+  "The current shape of The Old School House keeps the classic pub character while making more of the space inside and out.",
+  "That means exposed brick, wooden floors, a strong bar, a front outdoor area, and a private courtyard that make longer visits easy.",
+]
+
+export const aboutOperatorNotes = [
+  "Sanjog Gautam, known as San, brings experience from running a cafe, a restaurant, and a pub before taking on The Old School House.",
+  "The aim is not to lose the classic pub ethos. It is to keep that welcome intact while adding the Nepalese food offer guests already know him for.",
+  "That mix of familiarity and something more distinctive is what gives the pub its own place on the street.",
+]
+
+export const aboutFamilyNotes = [
+  "The Old School House is operated by Lapen Inns OSH Ltd as part of the wider Lapen Inns family.",
+  "Across the group, the idea is consistent: proper pub comfort, a warm welcome, and Nepalese cooking that gives the menu more identity.",
+  "For guests, that means the pub still feels local, but the food story travels with a team that already knows how to make it work.",
+]
+
+export const aboutLocationHighlights: HighlightItem[] = [
+  {
+    title: "On the busiest road in Stony Stratford",
+    description:
+      "London Road keeps the pub in the middle of the everyday rhythm of the town, from passing drinks to planned evenings out.",
+  },
+  {
+    title: "Easy to work into a day in town",
+    description:
+      "Shops, parking, and local footfall nearby make it an easy stop whether you are meeting friends or making an evening of it.",
+  },
+  {
+    title: "A good pub to keep in mind for local weekends",
+    description:
+      "When the town gets busier for events such as Folk on the Green, being well placed and easy to spot matters even more.",
   },
 ]
 

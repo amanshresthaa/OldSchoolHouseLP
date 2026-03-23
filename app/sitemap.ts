@@ -7,6 +7,7 @@ import { siteUrl } from "@/data/site"
 
 const routes = [
   { route: "", source: "app/page.tsx" },
+  { route: "/about", source: "app/about/page.tsx" },
   { route: "/menu", source: "app/menu/page.tsx" },
   { route: "/book", source: "app/book/page.tsx" },
   { route: "/events", source: "app/events/page.tsx" },

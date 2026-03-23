@@ -3,6 +3,7 @@ import { EnvelopeSimple, Phone } from "@phosphor-icons/react/dist/ssr"
 
 import { PageHero } from "@/components/site/PageHero"
 import { SectionHeading } from "@/components/site/SectionHeading"
+import { StickySplitSection } from "@/components/site/StickySplitSection"
 import { Button } from "@/components/ui/button"
 import { siteEmailHref, sitePhone, sitePhoneHref } from "@/data/site"
 
@@ -53,9 +54,10 @@ export default function WakesMenuPage() {
         secondaryAction={{ href: siteEmailHref, label: "Email the team" }}
       />
 
-      <section className="bg-background py-16 md:py-24">
-        <div className="section-shell grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
-          <div className="space-y-6 lg:sticky lg:top-28">
+      <StickySplitSection
+        className="bg-background"
+        intro={
+          <div className="space-y-6">
             <SectionHeading
               eyebrow="Planning support"
               title="The aim is to make the arranging part feel easier."
@@ -93,46 +95,47 @@ export default function WakesMenuPage() {
               </Button>
             </div>
           </div>
-          <div className="space-y-4">
-            <div className="grid gap-4 md:grid-cols-3">
-              {wakePlanningCards.map((card, index) => (
-                <article
-                  key={card.title}
-                  className={
-                    index === 1
-                      ? "surface-frame surface-pane surface-pane-muted"
-                      : "surface-frame surface-pane bg-[var(--color-surface-lowest)]"
-                  }
-                >
-                  <h2 className="text-[1.7rem] leading-tight">{card.title}</h2>
-                  <p className="pt-4 text-sm leading-7 text-on-surface md:text-base">
-                    {card.description}
-                  </p>
-                </article>
-              ))}
-            </div>
-            <div className="surface-frame overflow-hidden">
-              <div className="grid gap-px bg-[rgba(196,189,181,0.22)] md:grid-cols-[0.95fr_1.05fr]">
-                <div className="surface-pane bg-[var(--color-surface-lowest)]">
-                  <h2 className="text-[2rem]">What is useful to tell us</h2>
-                  <p className="pt-4 text-sm leading-7 text-on-surface md:text-base">
-                    Guest numbers, timing, food style, dietary notes, and how
-                    you want the gathering to feel are all useful things to
-                    mention at the start.
-                  </p>
-                </div>
-                <div className="surface-pane surface-pane-muted">
-                  <h2 className="text-[2rem]">What you can expect from us</h2>
-                  <p className="pt-4 text-sm leading-7 text-on-surface md:text-base">
-                    A calm conversation, clear next steps, and help shaping
-                    something that suits the day.
-                  </p>
-                </div>
+        }
+      >
+        <div className="space-y-4">
+          <div className="grid gap-4 md:grid-cols-3">
+            {wakePlanningCards.map((card, index) => (
+              <article
+                key={card.title}
+                className={
+                  index === 1
+                    ? "surface-frame surface-pane surface-pane-muted"
+                    : "surface-frame surface-pane bg-[var(--color-surface-lowest)]"
+                }
+              >
+                <h2 className="text-[1.7rem] leading-tight">{card.title}</h2>
+                <p className="pt-4 text-sm leading-7 text-on-surface md:text-base">
+                  {card.description}
+                </p>
+              </article>
+            ))}
+          </div>
+          <div className="surface-frame overflow-hidden">
+            <div className="grid gap-px bg-[rgba(196,189,181,0.22)] md:grid-cols-[0.95fr_1.05fr]">
+              <div className="surface-pane bg-[var(--color-surface-lowest)]">
+                <h2 className="text-[2rem]">What is useful to tell us</h2>
+                <p className="pt-4 text-sm leading-7 text-on-surface md:text-base">
+                  Guest numbers, timing, food style, dietary notes, and how you
+                  want the gathering to feel are all useful things to mention at
+                  the start.
+                </p>
+              </div>
+              <div className="surface-pane surface-pane-muted">
+                <h2 className="text-[2rem]">What you can expect from us</h2>
+                <p className="pt-4 text-sm leading-7 text-on-surface md:text-base">
+                  A calm conversation, clear next steps, and help shaping
+                  something that suits the day.
+                </p>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </StickySplitSection>
     </main>
   )
 }

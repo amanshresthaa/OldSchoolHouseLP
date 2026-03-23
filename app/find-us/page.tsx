@@ -11,6 +11,7 @@ import { InlineBookingCta } from "@/components/site/InlineBookingCta"
 import { MapEmbed } from "@/components/site/MapEmbed"
 import { PageHero } from "@/components/site/PageHero"
 import { SectionHeading } from "@/components/site/SectionHeading"
+import { StickySplitSection } from "@/components/site/StickySplitSection"
 import { Button } from "@/components/ui/button"
 import {
   accessibilityNotes,
@@ -46,9 +47,10 @@ export default function FindUsPage() {
         secondaryAction={{ href: sitePhoneHref, label: "Call the pub" }}
       />
 
-      <section className="bg-background py-16 md:py-24">
-        <div className="section-shell grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
-          <div className="space-y-6 lg:sticky lg:top-28">
+      <StickySplitSection
+        className="bg-background"
+        intro={
+          <div className="space-y-6">
             <SectionHeading
               eyebrow="Address and contact"
               title="The Old School House sits on the busiest road in Stony Stratford."
@@ -103,41 +105,54 @@ export default function FindUsPage() {
               </Button>
             </div>
           </div>
-          <div className="space-y-6">
-            <MapEmbed />
-            <div className="surface-frame overflow-hidden">
-              <div className="grid gap-px bg-[rgba(196,189,181,0.22)] md:grid-cols-3">
-                <div className="surface-pane surface-pane-muted text-sm leading-7 text-on-surface">
-                  London Road location in the heart of Stony Stratford.
-                </div>
-                <div className="surface-pane bg-[var(--color-surface-lowest)] text-sm leading-7 text-on-surface">
-                  Small on-site car park, plus town-centre parking nearby.
-                </div>
-                <div className="surface-pane surface-pane-muted text-sm leading-7 text-on-surface">
-                  Give us a ring if you would like a hand finding us.
-                </div>
+        }
+      >
+        <div className="space-y-4">
+          <MapEmbed />
+          <div className="surface-frame overflow-hidden">
+            <div className="grid gap-px bg-[rgba(196,189,181,0.22)] md:grid-cols-3">
+              <div className="surface-pane surface-pane-muted text-sm leading-7 text-on-surface">
+                London Road location in the heart of Stony Stratford.
+              </div>
+              <div className="surface-pane bg-[var(--color-surface-lowest)] text-sm leading-7 text-on-surface">
+                Small on-site car park, plus town-centre parking nearby.
+              </div>
+              <div className="surface-pane surface-pane-muted text-sm leading-7 text-on-surface">
+                Give us a ring if you would like a hand finding us.
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </StickySplitSection>
 
       <InlineBookingCta
         title="Thinking about dinner already?"
         description="If you know you are joining us, book ahead and arrive with everything nicely sorted."
       />
 
-      <section className="bg-[var(--color-surface-low)] py-16 md:py-24">
-        <div className="section-shell grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="rounded-[1.75rem] bg-[var(--color-surface-lowest)] px-5 py-6 md:px-7 lg:sticky lg:top-28">
-            <h2 className="text-[2rem]">Getting here</h2>
-            <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
-              {arrivalNotes.map((note) => (
-                <p key={note}>{note}</p>
-              ))}
+      <StickySplitSection
+        className="bg-[var(--color-surface-low)]"
+        intro={
+          <div className="space-y-6">
+            <SectionHeading
+              eyebrow="Getting here"
+              title="Easy to spot when you are heading through Stony Stratford."
+              description="Driving in, walking through town, or meeting friends on London Road should all feel straightforward before you arrive."
+            />
+            <div className="surface-frame">
+              <div className="surface-pane bg-[var(--color-surface-lowest)]">
+                <div className="space-y-3 text-sm leading-7 text-on-surface md:text-base">
+                  {arrivalNotes.map((note) => (
+                    <p key={note}>{note}</p>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
-          <div className="surface-frame grid gap-px bg-[rgba(196,189,181,0.22)]">
+        }
+      >
+        <div className="surface-frame overflow-hidden">
+          <div className="grid gap-px bg-[rgba(196,189,181,0.22)]">
             <div className="surface-pane bg-[var(--color-surface-lowest)]">
               <h2 className="text-[2rem]">Opening hours</h2>
               <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
@@ -176,69 +191,69 @@ export default function FindUsPage() {
             </div>
           </div>
         </div>
-      </section>
+      </StickySplitSection>
 
-      <section className="bg-background py-16 md:py-20">
-        <div className="section-shell">
-          <div className="surface-frame overflow-hidden">
-            <div className="grid gap-px bg-[rgba(196,189,181,0.22)] lg:grid-cols-[0.72fr_1.28fr]">
-              <div className="surface-pane surface-pane-muted">
-                <SectionHeading
-                  eyebrow="Accessibility"
-                  title="Arrival support should feel straightforward."
-                  description="If you need extra help with parking, access, or where to head when you arrive, give the team a ring before you set off."
-                />
-              </div>
-              <div className="grid gap-px bg-[rgba(196,189,181,0.18)] md:grid-cols-3">
-                {accessibilityNotes.map((note, index) => (
-                  <article
-                    key={note}
-                    className={cn(
-                      "surface-pane bg-[var(--color-surface-lowest)] text-sm leading-7 text-on-surface md:text-base",
-                      index === 1 && "surface-pane-muted"
-                    )}
-                  >
-                    {note}
-                  </article>
-                ))}
-              </div>
-            </div>
+      <StickySplitSection
+        className="bg-background"
+        intro={
+          <SectionHeading
+            eyebrow="Accessibility"
+            title="Arrival support should feel straightforward."
+            description="If you need extra help with parking, access, or where to head when you arrive, give the team a ring before you set off."
+          />
+        }
+      >
+        <div className="surface-frame overflow-hidden">
+          <div className="grid gap-px bg-[rgba(196,189,181,0.18)] md:grid-cols-3">
+            {accessibilityNotes.map((note, index) => (
+              <article
+                key={note}
+                className={cn(
+                  "surface-pane bg-[var(--color-surface-lowest)] text-sm leading-7 text-on-surface md:text-base",
+                  index === 1 && "surface-pane-muted"
+                )}
+              >
+                {note}
+              </article>
+            ))}
           </div>
         </div>
-      </section>
+      </StickySplitSection>
 
-      <section className="bg-background py-16 md:py-20">
-        <div className="section-shell grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+      <StickySplitSection
+        className="bg-background"
+        intro={
           <SectionHeading
             eyebrow="Before you come"
             title="If you need anything else, give us a ring."
             description="If you want to check parking, opening hours, or anything else before you arrive, just give us a call."
           />
-          <div className="surface-frame">
-            <div className="surface-pane surface-pane-muted">
-              <div className="space-y-4 text-sm leading-7 text-on-surface md:text-base">
-                <p>
-                  If you have questions before you visit, give us a ring and we
-                  will help.
-                </p>
-                <p>
-                  For directions or last-minute questions, call the pub team on{" "}
-                  <a
-                    href={sitePhoneHref}
-                    className="text-secondary transition hover:text-secondary/80"
-                  >
-                    {sitePhone}
-                  </a>
-                  .
-                </p>
-                <Button asChild size="lg">
-                  <Link href="/book">Book a table</Link>
-                </Button>
-              </div>
+        }
+      >
+        <div className="surface-frame">
+          <div className="surface-pane surface-pane-muted">
+            <div className="space-y-4 text-sm leading-7 text-on-surface md:text-base">
+              <p>
+                If you have questions before you visit, give us a ring and we
+                will help.
+              </p>
+              <p>
+                For directions or last-minute questions, call the pub team on{" "}
+                <a
+                  href={sitePhoneHref}
+                  className="text-secondary transition hover:text-secondary/80"
+                >
+                  {sitePhone}
+                </a>
+                .
+              </p>
+              <Button asChild size="lg">
+                <Link href="/book">Book a table</Link>
+              </Button>
             </div>
           </div>
         </div>
-      </section>
+      </StickySplitSection>
     </main>
   )
 }

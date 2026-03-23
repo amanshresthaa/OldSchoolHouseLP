@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 
 import { PageHero } from "@/components/site/PageHero"
 import { SectionHeading } from "@/components/site/SectionHeading"
+import { StickySplitSection } from "@/components/site/StickySplitSection"
 import { siteEmailHref, sitePhoneHref } from "@/data/site"
 
 export const metadata: Metadata = {
@@ -72,9 +73,10 @@ export default function TermsOfServicePage() {
         secondaryAction={{ href: siteEmailHref, label: "Email the team" }}
       />
 
-      <section className="bg-background py-16 md:py-24">
-        <div className="section-shell grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
-          <div className="space-y-6 lg:sticky lg:top-28">
+      <StickySplitSection
+        className="bg-background"
+        intro={
+          <div className="space-y-6">
             <SectionHeading
               eyebrow="Short version"
               title="Use the site to plan. Use the pub to confirm."
@@ -93,29 +95,30 @@ export default function TermsOfServicePage() {
               </div>
             </div>
           </div>
-          <div className="surface-frame overflow-hidden">
-            <div className="grid gap-px bg-[rgba(196,189,181,0.22)]">
-              {termsSections.map((section, index) => (
-                <article
-                  key={section.title}
-                  className={
-                    index % 2 === 0
-                      ? "surface-pane bg-[var(--color-surface-lowest)]"
-                      : "surface-pane surface-pane-muted"
-                  }
-                >
-                  <h2 className="text-[2rem]">{section.title}</h2>
-                  <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
-                    {section.paragraphs.map((paragraph) => (
-                      <p key={paragraph}>{paragraph}</p>
-                    ))}
-                  </div>
-                </article>
-              ))}
-            </div>
+        }
+      >
+        <div className="surface-frame overflow-hidden">
+          <div className="grid gap-px bg-[rgba(196,189,181,0.22)]">
+            {termsSections.map((section, index) => (
+              <article
+                key={section.title}
+                className={
+                  index % 2 === 0
+                    ? "surface-pane bg-[var(--color-surface-lowest)]"
+                    : "surface-pane surface-pane-muted"
+                }
+              >
+                <h2 className="text-[2rem]">{section.title}</h2>
+                <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
+                  {section.paragraphs.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </div>
+              </article>
+            ))}
           </div>
         </div>
-      </section>
+      </StickySplitSection>
     </main>
   )
 }

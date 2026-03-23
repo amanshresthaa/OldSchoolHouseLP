@@ -11,6 +11,7 @@ import {
 import { InlineBookingCta } from "@/components/site/InlineBookingCta"
 import { PageHero } from "@/components/site/PageHero"
 import { SectionHeading } from "@/components/site/SectionHeading"
+import { StickySplitSection } from "@/components/site/StickySplitSection"
 import { Button } from "@/components/ui/button"
 import { eventOccasions, siteEmailHref, sitePhoneHref } from "@/data/site"
 
@@ -50,9 +51,10 @@ export default function EventsPage() {
         secondaryAction={{ href: sitePhoneHref, label: "Call the pub" }}
       />
 
-      <section className="bg-background py-16 md:py-24">
-        <div className="section-shell grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
-          <div className="space-y-6 lg:sticky lg:top-28">
+      <StickySplitSection
+        className="bg-background"
+        intro={
+          <div className="space-y-6">
             <SectionHeading
               eyebrow="Room to gather"
               title="Enough room to host groups without losing the pub feel."
@@ -65,7 +67,10 @@ export default function EventsPage() {
               sizes="(min-width: 1024px) 40vw, 100vw"
             />
           </div>
-          <div className="surface-frame grid gap-px bg-[rgba(196,189,181,0.22)] lg:grid-cols-2">
+        }
+      >
+        <div className="surface-frame overflow-hidden">
+          <div className="grid gap-px bg-[rgba(196,189,181,0.22)] lg:grid-cols-2">
             {capacityNotes.map((note) => (
               <div
                 key={note}
@@ -76,10 +81,12 @@ export default function EventsPage() {
             ))}
           </div>
         </div>
-      </section>
+      </StickySplitSection>
 
-      <section className="bg-[var(--color-surface-low)] py-16 md:py-24">
-        <div className="section-shell grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
+      <StickySplitSection
+        className="bg-[var(--color-surface-low)]"
+        introClassName="space-y-5"
+        intro={
           <div className="space-y-5">
             <SectionHeading
               eyebrow="Occasions"
@@ -93,35 +100,39 @@ export default function EventsPage() {
               </a>
             </Button>
           </div>
-          <div className="surface-frame overflow-hidden">
-            <div className="grid gap-px bg-[rgba(196,189,181,0.22)] md:grid-cols-2">
-              {eventOccasions.map((occasion, index) => (
-                <div
-                  key={occasion}
-                  className={`surface-pane text-sm leading-7 font-medium text-on-background md:text-base ${index % 2 === 0 ? "surface-pane-muted" : "bg-[var(--color-surface-lowest)]"}`}
-                >
-                  {occasion}
-                </div>
-              ))}
-            </div>
+        }
+      >
+        <div className="surface-frame overflow-hidden">
+          <div className="grid gap-px bg-[rgba(196,189,181,0.22)] md:grid-cols-2">
+            {eventOccasions.map((occasion, index) => (
+              <div
+                key={occasion}
+                className={`surface-pane text-sm leading-7 font-medium text-on-background md:text-base ${index % 2 === 0 ? "surface-pane-muted" : "bg-[var(--color-surface-lowest)]"}`}
+              >
+                {occasion}
+              </div>
+            ))}
           </div>
         </div>
-      </section>
+      </StickySplitSection>
 
       <InlineBookingCta
         title="Need a table first and an event later?"
         description="If this visit is just drinks or dinner, book a table now. If you are planning something bigger, send us the details and we will help with the rest."
       />
 
-      <section className="bg-background py-16 md:py-24">
-        <div className="section-shell grid gap-10 lg:grid-cols-[0.64fr_1.36fr] lg:items-start">
+      <StickySplitSection
+        className="bg-background"
+        intro={
           <SectionHeading
             eyebrow="Plan the details"
             title="A little context helps us shape the right kind of gathering."
             description="Tell us the rough numbers, the kind of setup you want, and whether food, drinks, or the match matter most."
-            className="lg:sticky lg:top-28"
           />
-          <div className="surface-frame grid gap-px bg-[rgba(196,189,181,0.22)] md:grid-cols-[0.94fr_1.06fr]">
+        }
+      >
+        <div className="surface-frame overflow-hidden">
+          <div className="grid gap-px bg-[rgba(196,189,181,0.22)] md:grid-cols-[0.94fr_1.06fr]">
             <div className="surface-pane surface-pane-muted">
               <h2 className="text-[2rem]">What works well here</h2>
               <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
@@ -161,7 +172,7 @@ export default function EventsPage() {
             </div>
           </div>
         </div>
-      </section>
+      </StickySplitSection>
 
       <section className="bg-primary py-16 text-white md:py-20">
         <div className="section-shell grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">

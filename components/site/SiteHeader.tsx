@@ -84,28 +84,30 @@ export function SiteHeader() {
               {siteLocation}
             </span>
           </Link>
-          <nav className="hidden items-center gap-6 md:flex">
-            {siteNav.slice(0, 4).map((item) => {
-              const active = isCurrentPath(pathname, item.href)
+          <nav className="hidden items-center gap-4 lg:flex xl:gap-6">
+            {siteNav
+              .filter((item) => item.href !== "/book")
+              .map((item) => {
+                const active = isCurrentPath(pathname, item.href)
 
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={cn(
-                    "text-[0.82rem] font-semibold tracking-[0.16em] text-on-background uppercase transition hover:text-secondary",
-                    active && "text-secondary"
-                  )}
-                >
-                  {item.label}
-                </Link>
-              )
-            })}
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={cn(
+                      "text-[0.82rem] font-semibold tracking-[0.16em] text-on-background uppercase transition hover:text-secondary",
+                      active && "text-secondary"
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                )
+              })}
             <Button asChild>
               <Link href="/book">Book a table</Link>
             </Button>
           </nav>
-          <div className="flex shrink-0 items-center gap-2 md:hidden">
+          <div className="flex shrink-0 items-center gap-2 lg:hidden">
             <Button asChild size="sm">
               <Link href="/book">Book</Link>
             </Button>

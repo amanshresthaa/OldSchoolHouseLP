@@ -10,6 +10,7 @@ import {
 import { InlineBookingCta } from "@/components/site/InlineBookingCta"
 import { PageHero } from "@/components/site/PageHero"
 import { SectionHeading } from "@/components/site/SectionHeading"
+import { StickySplitSection } from "@/components/site/StickySplitSection"
 import { Button } from "@/components/ui/button"
 import {
   bookingNotes,
@@ -41,9 +42,10 @@ export default function BookPage() {
         secondaryAction={{ href: siteEmailHref, label: "Email a request" }}
       />
 
-      <section className="bg-background py-16 md:py-24">
-        <div className="section-shell grid gap-10 lg:grid-cols-[0.76fr_1.24fr] lg:items-start">
-          <div className="space-y-6 lg:sticky lg:top-28">
+      <StickySplitSection
+        className="bg-background"
+        intro={
+          <div className="space-y-6">
             <SectionHeading
               eyebrow="Booking now"
               title="A call or message is all it takes."
@@ -55,7 +57,10 @@ export default function BookPage() {
               ))}
             </div>
           </div>
-          <div className="surface-frame grid gap-px bg-[rgba(196,189,181,0.22)] lg:grid-cols-[1.08fr_0.92fr]">
+        }
+      >
+        <div className="surface-frame overflow-hidden">
+          <div className="grid gap-px bg-[rgba(196,189,181,0.22)] lg:grid-cols-[1.08fr_0.92fr]">
             <div className="surface-pane surface-pane-muted">
               <div className="space-y-5">
                 <h2 className="text-[2rem]">Get in touch</h2>
@@ -126,22 +131,26 @@ export default function BookPage() {
             </div>
           </div>
         </div>
-      </section>
+      </StickySplitSection>
 
       <InlineBookingCta
         title="Booking for tonight or on the way through town?"
         description="If you are already in Stony Stratford or fancy coming in tonight, give us a ring and we will do our best to sort your table."
       />
 
-      <section className="bg-[var(--color-surface-low)] py-16 md:py-24">
-        <div className="section-shell grid gap-10 lg:grid-cols-[0.64fr_1.36fr] lg:items-start">
+      <StickySplitSection
+        className="bg-[var(--color-surface-low)]"
+        gridClassName="section-shell grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-start"
+        intro={
           <SectionHeading
             eyebrow="Before you book"
             title="A few details help us get the table just right."
             description="Tell us when you would like to come in, how many are joining you, and anything worth knowing before you arrive."
-            className="lg:sticky lg:top-28"
           />
-          <div className="surface-frame grid gap-px bg-[rgba(196,189,181,0.22)] md:grid-cols-2">
+        }
+      >
+        <div className="surface-frame overflow-hidden">
+          <div className="grid gap-px bg-[rgba(196,189,181,0.22)] md:grid-cols-2">
             <div className="surface-pane bg-[var(--color-surface-lowest)]">
               <h2 className="text-[2rem]">What to include</h2>
               <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
@@ -174,7 +183,7 @@ export default function BookPage() {
             </div>
           </div>
         </div>
-      </section>
+      </StickySplitSection>
     </main>
   )
 }

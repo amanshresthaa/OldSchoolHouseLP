@@ -11,6 +11,7 @@ import { InlineBookingCta } from "@/components/site/InlineBookingCta"
 import { MenuSection } from "@/components/site/MenuSection"
 import { PageHero } from "@/components/site/PageHero"
 import { SectionHeading } from "@/components/site/SectionHeading"
+import { StickySplitSection } from "@/components/site/StickySplitSection"
 import { Button } from "@/components/ui/button"
 import {
   drinksHighlights,
@@ -94,9 +95,10 @@ export default function MenuPage() {
         description="Every section is linked here, so you can jump straight to momo, mixed grills, speciality dishes, curries, sides, desserts, or drinks-friendly extras."
       />
 
-      <section className="bg-background pb-16 md:pb-24">
-        <div className="section-shell grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
-          <div className="space-y-6 lg:sticky lg:top-28">
+      <StickySplitSection
+        className="bg-background"
+        intro={
+          <div className="space-y-6">
             <SectionHeading
               eyebrow="From the kitchen"
               title="Two menu moods, one pub."
@@ -109,7 +111,10 @@ export default function MenuPage() {
               sizes="(min-width: 1024px) 40vw, 100vw"
             />
           </div>
-          <div className="surface-frame grid gap-px bg-[rgba(196,189,181,0.22)] lg:grid-cols-[0.94fr_1.06fr]">
+        }
+      >
+        <div className="surface-frame overflow-hidden">
+          <div className="grid gap-px bg-[rgba(196,189,181,0.22)] lg:grid-cols-[0.94fr_1.06fr]">
             <div className="surface-pane surface-pane-muted">
               <h2 className="text-[2rem]">Before you order</h2>
               <div className="space-y-4 pt-4 text-sm leading-7 text-on-surface md:text-base">
@@ -180,7 +185,7 @@ export default function MenuPage() {
             </div>
           </div>
         </div>
-      </section>
+      </StickySplitSection>
 
       <section className="bg-[var(--color-surface-low)] py-16 md:py-24">
         <div className="section-shell grid gap-6">
