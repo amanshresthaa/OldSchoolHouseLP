@@ -6,11 +6,38 @@ import * as React from "react"
 import { List, X } from "@phosphor-icons/react"
 
 import { Button } from "@/components/ui/button"
-import { siteLocation, siteName, siteNav } from "@/data/site"
+import { type NavItem, siteLocation, siteName, siteNav } from "@/data/site"
 import { cn } from "@/lib/utils"
 
 function isCurrentPath(pathname: string, href: string) {
   return href === "/" ? pathname === href : pathname.startsWith(href)
+}
+
+interface HeaderNavLinkProps
+  extends Omit<React.ComponentProps<typeof Link>, "href"> {
+  active: boolean
+  item: NavItem
+}
+
+function HeaderNavLink({
+  active,
+  item,
+  className,
+  ...props
+}: HeaderNavLinkProps) {
+  return (
+    <Link
+      href={item.href}
+      className={cn(
+        "rounded-full px-3 py-2 text-[0.76rem] font-semibold tracking-[0.14em] text-on-background uppercase transition hover:bg-surface-low hover:text-secondary",
+        active && "bg-surface-low text-secondary",
+        className
+      )}
+      {...props}
+    >
+      {item.label}
+    </Link>
+  )
 }
 
 export function SiteHeader() {
@@ -22,6 +49,26 @@ export function SiteHeader() {
   React.useEffect(() => {
     setIsOpen(false)
   }, [pathname])
+
+  React.useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 768px)")
+
+    const handleViewportChange = (event: MediaQueryListEvent) => {
+      if (event.matches) {
+        setIsOpen(false)
+      }
+    }
+
+    if (mediaQuery.matches) {
+      setIsOpen(false)
+    }
+
+    mediaQuery.addEventListener("change", handleViewportChange)
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleViewportChange)
+    }
+  }, [])
 
   React.useEffect(() => {
     if (!isOpen) {
@@ -75,55 +122,64 @@ export function SiteHeader() {
   return (
     <>
       <header className="sticky top-0 z-40 border-b border-black/5 bg-background/85 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3 sm:px-6 md:px-8">
-          <Link href="/" className="min-w-0 flex-1 pr-1 md:flex-none md:pr-0">
-            <span className="block text-[clamp(1.08rem,5vw,1.5rem)] leading-[0.94] text-primary sm:text-2xl">
-              {siteName}
-            </span>
-            <span className="block pt-1 text-[0.5rem] leading-[1.25] font-semibold tracking-[0.12em] text-on-surface uppercase sm:text-[0.68rem] sm:tracking-[0.22em]">
-              {siteLocation}
-            </span>
-          </Link>
-          <nav className="hidden items-center gap-4 lg:flex xl:gap-6">
+        <div className="mx-auto max-w-7xl px-5 py-3 sm:px-6 md:px-8">
+          <div className="flex items-center justify-between gap-4">
+            <Link href="/" className="min-w-0 flex-1 pr-1 xl:flex-none xl:pr-0">
+              <span className="block text-[clamp(1.08rem,5vw,1.5rem)] leading-[0.94] text-primary sm:text-2xl">
+                {siteName}
+              </span>
+              <span className="block pt-1 text-[0.5rem] leading-[1.25] font-semibold tracking-[0.12em] text-on-surface uppercase sm:text-[0.68rem] sm:tracking-[0.22em]">
+                {siteLocation}
+              </span>
+            </Link>
+            <nav className="hidden items-center gap-1 xl:flex">
+              {siteNav
+                .filter((item) => item.href !== "/book")
+                .map((item) => (
+                  <HeaderNavLink
+                    key={item.href}
+                    active={isCurrentPath(pathname, item.href)}
+                    item={item}
+                  />
+                ))}
+            </nav>
+            <div className="hidden shrink-0 items-center gap-3 md:flex">
+              <Button asChild size="sm">
+                <Link href="/book">Book a table</Link>
+              </Button>
+            </div>
+            <div className="flex shrink-0 items-center gap-2 md:hidden">
+              <Button asChild size="sm">
+                <Link href="/book">Book</Link>
+              </Button>
+              <button
+                type="button"
+                aria-controls="mobile-site-navigation"
+                aria-expanded={isOpen}
+                aria-label={
+                  isOpen ? "Close navigation menu" : "Open navigation menu"
+                }
+                onClick={() => setIsOpen((value) => !value)}
+                className="inline-flex size-10 items-center justify-center rounded-full bg-primary text-white transition hover:bg-primary-container"
+              >
+                {isOpen ? <X size={20} /> : <List size={20} />}
+              </button>
+            </div>
+          </div>
+          <nav
+            aria-label="Primary navigation"
+            className="mt-3 hidden flex-wrap items-center gap-2 border-t border-black/5 pt-3 md:flex xl:hidden"
+          >
             {siteNav
               .filter((item) => item.href !== "/book")
-              .map((item) => {
-                const active = isCurrentPath(pathname, item.href)
-
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={cn(
-                      "text-[0.82rem] font-semibold tracking-[0.16em] text-on-background uppercase transition hover:text-secondary",
-                      active && "text-secondary"
-                    )}
-                  >
-                    {item.label}
-                  </Link>
-                )
-              })}
-            <Button asChild>
-              <Link href="/book">Book a table</Link>
-            </Button>
+              .map((item) => (
+                <HeaderNavLink
+                  key={item.href}
+                  active={isCurrentPath(pathname, item.href)}
+                  item={item}
+                />
+              ))}
           </nav>
-          <div className="flex shrink-0 items-center gap-2 lg:hidden">
-            <Button asChild size="sm">
-              <Link href="/book">Book</Link>
-            </Button>
-            <button
-              type="button"
-              aria-controls="mobile-site-navigation"
-              aria-expanded={isOpen}
-              aria-label={
-                isOpen ? "Close navigation menu" : "Open navigation menu"
-              }
-              onClick={() => setIsOpen((value) => !value)}
-              className="inline-flex size-10 items-center justify-center rounded-full bg-primary text-white transition hover:bg-primary-container"
-            >
-              {isOpen ? <X size={20} /> : <List size={20} />}
-            </button>
-          </div>
         </div>
       </header>
       {isOpen ? (
