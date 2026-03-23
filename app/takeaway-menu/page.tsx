@@ -1,11 +1,12 @@
 import type { Metadata } from "next"
-import Link from "next/link"
 import { DownloadSimple, Phone } from "@phosphor-icons/react/dist/ssr"
 
+import { InlineBookingCta } from "@/components/site/InlineBookingCta"
+import { PageSignoff } from "@/components/site/PageSignoff"
 import { PageHero } from "@/components/site/PageHero"
 import { SectionHeading } from "@/components/site/SectionHeading"
+import { SiteActionCard } from "@/components/site/SiteActionCard"
 import { StickySplitSection } from "@/components/site/StickySplitSection"
-import { Button } from "@/components/ui/button"
 import { siteMenuPdfHref, sitePhone, sitePhoneHref } from "@/data/site"
 
 export const metadata: Metadata = {
@@ -80,23 +81,25 @@ export default function TakeawayMenuPage() {
                 </ol>
               </div>
             </div>
-            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <Button asChild size="lg">
-                <a href={siteMenuPdfHref} download>
-                  Download PDF
-                  <DownloadSimple />
-                </a>
-              </Button>
-              <Button asChild size="lg" variant="outline">
-                <a href={sitePhoneHref}>
-                  Call {sitePhone}
-                  <Phone />
-                </a>
-              </Button>
-              <Button asChild size="lg" variant="outline">
-                <Link href="/menu">Browse live menu</Link>
-              </Button>
-            </div>
+            <SiteActionCard
+              actions={[
+                {
+                  href: siteMenuPdfHref,
+                  label: "Download PDF",
+                  download: true,
+                  icon: <DownloadSimple className="size-4" />,
+                },
+                {
+                  href: sitePhoneHref,
+                  label: `Call ${sitePhone}`,
+                  icon: <Phone className="size-4" />,
+                },
+                {
+                  href: "/menu",
+                  label: "Browse live menu",
+                },
+              ]}
+            />
           </div>
         }
       >
@@ -111,7 +114,7 @@ export default function TakeawayMenuPage() {
                     : "surface-frame surface-pane bg-[var(--color-surface-lowest)]"
                 }
               >
-                <h2 className="text-[1.7rem] leading-tight">{card.title}</h2>
+                <h2 className="section-title">{card.title}</h2>
                 <p className="pt-4 text-sm leading-7 text-on-surface md:text-base">
                   {card.description}
                 </p>
@@ -121,7 +124,7 @@ export default function TakeawayMenuPage() {
           <div className="surface-frame overflow-hidden">
             <div className="grid gap-px bg-[rgba(196,189,181,0.22)] md:grid-cols-[1.05fr_0.95fr]">
               <div className="surface-pane bg-[var(--color-surface-lowest)]">
-                <h2 className="text-[2rem]">
+                <h2 className="section-title">
                   Best if you want to share the menu
                 </h2>
                 <p className="pt-4 text-sm leading-7 text-on-surface md:text-base">
@@ -131,7 +134,7 @@ export default function TakeawayMenuPage() {
                 </p>
               </div>
               <div className="surface-pane surface-pane-muted">
-                <h2 className="text-[2rem]">
+                <h2 className="section-title">
                   Best if you want to browse quickly
                 </h2>
                 <p className="pt-4 text-sm leading-7 text-on-surface md:text-base">
@@ -144,6 +147,36 @@ export default function TakeawayMenuPage() {
           </div>
         </div>
       </StickySplitSection>
+
+      <InlineBookingCta
+        title="Thinking you may want the table instead of the takeaway?"
+        description="If the plan shifts from collection to sitting in, book ahead and keep the evening easy."
+      />
+
+      <PageSignoff
+        eyebrow="Next step"
+        title="Browse the menu in the format that suits you, then give the pub a ring when you are ready."
+        description="The PDF is useful for sharing. The live menu is better when you want to move quickly between sections on your phone."
+        body={
+          <p>
+            If you want help choosing, collection timing, or a quick check on a
+            dish before you order, calling the pub is still the easiest route.
+          </p>
+        }
+        actions={[
+          {
+            href: sitePhoneHref,
+            label: "Call to order",
+            icon: <Phone className="size-4" />,
+          },
+          {
+            href: siteMenuPdfHref,
+            label: "Download the PDF",
+            download: true,
+            icon: <DownloadSimple className="size-4" />,
+          },
+        ]}
+      />
     </main>
   )
 }

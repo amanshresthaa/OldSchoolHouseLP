@@ -226,7 +226,7 @@
 
 @layer utilities {
   .paper-panel {
-    @apply rounded-[1.75rem] border border-transparent bg-[var(--color-surface-lowest)] p-6;
+    @apply rounded-[1.75rem] border border-transparent bg-[var(--color-surface-lowest)] p-6 md:p-7;
     box-shadow: 0px 12px 32px rgba(27, 28, 28, 0.06);
   }
 
@@ -236,7 +236,7 @@
   }
 
   .surface-pane {
-    @apply px-5 py-6 md:px-7 md:py-7;
+    @apply px-5 py-7 md:px-7 md:py-8;
   }
 
   .surface-pane-muted {
@@ -248,7 +248,7 @@
   }
 
   .night-panel {
-    @apply rounded-[2rem] border p-5 text-white md:p-6;
+    @apply rounded-[2rem] border p-6 text-white md:p-7;
     border-color: rgba(255, 255, 255, 0.1);
     background: linear-gradient(
       160deg,
@@ -268,7 +268,7 @@
   }
 
   .night-tile {
-    @apply rounded-[1.4rem] border px-4 py-4 text-sm leading-7 text-white/88;
+    @apply rounded-[1.5rem] border px-4 py-4 text-sm leading-7 text-white/90;
     border-color: rgba(255, 255, 255, 0.1);
     background: rgba(255, 255, 255, 0.06);
   }
@@ -280,7 +280,7 @@
   }
 
   .night-list-item {
-    @apply flex items-start gap-3 px-4 py-4 text-sm leading-7 text-white/88;
+    @apply flex items-start gap-3 px-4 py-4 text-sm leading-7 text-white/90;
   }
 
   .night-divider {
@@ -388,12 +388,28 @@
     @apply mx-auto max-w-[84rem] px-5 sm:px-6 md:px-8;
   }
 
+  .page-section {
+    @apply py-16 md:py-24 lg:py-28;
+  }
+
   .display-copy {
     @apply font-heading text-[clamp(2.8rem,12vw,5.8rem)] leading-[0.96];
   }
 
   .eyebrow {
     @apply text-xs font-semibold tracking-[0.22em] text-secondary uppercase;
+  }
+
+  .section-title {
+    @apply text-[2rem] leading-tight;
+  }
+
+  .content-card {
+    @apply rounded-[1.5rem];
+  }
+
+  .dark-copy {
+    @apply text-white/72;
   }
 }
 

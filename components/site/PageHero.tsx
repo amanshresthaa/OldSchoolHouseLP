@@ -1,15 +1,14 @@
 import type { ComponentProps } from "react"
-import Link from "next/link"
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr"
 
 import { OpenStatusBadge } from "@/components/site/OpenStatusBadge"
-import { Button } from "@/components/ui/button"
+import { SiteActionCard } from "@/components/site/SiteActionCard"
 import { cn } from "@/lib/utils"
 
 interface HeroAction {
   href: string
   label: string
-  variant?: ComponentProps<typeof Button>["variant"]
+  variant?: "default" | "outline"
   download?: boolean | string
 }
 
@@ -19,46 +18,6 @@ interface PageHeroProps extends ComponentProps<"section"> {
   description: string
   primaryAction: HeroAction
   secondaryAction?: HeroAction
-}
-
-function isExternalHref(href: string) {
-  return (
-    href.startsWith("http") ||
-    href.startsWith("mailto:") ||
-    href.startsWith("tel:")
-  )
-}
-
-function HeroActionLink({
-  href,
-  download,
-  children,
-}: {
-  href: string
-  download?: boolean | string
-  children: React.ReactNode
-}) {
-  if (download) {
-    return (
-      <a href={href} download={download}>
-        {children}
-      </a>
-    )
-  }
-
-  if (isExternalHref(href)) {
-    const externalProps = href.startsWith("http")
-      ? { target: "_blank", rel: "noreferrer" }
-      : {}
-
-    return (
-      <a href={href} {...externalProps}>
-        {children}
-      </a>
-    )
-  }
-
-  return <Link href={href}>{children}</Link>
 }
 
 export function PageHero({
@@ -72,7 +31,10 @@ export function PageHero({
 }: PageHeroProps) {
   return (
     <section
-      className={cn("relative overflow-hidden bg-primary text-white", className)}
+      className={cn(
+        "relative overflow-hidden bg-primary text-white",
+        className
+      )}
       {...props}
     >
       {/* Layered background — gradient + radial saffron accent + subtle grid texture */}
@@ -113,33 +75,27 @@ export function PageHero({
                 {description}
               </p>
 
-              {/* CTA block — frosted glass card */}
-              <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-4 backdrop-blur-md sm:p-5">
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-                  <HeroActionLink
-                    href={primaryAction.href}
-                    download={primaryAction.download}
-                  >
-                    <span className="group/cta inline-flex h-12 w-full items-center justify-center gap-2.5 rounded-xl bg-[linear-gradient(135deg,#af2b3e,#8f1f2e)] px-6 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(175,43,62,0.3)] transition-all duration-[var(--duration-micro)] ease-[var(--easing-standard)] hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(175,43,62,0.4)] hover:brightness-110 active:translate-y-px sm:w-auto">
-                      {primaryAction.label}
-                      <ArrowRight className="size-4 transition-transform duration-[var(--duration-micro)] ease-[var(--easing-standard)] group-hover/cta:translate-x-0.5" />
-                    </span>
-                  </HeroActionLink>
-                  {secondaryAction ? (
-                    <>
-                      <span className="hidden h-6 w-px bg-white/16 sm:block" />
-                      <HeroActionLink
-                        href={secondaryAction.href}
-                        download={secondaryAction.download}
-                      >
-                        <span className="group/cta2 inline-flex h-12 w-full items-center justify-center gap-2.5 rounded-xl border border-white/12 bg-white/[0.06] px-6 text-sm font-semibold text-white/88 transition-all duration-[var(--duration-micro)] ease-[var(--easing-standard)] hover:-translate-y-0.5 hover:bg-white/12 hover:text-white active:translate-y-px sm:w-auto">
-                          {secondaryAction.label}
-                        </span>
-                      </HeroActionLink>
-                    </>
-                  ) : null}
-                </div>
-              </div>
+              <SiteActionCard
+                actions={[
+                  {
+                    href: primaryAction.href,
+                    label: primaryAction.label,
+                    download: primaryAction.download,
+                    icon: <ArrowRight className="size-4" />,
+                  },
+                  ...(secondaryAction
+                    ? [
+                        {
+                          href: secondaryAction.href,
+                          label: secondaryAction.label,
+                          download: secondaryAction.download,
+                        },
+                      ]
+                    : []),
+                ]}
+                showDivider={Boolean(secondaryAction)}
+                tone="dark"
+              />
             </div>
           </div>
 

@@ -1,6 +1,5 @@
 import type { Metadata } from "next"
 import Image from "next/image"
-import Link from "next/link"
 import {
   CalendarDots,
   EnvelopeSimple,
@@ -8,11 +7,13 @@ import {
   UsersThree,
 } from "@phosphor-icons/react/dist/ssr"
 
+import { EditorialBreak } from "@/components/site/EditorialBreak"
 import { InlineBookingCta } from "@/components/site/InlineBookingCta"
+import { PageSignoff } from "@/components/site/PageSignoff"
 import { PageHero } from "@/components/site/PageHero"
 import { SectionHeading } from "@/components/site/SectionHeading"
+import { SiteActionCard } from "@/components/site/SiteActionCard"
 import { StickySplitSection } from "@/components/site/StickySplitSection"
-import { Button } from "@/components/ui/button"
 import { eventOccasions, siteEmailHref, sitePhoneHref } from "@/data/site"
 
 import eventsImage from "@/images/food/peri-peri-chicken-with-fries-and-salad.png"
@@ -93,12 +94,15 @@ export default function EventsPage() {
               title="More than just formal private hire."
               description="Big celebrations, casual get-togethers, match-day meetups, and tasting nights all feel right at home here."
             />
-            <Button asChild size="lg">
-              <a href={siteEmailHref}>
-                Start an enquiry
-                <EnvelopeSimple />
-              </a>
-            </Button>
+            <SiteActionCard
+              actions={[
+                {
+                  href: siteEmailHref,
+                  label: "Start an enquiry",
+                  icon: <EnvelopeSimple className="size-4" />,
+                },
+              ]}
+            />
           </div>
         }
       >
@@ -134,7 +138,7 @@ export default function EventsPage() {
         <div className="surface-frame overflow-hidden">
           <div className="grid gap-px bg-[rgba(196,189,181,0.22)] md:grid-cols-[0.94fr_1.06fr]">
             <div className="surface-pane surface-pane-muted">
-              <h2 className="text-[2rem]">What works well here</h2>
+              <h2 className="section-title">What works well here</h2>
               <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
                 <p>Sports screenings and local team socials.</p>
                 <p>Seasonal tasting evenings and menu launches.</p>
@@ -149,67 +153,59 @@ export default function EventsPage() {
               </div>
             </div>
             <div className="surface-pane bg-[var(--color-surface-lowest)] lg:pt-12">
-              <h2 className="text-[2rem]">What to send in your enquiry</h2>
+              <h2 className="section-title">What to send in your enquiry</h2>
               <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
                 {enquiryChecklist.map((item) => (
                   <p key={item}>{item}</p>
                 ))}
               </div>
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                <Button asChild size="lg">
-                  <a href={siteEmailHref}>
-                    Email details
-                    <EnvelopeSimple />
-                  </a>
-                </Button>
-                <Button asChild size="lg" variant="outline">
-                  <a href={sitePhoneHref}>
-                    Call to talk it through
-                    <Phone />
-                  </a>
-                </Button>
-              </div>
+              <SiteActionCard
+                className="mt-6"
+                actions={[
+                  {
+                    href: siteEmailHref,
+                    label: "Email details",
+                    icon: <EnvelopeSimple className="size-4" />,
+                  },
+                  {
+                    href: sitePhoneHref,
+                    label: "Call to talk it through",
+                    icon: <Phone className="size-4" />,
+                  },
+                ]}
+                showDivider
+              />
             </div>
           </div>
         </div>
       </StickySplitSection>
 
-      <section className="bg-primary py-16 text-white md:py-20">
-        <div className="section-shell grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-          <SectionHeading
-            eyebrow="Start planning"
-            title="Tell us what you have in mind and we will help shape the rest."
-            description="If you already know the date, the guest list, or the kind of table you want, send it through and we will help put it together."
-            invert
-          />
-          <div className="night-panel space-y-4 text-sm leading-7 md:text-base">
-            <p>
-              Some gatherings only need a few tables and a round of drinks.
-              Others need food, space, and a bit more planning. Either way, we
-              would love to hear from you.
-            </p>
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <Button asChild size="lg" variant="secondary">
-                <Link href="/book">
-                  Book a table instead
-                  <CalendarDots />
-                </Link>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="border-white/12 bg-black/16 text-white hover:bg-black/24 hover:text-white"
-              >
-                <a href={siteEmailHref}>
-                  Email for private hire
-                  <UsersThree />
-                </a>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <EditorialBreak quote="The best gatherings start with a conversation, not a fixed package." />
+
+      <PageSignoff
+        eyebrow="Start planning"
+        title="Tell us what you have in mind and we will help shape the rest."
+        description="If you already know the date, the guest list, or the kind of table you want, send it through and we will help put it together."
+        body={
+          <p>
+            Some gatherings only need a few tables and a round of drinks. Others
+            need food, space, and a bit more planning. Either way, we would love
+            to hear from you.
+          </p>
+        }
+        actions={[
+          {
+            href: "/book",
+            label: "Book a table instead",
+            icon: <CalendarDots className="size-4" />,
+          },
+          {
+            href: siteEmailHref,
+            label: "Email for private hire",
+            icon: <UsersThree className="size-4" />,
+          },
+        ]}
+      />
     </main>
   )
 }

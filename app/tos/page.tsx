@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 
+import { PageSignoff } from "@/components/site/PageSignoff"
 import { PageHero } from "@/components/site/PageHero"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import { StickySplitSection } from "@/components/site/StickySplitSection"
@@ -108,7 +109,7 @@ export default function TermsOfServicePage() {
                     : "surface-pane surface-pane-muted"
                 }
               >
-                <h2 className="text-[2rem]">{section.title}</h2>
+                <h2 className="section-title">{section.title}</h2>
                 <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
                   {section.paragraphs.map((paragraph) => (
                     <p key={paragraph}>{paragraph}</p>
@@ -119,6 +120,29 @@ export default function TermsOfServicePage() {
           </div>
         </div>
       </StickySplitSection>
+
+      <PageSignoff
+        eyebrow="Need a clear answer today?"
+        title="Use the site to plan, then use the pub to confirm anything time-sensitive."
+        description="That is the simplest way to think about bookings, menu changes, and details that affect today’s visit."
+        body={
+          <p>
+            If you are unsure about a booking, menu item, or opening detail,
+            call or email the team and we will help you get the current answer
+            without guesswork.
+          </p>
+        }
+        actions={[
+          {
+            href: sitePhoneHref,
+            label: "Call with a booking question",
+          },
+          {
+            href: siteEmailHref,
+            label: "Email the team",
+          },
+        ]}
+      />
     </main>
   )
 }

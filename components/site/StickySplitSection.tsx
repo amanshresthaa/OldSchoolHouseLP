@@ -20,17 +20,17 @@ export function StickySplitSection({
   ...props
 }: StickySplitSectionProps) {
   return (
-    <section className={cn("py-16 md:py-24", className)} {...props}>
+    <section className={cn("page-section", className)} {...props}>
       <div
         className={cn(
-          "section-shell grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-start",
+          "section-shell grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-start",
           gridClassName
         )}
       >
-        <div className={cn("space-y-6 lg:sticky lg:top-28", introClassName)}>
+        <div className={cn("space-y-7 lg:sticky lg:top-28", introClassName)}>
           {intro}
         </div>
-        <div className={cn("space-y-4", contentClassName)}>{children}</div>
+        <div className={cn("space-y-5", contentClassName)}>{children}</div>
       </div>
     </section>
   )

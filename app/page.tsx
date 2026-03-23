@@ -19,7 +19,7 @@ import { MenuCategoryScroller } from "@/components/site/MenuCategoryScroller"
 import { MapEmbed } from "@/components/site/MapEmbed"
 import { OpenStatusBadge } from "@/components/site/OpenStatusBadge"
 import { SectionHeading } from "@/components/site/SectionHeading"
-import { Button } from "@/components/ui/button"
+import { SiteActionCard } from "@/components/site/SiteActionCard"
 import {
   arrivalNotes,
   atmosphereMoments,
@@ -33,7 +33,6 @@ import {
   localBusinessSchema,
   mapHref,
   openingHours,
-  proofPoints,
   siteAddress,
   siteEmail,
   siteEmailHref,
@@ -249,7 +248,7 @@ export default function Page() {
                   <h1 className="display-copy max-w-[16ch] text-white">
                     The Old School House.
                   </h1>
-                  <p className="max-w-2xl font-heading text-2xl leading-snug text-white/88 md:text-3xl md:leading-snug">
+                  <p className="max-w-2xl font-heading text-2xl leading-snug text-white/90 md:text-3xl md:leading-snug">
                     Traditional pub comfort, Nepalese cooking, and a warm
                     welcome on London Road.
                   </p>
@@ -257,32 +256,28 @@ export default function Page() {
 
                 {/* Right column — description, CTA, meta */}
                 <div className="hero-entrance-delay-2 space-y-6 lg:pb-2">
-                  <p className="max-w-lg text-base leading-7 text-white/70 md:text-lg md:leading-8">
+                  <p className="max-w-lg text-base leading-7 text-white/72 md:text-lg md:leading-8">
                     Come in for pub favourites, stay for Nepalese dishes, and
                     settle into a bar, front garden, and courtyard built for
                     longer evenings.
                   </p>
 
-                  {/* CTA block — frosted glass card */}
-                  <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-4 backdrop-blur-md sm:p-5">
-                    <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-                      <Link
-                        href="/book"
-                        className="group/cta inline-flex h-12 w-full items-center justify-center gap-2.5 rounded-xl bg-[linear-gradient(135deg,#af2b3e,#8f1f2e)] px-6 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(175,43,62,0.3)] transition-all duration-[var(--duration-micro)] ease-[var(--easing-standard)] hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(175,43,62,0.4)] hover:brightness-110 active:translate-y-px sm:w-auto"
-                      >
-                        Book a table
-                        <CalendarDots className="size-4" />
-                      </Link>
-                      <span className="hidden h-6 w-px bg-white/16 sm:block" />
-                      <Link
-                        href="/menu"
-                        className="group/cta2 inline-flex h-12 w-full items-center justify-center gap-2.5 rounded-xl border border-white/12 bg-white/[0.06] px-6 text-sm font-semibold text-white/88 transition-all duration-[var(--duration-micro)] ease-[var(--easing-standard)] hover:-translate-y-0.5 hover:bg-white/12 hover:text-white active:translate-y-px sm:w-auto"
-                      >
-                        View menu
-                        <ArrowRight className="size-4 transition-transform duration-[var(--duration-micro)] ease-[var(--easing-standard)] group-hover/cta2:translate-x-0.5" />
-                      </Link>
-                    </div>
-                  </div>
+                  <SiteActionCard
+                    actions={[
+                      {
+                        href: "/book",
+                        label: "Book a table",
+                        icon: <CalendarDots className="size-4" />,
+                      },
+                      {
+                        href: "/menu",
+                        label: "View menu",
+                        icon: <ArrowRight className="size-4" />,
+                      },
+                    ]}
+                    showDivider
+                    tone="dark"
+                  />
                 </div>
               </div>
 
@@ -310,7 +305,7 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="bg-background py-12 md:py-16">
+      <section className="page-section bg-background">
         <div className="section-shell">
           <div className="surface-frame overflow-hidden">
             <div className="grid gap-px bg-[rgba(196,189,181,0.22)] lg:grid-cols-[0.9fr_1.1fr]">
@@ -323,7 +318,7 @@ export default function Page() {
                 <Image
                   src={startersImage}
                   alt="Samosas plated with salad and chutneys at The Old School House."
-                  className="media-lift mt-5 h-[16rem] w-full rounded-[1.9rem] object-cover md:h-[20rem] lg:h-[22rem]"
+                  className="media-lift mt-5 h-[16rem] w-full rounded-[2rem] object-cover md:h-[20rem] lg:h-[22rem]"
                   sizes="(min-width: 1024px) 38vw, 100vw"
                 />
               </div>
@@ -353,7 +348,7 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="bg-[var(--color-surface-low)] py-14 md:py-20">
+      <section className="page-section bg-[var(--color-surface-low)]">
         <div className="section-shell space-y-6 md:space-y-8">
           <div className="grid gap-8 lg:grid-cols-[0.74fr_1.26fr] lg:items-end">
             <div className="min-w-0 space-y-5 lg:pb-4">
@@ -369,28 +364,26 @@ export default function Page() {
                 For a first visit, think one shareable opener, one bigger plate
                 for the middle, then one house favourite.
               </p>
-              <div className="hidden flex-col gap-3 sm:flex-row lg:flex">
-                <Button asChild size="lg" className="w-full sm:w-fit">
-                  <Link href="/menu" className="w-full">
-                    See full menu
-                    <ForkKnife />
-                  </Link>
-                </Button>
-                <Button
-                  asChild
-                  size="lg"
-                  variant="outline"
-                  className="w-full sm:w-fit"
-                >
-                  <Link href="/book" className="w-full">
-                    Book for dinner
-                    <CalendarDots />
-                  </Link>
-                </Button>
+              <div className="hidden lg:block">
+                <SiteActionCard
+                  actions={[
+                    {
+                      href: "/menu",
+                      label: "See full menu",
+                      icon: <ForkKnife className="size-4" />,
+                    },
+                    {
+                      href: "/book",
+                      label: "Book for dinner",
+                      icon: <CalendarDots className="size-4" />,
+                    },
+                  ]}
+                  showDivider
+                />
               </div>
             </div>
             <div className="hidden gap-4 lg:grid lg:grid-cols-[1.1fr_0.9fr]">
-              <figure className="group relative overflow-hidden rounded-[2.25rem] bg-primary text-white">
+              <figure className="group relative overflow-hidden rounded-[2rem] bg-primary text-white">
                 <Image
                   src={menuPreviewShowcase[0].image}
                   alt={menuPreviewShowcase[0].alt}
@@ -407,7 +400,7 @@ export default function Page() {
                       <h3 className="font-heading text-4xl leading-none text-white">
                         {menuPreviewShowcase[0].title}
                       </h3>
-                      <p className="pt-2 text-sm leading-6 text-white/80">
+                      <p className="pt-2 text-sm leading-6 text-white/72">
                         {menuPreviewShowcase[0].caption}
                       </p>
                     </div>
@@ -439,7 +432,7 @@ export default function Page() {
                           <h3 className="font-sans text-2xl font-semibold text-white">
                             {feature.title}
                           </h3>
-                          <p className="pt-2 text-sm leading-6 text-white/76">
+                          <p className="pt-2 text-sm leading-6 text-white/72">
                             {feature.caption}
                           </p>
                         </div>
@@ -494,7 +487,7 @@ export default function Page() {
                       >
                         {feature.title}
                       </h3>
-                      <p className="pt-2 text-sm leading-6 text-white/78">
+                      <p className="pt-2 text-sm leading-6 text-white/72">
                         {feature.caption}
                       </p>
                     </div>
@@ -567,24 +560,22 @@ export default function Page() {
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-3 sm:flex-row lg:hidden">
-            <Button asChild size="lg" className="w-full sm:w-fit">
-              <Link href="/menu" className="w-full">
-                See full menu
-                <ForkKnife />
-              </Link>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="w-full sm:w-fit"
-            >
-              <Link href="/book" className="w-full">
-                Book for dinner
-                <CalendarDots />
-              </Link>
-            </Button>
+          <div className="lg:hidden">
+            <SiteActionCard
+              actions={[
+                {
+                  href: "/menu",
+                  label: "See full menu",
+                  icon: <ForkKnife className="size-4" />,
+                },
+                {
+                  href: "/book",
+                  label: "Book for dinner",
+                  icon: <CalendarDots className="size-4" />,
+                },
+              ]}
+              showDivider
+            />
           </div>
         </div>
       </section>
@@ -594,7 +585,7 @@ export default function Page() {
         description="Dinner, drinks, or an easy catch-up all start better when the table is already sorted."
       />
 
-      <section className="bg-background py-14 md:py-20">
+      <section className="page-section bg-background">
         <div className="section-shell grid gap-8 lg:grid-cols-[0.6fr_1.4fr] lg:items-start">
           <div className="contents lg:sticky lg:top-28 lg:block lg:space-y-5">
             <SectionHeading
@@ -609,20 +600,22 @@ export default function Page() {
                 <p className="pt-3 text-sm leading-6 text-on-surface md:text-base md:leading-7">
                   Leave a quick note on Google and help the next guest decide.
                 </p>
-                <div className="mt-4 flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
-                  <Button asChild size="lg">
-                    <a href={googleReviewHref} target="_blank" rel="noreferrer">
-                      Write a Google review
-                      <ChatCircleDots />
-                    </a>
-                  </Button>
-                  <Button asChild size="lg" variant="outline">
-                    <a href={mapHref} target="_blank" rel="noreferrer">
-                      Open on Google Maps
-                      <ArrowRight />
-                    </a>
-                  </Button>
-                </div>
+                <SiteActionCard
+                  className="mt-4"
+                  actions={[
+                    {
+                      href: googleReviewHref,
+                      label: "Write a Google review",
+                      icon: <ChatCircleDots className="size-4" />,
+                    },
+                    {
+                      href: mapHref,
+                      label: "Open on Google Maps",
+                      icon: <ArrowRight className="size-4" />,
+                    },
+                  ]}
+                  showDivider
+                />
               </div>
             </div>
           </div>
@@ -640,7 +633,7 @@ export default function Page() {
                     {guestReviews.map((review) => (
                       <article
                         key={`${groupIndex}-${review.name}`}
-                        className="w-[19.5rem] shrink-0 rounded-[1.9rem] bg-[var(--color-surface-lowest)] px-5 py-6 shadow-[0px_14px_34px_rgba(27,28,28,0.06)] md:w-[21rem] md:px-6 md:py-7"
+                        className="w-[19.5rem] shrink-0 rounded-[2rem] bg-[var(--color-surface-lowest)] px-5 py-6 shadow-[0px_14px_34px_rgba(27,28,28,0.06)] md:w-[21rem] md:px-6 md:py-7"
                       >
                         <div className="flex items-start justify-between gap-4">
                           <div className="flex items-start gap-3">
@@ -754,7 +747,7 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="bg-primary py-12 text-white md:py-16">
+      <section className="page-section bg-primary text-white">
         <div className="section-shell">
           <div className="night-panel overflow-hidden p-0">
             <div className="grid gap-px bg-white/10 lg:grid-cols-[0.92fr_1.08fr]">
@@ -763,7 +756,7 @@ export default function Page() {
                 <h2 className="mt-3 max-w-xl text-white">
                   Private hire, sport nights, and good reasons to come back.
                 </h2>
-                <p className="mt-3 max-w-lg text-sm leading-6 text-white/76 md:text-base md:leading-7">
+                <p className="mt-3 max-w-lg text-sm leading-6 text-white/72 md:text-base md:leading-7">
                   Good for birthday tables, work drinks, watch nights, and easy
                   group plans that need food, drinks, and room to settle in.
                 </p>
@@ -771,25 +764,30 @@ export default function Page() {
                   {eventOccasions.slice(0, 4).map((occasion) => (
                     <div
                       key={occasion}
-                      className="rounded-[1.35rem] bg-white/6 px-4 py-3 text-sm leading-6 text-white/84"
+                      className="content-card bg-white/6 px-4 py-3 text-sm leading-6 text-white/90"
                     >
                       {occasion}
                     </div>
                   ))}
                 </div>
-                <Button asChild size="lg" variant="secondary" className="mt-5">
-                  <Link href="/events">
-                    Ask about private hire
-                    <UsersThree />
-                  </Link>
-                </Button>
+                <SiteActionCard
+                  className="mt-5"
+                  actions={[
+                    {
+                      href: "/events",
+                      label: "Ask about private hire",
+                      icon: <UsersThree className="size-4" />,
+                    },
+                  ]}
+                  tone="dark"
+                />
               </div>
               <div className="px-5 py-6 md:px-7 md:py-7">
                 <div className="grid gap-3 xl:grid-cols-3">
                   {eventsHighlights.map((highlight) => (
                     <article
                       key={highlight.title}
-                      className="rounded-[1.45rem] bg-white/6 px-4 py-4"
+                      className="content-card bg-white/6 px-4 py-4"
                     >
                       <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-[var(--color-on-tertiary-container)] uppercase">
                         Why it works
@@ -797,7 +795,7 @@ export default function Page() {
                       <h3 className="pt-3 font-sans text-lg font-semibold text-white">
                         {highlight.title}
                       </h3>
-                      <p className="pt-2 text-sm leading-6 text-white/76">
+                      <p className="pt-2 text-sm leading-6 text-white/72">
                         {highlight.description}
                       </p>
                     </article>
@@ -807,13 +805,13 @@ export default function Page() {
                   {eventOccasions.slice(4).map((occasion) => (
                     <div
                       key={occasion}
-                      className="rounded-[1.35rem] border border-white/10 px-4 py-3 text-sm leading-6 text-white/72"
+                      className="content-card border border-white/10 px-4 py-3 text-sm leading-6 text-white/72"
                     >
                       {occasion}
                     </div>
                   ))}
                 </div>
-                <div className="mt-4 rounded-[1.45rem] bg-[linear-gradient(135deg,rgba(212,160,23,0.14),rgba(255,255,255,0.04))] px-4 py-4 text-sm leading-6 text-white/78 md:px-5">
+                <div className="content-card mt-4 bg-[linear-gradient(135deg,rgba(212,160,23,0.14),rgba(255,255,255,0.04))] px-4 py-4 text-sm leading-6 text-white/72 md:px-5">
                   Front garden, private courtyard, and room inside keep bigger
                   plans feeling relaxed from first drink to last round.
                 </div>
@@ -823,7 +821,7 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="bg-background py-12 md:py-16">
+      <section className="page-section bg-background">
         <div className="section-shell">
           <div className="surface-frame overflow-hidden">
             <div className="grid gap-px bg-[rgba(196,189,181,0.22)] lg:grid-cols-[0.88fr_1.12fr]">
@@ -833,7 +831,7 @@ export default function Page() {
                   title="Helpful details before you choose a table."
                   description="Parking, dogs, Wi-Fi, food hours, and live sport."
                 />
-                <div className="mt-5 rounded-[1.45rem] bg-[var(--color-surface-lowest)] px-4 py-4 md:px-5">
+                <div className="content-card mt-5 bg-[var(--color-surface-lowest)] px-4 py-4 md:px-5">
                   <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
                     Food hours
                   </p>
@@ -843,17 +841,21 @@ export default function Page() {
                     ))}
                   </div>
                 </div>
-                <div className="mt-4 flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
-                  <Button asChild size="lg">
-                    <Link href="/find-us">Find us</Link>
-                  </Button>
-                  <Button asChild size="lg" variant="outline">
-                    <a href={mapHref} target="_blank" rel="noreferrer">
-                      Open map
-                      <ArrowRight />
-                    </a>
-                  </Button>
-                </div>
+                <SiteActionCard
+                  className="mt-4"
+                  actions={[
+                    {
+                      href: "/find-us",
+                      label: "Find us",
+                    },
+                    {
+                      href: mapHref,
+                      label: "Open map",
+                      icon: <ArrowRight className="size-4" />,
+                    },
+                  ]}
+                  showDivider
+                />
               </div>
               <div className="grid gap-px bg-[rgba(196,189,181,0.18)]">
                 {localFaqs.map((faq, index) => (
@@ -885,7 +887,7 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="bg-background py-14 md:py-20">
+      <section className="page-section bg-background">
         <div className="section-shell grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
           <div className="contents lg:block lg:space-y-5">
             <SectionHeading
@@ -934,17 +936,21 @@ export default function Page() {
                 </div>
               </div>
             </div>
-            <div className="order-4 flex flex-col gap-3 sm:flex-row lg:mt-5">
-              <Button asChild size="lg">
-                <Link href="/find-us">Find us</Link>
-              </Button>
-              <Button asChild size="lg" variant="outline">
-                <a href={mapHref} target="_blank" rel="noreferrer">
-                  Open map
-                  <ArrowRight />
-                </a>
-              </Button>
-            </div>
+            <SiteActionCard
+              className="order-4 lg:mt-5"
+              actions={[
+                {
+                  href: "/find-us",
+                  label: "Find us",
+                },
+                {
+                  href: mapHref,
+                  label: "Open map",
+                  icon: <ArrowRight className="size-4" />,
+                },
+              ]}
+              showDivider
+            />
           </div>
           <MapEmbed className="order-2 lg:order-none" />
         </div>

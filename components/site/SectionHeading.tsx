@@ -39,7 +39,7 @@ export function SectionHeading({
         <p
           className={cn(
             "max-w-xl text-sm leading-6 md:text-base md:leading-7",
-            invert ? "text-white/78" : "text-on-surface"
+            invert ? "text-white/72" : "text-on-surface"
           )}
         >
           {description}

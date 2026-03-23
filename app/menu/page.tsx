@@ -2,10 +2,11 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { DownloadSimple, Phone } from "@phosphor-icons/react/dist/ssr"
 
+import { EditorialBreak } from "@/components/site/EditorialBreak"
 import { InlineBookingCta } from "@/components/site/InlineBookingCta"
+import { PageSignoff } from "@/components/site/PageSignoff"
 import { MenuInteractive } from "@/components/site/MenuInteractive"
 import { PageHero } from "@/components/site/PageHero"
-import { SectionHeading } from "@/components/site/SectionHeading"
 import { Button } from "@/components/ui/button"
 import {
   drinksHighlights,
@@ -65,7 +66,7 @@ export default function MenuPage() {
       />
 
       {/* B. Quick-info strip */}
-      <section className="bg-[var(--color-surface-low)] py-8 md:py-10">
+      <section className="bg-[var(--color-surface-low)] py-10 md:py-12">
         <div className="section-shell">
           <div className="surface-frame">
             <div className="surface-pane">
@@ -79,9 +80,7 @@ export default function MenuPage() {
 
                 <div className="space-y-1 text-sm leading-7 text-on-surface">
                   <p className="eyebrow">What to expect</p>
-                  <p>
-                    Nepalese dishes, pub classics, kids meals and desserts
-                  </p>
+                  <p>Nepalese dishes, pub classics, kids meals and desserts</p>
                 </div>
 
                 <div className="space-y-3">
@@ -105,18 +104,18 @@ export default function MenuPage() {
       </section>
 
       {/* C. Interactive menu */}
-      <section className="bg-background py-8 md:py-12">
+      <section className="bg-background py-10 md:py-14">
         <MenuInteractive categories={menuCategories} />
       </section>
 
       {/* C2. Drinks highlights */}
-      <section className="bg-[var(--color-surface-low)] py-12 md:py-16">
+      <section className="page-section bg-[var(--color-surface-low)]">
         <div className="section-shell">
           <div className="surface-frame">
             <div className="grid gap-px bg-[rgba(196,189,181,0.22)] lg:grid-cols-[0.55fr_1.45fr]">
               <div className="surface-pane surface-pane-muted">
                 <p className="eyebrow">From the bar</p>
-                <h2 className="pt-3 text-[2rem]">Drinks worth asking for</h2>
+                <h2 className="section-title pt-3">Drinks worth asking for</h2>
                 <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
                   A strong bar sits alongside the food. Ask the team what is
                   pouring well today.
@@ -127,7 +126,7 @@ export default function MenuPage() {
                   {drinksHighlights.map((item) => (
                     <div
                       key={item}
-                      className="rounded-[1.35rem] bg-[var(--color-surface-low)]/72 px-5 py-4 text-sm leading-7 text-on-surface"
+                      className="content-card bg-[var(--color-surface-low)]/72 px-5 py-4 text-sm leading-7 text-on-surface"
                     >
                       {item}
                     </div>
@@ -140,16 +139,7 @@ export default function MenuPage() {
       </section>
 
       {/* Editorial break */}
-      <section className="bg-[var(--color-tertiary-container)] py-12 md:py-16">
-        <div className="section-shell text-center">
-          <blockquote className="mx-auto max-w-3xl">
-            <p className="font-heading text-2xl leading-relaxed text-[var(--color-on-tertiary-container)] italic md:text-3xl">
-              &ldquo;Come in for something familiar, stay for something you have
-              never tried before.&rdquo;
-            </p>
-          </blockquote>
-        </div>
-      </section>
+      <EditorialBreak quote="Come in for something familiar, stay for something you have never tried before." />
 
       {/* D. Inline booking CTA */}
       <InlineBookingCta
@@ -158,59 +148,61 @@ export default function MenuPage() {
       />
 
       {/* E. Good to know */}
-      <section className="bg-primary py-16 text-white md:py-20">
-        <div className="section-shell grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-          <SectionHeading
-            eyebrow="Good to know"
-            title="A few helpful details before you order."
-            invert
-          />
-
-          <div className="grid gap-3">
-            {policyNotes.map((note) => (
-              <div key={note} className="night-tile">
-                {note}
+      <PageSignoff
+        eyebrow="Good to know"
+        title="A few helpful details before you order."
+        body={
+          <p>
+            If you have an allergy, want to double-check a dish, or need a quick
+            answer before you come in, a call to the pub is always the safest
+            route.
+          </p>
+        }
+        actions={[
+          {
+            href: sitePhoneHref,
+            label: "Call the bar",
+            icon: <Phone className="size-4" />,
+          },
+          {
+            href: "/book",
+            label: "Book a table",
+          },
+        ]}
+        details={
+          <>
+            <div className="grid gap-3">
+              {policyNotes.map((note) => (
+                <div key={note} className="night-tile">
+                  {note}
+                </div>
+              ))}
+              <div className="night-tile">
+                Beer and cider are available by the half pint, spirits in 25ml
+                or 35ml servings, and still wine in 125ml measures.
               </div>
-            ))}
-            <div className="night-tile">
-              Beer and cider are available by the half pint, spirits in 25ml or
-              35ml servings, and still wine in 125ml measures.
+              <div className="night-tile">
+                If you have an allergy or want to double-check a dish, please
+                speak to the team before ordering.
+              </div>
             </div>
-
-            <div className="night-tile">
-              If you have an allergy or want to double-check a dish, please
-              speak to the team before ordering.
-            </div>
-
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="mt-2 w-fit border-white/12 bg-black/16 text-white hover:bg-black/24 hover:text-white"
-            >
-              <a href={sitePhoneHref}>
-                Call the bar
-                <Phone />
-              </a>
-            </Button>
-
-            <div className="mt-4 grid gap-2 text-sm leading-7">
+            <div className="grid gap-2 text-sm leading-7">
               <Link
                 href="/takeaway-menu"
-                className="text-white/78 transition hover:text-white"
+                className="text-white/72 transition hover:text-white"
               >
                 Looking for collection details instead? →
               </Link>
               <Link
                 href="/wakes-menu"
-                className="text-white/78 transition hover:text-white"
+                className="text-white/72 transition hover:text-white"
               >
                 Planning buffet-style food for a wake? →
               </Link>
             </div>
-          </div>
-        </div>
-      </section>
+          </>
+        }
+      />
     </main>
   )
 }

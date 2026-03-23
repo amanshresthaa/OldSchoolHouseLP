@@ -8,9 +8,12 @@ import {
   MapPin,
 } from "@phosphor-icons/react/dist/ssr"
 
+import { EditorialBreak } from "@/components/site/EditorialBreak"
+import { InlineBookingCta } from "@/components/site/InlineBookingCta"
+import { PageSignoff } from "@/components/site/PageSignoff"
 import { PageHero } from "@/components/site/PageHero"
 import { SectionHeading } from "@/components/site/SectionHeading"
-import { Button } from "@/components/ui/button"
+import { SiteActionCard } from "@/components/site/SiteActionCard"
 import {
   aboutFamilyNotes,
   aboutLocationHighlights,
@@ -44,7 +47,7 @@ export default function AboutPage() {
         secondaryAction={{ href: "/menu", label: "Browse the menu" }}
       />
 
-      <section className="bg-background py-12 md:py-16">
+      <section className="page-section bg-background">
         <div className="section-shell">
           <div className="surface-frame overflow-hidden">
             <div className="grid gap-px bg-[rgba(196,189,181,0.22)] lg:grid-cols-[0.8fr_1.2fr]">
@@ -72,9 +75,7 @@ export default function AboutPage() {
                     key={reason.title}
                     className={`surface-pane ${index === 0 ? "bg-[var(--color-surface-lowest)] sm:col-span-2" : index === 1 ? "surface-pane-muted" : "bg-[var(--color-surface-lowest)]"}`}
                   >
-                    <h2 className="text-[1.8rem] leading-tight">
-                      {reason.title}
-                    </h2>
+                    <h2 className="section-title">{reason.title}</h2>
                     <p className="pt-4 text-sm leading-7 text-on-surface md:text-base">
                       {reason.description}
                     </p>
@@ -86,7 +87,7 @@ export default function AboutPage() {
                     {aboutPubFacts.map((fact) => (
                       <div
                         key={fact.label}
-                        className="rounded-[1.35rem] bg-[var(--color-surface-lowest)] px-5 py-4"
+                        className="content-card bg-[var(--color-surface-lowest)] px-5 py-4"
                       >
                         <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
                           {fact.label}
@@ -104,7 +105,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-[var(--color-surface-low)] py-14 md:py-20">
+      <section className="page-section bg-[var(--color-surface-low)]">
         <div className="section-shell">
           <div className="surface-frame overflow-hidden">
             <div className="grid gap-px bg-[rgba(196,189,181,0.22)] lg:grid-cols-[0.72fr_1.28fr]">
@@ -121,23 +122,27 @@ export default function AboutPage() {
                   Stratford, but has a clearer point of difference once you sit
                   down and order.
                 </p>
-                <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                  <Button asChild size="lg">
-                    <Link href="/book">
-                      Book a table
-                      <ArrowRight />
-                    </Link>
-                  </Button>
-                  <Button asChild size="lg" variant="outline">
-                    <a href={siteEmailHref}>Ask the team a question</a>
-                  </Button>
-                </div>
+                <SiteActionCard
+                  className="mt-6"
+                  actions={[
+                    {
+                      href: "/book",
+                      label: "Book a table",
+                      icon: <ArrowRight className="size-4" />,
+                    },
+                    {
+                      href: siteEmailHref,
+                      label: "Ask the team a question",
+                    },
+                  ]}
+                  showDivider
+                />
               </div>
               <div className="grid gap-px bg-[rgba(196,189,181,0.18)] md:grid-cols-2">
                 <article className="surface-pane bg-[var(--color-surface-lowest)]">
                   <div className="flex items-center gap-3">
                     <ForkKnife className="size-5 text-secondary" />
-                    <h2 className="text-[2rem]">
+                    <h2 className="section-title">
                       San&apos;s hospitality approach
                     </h2>
                   </div>
@@ -150,7 +155,7 @@ export default function AboutPage() {
                 <article className="surface-pane surface-pane-muted">
                   <div className="flex items-center gap-3">
                     <Buildings className="size-5 text-secondary" />
-                    <h2 className="text-[2rem]">
+                    <h2 className="section-title">
                       Part of the Lapen Inns family
                     </h2>
                   </div>
@@ -175,13 +180,13 @@ export default function AboutPage() {
                 <article className="surface-pane surface-pane-muted md:col-span-2">
                   <div className="flex items-center gap-3">
                     <MapPin className="size-5 text-secondary" />
-                    <h2 className="text-[2rem]">Why the location helps</h2>
+                    <h2 className="section-title">Why the location helps</h2>
                   </div>
                   <div className="mt-4 grid gap-3 lg:grid-cols-3">
                     {aboutLocationHighlights.map((item, index) => (
                       <div
                         key={item.title}
-                        className={`rounded-[1.35rem] px-5 py-4 ${index === 1 ? "bg-[var(--color-surface-lowest)]" : "bg-[var(--color-surface-low)]/72"}`}
+                        className={`content-card px-5 py-4 ${index === 1 ? "bg-[var(--color-surface-lowest)]" : "bg-[var(--color-surface-low)]/72"}`}
                       >
                         <p className="font-sans text-lg font-semibold text-secondary">
                           {item.title}
@@ -195,19 +200,19 @@ export default function AboutPage() {
                   <div className="mt-6 grid gap-3 text-sm leading-7 md:grid-cols-3 md:text-base">
                     <Link
                       href="/find-us"
-                      className="rounded-[1.35rem] bg-[var(--color-surface-lowest)] px-4 py-4 text-on-surface transition hover:-translate-y-0.5"
+                      className="content-card bg-[var(--color-surface-lowest)] px-4 py-4 text-on-surface transition hover:-translate-y-0.5"
                     >
                       Plan the journey
                     </Link>
                     <Link
                       href="/events"
-                      className="rounded-[1.35rem] bg-[var(--color-surface-lowest)] px-4 py-4 text-on-surface transition hover:-translate-y-0.5"
+                      className="content-card bg-[var(--color-surface-lowest)] px-4 py-4 text-on-surface transition hover:-translate-y-0.5"
                     >
                       See group and private hire options
                     </Link>
                     <a
                       href={siteEmailHref}
-                      className="rounded-[1.35rem] bg-[var(--color-surface-lowest)] px-4 py-4 text-on-surface transition hover:-translate-y-0.5"
+                      className="content-card bg-[var(--color-surface-lowest)] px-4 py-4 text-on-surface transition hover:-translate-y-0.5"
                     >
                       Ask the team a question
                     </a>
@@ -219,42 +224,37 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-primary py-16 text-white md:py-20">
-        <div className="section-shell grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-          <SectionHeading
-            eyebrow="Next step"
-            title="Now you know the shape of the place, the best part is coming in."
-            description="Whether you are planning dinner, drinks, or a bigger get-together, the rest of the site can help you move from browsing to booking."
-            invert
-          />
-          <div className="night-panel space-y-4 text-sm leading-7 md:text-base">
-            <p>
-              Start with the menu if you want to get a feel for the food, head
-              to find us if you are planning the journey, or book now if you
-              already know this is your kind of pub.
-            </p>
-            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <Button asChild size="lg" variant="secondary">
-                <Link href="/book">
-                  Book a table
-                  <ArrowRight />
-                </Link>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="border-white/12 bg-black/16 text-white hover:bg-black/24 hover:text-white"
-              >
-                <Link href="/find-us">
-                  Find us
-                  <MapPin />
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <InlineBookingCta
+        title="Want the feel of the place without overthinking the first visit?"
+        description="Book a table now and let the room, the food, and the evening do the convincing once you arrive."
+      />
+
+      <EditorialBreak quote="A proper pub with a broader food story, built for the kind of return visits that turn one drink into a usual table." />
+
+      <PageSignoff
+        eyebrow="Next step"
+        title="Now you know the shape of the place, the best part is coming in."
+        description="Whether you are planning dinner, drinks, or a bigger get-together, the rest of the site can help you move from browsing to booking."
+        body={
+          <p>
+            Start with the menu if you want to get a feel for the food, head to
+            find us if you are planning the journey, or book now if you already
+            know this is your kind of pub.
+          </p>
+        }
+        actions={[
+          {
+            href: "/book",
+            label: "Book a table",
+            icon: <ArrowRight className="size-4" />,
+          },
+          {
+            href: "/find-us",
+            label: "Find us",
+            icon: <MapPin className="size-4" />,
+          },
+        ]}
+      />
     </main>
   )
 }

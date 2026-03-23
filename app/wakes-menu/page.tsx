@@ -1,10 +1,12 @@
 import type { Metadata } from "next"
 import { EnvelopeSimple, Phone } from "@phosphor-icons/react/dist/ssr"
 
+import { InlineBookingCta } from "@/components/site/InlineBookingCta"
+import { PageSignoff } from "@/components/site/PageSignoff"
 import { PageHero } from "@/components/site/PageHero"
 import { SectionHeading } from "@/components/site/SectionHeading"
+import { SiteActionCard } from "@/components/site/SiteActionCard"
 import { StickySplitSection } from "@/components/site/StickySplitSection"
-import { Button } from "@/components/ui/button"
 import { siteEmailHref, sitePhone, sitePhoneHref } from "@/data/site"
 
 export const metadata: Metadata = {
@@ -80,20 +82,21 @@ export default function WakesMenuPage() {
                 </p>
               </div>
             </div>
-            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <Button asChild size="lg">
-                <a href={sitePhoneHref}>
-                  Call the pub
-                  <Phone />
-                </a>
-              </Button>
-              <Button asChild size="lg" variant="outline">
-                <a href={siteEmailHref}>
-                  Email the team
-                  <EnvelopeSimple />
-                </a>
-              </Button>
-            </div>
+            <SiteActionCard
+              actions={[
+                {
+                  href: sitePhoneHref,
+                  label: "Call the pub",
+                  icon: <Phone className="size-4" />,
+                },
+                {
+                  href: siteEmailHref,
+                  label: "Email the team",
+                  icon: <EnvelopeSimple className="size-4" />,
+                },
+              ]}
+              showDivider
+            />
           </div>
         }
       >
@@ -108,7 +111,7 @@ export default function WakesMenuPage() {
                     : "surface-frame surface-pane bg-[var(--color-surface-lowest)]"
                 }
               >
-                <h2 className="text-[1.7rem] leading-tight">{card.title}</h2>
+                <h2 className="section-title">{card.title}</h2>
                 <p className="pt-4 text-sm leading-7 text-on-surface md:text-base">
                   {card.description}
                 </p>
@@ -118,7 +121,7 @@ export default function WakesMenuPage() {
           <div className="surface-frame overflow-hidden">
             <div className="grid gap-px bg-[rgba(196,189,181,0.22)] md:grid-cols-[0.95fr_1.05fr]">
               <div className="surface-pane bg-[var(--color-surface-lowest)]">
-                <h2 className="text-[2rem]">What is useful to tell us</h2>
+                <h2 className="section-title">What is useful to tell us</h2>
                 <p className="pt-4 text-sm leading-7 text-on-surface md:text-base">
                   Guest numbers, timing, food style, dietary notes, and how you
                   want the gathering to feel are all useful things to mention at
@@ -126,7 +129,7 @@ export default function WakesMenuPage() {
                 </p>
               </div>
               <div className="surface-pane surface-pane-muted">
-                <h2 className="text-[2rem]">What you can expect from us</h2>
+                <h2 className="section-title">What you can expect from us</h2>
                 <p className="pt-4 text-sm leading-7 text-on-surface md:text-base">
                   A calm conversation, clear next steps, and help shaping
                   something that suits the day.
@@ -136,6 +139,35 @@ export default function WakesMenuPage() {
           </div>
         </div>
       </StickySplitSection>
+
+      <InlineBookingCta
+        title="Need a simpler table booking while you work through the bigger plans?"
+        description="If the immediate need is just a family table or a quiet meal, you can sort that now and come back to the wider arrangements later."
+      />
+
+      <PageSignoff
+        eyebrow="Take the next step gently"
+        title="A quick call or a thoughtful email is enough to start the conversation."
+        description="You do not need to arrive with a full brief. Rough numbers, timing, and the feel you want are enough for us to help."
+        body={
+          <p>
+            We would rather talk through the day calmly than force everything
+            into a fixed package, so reach out in whichever way feels easier.
+          </p>
+        }
+        actions={[
+          {
+            href: sitePhoneHref,
+            label: "Call to talk it through",
+            icon: <Phone className="size-4" />,
+          },
+          {
+            href: siteEmailHref,
+            label: "Email the team",
+            icon: <EnvelopeSimple className="size-4" />,
+          },
+        ]}
+      />
     </main>
   )
 }

@@ -8,10 +8,11 @@ import {
 } from "@phosphor-icons/react/dist/ssr"
 
 import { InlineBookingCta } from "@/components/site/InlineBookingCta"
+import { PageSignoff } from "@/components/site/PageSignoff"
 import { PageHero } from "@/components/site/PageHero"
 import { SectionHeading } from "@/components/site/SectionHeading"
+import { SiteActionCard } from "@/components/site/SiteActionCard"
 import { StickySplitSection } from "@/components/site/StickySplitSection"
-import { Button } from "@/components/ui/button"
 import {
   bookingNotes,
   openingHours,
@@ -63,7 +64,7 @@ export default function BookPage() {
           <div className="grid gap-px bg-[rgba(196,189,181,0.22)] lg:grid-cols-[1.08fr_0.92fr]">
             <div className="surface-pane surface-pane-muted">
               <div className="space-y-5">
-                <h2 className="text-[2rem]">Get in touch</h2>
+                <h2 className="section-title">Get in touch</h2>
                 <div className="space-y-4 text-sm leading-7 text-on-surface md:text-base">
                   <p className="flex items-start gap-3">
                     <Phone className="mt-1 size-4 shrink-0 text-secondary" />
@@ -97,20 +98,21 @@ export default function BookPage() {
                     {openingHoursNote}
                   </p>
                 </div>
-                <div className="flex flex-col gap-3 sm:flex-row">
-                  <Button asChild size="lg">
-                    <a href={sitePhoneHref}>
-                      Call now
-                      <Phone />
-                    </a>
-                  </Button>
-                  <Button asChild size="lg" variant="outline">
-                    <a href={siteEmailHref}>
-                      Email the team
-                      <EnvelopeSimple />
-                    </a>
-                  </Button>
-                </div>
+                <SiteActionCard
+                  actions={[
+                    {
+                      href: sitePhoneHref,
+                      label: "Call now",
+                      icon: <Phone className="size-4" />,
+                    },
+                    {
+                      href: siteEmailHref,
+                      label: "Email the team",
+                      icon: <EnvelopeSimple className="size-4" />,
+                    },
+                  ]}
+                  showDivider
+                />
               </div>
             </div>
             <div className="surface-pane bg-[var(--color-surface-lowest)] lg:pt-12">
@@ -122,12 +124,16 @@ export default function BookPage() {
                 <p>Celebration meals that need a little more notice.</p>
                 <p>Work drinks, group meals, and larger bookings.</p>
               </div>
-              <Button asChild size="lg" className="mt-6">
-                <Link href="/events">
-                  Planning something bigger?
-                  <CalendarDots />
-                </Link>
-              </Button>
+              <SiteActionCard
+                className="mt-6"
+                actions={[
+                  {
+                    href: "/events",
+                    label: "Planning something bigger?",
+                    icon: <CalendarDots className="size-4" />,
+                  },
+                ]}
+              />
             </div>
           </div>
         </div>
@@ -152,7 +158,7 @@ export default function BookPage() {
         <div className="surface-frame overflow-hidden">
           <div className="grid gap-px bg-[rgba(196,189,181,0.22)] md:grid-cols-2">
             <div className="surface-pane bg-[var(--color-surface-lowest)]">
-              <h2 className="text-[2rem]">What to include</h2>
+              <h2 className="section-title">What to include</h2>
               <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
                 <p>Your preferred date and arrival time.</p>
                 <p>How many guests are joining you.</p>
@@ -163,7 +169,7 @@ export default function BookPage() {
               </div>
             </div>
             <div className="surface-pane surface-pane-muted lg:pt-12">
-              <h2 className="text-[2rem]">Good to know</h2>
+              <h2 className="section-title">Good to know</h2>
               <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
                 <p>
                   Pop in if you are nearby, or get in touch ahead of time if you
@@ -184,6 +190,31 @@ export default function BookPage() {
           </div>
         </div>
       </StickySplitSection>
+
+      <PageSignoff
+        eyebrow="Ready when you are"
+        title="Reach out in the way that feels quickest and we will take it from there."
+        description="Phone is best when you want an answer straight away. Email works well if you want to send the details over first."
+        body={
+          <p>
+            If you already know the date, the rough time, or the number of
+            guests, send it across and we can help get the table sorted without
+            fuss.
+          </p>
+        }
+        actions={[
+          {
+            href: sitePhoneHref,
+            label: "Call to book",
+            icon: <Phone className="size-4" />,
+          },
+          {
+            href: siteEmailHref,
+            label: "Email a booking request",
+            icon: <EnvelopeSimple className="size-4" />,
+          },
+        ]}
+      />
     </main>
   )
 }

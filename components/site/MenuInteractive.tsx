@@ -67,7 +67,7 @@ function HighlightMatch({ text, term }: { text: string; term: string }) {
   return (
     <>
       {text.slice(0, idx)}
-      <mark className="bg-[var(--color-on-tertiary-container)]/30 text-inherit rounded-sm px-0.5">
+      <mark className="rounded-sm bg-[var(--color-on-tertiary-container)]/30 px-0.5 text-inherit">
         {text.slice(idx, idx + term.length)}
       </mark>
       {text.slice(idx + term.length)}
@@ -93,29 +93,26 @@ export function MenuInteractive({ categories }: MenuInteractiveProps) {
   const stickySentinelRef = useRef<HTMLDivElement>(null)
   const backToTopSentinelRef = useRef<HTMLDivElement>(null)
 
-  const handleCategoryClick = useCallback(
-    (slug: string | null) => {
-      setIsTransitioning(true)
-      setActiveCategory(slug)
-      window.history.replaceState(null, "", slug ? `#${slug}` : " ")
+  const handleCategoryClick = useCallback((slug: string | null) => {
+    setIsTransitioning(true)
+    setActiveCategory(slug)
+    window.history.replaceState(null, "", slug ? `#${slug}` : " ")
 
-      requestAnimationFrame(() => {
-        contentRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
-        setTimeout(() => setIsTransitioning(false), 350)
+    requestAnimationFrame(() => {
+      contentRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
+      setTimeout(() => setIsTransitioning(false), 350)
 
-        const selector = slug
-          ? `[data-category="${slug}"]`
-          : "[data-category=\"all\"]"
-        const pill = scrollContainerRef.current?.querySelector(selector)
-        pill?.scrollIntoView({
-          behavior: "smooth",
-          block: "nearest",
-          inline: "center",
-        })
+      const selector = slug
+        ? `[data-category="${slug}"]`
+        : '[data-category="all"]'
+      const pill = scrollContainerRef.current?.querySelector(selector)
+      pill?.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center",
       })
-    },
-    []
-  )
+    })
+  }, [])
 
   const toggleDietaryFilter = useCallback((filter: DietaryFilter) => {
     setDietaryFilters((prev) => {
@@ -129,7 +126,8 @@ export function MenuInteractive({ categories }: MenuInteractiveProps) {
     })
   }, [])
 
-  const hasActiveFilters = searchTerm.trim().length > 0 || dietaryFilters.size > 0
+  const hasActiveFilters =
+    searchTerm.trim().length > 0 || dietaryFilters.size > 0
 
   const visibleCategories = useMemo(() => {
     const base =
@@ -297,7 +295,7 @@ export function MenuInteractive({ categories }: MenuInteractiveProps) {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search dishes…"
                 aria-label="Search dishes"
-                className="w-full rounded-xl bg-[var(--color-surface-highest)] px-4 py-2.5 text-sm text-on-background placeholder:text-on-surface/50 transition-colors duration-[var(--duration-micro)] ease-[var(--easing-standard)] border-transparent outline-none focus:border-[var(--color-outline-variant)] focus:bg-[var(--color-surface-lowest)]"
+                className="w-full rounded-xl border-transparent bg-[var(--color-surface-highest)] px-4 py-2.5 text-sm text-on-background transition-colors duration-[var(--duration-micro)] ease-[var(--easing-standard)] outline-none placeholder:text-on-surface/50 focus:border-[var(--color-outline-variant)] focus:bg-[var(--color-surface-lowest)]"
               />
               <div className="flex flex-wrap items-center gap-2">
                 {DIETARY_FILTERS.map((filter) => {
@@ -329,7 +327,7 @@ export function MenuInteractive({ categories }: MenuInteractiveProps) {
                     <button
                       type="button"
                       onClick={clearAllFilters}
-                      className="text-xs font-semibold text-secondary hover:text-secondary/80 transition-colors"
+                      className="text-xs font-semibold text-secondary transition-colors hover:text-secondary/80"
                     >
                       Clear all
                     </button>
@@ -390,11 +388,17 @@ export function MenuInteractive({ categories }: MenuInteractiveProps) {
                           <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
                             <div className="min-w-0 space-y-2">
                               <h3 className="font-sans text-lg font-semibold text-secondary">
-                                <HighlightMatch text={item.name} term={searchTerm} />
+                                <HighlightMatch
+                                  text={item.name}
+                                  term={searchTerm}
+                                />
                               </h3>
                               {item.description ? (
                                 <p className="text-sm leading-6 text-on-surface">
-                                  <HighlightMatch text={item.description} term={searchTerm} />
+                                  <HighlightMatch
+                                    text={item.description}
+                                    term={searchTerm}
+                                  />
                                 </p>
                               ) : null}
                             </div>
@@ -433,10 +437,10 @@ export function MenuInteractive({ categories }: MenuInteractiveProps) {
         type="button"
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         className={cn(
-          "fixed bottom-6 right-6 z-40 rounded-full bg-[var(--color-tertiary-container)] text-[var(--color-on-tertiary-container)] px-4 py-2.5 text-xs font-semibold tracking-wide shadow-lg transition-all duration-[var(--duration-transition)] ease-[var(--easing-standard)]",
+          "fixed right-6 bottom-6 z-40 rounded-full bg-[var(--color-tertiary-container)] px-4 py-2.5 text-xs font-semibold tracking-wide text-[var(--color-on-tertiary-container)] shadow-lg transition-all duration-[var(--duration-transition)] ease-[var(--easing-standard)]",
           showBackToTop
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 translate-y-4 pointer-events-none"
+            ? "translate-y-0 opacity-100"
+            : "pointer-events-none translate-y-4 opacity-0"
         )}
       >
         ↑ Back to top

@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 
+import { PageSignoff } from "@/components/site/PageSignoff"
 import { PageHero } from "@/components/site/PageHero"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import { StickySplitSection } from "@/components/site/StickySplitSection"
@@ -127,7 +128,7 @@ export default function PrivacyPage() {
                     : "surface-pane surface-pane-muted"
                 }
               >
-                <h2 className="text-[2rem]">{section.title}</h2>
+                <h2 className="section-title">{section.title}</h2>
                 <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
                   {section.paragraphs.map((paragraph) => (
                     <p key={paragraph}>{paragraph}</p>
@@ -138,6 +139,29 @@ export default function PrivacyPage() {
           </div>
         </div>
       </StickySplitSection>
+
+      <PageSignoff
+        eyebrow="Questions?"
+        title="If you want to ask about your information, the easiest thing is to contact the pub directly."
+        description="We keep this page plain on purpose, and we will do the same if you get in touch with a privacy question."
+        body={
+          <p>
+            Whether you want to correct something, ask what we hold, or simply
+            check how a booking detail is used, we are happy to point you in the
+            right direction.
+          </p>
+        }
+        actions={[
+          {
+            href: siteEmailHref,
+            label: "Email a privacy question",
+          },
+          {
+            href: sitePhoneHref,
+            label: "Call the pub",
+          },
+        ]}
+      />
     </main>
   )
 }

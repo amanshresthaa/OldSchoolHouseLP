@@ -47,7 +47,7 @@ export function SiteFooter() {
 
   return (
     <footer className="bg-primary text-white">
-      <div className="mx-auto grid max-w-7xl gap-10 px-5 py-12 sm:px-6 md:px-8 lg:grid-cols-[1.25fr_0.8fr_0.85fr_0.9fr]">
+      <div className="section-shell grid gap-10 py-12 lg:grid-cols-[1.25fr_0.8fr_0.85fr_0.9fr]">
         <div className="space-y-5">
           <div className="space-y-2">
             <p className="text-xs font-semibold tracking-[0.22em] text-[var(--color-on-tertiary-container)] uppercase">
@@ -57,7 +57,7 @@ export function SiteFooter() {
               A traditional pub and Nepalese kitchen for Stony Stratford.
             </h2>
           </div>
-          <div className="space-y-3 text-sm leading-7 text-white/74">
+          <div className="space-y-3 text-sm leading-7 text-white/72">
             <p>{siteAddress}</p>
             <p className="break-words">
               <a className="transition hover:text-white" href={sitePhoneHref}>
@@ -94,7 +94,7 @@ export function SiteFooter() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={item.label}
-                  className="inline-flex size-11 items-center justify-center rounded-full border border-white/10 bg-white/6 text-white/74 transition hover:-translate-y-0.5 hover:text-white"
+                  className="inline-flex size-11 items-center justify-center rounded-full border border-white/10 bg-white/6 text-white/72 transition hover:-translate-y-0.5 hover:text-white"
                 >
                   <Icon className="size-5" />
                 </a>
@@ -106,7 +106,7 @@ export function SiteFooter() {
           <p className="text-xs font-semibold tracking-[0.22em] text-[var(--color-on-tertiary-container)] uppercase">
             Explore
           </p>
-          <nav className="grid gap-3 text-sm text-white/74">
+          <nav className="grid gap-3 text-sm text-white/72">
             {siteNav.map((item) => (
               <Link
                 key={item.href}
@@ -122,7 +122,7 @@ export function SiteFooter() {
           <p className="text-xs font-semibold tracking-[0.22em] text-[var(--color-on-tertiary-container)] uppercase">
             Menus & info
           </p>
-          <nav className="grid gap-3 text-sm text-white/74">
+          <nav className="grid gap-3 text-sm text-white/72">
             {siteResources.map((item) => (
               <Link
                 key={item.href}
@@ -147,7 +147,7 @@ export function SiteFooter() {
           <p className="text-xs font-semibold tracking-[0.22em] text-[var(--color-on-tertiary-container)] uppercase">
             Visit
           </p>
-          <div className="space-y-3 text-sm text-white/74">
+          <div className="space-y-3 text-sm text-white/72">
             <p className="flex items-start gap-3">
               <Clock className="mt-0.5 size-4 shrink-0 text-[var(--color-on-tertiary-container)]" />
               <span>{openingHours[0].hours}</span>
@@ -176,8 +176,10 @@ export function SiteFooter() {
           </div>
         </div>
       </div>
-      <div className="border-t border-white/8 px-5 py-4 text-center text-xs tracking-[0.16em] text-white/55 uppercase sm:px-6 md:px-8">
-        {siteName} · London Road · Stony Stratford · Milton Keynes
+      <div className="border-t border-white/8 py-4 text-xs tracking-[0.16em] text-white/55 uppercase">
+        <div className="section-shell text-center">
+          {siteName} · London Road · Stony Stratford · Milton Keynes
+        </div>
       </div>
     </footer>
   )

@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import Link from "next/link"
 import {
   Clock,
   EnvelopeSimple,
@@ -7,12 +6,14 @@ import {
   Phone,
 } from "@phosphor-icons/react/dist/ssr"
 
+import { EditorialBreak } from "@/components/site/EditorialBreak"
 import { InlineBookingCta } from "@/components/site/InlineBookingCta"
 import { MapEmbed } from "@/components/site/MapEmbed"
+import { PageSignoff } from "@/components/site/PageSignoff"
 import { PageHero } from "@/components/site/PageHero"
 import { SectionHeading } from "@/components/site/SectionHeading"
+import { SiteActionCard } from "@/components/site/SiteActionCard"
 import { StickySplitSection } from "@/components/site/StickySplitSection"
-import { Button } from "@/components/ui/button"
 import {
   accessibilityNotes,
   arrivalNotes,
@@ -94,16 +95,19 @@ export default function FindUsPage() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <Button asChild size="lg">
-                <a href={mapHref} target="_blank" rel="noreferrer">
-                  Open Google Maps
-                </a>
-              </Button>
-              <Button asChild size="lg" variant="outline">
-                <a href={sitePhoneHref}>Call for directions</a>
-              </Button>
-            </div>
+            <SiteActionCard
+              actions={[
+                {
+                  href: mapHref,
+                  label: "Open Google Maps",
+                },
+                {
+                  href: sitePhoneHref,
+                  label: "Call for directions",
+                },
+              ]}
+              showDivider
+            />
           </div>
         }
       >
@@ -130,6 +134,8 @@ export default function FindUsPage() {
         description="If you know you are joining us, book ahead and arrive with everything nicely sorted."
       />
 
+      <EditorialBreak quote="Easy to find, easy to settle into, and easy to come back to." />
+
       <StickySplitSection
         className="bg-[var(--color-surface-low)]"
         intro={
@@ -154,7 +160,7 @@ export default function FindUsPage() {
         <div className="surface-frame overflow-hidden">
           <div className="grid gap-px bg-[rgba(196,189,181,0.22)]">
             <div className="surface-pane bg-[var(--color-surface-lowest)]">
-              <h2 className="text-[2rem]">Opening hours</h2>
+              <h2 className="section-title">Opening hours</h2>
               <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
                 {openingHours.map((item) => (
                   <div
@@ -171,7 +177,7 @@ export default function FindUsPage() {
               </div>
             </div>
             <div className="surface-pane surface-pane-muted lg:pt-12">
-              <h2 className="text-[2rem]">Need a hand?</h2>
+              <h2 className="section-title">Need a hand?</h2>
               <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
                 <p>
                   If you are on your way, call ahead and we will help you find
@@ -247,13 +253,42 @@ export default function FindUsPage() {
                 </a>
                 .
               </p>
-              <Button asChild size="lg">
-                <Link href="/book">Book a table</Link>
-              </Button>
+              <SiteActionCard
+                actions={[
+                  {
+                    href: "/book",
+                    label: "Book a table",
+                  },
+                ]}
+              />
             </div>
           </div>
         </div>
       </StickySplitSection>
+
+      <PageSignoff
+        eyebrow="Finish planning"
+        title="Once the route is sorted, the easiest next step is deciding whether to book ahead."
+        description="Open the map if you are checking the journey, or lock the table in now if you already know you are coming."
+        body={
+          <p>
+            If you need a quick answer before you set off, give the pub a ring.
+            If you are already sure about the visit, booking ahead keeps the
+            rest simple.
+          </p>
+        }
+        actions={[
+          {
+            href: "/book",
+            label: "Book a table",
+          },
+          {
+            href: mapHref,
+            label: "Open the map",
+            icon: <MapPin className="size-4" />,
+          },
+        ]}
+      />
     </main>
   )
 }

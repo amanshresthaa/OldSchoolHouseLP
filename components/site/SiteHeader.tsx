@@ -13,8 +13,10 @@ function isCurrentPath(pathname: string, href: string) {
   return href === "/" ? pathname === href : pathname.startsWith(href)
 }
 
-interface HeaderNavLinkProps
-  extends Omit<React.ComponentProps<typeof Link>, "href"> {
+interface HeaderNavLinkProps extends Omit<
+  React.ComponentProps<typeof Link>,
+  "href"
+> {
   active: boolean
   item: NavItem
 }
