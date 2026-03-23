@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Newsreader, Manrope } from "next/font/google"
 
 import "./globals.css"
+import { CookieBanner } from "@/components/site/CookieBanner"
 import { SiteFooter } from "@/components/site/SiteFooter"
 import { SiteHeader } from "@/components/site/SiteHeader"
 import { StickyBookingBar } from "@/components/site/StickyBookingBar"
@@ -72,6 +73,7 @@ export default function RootLayout({
             <SiteHeader />
             {children}
             <SiteFooter />
+            <CookieBanner />
             <StickyBookingBar />
           </div>
         </ThemeProvider>

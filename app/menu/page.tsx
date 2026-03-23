@@ -1,7 +1,11 @@
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
-import { ForkKnife, Phone } from "@phosphor-icons/react/dist/ssr"
+import {
+  DownloadSimple,
+  ForkKnife,
+  Phone,
+} from "@phosphor-icons/react/dist/ssr"
 
 import { InlineBookingCta } from "@/components/site/InlineBookingCta"
 import { MenuSection } from "@/components/site/MenuSection"
@@ -11,6 +15,7 @@ import { Button } from "@/components/ui/button"
 import {
   drinksHighlights,
   policyNotes,
+  siteMenuPdfHref,
   sitePhone,
   sitePhoneHref,
 } from "@/data/site"
@@ -128,6 +133,17 @@ export default function MenuPage() {
                   .
                 </p>
               </div>
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                <Button asChild size="lg" variant="outline">
+                  <a href={siteMenuPdfHref} download>
+                    Download PDF menu
+                    <DownloadSimple />
+                  </a>
+                </Button>
+                <Button asChild size="lg" variant="outline">
+                  <Link href="/menu-information">Allergens & menu info</Link>
+                </Button>
+              </div>
             </div>
             <div className="surface-pane bg-[var(--color-surface-lowest)] lg:pt-12">
               <h2>Drinks worth asking for</h2>
@@ -147,6 +163,20 @@ export default function MenuPage() {
                   <ForkKnife />
                 </Link>
               </Button>
+              <div className="mt-6 grid gap-3 text-sm leading-7 text-on-surface">
+                <Link
+                  href="/takeaway-menu"
+                  className="text-secondary transition hover:text-secondary/80"
+                >
+                  Looking for collection details instead?
+                </Link>
+                <Link
+                  href="/wakes-menu"
+                  className="text-secondary transition hover:text-secondary/80"
+                >
+                  Planning buffet-style food for a wake?
+                </Link>
+              </div>
             </div>
           </div>
         </div>

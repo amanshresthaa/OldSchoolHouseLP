@@ -55,6 +55,8 @@ export const socialLinks = [
   "https://www.facebook.com/OldSchoolHouseStony/",
   "https://www.instagram.com/oldschoolhousestony/",
 ]
+export const siteMenuPdfHref =
+  "/downloads/old-school-house-menu-placeholder.pdf"
 
 export const siteDescription =
   "Pub favourites, Nepalese cooking, live sport, and a warm welcome in the heart of Stony Stratford, with a front garden, private courtyard, and plenty of reasons to stay a little longer."
@@ -65,6 +67,17 @@ export const siteNav: NavItem[] = [
   { href: "/events", label: "Events" },
   { href: "/find-us", label: "Find Us" },
   { href: "/book", label: "Book" },
+]
+
+export const siteResources: NavItem[] = [
+  { href: "/menu-information", label: "Menu information" },
+  { href: "/takeaway-menu", label: "Takeaway menu" },
+  { href: "/wakes-menu", label: "Wakes menu" },
+]
+
+export const siteLegalLinks: NavItem[] = [
+  { href: "/privacy", label: "Privacy" },
+  { href: "/tos", label: "Terms" },
 ]
 
 export const heroSignals = [
@@ -314,18 +327,18 @@ export const arrivalNotes = [
   "If you need a hand finding us, give the pub a call.",
 ]
 
+export const accessibilityNotes = [
+  "A disabled parking space is available in the on-site car park to help keep arrival simpler.",
+  "If you need help with access, seating, or the easiest way in, call ahead and the team will talk you through it.",
+  "Let us know about mobility needs, prams, or extra space before you travel and we will do our best to make arrival smoother.",
+]
+
 export const openingHours: OpeningHoursItem[] = [
   { label: "Monday to Sunday", hours: "10:00 - 00:30" },
-  { label: "Christmas Eve", hours: "Until 01:30" },
-  { label: "Boxing Day", hours: "Until 01:30" },
-  { label: "New Year's Day", hours: "Until 01:30" },
-  { label: "Bank holiday weekends", hours: "Fri-Mon until 01:30" },
-  {
-    label: "New Year's Eve",
-    hours:
-      "Continuous from the end of NYE hours through to New Year's Day hours",
-  },
 ]
+
+export const openingHoursNote =
+  "Bank holiday and festive hours can vary, so please call if you are travelling for a specific day."
 
 export const policyNotes = [
   "Challenge 25 is in operation for alcohol sales.",
@@ -340,6 +353,7 @@ export const localBusinessSchema = {
   description: siteDescription,
   url: siteUrl,
   image: siteOgImage,
+  hasMenu: `${siteUrl}/menu`,
   servesCuisine: ["British", "Nepalese"],
   acceptsReservations: "True",
   areaServed: ["Stony Stratford", "Milton Keynes"],

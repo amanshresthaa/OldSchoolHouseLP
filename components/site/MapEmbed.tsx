@@ -1,6 +1,15 @@
-import type { ComponentProps } from "react"
+"use client"
 
+import type { ComponentProps } from "react"
+import * as React from "react"
+
+import { Button } from "@/components/ui/button"
 import { mapHref } from "@/data/site"
+import {
+  hasOptionalCookieConsent,
+  readCookieConsent,
+  writeCookieConsent,
+} from "@/lib/consent"
 
 interface MapEmbedProps extends ComponentProps<"div"> {
   title?: string
@@ -10,6 +19,56 @@ export function MapEmbed({
   title = "Map showing The Old School House in Stony Stratford",
   ...props
 }: MapEmbedProps) {
+  const [hasConsent, setHasConsent] = React.useState(false)
+  const [isReady, setIsReady] = React.useState(false)
+
+  React.useEffect(() => {
+    const consent = readCookieConsent(document.cookie)
+
+    setHasConsent(hasOptionalCookieConsent(consent))
+    setIsReady(true)
+  }, [])
+
+  if (!isReady || !hasConsent) {
+    return (
+      <div
+        className="overflow-hidden rounded-3xl bg-[var(--color-surface-highest)]"
+        {...props}
+      >
+        <div className="flex min-h-[22rem] flex-col justify-between gap-6 p-6 md:min-h-[28rem] md:p-8">
+          <div className="max-w-xl space-y-3">
+            <p className="eyebrow">Map privacy</p>
+            <h3 className="text-[2rem] leading-tight text-on-background">
+              Google Maps stays blocked until you allow optional cookies.
+            </h3>
+            <p className="text-sm leading-7 text-on-surface md:text-base">
+              That keeps third-party tracking from loading automatically. You
+              can still open directions in a new tab, or allow the embed just
+              for a more visual route preview.
+            </p>
+          </div>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Button
+              type="button"
+              size="lg"
+              onClick={() => {
+                writeCookieConsent("accepted")
+                setHasConsent(true)
+              }}
+            >
+              Allow map embed
+            </Button>
+            <Button asChild size="lg" variant="outline">
+              <a href={mapHref} target="_blank" rel="noreferrer">
+                Open directions instead
+              </a>
+            </Button>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div
       className="overflow-hidden rounded-3xl bg-[var(--color-surface-highest)]"

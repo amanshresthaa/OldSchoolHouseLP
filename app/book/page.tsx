@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button"
 import {
   bookingNotes,
   openingHours,
+  openingHoursNote,
   siteEmail,
   siteEmailHref,
   sitePhone,
@@ -86,6 +87,9 @@ export default function BookPage() {
                     <span>
                       {openingHours[0].label}: {openingHours[0].hours}
                     </span>
+                  </p>
+                  <p className="text-sm text-on-surface/78">
+                    {openingHoursNote}
                   </p>
                 </div>
                 <div className="flex flex-col gap-3 sm:flex-row">

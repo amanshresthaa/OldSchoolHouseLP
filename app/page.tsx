@@ -17,6 +17,7 @@ import {
 import { InlineBookingCta } from "@/components/site/InlineBookingCta"
 import { MenuCategoryScroller } from "@/components/site/MenuCategoryScroller"
 import { MapEmbed } from "@/components/site/MapEmbed"
+import { OpenStatusBadge } from "@/components/site/OpenStatusBadge"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import { Button } from "@/components/ui/button"
 import {
@@ -216,15 +217,19 @@ export default function Page() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(212,160,23,0.3),transparent_32%)]" />
         <div className="relative flex min-h-[calc(100svh-4.25rem)] flex-col justify-end px-5 py-10 sm:px-6 md:px-8 md:py-14">
           <div className="max-w-3xl space-y-6">
-            <p className="hero-entrance night-kicker">{siteName}</p>
+            <div className="hero-entrance flex flex-wrap items-center gap-3">
+              <p className="night-kicker">{siteName}</p>
+              <OpenStatusBadge />
+            </div>
             <div className="hero-entrance-delay-1 space-y-4">
               <h1 className="display-copy max-w-4xl text-white">
-                The Old School House
+                The Old School House pub and Nepalese restaurant in Stony
+                Stratford.
               </h1>
-              <h2 className="max-w-2xl text-2xl leading-tight text-white md:text-3xl">
-                Traditional pub, Nepalese kitchen, and a warm welcome on London
-                Road.
-              </h2>
+              <p className="max-w-2xl text-2xl leading-tight text-white md:text-3xl">
+                Traditional pub comfort, Nepalese cooking, and a warm welcome on
+                London Road.
+              </p>
             </div>
             <p className="hero-entrance-delay-2 max-w-2xl text-base leading-7 text-white/78 md:text-lg">
               Come in for pub favourites, stay for Nepalese dishes, and settle

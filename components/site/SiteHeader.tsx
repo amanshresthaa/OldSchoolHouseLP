@@ -16,10 +16,61 @@ function isCurrentPath(pathname: string, href: string) {
 export function SiteHeader() {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = React.useState(false)
+  const dialogRef = React.useRef<HTMLDivElement>(null)
+  const closeButtonRef = React.useRef<HTMLButtonElement>(null)
 
   React.useEffect(() => {
     setIsOpen(false)
   }, [pathname])
+
+  React.useEffect(() => {
+    if (!isOpen) {
+      document.body.style.overflow = ""
+      return
+    }
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+    closeButtonRef.current?.focus()
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault()
+        setIsOpen(false)
+        return
+      }
+
+      if (event.key !== "Tab") {
+        return
+      }
+
+      const focusableElements = dialogRef.current?.querySelectorAll<
+        HTMLButtonElement | HTMLAnchorElement
+      >('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])')
+
+      if (!focusableElements?.length) {
+        return
+      }
+
+      const firstElement = focusableElements[0]
+      const lastElement = focusableElements[focusableElements.length - 1]
+
+      if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault()
+        lastElement.focus()
+      } else if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault()
+        firstElement.focus()
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown)
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+      document.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [isOpen])
 
   return (
     <>
@@ -54,12 +105,14 @@ export function SiteHeader() {
               <Link href="/book">Book a table</Link>
             </Button>
           </nav>
-          <div className="shrink-0 flex items-center gap-2 md:hidden">
+          <div className="flex shrink-0 items-center gap-2 md:hidden">
             <Button asChild size="sm">
               <Link href="/book">Book</Link>
             </Button>
             <button
               type="button"
+              aria-controls="mobile-site-navigation"
+              aria-expanded={isOpen}
               aria-label={
                 isOpen ? "Close navigation menu" : "Open navigation menu"
               }
@@ -72,10 +125,20 @@ export function SiteHeader() {
         </div>
       </header>
       {isOpen ? (
-        <div className="fixed inset-0 z-50 bg-primary/96 px-5 py-6 text-white backdrop-blur-md md:hidden">
+        <div
+          ref={dialogRef}
+          id="mobile-site-navigation"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="mobile-site-navigation-title"
+          className="fixed inset-0 z-50 overflow-y-auto bg-primary/96 px-5 py-6 text-white backdrop-blur-md md:hidden"
+        >
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0 flex-1 pr-2">
-              <p className="text-[clamp(1.6rem,8vw,2.2rem)] leading-[0.95] text-white">
+              <p
+                id="mobile-site-navigation-title"
+                className="text-[clamp(1.6rem,8vw,2.2rem)] leading-[0.95] text-white"
+              >
                 {siteName}
               </p>
               <p className="pt-2 text-[0.58rem] leading-[1.35] font-semibold tracking-[0.14em] text-[var(--color-on-tertiary-container)] uppercase">
@@ -83,6 +146,7 @@ export function SiteHeader() {
               </p>
             </div>
             <button
+              ref={closeButtonRef}
               type="button"
               aria-label="Close navigation menu"
               onClick={() => setIsOpen(false)}
@@ -91,7 +155,7 @@ export function SiteHeader() {
               <X size={20} />
             </button>
           </div>
-          <nav className="mt-12 grid gap-5">
+          <nav aria-label="Mobile navigation" className="mt-12 grid gap-5">
             {siteNav.map((item) => {
               const active = isCurrentPath(pathname, item.href)
 

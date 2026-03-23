@@ -13,15 +13,18 @@ import { PageHero } from "@/components/site/PageHero"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import { Button } from "@/components/ui/button"
 import {
+  accessibilityNotes,
   arrivalNotes,
   mapHref,
   openingHours,
+  openingHoursNote,
   siteAddress,
   siteEmail,
   siteEmailHref,
   sitePhone,
   sitePhoneHref,
 } from "@/data/site"
+import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
   title: "Find Us in Stony Stratford",
@@ -147,6 +150,9 @@ export default function FindUsPage() {
                     <span className="text-on-background">{item.hours}</span>
                   </div>
                 ))}
+                <p className="pt-2 text-sm text-on-surface/78">
+                  {openingHoursNote}
+                </p>
               </div>
             </div>
             <div className="surface-pane surface-pane-muted lg:pt-12">
@@ -166,6 +172,35 @@ export default function FindUsPage() {
                   </a>{" "}
                   before you head over.
                 </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-background py-16 md:py-20">
+        <div className="section-shell">
+          <div className="surface-frame overflow-hidden">
+            <div className="grid gap-px bg-[rgba(196,189,181,0.22)] lg:grid-cols-[0.72fr_1.28fr]">
+              <div className="surface-pane surface-pane-muted">
+                <SectionHeading
+                  eyebrow="Accessibility"
+                  title="Arrival support should feel straightforward."
+                  description="If you need extra help with parking, access, or where to head when you arrive, give the team a ring before you set off."
+                />
+              </div>
+              <div className="grid gap-px bg-[rgba(196,189,181,0.18)] md:grid-cols-3">
+                {accessibilityNotes.map((note, index) => (
+                  <article
+                    key={note}
+                    className={cn(
+                      "surface-pane bg-[var(--color-surface-lowest)] text-sm leading-7 text-on-surface md:text-base",
+                      index === 1 && "surface-pane-muted"
+                    )}
+                  >
+                    {note}
+                  </article>
+                ))}
               </div>
             </div>
           </div>
