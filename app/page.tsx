@@ -204,7 +204,8 @@ export default function Page() {
         }}
       />
 
-      <section className="relative min-h-[calc(100svh-4.25rem)] overflow-hidden bg-primary text-white">
+      <section className="relative overflow-hidden bg-primary text-white">
+        {/* Full-bleed background image */}
         <Image
           src={heroImage}
           alt="A table spread at The Old School House with Nepalese dishes, pub plates, and drinks."
@@ -213,85 +214,95 @@ export default function Page() {
           className="object-cover object-center"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,27,14,0.28),rgba(6,27,14,0.88)_58%,rgba(6,27,14,0.96))]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(212,160,23,0.3),transparent_32%)]" />
-        <div className="relative flex min-h-[calc(100svh-4.25rem)] flex-col justify-end px-5 py-10 sm:px-6 md:px-8 md:py-14">
-          <div className="max-w-3xl space-y-6">
-            <div className="hero-entrance flex flex-wrap items-center gap-3">
-              <p className="night-kicker">{siteName}</p>
-              <OpenStatusBadge />
-            </div>
-            <div className="hero-entrance-delay-1 space-y-4">
-              <h1 className="display-copy max-w-4xl text-white">
-                The Old School House pub and Nepalese restaurant in Stony
-                Stratford.
-              </h1>
-              <p className="max-w-2xl text-2xl leading-tight text-white md:text-3xl">
-                Traditional pub comfort, Nepalese cooking, and a warm welcome on
-                London Road.
-              </p>
-            </div>
-            <p className="hero-entrance-delay-2 max-w-2xl text-base leading-7 text-white/78 md:text-lg">
-              Come in for pub favourites, stay for Nepalese dishes, and settle
-              into a bar, front garden, and courtyard built for longer evenings.
-            </p>
-            <div className="hero-entrance-delay-2 flex flex-col gap-3 sm:flex-row">
-              <Button asChild size="lg">
-                <Link href="/book">
-                  Book a table
-                  <CalendarDots />
-                </Link>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="border-white/12 bg-black/16 text-white hover:bg-black/24 hover:text-white"
-              >
-                <Link href="/menu">
-                  View menu
-                  <ArrowRight />
-                </Link>
-              </Button>
-            </div>
-            <p className="hero-entrance-delay-3 max-w-2xl text-sm leading-7 text-[var(--color-on-tertiary-container)]">
-              Open daily from 10:00 to 00:30 · Stony Stratford, Milton Keynes ·
-              01908 561936
-            </p>
-          </div>
-        </div>
-      </section>
 
-      <section className="bg-[var(--color-surface-low)] py-3">
-        <div className="section-shell">
-          <div className="surface-frame relative overflow-hidden">
-            <div className="flex items-center">
-              <div className="shrink-0 bg-secondary px-3 py-2.5 text-[0.52rem] font-semibold tracking-[0.12em] text-white uppercase md:px-4 md:text-[0.58rem]">
-                At a glance
+        {/* Layered overlays — depth gradient + saffron accent + burgundy bloom */}
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,27,14,0.18)_0%,rgba(6,27,14,0.52)_30%,rgba(6,27,14,0.92)_62%,rgba(6,27,14,0.98)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_40%_at_75%_5%,_rgba(212,160,23,0.28),_transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_60%_at_0%_100%,_rgba(175,43,62,0.14),_transparent_50%)]" />
+
+        {/* Top saffron hairline */}
+        <div className="absolute top-0 right-0 left-0 z-10 h-px bg-gradient-to-r from-transparent via-[var(--color-on-tertiary-container)]/30 to-transparent" />
+
+        <div className="relative flex min-h-[calc(100svh-4.25rem)] flex-col">
+          {/* Top bar */}
+          <div className="mx-auto w-full max-w-[84rem] px-5 sm:px-6 md:px-8">
+            <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/8 py-5">
+              <div className="hero-entrance flex items-center gap-3">
+                <span className="inline-block size-1.5 rounded-full bg-[var(--color-on-tertiary-container)]" />
+                <p className="text-[0.68rem] font-semibold tracking-[0.28em] text-[var(--color-on-tertiary-container)] uppercase">
+                  {siteName}
+                </p>
               </div>
-              <div className="relative min-w-0 flex-1">
-                <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-[linear-gradient(90deg,var(--color-surface-lowest),rgba(255,255,255,0))] md:w-12" />
-                <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-[linear-gradient(270deg,var(--color-surface-lowest),rgba(255,255,255,0))] md:w-12" />
-                <div className="rail-marquee py-3 text-sm font-semibold tracking-[0.14em] text-on-surface uppercase md:text-[0.82rem]">
-                  <div className="rail-marquee-track">
-                    {[0, 1].map((groupIndex) => (
-                      <div
-                        key={groupIndex}
-                        className="rail-marquee-group"
-                        aria-hidden={groupIndex === 1}
+              <div className="hero-entrance">
+                <OpenStatusBadge />
+              </div>
+            </div>
+          </div>
+
+          {/* Main content — pushed to bottom */}
+          <div className="mt-auto">
+            <div className="mx-auto max-w-[84rem] px-5 sm:px-6 md:px-8">
+              {/* Two-column layout on large screens */}
+              <div className="grid gap-8 py-10 md:py-14 lg:grid-cols-[1.2fr_0.8fr] lg:items-end lg:gap-16 lg:py-16">
+                {/* Left column — headline + subline */}
+                <div className="hero-entrance-delay-1 space-y-5">
+                  <h1 className="display-copy max-w-[16ch] text-white">
+                    The Old School House.
+                  </h1>
+                  <p className="max-w-2xl font-heading text-2xl leading-snug text-white/88 md:text-3xl md:leading-snug">
+                    Traditional pub comfort, Nepalese cooking, and a warm
+                    welcome on London Road.
+                  </p>
+                </div>
+
+                {/* Right column — description, CTA, meta */}
+                <div className="hero-entrance-delay-2 space-y-6 lg:pb-2">
+                  <p className="max-w-lg text-base leading-7 text-white/70 md:text-lg md:leading-8">
+                    Come in for pub favourites, stay for Nepalese dishes, and
+                    settle into a bar, front garden, and courtyard built for
+                    longer evenings.
+                  </p>
+
+                  {/* CTA block — frosted glass card */}
+                  <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-4 backdrop-blur-md sm:p-5">
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                      <Link
+                        href="/book"
+                        className="group/cta inline-flex h-12 w-full items-center justify-center gap-2.5 rounded-xl bg-[linear-gradient(135deg,#af2b3e,#8f1f2e)] px-6 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(175,43,62,0.3)] transition-all duration-[var(--duration-micro)] ease-[var(--easing-standard)] hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(175,43,62,0.4)] hover:brightness-110 active:translate-y-px sm:w-auto"
                       >
-                        {proofPoints.map((point) => (
-                          <div
-                            key={`${groupIndex}-${point.title}`}
-                            className="flex items-center gap-3 px-4 whitespace-nowrap md:px-5"
-                          >
-                            <span className="text-secondary">/</span>
-                            <span>{point.title}</span>
-                          </div>
-                        ))}
-                      </div>
-                    ))}
+                        Book a table
+                        <CalendarDots className="size-4" />
+                      </Link>
+                      <span className="hidden h-6 w-px bg-white/16 sm:block" />
+                      <Link
+                        href="/menu"
+                        className="group/cta2 inline-flex h-12 w-full items-center justify-center gap-2.5 rounded-xl border border-white/12 bg-white/[0.06] px-6 text-sm font-semibold text-white/88 transition-all duration-[var(--duration-micro)] ease-[var(--easing-standard)] hover:-translate-y-0.5 hover:bg-white/12 hover:text-white active:translate-y-px sm:w-auto"
+                      >
+                        View menu
+                        <ArrowRight className="size-4 transition-transform duration-[var(--duration-micro)] ease-[var(--easing-standard)] group-hover/cta2:translate-x-0.5" />
+                      </Link>
+                    </div>
                   </div>
+                </div>
+              </div>
+
+              {/* Bottom info strip */}
+              <div className="hero-entrance-delay-3 border-t border-white/8 py-4">
+                <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[0.72rem] font-medium tracking-wide text-[var(--color-on-tertiary-container)]/80">
+                  <span className="inline-flex items-center gap-1.5">
+                    <Clock className="size-3.5" />
+                    Open daily 10:00–00:30
+                  </span>
+                  <span className="hidden size-1 rounded-full bg-[var(--color-on-tertiary-container)]/40 sm:inline-block" />
+                  <span className="inline-flex items-center gap-1.5">
+                    <MapPin className="size-3.5" />
+                    Stony Stratford, Milton Keynes
+                  </span>
+                  <span className="hidden size-1 rounded-full bg-[var(--color-on-tertiary-container)]/40 sm:inline-block" />
+                  <span className="inline-flex items-center gap-1.5">
+                    <Phone className="size-3.5" />
+                    {sitePhone}
+                  </span>
                 </div>
               </div>
             </div>
