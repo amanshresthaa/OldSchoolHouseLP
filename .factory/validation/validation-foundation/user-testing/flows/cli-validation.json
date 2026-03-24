@@ -1,0 +1,86 @@
+{
+  "surface": "cli",
+  "toolsUsed": ["Read", "LS", "Glob", "Grep", "Execute"],
+  "assertions": [
+    {
+      "id": "VAL-FOUNDATION-001",
+      "status": "pass",
+      "reason": "The committed Husky pre-commit hook delegates to pnpm precommit:check, and a staged invalid TypeScript proof file caused lint-staged/ESLint to fail before commit creation with actionable output; the same hook path passed cleanly with no staged files and typecheck completed.",
+      "evidence": [
+        "file:.husky/pre-commit -> pnpm precommit:check",
+        "file:package.json scripts precommit:lint-staged, precommit:typecheck, precommit:check, lint-staged",
+        "terminal:negative proof via HUSKY=1 .husky/pre-commit failed on staged .factory/validation/validation-foundation/user-testing/flows/.cli-precommit-proof.ts with @typescript-eslint/no-unused-expressions warning and exit code 1",
+        "terminal:pnpm precommit:check passed with no staged files and completed pnpm typecheck",
+        "evidence: /Users/amankumarshrestha/.factory/missions/c4e99167-53fb-4194-b991-8a653cfe4bb9/evidence/validation-foundation/cli-validation/VAL-FOUNDATION-001-negative-proof.txt"
+      ]
+    },
+    {
+      "id": "VAL-FOUNDATION-002",
+      "status": "pass",
+      "reason": "The hook body contains only pnpm precommit:check, and package.json exposes the canonical named commands behind that hook. Repository search did not reveal conflicting duplicate committed hook definitions for the active pre-commit path.",
+      "evidence": [
+        "file:.husky/pre-commit -> #!/usr/bin/env sh && pnpm precommit:check",
+        "file:package.json -> precommit:lint-staged, precommit:typecheck, precommit:check",
+        "terminal:pnpm precommit:check output showed pnpm precommit:lint-staged then pnpm precommit:typecheck",
+        "file-search: Glob found committed pre-commit files under .husky with active hook at .husky/pre-commit and no alternate package.json hook definitions"
+      ]
+    },
+    {
+      "id": "VAL-FOUNDATION-003",
+      "status": "pass",
+      "reason": "package.json exposes dedicated readiness commands for dead code, duplicate code, and tech debt, each backed by committed config or scripts and each returning deterministic local exit codes.",
+      "evidence": [
+        "file:package.json -> readiness:dead-code, readiness:duplicate-code, readiness:tech-debt, readiness:scan",
+        "file:knip.json",
+        "file:jscpd.json",
+        "file:scripts/readiness/tech-debt-scan.mjs",
+        "terminal:pnpm readiness:dead-code EXIT_CODE:0",
+        "terminal:pnpm readiness:duplicate-code EXIT_CODE:0",
+        "terminal:pnpm readiness:tech-debt EXIT_CODE:0"
+      ]
+    },
+    {
+      "id": "VAL-FOUNDATION-004",
+      "status": "pass",
+      "reason": "The negative pre-commit/readiness-style proof produced actionable file and line references, and passing readiness scans reported clear summaries. Enabled scan config also shows explicit thresholds and formats.",
+      "evidence": [
+        "terminal:failing staged proof referenced /Users/amankumarshrestha/LapenInns Project/OldSchoolHouseLP/.factory/validation/validation-foundation/user-testing/flows/.cli-precommit-proof.ts line 1:1 with rule @typescript-eslint/no-unused-expressions",
+        "file:jscpd.json -> threshold/minLines/minTokens/reporters",
+        "file:knip.json -> entry/project/ignore configuration",
+        "terminal:pnpm readiness:duplicate-code passing output summarized analyzed files and 0 clones",
+        "terminal:pnpm readiness:tech-debt passing output reported no TODO/FIXME/HACK/XXX markers"
+      ]
+    },
+    {
+      "id": "VAL-FOUNDATION-007",
+      "status": "pass",
+      "reason": "The committed validation workflow triggers on pull_request and pushes to main, and it runs lint, typecheck, readiness scans, unit/config smoke tests, browser smoke tests, and production build as required gates.",
+      "evidence": [
+        "file:.github/workflows/validation.yml -> on: pull_request and push branches main",
+        "file:.github/workflows/validation.yml -> Run lint, Run typecheck, Run readiness scans, Run unit/config smoke tests, Run browser smoke tests, Run production build",
+        "terminal:local reproduction commands succeeded for pnpm lint, pnpm typecheck, pnpm test:unit, and readiness scan subcommands"
+      ]
+    },
+    {
+      "id": "VAL-FOUNDATION-008",
+      "status": "pass",
+      "reason": "CI steps map directly to committed package scripts and local service guidance. Local reproduction confirmed the same canonical commands are runnable outside CI.",
+      "evidence": [
+        "file:package.json -> lint, typecheck, readiness:scan, test:unit, test:browser, build",
+        "file:.github/workflows/validation.yml -> each validation step uses pnpm <script-name>",
+        "file:.factory/services.yaml -> canonical install/lint/typecheck/test/build commands",
+        "file:playwright.config.ts -> browser smoke uses committed webServer command pnpm dev:smoke at http://127.0.0.1:3001",
+        "terminal:local reproductions succeeded for pnpm lint, pnpm typecheck, pnpm precommit:check, pnpm readiness:dead-code, pnpm readiness:duplicate-code, pnpm readiness:tech-debt, pnpm test:unit"
+      ]
+    }
+  ],
+  "frictions": [
+    {
+      "description": "The global ~/.factory/library/user-testing.md path referenced by the mission prompt did not exist in this environment; the equivalent committed repo copy at .factory/library/user-testing.md was used instead.",
+      "resolved": true,
+      "resolution": "Read the repository-local user-testing guidance file and followed its CLI surface instructions."
+    }
+  ],
+  "blockers": [],
+  "summary": "Validated 6 CLI assertions for validation-foundation: all 6 passed. Verified canonical pre-commit, readiness scan, and CI command mappings with local command runs, including a reversible failing staged-file proof that the pre-commit gate blocks invalid changes."
+}

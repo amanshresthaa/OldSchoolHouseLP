@@ -1,0 +1,43 @@
+{
+  "milestone": "validation-foundation",
+  "round": 1,
+  "status": "pass",
+  "assertionsSummary": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "blocked": 0
+  },
+  "passedAssertions": [
+    "VAL-FOUNDATION-005",
+    "VAL-FOUNDATION-006",
+    "VAL-FOUNDATION-001",
+    "VAL-FOUNDATION-002",
+    "VAL-FOUNDATION-003",
+    "VAL-FOUNDATION-004",
+    "VAL-FOUNDATION-007",
+    "VAL-FOUNDATION-008"
+  ],
+  "failedAssertions": [],
+  "blockedAssertions": [],
+  "appliedUpdates": [
+    {
+      "target": "user-testing.md",
+      "description": "Added Flow Validator Guidance sections for CLI and Browser surfaces to document isolation and shared-boundary rules for validation subagents.",
+      "source": "setup"
+    }
+  ],
+  "previousRound": null,
+  "frictions": [
+    {
+      "description": "The global ~/.factory/library/user-testing.md path referenced by the mission prompt did not exist in this environment; the equivalent committed repo copy at .factory/library/user-testing.md was used instead.",
+      "resolved": true,
+      "resolution": "Read the repository-local user-testing guidance file and followed its CLI surface instructions."
+    }
+  ],
+  "blockers": [],
+  "flowReports": [
+    ".factory/validation/validation-foundation/user-testing/flows/browser-validation.json",
+    ".factory/validation/validation-foundation/user-testing/flows/cli-validation.json"
+  ]
+}

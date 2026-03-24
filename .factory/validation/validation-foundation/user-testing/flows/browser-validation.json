@@ -1,0 +1,31 @@
+{
+  "surface": "browser",
+  "toolsUsed": ["Read", "Glob", "Execute"],
+  "assertions": [
+    {
+      "id": "VAL-FOUNDATION-005",
+      "status": "pass",
+      "reason": "The repository exposes a stable unit/config smoke command via pnpm test:unit using committed Vitest configuration and committed tests, and it passed locally without external services or undeclared environment state.",
+      "evidence": [
+        "file:package.json -> test:unit",
+        "file:vitest.config.ts -> include tests/unit/**/*.test.ts with node environment",
+        "file:tests/unit/routes-config.test.ts",
+        "terminal:pnpm test:unit passed with 1 file and 3 tests passing"
+      ]
+    },
+    {
+      "id": "VAL-FOUNDATION-006",
+      "status": "pass",
+      "reason": "The repository exposes a committed browser smoke command via pnpm test:browser using Playwright config pinned to http://127.0.0.1:3001, and the smoke suite successfully rendered /, /menu, /book, /events, and /find-us on that target.",
+      "evidence": [
+        "file:package.json -> test:browser and dev:smoke",
+        "file:playwright.config.ts -> baseURL http://127.0.0.1:3001 and webServer command pnpm dev:smoke",
+        "file:tests/browser/public-routes.spec.ts -> route coverage for /, /menu, /book, /events, /find-us",
+        "terminal:pnpm test:browser passed 5 tests on chromium for the required route set"
+      ]
+    }
+  ],
+  "frictions": [],
+  "blockers": [],
+  "summary": "Validated 2 browser-surface assertions for validation-foundation: both passed. Confirmed the stable Vitest and Playwright smoke commands and verified the required public routes render through the committed 127.0.0.1:3001 configuration."
+}
