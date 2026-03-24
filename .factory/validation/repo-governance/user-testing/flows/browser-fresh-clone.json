@@ -1,0 +1,66 @@
+{
+  "groupId": "browser-fresh-clone",
+  "testedAt": "2026-03-24T00:00:00Z",
+  "isolation": {
+    "appUrl": "http://127.0.0.1:3001",
+    "missionDir": "/Users/amankumarshrestha/.factory/missions/c4e99167-53fb-4194-b991-8a653cfe4bb9",
+    "repoRoot": "/Users/amankumarshrestha/LapenInns Project/OldSchoolHouseLP",
+    "browserSession": "browser-fresh-clone-20260324"
+  },
+  "toolsUsed": [
+    "agent-browser"
+  ],
+  "assertions": [
+    {
+      "id": "VAL-CROSS-001",
+      "title": "Fresh-clone setup guidance reaches executable validation commands",
+      "status": "pass",
+      "steps": [
+        {
+          "action": "Read README fresh-clone setup guidance and confirm it points browser smoke validation to http://127.0.0.1:3001.",
+          "expected": "Guidance documents the approved local port and route smoke target.",
+          "observed": "README documents pnpm dev:smoke and names http://127.0.0.1:3001 as the browser validation target."
+        },
+        {
+          "action": "Open the public home route at http://127.0.0.1:3001/ in an isolated browser session.",
+          "expected": "Home page renders successfully.",
+          "observed": "Home page loaded with title 'The Old School House | Pub & Restaurant in Stony Stratford'."
+        },
+        {
+          "action": "Open the documented public routes /menu, /book, /events, and /find-us on the approved port.",
+          "expected": "Each route renders successfully without blocking UI failures.",
+          "observed": "All four routes rendered successfully with route-specific page titles and visible content."
+        },
+        {
+          "action": "Check browser errors and captured network activity during the route smoke flow.",
+          "expected": "No console/page errors and successful local document requests for the public routes.",
+          "observed": "No browser errors were reported; network logs showed successful GET document requests for /, /menu, /book, /events, and /find-us on 127.0.0.1:3001."
+        }
+      ],
+      "evidence": {
+        "screenshots": [
+          "repo-governance/browser-fresh-clone/VAL-CROSS-001-home.png",
+          "repo-governance/browser-fresh-clone/VAL-CROSS-001-menu.png",
+          "repo-governance/browser-fresh-clone/VAL-CROSS-001-book.png",
+          "repo-governance/browser-fresh-clone/VAL-CROSS-001-events.png",
+          "repo-governance/browser-fresh-clone/VAL-CROSS-001-find-us.png"
+        ],
+        "consoleErrors": "none",
+        "network": "Successful GET document requests observed for http://127.0.0.1:3001/, /menu, /book, /events, and /find-us in the shared local app session."
+      },
+      "issues": null
+    }
+  ],
+  "frictions": [
+    {
+      "description": "The referenced shared guidance file ~/.factory/library/user-testing.md was not present in this environment.",
+      "resolved": true,
+      "resolution": "Used the mission AGENTS guidance plus the parent task's Browser surface instructions to stay within the assigned boundary.",
+      "affectedAssertions": [
+        "VAL-CROSS-001"
+      ]
+    }
+  ],
+  "blockers": [],
+  "summary": "Tested 1 assertion: VAL-CROSS-001 passed. README guidance aligned with the approved 127.0.0.1:3001 browser target, and the public routes /, /menu, /book, /events, and /find-us all rendered successfully in the assigned local app instance."
+}

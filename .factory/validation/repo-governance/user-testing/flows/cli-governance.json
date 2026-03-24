@@ -1,0 +1,150 @@
+{
+  "surface": "cli",
+  "assertions": [
+    {
+      "id": "VAL-GOV-001",
+      "status": "pass",
+      "reason": "Repo onboarding guidance documents install, safe env setup, dev startup, and canonical validation commands from the repository root.",
+      "evidence": [
+        "file:README.md",
+        "command:python3 package.json script inspection"
+      ]
+    },
+    {
+      "id": "VAL-GOV-002",
+      "status": "pass",
+      "reason": "Safe env onboarding is committed via .env.example while local env variants remain ignored in .gitignore.",
+      "evidence": [
+        "file:.env.example",
+        "file:.gitignore"
+      ]
+    },
+    {
+      "id": "VAL-GOV-003",
+      "status": "pass",
+      "reason": "Local artifact ignore rules cover env locals, Playwright outputs, and tsbuildinfo while not ignoring next-env.d.ts.",
+      "evidence": [
+        "file:.gitignore",
+        "command:python3 .gitignore inspection"
+      ]
+    },
+    {
+      "id": "VAL-GOV-004",
+      "status": "pass",
+      "reason": "Review ownership is configured with a real maintainer handle and includes governance-critical paths.",
+      "evidence": [
+        "file:.github/CODEOWNERS"
+      ]
+    },
+    {
+      "id": "VAL-GOV-005",
+      "status": "pass",
+      "reason": "Dependabot is configured in the GitHub-recognized path for weekly npm dependency updates at the repo root.",
+      "evidence": [
+        "file:.github/dependabot.yml"
+      ]
+    },
+    {
+      "id": "VAL-GOV-006",
+      "status": "pass",
+      "reason": "Bug and feature issue templates exist in GitHub-recognized paths and use repo-specific prompts.",
+      "evidence": [
+        "file:.github/ISSUE_TEMPLATE/bug-report.yml",
+        "file:.github/ISSUE_TEMPLATE/feature-request.yml"
+      ]
+    },
+    {
+      "id": "VAL-GOV-007",
+      "status": "pass",
+      "reason": "The pull request template requires summary, validation checklist, related context, and risk notes tied to this repo workflow.",
+      "evidence": [
+        "file:.github/PULL_REQUEST_TEMPLATE.md"
+      ]
+    },
+    {
+      "id": "VAL-GOV-008",
+      "status": "pass",
+      "reason": "The validation workflow runs install, lint, typecheck, readiness scan, unit tests, browser tests, and build using real pnpm commands.",
+      "evidence": [
+        "file:.github/workflows/validation.yml",
+        "command:python3 workflow command inspection"
+      ]
+    },
+    {
+      "id": "VAL-GOV-009",
+      "status": "pass",
+      "reason": "The Husky pre-commit hook calls the committed precommit:check script, which resolves to lint-staged plus typecheck in package.json.",
+      "evidence": [
+        "file:.husky/pre-commit",
+        "file:package.json"
+      ]
+    },
+    {
+      "id": "VAL-CROSS-001",
+      "status": "pass",
+      "reason": "README, package scripts, CI workflow, and Factory service manifest align on canonical lint, typecheck, test, readiness, and build command names.",
+      "evidence": [
+        "file:README.md",
+        "file:package.json",
+        "file:.github/workflows/validation.yml",
+        "file:.factory/services.yaml"
+      ]
+    },
+    {
+      "id": "VAL-CROSS-002",
+      "status": "pass",
+      "reason": "Factory user-testing guidance defines the CLI surface as package scripts and repo-governance file checks without browser usage.",
+      "evidence": [
+        "file:.factory/library/user-testing.md"
+      ]
+    },
+    {
+      "id": "VAL-CROSS-003",
+      "status": "pass",
+      "reason": "Factory operational artifacts remain repo-specific and aligned to the approved local smoke target on 127.0.0.1:3001.",
+      "evidence": [
+        "file:.factory/services.yaml",
+        "file:.factory/skills/governance-worker/SKILL.md",
+        "file:README.md"
+      ]
+    },
+    {
+      "id": "VAL-CROSS-004",
+      "status": "pass",
+      "reason": "Governance guidance and templates consistently reference reproducible repo-specific commands and validation expectations.",
+      "evidence": [
+        "file:README.md",
+        "file:.github/PULL_REQUEST_TEMPLATE.md",
+        "file:.factory/skills/governance-worker/SKILL.md"
+      ]
+    },
+    {
+      "id": "VAL-CROSS-005",
+      "status": "pass",
+      "reason": "All required governance artifacts were present in expected GitHub or Factory paths during file existence checks.",
+      "evidence": [
+        "command:python3 governance file existence check",
+        "file:.github/CODEOWNERS",
+        "file:.factory/library/user-testing.md"
+      ]
+    },
+    {
+      "id": "VAL-CROSS-006",
+      "status": "pass",
+      "reason": "Assigned governance assertions were validated read-only from the repository root using file inspection and lightweight CLI spot checks only.",
+      "evidence": [
+        "command:git status --short",
+        "command:git diff -- .github/CODEOWNERS .gitignore .factory/services.yaml .factory/skills/governance-worker/SKILL.md README.md .github/dependabot.yml .github/PULL_REQUEST_TEMPLATE.md .github/ISSUE_TEMPLATE/bug-report.yml .github/ISSUE_TEMPLATE/feature-request.yml .github/workflows/validation.yml .husky/pre-commit package.json .factory/library/user-testing.md"
+      ]
+    }
+  ],
+  "frictions": [
+    "Initial attempt to read global user-testing guidance at /Users/amankumarshrestha/.factory/library/user-testing.md failed because this repo stores the guidance under the repo-local .factory/library path.",
+    "A first services.yaml parsing spot-check using PyYAML failed because the yaml module is unavailable in the base Python 3.9 environment; a plain-text parser was used instead."
+  ],
+  "blockers": [],
+  "toolsUsed": [
+    "Read",
+    "Execute"
+  ]
+}

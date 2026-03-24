@@ -1,0 +1,21 @@
+{
+  "featureId": "validation-foundation-route-smoke-depth-fix",
+  "reviewedAt": "2026-03-24T15:03:32Z",
+  "commitId": "44d7f9d9cfabff62b3401068d6a154d3c920b64e",
+  "transcriptSkeletonReviewed": true,
+  "diffReviewed": true,
+  "status": "pass",
+  "codeReview": {
+    "summary": "The fix resolves the earlier shallow route-smoke gap by making the unit smoke inspect committed route page files for the required public-route canonicals and by switching browser smoke assertions to durable URL, title, and main-landmark signals instead of brittle marketing-copy headings.",
+    "issues": []
+  },
+  "sharedStateObservations": [
+    {
+      "area": "skills",
+      "observation": "The worker deviated from its baseline-validation procedure because it tried to parse `.factory/services.yaml` via Python and hit a missing `PyYAML` dependency before falling back to direct `pnpm test` execution, suggesting the shared skill guidance assumes tooling that is not guaranteed in this environment.",
+      "evidence": "Handoff skillFeedback for worker session e1ca006d-1dbf-475c-ab5c-e7ec4687f853 records `followedProcedure: false` and notes the missing `yaml` Python module when attempting baseline validation from `.factory/services.yaml`."
+    }
+  ],
+  "addressesFailureFrom": "/Users/amankumarshrestha/LapenInns Project/OldSchoolHouseLP/.factory/validation/validation-foundation/scrutiny/reviews/validation-foundation-automated-test-harness.json",
+  "summary": "Pass: the updated Vitest smoke now fails if required route page files lose their canonical route declarations, and the Playwright smoke now relies on durable route/title/main-landmark assertions rather than exact hero copy, adequately addressing the prior review failure."
+}

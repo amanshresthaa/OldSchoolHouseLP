@@ -2,6 +2,7 @@ commands:
   install: pnpm install --frozen-lockfile
   lint: pnpm lint
   typecheck: pnpm typecheck
+  readiness:scan: pnpm readiness:scan
   test: pnpm test
   build: pnpm build
 

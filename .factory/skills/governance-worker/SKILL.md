@@ -25,11 +25,12 @@ None
 1. Read the assigned feature, mission `AGENTS.md`, repo `AGENTS.md`, `.factory/services.yaml`, and any existing governance files before making changes.
 2. Confirm the current canonical command names from `package.json` and any committed workflow or hook files; governance artifacts must reference only real commands.
 3. Add or update the minimum set of files needed for the feature using GitHub-recognized paths and repo-specific wording. Avoid placeholder boilerplate that does not describe this repo.
-4. When editing docs, prefer concise authoritative instructions over exhaustive prose. The goal is maintainer usability and readiness signal, not marketing copy.
-5. When editing `.factory/` artifacts, keep them aligned with mission boundaries, the approved `127.0.0.1:3001` browser path, and the actual repo structure.
-6. Verify every changed path exists where GitHub or Factory expects it, and cross-check that file references, command names, and port numbers are consistent across the edited files.
-7. Run the relevant validators after edits. At minimum preserve `pnpm lint`, `pnpm typecheck`, and any changed scripts or doc-linked commands that can be exercised locally.
-8. In the handoff, call out any remaining repo-admin items that are intentionally out of scope rather than leaving them implicit.
+4. For ownership files such as `CODEOWNERS`, use only real maintainer usernames or teams that can be inferred safely from repo context. Never use placeholder bot owners; if no safe maintainer owner can be inferred, return to orchestrator.
+5. When editing docs, prefer concise authoritative instructions over exhaustive prose. The goal is maintainer usability and readiness signal, not marketing copy.
+6. When editing `.factory/` artifacts, keep them aligned with mission boundaries, the approved `127.0.0.1:3001` browser path, and the actual repo structure.
+7. Verify every changed path exists where GitHub or Factory expects it, and cross-check that file references, command names, and port numbers are consistent across the edited files.
+8. Run the relevant validators after edits. At minimum preserve `pnpm lint`, `pnpm typecheck`, and any changed scripts or doc-linked commands that can be exercised locally.
+9. In the handoff, call out any remaining repo-admin items that are intentionally out of scope rather than leaving them implicit.
 
 ## Example Handoff
 

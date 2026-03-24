@@ -1,9 +1,9 @@
-* @factory-droid[bot]
+* @amanshresthaa
 
 # Validation-critical governance and tooling surfaces
-.github/** @factory-droid[bot]
-.husky/** @factory-droid[bot]
-.factory/** @factory-droid[bot]
-package.json @factory-droid[bot]
-pnpm-lock.yaml @factory-droid[bot]
-README.md @factory-droid[bot]
+.github/** @amanshresthaa
+.husky/** @amanshresthaa
+.factory/** @amanshresthaa
+package.json @amanshresthaa
+pnpm-lock.yaml @amanshresthaa
+README.md @amanshresthaa

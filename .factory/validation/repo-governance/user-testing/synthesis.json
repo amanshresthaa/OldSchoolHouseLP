@@ -1,0 +1,32 @@
+{
+  "milestone": "repo-governance",
+  "round": 1,
+  "status": "pass",
+  "assertionsSummary": {
+    "total": 15,
+    "passed": 15,
+    "failed": 0,
+    "blocked": 0
+  },
+  "passedAssertions": [
+    "VAL-CROSS-001",
+    "VAL-CROSS-002",
+    "VAL-CROSS-003",
+    "VAL-CROSS-004",
+    "VAL-CROSS-005",
+    "VAL-CROSS-006",
+    "VAL-GOV-001",
+    "VAL-GOV-002",
+    "VAL-GOV-003",
+    "VAL-GOV-004",
+    "VAL-GOV-005",
+    "VAL-GOV-006",
+    "VAL-GOV-007",
+    "VAL-GOV-008",
+    "VAL-GOV-009"
+  ],
+  "failedAssertions": [],
+  "blockedAssertions": [],
+  "appliedUpdates": [],
+  "previousRound": null
+}

@@ -1,0 +1,51 @@
+{
+  "milestone": "validation-foundation",
+  "round": 4,
+  "status": "pass",
+  "validatorsRun": {
+    "test": {
+      "passed": true,
+      "command": "pnpm test",
+      "exitCode": 0
+    },
+    "typecheck": {
+      "passed": true,
+      "command": "pnpm typecheck",
+      "exitCode": 0
+    },
+    "lint": {
+      "passed": true,
+      "command": "pnpm lint",
+      "exitCode": 0
+    }
+  },
+  "reviewsSummary": {
+    "total": 6,
+    "passed": 6,
+    "failed": 0,
+    "failedFeatures": []
+  },
+  "blockingIssues": [],
+  "appliedUpdates": [],
+  "suggestedGuidanceUpdates": [
+    {
+      "target": "skills",
+      "suggestion": "Update the scrutiny validation skill guidance to avoid assuming Python YAML dependencies are installed; recommend reading `.factory/services.yaml` via committed repo commands or a dependency-free parser fallback.",
+      "evidence": "validation-foundation-automated-test-harness review noted the worker hit a missing `yaml` module while trying to parse `.factory/services.yaml`, then fell back to direct canonical commands.",
+      "isSystemic": true
+    },
+    {
+      "target": "AGENTS.md",
+      "suggestion": "Clarify whether Playwright `test-results/` artifacts should be ignored or cleaned after browser smoke runs so workers can preserve a clean working tree consistently.",
+      "evidence": "validation-foundation-ci-validation-pipeline review observed untracked `test-results/` output after `pnpm test:browser`, with no current shared guidance on expected handling.",
+      "isSystemic": false
+    }
+  ],
+  "rejectedObservations": [
+    {
+      "observation": "Update the scrutiny validation skill guidance to avoid assuming Python YAML dependencies are installed; recommend reading `.factory/services.yaml` via committed repo commands or a dependency-free parser fallback.",
+      "reason": "duplicate"
+    }
+  ],
+  "previousRound": ".factory/validation/validation-foundation/scrutiny/synthesis.json"
+}
