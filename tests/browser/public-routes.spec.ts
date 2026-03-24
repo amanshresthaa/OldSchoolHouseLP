@@ -1,21 +1,20 @@
 import { expect, test } from "@playwright/test"
 
 const routeChecks = [
-  { path: "/", heading: "The Old School House." },
+  { path: "/", title: "The Old School House." },
   {
     path: "/menu",
-    heading: "Two kitchens, one menu, and a table worth coming back to.",
+    title: "Menu in Stony Stratford",
   },
   {
     path: "/book",
-    heading: "Book your table and make it easy from the start.",
+    title: "Book a Table in Stony Stratford",
   },
   {
     path: "/events",
-    heading:
-      "A venue shape that works for birthdays, match days, and longer-table gatherings.",
+    title: "Private Hire in Stony Stratford",
   },
-  { path: "/find-us", heading: "Everything you need to find us easily." },
+  { path: "/find-us", title: "Find Us in Stony Stratford" },
 ] as const
 
 for (const route of routeChecks) {
@@ -30,8 +29,10 @@ for (const route of routeChecks) {
     })
 
     expect(response?.ok()).toBeTruthy()
-    await expect(
-      page.getByRole("heading", { name: route.heading })
-    ).toBeVisible()
+    await expect(page).toHaveURL(
+      new RegExp(`${route.path === "/" ? "/?$" : `${route.path}$`}`)
+    )
+    await expect(page).toHaveTitle(new RegExp(route.title))
+    await expect(page.locator("main")).toBeVisible()
   })
 }
