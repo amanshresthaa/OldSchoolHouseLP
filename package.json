@@ -8,28 +8,33 @@
     "dev": "next dev --turbopack",
     "dev:smoke": "PORT=3001 next dev --hostname 127.0.0.1 --turbopack",
     "build": "next build",
+    "build:ci": "CI=1 node ./scripts/readiness/build-performance-track.mjs",
     "start": "next start",
     "lint": "eslint . --max-warnings=0",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
     "typecheck": "tsc --noEmit",
     "test": "pnpm test:unit && pnpm test:browser",
+    "test:unit:coverage": "vitest run --config vitest.config.ts --coverage",
+    "test:unit:perf": "node ./scripts/readiness/test-performance-track.mjs",
     "prepare": "husky",
     "precommit:lint-staged": "lint-staged",
     "precommit:typecheck": "pnpm typecheck",
     "precommit:check": "pnpm precommit:lint-staged && pnpm precommit:typecheck",
-    "test:unit": "vitest run --config vitest.config.ts",
+    "test:unit": "pnpm test:unit:coverage",
     "test:browser": "playwright test",
     "readiness:dead-code": "knip --config knip.json --reporter compact --no-progress",
     "readiness:duplicate-code": "jscpd --config jscpd.json",
+    "readiness:large-files": "node ./scripts/readiness/large-file-scan.mjs",
     "readiness:tech-debt": "node ./scripts/readiness/tech-debt-scan.mjs",
-    "readiness:scan": "pnpm readiness:dead-code && pnpm readiness:duplicate-code && pnpm readiness:tech-debt"
+    "readiness:scan": "pnpm readiness:dead-code && pnpm readiness:duplicate-code && pnpm readiness:large-files && pnpm readiness:tech-debt"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,mjs,cjs}": [
       "eslint --max-warnings=0 --fix",
       "prettier --write"
     ],
+    "*": "pnpm readiness:large-files",
     "*.{json,md,css}": "prettier --write"
   },
   "dependencies": {
@@ -52,6 +57,7 @@
     "@types/node": "^25.5.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "@vitest/coverage-v8": "^4.1.1",
     "eslint": "^9.39.4",
     "eslint-config-next": "16.1.7",
     "husky": "^9.1.7",

@@ -68,7 +68,10 @@ for (const filePath of walk(repoRoot)) {
       return
     }
 
-    if (relativePath === "oldschoolhouselp-readiness-report.md") {
+    if (
+      relativePath === "oldschoolhouselp-readiness-report.md" ||
+      relativePath === "oldschoolhouselp-readiness-report (2).md"
+    ) {
       return
     }
 

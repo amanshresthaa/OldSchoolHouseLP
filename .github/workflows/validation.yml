@@ -39,11 +39,27 @@ jobs:
       - name: Run readiness scans
         run: pnpm readiness:scan
 
-      - name: Run unit/config smoke tests
-        run: pnpm test:unit
+      - name: Run unit/config smoke tests with coverage + timing
+        run: pnpm test:unit:perf
+
+      - name: Upload unit coverage and performance artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: vitest-artifacts
+          path: |
+            coverage/vitest/**
+            test-results/vitest/**
 
       - name: Run browser smoke tests
         run: pnpm test:browser
 
-      - name: Run production build
-        run: pnpm build
+      - name: Run production build with timing
+        run: pnpm build:ci
+
+      - name: Upload build performance artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-performance-artifacts
+          path: test-results/build/**
