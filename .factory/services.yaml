@@ -1,0 +1,14 @@
+commands:
+  install: pnpm install --frozen-lockfile
+  lint: pnpm lint
+  typecheck: pnpm typecheck
+  test: pnpm test
+  build: pnpm build
+
+services:
+  web:
+    start: PORT=3001 pnpm dev -- --hostname 127.0.0.1
+    stop: lsof -ti :3001 | xargs kill
+    healthcheck: curl -sf http://127.0.0.1:3001
+    port: 3001
+    depends_on: []

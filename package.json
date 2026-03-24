@@ -12,6 +12,7 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
     "typecheck": "tsc --noEmit",
+    "test": "pnpm test:unit && pnpm test:browser",
     "prepare": "husky",
     "precommit:lint-staged": "lint-staged",
     "precommit:typecheck": "pnpm typecheck",
