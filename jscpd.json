@@ -20,9 +20,6 @@
     "**/.factory/**",
     "**/.husky/**",
     "**/pnpm-lock.yaml",
-    "**/app/privacy/page.tsx",
-    "**/app/tos/page.tsx",
     "**/menu/*.json"
-  ],
-  "ignorePattern": ["privacySections\\.map\\(", "termsSections\\.map\\("]
+  ]
 }
