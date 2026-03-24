@@ -7,9 +7,25 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
+    "lint": "eslint . --max-warnings=0",
+    "lint:fix": "eslint . --fix",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepare": "husky",
+    "precommit:lint-staged": "lint-staged",
+    "precommit:typecheck": "pnpm typecheck",
+    "precommit:check": "pnpm precommit:lint-staged && pnpm precommit:typecheck",
+    "readiness:dead-code": "knip --config knip.json --reporter compact --no-progress",
+    "readiness:duplicate-code": "jscpd --config jscpd.json",
+    "readiness:tech-debt": "node ./scripts/readiness/tech-debt-scan.mjs",
+    "readiness:scan": "pnpm readiness:dead-code && pnpm readiness:duplicate-code && pnpm readiness:tech-debt"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,mjs,cjs}": [
+      "eslint --max-warnings=0 --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,css}": "prettier --write"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",
@@ -32,10 +48,15 @@
     "@types/react-dom": "^19.2.3",
     "eslint": "^9.39.4",
     "eslint-config-next": "16.1.7",
+    "husky": "^9.1.7",
+    "jscpd": "^4.0.8",
+    "knip": "^6.0.4",
+    "lint-staged": "^16.4.0",
     "postcss": "^8",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "tailwindcss": "^4.2.1",
+    "ts-prune": "^0.10.3",
     "typescript": "^5.9.3"
   }
 }

@@ -1,4 +1,4 @@
-export const COOKIE_CONSENT_NAME = "osh_cookie_consent"
+const COOKIE_CONSENT_NAME = "osh_cookie_consent"
 export const COOKIE_CONSENT_EVENT = "osh:cookie-consent-changed"
 
 export type CookieConsentValue = "accepted" | "essential"

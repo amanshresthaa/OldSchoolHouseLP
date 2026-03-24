@@ -60,6 +60,36 @@ const privacySections = [
   },
 ]
 
+function AlternatingSectionGrid({
+  sections,
+}: {
+  sections: typeof privacySections
+}) {
+  return (
+    <div className="surface-frame overflow-hidden">
+      <div className="grid gap-px bg-[rgba(196,189,181,0.22)]">
+        {sections.map((section, index) => (
+          <article
+            key={section.title}
+            className={
+              index % 2 === 0
+                ? "surface-pane bg-[var(--color-surface-lowest)]"
+                : "surface-pane surface-pane-muted"
+            }
+          >
+            <h2 className="section-title">{section.title}</h2>
+            <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
+              {section.paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export default function PrivacyPage() {
   return (
     <main>
@@ -117,27 +147,7 @@ export default function PrivacyPage() {
           </div>
         }
       >
-        <div className="surface-frame overflow-hidden">
-          <div className="grid gap-px bg-[rgba(196,189,181,0.22)]">
-            {privacySections.map((section, index) => (
-              <article
-                key={section.title}
-                className={
-                  index % 2 === 0
-                    ? "surface-pane bg-[var(--color-surface-lowest)]"
-                    : "surface-pane surface-pane-muted"
-                }
-              >
-                <h2 className="section-title">{section.title}</h2>
-                <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
-                  {section.paragraphs.map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
-                  ))}
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
+        <AlternatingSectionGrid sections={privacySections} />
       </StickySplitSection>
 
       <PageSignoff

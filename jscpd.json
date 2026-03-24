@@ -1,0 +1,28 @@
+{
+  "absolute": true,
+  "threshold": 1,
+  "minLines": 10,
+  "minTokens": 80,
+  "reporters": ["console"],
+  "format": [
+    "typescript",
+    "javascript",
+    "tsx",
+    "jsx",
+    "css",
+    "markdown",
+    "yaml",
+    "json"
+  ],
+  "ignore": [
+    "**/.next/**",
+    "**/node_modules/**",
+    "**/.factory/**",
+    "**/.husky/**",
+    "**/pnpm-lock.yaml",
+    "**/app/privacy/page.tsx",
+    "**/app/tos/page.tsx",
+    "**/menu/*.json"
+  ],
+  "ignorePattern": ["privacySections\\.map\\(", "termsSections\\.map\\("]
+}

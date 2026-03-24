@@ -1,0 +1,42 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": [
+    "app/**/*.{ts,tsx}",
+    "components/**/*.{ts,tsx}",
+    "hooks/**/*.ts",
+    "lib/**/*.ts",
+    "data/**/*.ts",
+    "next.config.mjs",
+    "postcss.config.mjs",
+    "eslint.config.mjs"
+  ],
+  "project": [
+    "app/**/*.{ts,tsx}",
+    "components/**/*.{ts,tsx}",
+    "hooks/**/*.ts",
+    "lib/**/*.ts",
+    "data/**/*.ts",
+    "images/**/*.{ts,tsx}",
+    "*.config.{js,mjs,ts}",
+    "*.d.ts"
+  ],
+  "ignore": [
+    "components/site/MenuSection.tsx",
+    "data/site.ts",
+    "lib/menu.ts",
+    "app/**/page.tsx",
+    "app/layout.tsx",
+    "app/manifest.ts",
+    "app/robots.ts",
+    "app/sitemap.ts"
+  ],
+  "ignoreDependencies": [
+    "@eslint/eslintrc",
+    "jscpd",
+    "postcss-load-config",
+    "shadcn",
+    "tailwindcss",
+    "ts-prune",
+    "tw-animate-css"
+  ]
+}
