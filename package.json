@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "type": "module",
   "private": true,
+  "packageManager": "pnpm@10.32.1",
   "scripts": {
     "dev": "next dev --turbopack",
     "dev:smoke": "PORT=3001 next dev --hostname 127.0.0.1 --turbopack",
