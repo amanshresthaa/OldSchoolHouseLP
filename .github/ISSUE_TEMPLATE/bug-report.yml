@@ -1,0 +1,41 @@
+name: Bug report
+description: Report a repo or site issue that needs investigation.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What is broken, and where did you see it?
+      placeholder: A short description of the issue and the affected page, command, or workflow.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      description: List the exact steps someone else can follow to reproduce the issue.
+      placeholder: |
+        1. Run `pnpm ...`
+        2. Open `http://127.0.0.1:3001/...`
+        3. Observe ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected outcome
+      description: What should have happened instead?
+      placeholder: Describe the expected behavior or validation result.
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact and evidence
+      description: Explain who or what is blocked and include any errors, screenshots, or failing command output.
+      placeholder: This blocks `pnpm test` because..., or it affects the `/menu` route because...
+    validations:
+      required: true

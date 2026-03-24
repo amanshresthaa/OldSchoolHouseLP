@@ -1,0 +1,38 @@
+name: Feature request
+description: Propose a scoped enhancement for the site or repo workflow.
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: What problem, opportunity, or readiness gap is motivating this request?
+      placeholder: Explain the background and who needs this.
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome
+      description: Describe the expected behavior or maintainer experience once this is implemented.
+      placeholder: When complete, contributors should be able to...
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact
+      description: Why does this matter for guests, maintainers, or validation reliability?
+      placeholder: This would reduce..., unlock..., or protect...
+    validations:
+      required: true
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints and references
+      description: Note any known boundaries, related issues, report items, or commands that should guide implementation.
+      placeholder: Mention linked issues, route names, or canonical commands if relevant.
+    validations:
+      required: false
