@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "dev:smoke": "PORT=3001 next dev --hostname 127.0.0.1 --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --max-warnings=0",
@@ -15,6 +16,8 @@
     "precommit:lint-staged": "lint-staged",
     "precommit:typecheck": "pnpm typecheck",
     "precommit:check": "pnpm precommit:lint-staged && pnpm precommit:typecheck",
+    "test:unit": "vitest run --config vitest.config.ts",
+    "test:browser": "playwright test",
     "readiness:dead-code": "knip --config knip.json --reporter compact --no-progress",
     "readiness:duplicate-code": "jscpd --config jscpd.json",
     "readiness:tech-debt": "node ./scripts/readiness/tech-debt-scan.mjs",
@@ -42,6 +45,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@playwright/test": "^1.58.2",
     "@tailwindcss/postcss": "^4.2.1",
     "@types/node": "^25.5.0",
     "@types/react": "^19.2.14",
@@ -50,6 +54,7 @@
     "eslint-config-next": "16.1.7",
     "husky": "^9.1.7",
     "jscpd": "^4.0.8",
+    "jsdom": "^29.0.1",
     "knip": "^6.0.4",
     "lint-staged": "^16.4.0",
     "postcss": "^8",
@@ -57,6 +62,7 @@
     "prettier-plugin-tailwindcss": "^0.7.2",
     "tailwindcss": "^4.2.1",
     "ts-prune": "^0.10.3",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.1"
   }
 }
