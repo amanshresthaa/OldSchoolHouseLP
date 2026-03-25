@@ -50,6 +50,11 @@ export const siteEmailHref = "mailto:hellotheoldschoolhouse@gmail.com"
 export const lapenInnsHref = "https://lapeninns.com"
 export const mapHref =
   "https://www.google.com/maps/search/?api=1&query=The+Old+School+House+London+Road+Stony+Stratford+Milton+Keynes+MK11+1JA"
+export const directionsHref =
+  "https://www.google.com/maps/dir/?api=1&destination=The+Old+School+House,+London+Rd,+Stony+Stratford,+Milton+Keynes+MK11+1JA&travelmode=driving"
+export const bookingHref =
+  "https://www.nabatable.com/restaurants/the-old-school-house/book"
+export const bookOnlineHref = "/book-online"
 export const googleReviewHref =
   "https://search.google.com/local/writereview?placeid=ChIJbbeIWMQBd0gRTk6up33n664"
 export const socialLinks = [
@@ -117,7 +122,7 @@ export const proofPoints: ProofPoint[] = [
   {
     title: "Open daily from 10:00",
     description:
-      "Simple to drop in for lunch, come back for dinner, or settle in later when the evening picks up.",
+      "Drop in for lunch, come back for dinner, or stay a while once the evening picks up.",
   },
 ]
 
@@ -130,7 +135,7 @@ export const homeReasons: HighlightItem[] = [
   {
     title: "Warm, welcoming, and easy to settle into",
     description:
-      "Exposed brick, wooden floors, and a relaxed room make it easy to settle in from first drink to last bite.",
+      "Exposed brick, wooden floors, and a relaxed room that feels right from the moment you walk in.",
   },
   {
     title: "Good food, good drinks, and good value",
@@ -143,7 +148,7 @@ export const aboutReasons: HighlightItem[] = [
   {
     title: "A proper pub setting with real character",
     description:
-      "Exposed brick, wooden floors, and an open-plan bar give the place the sort of warmth that feels established the moment you walk in.",
+      "Exposed brick, wooden floors, and an open-plan bar that give the place a warmth you notice the moment you walk in.",
   },
   {
     title: "A wider food story than the usual pub stop",
@@ -153,7 +158,7 @@ export const aboutReasons: HighlightItem[] = [
   {
     title: "Room for everyday visits and bigger plans",
     description:
-      "With 65 covers inside, around 60 outside, a front seating area, and a private courtyard, it works for a quick pint, a proper dinner, or a larger get-together.",
+      "With 65 covers inside, around 60 outside, a front seating area, and a private courtyard, there is room for a quick pint, a proper dinner, or a birthday that runs late.",
   },
 ]
 
@@ -174,7 +179,7 @@ export const aboutPubFacts: InfoItem[] = [
   { label: "Parking", value: "A small on-site car park for easier arrival" },
   {
     label: "Outdoor feel",
-    value: "Front wooden seating made for near year-round trade",
+    value: "Front wooden seating that works through most of the year",
   },
 ]
 
@@ -187,13 +192,13 @@ export const aboutStoryNotes = [
 export const aboutOperatorNotes = [
   "Sanjog Gautam, known as San, brings experience from running a cafe, a restaurant, and a pub before taking on The Old School House.",
   "The aim is not to lose the classic pub ethos. It is to keep that welcome intact while adding the Nepalese food offer guests already know him for.",
-  "That mix of familiarity and something more distinctive is what gives the pub its own place on the street.",
+  "That mix of the familiar and the unexpected is what makes the pub worth a second visit.",
 ]
 
 export const aboutFamilyNotes = [
   "The Old School House is operated by Lapen Inns OSH Ltd as part of the wider Lapen Inns family.",
   "Across the group, the idea is consistent: proper pub comfort, a warm welcome, and Nepalese cooking that gives the menu more identity.",
-  "For guests, that means the pub still feels local, but the food story travels with a team that already knows how to make it work.",
+  "For guests, that means the pub still feels local, but the kitchen brings something you would not expect from a typical High Street pub.",
 ]
 
 export const aboutLocationHighlights: HighlightItem[] = [
@@ -236,7 +241,7 @@ export const atmosphereMoments: HighlightItem[] = [
   {
     title: "Front garden for brighter afternoons",
     description:
-      "A good spot for brighter afternoons, easy drinks, and one more round.",
+      "A good spot when the sun is out, the drinks are cold, and nobody wants to leave.",
   },
   {
     title: "A bar that can shift from lunch to live sport",
@@ -246,7 +251,7 @@ export const atmosphereMoments: HighlightItem[] = [
   {
     title: "Corners for parties, tasting nights, and group dinners",
     description:
-      "There is enough room for parties and group dinners without losing the feel of a local.",
+      "There is enough room for parties and group dinners, and it still feels like your local.",
   },
 ]
 
@@ -257,9 +262,9 @@ export const eventsHighlights: HighlightItem[] = [
       "Use the dining room, front garden, and courtyard for birthdays, work drinks, and longer-table plans.",
   },
   {
-    title: "Sport, theme nights, and community trade",
+    title: "Sport, theme nights, and local get-togethers",
     description:
-      "Live sport, theme nights, and local meetups all fit here without forcing the pub to feel overly busy.",
+      "Live sport, theme nights, and local meetups all have a home here without the place ever feeling overcrowded.",
   },
   {
     title: "Tasting nights and seasonal reasons to come back",
@@ -365,7 +370,7 @@ export const localFaqs: LocalFaq[] = [
   {
     question: "Do you show live sport?",
     answer:
-      "Yes. The Old School House shows live sport including football and rugby, with Sky Sports and TNT Sports called out on the site.",
+      "Yes. We show live sport including football and rugby on Sky Sports and TNT Sports.",
   },
 ]
 
@@ -374,6 +379,9 @@ export const bookingNotes = [
   "Email is ideal for dinner plans, birthdays, and bigger group bookings.",
   "If you are planning a party, work drinks, or a sports social, we would love to help with that too.",
 ]
+
+export const bookingUrgencyNote =
+  "Weekends fill up fast — book ahead so your table is ready when you arrive."
 
 export const eventOccasions = [
   "Birthdays and family celebrations",
@@ -406,7 +414,7 @@ export const arrivalNotes = [
 
 export const accessibilityNotes = [
   "A disabled parking space is available in the on-site car park to help keep arrival simpler.",
-  "If you need help with access, seating, or the easiest way in, call ahead and the team will talk you through it.",
+  "If you need help with access, seating, or the easiest way in, call ahead and we will talk you through it.",
   "Let us know about mobility needs, prams, or extra space before you travel and we will do our best to make arrival smoother.",
 ]
 

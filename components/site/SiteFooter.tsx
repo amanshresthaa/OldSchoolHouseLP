@@ -9,6 +9,7 @@ import {
 } from "@phosphor-icons/react/dist/ssr"
 
 import {
+  directionsHref,
   mapHref,
   openingHours,
   siteAddress,
@@ -74,7 +75,7 @@ export function SiteFooter() {
             <p>
               <a
                 className="inline-flex items-center gap-2 text-[var(--color-on-tertiary-container)] transition hover:text-white"
-                href={mapHref}
+                href={directionsHref}
                 target="_blank"
                 rel="noreferrer"
               >

@@ -4,7 +4,7 @@ import type { ComponentProps } from "react"
 import * as React from "react"
 
 import { Button } from "@/components/ui/button"
-import { mapHref } from "@/data/site"
+import { directionsHref } from "@/data/site"
 import {
   hasOptionalCookieConsent,
   readCookieConsent,
@@ -59,8 +59,8 @@ export function MapEmbed({
               Allow map embed
             </Button>
             <Button asChild size="lg" variant="outline">
-              <a href={mapHref} target="_blank" rel="noreferrer">
-                Open directions instead
+              <a href={directionsHref} target="_blank" rel="noreferrer">
+                Get directions instead
               </a>
             </Button>
           </div>
@@ -82,14 +82,14 @@ export function MapEmbed({
         referrerPolicy="no-referrer-when-downgrade"
       />
       <div className="flex flex-col items-start gap-3 bg-[var(--color-surface-lowest)] px-5 py-4 text-sm text-on-surface sm:flex-row sm:items-center sm:justify-between">
-        <p>Need turn-by-turn directions? Open the pub in Google Maps.</p>
+        <p>Need turn-by-turn directions? Open the route straight in Google Maps.</p>
         <a
-          href={mapHref}
+          href={directionsHref}
           target="_blank"
           rel="noreferrer"
           className="text-secondary underline-offset-4 transition hover:text-secondary/80 hover:underline"
         >
-          Open map
+          Get directions
         </a>
       </div>
     </div>

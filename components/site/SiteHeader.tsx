@@ -6,7 +6,13 @@ import * as React from "react"
 import { List, X } from "@phosphor-icons/react"
 
 import { Button } from "@/components/ui/button"
-import { type NavItem, siteLocation, siteName, siteNav } from "@/data/site"
+import {
+  bookOnlineHref,
+  type NavItem,
+  siteLocation,
+  siteName,
+  siteNav,
+} from "@/data/site"
 import { cn } from "@/lib/utils"
 
 function isCurrentPath(pathname: string, href: string) {
@@ -147,12 +153,16 @@ export function SiteHeader() {
             </nav>
             <div className="hidden shrink-0 items-center gap-3 md:flex">
               <Button asChild size="sm">
-                <Link href="/book">Book a table</Link>
+                <Link href={bookOnlineHref}>
+                  Book a table
+                </Link>
               </Button>
             </div>
             <div className="flex shrink-0 items-center gap-2 md:hidden">
               <Button asChild size="sm">
-                <Link href="/book">Book</Link>
+                <Link href={bookOnlineHref}>
+                  Book
+                </Link>
               </Button>
               <button
                 type="button"
@@ -216,7 +226,7 @@ export function SiteHeader() {
             </button>
           </div>
           <nav aria-label="Mobile navigation" className="mt-12 grid gap-5">
-            {siteNav.map((item) => {
+            {siteNav.filter((item) => item.href !== "/book").map((item) => {
               const active = isCurrentPath(pathname, item.href)
 
               return (
@@ -233,6 +243,17 @@ export function SiteHeader() {
               )
             })}
           </nav>
+          <div className="mt-10 border-t border-white/10 pt-8">
+            <Link
+              href={bookOnlineHref}
+              className="inline-flex h-14 w-full items-center justify-center gap-2.5 rounded-xl bg-[linear-gradient(135deg,#af2b3e,#8f1f2e)] px-8 text-base font-semibold text-white shadow-[0_8px_24px_rgba(175,43,62,0.3)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(175,43,62,0.4)] hover:brightness-110"
+            >
+              Book a table
+            </Link>
+            <p className="pt-3 text-center text-sm text-white/55">
+              Opens online booking
+            </p>
+          </div>
         </div>
       ) : null}
     </>

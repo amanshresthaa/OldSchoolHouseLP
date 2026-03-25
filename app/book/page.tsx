@@ -1,22 +1,18 @@
 import type { Metadata } from "next"
-import Link from "next/link"
 import {
+  ArrowRight,
   CalendarDots,
   Clock,
   EnvelopeSimple,
   Phone,
 } from "@phosphor-icons/react/dist/ssr"
 
-import { InlineBookingCta } from "@/components/site/InlineBookingCta"
-import { PageSignoff } from "@/components/site/PageSignoff"
-import { PageHero } from "@/components/site/PageHero"
-import { SectionHeading } from "@/components/site/SectionHeading"
+import { OpenStatusBadge } from "@/components/site/OpenStatusBadge"
 import { SiteActionCard } from "@/components/site/SiteActionCard"
-import { StickySplitSection } from "@/components/site/StickySplitSection"
 import {
-  bookingNotes,
+  bookOnlineHref,
+  foodHours,
   openingHours,
-  openingHoursNote,
   siteEmail,
   siteEmailHref,
   sitePhone,
@@ -26,7 +22,7 @@ import {
 export const metadata: Metadata = {
   title: "Book a Table in Stony Stratford",
   description:
-    "Book a table at The Old School House in Stony Stratford by phone or email, with contact details, opening hours, and help for larger bookings.",
+    "Book a table at The Old School House in Stony Stratford online, by phone, or by email. Open seven days a week on London Road.",
   alternates: {
     canonical: "/book",
   },
@@ -35,186 +31,179 @@ export const metadata: Metadata = {
 export default function BookPage() {
   return (
     <main>
-      <PageHero
-        eyebrow="Book a table"
-        title="Book your table and make it easy from the start."
-        description="Whether it is dinner for two, drinks with friends, or a bigger get-together, getting in touch is simple."
-        primaryAction={{ href: sitePhoneHref, label: "Call to book" }}
-        secondaryAction={{ href: siteEmailHref, label: "Email a request" }}
-      />
+      {/* Hero — focused on the three booking paths */}
+      <section className="relative overflow-hidden bg-primary text-white">
+        <div className="absolute inset-0 bg-[linear-gradient(160deg,_rgba(6,27,14,0.98),_rgba(27,48,34,0.94)_48%,_rgba(6,27,14,0.97))]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_80%_-10%,_rgba(212,160,23,0.22),_transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_0%_100%,_rgba(175,43,62,0.12),_transparent_50%)]" />
+        <div className="absolute top-0 right-0 left-0 h-px bg-gradient-to-r from-transparent via-[var(--color-on-tertiary-container)]/30 to-transparent" />
 
-      <StickySplitSection
-        className="bg-background"
-        intro={
-          <div className="space-y-6">
-            <SectionHeading
-              eyebrow="Booking now"
-              title="A call or message is all it takes."
-              description="Give us a ring and we will help straight away, or send over your details by email and we will take it from there."
-            />
-            <div className="space-y-4 text-sm leading-7 text-on-surface md:text-base">
-              {bookingNotes.map((note) => (
-                <p key={note}>{note}</p>
-              ))}
+        <div className="relative">
+          <div className="mx-auto max-w-[84rem] px-5 sm:px-6 md:px-8">
+            <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/8 py-5">
+              <div className="hero-entrance flex items-center gap-3">
+                <span className="inline-block size-1.5 rounded-full bg-[var(--color-on-tertiary-container)]" />
+                <p className="text-[0.68rem] font-semibold tracking-[0.28em] text-[var(--color-on-tertiary-container)] uppercase">
+                  Book a table
+                </p>
+              </div>
+              <div className="hero-entrance">
+                <OpenStatusBadge />
+              </div>
             </div>
+
+            <div className="grid gap-10 py-10 md:py-14 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:gap-16 lg:py-16">
+              <div className="hero-entrance-delay-1 space-y-5">
+                <h1 className="max-w-[18ch] text-[clamp(2rem,5vw,3.5rem)] leading-[1.06] font-normal text-white">
+                  Your table is a phone call, an email, or a few taps away.
+                </h1>
+                <p className="max-w-xl text-base leading-7 text-white/72 md:text-lg md:leading-8">
+                  Dinner for two, a birthday with friends, or just a midweek
+                  catch-up — however you like to book, we make it simple.
+                </p>
+              </div>
+
+              <div className="hero-entrance-delay-2 space-y-5 lg:pb-2">
+                <SiteActionCard
+                  actions={[
+                    {
+                      href: bookOnlineHref,
+                      label: "Book online",
+                      icon: <ArrowRight className="size-4" />,
+                    },
+                    {
+                      href: sitePhoneHref,
+                      label: `Call ${sitePhone}`,
+                      icon: <Phone className="size-4" />,
+                    },
+                  ]}
+                  showDivider
+                  tone="dark"
+                />
+                <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-1 text-[0.72rem] font-medium tracking-wide text-[var(--color-on-tertiary-container)]/80">
+                  <span className="inline-flex items-center gap-1.5">
+                    <Clock className="size-3.5" />
+                    {openingHours[0].label}: {openingHours[0].hours}
+                  </span>
+                  <span className="hidden size-1 rounded-full bg-[var(--color-on-tertiary-container)]/40 sm:inline-block" />
+                  <span className="inline-flex items-center gap-1.5">
+                    <CalendarDots className="size-3.5" />
+                    Book ahead for weekends
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className="h-px bg-gradient-to-r from-[var(--color-on-tertiary-container)]/40 via-[var(--color-on-tertiary-container)]/20 to-transparent" />
           </div>
-        }
-      >
-        <div className="surface-frame overflow-hidden">
-          <div className="grid gap-px bg-[rgba(196,189,181,0.22)] lg:grid-cols-[1.08fr_0.92fr]">
-            <div className="surface-pane surface-pane-muted">
-              <div className="space-y-5">
-                <h2 className="section-title">Get in touch</h2>
-                <div className="space-y-4 text-sm leading-7 text-on-surface md:text-base">
-                  <p className="flex items-start gap-3">
-                    <Phone className="mt-1 size-4 shrink-0 text-secondary" />
-                    <span>
-                      <a
-                        href={sitePhoneHref}
-                        className="text-secondary transition hover:text-secondary/80"
-                      >
-                        {sitePhone}
-                      </a>
-                    </span>
+        </div>
+      </section>
+
+      {/* Three booking paths — clear, distinct, no repetition */}
+      <section className="page-section bg-background">
+        <div className="section-shell">
+          <div className="surface-frame overflow-hidden">
+            <div className="grid gap-px bg-[rgba(196,189,181,0.22)] md:grid-cols-3">
+              {/* Online */}
+              <div className="surface-pane bg-[var(--color-surface-lowest)] space-y-5">
+                <div className="space-y-3">
+                  <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
+                    Quickest
                   </p>
-                  <p className="flex items-start gap-3">
-                    <EnvelopeSimple className="mt-1 size-4 shrink-0 text-secondary" />
-                    <span>
-                      <a
-                        href={siteEmailHref}
-                        className="text-secondary transition hover:text-secondary/80"
-                      >
-                        {siteEmail}
-                      </a>
-                    </span>
-                  </p>
-                  <p className="flex items-start gap-3">
-                    <Clock className="mt-1 size-4 shrink-0 text-secondary" />
-                    <span>
-                      {openingHours[0].label}: {openingHours[0].hours}
-                    </span>
-                  </p>
-                  <p className="text-sm text-on-surface/78">
-                    {openingHoursNote}
+                  <h2 className="font-sans text-xl font-semibold text-secondary md:text-2xl">
+                    Book online
+                  </h2>
+                  <p className="text-sm leading-7 text-on-surface md:text-base">
+                    Pick your date, choose a time, and confirm in under a minute.
+                    No account needed.
                   </p>
                 </div>
                 <SiteActionCard
                   actions={[
                     {
-                      href: sitePhoneHref,
-                      label: "Call now",
-                      icon: <Phone className="size-4" />,
-                    },
-                    {
-                      href: siteEmailHref,
-                      label: "Email the team",
-                      icon: <EnvelopeSimple className="size-4" />,
+                      href: bookOnlineHref,
+                      label: "Book online now",
+                      icon: <ArrowRight className="size-4" />,
                     },
                   ]}
-                  showDivider
                 />
               </div>
-            </div>
-            <div className="surface-pane bg-[var(--color-surface-lowest)] lg:pt-12">
-              <p className="eyebrow">Best for</p>
-              <div className="mt-4 space-y-4 text-sm leading-7 text-on-surface md:text-base">
-                <p>
-                  Dinner tonight, catch-ups in town, and last-minute tables.
-                </p>
-                <p>Celebration meals that need a little more notice.</p>
-                <p>Work drinks, group meals, and larger bookings.</p>
-              </div>
-              <SiteActionCard
-                className="mt-6"
-                actions={[
-                  {
-                    href: "/events",
-                    label: "Planning something bigger?",
-                    icon: <CalendarDots className="size-4" />,
-                  },
-                ]}
-              />
-            </div>
-          </div>
-        </div>
-      </StickySplitSection>
 
-      <InlineBookingCta
-        title="Booking for tonight or on the way through town?"
-        description="If you are already in Stony Stratford or fancy coming in tonight, give us a ring and we will do our best to sort your table."
-      />
-
-      <StickySplitSection
-        className="bg-[var(--color-surface-low)]"
-        gridClassName="section-shell grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-start"
-        intro={
-          <SectionHeading
-            eyebrow="Before you book"
-            title="A few details help us get the table just right."
-            description="Tell us when you would like to come in, how many are joining you, and anything worth knowing before you arrive."
-          />
-        }
-      >
-        <div className="surface-frame overflow-hidden">
-          <div className="grid gap-px bg-[rgba(196,189,181,0.22)] md:grid-cols-2">
-            <div className="surface-pane bg-[var(--color-surface-lowest)]">
-              <h2 className="section-title">What to include</h2>
-              <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
-                <p>Your preferred date and arrival time.</p>
-                <p>How many guests are joining you.</p>
-                <p>Any celebration or private-hire details worth knowing.</p>
-                <p>
-                  The best number or email so we can confirm everything for you.
-                </p>
-              </div>
-            </div>
-            <div className="surface-pane surface-pane-muted lg:pt-12">
-              <h2 className="section-title">Good to know</h2>
-              <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
-                <p>
-                  Pop in if you are nearby, or get in touch ahead of time if you
-                  would rather have your table ready and waiting.
-                </p>
-                <p>
-                  If you are arranging a larger occasion, the{" "}
-                  <Link
-                    href="/events"
-                    className="text-secondary transition hover:text-secondary/80"
+              {/* Phone */}
+              <div className="surface-pane surface-pane-muted space-y-5">
+                <div className="space-y-3">
+                  <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
+                    Same-day tables
+                  </p>
+                  <h2 className="font-sans text-xl font-semibold text-secondary md:text-2xl">
+                    Call the pub
+                  </h2>
+                  <p className="text-sm leading-7 text-on-surface md:text-base">
+                    Best for tonight, last-minute plans, or when you just want to
+                    speak to someone.
+                  </p>
+                </div>
+                <div className="space-y-3">
+                  <a
+                    href={sitePhoneHref}
+                    className="inline-flex items-center gap-2 font-sans text-lg font-semibold text-secondary transition hover:text-primary"
                   >
-                    events and private hire page
-                  </Link>{" "}
-                  gives a clearer sense of the spaces available.
-                </p>
+                    <Phone className="size-5" />
+                    {sitePhone}
+                  </a>
+                  <p className="text-sm text-on-surface/78">
+                    {foodHours[0]} {foodHours[1]}
+                  </p>
+                </div>
+              </div>
+
+              {/* Email */}
+              <div className="surface-pane bg-[var(--color-surface-lowest)] space-y-5">
+                <div className="space-y-3">
+                  <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
+                    Larger bookings
+                  </p>
+                  <h2 className="font-sans text-xl font-semibold text-secondary md:text-2xl">
+                    Email us
+                  </h2>
+                  <p className="text-sm leading-7 text-on-surface md:text-base">
+                    Birthdays, group dinners, or anything that needs a little
+                    more planning. Send the details and we will come back to you.
+                  </p>
+                </div>
+                <div className="space-y-3">
+                  <a
+                    href={siteEmailHref}
+                    className="inline-flex items-center gap-2 font-sans text-base font-semibold text-secondary break-all transition hover:text-primary"
+                  >
+                    <EnvelopeSimple className="size-5 shrink-0" />
+                    {siteEmail}
+                  </a>
+                  <p className="text-sm text-on-surface/78">
+                    Include dates, guest numbers, and anything worth knowing.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </StickySplitSection>
+      </section>
 
-      <PageSignoff
-        eyebrow="Ready when you are"
-        title="Reach out in the way that feels quickest and we will take it from there."
-        description="Phone is best when you want an answer straight away. Email works well if you want to send the details over first."
-        body={
-          <p>
-            If you already know the date, the rough time, or the number of
-            guests, send it across and we can help get the table sorted without
-            fuss.
+      {/* Reassurance strip */}
+      <section className="bg-tertiary-container py-10 text-white md:py-12">
+        <div className="section-shell text-center">
+          <p className="text-xs font-semibold tracking-[0.22em] text-[var(--color-on-tertiary-container)] uppercase">
+            Good to know
           </p>
-        }
-        actions={[
-          {
-            href: sitePhoneHref,
-            label: "Call to book",
-            icon: <Phone className="size-4" />,
-          },
-          {
-            href: siteEmailHref,
-            label: "Email a booking request",
-            icon: <EnvelopeSimple className="size-4" />,
-          },
-        ]}
-      />
+          <h2 className="mx-auto mt-3 max-w-2xl text-white">
+            Walk-ins are welcome, but a booking means your table is guaranteed.
+          </h2>
+          <p className="mx-auto mt-3 max-w-xl text-sm leading-7 text-white/72 md:text-base">
+            We do our best with walk-ins, especially earlier in the week. For
+            Friday, Saturday, and bigger groups, booking ahead is the safest bet.
+          </p>
+        </div>
+      </section>
     </main>
   )
 }

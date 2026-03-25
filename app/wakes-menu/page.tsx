@@ -141,7 +141,7 @@ export default function WakesMenuPage() {
       </StickySplitSection>
 
       <InlineBookingCta
-        title="Need a simpler table booking while you work through the bigger plans?"
+        title="Need a table while the bigger plans take shape?"
         description="If the immediate need is just a family table or a quiet meal, you can sort that now and come back to the wider arrangements later."
       />
 

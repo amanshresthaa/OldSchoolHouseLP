@@ -9,6 +9,7 @@ import { MenuInteractive } from "@/components/site/MenuInteractive"
 import { PageHero } from "@/components/site/PageHero"
 import { Button } from "@/components/ui/button"
 import {
+  bookOnlineHref,
   drinksHighlights,
   foodHours,
   policyNotes,
@@ -61,7 +62,7 @@ export default function MenuPage() {
         eyebrow="Food and drink menu"
         title="Two kitchens, one menu, and a table worth coming back to."
         description="Pub favourites sit alongside Nepalese specialities. Browse everything here, then book or call when you are ready."
-        primaryAction={{ href: "/book", label: "Book a table" }}
+        primaryAction={{ href: bookOnlineHref, label: "Book a table" }}
         secondaryAction={{ href: sitePhoneHref, label: "Call 01908 561936" }}
       />
 
@@ -139,12 +140,12 @@ export default function MenuPage() {
       </section>
 
       {/* Editorial break */}
-      <EditorialBreak quote="Come in for something familiar, stay for something you have never tried before." />
+      <EditorialBreak quote="Start with what you know. Stay for what you did not expect." />
 
       {/* D. Inline booking CTA */}
       <InlineBookingCta
-        title="Seen something you fancy?"
-        description="Pick your table now, then come back to the menu if you want a second look before you arrive."
+        title="Ready to try it?"
+        description="Book your table now. You can always come back to the menu for a second look before you arrive."
       />
 
       {/* E. Good to know */}
@@ -165,7 +166,7 @@ export default function MenuPage() {
             icon: <Phone className="size-4" />,
           },
           {
-            href: "/book",
+            href: bookOnlineHref,
             label: "Book a table",
           },
         ]}

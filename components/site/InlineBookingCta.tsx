@@ -1,7 +1,7 @@
 import { ArrowRight, Phone } from "@phosphor-icons/react/dist/ssr"
 
 import { SiteActionCard } from "@/components/site/SiteActionCard"
-import { sitePhoneHref } from "@/data/site"
+import { bookOnlineHref, bookingUrgencyNote, sitePhone, sitePhoneHref } from "@/data/site"
 
 interface InlineBookingCtaProps extends React.ComponentProps<"section"> {
   title: string
@@ -33,17 +33,17 @@ export function InlineBookingCta({
             <SiteActionCard
               actions={[
                 {
-                  href: "/book",
+                  href: bookOnlineHref,
                   label: "Book a table",
                   icon: <ArrowRight className="size-4" />,
                 },
                 {
                   href: sitePhoneHref,
-                  label: "Call the pub",
+                  label: `Call ${sitePhone}`,
                   icon: <Phone className="size-4" />,
                 },
               ]}
-              supportingText="Prefer to speak first? Give the pub a ring."
+              supportingText={`${bookingUrgencyNote} Prefer to speak first? Give the pub a ring.`}
               showDivider
               tone="dark"
             />

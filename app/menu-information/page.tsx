@@ -77,7 +77,7 @@ export default function MenuInformationPage() {
           <div className="space-y-6">
             <SectionHeading
               eyebrow="Start here"
-              title="Here is the easy version."
+              title="The quick version."
               description="Browse the live menu for the latest version, use the PDF when you want something printable, and call us if the answer matters to today."
             />
             <div className="surface-frame">

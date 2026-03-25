@@ -14,7 +14,12 @@ import { PageHero } from "@/components/site/PageHero"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import { SiteActionCard } from "@/components/site/SiteActionCard"
 import { StickySplitSection } from "@/components/site/StickySplitSection"
-import { eventOccasions, siteEmailHref, sitePhoneHref } from "@/data/site"
+import {
+  bookOnlineHref,
+  eventOccasions,
+  siteEmailHref,
+  sitePhoneHref,
+} from "@/data/site"
 
 import eventsImage from "@/images/food/peri-peri-chicken-with-fries-and-salad.png"
 
@@ -59,7 +64,7 @@ export default function EventsPage() {
             <SectionHeading
               eyebrow="Room to gather"
               title="Enough room to host groups without losing the pub feel."
-              description="Keep it relaxed with drinks in the garden, gather everyone around a longer table, or plan something that carries on through the evening."
+              description="Drinks in the garden, a longer table inside, or something that carries on well past dessert — there is space for all of it."
             />
             <Image
               src={eventsImage}
@@ -119,6 +124,63 @@ export default function EventsPage() {
           </div>
         </div>
       </StickySplitSection>
+
+      <section className="page-section bg-background">
+        <div className="section-shell">
+          <div className="surface-frame overflow-hidden">
+            <div className="grid gap-px bg-[rgba(196,189,181,0.22)] lg:grid-cols-[0.9fr_1.1fr]">
+              <div className="surface-pane surface-pane-muted">
+                <SectionHeading
+                  eyebrow="What is included"
+                  title="Practical details for planning your event."
+                  description="Every event is different, so we shape the offer around what you need rather than forcing a fixed package."
+                />
+              </div>
+              <div className="grid gap-px bg-[rgba(196,189,181,0.18)] sm:grid-cols-2">
+                <div className="surface-pane bg-[var(--color-surface-lowest)]">
+                  <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
+                    Space
+                  </p>
+                  <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                    65 covers inside and around 60 outside across the front
+                    garden and private courtyard. Flexible layouts for standing,
+                    seated, or mixed.
+                  </p>
+                </div>
+                <div className="surface-pane surface-pane-muted">
+                  <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
+                    Food and drink
+                  </p>
+                  <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                    Choose from the main menu, a set menu for groups, or a
+                    buffet spread. Drinks can be run on a tab or pay-as-you-go.
+                  </p>
+                </div>
+                <div className="surface-pane surface-pane-muted">
+                  <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
+                    Pricing
+                  </p>
+                  <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                    No fixed hire fee for most bookings. Minimum spend may apply
+                    for exclusive use on busier evenings. Tell us your plans and
+                    we will give you a clear quote.
+                  </p>
+                </div>
+                <div className="surface-pane bg-[var(--color-surface-lowest)]">
+                  <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
+                    Extras
+                  </p>
+                  <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                    Live sport on screens, music options, and decoration
+                    flexibility. We will help tailor the details once you get in
+                    touch.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <InlineBookingCta
         title="Need a table first and an event later?"
@@ -180,7 +242,7 @@ export default function EventsPage() {
         </div>
       </StickySplitSection>
 
-      <EditorialBreak quote="The best gatherings start with a conversation, not a fixed package." />
+      <EditorialBreak quote="Tell us what you have in mind. We will work out the rest together." />
 
       <PageSignoff
         eyebrow="Start planning"
@@ -188,14 +250,14 @@ export default function EventsPage() {
         description="If you already know the date, the guest list, or the kind of table you want, send it through and we will help put it together."
         body={
           <p>
-            Some gatherings only need a few tables and a round of drinks. Others
-            need food, space, and a bit more planning. Either way, we would love
-            to hear from you.
+            Some nights only need a few tables and a round of drinks. Others
+            need food, space, and a bit more thought. Either way, drop us a
+            line.
           </p>
         }
         actions={[
           {
-            href: "/book",
+            href: bookOnlineHref,
             label: "Book a table instead",
             icon: <CalendarDots className="size-4" />,
           },

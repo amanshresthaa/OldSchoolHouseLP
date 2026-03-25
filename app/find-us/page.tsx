@@ -17,6 +17,8 @@ import { StickySplitSection } from "@/components/site/StickySplitSection"
 import {
   accessibilityNotes,
   arrivalNotes,
+  bookOnlineHref,
+  directionsHref,
   mapHref,
   openingHours,
   openingHoursNote,
@@ -43,8 +45,8 @@ export default function FindUsPage() {
       <PageHero
         eyebrow="Find us"
         title="Everything you need to find us easily."
-        description="Find the address, opening hours, phone number, and map all in one place so joining us feels easy from the start."
-        primaryAction={{ href: mapHref, label: "Open map" }}
+        description="Address, hours, phone number, and a map — everything in one place."
+        primaryAction={{ href: directionsHref, label: "Get directions" }}
         secondaryAction={{ href: sitePhoneHref, label: "Call the pub" }}
       />
 
@@ -55,7 +57,7 @@ export default function FindUsPage() {
             <SectionHeading
               eyebrow="Address and contact"
               title="The Old School House sits on the busiest road in Stony Stratford."
-              description="Right on London Road, we are easy to spot whether you are stopping by for a quick drink, dinner with friends, or a longer evening in town."
+              description="Right on London Road, we are easy to spot whether you are popping in for a drink, meeting friends for dinner, or making an evening of it."
             />
             <div className="surface-frame">
               <div className="surface-pane">
@@ -98,12 +100,12 @@ export default function FindUsPage() {
             <SiteActionCard
               actions={[
                 {
-                  href: mapHref,
-                  label: "Open Google Maps",
+                  href: directionsHref,
+                  label: "Get directions",
                 },
                 {
-                  href: sitePhoneHref,
-                  label: "Call for directions",
+                  href: mapHref,
+                  label: "View on Google Maps",
                 },
               ]}
               showDivider
@@ -134,7 +136,7 @@ export default function FindUsPage() {
         description="If you know you are joining us, book ahead and arrive with everything nicely sorted."
       />
 
-      <EditorialBreak quote="Easy to find, easy to settle into, and easy to come back to." />
+      <EditorialBreak quote="Easy to find, hard to leave, and worth coming back to." />
 
       <StickySplitSection
         className="bg-[var(--color-surface-low)]"
@@ -231,8 +233,8 @@ export default function FindUsPage() {
         intro={
           <SectionHeading
             eyebrow="Before you come"
-            title="If you need anything else, give us a ring."
-            description="If you want to check parking, opening hours, or anything else before you arrive, just give us a call."
+            title="Any other questions before you head over?"
+            description="Parking, hours, access — if something is on your mind, a quick call sorts it."
           />
         }
       >
@@ -256,7 +258,7 @@ export default function FindUsPage() {
               <SiteActionCard
                 actions={[
                   {
-                    href: "/book",
+                    href: bookOnlineHref,
                     label: "Book a table",
                   },
                 ]}
@@ -268,23 +270,22 @@ export default function FindUsPage() {
 
       <PageSignoff
         eyebrow="Finish planning"
-        title="Once the route is sorted, the easiest next step is deciding whether to book ahead."
-        description="Open the map if you are checking the journey, or lock the table in now if you already know you are coming."
+        title="Route sorted? Book a table and you are all set."
+        description="Open the map if you still need directions, or go straight to booking if you already know you are coming."
         body={
           <p>
-            If you need a quick answer before you set off, give the pub a ring.
-            If you are already sure about the visit, booking ahead keeps the
-            rest simple.
+            Quick question before you leave? Give us a ring. Already sure? Book
+            now and skip the guesswork.
           </p>
         }
         actions={[
           {
-            href: "/book",
+            href: bookOnlineHref,
             label: "Book a table",
           },
           {
-            href: mapHref,
-            label: "Open the map",
+            href: directionsHref,
+            label: "Get directions",
             icon: <MapPin className="size-4" />,
           },
         ]}

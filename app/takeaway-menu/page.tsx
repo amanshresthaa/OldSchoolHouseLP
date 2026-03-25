@@ -48,8 +48,8 @@ export default function TakeawayMenuPage() {
     <main>
       <PageHero
         eyebrow="Takeaway menu"
-        title="A simple way to browse at home and order by phone."
-        description="If you are planning a takeaway, start with the PDF, then give the pub a ring when you are ready to order or want help choosing."
+        title="Browse at home, order by phone, collect from the pub."
+        description="Our takeaway is collection only — browse the menu, give us a ring to order, and pick it up when it is ready."
         primaryAction={{
           href: siteMenuPdfHref,
           label: "Download PDF menu",
@@ -149,13 +149,13 @@ export default function TakeawayMenuPage() {
       </StickySplitSection>
 
       <InlineBookingCta
-        title="Thinking you may want the table instead of the takeaway?"
-        description="If the plan shifts from collection to sitting in, book ahead and keep the evening easy."
+        title="Changed your mind about staying home?"
+        description="If collection turns into dinner plans, book a table and come sit with us instead."
       />
 
       <PageSignoff
         eyebrow="Next step"
-        title="Browse the menu in the format that suits you, then give the pub a ring when you are ready."
+        title="Find what you want, call to order, and collect when we give you a time."
         description="The PDF is useful for sharing. The live menu is better when you want to move quickly between sections on your phone."
         body={
           <p>

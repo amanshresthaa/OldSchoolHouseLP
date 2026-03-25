@@ -23,6 +23,7 @@ import { SiteActionCard } from "@/components/site/SiteActionCard"
 import {
   arrivalNotes,
   atmosphereMoments,
+  bookOnlineHref,
   eventOccasions,
   eventsHighlights,
   foodHours,
@@ -127,7 +128,7 @@ const menuPreviewShowcase = [
   {
     eyebrow: "First stop",
     title: "Momo",
-    caption: "Traditional Nepalese dumplings that get the table started well.",
+    caption: "Steamed dumplings with chutney — the way most tables start here.",
     image: momoImage,
     alt: "A plate of momo dumplings served with chutney at The Old School House.",
     item: requireMenuItem("Momo (Veg)"),
@@ -136,7 +137,7 @@ const menuPreviewShowcase = [
     eyebrow: "Best for sharing",
     title: "Large Mixed Grill",
     caption:
-      "A lively middle of the table when everyone wants a little of everything.",
+      "Enough meat, heat, and colour for the whole table to share.",
     image: mixedGrillImage,
     alt: "A large mixed grill with assorted meats served on a sizzling platter at The Old School House.",
     item: requireMenuItem("Large Mixed Grill"),
@@ -144,7 +145,7 @@ const menuPreviewShowcase = [
   {
     eyebrow: "Go richer",
     title: "Goat Curry",
-    caption: "A slower, fuller plate for when dinner starts to settle in.",
+    caption: "Rich, slow-cooked, and best with rice or naan on the side.",
     image: goatCurryImage,
     alt: "A bowl of goat curry from the Nepalese kitchen at The Old School House.",
     item: requireMenuItem("Khasi Ko Masu (Goat Curry) (GF)"),
@@ -154,19 +155,19 @@ const menuPreviewShowcase = [
 const menuPreviewJourney = [
   {
     label: "Start with",
-    note: "Bring something Nepalese to the table straight away and let everyone dip in.",
+    note: "Something Nepalese to start — let everyone pick and dip.",
     href: "/menu#starters",
     item: menuPreviewShowcase[0].item,
   },
   {
     label: "Share in the middle",
-    note: "When the table wants colour, heat, and a bit of theatre, this is the move.",
+    note: "For the middle of the table when everyone wants a bit of everything.",
     href: "/menu#mixed-grills",
     item: menuPreviewShowcase[1].item,
   },
   {
     label: "Finish with a house dish",
-    note: "Settle into one of the kitchen favourites and round it out with rice or naan.",
+    note: "One of the kitchen favourites, best finished with rice or naan.",
     href: "/menu#speciality-dishes",
     item: menuPreviewShowcase[2].item,
   },
@@ -249,8 +250,8 @@ export default function Page() {
                     The Old School House.
                   </h1>
                   <p className="max-w-2xl font-heading text-2xl leading-snug text-white/90 md:text-3xl md:leading-snug">
-                    Traditional pub comfort, Nepalese cooking, and a warm
-                    welcome on London Road.
+                    Traditional pub comfort, Nepalese cooking, and a good
+                    reason to visit London Road.
                   </p>
                 </div>
 
@@ -258,14 +259,14 @@ export default function Page() {
                 <div className="hero-entrance-delay-2 space-y-6 lg:pb-2">
                   <p className="max-w-lg text-base leading-7 text-white/72 md:text-lg md:leading-8">
                     Come in for pub favourites, stay for Nepalese dishes, and
-                    settle into a bar, front garden, and courtyard built for
-                    longer evenings.
+                    find a bar, front garden, and courtyard made for longer
+                    evenings.
                   </p>
 
                   <SiteActionCard
                     actions={[
                       {
-                        href: "/book",
+                        href: bookOnlineHref,
                         label: "Book a table",
                         icon: <CalendarDots className="size-4" />,
                       },
@@ -294,13 +295,39 @@ export default function Page() {
                     Stony Stratford, Milton Keynes
                   </span>
                   <span className="hidden size-1 rounded-full bg-[var(--color-on-tertiary-container)]/40 sm:inline-block" />
-                  <span className="inline-flex items-center gap-1.5">
+                  <a href={sitePhoneHref} className="inline-flex items-center gap-1.5 transition hover:text-[var(--color-on-tertiary-container)]">
                     <Phone className="size-3.5" />
                     {sitePhone}
+                  </a>
+                  <span className="hidden size-1 rounded-full bg-[var(--color-on-tertiary-container)]/40 sm:inline-block" />
+                  <span className="inline-flex items-center gap-1.5">
+                    <CalendarDots className="size-3.5" />
+                    Book ahead for weekends
                   </span>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-black/5 bg-[var(--color-surface-low)] py-5 md:py-6">
+        <div className="section-shell">
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-center text-sm font-medium text-on-surface md:gap-x-12">
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-0.5 text-[#fbbc04]">
+                {Array.from({ length: 5 }).map((_, index) => (
+                  <Star key={index} size={14} weight="fill" />
+                ))}
+              </div>
+              <span>Rated on Google</span>
+            </div>
+            <span className="hidden size-1 rounded-full bg-on-surface/20 sm:inline-block" />
+            <span>Open 7 days a week</span>
+            <span className="hidden size-1 rounded-full bg-on-surface/20 sm:inline-block" />
+            <span>125+ covers inside and out</span>
+            <span className="hidden size-1 rounded-full bg-on-surface/20 sm:inline-block" />
+            <span>Takeaway (collection only)</span>
           </div>
         </div>
       </section>
@@ -312,8 +339,8 @@ export default function Page() {
               <div className="surface-pane surface-pane-muted order-1">
                 <SectionHeading
                   eyebrow="Why choose us"
-                  title="A proper pub with a Nepalese kitchen worth coming back for."
-                  description="Familiar pub comfort, a stronger food story, and a room that stays relaxed from first drink to last bite."
+                  title="A proper pub with a kitchen you would not expect."
+                  description="Familiar pub comfort, a more interesting menu, and a room that stays relaxed all evening."
                 />
                 <Image
                   src={startersImage}
@@ -373,7 +400,7 @@ export default function Page() {
                       icon: <ForkKnife className="size-4" />,
                     },
                     {
-                      href: "/book",
+                      href: bookOnlineHref,
                       label: "Book for dinner",
                       icon: <CalendarDots className="size-4" />,
                     },
@@ -569,7 +596,7 @@ export default function Page() {
                   icon: <ForkKnife className="size-4" />,
                 },
                 {
-                  href: "/book",
+                  href: bookOnlineHref,
                   label: "Book for dinner",
                   icon: <CalendarDots className="size-4" />,
                 },
@@ -581,9 +608,31 @@ export default function Page() {
       </section>
 
       <InlineBookingCta
-        title="Book ahead and arrive knowing your table is waiting."
-        description="Dinner, drinks, or an easy catch-up all start better when the table is already sorted."
+        title="Know where you are sitting before you arrive."
+        description="A quick booking now means no waiting around when you get here."
       />
+
+      <section className="border-y border-black/5 bg-[var(--color-surface-low)] py-6 md:py-8">
+        <div className="section-shell flex flex-col items-center gap-4 text-center sm:flex-row sm:justify-between sm:text-left">
+          <div>
+            <p className="text-sm font-semibold text-on-background">
+              Prefer to eat at home?
+            </p>
+            <p className="pt-1 text-sm leading-6 text-on-surface">
+              Browse the takeaway menu, call to order, and collect when it is ready.
+            </p>
+          </div>
+          <SiteActionCard
+            actions={[
+              {
+                href: "/takeaway-menu",
+                label: "Collection menu",
+                icon: <ArrowRight className="size-4" />,
+              },
+            ]}
+          />
+        </div>
+      </section>
 
       <section className="page-section bg-background">
         <div className="section-shell grid gap-8 lg:grid-cols-[0.6fr_1.4fr] lg:items-start">
@@ -595,6 +644,30 @@ export default function Page() {
               className="order-1"
             />
             <div className="surface-frame order-3 lg:mt-5">
+              <div className="surface-pane bg-[var(--color-surface-lowest)]">
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-0.5 text-[#fbbc04]">
+                    {Array.from({ length: 5 }).map((_, index) => (
+                      <Star key={index} size={14} weight="fill" />
+                    ))}
+                  </div>
+                  <span className="text-sm font-semibold text-on-background">
+                    Rated on Google
+                  </span>
+                </div>
+                <p className="pt-2 text-sm leading-6 text-on-surface">
+                  See what guests are saying about their visits.
+                </p>
+                <a
+                  href={mapHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-secondary transition hover:text-primary"
+                >
+                  Read reviews on Google
+                  <ArrowRight className="size-4" />
+                </a>
+              </div>
               <div className="surface-pane surface-pane-muted">
                 <p className="eyebrow">Share your visit</p>
                 <p className="pt-3 text-sm leading-6 text-on-surface md:text-base md:leading-7">
@@ -812,8 +885,8 @@ export default function Page() {
                   ))}
                 </div>
                 <div className="content-card mt-4 bg-[linear-gradient(135deg,rgba(212,160,23,0.14),rgba(255,255,255,0.04))] px-4 py-4 text-sm leading-6 text-white/72 md:px-5">
-                  Front garden, private courtyard, and room inside keep bigger
-                  plans feeling relaxed from first drink to last round.
+                  Front garden, private courtyard, and room inside — so the
+                  evening never feels squeezed.
                 </div>
               </div>
             </div>

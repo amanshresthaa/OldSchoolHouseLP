@@ -21,6 +21,7 @@ import {
   aboutPubFacts,
   aboutReasons,
   aboutStoryNotes,
+  bookOnlineHref,
   lapenInnsHref,
   siteEmailHref,
 } from "@/data/site"
@@ -42,8 +43,8 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About"
         title="The story behind a proper Stony Stratford pub with a Nepalese kitchen."
-        description="Previously known as The Plough, The Old School House brings together classic pub character, a broader food story, and enough room to settle in properly."
-        primaryAction={{ href: "/book", label: "Book a table" }}
+        description="Previously known as The Plough, The Old School House brings together classic pub character, a kitchen with real range, and enough room to stay as long as you like."
+        primaryAction={{ href: bookOnlineHref, label: "Book a table" }}
         secondaryAction={{ href: "/menu", label: "Browse the menu" }}
       />
 
@@ -55,7 +56,7 @@ export default function AboutPage() {
                 <SectionHeading
                   eyebrow="Why people choose it"
                   title="It feels familiar in the right ways, but gives you more than the usual pub stop."
-                  description="The building gives the pub its character. The kitchen gives it range. Together they make it easy to return for drinks, dinner, and bigger plans."
+                  description="The building gives the pub its warmth. The kitchen gives it range. Together they give you a reason to come back for drinks, dinner, and the occasional birthday."
                 />
                 <div className="mt-5 space-y-4 text-sm leading-7 text-on-surface md:text-base">
                   {aboutStoryNotes.map((note) => (
@@ -126,7 +127,7 @@ export default function AboutPage() {
                   className="mt-6"
                   actions={[
                     {
-                      href: "/book",
+                      href: bookOnlineHref,
                       label: "Book a table",
                       icon: <ArrowRight className="size-4" />,
                     },
@@ -225,26 +226,26 @@ export default function AboutPage() {
       </section>
 
       <InlineBookingCta
-        title="Want the feel of the place without overthinking the first visit?"
-        description="Book a table now and let the room, the food, and the evening do the convincing once you arrive."
+        title="The best way to decide is to come in."
+        description="Book a table, try the menu, and let the evening do the rest."
       />
 
-      <EditorialBreak quote="A proper pub with a broader food story, built for the kind of return visits that turn one drink into a usual table." />
+      <EditorialBreak quote="A proper pub where the food keeps surprising you and one drink keeps turning into another." />
 
       <PageSignoff
         eyebrow="Next step"
-        title="Now you know the shape of the place, the best part is coming in."
-        description="Whether you are planning dinner, drinks, or a bigger get-together, the rest of the site can help you move from browsing to booking."
+        title="Now you know the story, the best part is pulling up a chair."
+        description="Whether it is dinner, drinks, or something you want to celebrate, your next step is just below."
         body={
           <p>
-            Start with the menu if you want to get a feel for the food, head to
-            find us if you are planning the journey, or book now if you already
-            know this is your kind of pub.
+            Start with the menu if you are curious about the food, check find us
+            if you need directions, or just book now if you have already made up
+            your mind.
           </p>
         }
         actions={[
           {
-            href: "/book",
+            href: bookOnlineHref,
             label: "Book a table",
             icon: <ArrowRight className="size-4" />,
           },
