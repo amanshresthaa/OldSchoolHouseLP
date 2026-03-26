@@ -6,13 +6,7 @@ import { InlineBookingCta } from "@/components/site/InlineBookingCta"
 import { PageHero } from "@/components/site/PageHero"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import { SiteActionCard } from "@/components/site/SiteActionCard"
-import { StickySplitSection } from "@/components/site/StickySplitSection"
-import {
-  bookOnlineHref,
-  eventOccasions,
-  siteEmailHref,
-  sitePhoneHref,
-} from "@/data/site"
+import { eventOccasions, siteEmailHref, sitePhoneHref } from "@/data/site"
 
 import eventsImage from "@/images/food/peri-peri-chicken-with-fries-and-salad.png"
 
@@ -50,126 +44,115 @@ export default function EventsPage() {
         secondaryAction={{ href: sitePhoneHref, label: "Call the pub" }}
       />
 
-      <StickySplitSection
-        className="bg-background"
-        intro={
-          <div className="space-y-6">
+      <section className="bg-background py-10 md:py-14 lg:py-16">
+        <div className="section-shell space-y-5">
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <SectionHeading
               eyebrow="Room to gather"
               title="Enough room to host groups without losing the pub feel."
               description="Drinks in the garden, a longer table inside, or something that carries on well past dessert — there is space for all of it."
             />
+          </div>
+          <div className="grid gap-4 lg:grid-cols-[1fr_1.2fr]">
             <Image
               src={eventsImage}
               alt="A large plate of peri-peri chicken with fries and salad at The Old School House."
-              className="media-lift h-[22rem] w-full rounded-[2rem] object-cover md:h-[30rem] lg:h-[36rem]"
+              className="media-lift h-[16rem] w-full rounded-2xl object-cover md:h-[20rem] lg:h-full"
               sizes="(min-width: 1024px) 40vw, 100vw"
             />
-          </div>
-        }
-      >
-        <div className="surface-frame overflow-hidden">
-          <div className="grid gap-px bg-[rgba(196,189,181,0.22)] lg:grid-cols-2">
-            {capacityNotes.map((note) => (
-              <div
-                key={note}
-                className="surface-pane bg-[var(--color-surface-lowest)] text-sm leading-7 text-on-surface md:text-base"
-              >
-                {note}
-              </div>
-            ))}
+            <div className="grid gap-px overflow-hidden rounded-2xl bg-[rgba(196,189,181,0.22)] sm:grid-cols-2">
+              {capacityNotes.map((note, index) => (
+                <div
+                  key={note}
+                  className={`px-5 py-5 text-sm leading-7 text-on-surface md:px-6 md:py-6 md:text-base ${index % 2 === 0 ? "bg-[var(--color-surface-lowest)]" : "surface-pane-muted"}`}
+                >
+                  {note}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </StickySplitSection>
+      </section>
 
-      <StickySplitSection
-        className="bg-[var(--color-surface-low)]"
-        introClassName="space-y-5"
-        intro={
-          <div className="space-y-5">
+      <section className="bg-[var(--color-surface-low)] py-10 md:py-14 lg:py-16">
+        <div className="section-shell space-y-5">
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <SectionHeading
               eyebrow="Occasions"
               title="More than just formal private hire."
               description="Big celebrations, casual get-togethers, match-day meetups, and tasting nights all feel right at home here."
             />
-            <SiteActionCard
-              actions={[
-                {
-                  href: siteEmailHref,
-                  label: "Start an enquiry",
-                  icon: <EnvelopeSimple className="size-4" />,
-                },
-              ]}
-            />
+            <div className="shrink-0">
+              <SiteActionCard
+                actions={[
+                  {
+                    href: siteEmailHref,
+                    label: "Start an enquiry",
+                    icon: <EnvelopeSimple className="size-4" />,
+                  },
+                ]}
+              />
+            </div>
           </div>
-        }
-      >
-        <div className="surface-frame overflow-hidden">
-          <div className="grid gap-px bg-[rgba(196,189,181,0.22)] md:grid-cols-2">
+          <div className="grid gap-px overflow-hidden rounded-2xl bg-[rgba(196,189,181,0.22)] md:grid-cols-2">
             {eventOccasions.map((occasion, index) => (
               <div
                 key={occasion}
-                className={`surface-pane text-sm leading-7 font-medium text-on-background md:text-base ${index % 2 === 0 ? "surface-pane-muted" : "bg-[var(--color-surface-lowest)]"}`}
+                className={`px-5 py-5 text-sm leading-7 font-medium text-on-background md:px-6 md:py-6 md:text-base ${index % 2 === 0 ? "surface-pane-muted" : "bg-[var(--color-surface-lowest)]"}`}
               >
                 {occasion}
               </div>
             ))}
           </div>
         </div>
-      </StickySplitSection>
+      </section>
 
-      <section className="page-section bg-background">
-        <div className="section-shell">
-          <div className="surface-frame overflow-hidden">
-            <div className="grid gap-px bg-[rgba(196,189,181,0.22)] lg:grid-cols-[0.9fr_1.1fr]">
-              <div className="surface-pane surface-pane-muted">
-                <SectionHeading
-                  eyebrow="What is included"
-                  title="Practical details for planning your event."
-                  description="Every event is different, so we shape the offer around what you need rather than forcing a fixed package."
-                />
-              </div>
-              <div className="grid gap-px bg-[rgba(196,189,181,0.18)] sm:grid-cols-2">
-                <div className="surface-pane bg-[var(--color-surface-lowest)]">
-                  <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
-                    Space
-                  </p>
-                  <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
-                    65 covers inside and around 60 outside across the front
-                    garden and private courtyard. Flexible layouts for standing,
-                    seated, or mixed.
-                  </p>
-                </div>
-                <div className="surface-pane surface-pane-muted">
-                  <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
-                    Food and drink
-                  </p>
-                  <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
-                    Choose from the main menu, a set menu for groups, or a
-                    buffet spread. Drinks can be run on a tab or pay-as-you-go.
-                  </p>
-                </div>
-                <div className="surface-pane surface-pane-muted">
-                  <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
-                    Pricing
-                  </p>
-                  <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
-                    No fixed hire fee for most bookings. Minimum spend may apply
-                    for exclusive use on busier evenings. Tell us your plans and
-                    we will give you a clear quote.
-                  </p>
-                </div>
-                <div className="surface-pane bg-[var(--color-surface-lowest)]">
-                  <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
-                    Extras
-                  </p>
-                  <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
-                    Live sport on screens, music options, and decoration
-                    flexibility. We will help tailor the details once you get in
-                    touch.
-                  </p>
-                </div>
-              </div>
+      <section className="bg-background py-10 md:py-14 lg:py-16">
+        <div className="section-shell space-y-5">
+          <SectionHeading
+            eyebrow="What is included"
+            title="Practical details for planning your event."
+            description="Every event is different, so we shape the offer around what you need rather than forcing a fixed package."
+          />
+          <div className="grid gap-px overflow-hidden rounded-2xl bg-[rgba(196,189,181,0.22)] sm:grid-cols-2 lg:grid-cols-4">
+            <div className="bg-[var(--color-surface-lowest)] px-5 py-5 md:px-6 md:py-6">
+              <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
+                Space
+              </p>
+              <p className="pt-2 text-sm leading-7 text-on-surface">
+                65 covers inside and around 60 outside across the front garden
+                and private courtyard. Flexible layouts for standing, seated, or
+                mixed.
+              </p>
+            </div>
+            <div className="surface-pane-muted px-5 py-5 md:px-6 md:py-6">
+              <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
+                Food and drink
+              </p>
+              <p className="pt-2 text-sm leading-7 text-on-surface">
+                Choose from the main menu, a set menu for groups, or a buffet
+                spread. Drinks can be run on a tab or pay-as-you-go.
+              </p>
+            </div>
+            <div className="bg-[var(--color-surface-lowest)] px-5 py-5 md:px-6 md:py-6">
+              <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
+                Pricing
+              </p>
+              <p className="pt-2 text-sm leading-7 text-on-surface">
+                No fixed hire fee for most bookings. Minimum spend may apply for
+                exclusive use on busier evenings. Tell us your plans and we will
+                give you a clear quote.
+              </p>
+            </div>
+            <div className="surface-pane-muted px-5 py-5 md:px-6 md:py-6">
+              <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
+                Extras
+              </p>
+              <p className="pt-2 text-sm leading-7 text-on-surface">
+                Live sport on screens, music options, and decoration
+                flexibility. We will help tailor the details once you get in
+                touch.
+              </p>
             </div>
           </div>
         </div>
@@ -180,42 +163,16 @@ export default function EventsPage() {
         description="If this visit is just drinks or dinner, book a table now. If you are planning something bigger, send us the details and we will help with the rest."
       />
 
-      <StickySplitSection
-        className="bg-background"
-        intro={
-          <SectionHeading
-            eyebrow="Plan the details"
-            title="A little context helps us shape the right kind of gathering."
-            description="Tell us the rough numbers, the kind of setup you want, and whether food, drinks, or the match matter most."
-          />
-        }
-      >
-        <div className="surface-frame overflow-hidden">
-          <div className="grid gap-px bg-[rgba(196,189,181,0.22)] md:grid-cols-[0.94fr_1.06fr]">
-            <div className="surface-pane surface-pane-muted">
-              <h2 className="section-title">What works well here</h2>
-              <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
-                <p>Sports screenings and local team socials.</p>
-                <p>Seasonal tasting evenings and menu launches.</p>
-                <p>
-                  Functions and parties that want indoor and outdoor
-                  flexibility.
-                </p>
-                <p>
-                  Community gatherings that still want a proper food and drink
-                  offer.
-                </p>
-              </div>
-            </div>
-            <div className="surface-pane bg-[var(--color-surface-lowest)] lg:pt-12">
-              <h2 className="section-title">What to send in your enquiry</h2>
-              <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
-                {enquiryChecklist.map((item) => (
-                  <p key={item}>{item}</p>
-                ))}
-              </div>
+      <section className="bg-background py-10 md:py-14 lg:py-16">
+        <div className="section-shell space-y-5">
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <SectionHeading
+              eyebrow="Plan the details"
+              title="A little context helps us shape the right kind of gathering."
+              description="Tell us the rough numbers, the kind of setup you want, and whether food, drinks, or the match matter most."
+            />
+            <div className="shrink-0">
               <SiteActionCard
-                className="mt-6"
                 actions={[
                   {
                     href: siteEmailHref,
@@ -232,8 +189,37 @@ export default function EventsPage() {
               />
             </div>
           </div>
+          <div className="grid gap-4 lg:grid-cols-2">
+            <div className="rounded-2xl bg-[var(--color-surface-lowest)] px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6">
+              <h3 className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
+                What works well here
+              </h3>
+              <div className="mt-3 space-y-2 text-sm leading-7 text-on-surface md:text-base">
+                <p>Sports screenings and local team socials.</p>
+                <p>Seasonal tasting evenings and menu launches.</p>
+                <p>
+                  Functions and parties that want indoor and outdoor
+                  flexibility.
+                </p>
+                <p>
+                  Community gatherings that still want a proper food and drink
+                  offer.
+                </p>
+              </div>
+            </div>
+            <div className="surface-pane-muted rounded-2xl px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6">
+              <h3 className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
+                What to send in your enquiry
+              </h3>
+              <div className="mt-3 space-y-2 text-sm leading-7 text-on-surface md:text-base">
+                {enquiryChecklist.map((item) => (
+                  <p key={item}>{item}</p>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
-      </StickySplitSection>
+      </section>
     </main>
   )
 }

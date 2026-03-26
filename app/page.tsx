@@ -5,7 +5,6 @@ import {
   ArrowRight,
   CalendarDots,
   CaretDown,
-  ChatCircleDots,
   Clock,
   ForkKnife,
   MapPin,
@@ -27,7 +26,7 @@ import {
   eventOccasions,
   eventsHighlights,
   foodHours,
-  googleReviewHref,
+  googleReviewsPageHref,
   guestReviews,
   homeReasons,
   localFaqs,
@@ -75,7 +74,7 @@ function VenuePhotoPlaceholder({
       <div className="relative flex h-full items-end p-5 md:p-6">
         <div className="rounded-2xl bg-[var(--color-surface-lowest)]/88 px-4 py-3 backdrop-blur-sm">
           <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
-            Photo Placeholder
+            Coming soon
           </p>
           <p className="pt-1 font-heading text-2xl text-on-background">
             {title}
@@ -136,8 +135,7 @@ const menuPreviewShowcase = [
   {
     eyebrow: "Best for sharing",
     title: "Large Mixed Grill",
-    caption:
-      "Enough meat, heat, and colour for the whole table to share.",
+    caption: "Enough meat, heat, and colour for the whole table to share.",
     image: mixedGrillImage,
     alt: "A large mixed grill with assorted meats served on a sizzling platter at The Old School House.",
     item: requireMenuItem("Large Mixed Grill"),
@@ -250,13 +248,13 @@ export default function Page() {
                     The Old School House.
                   </h1>
                   <p className="max-w-2xl font-heading text-2xl leading-snug text-white/90 md:text-3xl md:leading-snug">
-                    Traditional pub comfort, Nepalese cooking, and a good
-                    reason to visit London Road.
+                    Traditional pub comfort, Nepalese cooking, and a good reason
+                    to visit London Road.
                   </p>
                 </div>
 
                 {/* Right column — description, CTA, meta */}
-                <div className="hero-entrance-delay-2 space-y-6 lg:pb-2">
+                <div className="hero-entrance-delay-2 space-y-5 lg:pb-2">
                   <p className="max-w-lg text-base leading-7 text-white/72 md:text-lg md:leading-8">
                     Come in for pub favourites, stay for Nepalese dishes, and
                     find a bar, front garden, and courtyard made for longer
@@ -295,7 +293,10 @@ export default function Page() {
                     Stony Stratford, Milton Keynes
                   </span>
                   <span className="hidden size-1 rounded-full bg-[var(--color-on-tertiary-container)]/40 sm:inline-block" />
-                  <a href={sitePhoneHref} className="inline-flex items-center gap-1.5 transition hover:text-[var(--color-on-tertiary-container)]">
+                  <a
+                    href={sitePhoneHref}
+                    className="inline-flex items-center gap-1.5 transition hover:text-[var(--color-on-tertiary-container)]"
+                  >
                     <Phone className="size-3.5" />
                     {sitePhone}
                   </a>
@@ -376,8 +377,8 @@ export default function Page() {
       </section>
 
       <section className="page-section bg-[var(--color-surface-low)]">
-        <div className="section-shell space-y-6 md:space-y-8">
-          <div className="grid gap-8 lg:grid-cols-[0.74fr_1.26fr] lg:items-end">
+        <div className="section-shell space-y-5">
+          <div className="grid gap-6 lg:grid-cols-[0.74fr_1.26fr] lg:items-end">
             <div className="min-w-0 space-y-5 lg:pb-4">
               <SectionHeading
                 eyebrow="Menu preview"
@@ -619,7 +620,8 @@ export default function Page() {
               Prefer to eat at home?
             </p>
             <p className="pt-1 text-sm leading-6 text-on-surface">
-              Browse the takeaway menu, call to order, and collect when it is ready.
+              Browse the takeaway menu, call to order, and collect when it is
+              ready.
             </p>
           </div>
           <SiteActionCard
@@ -634,68 +636,41 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="page-section bg-background">
-        <div className="section-shell grid gap-8 lg:grid-cols-[0.6fr_1.4fr] lg:items-start">
-          <div className="contents lg:sticky lg:top-28 lg:block lg:space-y-5">
+      <section className="bg-background py-10 md:py-14 lg:py-16">
+        <div className="section-shell space-y-5">
+          <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
             <SectionHeading
               eyebrow="Guest reviews"
               title="What guests talk about after a visit."
               description="Good food, good drinks, and a room that makes staying for another round easy."
-              className="order-1"
             />
-            <div className="surface-frame order-3 lg:mt-5">
-              <div className="surface-pane bg-[var(--color-surface-lowest)]">
-                <div className="flex items-center gap-3">
-                  <div className="flex items-center gap-0.5 text-[#fbbc04]">
-                    {Array.from({ length: 5 }).map((_, index) => (
-                      <Star key={index} size={14} weight="fill" />
-                    ))}
-                  </div>
-                  <span className="text-sm font-semibold text-on-background">
-                    Rated on Google
-                  </span>
+            <div className="flex shrink-0 items-center gap-6">
+              <div className="flex items-center gap-2">
+                <div className="flex items-center gap-0.5 text-[#fbbc04]">
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <Star key={index} size={14} weight="fill" />
+                  ))}
                 </div>
-                <p className="pt-2 text-sm leading-6 text-on-surface">
-                  See what guests are saying about their visits.
-                </p>
-                <a
-                  href={mapHref}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-secondary transition hover:text-primary"
-                >
-                  Read reviews on Google
-                  <ArrowRight className="size-4" />
-                </a>
+                <span className="text-sm font-semibold text-on-background">
+                  Rated on Google
+                </span>
               </div>
-              <div className="surface-pane surface-pane-muted">
-                <p className="eyebrow">Share your visit</p>
-                <p className="pt-3 text-sm leading-6 text-on-surface md:text-base md:leading-7">
-                  Leave a quick note on Google and help the next guest decide.
-                </p>
-                <SiteActionCard
-                  className="mt-4"
-                  actions={[
-                    {
-                      href: googleReviewHref,
-                      label: "Write a Google review",
-                      icon: <ChatCircleDots className="size-4" />,
-                    },
-                    {
-                      href: mapHref,
-                      label: "Open on Google Maps",
-                      icon: <ArrowRight className="size-4" />,
-                    },
-                  ]}
-                  showDivider
-                />
-              </div>
+              <a
+                href={googleReviewsPageHref}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-secondary transition hover:text-primary"
+              >
+                Read reviews
+                <ArrowRight className="size-4" />
+              </a>
             </div>
           </div>
-          <div className="surface-frame relative order-2 overflow-hidden lg:order-none">
-            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-[linear-gradient(90deg,var(--color-background),rgba(249,246,241,0))] md:w-20" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-[linear-gradient(270deg,var(--color-background),rgba(249,246,241,0))] md:w-20" />
-            <div className="review-marquee px-1 py-1">
+
+          <div className="relative overflow-hidden">
+            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-[linear-gradient(90deg,var(--color-background),rgba(249,246,241,0))] md:w-16" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-[linear-gradient(270deg,var(--color-background),rgba(249,246,241,0))] md:w-16" />
+            <div className="review-marquee py-1">
               <div className="review-marquee-track">
                 {[0, 1].map((groupIndex) => (
                   <div
@@ -706,46 +681,34 @@ export default function Page() {
                     {guestReviews.map((review) => (
                       <article
                         key={`${groupIndex}-${review.name}`}
-                        className="w-[19.5rem] shrink-0 rounded-[2rem] bg-[var(--color-surface-lowest)] px-5 py-6 shadow-[0px_14px_34px_rgba(27,28,28,0.06)] md:w-[21rem] md:px-6 md:py-7"
+                        className="w-[18rem] shrink-0 rounded-2xl bg-[var(--color-surface-lowest)] px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:w-[20rem] md:px-6 md:py-6"
                       >
-                        <div className="flex items-start justify-between gap-4">
-                          <div className="flex items-start gap-3">
-                            <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-[var(--color-surface-highest)] text-sm font-semibold text-primary">
-                              {getInitials(review.name)}
-                            </div>
-                            <div className="min-w-0">
-                              <h3 className="font-sans text-base font-semibold text-on-background">
-                                {review.name}
-                              </h3>
-                              <p className="pt-1 text-[0.72rem] font-semibold tracking-[0.14em] text-on-surface uppercase">
-                                {review.guestType}
-                              </p>
-                            </div>
+                        <div className="flex items-center gap-3">
+                          <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[var(--color-surface-highest)] text-xs font-semibold text-primary">
+                            {getInitials(review.name)}
                           </div>
-                          <div className="rounded-full bg-[var(--color-surface-low)] px-3 py-1 text-[0.7rem] font-semibold tracking-[0.14em] text-on-surface uppercase">
-                            Google review
+                          <div className="min-w-0 flex-1">
+                            <h3 className="font-sans text-sm font-semibold text-on-background">
+                              {review.name}
+                            </h3>
+                            <p className="text-[0.68rem] font-medium tracking-[0.1em] text-on-surface/70 uppercase">
+                              {review.guestType}
+                            </p>
                           </div>
-                        </div>
-                        <div className="mt-4 flex items-center gap-3">
                           <GoogleStars />
-                          <p className="text-xs font-medium text-on-surface/76">
-                            Shared by a guest
-                          </p>
                         </div>
-                        <div className="mt-4 flex flex-wrap gap-2">
+                        <div className="mt-3 flex flex-wrap gap-1.5">
                           {review.focus.map((item) => (
                             <span
                               key={item}
-                              className="rounded-full bg-[var(--color-surface-low)] px-3 py-1 text-[0.7rem] font-semibold tracking-[0.12em] text-secondary uppercase"
+                              className="rounded-full bg-[var(--color-surface-low)] px-2.5 py-0.5 text-[0.65rem] font-semibold tracking-[0.1em] text-secondary uppercase"
                             >
                               {item}
                             </span>
                           ))}
                         </div>
-                        <p className="mt-4 text-sm leading-7 text-on-surface">
-                          {'"'}
-                          {review.summary}
-                          {'"'}
+                        <p className="mt-3 text-[0.82rem] leading-6 text-on-surface">
+                          &ldquo;{review.summary}&rdquo;
                         </p>
                       </article>
                     ))}
@@ -795,22 +758,22 @@ export default function Page() {
                 <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
                   <VenuePhotoPlaceholder
                     title="Exterior"
-                    alt="Placeholder for a future exterior photograph of The Old School House on London Road, showing the brick frontage and entrance."
+                    alt="The brick frontage and entrance of The Old School House on London Road."
                     className="media-lift h-[14rem] sm:col-span-2 xl:col-span-2 xl:row-span-2 xl:h-[23rem]"
                   />
                   <VenuePhotoPlaceholder
                     title="Bar"
-                    alt="Placeholder for a future bar photograph showing the single-bar setup inside The Old School House."
+                    alt="The single-bar setup inside The Old School House."
                     className="media-lift h-[11rem] xl:h-[11rem]"
                   />
                   <VenuePhotoPlaceholder
                     title="Dining Room"
-                    alt="Placeholder for a future dining room photograph showing exposed brick, wooden floors, and guest seating inside The Old School House."
+                    alt="Exposed brick, wooden floors, and guest seating inside The Old School House."
                     className="media-lift h-[11rem] xl:h-[11rem]"
                   />
                   <VenuePhotoPlaceholder
                     title="Front Garden"
-                    alt="Placeholder for a future front garden photograph showing the outdoor seating area at The Old School House."
+                    alt="The outdoor seating area at The Old School House."
                     className="media-lift h-[11rem] sm:col-span-2 xl:col-span-2 xl:h-[11.5rem]"
                   />
                 </div>
@@ -961,7 +924,7 @@ export default function Page() {
       </section>
 
       <section className="page-section bg-background">
-        <div className="section-shell grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+        <div className="section-shell grid gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
           <div className="contents lg:block lg:space-y-5">
             <SectionHeading
               eyebrow="Visit"

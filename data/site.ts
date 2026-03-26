@@ -55,14 +55,15 @@ export const directionsHref =
 export const bookingHref =
   "https://www.nabatable.com/restaurants/the-old-school-house/book"
 export const bookOnlineHref = "/book-online"
+export const googleReviewsPageHref =
+  "https://www.google.com/search?q=The+Old+School+House+Stony+Stratford+Reviews#lrd=0x487701c45888b76d:0xaeebe77da7ae4e4e,1,,,,"
 export const googleReviewHref =
   "https://search.google.com/local/writereview?placeid=ChIJbbeIWMQBd0gRTk6up33n664"
 export const socialLinks = [
   "https://www.facebook.com/OldSchoolHouseStony/",
   "https://www.instagram.com/oldschoolhousestony/",
 ]
-export const siteMenuPdfHref =
-  "/downloads/old-school-house-menu-placeholder.pdf"
+export const siteMenuPdfHref = "/downloads/old-school-house-menu.pdf"
 
 export const siteDescription =
   "Pub favourites, Nepalese cooking, live sport, and a warm welcome in the heart of Stony Stratford, with a front garden, private courtyard, and plenty of reasons to stay a little longer."

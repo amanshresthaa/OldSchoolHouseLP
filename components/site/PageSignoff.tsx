@@ -28,22 +28,26 @@ export function PageSignoff({
 }: PageSignoffProps) {
   return (
     <section
-      className={cn("page-section bg-primary text-white", className)}
+      className={cn("bg-primary py-10 text-white md:py-14 lg:py-16", className)}
       {...props}
     >
-      <div className="section-shell grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-        <SectionHeading
-          eyebrow={eyebrow}
-          title={title}
-          description={description}
-          invert
-        />
-        <div className="night-panel space-y-6">
+      <div className="section-shell space-y-5">
+        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <SectionHeading
+            eyebrow={eyebrow}
+            title={title}
+            description={description}
+            invert
+          />
+          <div className="shrink-0">
+            <SiteActionCard actions={actions} tone="dark" />
+          </div>
+        </div>
+        <div className="night-panel space-y-4 p-5 md:p-6">
           <div className="text-sm leading-7 text-white/72 md:text-base">
             {body}
           </div>
-          {details ? <div className="space-y-5">{details}</div> : null}
-          <SiteActionCard actions={actions} tone="dark" />
+          {details ? <div className="space-y-4">{details}</div> : null}
         </div>
       </div>
     </section>

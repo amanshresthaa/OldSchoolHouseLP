@@ -5,7 +5,7 @@ import { InlineBookingCta } from "@/components/site/InlineBookingCta"
 import { PageHero } from "@/components/site/PageHero"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import { SiteActionCard } from "@/components/site/SiteActionCard"
-import { StickySplitSection } from "@/components/site/StickySplitSection"
+
 import { siteEmailHref, sitePhone, sitePhoneHref } from "@/data/site"
 
 export const metadata: Metadata = {
@@ -55,32 +55,14 @@ export default function WakesMenuPage() {
         secondaryAction={{ href: siteEmailHref, label: "Email the team" }}
       />
 
-      <StickySplitSection
-        className="bg-background"
-        intro={
-          <div className="space-y-6">
+      <section className="bg-background py-10 md:py-14 lg:py-16">
+        <div className="section-shell space-y-5">
+          <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
             <SectionHeading
               eyebrow="Planning support"
               title="The aim is to make the arranging part feel easier."
               description="Call us with the rough shape of the gathering and we will help you work towards something warm, simple, and considerate."
             />
-            <div className="surface-frame">
-              <div className="surface-pane space-y-4 text-sm leading-7 text-on-surface md:text-base">
-                {wakeSupportNotes.map((note) => (
-                  <p key={note}>{note}</p>
-                ))}
-                <p>
-                  The quickest way to begin is to call{" "}
-                  <a
-                    href={sitePhoneHref}
-                    className="text-secondary transition hover:text-secondary/80"
-                  >
-                    {sitePhone}
-                  </a>
-                  .
-                </p>
-              </div>
-            </div>
             <SiteActionCard
               actions={[
                 {
@@ -97,9 +79,25 @@ export default function WakesMenuPage() {
               showDivider
             />
           </div>
-        }
-      >
-        <div className="space-y-4">
+
+          <div className="rounded-2xl bg-[var(--color-surface-lowest)] px-5 py-4">
+            <div className="space-y-4 text-sm leading-7 text-on-surface md:text-base">
+              {wakeSupportNotes.map((note) => (
+                <p key={note}>{note}</p>
+              ))}
+              <p>
+                The quickest way to begin is to call{" "}
+                <a
+                  href={sitePhoneHref}
+                  className="text-secondary transition hover:text-secondary/80"
+                >
+                  {sitePhone}
+                </a>
+                .
+              </p>
+            </div>
+          </div>
+
           <div className="grid gap-4 md:grid-cols-3">
             {wakePlanningCards.map((card, index) => (
               <article
@@ -117,6 +115,7 @@ export default function WakesMenuPage() {
               </article>
             ))}
           </div>
+
           <div className="surface-frame overflow-hidden">
             <div className="grid gap-px bg-[rgba(196,189,181,0.22)] md:grid-cols-[0.95fr_1.05fr]">
               <div className="surface-pane bg-[var(--color-surface-lowest)]">
@@ -137,7 +136,7 @@ export default function WakesMenuPage() {
             </div>
           </div>
         </div>
-      </StickySplitSection>
+      </section>
 
       <InlineBookingCta
         title="Need a table while the bigger plans take shape?"

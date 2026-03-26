@@ -4,7 +4,7 @@ import { AlternatingSectionGrid } from "@/components/site/AlternatingSectionGrid
 import { PageSignoff } from "@/components/site/PageSignoff"
 import { PageHero } from "@/components/site/PageHero"
 import { SectionHeading } from "@/components/site/SectionHeading"
-import { StickySplitSection } from "@/components/site/StickySplitSection"
+
 import {
   siteAddress,
   siteEmail,
@@ -75,51 +75,49 @@ export default function PrivacyPage() {
         secondaryAction={{ href: sitePhoneHref, label: "Call the pub" }}
       />
 
-      <StickySplitSection
-        className="bg-background"
-        intro={
-          <div className="space-y-6">
-            <SectionHeading
-              eyebrow="Short version"
-              title="We keep it simple."
-              description="We only want the information needed to answer messages, help with bookings, and keep the website working as expected."
-            />
-            <div className="surface-frame">
-              <div className="surface-pane space-y-4 text-sm leading-7 text-on-surface md:text-base">
-                <p>
-                  <strong>Venue:</strong> {siteName}
-                </p>
-                <p>
-                  <strong>Address:</strong> {siteAddress}
-                </p>
-                <p>
-                  <strong>Email:</strong>{" "}
-                  <a
-                    href={siteEmailHref}
-                    className="text-secondary transition hover:text-secondary/80"
-                  >
-                    {siteEmail}
-                  </a>
-                </p>
-                <p>
-                  <strong>Phone:</strong>{" "}
-                  <a
-                    href={sitePhoneHref}
-                    className="text-secondary transition hover:text-secondary/80"
-                  >
-                    {sitePhone}
-                  </a>
-                </p>
-                <p className="text-xs tracking-[0.16em] text-on-surface/72 uppercase">
-                  Last updated: 23 March 2026
-                </p>
-              </div>
+      <section className="bg-background py-10 md:py-14 lg:py-16">
+        <div className="section-shell space-y-5">
+          <SectionHeading
+            eyebrow="Short version"
+            title="We keep it simple."
+            description="We only want the information needed to answer messages, help with bookings, and keep the website working as expected."
+          />
+
+          <div className="bg-surface-1 rounded-2xl px-5 py-4">
+            <div className="flex flex-col gap-3 text-sm leading-7 text-on-surface md:flex-row md:flex-wrap md:items-center md:gap-0 md:divide-x md:divide-on-surface/12 md:text-base">
+              <p className="md:pr-4">
+                <strong>Venue:</strong> {siteName}
+              </p>
+              <p className="md:px-4">
+                <strong>Address:</strong> {siteAddress}
+              </p>
+              <p className="md:px-4">
+                <strong>Email:</strong>{" "}
+                <a
+                  href={siteEmailHref}
+                  className="text-secondary transition hover:text-secondary/80"
+                >
+                  {siteEmail}
+                </a>
+              </p>
+              <p className="md:px-4">
+                <strong>Phone:</strong>{" "}
+                <a
+                  href={sitePhoneHref}
+                  className="text-secondary transition hover:text-secondary/80"
+                >
+                  {sitePhone}
+                </a>
+              </p>
+              <p className="text-xs tracking-[0.16em] text-on-surface/72 uppercase md:pl-4">
+                Last updated: 23 March 2026
+              </p>
             </div>
           </div>
-        }
-      >
-        <AlternatingSectionGrid sections={privacySections} />
-      </StickySplitSection>
+
+          <AlternatingSectionGrid sections={privacySections} />
+        </div>
+      </section>
 
       <PageSignoff
         eyebrow="Questions?"

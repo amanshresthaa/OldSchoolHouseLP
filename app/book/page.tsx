@@ -52,7 +52,7 @@ export default function BookPage() {
               </div>
             </div>
 
-            <div className="grid gap-10 py-10 md:py-14 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:gap-16 lg:py-16">
+            <div className="grid gap-6 py-10 md:py-14 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:gap-16 lg:py-16">
               <div className="hero-entrance-delay-1 space-y-5">
                 <h1 className="max-w-[18ch] text-[clamp(2rem,5vw,3.5rem)] leading-[1.06] font-normal text-white">
                   Your table is a phone call, an email, or a few taps away.
@@ -105,7 +105,7 @@ export default function BookPage() {
           <div className="surface-frame overflow-hidden">
             <div className="grid gap-px bg-[rgba(196,189,181,0.22)] md:grid-cols-3">
               {/* Online */}
-              <div className="surface-pane bg-[var(--color-surface-lowest)] space-y-5">
+              <div className="surface-pane space-y-5 bg-[var(--color-surface-lowest)]">
                 <div className="space-y-3">
                   <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
                     Quickest
@@ -114,8 +114,8 @@ export default function BookPage() {
                     Book online
                   </h2>
                   <p className="text-sm leading-7 text-on-surface md:text-base">
-                    Pick your date, choose a time, and confirm in under a minute.
-                    No account needed.
+                    Pick your date, choose a time, and confirm in under a
+                    minute. No account needed.
                   </p>
                 </div>
                 <SiteActionCard
@@ -139,8 +139,8 @@ export default function BookPage() {
                     Call the pub
                   </h2>
                   <p className="text-sm leading-7 text-on-surface md:text-base">
-                    Best for tonight, last-minute plans, or when you just want to
-                    speak to someone.
+                    Best for tonight, last-minute plans, or when you just want
+                    to speak to someone.
                   </p>
                 </div>
                 <div className="space-y-3">
@@ -158,7 +158,7 @@ export default function BookPage() {
               </div>
 
               {/* Email */}
-              <div className="surface-pane bg-[var(--color-surface-lowest)] space-y-5">
+              <div className="surface-pane space-y-5 bg-[var(--color-surface-lowest)]">
                 <div className="space-y-3">
                   <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
                     Larger bookings
@@ -168,13 +168,14 @@ export default function BookPage() {
                   </h2>
                   <p className="text-sm leading-7 text-on-surface md:text-base">
                     Birthdays, group dinners, or anything that needs a little
-                    more planning. Send the details and we will come back to you.
+                    more planning. Send the details and we will come back to
+                    you.
                   </p>
                 </div>
                 <div className="space-y-3">
                   <a
                     href={siteEmailHref}
-                    className="inline-flex items-center gap-2 font-sans text-base font-semibold text-secondary break-all transition hover:text-primary"
+                    className="inline-flex items-center gap-2 font-sans text-base font-semibold break-all text-secondary transition hover:text-primary"
                   >
                     <EnvelopeSimple className="size-5 shrink-0" />
                     {siteEmail}
@@ -200,7 +201,8 @@ export default function BookPage() {
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-sm leading-7 text-white/72 md:text-base">
             We do our best with walk-ins, especially earlier in the week. For
-            Friday, Saturday, and bigger groups, booking ahead is the safest bet.
+            Friday, Saturday, and bigger groups, booking ahead is the safest
+            bet.
           </p>
         </div>
       </section>

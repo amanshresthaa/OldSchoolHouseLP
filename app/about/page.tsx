@@ -64,7 +64,7 @@ export default function AboutPage() {
                 <Image
                   src={heroImage}
                   alt="A table of pub plates, Nepalese dishes, and drinks at The Old School House."
-                  className="media-lift mt-6 h-[18rem] w-full rounded-[2rem] object-cover md:h-[24rem] lg:h-[28rem]"
+                  className="media-lift mt-5 h-[18rem] w-full rounded-[2rem] object-cover md:h-[24rem] lg:h-[28rem]"
                   sizes="(min-width: 1024px) 40vw, 100vw"
                 />
               </div>
@@ -107,117 +107,115 @@ export default function AboutPage() {
       <section className="page-section bg-[var(--color-surface-low)]">
         <div className="section-shell">
           <div className="surface-frame overflow-hidden">
-            <div className="grid gap-px bg-[rgba(196,189,181,0.22)] lg:grid-cols-[0.72fr_1.28fr]">
-              <div className="surface-pane bg-[var(--color-surface-lowest)]">
-                <SectionHeading
-                  eyebrow="The people behind it"
-                  title={
-                    'Led by Sanjog "San" Gautam, with the wider Lapen Inns family behind the pub.'
-                  }
-                  description="The aim is not to replace the classic pub feel. It is to keep that welcome intact and add a food offer strong enough to make the place stand out."
-                />
-                <p className="mt-5 max-w-xl text-sm leading-7 text-on-surface md:text-base">
-                  The result is a pub that still feels rooted in Stony
-                  Stratford, but has a clearer point of difference once you sit
-                  down and order.
-                </p>
-                <SiteActionCard
-                  className="mt-6"
-                  actions={[
-                    {
-                      href: bookOnlineHref,
-                      label: "Book a table",
-                      icon: <ArrowRight className="size-4" />,
-                    },
-                    {
-                      href: siteEmailHref,
-                      label: "Ask the team a question",
-                    },
-                  ]}
-                  showDivider
-                />
-              </div>
-              <div className="grid gap-px bg-[rgba(196,189,181,0.18)] md:grid-cols-2">
-                <article className="surface-pane bg-[var(--color-surface-lowest)]">
-                  <div className="flex items-center gap-3">
-                    <ForkKnife className="size-5 text-secondary" />
-                    <h2 className="section-title">
-                      San&apos;s hospitality approach
-                    </h2>
-                  </div>
-                  <div className="space-y-4 pt-4 text-sm leading-7 text-on-surface md:text-base">
-                    {aboutOperatorNotes.map((note) => (
-                      <p key={note}>{note}</p>
-                    ))}
-                  </div>
-                </article>
-                <article className="surface-pane surface-pane-muted">
-                  <div className="flex items-center gap-3">
-                    <Buildings className="size-5 text-secondary" />
-                    <h2 className="section-title">
-                      Part of the Lapen Inns family
-                    </h2>
-                  </div>
-                  <div className="space-y-4 pt-4 text-sm leading-7 text-on-surface md:text-base">
-                    {aboutFamilyNotes.map((note) => (
-                      <p key={note}>{note}</p>
-                    ))}
-                    <p>
-                      You can see more of the wider group at{" "}
-                      <a
-                        href={lapenInnsHref}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-secondary transition hover:text-secondary/80"
-                      >
-                        lapeninns.com
-                      </a>
-                      .
+            <div className="grid gap-px bg-[rgba(196,189,181,0.22)]">
+              <div className="grid gap-px lg:grid-cols-[0.72fr_1.28fr]">
+                <div className="surface-pane flex flex-col justify-between bg-[var(--color-surface-lowest)]">
+                  <div>
+                    <SectionHeading
+                      eyebrow="The people behind it"
+                      title={
+                        'Led by Sanjog "San" Gautam, with the wider Lapen Inns family behind the pub.'
+                      }
+                      description="The aim is not to replace the classic pub feel. It is to keep that welcome intact and add a food offer strong enough to make the place stand out."
+                    />
+                    <p className="mt-5 max-w-xl text-sm leading-7 text-on-surface md:text-base">
+                      The result is a pub that still feels rooted in Stony
+                      Stratford, but has a clearer point of difference once you
+                      sit down and order.
                     </p>
                   </div>
-                </article>
-                <article className="surface-pane surface-pane-muted md:col-span-2">
-                  <div className="flex items-center gap-3">
-                    <MapPin className="size-5 text-secondary" />
-                    <h2 className="section-title">Why the location helps</h2>
-                  </div>
-                  <div className="mt-4 grid gap-3 lg:grid-cols-3">
-                    {aboutLocationHighlights.map((item, index) => (
-                      <div
-                        key={item.title}
-                        className={`content-card px-5 py-4 ${index === 1 ? "bg-[var(--color-surface-lowest)]" : "bg-[var(--color-surface-low)]/72"}`}
-                      >
-                        <p className="font-sans text-lg font-semibold text-secondary">
-                          {item.title}
-                        </p>
-                        <p className="pt-2 text-sm leading-7 text-on-surface md:text-base">
-                          {item.description}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="mt-6 grid gap-3 text-sm leading-7 md:grid-cols-3 md:text-base">
-                    <Link
-                      href="/find-us"
-                      className="content-card bg-[var(--color-surface-lowest)] px-4 py-4 text-on-surface transition hover:-translate-y-0.5"
-                    >
-                      Plan the journey
-                    </Link>
-                    <Link
-                      href="/events"
-                      className="content-card bg-[var(--color-surface-lowest)] px-4 py-4 text-on-surface transition hover:-translate-y-0.5"
-                    >
-                      See group and private hire options
-                    </Link>
-                    <a
-                      href={siteEmailHref}
-                      className="content-card bg-[var(--color-surface-lowest)] px-4 py-4 text-on-surface transition hover:-translate-y-0.5"
-                    >
-                      Ask the team a question
-                    </a>
-                  </div>
-                </article>
+                  <SiteActionCard
+                    className="mt-5"
+                    actions={[
+                      {
+                        href: bookOnlineHref,
+                        label: "Book a table",
+                        icon: <ArrowRight className="size-4" />,
+                      },
+                      {
+                        href: siteEmailHref,
+                        label: "Ask the team a question",
+                      },
+                    ]}
+                    showDivider
+                  />
+                </div>
+                <div className="grid gap-px bg-[rgba(196,189,181,0.18)] md:grid-cols-2">
+                  <article className="surface-pane bg-[var(--color-surface-lowest)]">
+                    <div className="flex items-center gap-3">
+                      <ForkKnife className="size-5 text-secondary" />
+                      <h2 className="section-title">
+                        San&apos;s hospitality approach
+                      </h2>
+                    </div>
+                    <div className="space-y-4 pt-4 text-sm leading-7 text-on-surface md:text-base">
+                      {aboutOperatorNotes.map((note) => (
+                        <p key={note}>{note}</p>
+                      ))}
+                    </div>
+                  </article>
+                  <article className="surface-pane surface-pane-muted">
+                    <div className="flex items-center gap-3">
+                      <Buildings className="size-5 text-secondary" />
+                      <h2 className="section-title">
+                        Part of the Lapen Inns family
+                      </h2>
+                    </div>
+                    <div className="space-y-4 pt-4 text-sm leading-7 text-on-surface md:text-base">
+                      {aboutFamilyNotes.map((note) => (
+                        <p key={note}>{note}</p>
+                      ))}
+                      <p>
+                        You can see more of the wider group at{" "}
+                        <a
+                          href={lapenInnsHref}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-secondary transition hover:text-secondary/80"
+                        >
+                          lapeninns.com
+                        </a>
+                        .
+                      </p>
+                    </div>
+                  </article>
+                </div>
               </div>
+              <article className="surface-pane surface-pane-muted">
+                <div className="flex items-center gap-3">
+                  <MapPin className="size-5 text-secondary" />
+                  <h2 className="section-title">Why the location helps</h2>
+                </div>
+                <div className="mt-4 grid gap-3 lg:grid-cols-3">
+                  {aboutLocationHighlights.map((item, index) => (
+                    <div
+                      key={item.title}
+                      className={`content-card px-5 py-4 ${index === 1 ? "bg-[var(--color-surface-lowest)]" : "bg-[var(--color-surface-low)]/72"}`}
+                    >
+                      <p className="font-sans text-lg font-semibold text-secondary">
+                        {item.title}
+                      </p>
+                      <p className="pt-2 text-sm leading-7 text-on-surface md:text-base">
+                        {item.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-5 grid gap-3 text-sm leading-7 md:grid-cols-2 md:text-base">
+                  <Link
+                    href="/find-us"
+                    className="content-card bg-[var(--color-surface-lowest)] px-4 py-4 text-on-surface transition hover:-translate-y-0.5"
+                  >
+                    Plan the journey
+                  </Link>
+                  <Link
+                    href="/events"
+                    className="content-card bg-[var(--color-surface-lowest)] px-4 py-4 text-on-surface transition hover:-translate-y-0.5"
+                  >
+                    See group and private hire options
+                  </Link>
+                </div>
+              </article>
             </div>
           </div>
         </div>

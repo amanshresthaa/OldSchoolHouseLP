@@ -4,7 +4,7 @@ import { DownloadSimple, Phone } from "@phosphor-icons/react/dist/ssr"
 
 import { PageHero } from "@/components/site/PageHero"
 import { SectionHeading } from "@/components/site/SectionHeading"
-import { StickySplitSection } from "@/components/site/StickySplitSection"
+
 import { Button } from "@/components/ui/button"
 import { siteMenuPdfHref, sitePhone, sitePhoneHref } from "@/data/site"
 
@@ -71,33 +71,14 @@ export default function MenuInformationPage() {
         }}
       />
 
-      <StickySplitSection
-        className="bg-background"
-        intro={
-          <div className="space-y-6">
+      <section className="bg-background py-10 md:py-14 lg:py-16">
+        <div className="section-shell space-y-5">
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <SectionHeading
               eyebrow="Start here"
               title="The quick version."
               description="Browse the live menu for the latest version, use the PDF when you want something printable, and call us if the answer matters to today."
             />
-            <div className="surface-frame">
-              <div className="surface-pane space-y-4 text-sm leading-7 text-on-surface md:text-base">
-                <p>
-                  If you want a quick answer, ring{" "}
-                  <a
-                    href={sitePhoneHref}
-                    className="text-secondary transition hover:text-secondary/80"
-                  >
-                    {sitePhone}
-                  </a>
-                  .
-                </p>
-                <p>
-                  The website menu is best for browsing on your phone. The PDF
-                  is best for printing, sharing, or keeping a copy to hand.
-                </p>
-              </div>
-            </div>
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Button asChild size="lg">
                 <Link href="/menu">View HTML menu</Link>
@@ -116,10 +97,25 @@ export default function MenuInformationPage() {
               </Button>
             </div>
           </div>
-        }
-      >
-        <div className="space-y-4">
-          <div className="surface-frame overflow-hidden">
+
+          <div className="space-y-4 text-sm leading-7 text-on-surface md:text-base">
+            <p>
+              If you want a quick answer, ring{" "}
+              <a
+                href={sitePhoneHref}
+                className="text-secondary transition hover:text-secondary/80"
+              >
+                {sitePhone}
+              </a>
+              .
+            </p>
+            <p>
+              The website menu is best for browsing on your phone. The PDF is
+              best for printing, sharing, or keeping a copy to hand.
+            </p>
+          </div>
+
+          <div className="surface-frame overflow-hidden rounded-2xl">
             <div className="grid gap-px bg-[rgba(196,189,181,0.22)]">
               {menuFaqs.map((item, index) => (
                 <article
@@ -138,14 +134,15 @@ export default function MenuInformationPage() {
               ))}
             </div>
           </div>
+
           <div className="grid gap-4 md:grid-cols-3">
             {menuInfoHighlights.map((item, index) => (
               <article
                 key={item.title}
                 className={
                   index === 1
-                    ? "surface-frame surface-pane surface-pane-muted"
-                    : "surface-frame surface-pane bg-[var(--color-surface-lowest)]"
+                    ? "surface-frame surface-pane surface-pane-muted rounded-2xl"
+                    : "surface-frame surface-pane rounded-2xl bg-[var(--color-surface-lowest)]"
                 }
               >
                 <p className="eyebrow">{item.title}</p>
@@ -155,7 +152,8 @@ export default function MenuInformationPage() {
               </article>
             ))}
           </div>
-          <div className="surface-frame">
+
+          <div className="surface-frame rounded-2xl">
             <div className="surface-pane">
               <h2 className="text-[2rem]">Useful next pages</h2>
               <div className="grid gap-3 pt-4 text-sm leading-7 md:grid-cols-3 md:text-base">
@@ -181,7 +179,7 @@ export default function MenuInformationPage() {
             </div>
           </div>
         </div>
-      </StickySplitSection>
+      </section>
     </main>
   )
 }

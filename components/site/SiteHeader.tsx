@@ -1,18 +1,14 @@
 "use client"
 
+import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import * as React from "react"
 import { List, X } from "@phosphor-icons/react"
 
+import logo from "@/images/logos/OldSchoolHouse.png"
 import { Button } from "@/components/ui/button"
-import {
-  bookOnlineHref,
-  type NavItem,
-  siteLocation,
-  siteName,
-  siteNav,
-} from "@/data/site"
+import { bookOnlineHref, type NavItem, siteNav } from "@/data/site"
 import { cn } from "@/lib/utils"
 
 function isCurrentPath(pathname: string, href: string) {
@@ -133,12 +129,12 @@ export function SiteHeader() {
         <div className="mx-auto max-w-7xl px-5 py-3 sm:px-6 md:px-8">
           <div className="flex items-center justify-between gap-4">
             <Link href="/" className="min-w-0 flex-1 pr-1 xl:flex-none xl:pr-0">
-              <span className="block text-[clamp(1.08rem,5vw,1.5rem)] leading-[0.94] text-primary sm:text-2xl">
-                {siteName}
-              </span>
-              <span className="block pt-1 text-[0.5rem] leading-[1.25] font-semibold tracking-[0.12em] text-on-surface uppercase sm:text-[0.68rem] sm:tracking-[0.22em]">
-                {siteLocation}
-              </span>
+              <Image
+                src={logo}
+                alt="The Old School House logo"
+                className="h-12 w-auto sm:h-14"
+                priority
+              />
             </Link>
             <nav className="hidden items-center gap-1 xl:flex">
               {siteNav
@@ -153,16 +149,12 @@ export function SiteHeader() {
             </nav>
             <div className="hidden shrink-0 items-center gap-3 md:flex">
               <Button asChild size="sm">
-                <Link href={bookOnlineHref}>
-                  Book a table
-                </Link>
+                <Link href={bookOnlineHref}>Book a table</Link>
               </Button>
             </div>
             <div className="flex shrink-0 items-center gap-2 md:hidden">
               <Button asChild size="sm">
-                <Link href={bookOnlineHref}>
-                  Book
-                </Link>
+                <Link href={bookOnlineHref}>Book</Link>
               </Button>
               <button
                 type="button"
@@ -205,15 +197,12 @@ export function SiteHeader() {
         >
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0 flex-1 pr-2">
-              <p
-                id="mobile-site-navigation-title"
-                className="text-[clamp(1.6rem,8vw,2.2rem)] leading-[0.95] text-white"
-              >
-                {siteName}
-              </p>
-              <p className="pt-2 text-[0.58rem] leading-[1.35] font-semibold tracking-[0.14em] text-[var(--color-on-tertiary-container)] uppercase">
-                {siteLocation}
-              </p>
+              <Image
+                src={logo}
+                alt="The Old School House logo"
+                className="h-10 w-auto brightness-0 invert"
+                priority
+              />
             </div>
             <button
               ref={closeButtonRef}
@@ -226,22 +215,24 @@ export function SiteHeader() {
             </button>
           </div>
           <nav aria-label="Mobile navigation" className="mt-12 grid gap-5">
-            {siteNav.filter((item) => item.href !== "/book").map((item) => {
-              const active = isCurrentPath(pathname, item.href)
+            {siteNav
+              .filter((item) => item.href !== "/book")
+              .map((item) => {
+                const active = isCurrentPath(pathname, item.href)
 
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={cn(
-                    "font-heading text-4xl leading-none text-white/78 transition hover:text-[var(--color-on-tertiary-container)]",
-                    active && "text-[var(--color-on-tertiary-container)]"
-                  )}
-                >
-                  {item.label}
-                </Link>
-              )
-            })}
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={cn(
+                      "font-heading text-4xl leading-none text-white/78 transition hover:text-[var(--color-on-tertiary-container)]",
+                      active && "text-[var(--color-on-tertiary-container)]"
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                )
+              })}
           </nav>
           <div className="mt-10 border-t border-white/10 pt-8">
             <Link

@@ -11,7 +11,6 @@ import { MapEmbed } from "@/components/site/MapEmbed"
 import { PageHero } from "@/components/site/PageHero"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import { SiteActionCard } from "@/components/site/SiteActionCard"
-import { StickySplitSection } from "@/components/site/StickySplitSection"
 import {
   accessibilityNotes,
   arrivalNotes,
@@ -48,53 +47,14 @@ export default function FindUsPage() {
         secondaryAction={{ href: sitePhoneHref, label: "Call the pub" }}
       />
 
-      <StickySplitSection
-        className="bg-background"
-        intro={
-          <div className="space-y-6">
+      <section className="bg-background py-10 md:py-14 lg:py-16">
+        <div className="section-shell space-y-5">
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <SectionHeading
               eyebrow="Address and contact"
               title="The Old School House sits on the busiest road in Stony Stratford."
               description="Right on London Road, we are easy to spot whether you are popping in for a drink, meeting friends for dinner, or making an evening of it."
             />
-            <div className="surface-frame">
-              <div className="surface-pane">
-                <div className="grid gap-4 text-sm leading-7 text-on-surface md:text-base">
-                  <p className="flex items-start gap-3">
-                    <MapPin className="mt-1 size-4 shrink-0 text-secondary" />
-                    <span>{siteAddress}</span>
-                  </p>
-                  <p className="flex items-start gap-3">
-                    <Phone className="mt-1 size-4 shrink-0 text-secondary" />
-                    <span>
-                      <a
-                        href={sitePhoneHref}
-                        className="text-secondary transition hover:text-secondary/80"
-                      >
-                        {sitePhone}
-                      </a>
-                    </span>
-                  </p>
-                  <p className="flex items-start gap-3">
-                    <EnvelopeSimple className="mt-1 size-4 shrink-0 text-secondary" />
-                    <span>
-                      <a
-                        href={siteEmailHref}
-                        className="text-secondary transition hover:text-secondary/80"
-                      >
-                        {siteEmail}
-                      </a>
-                    </span>
-                  </p>
-                  <p className="flex items-start gap-3">
-                    <Clock className="mt-1 size-4 shrink-0 text-secondary" />
-                    <span>
-                      {openingHours[0].label}: {openingHours[0].hours}
-                    </span>
-                  </p>
-                </div>
-              </div>
-            </div>
             <SiteActionCard
               actions={[
                 {
@@ -109,11 +69,46 @@ export default function FindUsPage() {
               showDivider
             />
           </div>
-        }
-      >
-        <div className="space-y-4">
+          <div className="surface-frame rounded-2xl">
+            <div className="surface-pane">
+              <div className="grid gap-4 text-sm leading-7 text-on-surface md:text-base">
+                <p className="flex items-start gap-3">
+                  <MapPin className="mt-1 size-4 shrink-0 text-secondary" />
+                  <span>{siteAddress}</span>
+                </p>
+                <p className="flex items-start gap-3">
+                  <Phone className="mt-1 size-4 shrink-0 text-secondary" />
+                  <span>
+                    <a
+                      href={sitePhoneHref}
+                      className="text-secondary transition hover:text-secondary/80"
+                    >
+                      {sitePhone}
+                    </a>
+                  </span>
+                </p>
+                <p className="flex items-start gap-3">
+                  <EnvelopeSimple className="mt-1 size-4 shrink-0 text-secondary" />
+                  <span>
+                    <a
+                      href={siteEmailHref}
+                      className="text-secondary transition hover:text-secondary/80"
+                    >
+                      {siteEmail}
+                    </a>
+                  </span>
+                </p>
+                <p className="flex items-start gap-3">
+                  <Clock className="mt-1 size-4 shrink-0 text-secondary" />
+                  <span>
+                    {openingHours[0].label}: {openingHours[0].hours}
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>
           <MapEmbed />
-          <div className="surface-frame overflow-hidden">
+          <div className="surface-frame overflow-hidden rounded-2xl">
             <div className="grid gap-px bg-[rgba(196,189,181,0.22)] md:grid-cols-3">
               <div className="surface-pane surface-pane-muted text-sm leading-7 text-on-surface">
                 London Road location in the heart of Stony Stratford.
@@ -127,142 +122,140 @@ export default function FindUsPage() {
             </div>
           </div>
         </div>
-      </StickySplitSection>
+      </section>
 
       <InlineBookingCta
         title="Thinking about dinner already?"
         description="If you know you are joining us, book ahead and arrive with everything nicely sorted."
       />
 
-      <StickySplitSection
-        className="bg-[var(--color-surface-low)]"
-        intro={
-          <div className="space-y-6">
-            <SectionHeading
-              eyebrow="Getting here"
-              title="Easy to spot when you are heading through Stony Stratford."
-              description="Driving in, walking through town, or meeting friends on London Road should all feel straightforward before you arrive."
-            />
-            <div className="surface-frame">
-              <div className="surface-pane bg-[var(--color-surface-lowest)]">
-                <div className="space-y-3 text-sm leading-7 text-on-surface md:text-base">
-                  {arrivalNotes.map((note) => (
-                    <p key={note}>{note}</p>
-                  ))}
+      <section className="bg-[var(--color-surface-low)] py-10 md:py-14 lg:py-16">
+        <div className="section-shell space-y-5">
+          <SectionHeading
+            eyebrow="Getting here"
+            title="Easy to spot when you are heading through Stony Stratford."
+            description="Driving in, walking through town, or meeting friends on London Road should all feel straightforward before you arrive."
+          />
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="space-y-4">
+              <div className="surface-frame rounded-2xl">
+                <div className="surface-pane bg-[var(--color-surface-lowest)]">
+                  <div className="space-y-3 text-sm leading-7 text-on-surface md:text-base">
+                    {arrivalNotes.map((note) => (
+                      <p key={note}>{note}</p>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <div className="surface-frame rounded-2xl">
+                <div className="surface-pane bg-[var(--color-surface-lowest)]">
+                  <h2 className="section-title">Opening hours</h2>
+                  <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
+                    {openingHours.map((item) => (
+                      <div
+                        key={item.label}
+                        className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between"
+                      >
+                        <span>{item.label}</span>
+                        <span className="text-on-background">{item.hours}</span>
+                      </div>
+                    ))}
+                    <p className="pt-2 text-sm text-on-surface/78">
+                      {openingHoursNote}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="surface-frame rounded-2xl">
+              <div className="surface-pane surface-pane-muted">
+                <h2 className="section-title">Need a hand?</h2>
+                <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
+                  <p>
+                    If you are on your way, call ahead and we will help you find
+                    us.
+                  </p>
+                  <p>
+                    You can also{" "}
+                    <a
+                      href={sitePhoneHref}
+                      className="text-secondary transition hover:text-secondary/80"
+                    >
+                      ring the pub directly
+                    </a>{" "}
+                    before you head over.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
-        }
-      >
-        <div className="surface-frame overflow-hidden">
-          <div className="grid gap-px bg-[rgba(196,189,181,0.22)]">
-            <div className="surface-pane bg-[var(--color-surface-lowest)]">
-              <h2 className="section-title">Opening hours</h2>
-              <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
-                {openingHours.map((item) => (
-                  <div
-                    key={item.label}
-                    className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between"
-                  >
-                    <span>{item.label}</span>
-                    <span className="text-on-background">{item.hours}</span>
-                  </div>
-                ))}
-                <p className="pt-2 text-sm text-on-surface/78">
-                  {openingHoursNote}
-                </p>
-              </div>
-            </div>
-            <div className="surface-pane surface-pane-muted lg:pt-12">
-              <h2 className="section-title">Need a hand?</h2>
-              <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
-                <p>
-                  If you are on your way, call ahead and we will help you find
-                  us.
-                </p>
-                <p>
-                  You can also{" "}
-                  <a
-                    href={sitePhoneHref}
-                    className="text-secondary transition hover:text-secondary/80"
-                  >
-                    ring the pub directly
-                  </a>{" "}
-                  before you head over.
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
-      </StickySplitSection>
+      </section>
 
-      <StickySplitSection
-        className="bg-background"
-        intro={
+      <section className="bg-background py-10 md:py-14 lg:py-16">
+        <div className="section-shell space-y-5">
           <SectionHeading
             eyebrow="Accessibility"
             title="Arrival support should feel straightforward."
             description="If you need extra help with parking, access, or where to head when you arrive, give the team a ring before you set off."
           />
-        }
-      >
-        <div className="surface-frame overflow-hidden">
-          <div className="grid gap-px bg-[rgba(196,189,181,0.18)] md:grid-cols-3">
-            {accessibilityNotes.map((note, index) => (
-              <article
-                key={note}
-                className={cn(
-                  "surface-pane bg-[var(--color-surface-lowest)] text-sm leading-7 text-on-surface md:text-base",
-                  index === 1 && "surface-pane-muted"
-                )}
-              >
-                {note}
-              </article>
-            ))}
-          </div>
-        </div>
-      </StickySplitSection>
-
-      <StickySplitSection
-        className="bg-background"
-        intro={
-          <SectionHeading
-            eyebrow="Before you come"
-            title="Any other questions before you head over?"
-            description="Parking, hours, access — if something is on your mind, a quick call sorts it."
-          />
-        }
-      >
-        <div className="surface-frame">
-          <div className="surface-pane surface-pane-muted">
-            <div className="space-y-4 text-sm leading-7 text-on-surface md:text-base">
-              <p>
-                If you have questions before you visit, give us a ring and we
-                will help.
-              </p>
-              <p>
-                For directions or last-minute questions, call the pub team on{" "}
-                <a
-                  href={sitePhoneHref}
-                  className="text-secondary transition hover:text-secondary/80"
+          <div className="surface-frame overflow-hidden rounded-2xl">
+            <div className="grid gap-px bg-[rgba(196,189,181,0.18)] md:grid-cols-3">
+              {accessibilityNotes.map((note, index) => (
+                <article
+                  key={note}
+                  className={cn(
+                    "surface-pane bg-[var(--color-surface-lowest)] text-sm leading-7 text-on-surface md:text-base",
+                    index === 1 && "surface-pane-muted"
+                  )}
                 >
-                  {sitePhone}
-                </a>
-                .
-              </p>
-              <SiteActionCard
-                actions={[
-                  {
-                    href: bookOnlineHref,
-                    label: "Book a table",
-                  },
-                ]}
-              />
+                  {note}
+                </article>
+              ))}
             </div>
           </div>
         </div>
-      </StickySplitSection>
+      </section>
+
+      <section className="bg-background py-10 md:py-14 lg:py-16">
+        <div className="section-shell space-y-5">
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <SectionHeading
+              eyebrow="Before you come"
+              title="Any other questions before you head over?"
+              description="Parking, hours, access — if something is on your mind, a quick call sorts it."
+            />
+            <SiteActionCard
+              actions={[
+                {
+                  href: bookOnlineHref,
+                  label: "Book a table",
+                },
+              ]}
+            />
+          </div>
+          <div className="surface-frame rounded-2xl">
+            <div className="surface-pane surface-pane-muted">
+              <div className="space-y-4 text-sm leading-7 text-on-surface md:text-base">
+                <p>
+                  If you have questions before you visit, give us a ring and we
+                  will help.
+                </p>
+                <p>
+                  For directions or last-minute questions, call the pub team on{" "}
+                  <a
+                    href={sitePhoneHref}
+                    className="text-secondary transition hover:text-secondary/80"
+                  >
+                    {sitePhone}
+                  </a>
+                  .
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   )
 }

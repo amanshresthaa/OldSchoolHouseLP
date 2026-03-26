@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Link from "next/link"
 import {
   ArrowUpRight,
@@ -8,6 +9,7 @@ import {
   Phone,
 } from "@phosphor-icons/react/dist/ssr"
 
+import logo from "@/images/logos/OldSchoolHouse.png"
 import {
   directionsHref,
   mapHref,
@@ -51,10 +53,13 @@ export function SiteFooter() {
       <div className="section-shell grid gap-10 py-12 lg:grid-cols-[1.25fr_0.8fr_0.85fr_0.9fr]">
         <div className="space-y-5">
           <div className="space-y-2">
-            <p className="text-xs font-semibold tracking-[0.22em] text-[var(--color-on-tertiary-container)] uppercase">
-              The Old School House
-            </p>
-            <h2 className="max-w-md text-white">
+            <Image
+              src={logo}
+              alt="The Old School House logo"
+              className="h-10 w-auto brightness-0 invert"
+              priority
+            />
+            <h2 className="max-w-md pt-3 text-white">
               A traditional pub and Nepalese kitchen for Stony Stratford.
             </h2>
           </div>

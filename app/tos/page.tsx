@@ -4,7 +4,7 @@ import { AlternatingSectionGrid } from "@/components/site/AlternatingSectionGrid
 import { PageSignoff } from "@/components/site/PageSignoff"
 import { PageHero } from "@/components/site/PageHero"
 import { SectionHeading } from "@/components/site/SectionHeading"
-import { StickySplitSection } from "@/components/site/StickySplitSection"
+
 import { siteEmailHref, sitePhoneHref } from "@/data/site"
 
 export const metadata: Metadata = {
@@ -75,32 +75,21 @@ export default function TermsOfServicePage() {
         secondaryAction={{ href: siteEmailHref, label: "Email the team" }}
       />
 
-      <StickySplitSection
-        className="bg-background"
-        intro={
-          <div className="space-y-6">
-            <SectionHeading
-              eyebrow="Short version"
-              title="Use the site to plan. Use the pub to confirm."
-              description="That is the easiest way to think about bookings, menus, opening hours, and anything time-sensitive."
-            />
-            <div className="surface-frame">
-              <div className="surface-pane space-y-4 text-sm leading-7 text-on-surface md:text-base">
-                <p>
-                  If the answer affects your visit today, a quick call is always
-                  the safest route.
-                </p>
-                <p>
-                  If your question is about privacy or cookies, the separate
-                  privacy page explains that in plain language too.
-                </p>
-              </div>
-            </div>
-          </div>
-        }
-      >
-        <AlternatingSectionGrid sections={termsSections} />
-      </StickySplitSection>
+      <section className="bg-background py-10 md:py-14 lg:py-16">
+        <div className="section-shell space-y-5">
+          <SectionHeading
+            eyebrow="Short version"
+            title="Use the site to plan. Use the pub to confirm."
+            description="That is the easiest way to think about bookings, menus, opening hours, and anything time-sensitive."
+          />
+          <p className="text-sm leading-7 text-on-surface md:text-base">
+            If the answer affects your visit today, a quick call is always the
+            safest route. If your question is about privacy or cookies, the
+            separate privacy page explains that in plain language too.
+          </p>
+          <AlternatingSectionGrid sections={termsSections} />
+        </div>
+      </section>
 
       <PageSignoff
         eyebrow="Need a clear answer today?"
