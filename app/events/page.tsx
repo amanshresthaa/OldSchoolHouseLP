@@ -1,15 +1,8 @@
 import type { Metadata } from "next"
 import Image from "next/image"
-import {
-  CalendarDots,
-  EnvelopeSimple,
-  Phone,
-  UsersThree,
-} from "@phosphor-icons/react/dist/ssr"
+import { EnvelopeSimple, Phone } from "@phosphor-icons/react/dist/ssr"
 
-import { EditorialBreak } from "@/components/site/EditorialBreak"
 import { InlineBookingCta } from "@/components/site/InlineBookingCta"
-import { PageSignoff } from "@/components/site/PageSignoff"
 import { PageHero } from "@/components/site/PageHero"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import { SiteActionCard } from "@/components/site/SiteActionCard"
@@ -241,33 +234,6 @@ export default function EventsPage() {
           </div>
         </div>
       </StickySplitSection>
-
-      <EditorialBreak quote="Tell us what you have in mind. We will work out the rest together." />
-
-      <PageSignoff
-        eyebrow="Start planning"
-        title="Tell us what you have in mind and we will help shape the rest."
-        description="If you already know the date, the guest list, or the kind of table you want, send it through and we will help put it together."
-        body={
-          <p>
-            Some nights only need a few tables and a round of drinks. Others
-            need food, space, and a bit more thought. Either way, drop us a
-            line.
-          </p>
-        }
-        actions={[
-          {
-            href: bookOnlineHref,
-            label: "Book a table instead",
-            icon: <CalendarDots className="size-4" />,
-          },
-          {
-            href: siteEmailHref,
-            label: "Email for private hire",
-            icon: <UsersThree className="size-4" />,
-          },
-        ]}
-      />
     </main>
   )
 }

@@ -2,7 +2,6 @@ import type { Metadata } from "next"
 import { EnvelopeSimple, Phone } from "@phosphor-icons/react/dist/ssr"
 
 import { InlineBookingCta } from "@/components/site/InlineBookingCta"
-import { PageSignoff } from "@/components/site/PageSignoff"
 import { PageHero } from "@/components/site/PageHero"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import { SiteActionCard } from "@/components/site/SiteActionCard"
@@ -143,30 +142,6 @@ export default function WakesMenuPage() {
       <InlineBookingCta
         title="Need a table while the bigger plans take shape?"
         description="If the immediate need is just a family table or a quiet meal, you can sort that now and come back to the wider arrangements later."
-      />
-
-      <PageSignoff
-        eyebrow="Take the next step gently"
-        title="A quick call or a thoughtful email is enough to start the conversation."
-        description="You do not need to arrive with a full brief. Rough numbers, timing, and the feel you want are enough for us to help."
-        body={
-          <p>
-            We would rather talk through the day calmly than force everything
-            into a fixed package, so reach out in whichever way feels easier.
-          </p>
-        }
-        actions={[
-          {
-            href: sitePhoneHref,
-            label: "Call to talk it through",
-            icon: <Phone className="size-4" />,
-          },
-          {
-            href: siteEmailHref,
-            label: "Email the team",
-            icon: <EnvelopeSimple className="size-4" />,
-          },
-        ]}
       />
     </main>
   )

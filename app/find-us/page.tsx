@@ -6,10 +6,8 @@ import {
   Phone,
 } from "@phosphor-icons/react/dist/ssr"
 
-import { EditorialBreak } from "@/components/site/EditorialBreak"
 import { InlineBookingCta } from "@/components/site/InlineBookingCta"
 import { MapEmbed } from "@/components/site/MapEmbed"
-import { PageSignoff } from "@/components/site/PageSignoff"
 import { PageHero } from "@/components/site/PageHero"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import { SiteActionCard } from "@/components/site/SiteActionCard"
@@ -135,8 +133,6 @@ export default function FindUsPage() {
         title="Thinking about dinner already?"
         description="If you know you are joining us, book ahead and arrive with everything nicely sorted."
       />
-
-      <EditorialBreak quote="Easy to find, hard to leave, and worth coming back to." />
 
       <StickySplitSection
         className="bg-[var(--color-surface-low)]"
@@ -267,29 +263,6 @@ export default function FindUsPage() {
           </div>
         </div>
       </StickySplitSection>
-
-      <PageSignoff
-        eyebrow="Finish planning"
-        title="Route sorted? Book a table and you are all set."
-        description="Open the map if you still need directions, or go straight to booking if you already know you are coming."
-        body={
-          <p>
-            Quick question before you leave? Give us a ring. Already sure? Book
-            now and skip the guesswork.
-          </p>
-        }
-        actions={[
-          {
-            href: bookOnlineHref,
-            label: "Book a table",
-          },
-          {
-            href: directionsHref,
-            label: "Get directions",
-            icon: <MapPin className="size-4" />,
-          },
-        ]}
-      />
     </main>
   )
 }

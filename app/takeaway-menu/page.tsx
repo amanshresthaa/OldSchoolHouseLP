@@ -2,7 +2,6 @@ import type { Metadata } from "next"
 import { DownloadSimple, Phone } from "@phosphor-icons/react/dist/ssr"
 
 import { InlineBookingCta } from "@/components/site/InlineBookingCta"
-import { PageSignoff } from "@/components/site/PageSignoff"
 import { PageHero } from "@/components/site/PageHero"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import { SiteActionCard } from "@/components/site/SiteActionCard"
@@ -151,31 +150,6 @@ export default function TakeawayMenuPage() {
       <InlineBookingCta
         title="Changed your mind about staying home?"
         description="If collection turns into dinner plans, book a table and come sit with us instead."
-      />
-
-      <PageSignoff
-        eyebrow="Next step"
-        title="Find what you want, call to order, and collect when we give you a time."
-        description="The PDF is useful for sharing. The live menu is better when you want to move quickly between sections on your phone."
-        body={
-          <p>
-            If you want help choosing, collection timing, or a quick check on a
-            dish before you order, calling the pub is still the easiest route.
-          </p>
-        }
-        actions={[
-          {
-            href: sitePhoneHref,
-            label: "Call to order",
-            icon: <Phone className="size-4" />,
-          },
-          {
-            href: siteMenuPdfHref,
-            label: "Download the PDF",
-            download: true,
-            icon: <DownloadSimple className="size-4" />,
-          },
-        ]}
       />
     </main>
   )

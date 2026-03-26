@@ -8,9 +8,7 @@ import {
   MapPin,
 } from "@phosphor-icons/react/dist/ssr"
 
-import { EditorialBreak } from "@/components/site/EditorialBreak"
 import { InlineBookingCta } from "@/components/site/InlineBookingCta"
-import { PageSignoff } from "@/components/site/PageSignoff"
 import { PageHero } from "@/components/site/PageHero"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import { SiteActionCard } from "@/components/site/SiteActionCard"
@@ -228,33 +226,6 @@ export default function AboutPage() {
       <InlineBookingCta
         title="The best way to decide is to come in."
         description="Book a table, try the menu, and let the evening do the rest."
-      />
-
-      <EditorialBreak quote="A proper pub where the food keeps surprising you and one drink keeps turning into another." />
-
-      <PageSignoff
-        eyebrow="Next step"
-        title="Now you know the story, the best part is pulling up a chair."
-        description="Whether it is dinner, drinks, or something you want to celebrate, your next step is just below."
-        body={
-          <p>
-            Start with the menu if you are curious about the food, check find us
-            if you need directions, or just book now if you have already made up
-            your mind.
-          </p>
-        }
-        actions={[
-          {
-            href: bookOnlineHref,
-            label: "Book a table",
-            icon: <ArrowRight className="size-4" />,
-          },
-          {
-            href: "/find-us",
-            label: "Find us",
-            icon: <MapPin className="size-4" />,
-          },
-        ]}
       />
     </main>
   )

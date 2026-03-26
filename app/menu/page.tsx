@@ -2,7 +2,6 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { DownloadSimple, Phone } from "@phosphor-icons/react/dist/ssr"
 
-import { EditorialBreak } from "@/components/site/EditorialBreak"
 import { InlineBookingCta } from "@/components/site/InlineBookingCta"
 import { PageSignoff } from "@/components/site/PageSignoff"
 import { MenuInteractive } from "@/components/site/MenuInteractive"
@@ -138,9 +137,6 @@ export default function MenuPage() {
           </div>
         </div>
       </section>
-
-      {/* Editorial break */}
-      <EditorialBreak quote="Start with what you know. Stay for what you did not expect." />
 
       {/* D. Inline booking CTA */}
       <InlineBookingCta
