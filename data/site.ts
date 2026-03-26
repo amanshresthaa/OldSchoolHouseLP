@@ -202,6 +202,12 @@ export const aboutFamilyNotes = [
   "For guests, that means the pub still feels local, but the kitchen brings something you would not expect from a typical High Street pub.",
 ]
 
+export const aboutHeritageNotes = [
+  "Stony Stratford is a market town with roots stretching back to at least Roman times, when it grew up around the historic ford of Watling Street over the River Great Ouse.",
+  "The town received its market charter in 1194 and was granted official town status in 1215 — a long tradition of hospitality on a road that has welcomed travellers for centuries.",
+  "Today it sits at the north-west corner of Milton Keynes in north Buckinghamshire, with the annual Folk on the Green festival on Horsefair Green each June drawing folk and rock music to the heart of town.",
+]
+
 export const aboutLocationHighlights: HighlightItem[] = [
   {
     title: "On the busiest road in Stony Stratford",

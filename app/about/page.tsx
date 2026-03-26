@@ -14,6 +14,7 @@ import { SectionHeading } from "@/components/site/SectionHeading"
 import { SiteActionCard } from "@/components/site/SiteActionCard"
 import {
   aboutFamilyNotes,
+  aboutHeritageNotes,
   aboutLocationHighlights,
   aboutOperatorNotes,
   aboutPubFacts,
@@ -186,7 +187,12 @@ export default function AboutPage() {
                   <MapPin className="size-5 text-secondary" />
                   <h2 className="section-title">Why the location helps</h2>
                 </div>
-                <div className="mt-4 grid gap-3 lg:grid-cols-3">
+                <div className="mt-4 space-y-4 text-sm leading-7 text-on-surface md:text-base">
+                  {aboutHeritageNotes.map((note) => (
+                    <p key={note}>{note}</p>
+                  ))}
+                </div>
+                <div className="mt-5 grid gap-3 lg:grid-cols-3">
                   {aboutLocationHighlights.map((item, index) => (
                     <div
                       key={item.title}
