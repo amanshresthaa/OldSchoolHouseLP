@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { headers } from "next/headers"
-import { Newsreader, Manrope } from "next/font/google"
+import localFont from "next/font/local"
 
 import "./globals.css"
 import { CookieBanner } from "@/components/site/CookieBanner"
@@ -12,14 +12,46 @@ import { siteDescription, siteName, siteOgImage, siteUrl } from "@/data/site"
 import { TRACE_ID_HEADER } from "@/lib/tracing"
 import { cn } from "@/lib/utils"
 
-const newsreader = Newsreader({
-  subsets: ["latin"],
+const newsreader = localFont({
+  src: [
+    {
+      path: "./fonts/Newsreader-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+  ],
   variable: "--font-newsreader",
   display: "swap",
 })
 
-const manrope = Manrope({
-  subsets: ["latin"],
+const manrope = localFont({
+  src: [
+    {
+      path: "./fonts/Manrope-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Manrope-Medium.ttf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Manrope-SemiBold.ttf",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Manrope-Bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Manrope-ExtraBold.ttf",
+      weight: "800",
+      style: "normal",
+    },
+  ],
   variable: "--font-manrope",
   display: "swap",
 })
@@ -27,7 +59,7 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${siteName} | Pub & Restaurant in Stony Stratford`,
+    default: `${siteName} | Traditional Pub in Stony Stratford`,
     template: `%s | ${siteName}`,
   },
   description: siteDescription,
@@ -46,7 +78,7 @@ export const metadata: Metadata = {
     locale: "en_GB",
     url: siteUrl,
     siteName,
-    title: `${siteName} | Pub & Restaurant in Stony Stratford`,
+    title: `${siteName} | Traditional Pub in Stony Stratford`,
     description: siteDescription,
     images: [
       {
@@ -59,7 +91,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteName} | Pub & Restaurant in Stony Stratford`,
+    title: `${siteName} | Traditional Pub in Stony Stratford`,
     description: siteDescription,
     images: [siteOgImage],
   },

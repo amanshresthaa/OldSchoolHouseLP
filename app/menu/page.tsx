@@ -15,13 +15,15 @@ import {
   siteMenuPdfHref,
   sitePhoneHref,
 } from "@/data/site"
+import { getRouteConfig } from "@/data/site-routes"
 import { menuCategories } from "@/lib/menu"
 
+const route = getRouteConfig("/menu")
+
 export const metadata: Metadata = {
-  title: "Menu in Stony Stratford",
-  description:
-    "Explore the food and drink at The Old School House in Stony Stratford, from pub favourites and Nepalese dishes to desserts, craft pours, and coffee.",
-  alternates: { canonical: "/menu" },
+  title: route?.meta.title,
+  description: route?.meta.description,
+  alternates: { canonical: route?.meta.canonical },
 }
 
 export default function MenuPage() {
@@ -57,13 +59,7 @@ export default function MenuPage() {
       />
 
       {/* A. Hero */}
-      <PageHero
-        eyebrow="Food and drink menu"
-        title="Two kitchens, one menu, and a table worth coming back to."
-        description="Pub favourites sit alongside Nepalese specialities. Browse everything here, then book or call when you are ready."
-        primaryAction={{ href: bookOnlineHref, label: "Book a table" }}
-        secondaryAction={{ href: sitePhoneHref, label: "Call 01908 561936" }}
-      />
+      <PageHero {...route!.hero!} />
 
       {/* B. Quick-info strip */}
       <section className="bg-[var(--color-surface-low)] py-10 md:py-12">
@@ -184,6 +180,24 @@ export default function MenuPage() {
               </div>
             </div>
             <div className="grid gap-2 text-sm leading-7">
+              <Link
+                href="/sunday-roast"
+                className="text-white/72 transition hover:text-white"
+              >
+                Planning Sunday lunch? →
+              </Link>
+              <Link
+                href="/nepalese-kitchen"
+                className="text-white/72 transition hover:text-white"
+              >
+                Want the Nepalese side of the menu explained first? →
+              </Link>
+              <Link
+                href="/group-dining-celebrations"
+                className="text-white/72 transition hover:text-white"
+              >
+                Booking for a mixed group or celebration? →
+              </Link>
               <Link
                 href="/takeaway-menu"
                 className="text-white/72 transition hover:text-white"

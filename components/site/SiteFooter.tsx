@@ -13,18 +13,17 @@ import logo from "@/images/logos/OldSchoolHouse.png"
 import {
   directionsHref,
   mapHref,
+  openingHoursNote,
   openingHours,
   siteAddress,
   siteEmail,
   siteEmailHref,
-  siteLegalLinks,
   siteName,
-  siteNav,
   sitePhone,
   sitePhoneHref,
-  siteResources,
   socialLinks,
 } from "@/data/site"
+import { siteLegalLinks, siteNav, siteResources } from "@/data/site-routes"
 
 export function SiteFooter() {
   const socialItems = [
@@ -168,6 +167,7 @@ export function SiteFooter() {
                 {sitePhone}
               </a>
             </p>
+            <p className="text-white/55">{openingHoursNote}</p>
             <p className="pt-1">
               <a
                 className="inline-flex items-center gap-2 text-[var(--color-on-tertiary-container)] transition hover:text-white"

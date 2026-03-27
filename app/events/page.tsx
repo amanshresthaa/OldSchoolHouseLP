@@ -1,225 +1,193 @@
 import type { Metadata } from "next"
-import Image from "next/image"
-import { EnvelopeSimple, Phone } from "@phosphor-icons/react/dist/ssr"
+import Link from "next/link"
+import {
+  ArrowRight,
+  CalendarDots,
+  ForkKnife,
+  Television,
+  UsersThree,
+} from "@phosphor-icons/react/dist/ssr"
 
+import { FaqSection } from "@/components/site/FaqSection"
 import { InlineBookingCta } from "@/components/site/InlineBookingCta"
 import { PageHero } from "@/components/site/PageHero"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import { SiteActionCard } from "@/components/site/SiteActionCard"
-import { eventOccasions, siteEmailHref, sitePhoneHref } from "@/data/site"
+import { eventOccasions } from "@/data/site"
+import { getRouteConfig } from "@/data/site-routes"
 
-import eventsImage from "@/images/food/peri-peri-chicken-with-fries-and-salad.png"
+const route = getRouteConfig("/events")
 
 export const metadata: Metadata = {
-  title: "Private Hire in Stony Stratford",
-  description:
-    "Private hire, sports socials, tasting nights, and group bookings at The Old School House in Stony Stratford, with indoor and outdoor capacity for a range of occasions.",
+  title: route?.meta.title,
+  description: route?.meta.description,
   alternates: {
-    canonical: "/events",
+    canonical: route?.meta.canonical,
   },
 }
 
-const capacityNotes = [
-  "Room indoors for seated meals and longer-table gatherings.",
-  "Outdoor space across the front garden and rear courtyard.",
-  "An open-plan bar that suits standing drinks and easy celebrations.",
-  "Food and drinks that work just as well for groups as they do for smaller tables.",
+const whatOnCards = [
+  {
+    title: "Live sport that keeps the pub feel intact",
+    description:
+      "Fixtures matter here, but so do the drinks, the table, and the atmosphere around them. That makes the pub a better all-round choice than a screen-only venue.",
+    icon: Television,
+  },
+  {
+    title: "Quiz nights and product tastings",
+    description:
+      "Community-led reasons to return help the pub feel active without needing to become a crowded event machine every night of the week.",
+    icon: CalendarDots,
+  },
+  {
+    title: "Food-led nights with stronger identity",
+    description:
+      "The Nepalese kitchen gives tasting nights and special menus more shape than the usual generic pub promo.",
+    icon: ForkKnife,
+  },
 ]
 
-const enquiryChecklist = [
-  "Preferred date and rough arrival time",
-  "Estimated guest numbers",
-  "Whether you need seated dining, drinks space, or outdoor room",
-  "Any food direction, sports fixture, or celebration detail worth planning around",
+const whatOnFaqs = [
+  {
+    question: "What kinds of events does The Old School House suit?",
+    answer:
+      "The pub suits live sport, quiz nights, tastings, community meetups, and other repeat-visit reasons to come back through the week and across the year.",
+  },
+  {
+    question: "Can I book a table for event nights?",
+    answer:
+      "Yes. Booking ahead is the safest route if you know you are coming in for a fixture, quiz night, or a busier evening.",
+  },
+  {
+    question: "What if I want to organise a bigger private occasion instead?",
+    answer:
+      "Use the private hire page if the main need is a birthday, work drinks, wake, or group gathering rather than a public event night.",
+  },
 ]
 
 export default function EventsPage() {
   return (
     <main>
-      <PageHero
-        eyebrow="Events and private hire"
-        title="A venue shape that works for birthdays, match days, and longer-table gatherings."
-        description="From birthday dinners and sports socials to private gatherings with food and drinks, The Old School House has room to bring everyone together."
-        primaryAction={{ href: siteEmailHref, label: "Email an enquiry" }}
-        secondaryAction={{ href: sitePhoneHref, label: "Call the pub" }}
-      />
+      <PageHero {...route!.hero!} />
 
       <section className="bg-background py-10 md:py-14 lg:py-16">
         <div className="section-shell space-y-5">
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <SectionHeading
-              eyebrow="Room to gather"
-              title="Enough room to host groups without losing the pub feel."
-              description="Drinks in the garden, a longer table inside, or something that carries on well past dessert — there is space for all of it."
+              eyebrow="What’s on at the pub"
+              title="Repeat visits matter just as much as the first one."
+              description="The Old School House should feel like a pub people keep in mind for a match, a quiz, a tasting night, or the kind of evening that only becomes a plan once friends start messaging."
+            />
+            <SiteActionCard
+              actions={[
+                {
+                  href: "/book",
+                  label: "Book for an event night",
+                  icon: <ArrowRight className="size-4" />,
+                },
+                {
+                  href: "/private-hire",
+                  label: "Private hire",
+                },
+              ]}
+              supportingText="Use What’s On for public reasons to visit. Use Private Hire when you are planning something centred around your own group."
+              showDivider
             />
           </div>
-          <div className="grid gap-4 lg:grid-cols-[1fr_1.2fr]">
-            <Image
-              src={eventsImage}
-              alt="A large plate of peri-peri chicken with fries and salad at The Old School House."
-              className="media-lift h-[16rem] w-full rounded-2xl object-cover md:h-[20rem] lg:h-full"
-              sizes="(min-width: 1024px) 40vw, 100vw"
-            />
-            <div className="grid gap-px overflow-hidden rounded-2xl bg-[rgba(196,189,181,0.22)] sm:grid-cols-2">
-              {capacityNotes.map((note, index) => (
-                <div
-                  key={note}
-                  className={`px-5 py-5 text-sm leading-7 text-on-surface md:px-6 md:py-6 md:text-base ${index % 2 === 0 ? "bg-[var(--color-surface-lowest)]" : "surface-pane-muted"}`}
+          <div className="grid gap-4 lg:grid-cols-3">
+            {whatOnCards.map((card, index) => {
+              const Icon = card.icon
+
+              return (
+                <article
+                  key={card.title}
+                  className={`rounded-2xl px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6 ${
+                    index === 1
+                      ? "surface-pane-muted"
+                      : "bg-[var(--color-surface-lowest)]"
+                  }`}
                 >
-                  {note}
-                </div>
-              ))}
-            </div>
+                  <Icon className="size-5 text-secondary" />
+                  <h2 className="section-title pt-3">{card.title}</h2>
+                  <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                    {card.description}
+                  </p>
+                </article>
+              )
+            })}
           </div>
         </div>
       </section>
 
       <section className="bg-[var(--color-surface-low)] py-10 md:py-14 lg:py-16">
         <div className="section-shell space-y-5">
-          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <SectionHeading
-              eyebrow="Occasions"
-              title="More than just formal private hire."
-              description="Big celebrations, casual get-togethers, match-day meetups, and tasting nights all feel right at home here."
-            />
-            <div className="shrink-0">
-              <SiteActionCard
-                actions={[
-                  {
-                    href: siteEmailHref,
-                    label: "Start an enquiry",
-                    icon: <EnvelopeSimple className="size-4" />,
-                  },
-                ]}
-              />
-            </div>
-          </div>
-          <div className="grid gap-px overflow-hidden rounded-2xl bg-[rgba(196,189,181,0.22)] md:grid-cols-2">
+          <SectionHeading
+            eyebrow="Built for return visits"
+            title="The pub should work for more than one kind of night."
+            description="Live sport, local meetups, and tasting-led evenings help people think of The Old School House more often than just when they happen to need dinner."
+          />
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {eventOccasions.map((occasion, index) => (
-              <div
+              <article
                 key={occasion}
-                className={`px-5 py-5 text-sm leading-7 font-medium text-on-background md:px-6 md:py-6 md:text-base ${index % 2 === 0 ? "surface-pane-muted" : "bg-[var(--color-surface-lowest)]"}`}
+                className={`rounded-2xl px-5 py-5 text-sm leading-7 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6 md:text-base ${
+                  index % 2 === 0
+                    ? "bg-[var(--color-surface-lowest)]"
+                    : "surface-pane-muted"
+                }`}
               >
                 {occasion}
-              </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-background py-10 md:py-14 lg:py-16">
-        <div className="section-shell space-y-5">
-          <SectionHeading
-            eyebrow="What is included"
-            title="Practical details for planning your event."
-            description="Every event is different, so we shape the offer around what you need rather than forcing a fixed package."
-          />
-          <div className="grid gap-px overflow-hidden rounded-2xl bg-[rgba(196,189,181,0.22)] sm:grid-cols-2 lg:grid-cols-4">
-            <div className="bg-[var(--color-surface-lowest)] px-5 py-5 md:px-6 md:py-6">
-              <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
-                Space
-              </p>
-              <p className="pt-2 text-sm leading-7 text-on-surface">
-                65 covers inside and around 60 outside across the front garden
-                and private courtyard. Flexible layouts for standing, seated, or
-                mixed.
-              </p>
-            </div>
-            <div className="surface-pane-muted px-5 py-5 md:px-6 md:py-6">
-              <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
-                Food and drink
-              </p>
-              <p className="pt-2 text-sm leading-7 text-on-surface">
-                Choose from the main menu, a set menu for groups, or a buffet
-                spread. Drinks can be run on a tab or pay-as-you-go.
-              </p>
-            </div>
-            <div className="bg-[var(--color-surface-lowest)] px-5 py-5 md:px-6 md:py-6">
-              <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
-                Pricing
-              </p>
-              <p className="pt-2 text-sm leading-7 text-on-surface">
-                No fixed hire fee for most bookings. Minimum spend may apply for
-                exclusive use on busier evenings. Tell us your plans and we will
-                give you a clear quote.
-              </p>
-            </div>
-            <div className="surface-pane-muted px-5 py-5 md:px-6 md:py-6">
-              <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
-                Extras
-              </p>
-              <p className="pt-2 text-sm leading-7 text-on-surface">
-                Live sport on screens, music options, and decoration
-                flexibility. We will help tailor the details once you get in
-                touch.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <InlineBookingCta
-        title="Need a table first and an event later?"
-        description="If this visit is just drinks or dinner, book a table now. If you are planning something bigger, send us the details and we will help with the rest."
+        title="Heading in for the match, the quiz, or a busier night?"
+        description="Book ahead and let the pub side of the visit feel straightforward before the evening gets moving."
       />
 
       <section className="bg-background py-10 md:py-14 lg:py-16">
         <div className="section-shell space-y-5">
-          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <SectionHeading
-              eyebrow="Plan the details"
-              title="A little context helps us shape the right kind of gathering."
-              description="Tell us the rough numbers, the kind of setup you want, and whether food, drinks, or the match matter most."
-            />
-            <div className="shrink-0">
-              <SiteActionCard
-                actions={[
-                  {
-                    href: siteEmailHref,
-                    label: "Email details",
-                    icon: <EnvelopeSimple className="size-4" />,
-                  },
-                  {
-                    href: sitePhoneHref,
-                    label: "Call to talk it through",
-                    icon: <Phone className="size-4" />,
-                  },
-                ]}
-                showDivider
-              />
-            </div>
-          </div>
-          <div className="grid gap-4 lg:grid-cols-2">
-            <div className="rounded-2xl bg-[var(--color-surface-lowest)] px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6">
-              <h3 className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
-                What works well here
-              </h3>
-              <div className="mt-3 space-y-2 text-sm leading-7 text-on-surface md:text-base">
-                <p>Sports screenings and local team socials.</p>
-                <p>Seasonal tasting evenings and menu launches.</p>
-                <p>
-                  Functions and parties that want indoor and outdoor
-                  flexibility.
-                </p>
-                <p>
-                  Community gatherings that still want a proper food and drink
-                  offer.
-                </p>
-              </div>
-            </div>
-            <div className="surface-pane-muted rounded-2xl px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6">
-              <h3 className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
-                What to send in your enquiry
-              </h3>
-              <div className="mt-3 space-y-2 text-sm leading-7 text-on-surface md:text-base">
-                {enquiryChecklist.map((item) => (
-                  <p key={item}>{item}</p>
-                ))}
-              </div>
-            </div>
+          <SectionHeading
+            eyebrow="Need a different route?"
+            title="Public events and private occasions should not compete with each other."
+            description="If your priority is your own guest list rather than the pub calendar, the private hire route is the right next step."
+          />
+          <div className="grid gap-4 md:grid-cols-2">
+            <Link
+              href="/live-sport"
+              className="rounded-2xl bg-[var(--color-surface-lowest)] px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] transition hover:-translate-y-0.5 md:px-6 md:py-6"
+            >
+              <Television className="size-5 text-secondary" />
+              <h2 className="section-title pt-3">Live sport</h2>
+              <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                Use the live sport page if the main draw is the fixture and the
+                table around it.
+              </p>
+            </Link>
+            <Link
+              href="/private-hire"
+              className="surface-pane-muted rounded-2xl px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] transition hover:-translate-y-0.5 md:px-6 md:py-6"
+            >
+              <UsersThree className="size-5 text-secondary" />
+              <h2 className="section-title pt-3">Private hire</h2>
+              <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                Use private hire for birthdays, wakes, work drinks, and
+                gatherings built around your own group.
+              </p>
+            </Link>
           </div>
         </div>
       </section>
+
+      <FaqSection
+        eyebrow="What’s on FAQs"
+        title="Keep public event nights easy to understand."
+        description="The page should explain why people come back, while letting private enquiries move somewhere more appropriate."
+        faqs={whatOnFaqs}
+      />
     </main>
   )
 }

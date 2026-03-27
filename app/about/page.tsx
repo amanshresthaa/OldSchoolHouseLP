@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import Image from "next/image"
 import Link from "next/link"
 import {
   ArrowRight,
@@ -8,10 +7,9 @@ import {
   MapPin,
 } from "@phosphor-icons/react/dist/ssr"
 
-import { InlineBookingCta } from "@/components/site/InlineBookingCta"
 import { PageHero } from "@/components/site/PageHero"
+import { PageSignoff } from "@/components/site/PageSignoff"
 import { SectionHeading } from "@/components/site/SectionHeading"
-import { SiteActionCard } from "@/components/site/SiteActionCard"
 import {
   aboutFamilyNotes,
   aboutHeritageNotes,
@@ -20,216 +18,196 @@ import {
   aboutPubFacts,
   aboutReasons,
   aboutStoryNotes,
-  bookOnlineHref,
   lapenInnsHref,
   siteEmailHref,
 } from "@/data/site"
+import { getRouteConfig } from "@/data/site-routes"
 
-import heroImage from "@/images/food/table-food.png"
+const route = getRouteConfig("/about")
 
 export const metadata: Metadata = {
-  title: "About The Old School House",
-  description:
-    "Learn the story behind The Old School House in Stony Stratford, from the character of the building to the Nepalese kitchen and the team behind the pub.",
+  title: route?.meta.title,
+  description: route?.meta.description,
   alternates: {
-    canonical: "/about",
+    canonical: route?.meta.canonical,
   },
 }
 
 export default function AboutPage() {
   return (
     <main>
-      <PageHero
-        eyebrow="About"
-        title="The story behind a proper Stony Stratford pub with a Nepalese kitchen."
-        description="Previously known as The Plough, The Old School House brings together classic pub character, a kitchen with real range, and enough room to stay as long as you like."
-        primaryAction={{ href: bookOnlineHref, label: "Book a table" }}
-        secondaryAction={{ href: "/menu", label: "Browse the menu" }}
-      />
+      <PageHero {...route!.hero!} />
 
-      <section className="page-section bg-background">
-        <div className="section-shell">
-          <div className="surface-frame overflow-hidden">
-            <div className="grid gap-px bg-[rgba(196,189,181,0.22)] lg:grid-cols-[0.8fr_1.2fr]">
-              <div className="surface-pane surface-pane-muted">
-                <SectionHeading
-                  eyebrow="Why people choose it"
-                  title="It feels familiar in the right ways, but gives you more than the usual pub stop."
-                  description="The building gives the pub its warmth. The kitchen gives it range. Together they give you a reason to come back for drinks, dinner, and the occasional birthday."
-                />
-                <div className="mt-5 space-y-4 text-sm leading-7 text-on-surface md:text-base">
-                  {aboutStoryNotes.map((note) => (
-                    <p key={note}>{note}</p>
-                  ))}
-                </div>
-                <Image
-                  src={heroImage}
-                  alt="A table of pub plates, Nepalese dishes, and drinks at The Old School House."
-                  className="media-lift mt-5 h-[18rem] w-full rounded-[2rem] object-cover md:h-[24rem] lg:h-[28rem]"
-                  sizes="(min-width: 1024px) 40vw, 100vw"
-                />
-              </div>
-              <div className="grid gap-px bg-[rgba(196,189,181,0.18)] sm:grid-cols-2">
-                {aboutReasons.map((reason, index) => (
-                  <article
-                    key={reason.title}
-                    className={`surface-pane ${index === 0 ? "bg-[var(--color-surface-lowest)] sm:col-span-2" : index === 1 ? "surface-pane-muted" : "bg-[var(--color-surface-lowest)]"}`}
-                  >
-                    <h2 className="section-title">{reason.title}</h2>
-                    <p className="pt-4 text-sm leading-7 text-on-surface md:text-base">
-                      {reason.description}
-                    </p>
-                  </article>
-                ))}
-                <div className="surface-pane surface-pane-muted sm:col-span-2">
-                  <p className="eyebrow">What the space gives you</p>
-                  <div className="mt-4 grid gap-3 md:grid-cols-2">
-                    {aboutPubFacts.map((fact) => (
-                      <div
-                        key={fact.label}
-                        className="content-card bg-[var(--color-surface-lowest)] px-5 py-4"
-                      >
-                        <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
-                          {fact.label}
-                        </p>
-                        <p className="pt-2 text-sm leading-7 text-on-surface md:text-base">
-                          {fact.value}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="page-section bg-[var(--color-surface-low)]">
-        <div className="section-shell">
-          <div className="surface-frame overflow-hidden">
-            <div className="grid gap-px bg-[rgba(196,189,181,0.22)]">
-              <div className="grid gap-px lg:grid-cols-[0.72fr_1.28fr]">
-                <div className="surface-pane flex flex-col justify-between bg-[var(--color-surface-lowest)]">
-                  <div>
-                    <SectionHeading
-                      eyebrow="The people behind it"
-                      title={
-                        'Led by Sanjog "San" Gautam, with the wider Lapen Inns family behind the pub.'
-                      }
-                      description="The aim is not to replace the classic pub feel. It is to keep that welcome intact and add a food offer strong enough to make the place stand out."
-                    />
-                    <p className="mt-5 max-w-xl text-sm leading-7 text-on-surface md:text-base">
-                      The result is a pub that still feels rooted in Stony
-                      Stratford, but has a clearer point of difference once you
-                      sit down and order.
-                    </p>
-                  </div>
-                  <SiteActionCard
-                    className="mt-5"
-                    actions={[
-                      {
-                        href: bookOnlineHref,
-                        label: "Book a table",
-                        icon: <ArrowRight className="size-4" />,
-                      },
-                      {
-                        href: siteEmailHref,
-                        label: "Ask the team a question",
-                      },
-                    ]}
-                    showDivider
-                  />
-                </div>
-                <div className="grid gap-px bg-[rgba(196,189,181,0.18)] md:grid-cols-2">
-                  <article className="surface-pane bg-[var(--color-surface-lowest)]">
-                    <div className="flex items-center gap-3">
-                      <ForkKnife className="size-5 text-secondary" />
-                      <h2 className="section-title">
-                        San&apos;s hospitality approach
-                      </h2>
-                    </div>
-                    <div className="space-y-4 pt-4 text-sm leading-7 text-on-surface md:text-base">
-                      {aboutOperatorNotes.map((note) => (
-                        <p key={note}>{note}</p>
-                      ))}
-                    </div>
-                  </article>
-                  <article className="surface-pane surface-pane-muted">
-                    <div className="flex items-center gap-3">
-                      <Buildings className="size-5 text-secondary" />
-                      <h2 className="section-title">
-                        Part of the Lapen Inns family
-                      </h2>
-                    </div>
-                    <div className="space-y-4 pt-4 text-sm leading-7 text-on-surface md:text-base">
-                      {aboutFamilyNotes.map((note) => (
-                        <p key={note}>{note}</p>
-                      ))}
-                      <p>
-                        You can see more of the wider group at{" "}
-                        <a
-                          href={lapenInnsHref}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="text-secondary transition hover:text-secondary/80"
-                        >
-                          lapeninns.com
-                        </a>
-                        .
-                      </p>
-                    </div>
-                  </article>
-                </div>
-              </div>
-              <article className="surface-pane surface-pane-muted">
-                <div className="flex items-center gap-3">
-                  <MapPin className="size-5 text-secondary" />
-                  <h2 className="section-title">Why the location helps</h2>
-                </div>
-                <div className="mt-4 space-y-4 text-sm leading-7 text-on-surface md:text-base">
-                  {aboutHeritageNotes.map((note) => (
-                    <p key={note}>{note}</p>
-                  ))}
-                </div>
-                <div className="mt-5 grid gap-3 lg:grid-cols-3">
-                  {aboutLocationHighlights.map((item, index) => (
-                    <div
-                      key={item.title}
-                      className={`content-card px-5 py-4 ${index === 1 ? "bg-[var(--color-surface-lowest)]" : "bg-[var(--color-surface-low)]/72"}`}
-                    >
-                      <p className="font-sans text-lg font-semibold text-secondary">
-                        {item.title}
-                      </p>
-                      <p className="pt-2 text-sm leading-7 text-on-surface md:text-base">
-                        {item.description}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-5 grid gap-3 text-sm leading-7 md:grid-cols-2 md:text-base">
-                  <Link
-                    href="/find-us"
-                    className="content-card bg-[var(--color-surface-lowest)] px-4 py-4 text-on-surface transition hover:-translate-y-0.5"
-                  >
-                    Plan the journey
-                  </Link>
-                  <Link
-                    href="/events"
-                    className="content-card bg-[var(--color-surface-lowest)] px-4 py-4 text-on-surface transition hover:-translate-y-0.5"
-                  >
-                    See group and private hire options
-                  </Link>
-                </div>
+      <section className="bg-background py-10 md:py-14 lg:py-16">
+        <div className="section-shell space-y-5">
+          <SectionHeading
+            eyebrow="The concept"
+            title="The Old School House is pub-led by design."
+            description="The point of difference is not a second brand hidden inside the building. It is a traditional pub that earns discovery through the Nepalese kitchen once guests are already interested in the visit."
+          />
+          <div className="grid gap-4 lg:grid-cols-3">
+            {aboutReasons.map((reason, index) => (
+              <article
+                key={reason.title}
+                className={`rounded-2xl px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6 ${
+                  index === 1
+                    ? "surface-pane-muted"
+                    : "bg-[var(--color-surface-lowest)]"
+                }`}
+              >
+                <h2 className="section-title">{reason.title}</h2>
+                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                  {reason.description}
+                </p>
               </article>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <InlineBookingCta
-        title="The best way to decide is to come in."
-        description="Book a table, try the menu, and let the evening do the rest."
+      <section className="bg-[var(--color-surface-low)] py-10 md:py-14 lg:py-16">
+        <div className="section-shell space-y-5">
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <SectionHeading
+              eyebrow="Building and setting"
+              title="The building does a lot of the trust work before the first order."
+              description="Character matters in hospitality, especially when you want the pub to feel like a place people return to for drinks, dinner, and occasions that sit somewhere between casual and planned."
+            />
+            <div className="grid gap-2 text-sm leading-7 text-on-surface md:text-right md:text-base">
+              {aboutStoryNotes.map((note) => (
+                <p key={note}>{note}</p>
+              ))}
+            </div>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {aboutPubFacts.map((fact, index) => (
+              <article
+                key={fact.label}
+                className={`rounded-2xl px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6 ${
+                  index % 2 === 0
+                    ? "bg-[var(--color-surface-lowest)]"
+                    : "surface-pane-muted"
+                }`}
+              >
+                <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
+                  {fact.label}
+                </p>
+                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                  {fact.value}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-background py-10 md:py-14 lg:py-16">
+        <div className="section-shell space-y-5">
+          <div className="grid gap-4 lg:grid-cols-3">
+            <article className="rounded-2xl bg-[var(--color-surface-lowest)] px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6">
+              <div className="flex items-center gap-3">
+                <ForkKnife className="size-5 text-secondary" />
+                <h2 className="section-title">The operator story</h2>
+              </div>
+              <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
+                {aboutOperatorNotes.map((note) => (
+                  <p key={note}>{note}</p>
+                ))}
+              </div>
+            </article>
+            <article className="surface-pane-muted rounded-2xl px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6">
+              <div className="flex items-center gap-3">
+                <Buildings className="size-5 text-secondary" />
+                <h2 className="section-title">Part of Lapen Inns</h2>
+              </div>
+              <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
+                {aboutFamilyNotes.map((note) => (
+                  <p key={note}>{note}</p>
+                ))}
+                <p>
+                  Find the wider group at{" "}
+                  <a
+                    href={lapenInnsHref}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-secondary transition hover:text-secondary/80"
+                  >
+                    lapeninns.com
+                  </a>
+                  .
+                </p>
+              </div>
+            </article>
+            <article className="rounded-2xl bg-[var(--color-surface-lowest)] px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6">
+              <div className="flex items-center gap-3">
+                <MapPin className="size-5 text-secondary" />
+                <h2 className="section-title">Why Stony Stratford matters</h2>
+              </div>
+              <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
+                {aboutHeritageNotes.map((note) => (
+                  <p key={note}>{note}</p>
+                ))}
+              </div>
+            </article>
+          </div>
+          <div className="grid gap-4 lg:grid-cols-3">
+            {aboutLocationHighlights.map((item, index) => (
+              <article
+                key={item.title}
+                className={`rounded-2xl px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6 ${
+                  index === 1
+                    ? "surface-pane-muted"
+                    : "bg-[var(--color-surface-lowest)]"
+                }`}
+              >
+                <h2 className="section-title">{item.title}</h2>
+                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                  {item.description}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <PageSignoff
+        eyebrow="Next step"
+        title="See how the story lands on the menu."
+        description="The concept only works if the menu and visit path make it feel easy to understand."
+        body={
+          <p>
+            If you want to see where the pub comfort and Nepalese kitchen meet
+            most clearly, the menu and Nepalese kitchen pages are the best next
+            stop.
+          </p>
+        }
+        actions={[
+          {
+            href: "/menu",
+            label: "View the menu",
+            icon: <ArrowRight className="size-4" />,
+          },
+          {
+            href: "/nepalese-kitchen",
+            label: "Explore the kitchen",
+          },
+        ]}
+        details={
+          <div className="grid gap-2 text-sm leading-7">
+            <Link
+              href="/private-hire"
+              className="text-white/72 transition hover:text-white"
+            >
+              Planning a bigger gathering? →
+            </Link>
+            <a
+              href={siteEmailHref}
+              className="text-white/72 transition hover:text-white"
+            >
+              Need to ask the team something directly? →
+            </a>
+          </div>
+        }
       />
     </main>
   )

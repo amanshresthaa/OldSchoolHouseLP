@@ -1,13 +1,17 @@
 import { describe, expect, it } from "vitest"
 
 import {
+  featureFlags,
   localBusinessSchema,
   openingHours,
   siteAddress,
+} from "../../data/site"
+import {
+  getRouteConfig,
   siteLegalLinks,
   siteNav,
   siteResources,
-} from "../../data/site"
+} from "../../data/site-routes"
 
 describe("site data exports", () => {
   it("keeps key navigation and resource links present", () => {
@@ -38,8 +42,8 @@ describe("site data exports", () => {
     expect(siteAddress).toContain("Stony Stratford")
     expect(openingHours).toEqual([
       {
-        label: "Monday to Sunday",
-        hours: "10:00 - 00:30",
+        label: "Opening hours",
+        hours: "Call the pub for today’s hours",
       },
     ])
     expect(localBusinessSchema).toEqual(
@@ -49,13 +53,23 @@ describe("site data exports", () => {
         address: expect.objectContaining({
           postalCode: "MK11 1JA",
         }),
-        openingHoursSpecification: expect.arrayContaining([
-          expect.objectContaining({
-            opens: "10:00",
-            closes: "00:30",
-          }),
-        ]),
       })
     )
+    expect(featureFlags.hoursConfirmed).toBe(false)
+    expect(localBusinessSchema).not.toHaveProperty("openingHoursSpecification")
+  })
+
+  it("returns route configs for published pages and undefined for unknown routes", () => {
+    expect(getRouteConfig("/private-hire")).toEqual(
+      expect.objectContaining({
+        href: "/private-hire",
+        published: true,
+        meta: expect.objectContaining({
+          canonical: "/private-hire",
+        }),
+      })
+    )
+
+    expect(getRouteConfig("/does-not-exist")).toBeUndefined()
   })
 })

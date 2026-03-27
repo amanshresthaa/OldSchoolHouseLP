@@ -82,7 +82,9 @@ export function MapEmbed({
         referrerPolicy="no-referrer-when-downgrade"
       />
       <div className="flex flex-col items-start gap-3 bg-[var(--color-surface-lowest)] px-5 py-4 text-sm text-on-surface sm:flex-row sm:items-center sm:justify-between">
-        <p>Need turn-by-turn directions? Open the route straight in Google Maps.</p>
+        <p>
+          Need turn-by-turn directions? Open the route straight in Google Maps.
+        </p>
         <a
           href={directionsHref}
           target="_blank"

@@ -164,10 +164,10 @@ export default function MenuInformationPage() {
                   Takeaway menu
                 </Link>
                 <Link
-                  href="/wakes-menu"
+                  href="/wakes-life-celebrations"
                   className="rounded-[1.35rem] bg-[var(--color-surface-low)] px-4 py-4 text-on-surface transition hover:-translate-y-0.5"
                 >
-                  Wakes menu
+                  Wakes & life celebrations
                 </Link>
                 <Link
                   href="/book"

@@ -1,15 +1,20 @@
 import { describe, expect, it } from "vitest"
-import { readFile } from "node:fs/promises"
-import { resolve } from "node:path"
 
-import { siteNav, siteUrl } from "../../data/site"
+import { featureFlags, siteUrl } from "../../data/site"
+import {
+  publishedRouteHrefs,
+  routeConfigs,
+  siteNav,
+} from "../../data/site-routes"
 
 const requiredPublicRoutes = [
   { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
   { href: "/menu", label: "Menu" },
-  { href: "/book", label: "Book" },
   { href: "/events", label: "Events" },
+  { href: "/private-hire", label: "Private Hire" },
   { href: "/find-us", label: "Find Us" },
+  { href: "/book", label: "Book" },
 ] as const
 
 describe("site config smoke", () => {
@@ -25,36 +30,28 @@ describe("site config smoke", () => {
     expect(siteUrl).toBe("https://oldschoolhousestony.co.uk")
   })
 
-  it("uses the required public routes as canonical destinations", async () => {
-    const canonicalRouteFiles = await Promise.all(
-      requiredPublicRoutes.map(async (route) => {
-        const routeFile =
-          route.href === "/"
-            ? "../../app/page.tsx"
-            : `../../app${route.href}/page.tsx`
-
-        return {
-          href: route.href,
-          fileContents: await readFile(
-            resolve(import.meta.dirname, routeFile),
-            "utf8"
-          ),
-        }
-      })
+  it("keeps unpublished policy-led routes out of the public route set", () => {
+    expect(featureFlags.dogPolicyConfirmed).toBe(false)
+    expect(featureFlags.familyPolicyConfirmed).toBe(false)
+    expect(publishedRouteHrefs).not.toContain(
+      "/dog-friendly-pub-stony-stratford"
     )
+    expect(publishedRouteHrefs).not.toContain(
+      "/family-friendly-pub-stony-stratford"
+    )
+  })
 
-    expect(canonicalRouteFiles).toEqual(
+  it("uses the required public routes as canonical destinations", () => {
+    expect(routeConfigs).toEqual(
       expect.arrayContaining(
-        requiredPublicRoutes
-          .filter((route) => route.href !== "/")
-          .map((route) =>
-            expect.objectContaining({
-              href: route.href,
-              fileContents: expect.stringContaining(
-                `canonical: "${route.href}"`
-              ),
-            })
-          )
+        requiredPublicRoutes.map((route) =>
+          expect.objectContaining({
+            href: route.href,
+            meta: expect.objectContaining({
+              canonical: route.href,
+            }),
+          })
+        )
       )
     )
   })

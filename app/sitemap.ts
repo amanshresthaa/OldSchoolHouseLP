@@ -4,20 +4,7 @@ import { join } from "node:path"
 import process from "node:process"
 
 import { siteUrl } from "@/data/site"
-
-const routes = [
-  { route: "", source: "app/page.tsx" },
-  { route: "/about", source: "app/about/page.tsx" },
-  { route: "/menu", source: "app/menu/page.tsx" },
-  { route: "/book", source: "app/book/page.tsx" },
-  { route: "/events", source: "app/events/page.tsx" },
-  { route: "/find-us", source: "app/find-us/page.tsx" },
-  { route: "/menu-information", source: "app/menu-information/page.tsx" },
-  { route: "/takeaway-menu", source: "app/takeaway-menu/page.tsx" },
-  { route: "/wakes-menu", source: "app/wakes-menu/page.tsx" },
-  { route: "/privacy", source: "app/privacy/page.tsx" },
-  { route: "/tos", source: "app/tos/page.tsx" },
-]
+import { publishedSitemapRoutes } from "@/data/site-routes"
 
 function getLastModified(source: string) {
   const sourcePath = join(process.cwd(), source)
@@ -30,10 +17,14 @@ function getLastModified(source: string) {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return routes.map(({ route, source }) => ({
-    url: `${siteUrl}${route}`,
-    lastModified: getLastModified(source),
-    changeFrequency: route === "" ? "weekly" : "monthly",
-    priority: route === "" ? 1 : 0.7,
-  }))
+  return publishedSitemapRoutes.map(({ href }) => {
+    const source = href === "/" ? "app/page.tsx" : `app${href}/page.tsx`
+
+    return {
+      url: `${siteUrl}${href}`,
+      lastModified: getLastModified(source),
+      changeFrequency: href === "/" ? "weekly" : "monthly",
+      priority: href === "/" ? 1 : 0.7,
+    }
+  })
 }
