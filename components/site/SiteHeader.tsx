@@ -8,7 +8,8 @@ import { List, X } from "@phosphor-icons/react"
 
 import logo from "@/images/logos/OldSchoolHouse.png"
 import { Button } from "@/components/ui/button"
-import { bookOnlineHref, type NavItem, siteNav } from "@/data/site"
+import { bookOnlineHref, type NavItem } from "@/data/site"
+import { siteNav } from "@/data/site-routes"
 import { cn } from "@/lib/utils"
 
 function isCurrentPath(pathname: string, href: string) {
@@ -149,7 +150,7 @@ export function SiteHeader() {
             </nav>
             <div className="hidden shrink-0 items-center gap-3 md:flex">
               <Button asChild size="sm">
-                <Link href={bookOnlineHref}>Book a table</Link>
+                <Link href={bookOnlineHref}>Book</Link>
               </Button>
             </div>
             <div className="flex shrink-0 items-center gap-2 md:hidden">
@@ -242,7 +243,7 @@ export function SiteHeader() {
               Book a table
             </Link>
             <p className="pt-3 text-center text-sm text-white/55">
-              Opens online booking
+              Booking options and contact details
             </p>
           </div>
         </div>

@@ -1,7 +1,12 @@
 import { ArrowRight, Phone } from "@phosphor-icons/react/dist/ssr"
 
 import { SiteActionCard } from "@/components/site/SiteActionCard"
-import { bookOnlineHref, bookingUrgencyNote, sitePhone, sitePhoneHref } from "@/data/site"
+import {
+  bookOnlineHref,
+  bookingUrgencyNote,
+  sitePhone,
+  sitePhoneHref,
+} from "@/data/site"
 
 interface InlineBookingCtaProps extends React.ComponentProps<"section"> {
   title: string

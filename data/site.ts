@@ -23,20 +23,72 @@ export interface OpeningHoursItem {
   hours: string
 }
 
-export interface GuestReview {
-  name: string
-  guestType: string
-  focus: string[]
-  summary: string
-}
-
 export interface LocalFaq {
   question: string
   answer: string
 }
 
+export interface CtaConfig {
+  href: string
+  label: string
+  download?: boolean | string
+}
+
+export interface PageMeta {
+  title: string
+  description: string
+  canonical: string
+}
+
+export interface PageHeroConfig {
+  eyebrow: string
+  title: string
+  description: string
+  primaryAction: CtaConfig
+  secondaryAction?: CtaConfig
+}
+
+export interface SchemaConfig {
+  localBusiness?: boolean
+  faq?: boolean
+  menu?: boolean
+  event?: boolean
+}
+
+export interface FeatureFlags {
+  hoursConfirmed: boolean
+  dogPolicyConfirmed: boolean
+  familyPolicyConfirmed: boolean
+  accessibilityConfirmed: boolean
+  eventScheduleConfirmed: boolean
+  sundayRoastConfirmed: boolean
+}
+
+export interface RouteConfig {
+  href: string
+  label: string
+  navLabel?: string
+  primaryNav?: boolean
+  sitemap?: boolean
+  resource?: boolean
+  published?: boolean
+  meta: PageMeta
+  hero?: PageHeroConfig
+  schema?: SchemaConfig
+  stickySecondaryAction?: CtaConfig
+}
+
+export const featureFlags: FeatureFlags = {
+  hoursConfirmed: false,
+  dogPolicyConfirmed: false,
+  familyPolicyConfirmed: false,
+  accessibilityConfirmed: false,
+  eventScheduleConfirmed: false,
+  sundayRoastConfirmed: true,
+}
+
 export const siteName = "The Old School House"
-export const siteDescriptor = "Traditional pub & Nepalese kitchen"
+export const siteDescriptor = "Traditional pub and Nepalese kitchen"
 export const siteLocation = "Stony Stratford, Milton Keynes"
 export const siteAddress =
   "London Road, Stony Stratford, Milton Keynes, MK11 1JA"
@@ -54,7 +106,8 @@ export const directionsHref =
   "https://www.google.com/maps/dir/?api=1&destination=The+Old+School+House,+London+Rd,+Stony+Stratford,+Milton+Keynes+MK11+1JA&travelmode=driving"
 export const bookingHref =
   "https://www.nabatable.com/restaurants/the-old-school-house/book"
-export const bookOnlineHref = "/book-online"
+export const bookOnlineHref = "/book"
+export const legacyBookOnlineHref = "/book-online"
 export const googleReviewsPageHref =
   "https://www.google.com/search?q=The+Old+School+House+Stony+Stratford+Reviews#lrd=0x487701c45888b76d:0xaeebe77da7ae4e4e,1,,,,"
 export const googleReviewHref =
@@ -66,82 +119,63 @@ export const socialLinks = [
 export const siteMenuPdfHref = "/downloads/old-school-house-menu.pdf"
 
 export const siteDescription =
-  "Pub favourites, Nepalese cooking, live sport, and a warm welcome in the heart of Stony Stratford, with a front garden, private courtyard, and plenty of reasons to stay a little longer."
-
-export const siteNav: NavItem[] = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/menu", label: "Menu" },
-  { href: "/events", label: "Events" },
-  { href: "/find-us", label: "Find Us" },
-  { href: "/book", label: "Book" },
-]
-
-export const siteResources: NavItem[] = [
-  { href: "/menu-information", label: "Menu information" },
-  { href: "/takeaway-menu", label: "Takeaway menu" },
-  { href: "/wakes-menu", label: "Wakes menu" },
-]
-
-export const siteLegalLinks: NavItem[] = [
-  { href: "/privacy", label: "Privacy" },
-  { href: "/tos", label: "Terms" },
-]
+  "A traditional pub on London Road in Stony Stratford with a standout Nepalese kitchen, Sunday roast, live sport, and a welcoming place to book for food and drinks."
 
 export const heroSignals = [
-  "Open daily from 10:00",
+  "Traditional pub on London Road",
   "Front garden and private courtyard",
-  "Sky Sports and TNT Sports",
+  "Standout Nepalese kitchen",
 ]
 
 export const proofPoints: ProofPoint[] = [
   {
-    title: "Pub classics and Nepalese dishes",
+    title: "Traditional pub, Stony Stratford first",
     description:
-      "Order across both sides of the menu, from familiar pub comfort to momo, goat curry, and house signatures.",
+      "The Old School House leads with the warmth, welcome, and ease people want from a proper local on London Road.",
   },
   {
-    title: "Front garden seating",
+    title: "Nepalese kitchen worth talking about",
     description:
-      "A good spot for brighter afternoons, easy drinks, and the kind of visit that turns into another round.",
+      "The menu gives people more to discover than the standard pub line-up, especially if they start with the momo or order across the house dishes.",
   },
   {
-    title: "Private courtyard",
+    title: "65 covers inside, 60 outside",
     description:
-      "Useful when you want a little more room for catch-ups, group tables, or a longer evening outside.",
+      "There is room for a quiet lunch, bigger tables, sports nights, and the kind of visit that stretches out longer than planned.",
   },
   {
-    title: "Live sport",
+    title: "Front garden and private courtyard",
     description:
-      "Football, rugby, and bigger fixtures all have a place here without the pub losing its warm feel.",
+      "Outdoor drinks and dining have more than one setting here, from the front seating area to the more tucked-away courtyard.",
   },
   {
-    title: "Stony Stratford High Street",
+    title: "Live sport and local occasions",
     description:
-      "Right on London Road and easy to work into shopping, midweek catch-ups, or a planned evening in town.",
+      "The pub suits match days, community-led gatherings, quiz nights, and more informal celebrations without losing its pub feel.",
   },
   {
-    title: "Open daily from 10:00",
+    title: "Easy to find on busy London Road",
     description:
-      "Drop in for lunch, come back for dinner, or stay a while once the evening picks up.",
+      "A central Stony Stratford position makes the pub a natural pick for walk-ins, planned dinners, and stop-ins during a day in town.",
   },
 ]
 
 export const homeReasons: HighlightItem[] = [
   {
-    title: "A proper pub, with more to discover on the menu",
+    title: "A proper pub, with a stronger food story behind it",
     description:
-      "Come for the familiar pub plates, then add momo, mixed grills, and Nepalese dishes that make the meal feel more memorable.",
+      "People can come in for the familiar comfort of a traditional pub, then discover momo, Nepalese curries, and grilled dishes that make the menu more memorable.",
   },
   {
-    title: "Warm, welcoming, and easy to settle into",
+    title:
+      "Welcoming enough for a quick drink, strong enough for a proper meal",
     description:
-      "Exposed brick, wooden floors, and a relaxed room that feels right from the moment you walk in.",
+      "The room works for lunch, dinner, sport, and a round that turns into a second one without ever feeling like two different businesses stitched together.",
   },
   {
-    title: "Good food, good drinks, and good value",
+    title: "Better for mixed groups than the average pub stop",
     description:
-      "Lunch, drinks, or dinner all work for the same reason: honest food, a strong bar, and a place worth returning to.",
+      "Classic pub favourites and Nepalese dishes sit alongside each other well, which makes choosing the table easier for families, couples, and bigger groups.",
   },
 ]
 
@@ -149,298 +183,257 @@ export const aboutReasons: HighlightItem[] = [
   {
     title: "A proper pub setting with real character",
     description:
-      "Exposed brick, wooden floors, and an open-plan bar that give the place a warmth you notice the moment you walk in.",
+      "Exposed brick, wooden floors, and an open-plan bar keep the atmosphere rooted in the kind of pub comfort people recognise straight away.",
   },
   {
-    title: "A wider food story than the usual pub stop",
+    title: "A concept that feels clear rather than confused",
     description:
-      "The mix of classic pub comfort and Nepalese cooking gives couples, families, and mixed groups more reasons to agree on this table.",
+      "The pub stays pub-led, while the Nepalese kitchen gives the food a stronger point of difference once guests have taken their seats.",
   },
   {
     title: "Room for everyday visits and bigger plans",
     description:
-      "With 65 covers inside, around 60 outside, a front seating area, and a private courtyard, there is room for a quick pint, a proper dinner, or a birthday that runs late.",
+      "With strong indoor and outdoor capacity, The Old School House can handle a quick pint, a date night, a Sunday plan, or a larger gathering with ease.",
   },
 ]
 
 export const aboutPubFacts: InfoItem[] = [
-  { label: "Inside", value: "65 covers across the main pub space" },
+  { label: "Inside", value: "65 internal covers in a traditional pub setting" },
   {
     label: "Outside",
-    value: "Around 60 covers split between the front area and courtyard",
+    value: "60 external covers across the front garden and courtyard",
   },
   {
-    label: "Bar",
-    value: "One open-plan bar that keeps the room feeling together",
+    label: "Building",
+    value:
+      "Characterful brick frontage with exposed brick and wooden floors inside",
   },
   {
     label: "Kitchen",
-    value: "A full commercial kitchen behind the food offer",
+    value:
+      "A commercial trade kitchen behind both the pub and Nepalese sides of the menu",
   },
-  { label: "Parking", value: "A small on-site car park for easier arrival" },
+  { label: "Parking", value: "A small car park helps make arrival easier" },
   {
-    label: "Outdoor feel",
-    value: "Front wooden seating that works through most of the year",
+    label: "Offer",
+    value:
+      "Traditional pub ethos first, Nepalese kitchen as the standout difference",
   },
 ]
 
 export const aboutStoryNotes = [
-  "Previously known as The Plough, the building is a familiar Stony Stratford address on busy London Road.",
-  "The current shape of The Old School House keeps the classic pub character while making more of the space inside and out.",
-  "That means exposed brick, wooden floors, a strong bar, a front outdoor area, and a private courtyard that make longer visits easy.",
+  "Previously known as The Plough, the building remains a familiar Stony Stratford address on busy London Road.",
+  "The Old School House keeps the warmth of a proper pub while giving the menu a stronger identity than a standard High Street local.",
+  "That balance is the point: people can come in for the pub experience first, then stay because the kitchen gives them more to remember.",
 ]
 
 export const aboutOperatorNotes = [
-  "Sanjog Gautam, known as San, brings experience from running a cafe, a restaurant, and a pub before taking on The Old School House.",
-  "The aim is not to lose the classic pub ethos. It is to keep that welcome intact while adding the Nepalese food offer guests already know him for.",
-  "That mix of the familiar and the unexpected is what makes the pub worth a second visit.",
+  "Sanjog Gautam, known as San, brings experience from running a cafe, restaurant, and pub before taking on The Old School House.",
+  "His aim is not to replace the classic pub ethos, but to keep that welcome intact and add a Nepalese offer that makes the food side of the business more distinctive.",
+  "That combination is what gives the pub its identity online and at the table.",
 ]
 
 export const aboutFamilyNotes = [
-  "The Old School House is operated by Lapen Inns OSH Ltd as part of the wider Lapen Inns family.",
-  "Across the group, the idea is consistent: proper pub comfort, a warm welcome, and Nepalese cooking that gives the menu more identity.",
-  "For guests, that means the pub still feels local, but the kitchen brings something you would not expect from a typical High Street pub.",
+  "The Old School House is part of the Lapen Inns family, a group known for blending pub comfort with Nepalese kitchens.",
+  "Across the wider family, the idea stays consistent: warm hospitality, familiar pub ease, and a food offer that gives people a reason to come back.",
+  "Here in Stony Stratford, the result still feels rooted in the local pub first.",
 ]
 
 export const aboutHeritageNotes = [
-  "Stony Stratford is a market town with roots stretching back to at least Roman times, when it grew up around the historic ford of Watling Street over the River Great Ouse.",
-  "The town received its market charter in 1194 and was granted official town status in 1215 — a long tradition of hospitality on a road that has welcomed travellers for centuries.",
-  "Today it sits at the north-west corner of Milton Keynes in north Buckinghamshire, with the annual Folk on the Green festival on Horsefair Green each June drawing folk and rock music to the heart of town.",
+  "Stony Stratford is a market town with deep hospitality roots, shaped by its place on the historic Watling Street route.",
+  "That local sense of arrival and passing trade still matters on London Road today, where a well-positioned pub can serve regulars, visitors, and casual stop-ins alike.",
+  "The Old School House sits right in that rhythm, easy to work into a day in town and memorable enough to make the return visit easier.",
 ]
 
 export const aboutLocationHighlights: HighlightItem[] = [
   {
     title: "On the busiest road in Stony Stratford",
     description:
-      "London Road keeps the pub in the middle of the everyday rhythm of the town, from passing drinks to planned evenings out.",
+      "London Road keeps the pub visible, convenient, and woven into the daily movement of the town.",
   },
   {
-    title: "Easy to work into a day in town",
+    title: "Easy to pair with a day or evening in town",
     description:
-      "Shops, parking, and local footfall nearby make it an easy stop whether you are meeting friends or making an evening of it.",
+      "The location works for planned dinners, relaxed drinks, and the kind of visit that starts as one stop on the way through town and becomes the main one.",
   },
   {
-    title: "A good pub to keep in mind for local weekends",
+    title: "A pub that fits local weekends well",
     description:
-      "When the town gets busier for events such as Folk on the Green, being well placed and easy to spot matters even more.",
+      "From town events to casual meetups, the pub is well placed to feel like an easy local choice.",
   },
 ]
 
 export const homeMenuHighlights: HighlightItem[] = [
   {
-    title: "Momo, mixed grills, and house curries",
+    title: "Start with the momo",
     description:
-      "Expect Nepalese favourites like momo, Kathmandu tikka, goat curry, and sizzling grills alongside the sort of dishes that suit an easy pub meal.",
+      "The momo is the easiest first order if you want to discover why the Nepalese kitchen stands out inside a traditional pub setting.",
   },
   {
-    title: "Pub classics that keep things familiar",
+    title: "Keep the familiar pub comfort in play",
     description:
-      "Fish and chips, burgers, wraps, kids plates, and desserts keep the menu welcoming for everyone at the table, from quick lunches to family suppers.",
+      "Pub classics, desserts, and easier crowd-pleasers keep the menu comfortable for mixed tables and broader tastes.",
   },
   {
-    title: "Drinks worth coming in for",
+    title: "Order across both sides of the offer",
     description:
-      "Rotating guest ale, craft options, easy-drinking wines, premium spirits, coffee, and teas mean there is as much reason to come in for the bar as there is for the food.",
+      "That mix of pub comfort and Nepalese dishes is exactly what makes the menu feel more memorable than a standard pub stop.",
   },
 ]
 
 export const atmosphereMoments: HighlightItem[] = [
   {
-    title: "Front garden for brighter afternoons",
+    title: "A warm pub interior with character",
     description:
-      "A good spot when the sun is out, the drinks are cold, and nobody wants to leave.",
+      "Exposed brick, wooden floors, and a room that feels welcoming rather than over-styled.",
   },
   {
-    title: "A bar that can shift from lunch to live sport",
+    title: "Outdoor seating for brighter afternoons",
     description:
-      "The bar works just as well for lunch, a quick pint, or a bigger match crowd.",
+      "The front garden and courtyard give you room to settle in for drinks or stay outside with food when the weather suits it.",
   },
   {
-    title: "Corners for parties, tasting nights, and group dinners",
+    title: "Flexible enough for lunches, sport, and longer-table evenings",
     description:
-      "There is enough room for parties and group dinners, and it still feels like your local.",
+      "The pub can shift from casual lunch to live sport to group dining without losing the local feel.",
   },
 ]
 
 export const eventsHighlights: HighlightItem[] = [
   {
-    title: "Private hire with room to spread out",
+    title: "Live sport that still feels like the pub comes first",
     description:
-      "Use the dining room, front garden, and courtyard for birthdays, work drinks, and longer-table plans.",
+      "Sport is part of the offer, but the room still feels welcoming whether you are here for the fixture or not.",
   },
   {
-    title: "Sport, theme nights, and local get-togethers",
+    title: "Quiz nights, tastings, and community-led reasons to return",
     description:
-      "Live sport, theme nights, and local meetups all have a home here without the place ever feeling overcrowded.",
+      "The Old School House is built for repeat visits, not just one-off meals.",
   },
   {
-    title: "Tasting nights and seasonal reasons to come back",
+    title: "A venue that handles informal occasions well",
     description:
-      "Kitchen-led nights and seasonal events give people a reason to come back.",
+      "Birthdays, work drinks, sports socials, and family gatherings all have an easy fit here.",
   },
 ]
 
-export const communityNotes: HighlightItem[] = [
+export const reassuranceHighlights: HighlightItem[] = [
   {
-    title: "For family lunches and easy midweek meals",
+    title: "Traditional pub identity",
     description:
-      "Easy lunches, relaxed suppers, and familiar favourites make it just as inviting for a casual meal as it is for a planned evening out.",
+      "The site and the venue both lead with the pub first, making it easy for local searchers to understand what kind of place this is.",
   },
   {
-    title: "For sports nights, group tables, and catch-ups in town",
+    title: "Standout food without the confusion",
     description:
-      "It feels personal, relaxed, and easy to drop into, whether you are meeting friends for the match or finding somewhere everyone is happy to stay.",
+      "The Nepalese kitchen is presented as the difference-maker, not as a separate brand that pulls the pub out of focus.",
   },
   {
-    title: "For locals who want somewhere to return to",
+    title: "Fast paths to action",
     description:
-      "The Old School House is made for the kind of return visits that turn one drink into a usual table, a favourite dish, or a regular Sunday plan.",
-  },
-]
-
-export const guestReviews: GuestReview[] = [
-  {
-    name: "Asha K.",
-    guestType: "Local regular",
-    focus: ["Food", "Atmosphere", "Drinks"],
-    summary:
-      "The chicken momo and Kathmandu Tikka Masala keep pulling me back in, especially when I want a table with good atmosphere and a proper drink alongside dinner.",
-  },
-  {
-    name: "Chris M.",
-    guestType: "First-time diner",
-    focus: ["Food", "Atmosphere"],
-    summary:
-      "It was my first time in and the veg momo, chilli paneer, and Bhutuwa Lamb felt genuinely different from the usual curry order. The room made the whole evening feel relaxed from the start.",
-  },
-  {
-    name: "Priya S.",
-    guestType: "Date-night guest",
-    focus: ["Drinks", "Atmosphere"],
-    summary:
-      "We went for Kathmandu Tikka served in the grill and Rara King Prawn, and both felt a little more special. The drinks and atmosphere made it very easy to stay for another round.",
-  },
-  {
-    name: "Jordan T.",
-    guestType: "Group night out",
-    focus: ["Food", "Drinks"],
-    summary:
-      "We ordered the Large Mixed Grill, Chicken Biryani, and Lasun Kukhura Khursani, and the whole table loved how much colour, heat, and sharing energy it brought while the drinks kept flowing.",
-  },
-  {
-    name: "Manish R.",
-    guestType: "Midweek visitor",
-    focus: ["Food", "Atmosphere"],
-    summary:
-      "The Khasi Ko Masu goat curry and Special Butter Chicken arrived rich, hot, and full of flavour, and the warm room made it easy for me to settle in and stay longer than planned.",
-  },
-  {
-    name: "Leah P.",
-    guestType: "Match-night diner",
-    focus: ["Food", "Atmosphere", "Drinks"],
-    summary:
-      "Chicken Chilli, momo, and the Small Mixed Grill were ideal with a round of drinks before kick-off, and the pub still felt warm and welcoming once the screens came on.",
+      "Book a table, view the menu, call the pub, and get directions without hunting through multiple layers.",
   },
 ]
 
 export const foodHours = [
-  "Food served Monday to Saturday from 12:00 to 21:00.",
-  "Food served Sunday from 12:00 to 20:00.",
+  "Food service times can vary with events, service, and seasonal changes.",
+  "Please call the pub before travelling for a specific lunch, dinner, or Sunday plan.",
 ]
 
 export const localFaqs: LocalFaq[] = [
   {
-    question: "Do you have parking?",
+    question: "What kind of place is The Old School House?",
     answer:
-      "Yes. There is a small car park to the right of the building, including a disabled access space, with more parking around Stony Stratford town centre.",
+      "The Old School House is a traditional pub in Stony Stratford with a Nepalese kitchen that gives the menu a stronger point of difference once you sit down to eat.",
   },
   {
-    question: "Are dogs welcome?",
+    question: "Do you serve both pub food and Nepalese dishes?",
     answer:
-      "Yes. Dogs are welcome, with dog-friendly space in the bar and beer garden, plus fresh water, bowls, and treats at the bar.",
+      "Yes. The menu is designed so guests can order pub favourites and Nepalese dishes in the same visit.",
   },
   {
-    question: "Do you have free Wi-Fi?",
+    question: "Do you have outside seating?",
     answer:
-      "Yes. Free customer Wi-Fi is available if you are stopping in for lunch, catching up over drinks, or working from the pub for a little while.",
-  },
-  {
-    question: "Is there outside seating or a beer garden?",
-    answer:
-      "Yes. The pub has front outdoor seating and a garden area that works well for brighter afternoons, easy drinks, and casual meetups.",
-  },
-  {
-    question: "When is food served?",
-    answer:
-      "Main food service runs Monday to Saturday from 12:00 to 21:00, and Sunday from 12:00 to 20:00.",
+      "Yes. The pub has a generous front garden with wooden seating and a private courtyard.",
   },
   {
     question: "Do you show live sport?",
     answer:
-      "Yes. We show live sport including football and rugby on Sky Sports and TNT Sports.",
+      "Yes. Live sport is part of the pub offer, alongside food, drinks, and community-led reasons to visit.",
+  },
+  {
+    question: "How do I book a table?",
+    answer:
+      "Use the booking page for the quickest route, or call the pub if you are planning a group visit or want to ask something first.",
+  },
+  {
+    question: "Are dogs welcome?",
+    answer:
+      "Please contact the pub directly to check the latest dog policy before you visit, as we only publish that page once the operational details are fully confirmed.",
   },
 ]
 
 export const bookingNotes = [
-  "If you are hoping to join us today, give the pub a ring and we will do our best to find you a table.",
-  "Email is ideal for dinner plans, birthdays, and bigger group bookings.",
-  "If you are planning a party, work drinks, or a sports social, we would love to help with that too.",
+  "Online booking is the quickest route for standard tables and planned visits.",
+  "If you are hoping to join us today or planning for a larger group, a call or email can be the easier place to start.",
+  "Private occasions, wakes, and work gatherings are best handled through the dedicated enquiry routes.",
 ]
 
 export const bookingUrgencyNote =
-  "Weekends fill up fast — book ahead so your table is ready when you arrive."
+  "Busier evenings and Sundays are easiest to plan when you book ahead."
 
 export const eventOccasions = [
-  "Birthdays and family celebrations",
+  "Quiz nights and tasting evenings",
+  "Birthdays and informal celebrations",
   "Work drinks and team socials",
-  "Sports watch parties",
-  "Quiz and theme nights",
-  "Seasonal tasting evenings",
-  "Local club and society meetups",
+  "Sports group meetups",
+  "Community gatherings",
+  "Festive and seasonal pub events",
 ]
 
 export const drinksHighlights = [
-  "Rotating guest ale and a strong draught range",
-  "Craft beer and wines chosen to sit easily with the food",
-  "Premium spirits including gins and single malts",
-  "Coffee and artisanal teas when you want to stay a little longer",
+  "A stronger bar offer that still suits the pub first",
+  "Drinks that work with pub classics and Nepalese dishes alike",
+  "Coffee and tea when the visit runs longer than planned",
+  "A good reason to stay for another round after the food",
 ]
 
 export const visitDetails: InfoItem[] = [
   { label: "Address", value: siteAddress },
   { label: "Phone", value: sitePhone },
   { label: "Email", value: siteEmail },
-  { label: "Licence", value: "Premises Licence No. 163000" },
+  { label: "Parking", value: "Small car park on site" },
 ]
 
 export const arrivalNotes = [
   "You will find us on London Road in the heart of Stony Stratford.",
   "There is a small car park on site, with more parking around the town centre.",
-  "If you need a hand finding us, give the pub a call.",
+  "If you are travelling for a specific service or need the easiest route in, call the pub before you set off.",
 ]
 
 export const accessibilityNotes = [
-  "A disabled parking space is available in the on-site car park to help keep arrival simpler.",
-  "If you need help with access, seating, or the easiest way in, call ahead and we will talk you through it.",
-  "Let us know about mobility needs, prams, or extra space before you travel and we will do our best to make arrival smoother.",
+  "If you need help with access, seating, or the easiest way in, please call ahead before travelling.",
+  "We are happy to talk through mobility needs, prams, and arrival questions directly with the pub.",
+  "Detailed accessibility guidance will be published once the operational details have been fully confirmed.",
 ]
 
-export const openingHours: OpeningHoursItem[] = [
-  { label: "Monday to Sunday", hours: "10:00 - 00:30" },
-]
+export const openingHours: OpeningHoursItem[] = featureFlags.hoursConfirmed
+  ? [{ label: "Monday to Sunday", hours: "10:00 - 00:30" }]
+  : [{ label: "Opening hours", hours: "Call the pub for today’s hours" }]
 
-export const openingHoursNote =
-  "Bank holiday and festive hours can vary, so please call if you are travelling for a specific day."
+export const openingHoursNote = featureFlags.hoursConfirmed
+  ? "Bank holiday and festive hours can vary, so please call if you are travelling for a specific day."
+  : "Trading hours will be published once they are fully confirmed. Please call before travelling for a specific service or day."
 
 export const policyNotes = [
   "Challenge 25 is in operation for alcohol sales.",
-  "Alcohol service is licensed daily from 10:00 to 00:00.",
-  "Outside areas other than smoking points close after 23:00.",
+  "If allergies or dietary needs matter, please speak to the team before ordering.",
+  "Call ahead if your visit depends on a specific service time, event, or access arrangement.",
 ]
 
 export const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": ["BarOrPub", "Restaurant"],
+  "@type": "BarOrPub",
   name: siteName,
   description: siteDescription,
   url: siteUrl,
@@ -461,20 +454,24 @@ export const localBusinessSchema = {
     postalCode: "MK11 1JA",
     addressCountry: "GB",
   },
-  openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday",
-      ],
-      opens: "10:00",
-      closes: "00:30",
-    },
-  ],
+  ...(featureFlags.hoursConfirmed
+    ? {
+        openingHoursSpecification: [
+          {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday",
+            ],
+            opens: "10:00",
+            closes: "00:30",
+          },
+        ],
+      }
+    : {}),
 }

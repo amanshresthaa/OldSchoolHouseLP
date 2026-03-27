@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils"
-import { openingHours } from "@/data/site"
+import { featureFlags, openingHours, siteLocation } from "@/data/site"
 
 export function OpenStatusBadge({ className }: { className?: string }) {
   return (
@@ -11,8 +11,10 @@ export function OpenStatusBadge({ className }: { className?: string }) {
       )}
     >
       <span className="size-2 rounded-full bg-[var(--color-on-tertiary-container)]" />
-      <span>Open daily</span>
-      <span className="text-current/72">{openingHours[0].hours}</span>
+      <span>{featureFlags.hoursConfirmed ? "Hours" : "Stony Stratford"}</span>
+      <span className="text-current/72">
+        {featureFlags.hoursConfirmed ? openingHours[0].hours : siteLocation}
+      </span>
     </div>
   )
 }
