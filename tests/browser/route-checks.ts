@@ -85,6 +85,4 @@ export const responsivePages = [
   "/wakes-life-celebrations",
 ] as const
 
-export const browserWarmupPaths = Array.from(
-  new Set([...publicRouteChecks.map((route) => route.path), ...responsivePages])
-)
+export const browserWarmupPaths = ["/robots.txt"] as const
