@@ -16,6 +16,7 @@
   ],
   "ignore": [
     "**/.next/**",
+    "**/.next-local/**",
     "**/node_modules/**",
     "**/.factory/**",
     "**/.husky/**",

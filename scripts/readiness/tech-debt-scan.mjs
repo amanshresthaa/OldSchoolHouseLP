@@ -18,6 +18,7 @@ const includeExtensions = new Set([
 const ignoredDirectories = new Set([
   ".git",
   ".next",
+  ".next-local",
   ".factory",
   ".husky",
   "node_modules",

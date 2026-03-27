@@ -8,6 +8,7 @@ const MAX_LINES = 1000
 const IGNORED_DIRECTORIES = new Set([
   ".git",
   ".next",
+  ".next-local",
   ".factory",
   "node_modules",
   "coverage",

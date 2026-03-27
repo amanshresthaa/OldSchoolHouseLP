@@ -5,6 +5,7 @@ import { PageSignoff } from "@/components/site/PageSignoff"
 import { PageHero } from "@/components/site/PageHero"
 import { SectionHeading } from "@/components/site/SectionHeading"
 
+import { getRouteConfig } from "@/data/site-routes"
 import {
   siteAddress,
   siteEmail,
@@ -14,12 +15,13 @@ import {
   sitePhoneHref,
 } from "@/data/site"
 
+const route = getRouteConfig("/privacy")
+
 export const metadata: Metadata = {
-  title: "Privacy",
-  description:
-    "A simple privacy page covering booking details, messages, cookies, and how to get in touch.",
+  title: route?.meta.title,
+  description: route?.meta.description,
   alternates: {
-    canonical: "/privacy",
+    canonical: route?.meta.canonical,
   },
 }
 

@@ -1,18 +1,7 @@
+import type { Page } from "@playwright/test"
 import { expect, test } from "@playwright/test"
 
-const responsivePages = [
-  "/",
-  "/guides",
-  "/sunday-roast",
-  "/what-is-nepalese-food",
-  "/traditional-pub-with-nepalese-kitchen",
-  "/where-to-eat-in-stony-stratford",
-  "/live-sport",
-  "/dog-friendly-pub-stony-stratford",
-  "/family-friendly-pub-stony-stratford",
-  "/accessibility",
-  "/wakes-life-celebrations",
-] as const
+import { responsivePages } from "@/tests/browser/route-checks"
 
 const breakpoints = [
   {
@@ -41,6 +30,20 @@ const breakpoints = [
   },
 ] as const
 
+async function gotoWithWarmRetry(page: Page, path: string) {
+  for (let attempt = 0; attempt < 4; attempt += 1) {
+    const response = await page.goto(path, {
+      waitUntil: "domcontentloaded",
+    })
+
+    if (response?.ok()) {
+      return response
+    }
+
+    await page.waitForTimeout(400)
+  }
+}
+
 for (const pagePath of responsivePages) {
   for (const breakpoint of breakpoints) {
     test(`${pagePath} stays responsive at ${breakpoint.name}`, async ({
@@ -53,7 +56,7 @@ for (const pagePath of responsivePages) {
         width: breakpoint.width,
         height: breakpoint.height,
       })
-      await page.goto(pagePath, { waitUntil: "domcontentloaded" })
+      await gotoWithWarmRetry(page, pagePath)
 
       await expect(page.locator("main")).toBeVisible()
       await expect(

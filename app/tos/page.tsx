@@ -5,14 +5,16 @@ import { PageSignoff } from "@/components/site/PageSignoff"
 import { PageHero } from "@/components/site/PageHero"
 import { SectionHeading } from "@/components/site/SectionHeading"
 
+import { getRouteConfig } from "@/data/site-routes"
 import { siteEmailHref, sitePhoneHref } from "@/data/site"
 
+const route = getRouteConfig("/tos")
+
 export const metadata: Metadata = {
-  title: "Booking & Website Terms",
-  description:
-    "A short, guest-friendly summary of bookings, menus, allergies, and using the website.",
+  title: route?.meta.title,
+  description: route?.meta.description,
   alternates: {
-    canonical: "/tos",
+    canonical: route?.meta.canonical,
   },
 }
 
