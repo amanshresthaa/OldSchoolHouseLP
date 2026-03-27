@@ -19,27 +19,36 @@ export function SectionHeading({
 }: SectionHeadingProps) {
   return (
     <div
-      className={cn("max-w-2xl space-y-2.5", invert && "text-white", className)}
+      className={cn("max-w-2xl space-y-3", invert && "text-white", className)}
       {...props}
     >
       {eyebrow ? (
-        <p
-          className={cn(
-            "text-xs font-semibold tracking-[0.22em] uppercase",
-            invert
-              ? "text-[var(--color-on-tertiary-container)]"
-              : "text-secondary"
-          )}
-        >
-          {eyebrow}
-        </p>
+        <div className="eyebrow-row">
+          <span
+            aria-hidden="true"
+            className={cn(
+              "eyebrow-line",
+              invert && "bg-[var(--color-on-tertiary-container)]"
+            )}
+          />
+          <p
+            className={cn(
+              "eyebrow",
+              invert
+                ? "text-[var(--color-on-tertiary-container)]"
+                : "text-[var(--color-tertiary)]"
+            )}
+          >
+            {eyebrow}
+          </p>
+        </div>
       ) : null}
-      <h2 className={cn(invert && "text-white")}>{title}</h2>
+      <h2 className={cn("section-title", invert && "text-white")}>{title}</h2>
       {description ? (
         <p
           className={cn(
-            "max-w-xl text-sm leading-6 md:text-base md:leading-7",
-            invert ? "text-white/72" : "text-on-surface"
+            "max-w-[35rem] text-sm leading-[1.65] md:text-[0.9375rem]",
+            invert ? "text-white/55" : "text-on-surface"
           )}
         >
           {description}

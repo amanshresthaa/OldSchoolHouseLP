@@ -40,8 +40,8 @@ function HeaderNavLink({
     <Link
       href={item.href}
       className={cn(
-        "rounded-full px-3 py-2 text-[0.76rem] font-semibold tracking-[0.14em] text-on-background uppercase transition hover:bg-surface-low hover:text-secondary",
-        active && "bg-surface-low text-secondary",
+        "px-2 py-2 text-[0.875rem] font-medium tracking-[0.1rem] text-on-background uppercase transition hover:text-tertiary",
+        active && "text-secondary",
         className
       )}
       {...props}
@@ -219,7 +219,7 @@ export function SiteHeader() {
           role="dialog"
           aria-modal="true"
           aria-labelledby="mobile-site-navigation-title"
-          className="fixed inset-0 z-50 overflow-y-auto bg-primary/96 px-5 py-6 text-white backdrop-blur-md md:hidden"
+          className="fixed inset-0 z-50 overflow-y-auto bg-primary/96 px-5 py-6 text-white backdrop-blur-xl md:hidden"
         >
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0 flex-1 pr-2">
@@ -261,8 +261,8 @@ export function SiteHeader() {
                     key={item.href}
                     href={item.href}
                     className={cn(
-                      "font-heading text-4xl leading-none text-white/78 transition hover:text-[var(--color-on-tertiary-container)]",
-                      active && "text-[var(--color-on-tertiary-container)]"
+                      "font-heading text-4xl leading-none text-white/78 transition hover:text-[var(--color-tertiary)]",
+                      active && "text-[var(--color-tertiary)]"
                     )}
                   >
                     {item.label}
@@ -273,7 +273,7 @@ export function SiteHeader() {
           <div className="mt-10 border-t border-white/10 pt-8">
             <Link
               href={bookOnlineHref}
-              className="inline-flex h-14 w-full items-center justify-center gap-2.5 rounded-xl bg-[linear-gradient(135deg,#af2b3e,#8f1f2e)] px-8 text-base font-semibold text-white shadow-[0_8px_24px_rgba(175,43,62,0.3)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(175,43,62,0.4)] hover:brightness-110"
+              className="cta-primary inline-flex h-14 w-full items-center justify-center gap-2.5 px-8 text-base font-semibold"
             >
               Book a table
             </Link>

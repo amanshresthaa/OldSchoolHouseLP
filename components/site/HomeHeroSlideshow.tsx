@@ -128,7 +128,7 @@ export function HomeHeroSlideshow() {
 
   return (
     <section
-      className="relative h-[41rem] overflow-hidden bg-primary text-white sm:h-[43rem] md:h-[46rem] lg:h-[50rem] xl:h-[52rem]"
+      className="relative h-[36rem] overflow-hidden bg-primary text-white sm:h-[43rem] md:h-[46rem] lg:h-[50rem] xl:h-[52rem]"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onFocusCapture={() => setIsPaused(true)}
@@ -170,7 +170,7 @@ export function HomeHeroSlideshow() {
 
       <div className="relative h-full">
         <div className="mx-auto flex h-full max-w-[84rem] flex-col px-5 sm:px-6 md:px-8">
-          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/8 py-5">
+          <div className="hidden flex-wrap items-center justify-between gap-4 border-b border-white/8 py-5 sm:flex">
             <div className="flex items-center gap-3">
               <span className="inline-block size-1.5 rounded-full bg-[var(--color-on-tertiary-container)]" />
               <p className="text-[0.68rem] font-semibold tracking-[0.28em] text-[var(--color-on-tertiary-container)] uppercase">
@@ -180,16 +180,26 @@ export function HomeHeroSlideshow() {
             <OpenStatusBadge />
           </div>
 
-          <div className="grid h-[26rem] flex-1 content-end gap-5 py-6 sm:h-[28rem] sm:gap-6 sm:py-8 md:h-[30rem] md:py-10 lg:h-[21rem] lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-14 lg:py-12 xl:h-[22rem]">
+          <div className="grid h-[23.5rem] flex-1 content-end gap-4 py-5 sm:h-[28rem] sm:gap-6 sm:py-8 md:h-[30rem] md:py-10 lg:h-[21rem] lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-14 lg:py-12 xl:h-[22rem]">
             <div className="space-y-4 sm:space-y-5">
-              <p className="text-xs font-semibold tracking-[0.22em] text-[var(--color-on-tertiary-container)] uppercase">
-                {activeSlide.eyebrow}
-              </p>
+              <div className="eyebrow-row">
+                <span
+                  aria-hidden="true"
+                  className="h-px w-6 bg-[var(--color-tertiary)]"
+                />
+                <p className="text-[0.6875rem] font-semibold tracking-[0.12em] text-[var(--color-tertiary)] uppercase">
+                  {activeSlide.eyebrow}
+                </p>
+              </div>
               <h1 className="max-w-[14ch] text-[clamp(2rem,8vw,4.8rem)] leading-[0.98] font-normal text-white sm:max-w-[16ch]">
                 {activeSlide.title}
               </h1>
               <p className="max-w-2xl text-sm leading-6 text-white/78 sm:text-base sm:leading-7 md:text-lg md:leading-8">
                 {activeSlide.description}
+              </p>
+              <p className="max-w-md text-[0.82rem] leading-5 text-white/68 sm:hidden">
+                London Road, Stony Stratford. Book quickly, browse the menu, or
+                call if today&apos;s plan needs a quick answer.
               </p>
               <div className="flex flex-wrap gap-2 text-[0.68rem] font-semibold tracking-[0.18em] text-white/78 uppercase sm:gap-3 sm:text-xs">
                 {activeSlide.signals.map((signal, index) => (
@@ -203,7 +213,7 @@ export function HomeHeroSlideshow() {
                   </span>
                 ))}
               </div>
-              <div className="flex items-center gap-2 pt-2">
+              <div className="flex items-center gap-2 pt-1 sm:pt-2">
                 {heroSlides.map((slide, index) => (
                   <button
                     key={slide.title}
@@ -225,14 +235,14 @@ export function HomeHeroSlideshow() {
               <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
                 <Link
                   href="/book"
-                  className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-[linear-gradient(135deg,#af2b3e,#8f1f2e)] px-5 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(175,43,62,0.28)] transition-all duration-[var(--duration-micro)] ease-[var(--easing-standard)] hover:-translate-y-0.5 hover:brightness-110"
+                  className="cta-primary inline-flex h-12 items-center justify-center gap-2 px-5 text-sm font-semibold"
                 >
                   <span>Book a table</span>
                   <ArrowRight className="size-4" />
                 </Link>
                 <Link
                   href="/menu"
-                  className="inline-flex h-11 items-center justify-center rounded-xl border border-white/12 bg-white/[0.06] px-5 text-sm font-semibold text-white/92 transition-all duration-[var(--duration-micro)] ease-[var(--easing-standard)] hover:-translate-y-0.5 hover:bg-white/12"
+                  className="cta-secondary-dark inline-flex h-12 items-center justify-center px-5 text-sm font-semibold"
                 >
                   View menu
                 </Link>
@@ -242,7 +252,7 @@ export function HomeHeroSlideshow() {
                 explore the food, or book first and decide over a drink when you
                 arrive.
               </p>
-              <div className="flex justify-end gap-2 pt-1">
+              <div className="hidden justify-end gap-2 pt-1 sm:flex">
                 <button
                   type="button"
                   onClick={() => goToSlide(currentIndex - 1)}

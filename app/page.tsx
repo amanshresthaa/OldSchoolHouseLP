@@ -170,21 +170,44 @@ const discoveryLinks = [
     href: "/where-to-eat-in-stony-stratford",
     title: "Where to eat in Stony Stratford",
     description:
-      "Help local diners who know the town but have not yet decided which kind of place they want.",
+      "A quick local guide if you are weighing up where to eat and want to know what makes this pub a stronger shout.",
   },
   {
     href: "/what-is-nepalese-food",
     title: "What is Nepalese food?",
     description:
-      "Make the food feel approachable for first-timers before they ever open the menu.",
+      "The easiest read for first-timers who like the pub feel but want the food to feel familiar before they book.",
   },
   {
     href: "/traditional-pub-with-nepalese-kitchen",
     title: "Why the pub and kitchen work together",
     description:
-      "Show why this hybrid model feels clearer, not more confusing, for mixed groups and curious diners.",
+      "A clearer look at why pub classics and Nepalese dishes make sense together when the table wants more than one kind of meal.",
   },
 ]
+
+const homeProofBarItems = [
+  {
+    title: "Food-led pub feel",
+    description:
+      "Traditional pub comfort up front, with enough quality on the plate to make dinner feel like the main event.",
+  },
+  {
+    title: "A menu that sells the visit",
+    description:
+      "Pub classics keep mixed tables easy, while momo, curries, and grills give the place a real point of difference.",
+  },
+  {
+    title: "Better than a one-drink stop",
+    description:
+      "Front garden, courtyard, sport nights, and longer-table dinners all fit naturally here.",
+  },
+  {
+    title: "Fast next step",
+    description:
+      "Book, browse the menu, or call the pub without hunting for the right page.",
+  },
+] as const
 
 interface ImageRouteItem {
   href: string
@@ -233,11 +256,11 @@ const eventsFeature: ImageRouteItem = {
 
 const guideFeature: ImageRouteItem = {
   href: "/guides",
-  eyebrow: "Still deciding?",
+  eyebrow: "Need a little more help?",
   title:
-    "A few extra guides help when the pub feels right but you want the details before choosing the route.",
+    "A few short guides make the decision easier when you like the look of the pub but want a little more confidence before booking.",
   description:
-    "Start here if you want to compare food, atmosphere, and occasion-led visits a little more closely.",
+    "Use these if you are comparing food, atmosphere, or the kind of visit that suits your table best.",
   image: "/images/hero/placeholders/guides-overview.svg",
   alt: "Placeholder illustration representing The Old School House guide pages and decision paths.",
 }
@@ -317,6 +340,26 @@ export default function HomePage() {
 
       <HomeHeroSlideshow />
 
+      <section className="bg-background py-4 md:py-5">
+        <div className="section-shell">
+          <div className="grid auto-cols-[84%] grid-flow-col gap-px overflow-x-auto rounded-[1.6rem] bg-[rgba(196,189,181,0.38)] [-ms-overflow-style:none] [scrollbar-width:none] md:auto-cols-auto md:grid-flow-row md:grid-cols-2 xl:grid-cols-4 [&::-webkit-scrollbar]:hidden">
+            {homeProofBarItems.map((item) => (
+              <article
+                key={item.title}
+                className="snap-start bg-[var(--color-surface-lowest)] px-5 py-5 md:px-6 md:py-5"
+              >
+                <p className="text-[0.7rem] font-semibold tracking-[0.16em] text-secondary uppercase">
+                  {item.title}
+                </p>
+                <p className="pt-2 text-sm leading-6 text-on-surface">
+                  {item.description}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="bg-[var(--color-surface-low)] py-10 md:py-14 lg:py-16">
         <div className="section-shell">
           <div className="grid gap-4 xl:grid-cols-[1.02fr_0.98fr]">
@@ -327,8 +370,8 @@ export default function HomePage() {
             <div className="rounded-[1.9rem] bg-[var(--color-surface-lowest)] p-5 shadow-[0px_18px_48px_rgba(27,28,28,0.06)] md:p-7">
               <SectionHeading
                 eyebrow="Why choose us"
-                title="Come for the traditional pub experience. Stay for the unexpected Nepalese food."
-                description="A proper local on London Road, with food that gives the visit a stronger reason to come back."
+                title="A proper pub atmosphere first, then food that gives the table a reason to come back."
+                description="The homepage should make the pub feel warm and familiar, while the kitchen gives it more pull than the average gastropub stop."
                 className="max-w-none"
               />
               <div className="space-y-4 pt-6">
@@ -447,11 +490,11 @@ export default function HomePage() {
                 ))}
               </div>
               <div className="rounded-[1.8rem] bg-[var(--color-surface-low)] p-5 md:p-6">
-                <div className="grid gap-4 sm:grid-cols-3">
+                <div className="grid auto-cols-[84%] grid-flow-col gap-4 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] sm:auto-cols-auto sm:grid-flow-row sm:grid-cols-3 sm:overflow-visible sm:pb-0 [&::-webkit-scrollbar]:hidden">
                   {homeMenuHighlights.map((highlight) => (
                     <article
                       key={highlight.title}
-                      className="border-t border-[rgba(196,189,181,0.45)] pt-4 first:border-t-0 first:pt-0 sm:first:border-t sm:first:pt-4"
+                      className="snap-start border-t border-[rgba(196,189,181,0.45)] pt-4 first:border-t-0 first:pt-0 sm:first:border-t sm:first:pt-4"
                     >
                       <h3 className="text-[0.72rem] font-semibold tracking-[0.16em] text-secondary uppercase">
                         {highlight.title}
@@ -478,6 +521,47 @@ export default function HomePage() {
                     <ArrowRight className="size-4" />
                   </Link>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[var(--color-surface-low)] py-10 md:py-14 lg:py-16">
+        <div className="section-shell space-y-5">
+          <div className="rounded-[2rem] bg-primary p-6 text-white shadow-[0px_18px_48px_rgba(27,28,28,0.08)] md:p-7">
+            <div className="mx-auto flex max-w-4xl flex-col justify-between gap-8">
+              <div className="space-y-5">
+                <SectionHeading
+                  eyebrow="Guest reviews"
+                  title="People mostly remember the food, the warmth, and how easy it is to stay for another round."
+                  description="The food stands out, the room feels easy, and the whole visit lands the way guests hope it will."
+                  invert
+                  className="max-w-none"
+                />
+              </div>
+
+              <GuestReviewSlideshow reviews={guestReviews} />
+
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <a
+                  href={googleReviewHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="cta-primary inline-flex h-12 items-center justify-center gap-2.5 px-6 text-sm font-semibold"
+                >
+                  Write a Google review
+                  <ArrowRight className="size-4" />
+                </a>
+                <a
+                  href={googleReviewsPageHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="cta-secondary-dark inline-flex h-12 items-center justify-center gap-2.5 px-6 text-sm font-semibold"
+                >
+                  See latest reviews
+                  <ArrowRight className="size-4" />
+                </a>
               </div>
             </div>
           </div>
@@ -540,11 +624,9 @@ export default function HomePage() {
               {eventsHighlights.map((highlight, index) => (
                 <article
                   key={highlight.title}
-                  className={`rounded-2xl px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6 ${
-                    index === 1
-                      ? "surface-pane-muted"
-                      : "bg-[var(--color-surface-lowest)]"
-                  }`}
+                  className={
+                    index === 1 ? "surface-panel-muted" : "surface-panel"
+                  }
                 >
                   <h2 className="section-title">{highlight.title}</h2>
                   <p className="pt-2 text-sm leading-6 text-on-surface md:text-base">
@@ -561,16 +643,16 @@ export default function HomePage() {
         <div className="section-shell space-y-5">
           <SectionHeading
             eyebrow="Choose the visit that fits today"
-            title="Match the page to the plan, then get to the booking faster."
-            description="Some visitors already know what kind of visit they want. These routes get them there faster."
+            title="Pick the quickest route in, then get to the booking faster."
+            description="Some visitors already know the kind of table they want. These routes help them decide without making the homepage feel overlong."
             className="max-w-3xl"
           />
           <div className="space-y-4">
-            <div className="flex flex-wrap gap-3">
+            <div className="flex gap-3 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] sm:flex-wrap sm:overflow-visible sm:pb-0 [&::-webkit-scrollbar]:hidden">
               {reassuranceHighlights.map((item, index) => (
                 <article
                   key={item.title}
-                  className={`inline-flex items-center gap-3 rounded-full px-4 py-3 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] ${
+                  className={`inline-flex shrink-0 items-center gap-3 rounded-full px-4 py-3 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] ${
                     index === 1
                       ? "surface-pane-muted"
                       : "bg-[var(--color-surface-lowest)]"
@@ -603,11 +685,9 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="rounded-[2rem] bg-[var(--color-surface-low)] p-5 shadow-[0px_12px_32px_rgba(27,28,28,0.05)] md:p-6">
+              <div className="surface-panel-muted rounded-[2rem] p-5 md:p-6">
                 <div className="max-w-md">
-                  <p className="text-xs font-semibold tracking-[0.22em] text-secondary uppercase">
-                    Other quick routes
-                  </p>
+                  <p className="eyebrow">Other quick routes</p>
                   <h3 className="pt-2 font-heading text-[2rem] leading-[1.04] text-on-background">
                     Three more ways into the pub, depending on who is coming and
                     what kind of table it is.
@@ -651,50 +731,9 @@ export default function HomePage() {
 
       <section className="bg-[var(--color-surface-low)] py-10 md:py-14 lg:py-16">
         <div className="section-shell space-y-5">
-          <div className="rounded-[2rem] bg-primary p-6 text-white shadow-[0px_18px_48px_rgba(27,28,28,0.08)] md:p-7">
-            <div className="mx-auto flex max-w-4xl flex-col justify-between gap-8">
-              <div className="space-y-5">
-                <SectionHeading
-                  eyebrow="Guest reviews"
-                  title="People mostly remember the food, the warmth, and how easy it is to stay for another round."
-                  description="The food stands out, the room feels easy, and the whole visit lands the way guests hope it will."
-                  invert
-                  className="max-w-none"
-                />
-              </div>
-
-              <GuestReviewSlideshow reviews={guestReviews} />
-
-              <div className="flex flex-col gap-3 sm:flex-row">
-                <a
-                  href={googleReviewHref}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex h-12 items-center justify-center gap-2.5 rounded-xl bg-[linear-gradient(135deg,#af2b3e,#8f1f2e)] px-6 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(175,43,62,0.3)] transition-all duration-[var(--duration-micro)] ease-[var(--easing-standard)] hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(175,43,62,0.4)] hover:brightness-110"
-                >
-                  Write a Google review
-                  <ArrowRight className="size-4" />
-                </a>
-                <a
-                  href={googleReviewsPageHref}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex h-12 items-center justify-center gap-2.5 rounded-xl border border-white/12 bg-white/[0.06] px-6 text-sm font-semibold text-white/90 transition-all duration-[var(--duration-micro)] ease-[var(--easing-standard)] hover:-translate-y-0.5 hover:bg-white/12 hover:text-white"
-                >
-                  See latest reviews
-                  <ArrowRight className="size-4" />
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-[var(--color-surface-low)] py-10 md:py-14 lg:py-16">
-        <div className="section-shell space-y-5">
           <div className="grid gap-4 xl:grid-cols-[1.02fr_0.98fr]">
             <div className="grid gap-4">
-              <div className="rounded-[1.85rem] bg-[var(--color-surface-lowest)] p-5 shadow-[0px_14px_36px_rgba(27,28,28,0.05)] md:p-6">
+              <div className="surface-panel rounded-[1.85rem] p-5 md:p-6">
                 <SectionHeading
                   eyebrow="Visit us"
                   title="Easy to find on London Road, easy to work into a day or evening in Stony Stratford."
@@ -706,14 +745,14 @@ export default function HomePage() {
                     href={directionsHref}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex h-12 items-center justify-center gap-2.5 rounded-xl bg-[linear-gradient(135deg,#af2b3e,#8f1f2e)] px-6 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(175,43,62,0.3)] transition-all duration-[var(--duration-micro)] ease-[var(--easing-standard)] hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(175,43,62,0.4)] hover:brightness-110"
+                    className="cta-primary inline-flex h-12 items-center justify-center gap-2.5 px-6 text-sm font-semibold"
                   >
                     Get directions
                     <MapPin className="size-4" />
                   </a>
                   <a
                     href={sitePhoneHref}
-                    className="inline-flex h-12 items-center justify-center rounded-xl border border-[rgba(196,189,181,0.42)] bg-[var(--color-surface-low)] px-6 text-sm font-semibold text-primary transition-all duration-[var(--duration-micro)] ease-[var(--easing-standard)] hover:-translate-y-0.5 hover:bg-[var(--color-surface-highest)]"
+                    className="cta-secondary inline-flex h-12 items-center justify-center px-6"
                   >
                     Call {sitePhone}
                   </a>
@@ -728,11 +767,9 @@ export default function HomePage() {
                 {visitDetails.map((detail, index) => (
                   <div
                     key={detail.label}
-                    className={`rounded-[1.75rem] px-5 py-5 shadow-[0px_12px_32px_rgba(27,28,28,0.05)] md:px-6 md:py-6 ${
-                      index % 2 === 0
-                        ? "bg-[var(--color-surface-lowest)]"
-                        : "surface-pane-muted"
-                    }`}
+                    className={
+                      index % 2 === 0 ? "surface-panel" : "surface-panel-muted"
+                    }
                   >
                     <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
                       {detail.label}
@@ -760,7 +797,7 @@ export default function HomePage() {
                 ))}
               </div>
 
-              <div className="surface-pane-muted rounded-[1.75rem] p-5 shadow-[0px_12px_32px_rgba(27,28,28,0.05)] md:p-6">
+              <div className="surface-panel-muted rounded-[1.75rem] p-5 md:p-6">
                 <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
                   <div className="max-w-xl">
                     <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
@@ -812,11 +849,11 @@ export default function HomePage() {
             <div className="rounded-[2rem] bg-[var(--color-surface-low)] p-5 shadow-[0px_12px_32px_rgba(27,28,28,0.05)] md:p-7">
               <div className="max-w-lg">
                 <p className="text-xs font-semibold tracking-[0.22em] text-secondary uppercase">
-                  Lighter discovery
+                  A little more to help you choose
                 </p>
                 <h2 className="pt-2">
-                  Start with the main pages, then dip into the guides if you
-                  want a closer look before deciding.
+                  If you are nearly there but want one more nudge, these quick
+                  reads answer the questions that usually decide the table.
                 </h2>
               </div>
               <div className="grid gap-4 pt-6">
@@ -836,7 +873,7 @@ export default function HomePage() {
                       </p>
                     </div>
                     <span className="inline-flex items-center gap-2 text-sm font-semibold text-secondary transition group-hover:text-secondary/80">
-                      Explore
+                      Read guide
                       <ArrowRight className="size-4" />
                     </span>
                   </Link>

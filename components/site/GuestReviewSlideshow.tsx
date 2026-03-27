@@ -4,6 +4,7 @@ import * as React from "react"
 import { CaretLeft, CaretRight } from "@phosphor-icons/react/dist/ssr"
 
 import type { GuestReview } from "@/data/site"
+import { cn } from "@/lib/utils"
 
 interface GuestReviewSlideshowProps extends React.ComponentPropsWithoutRef<"article"> {
   reviews: GuestReview[]
@@ -11,7 +12,7 @@ interface GuestReviewSlideshowProps extends React.ComponentPropsWithoutRef<"arti
 
 function GoogleStars() {
   return (
-    <div className="flex items-center gap-0.5 text-[#fbbc04]">
+    <div className="flex items-center gap-0.5 text-[var(--color-tertiary)]">
       {Array.from({ length: 5 }).map((_, index) => (
         <span key={index} aria-hidden="true">
           ★
@@ -19,6 +20,15 @@ function GoogleStars() {
       ))}
     </div>
   )
+}
+
+function getInitials(name: string) {
+  return name
+    .split(" ")
+    .map((part) => part.replace(/[^A-Za-z]/g, "").slice(0, 1))
+    .filter(Boolean)
+    .slice(0, 2)
+    .join("")
 }
 
 export function GuestReviewSlideshow({
@@ -52,21 +62,29 @@ export function GuestReviewSlideshow({
 
   return (
     <article
-      className={`space-y-5 rounded-[1.75rem] border border-white/10 bg-white/[0.06] p-5 backdrop-blur-sm md:p-6 ${className ?? ""}`}
+      className={cn(
+        "surface-panel mx-auto w-full max-w-[29rem] space-y-4",
+        className
+      )}
       {...props}
     >
       <div className="flex items-start justify-between gap-4">
-        <div className="space-y-3">
-          <GoogleStars />
-          <div className="flex flex-wrap gap-2">
-            {activeReview.focus.map((item) => (
-              <span
-                key={item}
-                className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-[0.68rem] font-semibold tracking-[0.12em] text-[var(--color-on-tertiary-container)] uppercase"
-              >
-                {item}
-              </span>
-            ))}
+        <div className="flex items-center gap-3">
+          <div
+            className={cn(
+              "inline-flex size-10 shrink-0 items-center justify-center rounded-full text-[0.8125rem] font-bold text-white",
+              activeIndex % 2 === 0 ? "bg-primary" : "bg-secondary"
+            )}
+          >
+            {getInitials(activeReview.name)}
+          </div>
+          <div>
+            <h3 className="text-[0.875rem] font-semibold text-on-background">
+              {activeReview.name}
+            </h3>
+            <p className="pt-1 text-[0.6875rem] font-semibold tracking-[0.08em] text-on-surface uppercase">
+              {activeReview.guestType}
+            </p>
           </div>
         </div>
 
@@ -75,7 +93,7 @@ export function GuestReviewSlideshow({
             <button
               type="button"
               onClick={showPreviousReview}
-              className="inline-flex size-10 items-center justify-center rounded-full border border-white/12 bg-white/[0.04] text-white transition hover:bg-white/[0.1] focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:outline-none"
+              className="inline-flex size-9 items-center justify-center rounded-full border border-[rgba(196,189,181,0.15)] bg-[var(--color-surface)] text-primary transition hover:bg-[var(--color-surface-low)] focus-visible:ring-2 focus-visible:ring-secondary/40 focus-visible:outline-none"
               aria-label="Show previous review"
             >
               <CaretLeft className="size-4" />
@@ -83,7 +101,7 @@ export function GuestReviewSlideshow({
             <button
               type="button"
               onClick={showNextReview}
-              className="inline-flex size-10 items-center justify-center rounded-full border border-white/12 bg-white/[0.04] text-white transition hover:bg-white/[0.1] focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:outline-none"
+              className="inline-flex size-9 items-center justify-center rounded-full border border-[rgba(196,189,181,0.15)] bg-[var(--color-surface)] text-primary transition hover:bg-[var(--color-surface-low)] focus-visible:ring-2 focus-visible:ring-secondary/40 focus-visible:outline-none"
               aria-label="Show next review"
             >
               <CaretRight className="size-4" />
@@ -92,18 +110,22 @@ export function GuestReviewSlideshow({
         ) : null}
       </div>
 
-      <p className="font-heading text-[2rem] leading-[1.06] text-white md:text-[2.55rem]">
+      <GoogleStars />
+
+      <p className="text-[0.875rem] leading-[1.6] text-on-surface md:text-[0.9375rem]">
         &quot;{activeReview.summary}&quot;
       </p>
 
-      <div className="flex flex-wrap items-end justify-between gap-4 border-t border-white/10 pt-4">
-        <div>
-          <h3 className="text-base font-semibold text-white">
-            {activeReview.name}
-          </h3>
-          <p className="pt-1 text-[0.72rem] font-semibold tracking-[0.14em] text-white/68 uppercase">
-            {activeReview.guestType}
-          </p>
+      <div className="flex flex-wrap items-end justify-between gap-4 border-t border-[rgba(196,189,181,0.2)] pt-4">
+        <div className="flex flex-wrap gap-1.5">
+          {activeReview.focus.map((item) => (
+            <span
+              key={item}
+              className="rounded-full bg-[var(--color-surface-highest)] px-2.5 py-1 text-[0.65rem] font-medium text-on-surface"
+            >
+              {item}
+            </span>
+          ))}
         </div>
         <div className="flex items-center gap-3">
           {total > 1 ? (
@@ -113,10 +135,10 @@ export function GuestReviewSlideshow({
                   key={`${review.name}-${index}`}
                   type="button"
                   onClick={() => setActiveIndex(index)}
-                  className={`h-2.5 rounded-full transition focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:outline-none ${
+                  className={`h-2.5 rounded-full transition focus-visible:ring-2 focus-visible:ring-secondary/40 focus-visible:outline-none ${
                     index === activeIndex
-                      ? "w-7 bg-white"
-                      : "w-2.5 bg-white/35 hover:bg-white/55"
+                      ? "w-7 bg-secondary"
+                      : "w-2.5 bg-[var(--color-outline-variant)] hover:bg-secondary/55"
                   }`}
                   aria-label={`Show review ${index + 1}`}
                   aria-current={index === activeIndex}
@@ -124,9 +146,6 @@ export function GuestReviewSlideshow({
               ))}
             </div>
           ) : null}
-          <p className="text-[0.72rem] font-semibold tracking-[0.14em] text-white/68 uppercase">
-            Google review
-          </p>
         </div>
       </div>
     </article>

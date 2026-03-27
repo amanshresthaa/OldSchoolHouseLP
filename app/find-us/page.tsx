@@ -72,7 +72,7 @@ export default function FindUsPage() {
           </div>
           <div className="grid gap-4 xl:grid-cols-[0.85fr_1.15fr]">
             <div className="space-y-4">
-              <div className="rounded-2xl bg-[var(--color-surface-lowest)] px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6">
+              <div className="surface-panel">
                 <div className="space-y-4 text-sm leading-7 text-on-surface md:text-base">
                   <p className="flex items-start gap-3">
                     <MapPin className="mt-1 size-4 shrink-0 text-secondary" />
@@ -107,11 +107,9 @@ export default function FindUsPage() {
                 {arrivalNotes.map((note, index) => (
                   <article
                     key={note}
-                    className={`rounded-2xl px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6 ${
-                      index === 1
-                        ? "surface-pane-muted"
-                        : "bg-[var(--color-surface-lowest)]"
-                    }`}
+                    className={
+                      index === 1 ? "surface-panel-muted" : "surface-panel"
+                    }
                   >
                     <p className="text-sm leading-7 text-on-surface md:text-base">
                       {note}
@@ -141,11 +139,9 @@ export default function FindUsPage() {
             {accessibilityNotes.map((note, index) => (
               <article
                 key={note}
-                className={`rounded-2xl px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6 ${
-                  index === 1
-                    ? "surface-pane-muted"
-                    : "bg-[var(--color-surface-lowest)]"
-                }`}
+                className={
+                  index === 1 ? "surface-panel-muted" : "surface-panel"
+                }
               >
                 <p className="text-sm leading-7 text-on-surface md:text-base">
                   {note}

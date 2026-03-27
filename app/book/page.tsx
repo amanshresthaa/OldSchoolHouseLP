@@ -51,7 +51,7 @@ export default function BookPage() {
       <section className="bg-background py-10 md:py-14 lg:py-16">
         <div className="section-shell space-y-5">
           <div className="grid gap-4 xl:grid-cols-[1.1fr_0.9fr]">
-            <div className="rounded-2xl bg-[var(--color-surface-lowest)] px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6">
+            <div className="surface-panel">
               <p className="eyebrow">Book online</p>
               <h1 className="section-title pt-3">
                 The fastest route is the online booking link.
@@ -66,14 +66,14 @@ export default function BookPage() {
                   href={bookingHref}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex h-12 items-center justify-center gap-2.5 rounded-xl bg-[linear-gradient(135deg,#af2b3e,#8f1f2e)] px-6 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(175,43,62,0.3)] transition hover:-translate-y-0.5 hover:brightness-110"
+                  className="cta-primary inline-flex h-12 items-center justify-center gap-2.5 px-6 text-sm font-semibold"
                 >
                   Book online
                   <ArrowRight className="size-4" />
                 </a>
                 <Link
                   href="/menu"
-                  className="inline-flex h-12 items-center justify-center gap-2.5 rounded-xl border border-[rgba(196,189,181,0.42)] bg-[var(--color-surface-low)]/84 px-6 text-sm font-semibold text-primary transition hover:-translate-y-0.5"
+                  className="cta-secondary inline-flex h-12 items-center justify-center gap-2.5 px-6"
                 >
                   View menu first
                 </Link>
@@ -99,11 +99,9 @@ export default function BookPage() {
             {bookingNotes.map((note, index) => (
               <article
                 key={note}
-                className={`rounded-2xl px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6 ${
-                  index === 1
-                    ? "surface-pane-muted"
-                    : "bg-[var(--color-surface-lowest)]"
-                }`}
+                className={
+                  index === 1 ? "surface-panel-muted" : "surface-panel"
+                }
               >
                 <p className="text-sm leading-7 text-on-surface md:text-base">
                   {note}
@@ -124,7 +122,7 @@ export default function BookPage() {
           <div className="grid gap-4 md:grid-cols-3">
             <Link
               href="/sunday-roast"
-              className="rounded-2xl bg-[var(--color-surface-lowest)] px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] transition hover:-translate-y-0.5 md:px-6 md:py-6"
+              className="surface-panel transition hover:-translate-y-0.5"
             >
               <CalendarDots className="size-5 text-secondary" />
               <h2 className="section-title pt-3">Booking for Sunday?</h2>
@@ -135,7 +133,7 @@ export default function BookPage() {
             </Link>
             <Link
               href="/private-hire"
-              className="surface-pane-muted rounded-2xl px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] transition hover:-translate-y-0.5 md:px-6 md:py-6"
+              className="surface-panel-muted transition hover:-translate-y-0.5"
             >
               <UsersThree className="size-5 text-secondary" />
               <h2 className="section-title pt-3">Planning something bigger?</h2>
@@ -146,7 +144,7 @@ export default function BookPage() {
             </Link>
             <Link
               href="/find-us"
-              className="rounded-2xl bg-[var(--color-surface-lowest)] px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] transition hover:-translate-y-0.5 md:px-6 md:py-6"
+              className="surface-panel transition hover:-translate-y-0.5"
             >
               <Phone className="size-5 text-secondary" />
               <h2 className="section-title pt-3">

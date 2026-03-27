@@ -114,7 +114,7 @@ export default async function RootLayout({
     >
       <body className="min-h-svh">
         <ThemeProvider>
-          <div className="relative min-h-svh pb-20 md:pb-0">
+          <div className="relative min-h-svh pb-28 md:pb-0">
             <SiteHeader />
             {children}
             <SiteFooter />

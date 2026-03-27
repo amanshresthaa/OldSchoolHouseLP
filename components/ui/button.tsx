@@ -5,20 +5,17 @@ import { Slot } from "radix-ui"
 import { cn } from "@/lib/utils"
 
 export const buttonVariants = cva(
-  "group/button inline-flex shrink-0 items-center justify-center rounded-md border border-transparent bg-clip-padding text-sm font-semibold whitespace-nowrap transition-all duration-[var(--duration-micro)] ease-[var(--easing-standard)] outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30 active:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "group/button inline-flex shrink-0 items-center justify-center rounded-md border border-transparent bg-clip-padding text-sm font-semibold whitespace-nowrap transition-all duration-[var(--duration-micro)] ease-[var(--easing-standard)] outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
-        default:
-          "bg-[linear-gradient(135deg,#af2b3e,#8f1f2e)] text-white shadow-[0px_12px_32px_rgba(27,28,28,0.06)] hover:-translate-y-0.5 hover:brightness-105",
-        outline:
-          "border border-[color:rgba(196,189,181,0.35)] bg-[var(--color-surface-lowest)] text-primary hover:-translate-y-0.5 hover:bg-[var(--color-surface-low)] hover:text-primary aria-expanded:bg-[var(--color-surface-low)] aria-expanded:text-primary",
+        default: "cta-primary text-white",
+        outline: "cta-secondary",
         secondary:
-          "bg-[linear-gradient(135deg,#061b0e,#1b3022)] text-white hover:-translate-y-0.5 hover:brightness-105 aria-expanded:brightness-105",
-        ghost:
-          "hover:bg-[var(--color-surface-low)] hover:text-foreground aria-expanded:bg-[var(--color-surface-low)] aria-expanded:text-foreground",
+          "rounded-full bg-primary text-white hover:-translate-y-0.5 hover:bg-primary-container aria-expanded:bg-primary-container",
+        ghost: "cta-ghost aria-expanded:bg-secondary/6",
         destructive:
-          "bg-secondary-container text-white hover:bg-secondary-container/90 focus-visible:border-destructive/40 focus-visible:ring-destructive/20",
+          "rounded-full bg-secondary-container text-white hover:bg-secondary-container/90 focus-visible:border-destructive/40 focus-visible:ring-destructive/20",
         link: "text-secondary underline-offset-4 hover:text-secondary/80 hover:underline",
       },
       size: {

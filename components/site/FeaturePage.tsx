@@ -111,12 +111,11 @@ export function FeaturePage({
               {section.cards.map((card, cardIndex) => (
                 <article
                   key={card.title}
-                  className={cn(
-                    "rounded-2xl px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6",
+                  className={
                     cardIndex % 2 === 0
-                      ? "bg-[var(--color-surface-lowest)]"
-                      : "surface-pane-muted"
-                  )}
+                      ? "surface-panel"
+                      : "surface-panel-muted"
+                  }
                 >
                   <h2 className="section-title">{card.title}</h2>
                   <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
@@ -137,7 +136,7 @@ export function FeaturePage({
               title={checklist.title}
               description={checklist.description}
             />
-            <div className="rounded-2xl bg-[var(--color-surface-lowest)] px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6">
+            <div className="surface-panel">
               <ol className="space-y-3 text-sm leading-7 text-on-surface md:text-base">
                 {checklist.items.map((item, index) => (
                   <li key={item} className="flex gap-3">
