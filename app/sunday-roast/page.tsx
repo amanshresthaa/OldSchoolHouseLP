@@ -20,88 +20,106 @@ export default function SundayRoastPage() {
       hero={route!.hero!}
       sections={[
         {
-          eyebrow: "Why Sunday works here",
-          title: "A roast page should still feel pub-first.",
+          eyebrow: "Available every Sunday from 12pm",
+          title:
+            "A proper Sunday roast, served the way people want it from a Stony Stratford pub.",
           description:
-            "Sunday roast is one of the clearest commercial reasons for someone to search for a pub like this, so the page needs to lead with comfort, warmth, and the confidence of a proper pub lunch.",
+            "All roasts are served with fluffy roast potatoes, seasonal vegetables, Yorkshire pudding, and gravy. It is the kind of Sunday lunch that feels straightforward to book and easy to build a weekend around.",
           columns: 3,
           cards: [
             {
-              title: "Traditional pub setting",
+              title: "Any starter and a standard roast for £17.99",
               description:
-                "The room, the location, and the easy pub atmosphere do as much work for Sunday intent as the food itself.",
+                "If you want to turn Sunday lunch into a fuller meal, any starter and a standard roast can be ordered together for £17.99. Add a pudding for £3.49 more.",
             },
             {
-              title: "A menu with more range behind it",
+              title: "Choose the roast that suits you",
               description:
-                "Guests who arrive for Sunday roast can still discover the Nepalese side of the menu and remember the pub for more than one kind of visit.",
+                "Roast topside of beef is £17.49, roast loin of pork is £15.49, roast chicken breast is £15.49, and the roast plant-based meatloaf is £14.49.",
             },
             {
-              title: "Bookable, local, and easy to work into the weekend",
+              title: "Go big with the Super Roast",
               description:
-                "A strong Sunday page should make booking lunch feel like the natural next step, not another decision to make later.",
+                "If you cannot choose, the Super Roast is £19.99 and brings together beef, pork, and chicken with cauliflower and leek cheese on the plate.",
             },
           ],
         },
         {
-          eyebrow: "What to expect",
-          title:
-            "Sunday lunch should feel settled, sociable, and worth booking ahead for.",
+          eyebrow: "Extras worth knowing about",
+          title: "There is room to make Sunday lunch feel a bit more generous.",
           description:
-            "The page does not need to invent a detailed roast menu to convert. It just needs to show the pub is a credible Sunday choice for couples, families, and mixed tables.",
+            "If your table likes the full Sunday treatment, there are a few details worth knowing before you book.",
           columns: 2,
           muted: true,
           cards: [
             {
-              title: "Built for mixed tables",
+              title: "Add cauliflower and leek cheese",
               description:
-                "Traditional pub comfort makes Sunday familiar, while the wider kitchen identity gives the pub stronger recall afterwards.",
+                "A side of cauliflower and leek cheese is available for £4.99 if you want to make the roast feel even more indulgent.",
             },
             {
-              title: "A useful route into the rest of the site",
+              title: "Book ahead for the easiest Sunday",
               description:
-                "Once someone is interested in Sunday lunch, the page should move them into booking, the menu, and family or group dining journeys without losing momentum.",
+                "Sunday lunch is one of the clearest reasons people head out for the pub. Booking ahead keeps the table sorted before the day gets busy.",
             },
           ],
         },
       ]}
+      checklist={{
+        eyebrow: "Sunday roast choices",
+        title: "The current Sunday offer at a glance.",
+        description:
+          "Use this as the quick version before you head to the full menu or book the table.",
+        items: [
+          "Roast topside of beef — £17.49",
+          "Roast loin of pork — £15.49",
+          "Roast chicken breast — £15.49",
+          "Roast plant-based meatloaf — £14.49",
+          "Any starter and a standard roast — £17.99",
+          "Add a pudding for £3.49",
+          "Super Roast with beef, pork, chicken, and cauliflower and leek cheese — £19.99",
+        ],
+      }}
       faqSection={{
         eyebrow: "Sunday FAQs",
-        title: "Keep Sunday lunch questions simple.",
+        title: "Everything you need before you book Sunday lunch.",
         description:
-          "The page should support searchers who want reassurance fast, then move them toward a booking.",
+          "A few quick answers usually make it easier to settle on the plan and get the table booked.",
         faqs: [
           {
-            question: "Why have a dedicated Sunday roast page?",
+            question: "What time are Sunday roasts available?",
+            answer: "Sunday roasts are available every Sunday from 12pm.",
+          },
+          {
+            question: "What comes with the roast?",
             answer:
-              "Sunday roast is one of the strongest pub-led search intents, so it deserves a dedicated landing page rather than being buried deep in a broader menu page.",
+              "All roasts are served with fluffy roast potatoes, seasonal vegetables, Yorkshire pudding, and gravy.",
           },
           {
             question:
-              "Does the Sunday roast page still support the wider concept?",
-            answer:
-              "Yes. The page leads with traditional pub comfort, then uses the rest of the site to show that The Old School House also offers a more distinctive food story.",
+              "Does the starter and roast offer include the Super Roast?",
+            answer: "No. The starter and roast deal excludes the Super Roast.",
           },
           {
-            question: "What should I do next if I am interested?",
+            question: "Can I see the wider menu as well?",
             answer:
-              "Book your table first, then use the menu page if you want to browse further before you visit.",
+              "Yes. If you want to browse beyond the roast options, head to the full menu and then book once the table feels right.",
           },
         ],
       }}
       inlineCta={{
-        title: "If Sunday is the plan, booking ahead is the easiest next step.",
+        title: "If Sunday lunch is already in the diary, book the table now.",
         description:
-          "That keeps the visit simple and lets the pub side of the experience do the reassuring work before you arrive.",
+          "That way the pub part is taken care of before you even set off for London Road.",
       }}
       signoff={{
-        eyebrow: "Keep exploring",
-        title: "See how Sunday fits into the wider food and pub offer.",
+        eyebrow: "Keep planning",
+        title: "Get Sunday sorted, then see what else is on the menu.",
         body: (
           <p>
-            The Sunday roast page should win the search, but the menu and group
-            dining pages help explain why the pub stays in mind for more than
-            one weekly habit.
+            Sunday lunch is one of the easiest reasons to head into town and
+            settle in for a proper pub meal. Get the table sorted first, then
+            browse the wider menu if you want a bit more choice around it.
           </p>
         ),
         actions: [

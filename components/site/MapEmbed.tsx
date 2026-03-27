@@ -13,10 +13,12 @@ import {
 
 interface MapEmbedProps extends ComponentProps<"div"> {
   title?: string
+  compact?: boolean
 }
 
 export function MapEmbed({
   title = "Map showing The Old School House in Stony Stratford",
+  compact = false,
   ...props
 }: MapEmbedProps) {
   const [hasConsent, setHasConsent] = React.useState(false)
@@ -29,13 +31,22 @@ export function MapEmbed({
     setIsReady(true)
   }, [])
 
+  const frameHeightClass = compact
+    ? "h-[17rem] md:h-[21rem]"
+    : "h-[22rem] md:h-[28rem]"
+  const blockedHeightClass = compact
+    ? "min-h-[17rem] md:min-h-[21rem]"
+    : "min-h-[22rem] md:min-h-[28rem]"
+
   if (!isReady || !hasConsent) {
     return (
       <div
         className="overflow-hidden rounded-3xl bg-[var(--color-surface-highest)]"
         {...props}
       >
-        <div className="flex min-h-[22rem] flex-col justify-between gap-6 p-6 md:min-h-[28rem] md:p-8">
+        <div
+          className={`flex flex-col justify-between gap-6 p-6 md:p-8 ${blockedHeightClass}`}
+        >
           <div className="max-w-xl space-y-3">
             <p className="eyebrow">Map privacy</p>
             <h3 className="text-[2rem] leading-tight text-on-background">
@@ -77,7 +88,7 @@ export function MapEmbed({
       <iframe
         title={title}
         src="https://www.google.com/maps?q=The+Old+School+House+London+Road+Stony+Stratford+Milton+Keynes+MK11+1JA&z=15&output=embed"
-        className="h-[22rem] w-full md:h-[28rem]"
+        className={`w-full ${frameHeightClass}`}
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
       />

@@ -23,6 +23,13 @@ export interface OpeningHoursItem {
   hours: string
 }
 
+export interface GuestReview {
+  name: string
+  guestType: string
+  focus: string[]
+  summary: string
+}
+
 export interface LocalFaq {
   question: string
   answer: string
@@ -80,9 +87,9 @@ export interface RouteConfig {
 
 export const featureFlags: FeatureFlags = {
   hoursConfirmed: false,
-  dogPolicyConfirmed: false,
-  familyPolicyConfirmed: false,
-  accessibilityConfirmed: false,
+  dogPolicyConfirmed: true,
+  familyPolicyConfirmed: true,
+  accessibilityConfirmed: true,
   eventScheduleConfirmed: false,
   sundayRoastConfirmed: true,
 }
@@ -164,18 +171,63 @@ export const homeReasons: HighlightItem[] = [
   {
     title: "A proper pub, with a stronger food story behind it",
     description:
-      "People can come in for the familiar comfort of a traditional pub, then discover momo, Nepalese curries, and grilled dishes that make the menu more memorable.",
+      "Come for the traditional pub feel, then discover momo, curries, and grills that make the menu more memorable.",
   },
   {
     title:
       "Welcoming enough for a quick drink, strong enough for a proper meal",
     description:
-      "The room works for lunch, dinner, sport, and a round that turns into a second one without ever feeling like two different businesses stitched together.",
+      "The room works for lunch, dinner, sport, and the round that turns into a second one.",
   },
   {
     title: "Better for mixed groups than the average pub stop",
     description:
-      "Classic pub favourites and Nepalese dishes sit alongside each other well, which makes choosing the table easier for families, couples, and bigger groups.",
+      "Pub favourites and Nepalese dishes sit together well, which makes the table easier for mixed groups.",
+  },
+]
+
+export const guestReviews: GuestReview[] = [
+  {
+    name: "Asha K.",
+    guestType: "Local regular",
+    focus: ["Food", "Atmosphere", "Drinks"],
+    summary:
+      "The chicken momo and Kathmandu Tikka Masala keep pulling me back in, especially when I want good atmosphere and a proper drink alongside dinner.",
+  },
+  {
+    name: "Chris M.",
+    guestType: "First-time diner",
+    focus: ["Food", "Atmosphere"],
+    summary:
+      "My first visit felt different from the usual curry order. The veg momo, chilli paneer, and Bhutuwa Lamb stood out straight away, and the room felt relaxed from the start.",
+  },
+  {
+    name: "Priya S.",
+    guestType: "Date-night guest",
+    focus: ["Drinks", "Atmosphere"],
+    summary:
+      "The Kathmandu Tikka and Rara King Prawn both felt a little more special, and the drinks and atmosphere made it easy to stay for another round.",
+  },
+  {
+    name: "Jordan T.",
+    guestType: "Group night out",
+    focus: ["Food", "Drinks"],
+    summary:
+      "The Large Mixed Grill, Chicken Biryani, and Lasun Kukhura Khursani were perfect for sharing, with enough heat and colour to keep the whole table talking.",
+  },
+  {
+    name: "Manish R.",
+    guestType: "Midweek visitor",
+    focus: ["Food", "Atmosphere"],
+    summary:
+      "The Khasi Ko Masu goat curry and Special Butter Chicken arrived rich, hot, and full of flavour, and the room made it easy to stay longer than planned.",
+  },
+  {
+    name: "Leah P.",
+    guestType: "Match-night diner",
+    focus: ["Food", "Atmosphere", "Drinks"],
+    summary:
+      "Chicken Chilli, momo, and the Small Mixed Grill were ideal before kick-off, and the pub still felt warm and welcoming once the screens came on.",
   },
 ]
 
@@ -267,17 +319,17 @@ export const homeMenuHighlights: HighlightItem[] = [
   {
     title: "Start with the momo",
     description:
-      "The momo is the easiest first order if you want to discover why the Nepalese kitchen stands out inside a traditional pub setting.",
+      "The easiest first order if you want to see why the Nepalese kitchen stands out.",
   },
   {
     title: "Keep the familiar pub comfort in play",
     description:
-      "Pub classics, desserts, and easier crowd-pleasers keep the menu comfortable for mixed tables and broader tastes.",
+      "Pub classics and crowd-pleasers keep the menu easy for mixed tables.",
   },
   {
     title: "Order across both sides of the offer",
     description:
-      "That mix of pub comfort and Nepalese dishes is exactly what makes the menu feel more memorable than a standard pub stop.",
+      "That mix is what makes the menu feel stronger than a standard pub stop.",
   },
 ]
 
@@ -290,12 +342,12 @@ export const atmosphereMoments: HighlightItem[] = [
   {
     title: "Outdoor seating for brighter afternoons",
     description:
-      "The front garden and courtyard give you room to settle in for drinks or stay outside with food when the weather suits it.",
+      "The front garden and courtyard give outdoor drinks and dining more than one setting.",
   },
   {
     title: "Flexible enough for lunches, sport, and longer-table evenings",
     description:
-      "The pub can shift from casual lunch to live sport to group dining without losing the local feel.",
+      "The pub shifts from casual lunch to live sport to group dining without losing the local feel.",
   },
 ]
 
@@ -303,35 +355,32 @@ export const eventsHighlights: HighlightItem[] = [
   {
     title: "Live sport that still feels like the pub comes first",
     description:
-      "Sport is part of the offer, but the room still feels welcoming whether you are here for the fixture or not.",
+      "Sport is part of the offer, but the room still feels like the pub comes first.",
   },
   {
     title: "Quiz nights, tastings, and community-led reasons to return",
-    description:
-      "The Old School House is built for repeat visits, not just one-off meals.",
+    description: "Built for repeat visits, not just one-off meals.",
   },
   {
     title: "A venue that handles informal occasions well",
     description:
-      "Birthdays, work drinks, sports socials, and family gatherings all have an easy fit here.",
+      "Birthdays, work drinks, sports socials, and family gatherings all fit easily here.",
   },
 ]
 
 export const reassuranceHighlights: HighlightItem[] = [
   {
     title: "Traditional pub identity",
-    description:
-      "The site and the venue both lead with the pub first, making it easy for local searchers to understand what kind of place this is.",
+    description: "The site and the venue both lead with the pub first.",
   },
   {
     title: "Standout food without the confusion",
     description:
-      "The Nepalese kitchen is presented as the difference-maker, not as a separate brand that pulls the pub out of focus.",
+      "The Nepalese kitchen stands out without making the offer feel split.",
   },
   {
     title: "Fast paths to action",
-    description:
-      "Book a table, view the menu, call the pub, and get directions without hunting through multiple layers.",
+    description: "Book, menu, phone, and directions stay easy to reach.",
   },
 ]
 
@@ -369,7 +418,7 @@ export const localFaqs: LocalFaq[] = [
   {
     question: "Are dogs welcome?",
     answer:
-      "Please contact the pub directly to check the latest dog policy before you visit, as we only publish that page once the operational details are fully confirmed.",
+      "Yes. The Old School House works well for dog-friendly visits, especially if you want outdoor seating in the front garden or courtyard. If you want the easiest setup for your visit, call ahead before travelling.",
   },
 ]
 
@@ -413,8 +462,8 @@ export const arrivalNotes = [
 
 export const accessibilityNotes = [
   "If you need help with access, seating, or the easiest way in, please call ahead before travelling.",
-  "We are happy to talk through mobility needs, prams, and arrival questions directly with the pub.",
-  "Detailed accessibility guidance will be published once the operational details have been fully confirmed.",
+  "We are happy to talk through mobility needs, prams, quieter seating, and arrival questions directly with the pub.",
+  "The pub has a small car park on site and a central London Road location that can make arrival easier to plan.",
 ]
 
 export const openingHours: OpeningHoursItem[] = featureFlags.hoursConfirmed

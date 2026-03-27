@@ -56,7 +56,7 @@ export default function FindUsPage() {
             <SectionHeading
               eyebrow="Address and contact"
               title="The Old School House sits on London Road in the heart of Stony Stratford."
-              description="This page is built for mobile intent: quick address checks, easy map taps, and a simple route into calling or booking before you set off."
+              description="Use this page for quick address checks, easy map taps, and the simplest route into calling, booking, or checking access before you set off."
             />
             <SiteActionCard
               actions={[
@@ -135,7 +135,7 @@ export default function FindUsPage() {
           <SectionHeading
             eyebrow="Accessibility and arrival help"
             title="Call ahead if you want the easiest route into the pub."
-            description="We are keeping detailed accessibility claims off the page until they are confirmed in full, but we can still help guests plan a smoother arrival."
+            description="Historic pub buildings can vary, so the easiest option is still to call ahead if access, seating, prams, or the best arrival route matter to your visit."
           />
           <div className="grid gap-4 md:grid-cols-3">
             {accessibilityNotes.map((note, index) => (

@@ -1,0 +1,23 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" fill="#061B0E"/>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <circle cx="1328" cy="128" r="238" fill="#D4A017" fill-opacity="0.14"/>
+  <path d="M0 626C166.667 576 333.333 551 500 551C666.667 551 833.333 576 1000 626C1166.67 676 1333.33 701 1500 701C1533.33 701 1566.67 700 1600 698V900H0V626Z" fill="#1B3022"/>
+  <path d="M0 694C166.667 642 333.333 616 500 616C666.667 616 833.333 642 1000 694C1166.67 746 1333.33 772 1500 772C1533.33 772 1566.67 771 1600 769V900H0V694Z" fill="#0E2415"/>
+  <rect x="330" y="520" width="176" height="24" rx="12" fill="#F9F6F1"/>
+  <rect x="354" y="544" width="20" height="82" rx="10" fill="#F9F6F1"/>
+  <rect x="462" y="544" width="20" height="82" rx="10" fill="#F9F6F1"/>
+  <rect x="1094" y="520" width="176" height="24" rx="12" fill="#F9F6F1"/>
+  <rect x="1118" y="544" width="20" height="82" rx="10" fill="#F9F6F1"/>
+  <rect x="1226" y="544" width="20" height="82" rx="10" fill="#F9F6F1"/>
+  <rect x="708" y="394" width="184" height="184" rx="92" fill="#F0EBE3" fill-opacity="0.12" stroke="#F5D06B" stroke-width="12"/>
+  <path d="M800 322V484" stroke="#F9F6F1" stroke-width="14" stroke-linecap="round"/>
+  <path d="M718 404H882" stroke="#F9F6F1" stroke-width="14" stroke-linecap="round"/>
+  <path d="M750 530H850" stroke="#F5D06B" stroke-width="14" stroke-linecap="round"/>
+  <defs>
+    <linearGradient id="bg" x1="274" y1="40" x2="1352" y2="784" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1B3022"/>
+      <stop offset="1" stop-color="#2D0A10"/>
+    </linearGradient>
+  </defs>
+</svg>

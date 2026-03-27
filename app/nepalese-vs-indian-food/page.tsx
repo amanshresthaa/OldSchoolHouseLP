@@ -20,87 +20,89 @@ export default function NepaleseVsIndianFoodPage() {
       hero={route!.hero!}
       sections={[
         {
-          eyebrow: "Why this page exists",
+          eyebrow: "A simple guide",
           title:
-            "Educational pages should reduce hesitation, not sound like a lecture.",
+            "Nepalese and Indian food share some familiar ground, but they do not feel exactly the same on the table.",
           description:
-            "Many guests are curious about Nepalese food but do not arrive with strong prior knowledge. This page should give them confidence to try the kitchen without confusing the pub-led journey.",
+            "A lot of guests recognise Indian dishes first, so it helps to have a simple explanation before ordering. At The Old School House, the easiest way to understand the difference is through the dishes themselves rather than through a long history lesson.",
           columns: 3,
           cards: [
             {
-              title: "Shared influences exist",
+              title: "Some flavours feel familiar",
               description:
-                "Nepalese and Indian food can sit close enough in a guest’s mind that a gentle explanation helps them see the difference without making the copy feel heavy.",
+                "Curries, spice, and warming dishes can make the two cuisines feel close at first glance, which is why many guests want a quick introduction before they order.",
             },
             {
-              title: "The page should stay practical",
+              title:
+                "The Nepalese side often feels lighter and more varied in shape",
               description:
-                "The best version of this content helps someone order their first dish rather than trying to become a full food-history article.",
+                "Momo, grilled dishes, and sharing plates give the menu a different rhythm from a curry-only expectation and make it easier to order across the table.",
             },
             {
-              title: "It feeds back into conversion",
+              title: "The best way to understand it is to try a few dishes",
               description:
-                "Education is useful only if it sends the reader on to the kitchen page, the menu, and the booking flow afterwards.",
+                "A short explanation helps, but the real difference becomes clearer once you start with the momo and then move into the wider kitchen favourites.",
             },
           ],
         },
         {
-          eyebrow: "What to explain",
-          title: "Keep the difference inviting and easy to understand.",
+          eyebrow: "How it works here",
+          title:
+            "You are not choosing between two restaurant styles. You are choosing a pub with a menu that goes further.",
           description:
-            "This page is less about definitive comparison and more about helping people feel comfortable trying the Nepalese side of the menu in a pub setting.",
+            "The Old School House keeps everything approachable because the setting is still a proper Stony Stratford pub. That makes trying the Nepalese side of the menu feel inviting rather than intimidating.",
           columns: 2,
           muted: true,
           cards: [
             {
-              title: "Explain through dishes",
+              title: "Start with the recognisable dishes",
               description:
-                "Use examples like momo, grills, and house favourites so the difference feels tangible rather than abstract.",
+                "Momo, curries, and grilled dishes give you an easy route into the kitchen without needing to decode a long list of unfamiliar terms.",
             },
             {
-              title: "Keep the pub context visible",
+              title: "Keep the wider pub menu in view",
               description:
-                "Remind the reader that they are not choosing between two restaurants. They are discovering one of the reasons this pub feels more distinctive than the next.",
+                "If part of the table wants pub comfort and part wants to explore the Nepalese dishes, The Old School House is built to handle both in the same meal.",
             },
           ],
         },
       ]}
       faqSection={{
         eyebrow: "Guide FAQs",
-        title: "Use simple answers to build confidence.",
+        title: "A few simple answers before you order.",
         description:
-          "The point is to help the first-time guest feel ready to order, not to overwhelm them with detail.",
+          "This guide is here to make the first order feel easier, not to overload you with detail.",
         faqs: [
           {
-            question: "Why compare Nepalese and Indian food at all?",
+            question: "Why do people compare Nepalese and Indian food?",
             answer:
-              "Because many guests know the Indian category first, and a short explanation helps them understand what makes the Nepalese side of the menu more distinctive.",
+              "Because many guests know Indian dishes first, and a short explanation helps show what makes the Nepalese side of the menu feel different once you start ordering.",
           },
           {
-            question: "Does this page change the pub-first positioning?",
+            question: "What should I order if I want an easy introduction?",
             answer:
-              "No. The page supports discovery, but the pub remains the primary search-entry and brand anchor throughout the site.",
+              "Start with the momo, then move into the wider kitchen favourites if you want to keep exploring.",
           },
           {
-            question: "What should I do after reading this guide?",
+            question: "Do I need to know the difference before I visit?",
             answer:
-              "Use the Nepalese kitchen page for a stronger overview, then move into the menu and booking flow when you are ready.",
+              "Not at all. The guide is only there to make the menu feel more approachable. You can always browse the kitchen page and book when you are ready.",
           },
         ],
       }}
       inlineCta={{
         title:
-          "Once the difference feels clearer, the menu should feel easier too.",
+          "Once the difference feels clearer, the menu usually feels easier too.",
         description:
-          "Move from the guide into the kitchen page or the full menu rather than leaving the explanation as a standalone read.",
+          "Use the kitchen page or the full menu next, then book when the table plan is set.",
       }}
       signoff={{
         eyebrow: "Next step",
-        title: "Turn curiosity into an actual table.",
+        title: "Turn the guide into a real table and a real first order.",
         body: (
           <p>
-            The guide should give people enough confidence to order. From here,
-            the menu and booking path need to stay obvious.
+            The best next move is simple: look at the Nepalese kitchen, choose a
+            few dishes that sound right, and book the table.
           </p>
         ),
         actions: [

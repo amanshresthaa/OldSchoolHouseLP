@@ -197,7 +197,7 @@ export const routeConfigs: RouteConfig[] = [
       eyebrow: "Sunday roast",
       title: "Sunday roast in a proper Stony Stratford pub.",
       description:
-        "Settle in for the comfort people expect from Sunday lunch, then enjoy a pub that still gives the table more to talk about once you open the menu.",
+        "Available every Sunday from 12pm, with roast potatoes, seasonal vegetables, Yorkshire pudding, and gravy served as standard.",
       primaryAction: { href: bookOnlineHref, label: "Book Sunday lunch" },
       secondaryAction: { href: "/menu", label: "See the menu" },
     },
@@ -274,6 +274,77 @@ export const routeConfigs: RouteConfig[] = [
     stickySecondaryAction: { href: "/menu", label: "Menu" },
   },
   {
+    href: "/what-is-nepalese-food",
+    label: "What is Nepalese Food",
+    sitemap: true,
+    published: true,
+    meta: {
+      title: "What is Nepalese Food",
+      description:
+        "A simple guide to Nepalese food at The Old School House, from momo and grilled dishes to the pub-friendly way the menu is built.",
+      canonical: "/what-is-nepalese-food",
+    },
+    hero: {
+      eyebrow: "Food guide",
+      title: "What is Nepalese food, and where do you begin?",
+      description:
+        "Think warming dishes, generous plates, momo to start with, and a menu that feels easy to try in the comfort of a proper pub.",
+      primaryAction: {
+        href: "/nepalese-kitchen",
+        label: "Explore the kitchen",
+      },
+      secondaryAction: { href: "/menu", label: "See the menu" },
+    },
+    schema: { faq: true },
+    stickySecondaryAction: { href: "/menu", label: "Menu" },
+  },
+  {
+    href: "/traditional-pub-with-nepalese-kitchen",
+    label: "Traditional Pub with Nepalese Kitchen",
+    sitemap: true,
+    published: true,
+    meta: {
+      title: "Traditional Pub with a Nepalese Kitchen",
+      description:
+        "See why The Old School House works as a traditional pub first, then becomes more memorable through its Nepalese kitchen.",
+      canonical: "/traditional-pub-with-nepalese-kitchen",
+    },
+    hero: {
+      eyebrow: "Why it works",
+      title:
+        "A traditional pub first, with a kitchen that gives it more identity.",
+      description:
+        "The Old School House keeps the pub experience easy to recognise, then adds a Nepalese kitchen that makes the food feel more distinctive without making the visit harder to understand.",
+      primaryAction: { href: "/menu", label: "View menu" },
+      secondaryAction: { href: bookOnlineHref, label: "Book a table" },
+    },
+    schema: { faq: true },
+    stickySecondaryAction: { href: bookOnlineHref, label: "Book" },
+  },
+  {
+    href: "/where-to-eat-in-stony-stratford",
+    label: "Where to Eat in Stony Stratford",
+    sitemap: true,
+    published: true,
+    meta: {
+      title: "Where to Eat in Stony Stratford",
+      description:
+        "Looking for where to eat in Stony Stratford? See why The Old School House works for pub meals, Sunday lunch, groups, outdoor drinks, and Nepalese dishes.",
+      canonical: "/where-to-eat-in-stony-stratford",
+    },
+    hero: {
+      eyebrow: "Local guide",
+      title:
+        "Where to eat in Stony Stratford when you want more than one good reason to choose.",
+      description:
+        "The Old School House works for a proper pub meal, a Sunday plan, a group table, or a visit built around trying something different from the Nepalese kitchen.",
+      primaryAction: { href: "/menu", label: "Browse the menu" },
+      secondaryAction: { href: bookOnlineHref, label: "Book a table" },
+    },
+    schema: { faq: true },
+    stickySecondaryAction: { href: bookOnlineHref, label: "Book" },
+  },
+  {
     href: "/live-sport",
     label: "Live Sport",
     sitemap: true,
@@ -281,15 +352,15 @@ export const routeConfigs: RouteConfig[] = [
     meta: {
       title: "Live Sport Pub in Stony Stratford",
       description:
-        "Watch major fixtures at The Old School House, a traditional Stony Stratford pub with good food, drinks, and booking options for bigger match days.",
+        "Watch live sport at The Old School House, a traditional Stony Stratford pub with food, drinks, and easy booking for sport-led visits.",
       canonical: "/live-sport",
     },
     hero: {
       eyebrow: "Live sport",
       title: "A live sport pub that still feels like a proper local.",
       description:
-        "Come in for the fixture, stay for the food, and book ahead when you want the table sorted before kick-off.",
-      primaryAction: { href: bookOnlineHref, label: "Book for the match" },
+        "Come in for the sport, stay for the food, and book ahead when you want the table sorted before you arrive.",
+      primaryAction: { href: bookOnlineHref, label: "Book a table" },
       secondaryAction: { href: "/events", label: "See what’s on" },
     },
     schema: { faq: true },
@@ -340,26 +411,27 @@ export const routeConfigs: RouteConfig[] = [
     stickySecondaryAction: { href: "/private-hire", label: "Enquire" },
   },
   {
-    href: "/christmas-parties",
-    label: "Christmas Parties",
+    href: "/guides",
+    label: "Guides",
+    resource: true,
     sitemap: true,
     published: true,
     meta: {
-      title: "Christmas Parties in Stony Stratford",
+      title: "Pub Guides and Food Guides",
       description:
-        "Plan festive drinks, Christmas dinners, and group celebrations at The Old School House in Stony Stratford.",
-      canonical: "/christmas-parties",
+        "Browse local guides, food explainers, and comparison pages from The Old School House to help you choose where and what to book.",
+      canonical: "/guides",
     },
     hero: {
-      eyebrow: "Christmas parties",
-      title: "Christmas parties with proper pub warmth behind them.",
+      eyebrow: "Guides",
+      title: "A simple place to start if you are still deciding.",
       description:
-        "Work dos, family meals, and festive drinks all work better when the room feels welcoming and the food gives the table more than the obvious choice.",
-      primaryAction: { href: siteEmailHref, label: "Enquire for Christmas" },
-      secondaryAction: { href: "/private-hire", label: "See private hire" },
+        "These guides are here to help with the in-between stage: choosing the pub, understanding the food, and finding the page that fits your visit best.",
+      primaryAction: { href: "/menu", label: "Browse the menu" },
+      secondaryAction: { href: bookOnlineHref, label: "Book a table" },
     },
     schema: { faq: true },
-    stickySecondaryAction: { href: siteEmailHref, label: "Enquire" },
+    stickySecondaryAction: { href: bookOnlineHref, label: "Book" },
   },
   {
     href: "/wakes-life-celebrations",
@@ -369,15 +441,15 @@ export const routeConfigs: RouteConfig[] = [
     meta: {
       title: "Wakes and Life Celebrations in Stony Stratford",
       description:
-        "Talk to The Old School House about food, drinks, and a calm planning process for wakes and life celebrations in Stony Stratford.",
+        "Talk to The Old School House about a calm planning process and a £13-per-guest wakes buffet in Stony Stratford.",
       canonical: "/wakes-life-celebrations",
     },
     hero: {
       eyebrow: "Wakes and life celebrations",
       title:
-        "A calm, straightforward way to talk through a wake or life celebration.",
+        "A calm, straightforward way to plan a wake or celebration of life.",
       description:
-        "The most important thing is keeping the planning simple, warm, and considerate, with food and drink arranged in a way that suits the day.",
+        "Bring everyone together with a quietly considered buffet from The Old School House kitchen, served in the pub and shaped around the day.",
       primaryAction: { href: sitePhoneHref, label: "Call to talk it through" },
       secondaryAction: { href: siteEmailHref, label: "Email the team" },
     },
@@ -490,26 +562,71 @@ export const routeConfigs: RouteConfig[] = [
   {
     href: "/dog-friendly-pub-stony-stratford",
     label: "Dog Friendly",
+    resource: true,
     sitemap: featureFlags.dogPolicyConfirmed,
     published: featureFlags.dogPolicyConfirmed,
     meta: {
       title: "Dog-Friendly Pub in Stony Stratford",
       description:
-        "Check whether The Old School House is the right dog-friendly pub stop in Stony Stratford.",
+        "Bring the dog along to The Old School House, a dog-friendly Stony Stratford pub with outdoor seating and an easy London Road location.",
       canonical: "/dog-friendly-pub-stony-stratford",
     },
+    hero: {
+      eyebrow: "Dog-friendly pub",
+      title: "A dog-friendly pub stop in Stony Stratford.",
+      description:
+        "With a front garden, private courtyard, and an easy London Road location, The Old School House works well when the dog is part of the plan too.",
+      primaryAction: { href: bookOnlineHref, label: "Book a table" },
+      secondaryAction: { href: "/find-us", label: "Plan your visit" },
+    },
+    schema: { faq: true },
+    stickySecondaryAction: { href: directionsHref, label: "Directions" },
   },
   {
     href: "/family-friendly-pub-stony-stratford",
     label: "Family Friendly",
+    resource: true,
     sitemap: featureFlags.familyPolicyConfirmed,
     published: featureFlags.familyPolicyConfirmed,
     meta: {
       title: "Family-Friendly Pub in Stony Stratford",
       description:
-        "A welcoming pub in Stony Stratford for relaxed family meals and mixed-group dining.",
+        "A welcoming pub in Stony Stratford for relaxed family meals, Sunday lunches, and mixed-group dining.",
       canonical: "/family-friendly-pub-stony-stratford",
     },
+    hero: {
+      eyebrow: "Family-friendly pub",
+      title: "Family meals feel easy here.",
+      description:
+        "The Old School House is built around a warm traditional pub setting, outdoor space, and a menu that makes family visits easier to organise.",
+      primaryAction: { href: bookOnlineHref, label: "Book a family table" },
+      secondaryAction: { href: "/menu", label: "Browse the menu" },
+    },
+    schema: { faq: true },
+    stickySecondaryAction: { href: "/menu", label: "Menu" },
+  },
+  {
+    href: "/accessibility",
+    label: "Accessibility",
+    resource: true,
+    sitemap: featureFlags.accessibilityConfirmed,
+    published: featureFlags.accessibilityConfirmed,
+    meta: {
+      title: "Accessibility Information",
+      description:
+        "Accessibility information for visiting The Old School House on London Road, including arrival help, parking notes, and the best way to plan ahead.",
+      canonical: "/accessibility",
+    },
+    hero: {
+      eyebrow: "Accessibility information",
+      title: "A little planning makes arrival easier.",
+      description:
+        "If you need help with access, parking, prams, seating, or the best route into the pub, The Old School House team is happy to talk it through before you travel.",
+      primaryAction: { href: sitePhoneHref, label: "Call the pub" },
+      secondaryAction: { href: "/find-us", label: "Find us" },
+    },
+    schema: { faq: true },
+    stickySecondaryAction: { href: sitePhoneHref, label: "Call" },
   },
 ]
 

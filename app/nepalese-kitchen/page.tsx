@@ -20,91 +20,96 @@ export default function NepaleseKitchenPage() {
       hero={route!.hero!}
       sections={[
         {
-          eyebrow: "Why it matters",
-          title: "This is the differentiator, not the acquisition headline.",
+          eyebrow: "Why people remember the food",
+          title:
+            "The Nepalese kitchen gives this traditional pub a stronger point of difference.",
           description:
-            "The Nepalese kitchen should feel like the strongest reason to remember the pub after discovery, without making the venue look like a separate restaurant brand.",
+            "The Old School House keeps the feel of a proper local pub, then adds a Nepalese kitchen that gives the menu more warmth, more character, and more reason to come back for a second visit.",
           columns: 3,
           cards: [
             {
-              title: "It makes the pub more memorable",
+              title: "Led by Nepalese warmth",
               description:
-                "People may search for a traditional pub, but the Nepalese kitchen is what helps the visit feel less interchangeable once they are deciding where to go.",
+                "Operator Sanjog Gautam has built the food offer around the same idea as the pub itself: welcoming, generous, and easy for guests to enjoy without fuss.",
             },
             {
-              title: "It works best inside a pub frame",
+              title: "Designed to sit comfortably inside a pub visit",
               description:
-                "The comfort of the pub setting lowers the barrier for first-timers and makes curious food choices feel inviting rather than intimidating.",
+                "You do not need to choose between a pub meal and something more distinctive. Here, the Nepalese side of the menu sits naturally alongside the wider pub offer.",
             },
             {
-              title: "It improves repeat-visit potential",
+              title: "Memorable from the first order",
               description:
-                "A stronger point of difference means guests have more than one reason to return, whether they came in first for drinks, Sunday lunch, or a match night.",
+                "Momo, curries, and grilled dishes give people a clear reason to remember the meal, even if they first came in for drinks, Sunday lunch, or a fixture night.",
             },
           ],
         },
         {
-          eyebrow: "Where to start",
-          title: "The first order should feel easy.",
+          eyebrow: "Where to begin",
+          title:
+            "If you are new to the kitchen, start with the dishes that are easiest to share and easiest to talk about.",
           description:
-            "A good Nepalese kitchen page should guide the guest from curiosity into a first order, rather than assuming they already know the dishes.",
+            "The menu does not ask guests to arrive with specialist knowledge. It simply gives you a few strong starting points, then lets the rest of the meal open up from there.",
           columns: 3,
           muted: true,
           cards: [
             {
               title: "Start with momo",
               description:
-                "Momo is the natural bridge between curiosity and confidence: easy to describe, easy to share, and easy to recommend.",
+                "Momo is the most natural first step if you want to try the Nepalese side of the menu. It is straightforward, sociable, and easy to order for the table.",
             },
             {
-              title: "Move into richer house dishes",
+              title: "Move on to curries and grilled dishes",
               description:
-                "Curries, grills, and kitchen favourites should feel like the next step once the table is ready to order more widely.",
+                "Once the table is settled, the kitchen opens out into richer dishes that bring more depth and more flavour than a standard pub food line-up on its own.",
             },
             {
-              title: "Keep the pub menu in view",
+              title: "Order across the whole menu",
               description:
-                "The page should always make it clear that guests can order across the pub classics and the Nepalese kitchen in the same visit.",
+                "One of the strengths of The Old School House is that guests can mix pub favourites and Nepalese dishes in the same meal without the evening feeling split in two.",
             },
           ],
         },
       ]}
       faqSection={{
         eyebrow: "Kitchen FAQs",
-        title: "A simple explanation is more useful than a hard sell.",
+        title: "A few quick answers before you try the kitchen.",
         description:
-          "The goal is to make the Nepalese side of the menu feel inviting and easy to try inside the wider pub offer.",
+          "If you are curious but not sure where to begin, these are the questions that usually help most.",
         faqs: [
           {
-            question: "Why talk about the Nepalese kitchen on its own page?",
+            question: "Do I need to know Nepalese food before I visit?",
             answer:
-              "Because it is the clearest differentiator for the brand once someone has already entered through a pub-led journey.",
+              "No. The kitchen is designed to feel approachable, and the menu makes it easy to start with dishes like momo before moving further into the house favourites.",
           },
           {
             question:
-              "Does this make The Old School House feel less like a pub?",
+              "Does the Nepalese kitchen replace the pub side of the menu?",
             answer:
-              "No. The page should always frame the kitchen as something that sits inside a traditional pub, not as a separate restaurant identity.",
+              "No. The Old School House is still a traditional pub first. The Nepalese kitchen is what gives the food offer more character once you are here.",
           },
           {
-            question: "Where should I start if I am new to the food?",
+            question: "What is the best first order if I am new to it?",
             answer:
-              "Start with the momo, then use the menu and kitchen pages to move into the rest of the dishes at your own pace.",
+              "Start with the momo, then use the full menu to decide whether you want to move into curries, grilled dishes, or a wider mix across the table.",
           },
         ],
       }}
       inlineCta={{
-        title: "Curious enough to try it?",
+        title:
+          "If the kitchen sounds like your kind of table, make the booking now.",
         description:
-          "Book the table first, then use the menu to decide whether the first order starts with momo, a mixed grill, or one of the house curries.",
+          "You can always look at the menu afterwards, but the easiest start is getting the table sorted first.",
       }}
       signoff={{
         eyebrow: "Next step",
-        title: "Start with the signature dish, then use the menu for the rest.",
+        title:
+          "Start with the signature dish, then explore the rest of the menu.",
         body: (
           <p>
-            The Nepalese kitchen page should build appetite and confidence, then
-            hand off cleanly into the momo page and the full menu.
+            Momo is often the easiest introduction. From there, the full menu
+            gives you the best view of how the Nepalese kitchen and the pub
+            classics work together.
           </p>
         ),
         actions: [

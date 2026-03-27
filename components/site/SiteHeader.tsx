@@ -8,7 +8,13 @@ import { List, X } from "@phosphor-icons/react"
 
 import logo from "@/images/logos/OldSchoolHouse.png"
 import { Button } from "@/components/ui/button"
-import { bookOnlineHref, type NavItem } from "@/data/site"
+import {
+  bookOnlineHref,
+  siteDescriptor,
+  siteLocation,
+  siteName,
+  type NavItem,
+} from "@/data/site"
 import { siteNav } from "@/data/site-routes"
 import { cn } from "@/lib/utils"
 
@@ -129,13 +135,32 @@ export function SiteHeader() {
       <header className="sticky top-0 z-40 border-b border-black/5 bg-background/85 backdrop-blur-xl">
         <div className="mx-auto max-w-7xl px-5 py-3 sm:px-6 md:px-8">
           <div className="flex items-center justify-between gap-4">
-            <Link href="/" className="min-w-0 flex-1 pr-1 xl:flex-none xl:pr-0">
-              <Image
-                src={logo}
-                alt="The Old School House logo"
-                className="h-12 w-auto sm:h-14"
-                priority
-              />
+            <Link
+              href="/"
+              className="min-w-0 flex-1 pr-1 xl:flex-none xl:pr-0"
+              aria-label={siteName}
+            >
+              <div className="flex min-w-0 items-center gap-3">
+                <div className="shrink-0">
+                  <Image
+                    src={logo}
+                    alt="The Old School House logo"
+                    className="h-12 w-auto sm:h-14"
+                    priority
+                  />
+                </div>
+                <div className="max-w-[10.5rem] min-w-0 sm:max-w-[14rem] lg:max-w-[16rem]">
+                  <p className="font-heading text-base leading-[1.02] text-on-background sm:text-lg lg:text-xl">
+                    {siteName}
+                  </p>
+                  <p className="pt-1 text-[0.62rem] font-semibold tracking-[0.18em] text-secondary uppercase sm:text-[0.68rem] sm:tracking-[0.22em]">
+                    {siteLocation}
+                  </p>
+                  <p className="hidden pt-1 text-[0.72rem] leading-4 text-on-surface sm:block">
+                    {siteDescriptor}
+                  </p>
+                </div>
+              </div>
             </Link>
             <nav className="hidden items-center gap-1 xl:flex">
               {siteNav
@@ -198,12 +223,22 @@ export function SiteHeader() {
         >
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0 flex-1 pr-2">
-              <Image
-                src={logo}
-                alt="The Old School House logo"
-                className="h-10 w-auto brightness-0 invert"
-                priority
-              />
+              <div className="flex min-w-0 items-center gap-3">
+                <Image
+                  src={logo}
+                  alt="The Old School House logo"
+                  className="h-10 w-auto brightness-0 invert"
+                  priority
+                />
+                <div className="max-w-[12rem] min-w-0">
+                  <p className="font-heading text-lg leading-[1.02] text-white">
+                    {siteName}
+                  </p>
+                  <p className="pt-1 text-[0.62rem] font-semibold tracking-[0.18em] text-[var(--color-on-tertiary-container)] uppercase">
+                    {siteLocation}
+                  </p>
+                </div>
+              </div>
             </div>
             <button
               ref={closeButtonRef}

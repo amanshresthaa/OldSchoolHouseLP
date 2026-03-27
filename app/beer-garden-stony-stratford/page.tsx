@@ -20,86 +20,88 @@ export default function BeerGardenPage() {
       hero={route!.hero!}
       sections={[
         {
-          eyebrow: "Why this matters",
-          title: "Outdoor space is one of the clearest practical pub searches.",
+          eyebrow: "Outdoor pub time",
+          title:
+            "A front garden that feels worth the stop, plus a courtyard that gives you another way to stay outside.",
           description:
-            "A beer garden page should help people see that The Old School House has real outdoor room and more than one way to settle in outside.",
+            "The Old School House has proper outdoor space, not just a few token tables. The front garden with wooden seating gives the pub immediate kerb appeal on London Road, while the private courtyard adds a quieter option behind it.",
           columns: 3,
           cards: [
             {
-              title: "Front garden appeal",
+              title: "Generous front garden",
               description:
-                "The generous front garden with wooden seating gives the venue a stronger outdoor identity than a pub with only a few token tables.",
+                "The front garden is one of the venue’s strongest visual assets and one of the easiest reasons to stop in for drinks, lunch, or a slower afternoon catch-up.",
             },
             {
-              title: "Private courtyard as a second outdoor option",
+              title: "Private courtyard behind the pub",
               description:
-                "That extra outside space helps the pub feel more flexible for drinks, food, and informal groups in better weather.",
+                "The courtyard gives the site more flexibility than a single outdoor area and helps it suit both casual drinks and more planned get-togethers.",
             },
             {
-              title: "Useful for local and seasonal search",
+              title: "Easy to work into the day",
               description:
-                "Outdoor intent is often immediate and mobile-led, which makes this page a practical conversion route as well as a discovery page.",
+                "Situated on London Road in Stony Stratford, it is the kind of outdoor pub stop that feels easy for a quick drink, a relaxed meal, or a meet-up that turns into a longer stay.",
             },
           ],
         },
         {
-          eyebrow: "How it supports the wider site",
+          eyebrow: "What makes it useful",
           title:
-            "Outdoor searchers still need a clear route into booking and location.",
+            "The outdoor space works best when it is supported by the rest of the pub.",
           description:
-            "The page works best when it hands off into Find Us, Book, and the menu instead of trying to do everything itself.",
+            "Good outside seating matters more when the pub also has the food, drinks, and atmosphere to keep the visit going once you are settled in.",
           columns: 2,
           muted: true,
           cards: [
             {
               title: "Good for spontaneous visits",
               description:
-                "Beer garden searchers often want fast reassurance on location, atmosphere, and whether the space feels worth the stop.",
+                "If the weather turns in your favour, this is the sort of pub people can decide on quickly once they know where it is and what the outdoor setup looks like.",
             },
             {
-              title: "Good for longer planned stays too",
+              title: "Good for planned tables too",
               description:
-                "Outdoor dining becomes more compelling when the food, drinks, and rest of the pub experience are easy to browse from the same journey.",
+                "If you are planning to eat, meet friends, or turn drinks into a longer visit, it is worth booking ahead and checking the rest of the menu at the same time.",
             },
           ],
         },
       ]}
       faqSection={{
         eyebrow: "Outdoor seating FAQs",
-        title: "Keep outdoor-intent decisions quick.",
+        title: "Everything you need before you head for the garden.",
         description:
-          "The page should tell people enough to decide, then move them into the practical route for their visit.",
+          "A few quick answers should help you decide whether to book or just head over.",
         faqs: [
           {
-            question: "Why give the outdoor space its own page?",
+            question: "Does The Old School House have proper outdoor seating?",
             answer:
-              "Because outdoor seating and beer garden searches are a distinct pub-intent category, especially in warmer months and on mobile.",
+              "Yes. The pub has a generous front garden with wooden seating as well as a private courtyard behind the main building.",
           },
           {
-            question: "What makes the outside space commercially useful here?",
+            question: "Is it worth booking if we want to sit outside?",
             answer:
-              "The front garden and courtyard add capacity, seasonal appeal, and more flexibility for drinks, food, and casual meetups.",
+              "If you know you want to eat or you are planning a busier visit, booking ahead is the easiest way to keep the plan simple.",
           },
           {
-            question: "What should I do after reading this page?",
+            question: "What should I do next if I am planning to visit?",
             answer:
-              "Check directions or book a table, depending on whether your plan is immediate or already set.",
+              "Book a table if the plan is already set, or head to the Find Us page if you just want the quickest route over.",
           },
         ],
       }}
       inlineCta={{
         title: "If the weather is helping, make the table the next step.",
         description:
-          "That keeps outdoor intent moving toward an actual visit instead of ending with a browse.",
+          "That way the outdoor plan is sorted before you arrive on London Road.",
       }}
       signoff={{
         eyebrow: "Next step",
-        title: "Use the outdoor page to move into booking or directions.",
+        title:
+          "Plan the route or book the table and let the weather do the rest.",
         body: (
           <p>
-            The best next action from here is practical: secure the visit or get
-            the route sorted before you arrive on London Road.
+            The Old School House is easy to work into the day once you know
+            where you are heading and whether you want to book ahead.
           </p>
         ),
         actions: [

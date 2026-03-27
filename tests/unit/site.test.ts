@@ -25,6 +25,7 @@ describe("site data exports", () => {
 
     expect(siteResources).toEqual(
       expect.arrayContaining([
+        expect.objectContaining({ href: "/guides" }),
         expect.objectContaining({ href: "/menu-information" }),
         expect.objectContaining({ href: "/takeaway-menu" }),
       ])

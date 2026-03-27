@@ -30,15 +30,28 @@ describe("site config smoke", () => {
     expect(siteUrl).toBe("https://oldschoolhousestony.co.uk")
   })
 
-  it("keeps unpublished policy-led routes out of the public route set", () => {
-    expect(featureFlags.dogPolicyConfirmed).toBe(false)
-    expect(featureFlags.familyPolicyConfirmed).toBe(false)
-    expect(publishedRouteHrefs).not.toContain(
-      "/dog-friendly-pub-stony-stratford"
-    )
-    expect(publishedRouteHrefs).not.toContain(
+  it("publishes the approved audience and accessibility routes", () => {
+    expect(featureFlags.dogPolicyConfirmed).toBe(true)
+    expect(featureFlags.familyPolicyConfirmed).toBe(true)
+    expect(featureFlags.accessibilityConfirmed).toBe(true)
+    expect(publishedRouteHrefs).toContain("/dog-friendly-pub-stony-stratford")
+    expect(publishedRouteHrefs).toContain(
       "/family-friendly-pub-stony-stratford"
     )
+    expect(publishedRouteHrefs).toContain("/accessibility")
+  })
+
+  it("publishes the intent-led discovery and comparison routes", () => {
+    expect(publishedRouteHrefs).toContain("/guides")
+    expect(publishedRouteHrefs).toContain("/what-is-nepalese-food")
+    expect(publishedRouteHrefs).toContain(
+      "/traditional-pub-with-nepalese-kitchen"
+    )
+    expect(publishedRouteHrefs).toContain("/where-to-eat-in-stony-stratford")
+  })
+
+  it("keeps christmas out of the current public route set", () => {
+    expect(publishedRouteHrefs).not.toContain("/christmas-parties")
   })
 
   it("uses the required public routes as canonical destinations", () => {

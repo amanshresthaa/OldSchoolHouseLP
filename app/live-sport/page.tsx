@@ -20,95 +20,94 @@ export default function LiveSportPage() {
       hero={route!.hero!}
       sections={[
         {
-          eyebrow: "Why it converts",
+          eyebrow: "Live sport at the pub",
           title:
-            "Sport works best here when the rest of the pub still matters.",
+            "Watch live sport in a pub that still feels like a proper local.",
           description:
-            "The Old School House should not feel like a generic sports bar. The live sport page needs to show that fixtures sit inside a stronger pub experience rather than replacing it.",
+            "The Old School House is the kind of place where the screen matters, but so do the drinks, the food, and the atmosphere around the table. That makes it a stronger choice than a screen-only stop.",
           columns: 3,
           cards: [
             {
-              title: "Good for fixture intent",
+              title: "Easy to plan ahead",
               description:
-                "People search for a live sport pub because they want a screen, but they stay because the venue around it feels worth the evening.",
+                "If live sport is the reason for the visit, booking ahead keeps the evening straightforward and gives your group a better start to the table.",
             },
             {
-              title: "Food and drinks keep the stay longer",
+              title: "Built for more than one round",
               description:
-                "The page should connect match-day demand back into the menu, the booking flow, and the pub’s wider reasons to visit.",
+                "A proper pub setting, a fuller menu, and room to settle in mean the visit does not have to end when the coverage does.",
             },
             {
-              title: "Useful for group bookings",
+              title: "A natural fit for sports socials",
               description:
-                "Sports socials and casual meetups convert better when the page also signals room, drinks, and a straightforward route to enquire if needed.",
+                "If the sport is part of a bigger catch-up, the pub also works well for sports groups and casual socials that want food and drinks around the visit.",
             },
           ],
         },
         {
-          eyebrow: "What the page should prove",
-          title: "This is a pub first and a live sport venue second.",
+          eyebrow: "Why it works here",
+          title:
+            "The best sport-led visits happen when the whole venue still feels welcoming before and after the coverage.",
           description:
-            "That balance helps the page attract the right searchers while protecting the wider traditional-pub positioning of the site.",
+            "Live sport is part of the offer at The Old School House, but it sits inside a wider reason to visit: a traditional pub on London Road with food that makes staying longer feel worth it.",
           columns: 2,
           muted: true,
           cards: [
             {
-              title: "Built for match nights",
+              title: "Big nights, easy planning",
               description:
-                "The venue can handle fixtures, noise, and group energy without losing the warmth that makes it suitable for non-sport visits too.",
+                "Book ahead if you know you are coming in for live sport, or get in touch if it is part of a larger group plan that needs more room and a bit more shaping.",
             },
             {
-              title: "Connected to What’s On and Private Hire",
+              title: "Connected to the rest of the pub",
               description:
-                "The sport page should pass people into broader event discovery or private enquiries when the booking becomes more group-led than fixture-led.",
+                "Sport might get the evening started, but the menu, the drinks, and the wider pub atmosphere are what make people want to come back for another night as well.",
             },
           ],
         },
       ]}
       faqSection={{
         eyebrow: "Live sport FAQs",
-        title: "Help people choose the pub quickly on fixture days.",
+        title: "Everything you need before a sport-led visit.",
         description:
-          "A useful page answers the right questions fast and then gives people the table-booking route they were looking for.",
+          "If live sport is already part of the plan, a few quick answers usually make the booking decision easier.",
         faqs: [
           {
-            question: "Why does live sport deserve its own page?",
+            question: "Should I book ahead if I am coming in for live sport?",
             answer:
-              "Because live sport is a high-intent pub search and a repeat-visit driver, especially when the page can move guests into booking and group planning.",
+              "Yes. If live sport is the reason for your visit, booking ahead is the safest way to keep the evening straightforward.",
           },
           {
-            question: "Does the page turn the pub into a sports bar?",
+            question: "Is this more of a sports bar or a pub?",
             answer:
-              "No. The live sport content is there to support a use case, not to replace the traditional pub identity that leads the wider site.",
+              "It is a traditional pub first. Live sport is part of the offer, but the room, the drinks, and the food still do the work of making it feel like a proper pub visit.",
           },
           {
-            question:
-              "What should I do if I am planning a bigger sports group visit?",
+            question: "What if I am organising a bigger sports group?",
             answer:
-              "Use the private hire or group dining routes if the fixture is part of a larger social plan rather than just a standard table booking.",
+              "If sport is part of a bigger social plan, use the private hire route or get in touch so the team can help with the best setup.",
           },
         ],
       }}
       inlineCta={{
         title:
-          "If the fixture matters, book the table before the night fills up.",
+          "If live sport is the reason for the visit, get the table sorted before the room fills up.",
         description:
-          "That gives the page a clear commercial job instead of leaving it as a passive info stop.",
+          "Then you can focus on the evening rather than trying to find space at the last minute.",
       }}
       signoff={{
         eyebrow: "Next step",
-        title:
-          "Use sport as the entry, then let the rest of the pub do the rest.",
+        title: "Book the table, or keep browsing what’s on at the pub.",
         body: (
           <p>
-            Live sport should open the door to booking, group dining, and wider
-            event discovery rather than sitting in isolation.
+            The Old School House works best when the sport is only one part of
+            the visit and the pub around it gives you a reason to stay longer.
           </p>
         ),
         actions: [
           {
             href: "/book",
-            label: "Book for the match",
+            label: "Book a table",
             icon: <Television className="size-4" />,
           },
           {
