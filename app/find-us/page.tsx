@@ -13,6 +13,13 @@ import { PageHero } from "@/components/site/PageHero"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import { SiteActionCard } from "@/components/site/SiteActionCard"
 import {
+  findUsAccessibilitySection,
+  findUsActionCardText,
+  findUsFaqSectionCopy,
+  findUsAddressSection,
+  findUsInlineCtaCopy,
+} from "@/data/copy"
+import {
   accessibilityNotes,
   arrivalNotes,
   localFaqs,
@@ -53,11 +60,7 @@ export default function FindUsPage() {
       <section className="bg-background py-10 md:py-14 lg:py-16">
         <div className="section-shell space-y-5">
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <SectionHeading
-              eyebrow="Address and contact"
-              title="The Old School House sits on London Road in the heart of Stony Stratford."
-              description="Use this page for quick address checks, easy map taps, and the simplest route into calling, booking, or checking access before you set off."
-            />
+            <SectionHeading {...findUsAddressSection} />
             <SiteActionCard
               actions={[
                 {
@@ -66,7 +69,7 @@ export default function FindUsPage() {
                 },
                 { href: mapHref, label: "Open map" },
               ]}
-              supportingText="Use this page as the practical visit guide rather than hunting through the footer for key details."
+              supportingText={findUsActionCardText}
               showDivider
             />
           </div>
@@ -123,18 +126,11 @@ export default function FindUsPage() {
         </div>
       </section>
 
-      <InlineBookingCta
-        title="If you already know you are coming, book before you travel."
-        description="That is the easiest way to turn directions and a map check into an actual table waiting for you on arrival."
-      />
+      <InlineBookingCta {...findUsInlineCtaCopy} />
 
       <section className="bg-[var(--color-surface-low)] py-10 md:py-14 lg:py-16">
         <div className="section-shell space-y-5">
-          <SectionHeading
-            eyebrow="Accessibility and arrival help"
-            title="Call ahead if you want the easiest route into the pub."
-            description="Historic pub buildings can vary, so the easiest option is still to call ahead if access, seating, prams, or the best arrival route matter to your visit."
-          />
+          <SectionHeading {...findUsAccessibilitySection} />
           <div className="grid gap-4 md:grid-cols-3">
             {accessibilityNotes.map((note, index) => (
               <article
@@ -152,12 +148,7 @@ export default function FindUsPage() {
         </div>
       </section>
 
-      <FaqSection
-        eyebrow="Visit FAQs"
-        title="Useful questions before you set off."
-        description="Keep the practical details on one page, then use a call if you need the latest answer before you travel."
-        faqs={visitFaqs}
-      />
+      <FaqSection {...findUsFaqSectionCopy} faqs={visitFaqs} />
     </main>
   )
 }

@@ -19,6 +19,22 @@ import { MapEmbed } from "@/components/site/MapEmbed"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import { SiteActionCard } from "@/components/site/SiteActionCard"
 import {
+  homeAtmosphereTiles,
+  homeDiscoveryLinks,
+  homeEventsFeature,
+  homeExploreLinks,
+  homeFaqSectionCopy,
+  homeGuideFeature,
+  homeGuidesSectionCopy,
+  homeInlineCtaCopy,
+  homeMenuShowcase,
+  homePrimaryVisitPanels,
+  homeProofBarItems,
+  homeSecondaryVisitHeading,
+  homeStoryFeature,
+  homeVisitSectionCopy,
+} from "@/data/copy"
+import {
   arrivalNotes,
   directionsHref,
   eventsHighlights,
@@ -54,160 +70,57 @@ export const metadata: Metadata = {
 
 const menuShowcase = [
   {
-    title: "Momo",
-    description:
-      "The easiest first step into the Nepalese kitchen, and the dish most likely to turn first-time curiosity into a return visit.",
+    ...homeMenuShowcase[0],
     href: "/momo",
     image: momoImage,
-    alt: "Steamed momo dumplings with chutney at The Old School House.",
     item: featuredMenuItems[0],
   },
   {
-    title: "Mixed grill",
-    description:
-      "A strong sharing order when the table wants food with impact and a round of drinks to stay alongside it.",
+    ...homeMenuShowcase[1],
     href: "/nepalese-kitchen",
     image: mixedGrillImage,
-    alt: "A mixed grill platter served at The Old School House.",
     item: featuredMenuItems[1],
   },
   {
-    title: "Pub classics",
-    description:
-      "Familiar pub plates keep the menu easy for mixed tables, then the rest of the kitchen gives the visit a stronger reason to stay memorable.",
+    ...homeMenuShowcase[2],
     href: "/menu",
     image: roastImage,
-    alt: "A comforting pub plate served at The Old School House.",
     item: featuredMenuItems[3],
   },
 ]
 
 const storyFeature: ImageRouteItem = {
   href: "/traditional-pub-with-nepalese-kitchen",
-  eyebrow: "Why choose us",
-  title: "Traditional pub first. Nepalese kitchen as the standout difference.",
-  description:
-    "The mix should feel obvious at a glance, then get stronger once you explore.",
+  ...homeStoryFeature,
   image: "/images/hero/placeholders/pub-kitchen-story.svg",
-  alt: "Placeholder illustration showing the pub-and-kitchen identity of The Old School House.",
 }
 
-const exploreLinks = [
-  {
-    href: "/nepalese-kitchen",
-    title: "Nepalese kitchen",
-    description: "Lead curious diners into the food that sets the pub apart.",
-    icon: ForkKnife,
-  },
-  {
-    href: "/sunday-roast",
-    title: "Sunday roast",
-    description: "Head straight into the pub’s strongest Sunday lunch route.",
-    icon: CalendarDots,
-  },
-  {
-    href: "/beer-garden-stony-stratford",
-    title: "Beer garden",
-    description:
-      "Give outdoor drinks and dining a dedicated route of their own.",
-    icon: MapPin,
-  },
-  {
-    href: "/live-sport",
-    title: "Live sport",
-    description: "Turn sport-led intent into bookings and longer stays.",
-    icon: Television,
-  },
-  {
-    href: "/dog-friendly-pub-stony-stratford",
-    title: "Dog-friendly pub",
-    description:
-      "Answer the dog question quickly and keep the visit easy to plan.",
-    icon: MapPin,
-  },
-  {
-    href: "/family-friendly-pub-stony-stratford",
-    title: "Family-friendly pub",
-    description: "Show why the menu and setting work for mixed-age tables.",
-    icon: UsersThree,
-  },
+const exploreIcons = [
+  ForkKnife,
+  CalendarDots,
+  MapPin,
+  Television,
+  MapPin,
+  UsersThree,
 ]
+const exploreLinks = homeExploreLinks.map((link, i) => ({
+  ...link,
+  icon: exploreIcons[i],
+}))
 
-const primaryVisitPanels: ImageRouteItem[] = [
-  {
-    href: "/nepalese-kitchen",
-    eyebrow: "Food-led visit",
-    title: "Start with the Nepalese kitchen",
-    description:
-      "If the food is the reason for coming, this is the clearest route into the dishes that set the pub apart.",
-    image: "/images/hero/placeholders/pub-kitchen-story.svg",
-    alt: "Placeholder illustration representing the Nepalese kitchen at The Old School House.",
-  },
-  {
-    href: "/beer-garden-stony-stratford",
-    eyebrow: "Outdoor plan",
-    title: "Beer garden and courtyard",
-    description:
-      "Head here first for outdoor drinks, lunch in the open air, and a slower kind of visit.",
-    image: "/images/hero/placeholders/front-garden-courtyard.svg",
-    alt: "Placeholder illustration of the outdoor spaces at The Old School House.",
-  },
-  {
-    href: "/live-sport",
-    eyebrow: "Match-day plan",
-    title: "Live sport and bigger rounds",
-    description:
-      "Use the sport route if the screen, the drinks, and the room matter as much as the food.",
-    image: "/images/hero/placeholders/live-sport-occasions.svg",
-    alt: "Placeholder illustration representing live sport at The Old School House.",
-  },
-]
+const primaryVisitPanels: ImageRouteItem[] = homePrimaryVisitPanels.map(
+  (panel) => ({
+    ...panel,
+    image:
+      panel.href === "/nepalese-kitchen"
+        ? "/images/hero/placeholders/pub-kitchen-story.svg"
+        : panel.href === "/beer-garden-stony-stratford"
+          ? "/images/hero/placeholders/front-garden-courtyard.svg"
+          : "/images/hero/placeholders/live-sport-occasions.svg",
+  })
+)
 
 const secondaryVisitRoutes = [exploreLinks[1], exploreLinks[4], exploreLinks[5]]
-
-const discoveryLinks = [
-  {
-    href: "/where-to-eat-in-stony-stratford",
-    title: "Where to eat in Stony Stratford",
-    description:
-      "A quick local guide if you are weighing up where to eat and want to know what makes this pub a stronger shout.",
-  },
-  {
-    href: "/what-is-nepalese-food",
-    title: "What is Nepalese food?",
-    description:
-      "The easiest read for first-timers who like the pub feel but want the food to feel familiar before they book.",
-  },
-  {
-    href: "/traditional-pub-with-nepalese-kitchen",
-    title: "Why the pub and kitchen work together",
-    description:
-      "A clearer look at why pub classics and Nepalese dishes make sense together when the table wants more than one kind of meal.",
-  },
-]
-
-const homeProofBarItems = [
-  {
-    title: "Food-led pub feel",
-    description:
-      "Traditional pub comfort up front, with enough quality on the plate to make dinner feel like the main event.",
-  },
-  {
-    title: "A menu that sells the visit",
-    description:
-      "Pub classics keep mixed tables easy, while momo, curries, and grills give the place a real point of difference.",
-  },
-  {
-    title: "Better than a one-drink stop",
-    description:
-      "Front garden, courtyard, sport nights, and longer-table dinners all fit naturally here.",
-  },
-  {
-    title: "Fast next step",
-    description:
-      "Book, browse the menu, or call the pub without hunting for the right page.",
-  },
-] as const
 
 interface ImageRouteItem {
   href: string
@@ -218,51 +131,24 @@ interface ImageRouteItem {
   alt: string
 }
 
-const atmosphereTiles: ImageRouteItem[] = [
-  {
-    href: "/about",
-    eyebrow: "Inside the pub",
-    title: "Traditional room, warm feel",
-    description: "See the setting and character that shape the place.",
-    image: "/images/hero/placeholders/traditional-pub.svg",
-    alt: "Placeholder illustration of the traditional pub interior at The Old School House.",
-  },
-  {
-    href: "/beer-garden-stony-stratford",
-    eyebrow: "Outdoor spaces",
-    title: "Front garden and courtyard",
-    description: "Explore the outside seating for drinks and dining.",
-    image: "/images/hero/placeholders/front-garden-courtyard.svg",
-    alt: "Placeholder illustration of the front garden and courtyard at The Old School House.",
-  },
-  {
-    href: "/find-us",
-    eyebrow: "Capacity and flow",
-    title: "Room to settle in",
-    description: "Get the feel for the space before you arrive.",
-    image: "/images/hero/placeholders/covers-inside-outside.svg",
-    alt: "Placeholder illustration showing indoor and outdoor seating at The Old School House.",
-  },
-]
+const atmosphereTiles: ImageRouteItem[] = homeAtmosphereTiles.map((tile) => ({
+  ...tile,
+  image:
+    tile.href === "/about"
+      ? "/images/hero/placeholders/traditional-pub.svg"
+      : tile.href === "/beer-garden-stony-stratford"
+        ? "/images/hero/placeholders/front-garden-courtyard.svg"
+        : "/images/hero/placeholders/covers-inside-outside.svg",
+}))
 
 const eventsFeature: ImageRouteItem = {
-  href: "/events",
-  eyebrow: "Repeat-visit reasons",
-  title: "Sport, quiz nights, and local occasions",
-  description: "The quickest way into what is happening beyond a single meal.",
+  ...homeEventsFeature,
   image: "/images/hero/placeholders/live-sport-occasions.svg",
-  alt: "Placeholder illustration for live sport and local occasions at The Old School House.",
 }
 
 const guideFeature: ImageRouteItem = {
-  href: "/guides",
-  eyebrow: "Need a little more help?",
-  title:
-    "A few short guides make the decision easier when you like the look of the pub but want a little more confidence before booking.",
-  description:
-    "Use these if you are comparing food, atmosphere, or the kind of visit that suits your table best.",
+  ...homeGuideFeature,
   image: "/images/hero/placeholders/guides-overview.svg",
-  alt: "Placeholder illustration representing The Old School House guide pages and decision paths.",
 }
 
 function ImageRoutePanel({
@@ -394,7 +280,7 @@ export default function HomePage() {
                   href="/traditional-pub-with-nepalese-kitchen"
                   className="inline-flex items-center gap-2 text-sm font-semibold text-secondary transition hover:text-secondary/80"
                 >
-                  Why it works
+                  What makes it worth a visit
                   <ArrowRight className="size-4" />
                 </Link>
                 <Link
@@ -689,8 +575,7 @@ export default function HomePage() {
                 <div className="max-w-md">
                   <p className="eyebrow">Other quick routes</p>
                   <h3 className="pt-2 font-heading text-[2rem] leading-[1.04] text-on-background">
-                    Three more ways into the pub, depending on who is coming and
-                    what kind of table it is.
+                    {homeSecondaryVisitHeading}
                   </h3>
                 </div>
                 <div className="grid gap-4 pt-6">
@@ -735,9 +620,7 @@ export default function HomePage() {
             <div className="grid gap-4">
               <div className="surface-panel rounded-[1.85rem] p-5 md:p-6">
                 <SectionHeading
-                  eyebrow="Visit us"
-                  title="Easy to find on London Road, easy to work into a day or evening in Stony Stratford."
-                  description="From a quick lunch stop to a planned evening out, it is a straightforward pub to get to and settle into."
+                  {...homeVisitSectionCopy}
                   className="max-w-none"
                 />
                 <div className="grid gap-3 pt-5 sm:grid-cols-2">
@@ -849,15 +732,12 @@ export default function HomePage() {
             <div className="rounded-[2rem] bg-[var(--color-surface-low)] p-5 shadow-[0px_12px_32px_rgba(27,28,28,0.05)] md:p-7">
               <div className="max-w-lg">
                 <p className="text-xs font-semibold tracking-[0.22em] text-secondary uppercase">
-                  A little more to help you choose
+                  {homeGuidesSectionCopy.eyebrow}
                 </p>
-                <h2 className="pt-2">
-                  If you are nearly there but want one more nudge, these quick
-                  reads answer the questions that usually decide the table.
-                </h2>
+                <h2 className="pt-2">{homeGuidesSectionCopy.title}</h2>
               </div>
               <div className="grid gap-4 pt-6">
-                {discoveryLinks.map((item, index) => (
+                {homeDiscoveryLinks.map((item, index) => (
                   <Link
                     key={item.href}
                     href={item.href}
@@ -884,17 +764,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      <InlineBookingCta
-        title="Ready to plan the visit?"
-        description="Book for dinner, Sunday lunch, or the next night you want the table sorted before you arrive."
-      />
+      <InlineBookingCta {...homeInlineCtaCopy} />
 
-      <FaqSection
-        eyebrow="Before you visit"
-        title="A few quick answers before you book or head over."
-        description="The quick questions guests usually want settled before booking, calling, or making their way over."
-        faqs={localFaqs}
-      />
+      <FaqSection {...homeFaqSectionCopy} faqs={localFaqs} />
 
       <Script
         id="old-school-house-routes"

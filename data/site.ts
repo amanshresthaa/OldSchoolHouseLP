@@ -138,12 +138,12 @@ export const proofPoints: ProofPoint[] = [
   {
     title: "Traditional pub, Stony Stratford first",
     description:
-      "The Old School House leads with the warmth, welcome, and ease people want from a proper local on London Road.",
+      "The Old School House leads with the warmth, welcome, and comfort you want from a proper local on London Road.",
   },
   {
     title: "Nepalese kitchen worth talking about",
     description:
-      "The menu gives people more to discover than the standard pub line-up, especially if they start with the momo or order across the house dishes.",
+      "The menu gives you more to discover than the standard pub line-up, especially if you start with the momo or order across the house dishes.",
   },
   {
     title: "65 covers inside, 60 outside",
@@ -235,12 +235,12 @@ export const aboutReasons: HighlightItem[] = [
   {
     title: "A proper pub setting with real character",
     description:
-      "Exposed brick, wooden floors, and an open-plan bar keep the atmosphere rooted in the kind of pub comfort people recognise straight away.",
+      "Exposed brick, wooden floors, and an open-plan bar keep the atmosphere rooted in the kind of pub comfort you recognise straight away.",
   },
   {
     title: "A concept that feels clear rather than confused",
     description:
-      "The pub stays pub-led, while the Nepalese kitchen gives the food a stronger point of difference once guests have taken their seats.",
+      "The pub stays pub-led, while the Nepalese kitchen gives the food a stronger point of difference once you have taken your seat.",
   },
   {
     title: "Room for everyday visits and bigger plans",
@@ -276,25 +276,25 @@ export const aboutPubFacts: InfoItem[] = [
 export const aboutStoryNotes = [
   "Previously known as The Plough, the building remains a familiar Stony Stratford address on busy London Road.",
   "The Old School House keeps the warmth of a proper pub while giving the menu a stronger identity than a standard High Street local.",
-  "That balance is the point: people can come in for the pub experience first, then stay because the kitchen gives them more to remember.",
+  "That balance is the point: you can come in for the pub experience first, then stay because the kitchen gives you more to remember.",
 ]
 
 export const aboutOperatorNotes = [
-  "Sanjog Gautam, known as San, brings experience from running a cafe, restaurant, and pub before taking on The Old School House.",
-  "His aim is not to replace the classic pub ethos, but to keep that welcome intact and add a Nepalese offer that makes the food side of the business more distinctive.",
-  "That combination is what gives the pub its identity online and at the table.",
+  "Sanjog Gautam, known as San, took on The Old School House after years spent running a cafe, restaurant, and pub, so he arrived with a clear sense of how a room should flow and how a menu should earn repeat visits.",
+  "His philosophy is simple: keep the classic pub welcome intact, make the service generous and relaxed, and let the Nepalese dishes add depth, warmth, and real character rather than novelty for its own sake.",
+  "That is why the food feels specifically his. Momo, curries, grilled dishes, and sharper Nepalese flavours sit on the menu because he wants the pub to offer something memorable while still feeling easy for you to enjoy on an ordinary lunch, dinner, or Sunday visit.",
 ]
 
 export const aboutFamilyNotes = [
-  "The Old School House is part of the Lapen Inns family, a group known for blending pub comfort with Nepalese kitchens.",
-  "Across the wider family, the idea stays consistent: warm hospitality, familiar pub ease, and a food offer that gives people a reason to come back.",
-  "Here in Stony Stratford, the result still feels rooted in the local pub first.",
+  "The Old School House is part of the Lapen Inns family, a group known for pairing pub comfort with Nepalese kitchens in a way that still feels grounded in each local setting.",
+  "Across the wider family, the idea stays consistent: warm hospitality, familiar pub ease, and food that gives you a reason to come back for more than another pint.",
+  "Here in Stony Stratford, that approach still starts with the local pub first and then lets the kitchen add its own identity once you are at the table.",
 ]
 
 export const aboutHeritageNotes = [
-  "Stony Stratford is a market town with deep hospitality roots, shaped by its place on the historic Watling Street route.",
-  "That local sense of arrival and passing trade still matters on London Road today, where a well-positioned pub can serve regulars, visitors, and casual stop-ins alike.",
-  "The Old School House sits right in that rhythm, easy to work into a day in town and memorable enough to make the return visit easier.",
+  "Stony Stratford is a market town with deep hospitality roots, shaped by its place on the historic Watling Street route and its long habit of welcoming visitors passing through as well as locals who live nearby.",
+  "That local sense of arrival still matters on London Road today, where a well-positioned pub can look after regulars, visitors, and casual stop-ins alike.",
+  "The Old School House sits right in that rhythm, visible enough for a spontaneous pint and distinctive enough to stay in mind when you are choosing where to eat next time.",
 ]
 
 export const aboutLocationHighlights: HighlightItem[] = [
@@ -398,7 +398,7 @@ export const localFaqs: LocalFaq[] = [
   {
     question: "Do you serve both pub food and Nepalese dishes?",
     answer:
-      "Yes. The menu is designed so guests can order pub favourites and Nepalese dishes in the same visit.",
+      "Yes. The menu is designed so you can order pub favourites and Nepalese dishes in the same visit.",
   },
   {
     question: "Do you have outside seating?",

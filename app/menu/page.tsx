@@ -8,6 +8,13 @@ import { MenuInteractive } from "@/components/site/MenuInteractive"
 import { PageHero } from "@/components/site/PageHero"
 import { Button } from "@/components/ui/button"
 import {
+  menuDrinksSection,
+  menuInlineCtaCopy,
+  menuSchemaDescription,
+  menuSignoffCopy,
+  menuWhatToExpect,
+} from "@/data/copy"
+import {
   bookOnlineHref,
   drinksHighlights,
   foodHours,
@@ -36,8 +43,7 @@ export default function MenuPage() {
             "@context": "https://schema.org",
             "@type": "Menu",
             name: "The Old School House Menu",
-            description:
-              "Food and drink menu featuring pub favourites and Nepalese dishes.",
+            description: menuSchemaDescription,
             inLanguage: "en-GB",
             hasMenuSection: menuCategories.map((category) => ({
               "@type": "MenuSection",
@@ -76,7 +82,7 @@ export default function MenuPage() {
 
                 <div className="space-y-1 text-sm leading-7 text-on-surface">
                   <p className="eyebrow">What to expect</p>
-                  <p>Nepalese dishes, pub classics, kids meals and desserts</p>
+                  <p>{menuWhatToExpect}</p>
                 </div>
 
                 <div className="space-y-3">
@@ -110,11 +116,12 @@ export default function MenuPage() {
           <div className="surface-frame">
             <div className="grid gap-px bg-[rgba(196,189,181,0.22)] lg:grid-cols-[0.55fr_1.45fr]">
               <div className="surface-pane surface-pane-muted">
-                <p className="eyebrow">From the bar</p>
-                <h2 className="section-title pt-3">Drinks worth asking for</h2>
+                <p className="eyebrow">{menuDrinksSection.eyebrow}</p>
+                <h2 className="section-title pt-3">
+                  {menuDrinksSection.title}
+                </h2>
                 <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
-                  A strong bar sits alongside the food. Ask the team what is
-                  pouring well today.
+                  {menuDrinksSection.description}
                 </p>
               </div>
               <div className="surface-pane bg-[var(--color-surface-lowest)]">
@@ -135,22 +142,13 @@ export default function MenuPage() {
       </section>
 
       {/* D. Inline booking CTA */}
-      <InlineBookingCta
-        title="Ready to try it?"
-        description="Book your table now. You can always come back to the menu for a second look before you arrive."
-      />
+      <InlineBookingCta {...menuInlineCtaCopy} />
 
       {/* E. Good to know */}
       <PageSignoff
-        eyebrow="Good to know"
-        title="A few helpful details before you order."
-        body={
-          <p>
-            If you have an allergy, want to double-check a dish, or need a quick
-            answer before you come in, a call to the pub is always the safest
-            route.
-          </p>
-        }
+        eyebrow={menuSignoffCopy.eyebrow}
+        title={menuSignoffCopy.title}
+        body={<p>{menuSignoffCopy.body}</p>}
         actions={[
           {
             href: sitePhoneHref,
@@ -170,45 +168,39 @@ export default function MenuPage() {
                   {note}
                 </div>
               ))}
-              <div className="night-tile">
-                Beer and cider are available by the half pint, spirits in 25ml
-                or 35ml servings, and still wine in 125ml measures.
-              </div>
-              <div className="night-tile">
-                If you have an allergy or want to double-check a dish, please
-                speak to the team before ordering.
-              </div>
+              <div className="night-tile">{menuSignoffCopy.servingSizes}</div>
+              <div className="night-tile">{menuSignoffCopy.allergyNote}</div>
             </div>
             <div className="grid gap-2 text-sm leading-7">
               <Link
                 href="/sunday-roast"
                 className="text-white/72 transition hover:text-white"
               >
-                Planning Sunday lunch? →
+                {menuSignoffCopy.sundayLink}
               </Link>
               <Link
                 href="/nepalese-kitchen"
                 className="text-white/72 transition hover:text-white"
               >
-                Want the Nepalese side of the menu explained first? →
+                {menuSignoffCopy.kitchenLink}
               </Link>
               <Link
                 href="/group-dining-celebrations"
                 className="text-white/72 transition hover:text-white"
               >
-                Booking for a mixed group or celebration? →
+                {menuSignoffCopy.groupLink}
               </Link>
               <Link
                 href="/takeaway-menu"
                 className="text-white/72 transition hover:text-white"
               >
-                Looking for collection details instead? →
+                {menuSignoffCopy.takeawayLink}
               </Link>
               <Link
                 href="/wakes-menu"
                 className="text-white/72 transition hover:text-white"
               >
-                Planning buffet-style food for a wake? →
+                {menuSignoffCopy.wakesLink}
               </Link>
             </div>
           </>

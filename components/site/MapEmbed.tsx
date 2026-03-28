@@ -4,6 +4,7 @@ import type { ComponentProps } from "react"
 import * as React from "react"
 
 import { Button } from "@/components/ui/button"
+import { mapEmbedCopy } from "@/data/copy"
 import { directionsHref } from "@/data/site"
 import {
   hasOptionalCookieConsent,
@@ -17,7 +18,7 @@ interface MapEmbedProps extends ComponentProps<"div"> {
 }
 
 export function MapEmbed({
-  title = "Map showing The Old School House in Stony Stratford",
+  title = mapEmbedCopy.defaultTitle,
   compact = false,
   ...props
 }: MapEmbedProps) {
@@ -48,14 +49,12 @@ export function MapEmbed({
           className={`flex flex-col justify-between gap-6 p-6 md:p-8 ${blockedHeightClass}`}
         >
           <div className="max-w-xl space-y-3">
-            <p className="eyebrow">Map privacy</p>
+            <p className="eyebrow">{mapEmbedCopy.privacyEyebrow}</p>
             <h3 className="text-[2rem] leading-tight text-on-background">
-              Google Maps stays blocked until you allow optional cookies.
+              {mapEmbedCopy.privacyHeading}
             </h3>
             <p className="text-sm leading-7 text-on-surface md:text-base">
-              That keeps third-party tracking from loading automatically. You
-              can still open directions in a new tab, or allow the embed just
-              for a more visual route preview.
+              {mapEmbedCopy.privacyBody}
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row">
@@ -67,11 +66,11 @@ export function MapEmbed({
                 setHasConsent(true)
               }}
             >
-              Allow map embed
+              {mapEmbedCopy.allowButton}
             </Button>
             <Button asChild size="lg" variant="outline">
               <a href={directionsHref} target="_blank" rel="noreferrer">
-                Get directions instead
+                {mapEmbedCopy.directionsButton}
               </a>
             </Button>
           </div>
@@ -93,16 +92,14 @@ export function MapEmbed({
         referrerPolicy="no-referrer-when-downgrade"
       />
       <div className="flex flex-col items-start gap-3 bg-[var(--color-surface-lowest)] px-5 py-4 text-sm text-on-surface sm:flex-row sm:items-center sm:justify-between">
-        <p>
-          Need turn-by-turn directions? Open the route straight in Google Maps.
-        </p>
+        <p>{mapEmbedCopy.directionsPrompt}</p>
         <a
           href={directionsHref}
           target="_blank"
           rel="noreferrer"
           className="text-secondary underline-offset-4 transition hover:text-secondary/80 hover:underline"
         >
-          Get directions
+          {mapEmbedCopy.directionsLink}
         </a>
       </div>
     </div>

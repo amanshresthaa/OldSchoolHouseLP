@@ -4,6 +4,7 @@ import Link from "next/link"
 import * as React from "react"
 
 import { Button } from "@/components/ui/button"
+import { cookieBannerCopy } from "@/data/copy"
 import {
   readCookieConsent,
   writeCookieConsent,
@@ -33,13 +34,12 @@ export function CookieBanner() {
       <div className="mx-auto max-w-4xl rounded-[1.75rem] border border-[rgba(196,189,181,0.35)] bg-[var(--color-surface-lowest)]/96 p-5 shadow-[0px_18px_48px_rgba(27,28,28,0.12)] backdrop-blur-xl">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl space-y-2">
-            <p className="eyebrow">Cookies</p>
+            <p className="eyebrow">{cookieBannerCopy.eyebrow}</p>
             <p className="font-heading text-[1.6rem] leading-tight text-on-background md:text-[2rem]">
-              We only load optional embeds once you say yes.
+              {cookieBannerCopy.heading}
             </p>
             <p className="text-sm leading-6 text-on-surface md:text-base md:leading-7">
-              Essential cookies keep the site working. Optional consent lets us
-              load third-party content such as Google Maps. Read more in our{" "}
+              {cookieBannerCopy.body}{" "}
               <Link
                 className="text-secondary underline-offset-4 hover:underline"
                 href="/privacy"
@@ -56,14 +56,14 @@ export function CookieBanner() {
               size="lg"
               onClick={() => handleConsent("essential")}
             >
-              Only essential
+              {cookieBannerCopy.essentialButton}
             </Button>
             <Button
               type="button"
               size="lg"
               onClick={() => handleConsent("accepted")}
             >
-              Accept optional
+              {cookieBannerCopy.acceptButton}
             </Button>
           </div>
         </div>

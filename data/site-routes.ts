@@ -310,7 +310,7 @@ export const routeConfigs: RouteConfig[] = [
       canonical: "/traditional-pub-with-nepalese-kitchen",
     },
     hero: {
-      eyebrow: "Why it works",
+      eyebrow: "What makes it special",
       title:
         "A traditional pub first, with a kitchen that gives it more identity.",
       description:

@@ -11,6 +11,14 @@ import { PageHero } from "@/components/site/PageHero"
 import { PageSignoff } from "@/components/site/PageSignoff"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import {
+  aboutBuildingSection,
+  aboutConceptSection,
+  aboutFamilyCardTitle,
+  aboutHeritageCardTitle,
+  aboutOperatorCardTitle,
+  aboutSignoffCopy,
+} from "@/data/copy"
+import {
   aboutFamilyNotes,
   aboutHeritageNotes,
   aboutLocationHighlights,
@@ -40,11 +48,7 @@ export default function AboutPage() {
 
       <section className="bg-background py-10 md:py-14 lg:py-16">
         <div className="section-shell space-y-5">
-          <SectionHeading
-            eyebrow="The concept"
-            title="The Old School House is pub-led by design."
-            description="The point of difference is not a second brand hidden inside the building. It is a traditional pub that earns discovery through the Nepalese kitchen once guests are already interested in the visit."
-          />
+          <SectionHeading {...aboutConceptSection} />
           <div className="grid gap-4 lg:grid-cols-3">
             {aboutReasons.map((reason, index) => (
               <article
@@ -68,11 +72,7 @@ export default function AboutPage() {
       <section className="bg-[var(--color-surface-low)] py-10 md:py-14 lg:py-16">
         <div className="section-shell space-y-5">
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <SectionHeading
-              eyebrow="Building and setting"
-              title="The building does a lot of the trust work before the first order."
-              description="Character matters in hospitality, especially when you want the pub to feel like a place people return to for drinks, dinner, and occasions that sit somewhere between casual and planned."
-            />
+            <SectionHeading {...aboutBuildingSection} />
             <div className="grid gap-2 text-sm leading-7 text-on-surface md:text-right md:text-base">
               {aboutStoryNotes.map((note) => (
                 <p key={note}>{note}</p>
@@ -107,7 +107,7 @@ export default function AboutPage() {
             <article className="rounded-2xl bg-[var(--color-surface-lowest)] px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6">
               <div className="flex items-center gap-3">
                 <ForkKnife className="size-5 text-secondary" />
-                <h2 className="section-title">The operator story</h2>
+                <h2 className="section-title">{aboutOperatorCardTitle}</h2>
               </div>
               <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
                 {aboutOperatorNotes.map((note) => (
@@ -118,7 +118,7 @@ export default function AboutPage() {
             <article className="surface-pane-muted rounded-2xl px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6">
               <div className="flex items-center gap-3">
                 <Buildings className="size-5 text-secondary" />
-                <h2 className="section-title">Part of Lapen Inns</h2>
+                <h2 className="section-title">{aboutFamilyCardTitle}</h2>
               </div>
               <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
                 {aboutFamilyNotes.map((note) => (
@@ -141,7 +141,7 @@ export default function AboutPage() {
             <article className="rounded-2xl bg-[var(--color-surface-lowest)] px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6">
               <div className="flex items-center gap-3">
                 <MapPin className="size-5 text-secondary" />
-                <h2 className="section-title">Why Stony Stratford matters</h2>
+                <h2 className="section-title">{aboutHeritageCardTitle}</h2>
               </div>
               <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
                 {aboutHeritageNotes.map((note) => (
@@ -171,16 +171,10 @@ export default function AboutPage() {
       </section>
 
       <PageSignoff
-        eyebrow="Next step"
-        title="See how the story lands on the menu."
-        description="The concept only works if the menu and visit path make it feel easy to understand."
-        body={
-          <p>
-            If you want to see where the pub comfort and Nepalese kitchen meet
-            most clearly, the menu and Nepalese kitchen pages are the best next
-            stop.
-          </p>
-        }
+        eyebrow={aboutSignoffCopy.eyebrow}
+        title={aboutSignoffCopy.title}
+        description={aboutSignoffCopy.description}
+        body={<p>{aboutSignoffCopy.body}</p>}
         actions={[
           {
             href: "/menu",
@@ -198,13 +192,13 @@ export default function AboutPage() {
               href="/private-hire"
               className="text-white/72 transition hover:text-white"
             >
-              Planning a bigger gathering? →
+              {aboutSignoffCopy.planningLink}
             </Link>
             <a
               href={siteEmailHref}
               className="text-white/72 transition hover:text-white"
             >
-              Need to ask the team something directly? →
+              {aboutSignoffCopy.contactLink}
             </a>
           </div>
         }

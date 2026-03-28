@@ -9,6 +9,7 @@ import {
   Phone,
 } from "@phosphor-icons/react/dist/ssr"
 
+import { footerTagline } from "@/data/copy"
 import logo from "@/images/logos/OldSchoolHouse.png"
 import {
   directionsHref,
@@ -58,9 +59,7 @@ export function SiteFooter() {
               className="h-10 w-auto brightness-0 invert"
               priority
             />
-            <h2 className="max-w-md pt-3 text-white">
-              A traditional pub and Nepalese kitchen for Stony Stratford.
-            </h2>
+            <h2 className="max-w-md pt-3 text-white">{footerTagline}</h2>
           </div>
           <div className="space-y-3 text-sm leading-7 text-white/72">
             <p>{siteAddress}</p>

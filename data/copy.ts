@@ -1,0 +1,28 @@
+// ---------------------------------------------------------------------------
+// data/copy.ts — Barrel file for shared site copy exports
+// ---------------------------------------------------------------------------
+
+export * from "@/data/copy/shared"
+export * from "@/data/copy/home"
+export * from "@/data/copy/about"
+export * from "@/data/copy/events"
+export * from "@/data/copy/private-hire"
+export * from "@/data/copy/find-us"
+export * from "@/data/copy/book"
+export * from "@/data/copy/menu"
+export * from "@/data/copy/guides"
+export * from "@/data/copy/nepalese-kitchen"
+export * from "@/data/copy/beer-garden"
+export * from "@/data/copy/momo"
+export * from "@/data/copy/sunday-roast"
+export * from "@/data/copy/live-sport"
+export * from "@/data/copy/dog-friendly"
+export * from "@/data/copy/family-friendly"
+export * from "@/data/copy/traditional-pub"
+export * from "@/data/copy/where-to-eat"
+export * from "@/data/copy/what-is-nepalese-food"
+export * from "@/data/copy/nepalese-vs-indian"
+export * from "@/data/copy/wakes"
+export * from "@/data/copy/group-dining"
+export * from "@/data/copy/accessibility"
+export * from "@/data/copy/privacy"

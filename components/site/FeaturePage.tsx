@@ -12,7 +12,7 @@ import {
 } from "@/components/site/SiteActionCard"
 import { cn } from "@/lib/utils"
 
-interface FeaturePageSection {
+export interface FeaturePageSection {
   eyebrow: string
   title: string
   description: string
