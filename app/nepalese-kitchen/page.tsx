@@ -33,13 +33,13 @@ export default function NepaleseKitchenPage() {
         body: <p>{nepaleseKitchenSignoffCopy.body}</p>,
         actions: [
           {
-            href: "/momo",
-            label: "Start with momo",
+            href: "/menu",
+            label: "Browse the menu",
             icon: <ForkKnife className="size-4" />,
           },
           {
-            href: "/menu",
-            label: "View full menu",
+            href: "/book",
+            label: "Book a table",
             icon: <ArrowRight className="size-4" />,
           },
         ],

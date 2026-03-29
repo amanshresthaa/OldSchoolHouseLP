@@ -4,6 +4,7 @@ import { featureFlags, siteUrl } from "../../data/site"
 import {
   publishedRouteHrefs,
   routeConfigs,
+  siteFooterCoreLinks,
   siteNav,
 } from "../../data/site-routes"
 
@@ -41,13 +42,31 @@ describe("site config smoke", () => {
     expect(publishedRouteHrefs).toContain("/accessibility")
   })
 
-  it("publishes the intent-led discovery and comparison routes", () => {
-    expect(publishedRouteHrefs).toContain("/guides")
-    expect(publishedRouteHrefs).toContain("/what-is-nepalese-food")
-    expect(publishedRouteHrefs).toContain(
+  it("keeps discovery explainers out of the indexed commercial route set", () => {
+    expect(publishedRouteHrefs).not.toContain("/guides")
+    expect(publishedRouteHrefs).not.toContain("/momo")
+    expect(publishedRouteHrefs).not.toContain("/what-is-nepalese-food")
+    expect(publishedRouteHrefs).not.toContain(
       "/traditional-pub-with-nepalese-kitchen"
     )
-    expect(publishedRouteHrefs).toContain("/where-to-eat-in-stony-stratford")
+    expect(publishedRouteHrefs).not.toContain(
+      "/where-to-eat-in-stony-stratford"
+    )
+  })
+
+  it("keeps the footer core links aligned with the commercial journey pages", () => {
+    expect(siteFooterCoreLinks).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ href: "/menu", label: "Menu" }),
+        expect.objectContaining({ href: "/book", label: "Book" }),
+        expect.objectContaining({ href: "/events", label: "Events" }),
+        expect.objectContaining({
+          href: "/private-hire",
+          label: "Private Hire",
+        }),
+        expect.objectContaining({ href: "/find-us", label: "Find Us" }),
+      ])
+    )
   })
 
   it("keeps christmas out of the current public route set", () => {

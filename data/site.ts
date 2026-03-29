@@ -90,7 +90,7 @@ export const featureFlags: FeatureFlags = {
   dogPolicyConfirmed: true,
   familyPolicyConfirmed: true,
   accessibilityConfirmed: true,
-  eventScheduleConfirmed: false,
+  eventScheduleConfirmed: true,
   sundayRoastConfirmed: true,
 }
 
@@ -136,53 +136,52 @@ export const heroSignals = [
 
 export const proofPoints: ProofPoint[] = [
   {
-    title: "Traditional pub, Stony Stratford first",
+    title: "Traditional pub, central Stony Stratford setting",
     description:
-      "The Old School House leads with the warmth, welcome, and comfort you want from a proper local on London Road.",
+      "A characterful brick pub on London Road with exposed brick, wooden floors, and the easy feel of a proper local.",
   },
   {
-    title: "Nepalese kitchen worth talking about",
+    title: "Nepalese kitchen with dishes people actually remember",
     description:
-      "The menu gives you more to discover than the standard pub line-up, especially if you start with the momo or order across the house dishes.",
+      "Momo, curries, and grills give the menu a stronger identity than a standard pub food offer without changing the pub-first feel.",
   },
   {
     title: "65 covers inside, 60 outside",
     description:
-      "There is room for a quiet lunch, bigger tables, sports nights, and the kind of visit that stretches out longer than planned.",
+      "There is room for quieter lunches, bigger tables, sport-led visits, and the kind of evening that turns into another round.",
   },
   {
-    title: "Front garden and private courtyard",
+    title: "Front garden, private courtyard, easier arrival",
     description:
-      "Outdoor drinks and dining have more than one setting here, from the front seating area to the more tucked-away courtyard.",
+      "Outdoor drinks and dining have more than one setting here, with a small car park helping to make arrival simpler too.",
   },
   {
-    title: "Live sport and local occasions",
+    title: "Live sport, quiz nights, and repeat-visit reasons",
     description:
-      "The pub suits match days, community-led gatherings, quiz nights, and more informal celebrations without losing its pub feel.",
+      "The room suits match days, quiz nights, tasting evenings, and informal celebrations without losing its local pub atmosphere.",
   },
   {
-    title: "Easy to find on busy London Road",
+    title: "Close to the High Street and Horsefair Green",
     description:
-      "A central Stony Stratford position makes the pub a natural pick for walk-ins, planned dinners, and stop-ins during a day in town.",
+      "The location works well for planned dinners, walk-ins, and visits that start elsewhere in town before settling in here.",
   },
 ]
 
 export const homeReasons: HighlightItem[] = [
   {
-    title: "A proper pub, with a stronger food story behind it",
+    title: "A proper pub, with food people mention afterwards",
     description:
-      "Come for the traditional pub feel, then discover momo, curries, and grills that make the menu more memorable.",
+      "The traditional pub feel gets people through the door. The Nepalese dishes are what make the visit feel different once the food arrives.",
   },
   {
-    title:
-      "Welcoming enough for a quick drink, strong enough for a proper meal",
+    title: "Built for a pint, a dinner table, or a longer Sunday stay",
     description:
-      "The room works for lunch, dinner, sport, and the round that turns into a second one.",
+      "The room works for lunch, dinner, live sport, and the kind of visit that starts casually and runs longer than planned.",
   },
   {
-    title: "Better for mixed groups than the average pub stop",
+    title: "Easier for mixed tables than a one-note venue",
     description:
-      "Pub favourites and Nepalese dishes sit together well, which makes the table easier for mixed groups.",
+      "Pub favourites and Nepalese dishes sit together well, which makes family tables, group meals, and mixed tastes simpler to organise.",
   },
 ]
 
@@ -293,25 +292,25 @@ export const aboutFamilyNotes = [
 
 export const aboutHeritageNotes = [
   "Stony Stratford is a market town with deep hospitality roots, shaped by its place on the historic Watling Street route and its long habit of welcoming visitors passing through as well as locals who live nearby.",
-  "That local sense of arrival still matters on London Road today, where a well-positioned pub can look after regulars, visitors, and casual stop-ins alike.",
+  "That local sense of arrival still matters on London Road today, close to the High Street and within easy reach of Horsefair Green, where a well-positioned pub can look after regulars, visitors, and casual stop-ins alike.",
   "The Old School House sits right in that rhythm, visible enough for a spontaneous pint and distinctive enough to stay in mind when you are choosing where to eat next time.",
 ]
 
 export const aboutLocationHighlights: HighlightItem[] = [
   {
-    title: "On the busiest road in Stony Stratford",
+    title: "Visible, central, and easy to choose on London Road",
     description:
-      "London Road keeps the pub visible, convenient, and woven into the daily movement of the town.",
+      "London Road keeps the pub visible in the daily rhythm of Stony Stratford, whether the visit is planned in advance or decided on the way through town.",
   },
   {
-    title: "Easy to pair with a day or evening in town",
+    title: "Easy to pair with the High Street and Horsefair Green",
     description:
-      "The location works for planned dinners, relaxed drinks, and the kind of visit that starts as one stop on the way through town and becomes the main one.",
+      "The location suits relaxed drinks, planned dinners, and town-centre visits that begin near the High Street or Horsefair Green before settling in here.",
   },
   {
-    title: "A pub that fits local weekends well",
+    title: "A better fit for weekends, events, and repeat local visits",
     description:
-      "From town events to casual meetups, the pub is well placed to feel like an easy local choice.",
+      "From Sunday lunch to match days and town events such as Folk on the Green, the pub is well placed to feel like an easy local choice.",
   },
 ]
 
@@ -353,18 +352,19 @@ export const atmosphereMoments: HighlightItem[] = [
 
 export const eventsHighlights: HighlightItem[] = [
   {
-    title: "Live sport that still feels like the pub comes first",
+    title: "Live sport with a proper pub atmosphere around it",
     description:
-      "Sport is part of the offer, but the room still feels like the pub comes first.",
+      "Fixtures matter here, but so do the food, drinks, and the room around them, which keeps the visit feeling like a pub night rather than a screen-only stop.",
   },
   {
-    title: "Quiz nights, tastings, and community-led reasons to return",
-    description: "Built for repeat visits, not just one-off meals.",
+    title: "Quiz nights, tasting evenings, and local reasons to return",
+    description:
+      "The calendar gives regulars and casual visitors more than one reason to come back beyond a single meal.",
   },
   {
-    title: "A venue that handles informal occasions well",
+    title: "A venue that handles bigger tables and informal occasions well",
     description:
-      "Birthdays, work drinks, sports socials, and family gatherings all fit easily here.",
+      "Birthdays, work drinks, sports socials, and family gatherings all fit easily here without losing the relaxed pub feel.",
   },
 ]
 
@@ -452,12 +452,19 @@ export const visitDetails: InfoItem[] = [
   { label: "Phone", value: sitePhone },
   { label: "Email", value: siteEmail },
   { label: "Parking", value: "Small car park on site" },
+  {
+    label: "Nearby",
+    value:
+      "High Street, Horsefair Green, and town-centre events are all easy to work into the visit",
+  },
 ]
 
 export const arrivalNotes = [
-  "You will find us on London Road in the heart of Stony Stratford.",
-  "There is a small car park on site, with more parking around the town centre.",
-  "If you are travelling for a specific service or need the easiest route in, call the pub before you set off.",
+  "You will find us on London Road, a short walk from Stony Stratford High Street.",
+  "The pub works well for lunch, garden drinks, dinner, and meetups that start elsewhere in town or over on Horsefair Green.",
+  "There is a small car park on site, with more parking around the town centre if the pub spaces are full.",
+  "If you are visiting during Folk on the Green or another town event, check the latest booking picture before you travel.",
+  "If your visit depends on a specific service time or the easiest access route, call the pub before setting off.",
 ]
 
 export const accessibilityNotes = [

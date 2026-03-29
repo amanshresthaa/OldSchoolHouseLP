@@ -24,7 +24,11 @@ import {
   sitePhoneHref,
   socialLinks,
 } from "@/data/site"
-import { siteLegalLinks, siteNav, siteResources } from "@/data/site-routes"
+import {
+  siteFooterCoreLinks,
+  siteLegalLinks,
+  siteNav,
+} from "@/data/site-routes"
 
 export function SiteFooter() {
   const socialItems = [
@@ -108,35 +112,28 @@ export function SiteFooter() {
         </div>
         <div className="space-y-4">
           <p className="text-xs font-semibold tracking-[0.22em] text-[var(--color-on-tertiary-container)] uppercase">
-            Explore
+            Main pages
           </p>
           <nav className="grid gap-3 text-sm text-white/72">
-            {siteNav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="transition hover:text-white"
-              >
-                {item.label}
-              </Link>
-            ))}
+            {siteNav
+              .filter((item) => item.href !== "/")
+              .map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="transition hover:text-white"
+                >
+                  {item.label}
+                </Link>
+              ))}
           </nav>
         </div>
         <div className="space-y-4">
           <p className="text-xs font-semibold tracking-[0.22em] text-[var(--color-on-tertiary-container)] uppercase">
-            Menus & info
+            Plan your visit
           </p>
           <nav className="grid gap-3 text-sm text-white/72">
-            {siteResources.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="transition hover:text-white"
-              >
-                {item.label}
-              </Link>
-            ))}
-            {siteLegalLinks.map((item) => (
+            {siteFooterCoreLinks.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -182,8 +179,19 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-white/8 py-4 text-xs tracking-[0.16em] text-white/55 uppercase">
-        <div className="section-shell text-center">
-          {siteName} · London Road · Stony Stratford · Milton Keynes
+        <div className="section-shell flex flex-col items-center justify-center gap-2 text-center sm:flex-row sm:justify-between sm:text-left">
+          <p>{siteName} · London Road · Stony Stratford · Milton Keynes</p>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            {siteLegalLinks.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="transition hover:text-white"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </footer>

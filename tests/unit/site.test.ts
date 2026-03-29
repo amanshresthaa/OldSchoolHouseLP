@@ -8,6 +8,7 @@ import {
 } from "../../data/site"
 import {
   getRouteConfig,
+  siteFooterCoreLinks,
   siteLegalLinks,
   siteNav,
   siteResources,
@@ -25,9 +26,20 @@ describe("site data exports", () => {
 
     expect(siteResources).toEqual(
       expect.arrayContaining([
-        expect.objectContaining({ href: "/guides" }),
         expect.objectContaining({ href: "/menu-information" }),
         expect.objectContaining({ href: "/takeaway-menu" }),
+        expect.objectContaining({ href: "/accessibility" }),
+        expect.objectContaining({ href: "/wakes-life-celebrations" }),
+      ])
+    )
+
+    expect(siteFooterCoreLinks).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ href: "/menu" }),
+        expect.objectContaining({ href: "/book" }),
+        expect.objectContaining({ href: "/events" }),
+        expect.objectContaining({ href: "/private-hire" }),
+        expect.objectContaining({ href: "/find-us" }),
       ])
     )
 

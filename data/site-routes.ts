@@ -227,124 +227,6 @@ export const routeConfigs: RouteConfig[] = [
     stickySecondaryAction: { href: "/menu", label: "Menu" },
   },
   {
-    href: "/momo",
-    label: "Momo",
-    sitemap: true,
-    published: true,
-    meta: {
-      title: "Momo in Stony Stratford",
-      description:
-        "Try momo at The Old School House in Stony Stratford and discover one of the signature dishes from our Nepalese kitchen.",
-      canonical: "/momo",
-    },
-    hero: {
-      eyebrow: "Momo",
-      title: "Start with the momo.",
-      description:
-        "If you are new to the Nepalese side of the menu, momo is the easiest first order and one of the clearest reasons people remember the food here.",
-      primaryAction: { href: bookOnlineHref, label: "Book a table" },
-      secondaryAction: { href: "/menu", label: "See the menu" },
-    },
-    schema: { faq: true },
-    stickySecondaryAction: { href: "/menu", label: "Menu" },
-  },
-  {
-    href: "/nepalese-vs-indian-food",
-    label: "Nepalese vs Indian Food",
-    sitemap: true,
-    published: true,
-    meta: {
-      title: "Nepalese vs Indian Food",
-      description:
-        "A simple guide to the difference between Nepalese and Indian food, with dishes you can try at The Old School House.",
-      canonical: "/nepalese-vs-indian-food",
-    },
-    hero: {
-      eyebrow: "Food guide",
-      title: "Nepalese vs Indian food, explained simply.",
-      description:
-        "If you are curious but not sure where to start, this is the easiest route into the Nepalese side of the menu without losing sight of the pub setting around it.",
-      primaryAction: {
-        href: "/nepalese-kitchen",
-        label: "Explore the kitchen",
-      },
-      secondaryAction: { href: "/menu", label: "See the menu" },
-    },
-    schema: { faq: true },
-    stickySecondaryAction: { href: "/menu", label: "Menu" },
-  },
-  {
-    href: "/what-is-nepalese-food",
-    label: "What is Nepalese Food",
-    sitemap: true,
-    published: true,
-    meta: {
-      title: "What is Nepalese Food",
-      description:
-        "A simple guide to Nepalese food at The Old School House, from momo and grilled dishes to the pub-friendly way the menu is built.",
-      canonical: "/what-is-nepalese-food",
-    },
-    hero: {
-      eyebrow: "Food guide",
-      title: "What is Nepalese food, and where do you begin?",
-      description:
-        "Think warming dishes, generous plates, momo to start with, and a menu that feels easy to try in the comfort of a proper pub.",
-      primaryAction: {
-        href: "/nepalese-kitchen",
-        label: "Explore the kitchen",
-      },
-      secondaryAction: { href: "/menu", label: "See the menu" },
-    },
-    schema: { faq: true },
-    stickySecondaryAction: { href: "/menu", label: "Menu" },
-  },
-  {
-    href: "/traditional-pub-with-nepalese-kitchen",
-    label: "Traditional Pub with Nepalese Kitchen",
-    sitemap: true,
-    published: true,
-    meta: {
-      title: "Traditional Pub with a Nepalese Kitchen",
-      description:
-        "See why The Old School House works as a traditional pub first, then becomes more memorable through its Nepalese kitchen.",
-      canonical: "/traditional-pub-with-nepalese-kitchen",
-    },
-    hero: {
-      eyebrow: "What makes it special",
-      title:
-        "A traditional pub first, with a kitchen that gives it more identity.",
-      description:
-        "The Old School House keeps the pub experience easy to recognise, then adds a Nepalese kitchen that makes the food feel more distinctive without making the visit harder to understand.",
-      primaryAction: { href: "/menu", label: "View menu" },
-      secondaryAction: { href: bookOnlineHref, label: "Book a table" },
-    },
-    schema: { faq: true },
-    stickySecondaryAction: { href: bookOnlineHref, label: "Book" },
-  },
-  {
-    href: "/where-to-eat-in-stony-stratford",
-    label: "Where to Eat in Stony Stratford",
-    sitemap: true,
-    published: true,
-    meta: {
-      title: "Where to Eat in Stony Stratford",
-      description:
-        "Looking for where to eat in Stony Stratford? See why The Old School House works for pub meals, Sunday lunch, groups, outdoor drinks, and Nepalese dishes.",
-      canonical: "/where-to-eat-in-stony-stratford",
-    },
-    hero: {
-      eyebrow: "Local guide",
-      title:
-        "Where to eat in Stony Stratford when you want more than one good reason to choose.",
-      description:
-        "The Old School House works for a proper pub meal, a Sunday plan, a group table, or a visit built around trying something different from the Nepalese kitchen.",
-      primaryAction: { href: "/menu", label: "Browse the menu" },
-      secondaryAction: { href: bookOnlineHref, label: "Book a table" },
-    },
-    schema: { faq: true },
-    stickySecondaryAction: { href: bookOnlineHref, label: "Book" },
-  },
-  {
     href: "/live-sport",
     label: "Live Sport",
     sitemap: true,
@@ -409,29 +291,6 @@ export const routeConfigs: RouteConfig[] = [
     },
     schema: { faq: true },
     stickySecondaryAction: { href: "/private-hire", label: "Enquire" },
-  },
-  {
-    href: "/guides",
-    label: "Guides",
-    resource: true,
-    sitemap: true,
-    published: true,
-    meta: {
-      title: "Pub Guides and Food Guides",
-      description:
-        "Browse local guides, food explainers, and comparison pages from The Old School House to help you choose where and what to book.",
-      canonical: "/guides",
-    },
-    hero: {
-      eyebrow: "Guides",
-      title: "A simple place to start if you are still deciding.",
-      description:
-        "These guides are here to help with the in-between stage: choosing the pub, understanding the food, and finding the page that fits your visit best.",
-      primaryAction: { href: "/menu", label: "Browse the menu" },
-      secondaryAction: { href: bookOnlineHref, label: "Book a table" },
-    },
-    schema: { faq: true },
-    stickySecondaryAction: { href: bookOnlineHref, label: "Book" },
   },
   {
     href: "/wakes-life-celebrations",
@@ -637,15 +496,34 @@ export const siteNav: NavItem[] = routeConfigs
     label: route.navLabel ?? route.label,
   }))
 
+const footerCoreRouteHrefs = new Set([
+  "/menu",
+  "/book",
+  "/events",
+  "/private-hire",
+  "/find-us",
+])
+
+export const siteFooterCoreLinks: NavItem[] = routeConfigs
+  .filter((route) => route.published && footerCoreRouteHrefs.has(route.href))
+  .map((route) => ({
+    href: route.href,
+    label: route.navLabel ?? route.label,
+  }))
+
+const supportRouteHrefs = new Set([
+  "/menu-information",
+  "/takeaway-menu",
+  "/accessibility",
+  "/wakes-life-celebrations",
+])
+
 export const siteResources: NavItem[] = routeConfigs
-  .filter((route) => route.resource && route.published)
+  .filter((route) => route.published && supportRouteHrefs.has(route.href))
   .map((route) => ({
     href: route.href,
     label: route.label,
   }))
-  .concat([
-    { href: "/wakes-life-celebrations", label: "Wakes & life celebrations" },
-  ])
 
 export const siteLegalLinks: NavItem[] = [
   { href: "/privacy", label: "Privacy" },

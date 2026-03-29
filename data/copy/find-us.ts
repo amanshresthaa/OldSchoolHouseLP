@@ -9,7 +9,7 @@ export const findUsAddressSection = {
   title:
     "The Old School House sits on London Road in the heart of Stony Stratford.",
   description:
-    "Use this page for quick address checks, easy map taps, and the simplest route into calling, booking, or checking access before you set off.",
+    "Use this page for directions, parking, booking, and arrival checks before you set off from the High Street, Horsefair Green, or elsewhere in town.",
 }
 
 export const findUsActionCardText =

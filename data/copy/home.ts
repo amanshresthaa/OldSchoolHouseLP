@@ -33,116 +33,26 @@ export const homeStoryFeature = {
   alt: "Placeholder illustration showing the pub-and-kitchen identity of The Old School House.",
 }
 
-export const homeExploreLinks = [
-  {
-    href: "/nepalese-kitchen",
-    title: "Nepalese kitchen",
-    description:
-      "See the dishes that make this pub stand out once you sit down to eat.",
-  },
-  {
-    href: "/sunday-roast",
-    title: "Sunday roast",
-    description:
-      "See what makes Sunday lunch here worth booking before the best tables go.",
-  },
-  {
-    href: "/beer-garden-stony-stratford",
-    title: "Beer garden",
-    description:
-      "Picture where you would sit for a pint, lunch, or a slower afternoon in the sun.",
-  },
-  {
-    href: "/live-sport",
-    title: "Live sport",
-    description:
-      "Check whether this is the right pub for the fixture, the round before kick-off, and the stay after full time.",
-  },
-  {
-    href: "/dog-friendly-pub-stony-stratford",
-    title: "Dog-friendly pub",
-    description:
-      "Work out whether the dog can come along and where you will be most comfortable once you arrive.",
-  },
-  {
-    href: "/family-friendly-pub-stony-stratford",
-    title: "Family-friendly pub",
-    description:
-      "See how the menu, the space, and Sunday lunch all work for a family table.",
-  },
-]
-
-export const homePrimaryVisitPanels = [
-  {
-    href: "/nepalese-kitchen",
-    eyebrow: "Food-led visit",
-    title: "Start with the Nepalese kitchen",
-    description:
-      "If the food is the reason for coming, this is the clearest route into the dishes that set the pub apart.",
-    alt: "Placeholder illustration representing the Nepalese kitchen at The Old School House.",
-  },
-  {
-    href: "/beer-garden-stony-stratford",
-    eyebrow: "Outdoor plan",
-    title: "Beer garden and courtyard",
-    description:
-      "Head here first for outdoor drinks, lunch in the open air, and a slower kind of visit.",
-    alt: "Placeholder illustration of the outdoor spaces at The Old School House.",
-  },
-  {
-    href: "/live-sport",
-    eyebrow: "Match-day plan",
-    title: "Live sport and bigger rounds",
-    description:
-      "Use the sport route if the screen, the drinks, and the room matter as much as the food.",
-    alt: "Placeholder illustration representing live sport at The Old School House.",
-  },
-]
-
-export const homeSecondaryVisitHeading =
-  "Three more ways into the pub, depending on who is coming and what kind of table it is."
-
-export const homeDiscoveryLinks = [
-  {
-    href: "/where-to-eat-in-stony-stratford",
-    title: "Where to eat in Stony Stratford",
-    description:
-      "A quick local guide if you are weighing up where to eat and want to know what makes this pub a stronger shout.",
-  },
-  {
-    href: "/what-is-nepalese-food",
-    title: "What is Nepalese food?",
-    description:
-      "A simple read for first-timers who like the pub setting but want the food to sound familiar before they book.",
-  },
-  {
-    href: "/traditional-pub-with-nepalese-kitchen",
-    title: "Why the pub and kitchen work together",
-    description:
-      "A clearer look at why pub classics and Nepalese dishes make sense together when the table wants more than one kind of meal.",
-  },
-]
-
 export const homeProofBarItems = [
   {
-    title: "Food-led pub feel",
+    title: "London Road, close to the High Street",
     description:
-      "Traditional pub comfort up front, with enough quality on the plate to make dinner feel like the main event.",
+      "Easy for a planned dinner, a pub stop after time in town, or a quick decision once you are already in central Stony Stratford.",
   },
   {
-    title: "A menu that sells the visit",
+    title: "65 covers inside, 60 outside",
     description:
-      "Pub classics keep mixed tables easy, while momo, curries, and grills give the place a real point of difference.",
+      "There is enough room here for quieter meals, bigger tables, and visits that shift from one round into dinner.",
   },
   {
-    title: "Better than a one-drink stop",
+    title: "Front garden, courtyard, and easier arrival",
     description:
-      "Front garden, courtyard, sport nights, and longer-table dinners all fit naturally here.",
+      "Outdoor seating and a small car park make the pub easier to use for garden drinks, family visits, and longer stays.",
   },
   {
-    title: "Fast next step",
+    title: "Menu, booking, and directions in one move",
     description:
-      "Book, browse the menu, or call the pub without hunting for the right page.",
+      "The next step stays simple whether you want to browse first, book ahead, or get here quickly.",
   },
 ] as const
 
@@ -178,28 +88,11 @@ export const homeEventsFeature = {
   alt: "Placeholder illustration for live sport and local occasions at The Old School House.",
 }
 
-export const homeGuideFeature = {
-  href: "/guides",
-  eyebrow: "Need a little more help?",
-  title:
-    "A few short guides make the decision easier when you like the look of the pub but want a little more confidence before booking.",
-  description:
-    "Use these if you are comparing food, atmosphere, or the kind of visit that suits your table best.",
-  alt: "Placeholder illustration representing The Old School House guide pages and decision paths.",
-}
-
-export const homeGuidesSectionCopy = {
-  eyebrow: "A little more to help you choose",
-  title:
-    "If you are nearly there but want one more nudge, these quick reads answer the questions that usually decide the table.",
-}
-
 export const homeVisitSectionCopy = {
   eyebrow: "Visit us",
-  title:
-    "Easy to find on London Road, easy to work into a day or evening in Stony Stratford.",
+  title: "Easy to work into a day or evening in central Stony Stratford.",
   description:
-    "From a quick lunch stop to a planned evening out, it is a straightforward pub to get to and settle into.",
+    "Close to the High Street and Horsefair Green, with room to settle in for lunch, dinner, garden drinks, or a town-centre meet-up.",
 }
 
 export const homeInlineCtaCopy = {
