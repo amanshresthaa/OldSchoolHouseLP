@@ -1,5 +1,44 @@
-import { permanentRedirect } from "next/navigation"
+import type { Metadata } from "next"
+import { ArrowRight, ForkKnife } from "@phosphor-icons/react/dist/ssr"
 
-export default function WhatIsNepaleseFoodRedirectPage() {
-  permanentRedirect("/nepalese-kitchen")
+import { FeaturePage } from "@/components/site/FeaturePage"
+import {
+  whatIsNepaleseFoodFaqSection,
+  whatIsNepaleseFoodInlineCtaCopy,
+  whatIsNepaleseFoodSections,
+  whatIsNepaleseFoodSignoffCopy,
+} from "@/data/copy/what-is-nepalese-food"
+import { getRouteConfig } from "@/data/site-routes"
+import { buildPageMetadata } from "@/lib/metadata"
+
+const route = getRouteConfig("/what-is-nepalese-food")
+
+export const metadata: Metadata = buildPageMetadata(route!.meta)
+
+export default function WhatIsNepaleseFoodPage() {
+  return (
+    <FeaturePage
+      hero={route!.hero!}
+      sections={whatIsNepaleseFoodSections}
+      faqSection={whatIsNepaleseFoodFaqSection}
+      inlineCta={whatIsNepaleseFoodInlineCtaCopy}
+      signoff={{
+        eyebrow: whatIsNepaleseFoodSignoffCopy.eyebrow,
+        title: whatIsNepaleseFoodSignoffCopy.title,
+        body: <p>{whatIsNepaleseFoodSignoffCopy.body}</p>,
+        actions: [
+          {
+            href: "/nepalese-kitchen",
+            label: "See the kitchen",
+            icon: <ForkKnife className="size-4" />,
+          },
+          {
+            href: "/menu",
+            label: "Browse the menu",
+            icon: <ArrowRight className="size-4" />,
+          },
+        ],
+      }}
+    />
+  )
 }

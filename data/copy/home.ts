@@ -30,7 +30,7 @@ export const homeStoryFeature = {
   title: "Traditional pub first. Nepalese kitchen as the standout difference.",
   description:
     "You can settle into a proper pub straight away, then discover the Nepalese kitchen once the first drinks are on the table.",
-  alt: "Placeholder illustration showing the pub-and-kitchen identity of The Old School House.",
+  alt: "Pints being poured at the bar inside The Old School House.",
 }
 
 export const homeProofBarItems = [
@@ -62,21 +62,21 @@ export const homeAtmosphereTiles = [
     eyebrow: "Inside the pub",
     title: "Traditional room, warm feel",
     description: "See the setting and character that shape the place.",
-    alt: "Placeholder illustration of the traditional pub interior at The Old School House.",
+    alt: "Interior seating area inside The Old School House pub.",
   },
   {
     href: "/beer-garden-stony-stratford",
     eyebrow: "Outdoor spaces",
     title: "Front garden and courtyard",
     description: "Explore the outside seating for drinks and dining.",
-    alt: "Placeholder illustration of the front garden and courtyard at The Old School House.",
+    alt: "Exterior of The Old School House pub on London Road in Stony Stratford.",
   },
   {
     href: "/find-us",
     eyebrow: "Capacity and flow",
     title: "Room to settle in",
     description: "Get the feel for the space before you arrive.",
-    alt: "Placeholder illustration showing indoor and outdoor seating at The Old School House.",
+    alt: "Another view of the seating area inside The Old School House.",
   },
 ]
 
@@ -85,7 +85,7 @@ export const homeEventsFeature = {
   eyebrow: "Repeat-visit reasons",
   title: "Sport, quiz nights, and local occasions",
   description: "The quickest way into what is happening beyond a single meal.",
-  alt: "Placeholder illustration for live sport and local occasions at The Old School House.",
+  alt: "Large-screen sport setup inside The Old School House pub.",
 }
 
 export const homeVisitSectionCopy = {

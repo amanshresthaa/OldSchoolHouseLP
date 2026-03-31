@@ -8,6 +8,11 @@ import { ArrowRight } from "@phosphor-icons/react/dist/ssr"
 import { OpenStatusBadge } from "@/components/site/OpenStatusBadge"
 import { proofPoints, siteName, type ProofPoint } from "@/data/site"
 import momoImage from "@/images/food/chicken-momo-and-veg-momo.png"
+import beerOnTapImage from "@/images/indoor/old-school-house-pub-stony-stratford-mk-beer-on-tap.jpeg"
+import indoorSeatingImage from "@/images/indoor/old-school-house-pub-stony-stratford-mk-indoor-seating-area-1.jpeg"
+import sportsTvImage from "@/images/indoor/old-school-house-pub-stony-stratford-mk-sports-tv-big-screen.jpeg"
+import customerParkingImage from "@/images/outdoor/old-school-house-pub-stony-stratford-mk-customer-parking.jpeg"
+import pubExteriorImage from "@/images/outdoor/old-school-house-pub-stony-stratford-mk-pub-building-exterior.jpeg"
 
 interface HeroSlide extends ProofPoint {
   image: string | StaticImageData
@@ -19,8 +24,8 @@ interface HeroSlide extends ProofPoint {
 const heroSlides: HeroSlide[] = [
   {
     ...proofPoints[0],
-    image: "/images/hero/placeholders/traditional-pub.svg",
-    alt: "Illustrated placeholder showing a traditional pub frontage for The Old School House.",
+    image: pubExteriorImage,
+    alt: "Exterior of The Old School House pub on London Road in Stony Stratford.",
     eyebrow: "Traditional pub in Stony Stratford",
     signals: [
       "Warm local welcome",
@@ -41,15 +46,15 @@ const heroSlides: HeroSlide[] = [
   },
   {
     ...proofPoints[2],
-    image: "/images/hero/placeholders/covers-inside-outside.svg",
-    alt: "Illustrated placeholder representing indoor and outdoor capacity at The Old School House.",
+    image: indoorSeatingImage,
+    alt: "Indoor seating area at The Old School House showing the room layout and pub atmosphere.",
     eyebrow: "Traditional pub in Stony Stratford",
     signals: ["65 covers inside", "60 outside", "Lunches to group tables"],
   },
   {
     ...proofPoints[3],
-    image: "/images/hero/placeholders/front-garden-courtyard.svg",
-    alt: "Illustrated placeholder of the front garden and courtyard at The Old School House.",
+    image: customerParkingImage,
+    alt: "Customer parking area at The Old School House in Stony Stratford.",
     eyebrow: "Traditional pub in Stony Stratford",
     signals: [
       "Front garden seating",
@@ -59,21 +64,41 @@ const heroSlides: HeroSlide[] = [
   },
   {
     ...proofPoints[4],
-    image: "/images/hero/placeholders/live-sport-occasions.svg",
-    alt: "Illustrated placeholder highlighting live sport and local occasions at The Old School House.",
+    image: sportsTvImage,
+    alt: "Large-screen sports area inside The Old School House pub.",
     eyebrow: "Traditional pub in Stony Stratford",
     signals: ["Live sport", "Quiz nights", "Informal celebrations"],
   },
   {
     ...proofPoints[5],
-    image: "/images/hero/placeholders/london-road-location.svg",
-    alt: "Illustrated placeholder showing The Old School House position on London Road in Stony Stratford.",
+    image: beerOnTapImage,
+    alt: "Beer being poured at the bar inside The Old School House pub.",
     eyebrow: "Traditional pub in Stony Stratford",
     signals: ["Central Stony Stratford", "Easy for walk-ins", "Simple to find"],
   },
 ]
 
 const AUTOPLAY_INTERVAL_MS = 6200
+
+function getHeroTitleClass(title: string) {
+  if (title.length > 42) {
+    return "max-w-[18ch] text-[clamp(1.85rem,5vw,4rem)] leading-[1.02] sm:max-w-[19ch] lg:text-[clamp(2.4rem,4.6vw,4.15rem)]"
+  }
+
+  if (title.length > 32) {
+    return "max-w-[17ch] text-[clamp(2rem,6vw,4.35rem)] leading-[1] sm:max-w-[18ch] lg:text-[clamp(2.7rem,4.9vw,4.45rem)]"
+  }
+
+  return "max-w-[16ch] text-[clamp(2.2rem,6.8vw,4.8rem)] leading-[0.98]"
+}
+
+function getHeroDescriptionClass(description: string) {
+  if (description.length > 135) {
+    return "max-w-2xl text-sm leading-6 text-white/78 sm:text-[0.95rem] sm:leading-7 md:text-base md:leading-7"
+  }
+
+  return "max-w-2xl text-sm leading-6 text-white/78 sm:text-base sm:leading-7 md:text-lg md:leading-8"
+}
 
 export function HomeHeroSlideshow() {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -154,18 +179,16 @@ export function HomeHeroSlideshow() {
               priority={index === 0}
               className={`object-cover object-center transition-transform duration-[1800ms] ease-out ${
                 index === currentIndex
-                  ? "scale-100 brightness-[0.56] saturate-[0.88]"
-                  : "scale-[1.04] brightness-[0.5] saturate-[0.82]"
+                  ? "scale-100 brightness-[0.86] saturate-[1.02]"
+                  : "scale-[1.04] brightness-[0.78] saturate-[0.96]"
               }`}
               sizes="100vw"
             />
           </div>
         ))}
       </div>
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,10,7,0.48)_0%,rgba(4,14,9,0.7)_26%,rgba(5,17,11,0.9)_58%,rgba(6,20,13,0.985)_100%)]" />
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,13,8,0.66)_0%,rgba(4,13,8,0.48)_38%,rgba(4,13,8,0.6)_100%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_40%_at_75%_5%,_rgba(212,160,23,0.14),_transparent_60%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_60%_at_0%_100%,_rgba(175,43,62,0.1),_transparent_50%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,13,8,0.12)_0%,rgba(4,13,8,0.06)_24%,rgba(4,13,8,0.18)_62%,rgba(4,13,8,0.46)_100%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,13,8,0.32)_0%,rgba(4,13,8,0.12)_34%,rgba(4,13,8,0.04)_62%,rgba(4,13,8,0.12)_100%)]" />
       <div className="absolute top-0 right-0 left-0 h-px bg-gradient-to-r from-transparent via-[var(--color-on-tertiary-container)]/30 to-transparent" />
 
       <div className="relative h-full">
@@ -181,7 +204,7 @@ export function HomeHeroSlideshow() {
           </div>
 
           <div className="grid h-[23.5rem] flex-1 content-end gap-4 py-5 sm:h-[28rem] sm:gap-6 sm:py-8 md:h-[30rem] md:py-10 lg:h-[21rem] lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-14 lg:py-12 xl:h-[22rem]">
-            <div className="space-y-4 sm:space-y-5">
+            <div className="flex min-h-[19.5rem] max-w-3xl flex-col rounded-[1.9rem] border border-white/12 bg-[rgba(6,18,11,0.34)] px-5 py-5 shadow-[0px_18px_48px_rgba(6,18,11,0.18)] backdrop-blur-[5px] sm:min-h-[21rem] sm:px-6 sm:py-6 md:min-h-[22.5rem] md:px-7 md:py-7">
               <div className="eyebrow-row">
                 <span
                   aria-hidden="true"
@@ -191,17 +214,23 @@ export function HomeHeroSlideshow() {
                   {activeSlide.eyebrow}
                 </p>
               </div>
-              <h1 className="max-w-[14ch] text-[clamp(2rem,8vw,4.8rem)] leading-[0.98] font-normal text-white sm:max-w-[16ch]">
+              <h1
+                className={`pt-4 font-normal text-white sm:pt-5 ${getHeroTitleClass(
+                  activeSlide.title
+                )}`}
+              >
                 {activeSlide.title}
               </h1>
-              <p className="max-w-2xl text-sm leading-6 text-white/78 sm:text-base sm:leading-7 md:text-lg md:leading-8">
+              <p
+                className={`pt-3 ${getHeroDescriptionClass(activeSlide.description)}`}
+              >
                 {activeSlide.description}
               </p>
-              <p className="max-w-md text-[0.82rem] leading-5 text-white/68 sm:hidden">
+              <p className="max-w-md pt-3 text-[0.82rem] leading-5 text-white/68 sm:hidden">
                 London Road, Stony Stratford. Book quickly, browse the menu, or
                 call if today&apos;s plan needs a quick answer.
               </p>
-              <div className="flex flex-wrap gap-2 text-[0.68rem] font-semibold tracking-[0.18em] text-white/78 uppercase sm:gap-3 sm:text-xs">
+              <div className="mt-auto flex min-h-[3.75rem] flex-wrap content-start gap-2 pt-4 text-[0.68rem] font-semibold tracking-[0.18em] text-white/78 uppercase sm:min-h-[4.5rem] sm:gap-3 sm:pt-5 sm:text-xs">
                 {activeSlide.signals.map((signal, index) => (
                   <span
                     key={signal}
@@ -213,7 +242,7 @@ export function HomeHeroSlideshow() {
                   </span>
                 ))}
               </div>
-              <div className="flex items-center gap-2 pt-1 sm:pt-2">
+              <div className="flex items-center gap-2 pt-4 sm:pt-5">
                 {heroSlides.map((slide, index) => (
                   <button
                     key={slide.title}
@@ -231,7 +260,7 @@ export function HomeHeroSlideshow() {
               </div>
             </div>
 
-            <div className="space-y-3 sm:space-y-4">
+            <div className="space-y-3 rounded-[1.7rem] border border-white/10 bg-[rgba(6,18,11,0.24)] p-4 shadow-[0px_14px_36px_rgba(6,18,11,0.14)] backdrop-blur-[4px] sm:space-y-4 sm:p-5">
               <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
                 <Link
                   href="/book"

@@ -10,7 +10,7 @@ import {
 } from "@phosphor-icons/react/dist/ssr"
 
 import { footerTagline } from "@/data/copy"
-import logo from "@/images/logos/OldSchoolHouse.png"
+import logo from "@/images/logos/old-school-house-pub-stony-stratford-mk-logo.png"
 import {
   directionsHref,
   mapHref,

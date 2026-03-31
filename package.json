@@ -31,7 +31,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,mjs,cjs}": [
-      "eslint --max-warnings=0 --fix",
+      "eslint --max-warnings=0 --no-warn-ignored --fix",
       "prettier --write"
     ],
     "*": "pnpm readiness:large-files",

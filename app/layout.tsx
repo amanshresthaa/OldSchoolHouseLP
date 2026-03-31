@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import { headers } from "next/headers"
 import localFont from "next/font/local"
 
 import "./globals.css"
@@ -9,7 +8,6 @@ import { SiteHeader } from "@/components/site/SiteHeader"
 import { StickyBookingBar } from "@/components/site/StickyBookingBar"
 import { ThemeProvider } from "@/components/theme-provider"
 import { siteDescription, siteName, siteOgImage, siteUrl } from "@/data/site"
-import { TRACE_ID_HEADER } from "@/lib/tracing"
 import { cn } from "@/lib/utils"
 
 const newsreader = localFont({
@@ -97,19 +95,15 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const requestHeaders = await headers()
-  const traceId = requestHeaders.get(TRACE_ID_HEADER) ?? undefined
-
   return (
     <html
       lang="en"
       suppressHydrationWarning
-      data-trace-id={traceId}
       className={cn("antialiased", newsreader.variable, manrope.variable)}
     >
       <body className="min-h-svh">

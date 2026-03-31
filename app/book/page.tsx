@@ -33,16 +33,11 @@ import {
   sitePhoneHref,
 } from "@/data/site"
 import { getRouteConfig } from "@/data/site-routes"
+import { buildPageMetadata } from "@/lib/metadata"
 
 const route = getRouteConfig("/book")
 
-export const metadata: Metadata = {
-  title: route?.meta.title,
-  description: route?.meta.description,
-  alternates: {
-    canonical: route?.meta.canonical,
-  },
-}
+export const metadata: Metadata = buildPageMetadata(route!.meta)
 
 const bookingFaqs = localFaqs.filter((faq) =>
   [
@@ -62,9 +57,9 @@ export default function BookPage() {
           <div className="grid gap-4 xl:grid-cols-[1.1fr_0.9fr]">
             <div className="surface-panel">
               <p className="eyebrow">{bookOnlineSectionCopy.eyebrow}</p>
-              <h1 className="section-title pt-3">
+              <h2 className="section-title pt-3">
                 {bookOnlineSectionCopy.title}
-              </h1>
+              </h2>
               <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
                 {bookOnlineSectionCopy.description}
               </p>

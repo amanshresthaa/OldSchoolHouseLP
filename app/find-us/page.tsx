@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Image from "next/image"
 import {
   Clock,
   EnvelopeSimple,
@@ -33,16 +34,13 @@ import {
   sitePhoneHref,
 } from "@/data/site"
 import { getRouteConfig } from "@/data/site-routes"
+import { buildPageMetadata } from "@/lib/metadata"
+import customerParkingImage from "@/images/outdoor/old-school-house-pub-stony-stratford-mk-customer-parking.jpeg"
+import pubExteriorImage from "@/images/outdoor/old-school-house-pub-stony-stratford-mk-pub-building-exterior.jpeg"
 
 const route = getRouteConfig("/find-us")
 
-export const metadata: Metadata = {
-  title: route?.meta.title,
-  description: route?.meta.description,
-  alternates: {
-    canonical: route?.meta.canonical,
-  },
-}
+export const metadata: Metadata = buildPageMetadata(route!.meta)
 
 const visitFaqs = localFaqs.filter((faq) =>
   [
@@ -122,6 +120,52 @@ export default function FindUsPage() {
               </div>
             </div>
             <MapEmbed />
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[var(--color-surface-low)] py-10 md:py-14 lg:py-16">
+        <div className="section-shell space-y-5">
+          <SectionHeading
+            eyebrow="On arrival"
+            title="A clearer picture of the frontage and approach before you set off."
+            description="Use these quick views to recognise the building and get a feel for the easier arrival setup."
+          />
+          <div className="grid gap-4 md:grid-cols-2">
+            <article className="overflow-hidden rounded-[1.9rem] bg-[var(--color-surface-lowest)] shadow-[0px_18px_48px_rgba(27,28,28,0.06)]">
+              <Image
+                src={pubExteriorImage}
+                alt="Exterior of The Old School House pub on London Road in Stony Stratford."
+                className="h-72 w-full object-cover md:h-80"
+                sizes="(min-width: 768px) 50vw, 100vw"
+              />
+              <div className="px-5 py-5 md:px-6 md:py-6">
+                <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
+                  Frontage
+                </p>
+                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                  The pub is easy to recognise on London Road once you know the
+                  brick frontage you are looking for.
+                </p>
+              </div>
+            </article>
+            <article className="overflow-hidden rounded-[1.9rem] bg-[var(--color-surface-lowest)] shadow-[0px_18px_48px_rgba(27,28,28,0.06)]">
+              <Image
+                src={customerParkingImage}
+                alt="Customer parking area at The Old School House in Stony Stratford."
+                className="h-72 w-full object-cover md:h-80"
+                sizes="(min-width: 768px) 50vw, 100vw"
+              />
+              <div className="px-5 py-5 md:px-6 md:py-6">
+                <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
+                  Arrival
+                </p>
+                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                  A small customer parking area helps make planned dinners,
+                  family visits, and longer stays feel simpler from the start.
+                </p>
+              </div>
+            </article>
           </div>
         </div>
       </section>

@@ -9,16 +9,11 @@ import {
   liveSportSignoffCopy,
 } from "@/data/copy"
 import { getRouteConfig } from "@/data/site-routes"
+import { buildPageMetadata } from "@/lib/metadata"
 
 const route = getRouteConfig("/live-sport")
 
-export const metadata: Metadata = {
-  title: route?.meta.title,
-  description: route?.meta.description,
-  alternates: {
-    canonical: route?.meta.canonical,
-  },
-}
+export const metadata: Metadata = buildPageMetadata(route!.meta)
 
 export default function LiveSportPage() {
   return (

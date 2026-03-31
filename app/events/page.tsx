@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Image from "next/image"
 import Link from "next/link"
 import {
   ArrowRight,
@@ -27,16 +28,14 @@ import {
 } from "@/data/copy"
 import { eventOccasions } from "@/data/site"
 import { getRouteConfig } from "@/data/site-routes"
+import { buildPageMetadata } from "@/lib/metadata"
+import dartBoardImage from "@/images/indoor/old-school-house-pub-stony-stratford-mk-dart-board.jpeg"
+import poolTableImage from "@/images/indoor/old-school-house-pub-stony-stratford-mk-pool-table-and-fruit-machine.jpeg"
+import sportsTvImage from "@/images/indoor/old-school-house-pub-stony-stratford-mk-sports-tv-big-screen.jpeg"
 
 const route = getRouteConfig("/events")
 
-export const metadata: Metadata = {
-  title: route?.meta.title,
-  description: route?.meta.description,
-  alternates: {
-    canonical: route?.meta.canonical,
-  },
-}
+export const metadata: Metadata = buildPageMetadata(route!.meta)
 
 const whatOnIcons = [Television, CalendarDots, ForkKnife]
 
@@ -86,6 +85,61 @@ export default function EventsPage() {
                 </article>
               )
             })}
+          </div>
+          <div className="grid gap-4 xl:grid-cols-[1.02fr_0.98fr]">
+            <article className="overflow-hidden rounded-[2rem] bg-[var(--color-surface-lowest)] shadow-[0px_18px_48px_rgba(27,28,28,0.06)]">
+              <Image
+                src={sportsTvImage}
+                alt="Large-screen sports setup inside The Old School House."
+                className="h-80 w-full object-cover md:h-[28rem]"
+                sizes="(min-width: 1280px) 50vw, 100vw"
+              />
+              <div className="px-5 py-5 md:px-6 md:py-6">
+                <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
+                  Match nights
+                </p>
+                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                  Big-screen sport still lands inside a room that feels like a
+                  proper pub, not just somewhere to watch a fixture.
+                </p>
+              </div>
+            </article>
+            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-1">
+              <article className="overflow-hidden rounded-[1.7rem] bg-[var(--color-surface-lowest)] shadow-[0px_10px_28px_rgba(27,28,28,0.05)]">
+                <Image
+                  src={poolTableImage}
+                  alt="Pool table and fruit machine inside The Old School House."
+                  className="h-64 w-full object-cover"
+                  sizes="(min-width: 640px) 50vw, 100vw"
+                />
+                <div className="px-5 py-5 md:px-6 md:py-6">
+                  <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
+                    Casual nights
+                  </p>
+                  <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                    Pool, drinks, and easy pub energy give casual evenings more
+                    to do between rounds and conversation.
+                  </p>
+                </div>
+              </article>
+              <article className="overflow-hidden rounded-[1.7rem] bg-[var(--color-surface-lowest)] shadow-[0px_10px_28px_rgba(27,28,28,0.05)]">
+                <Image
+                  src={dartBoardImage}
+                  alt="Dart board area inside The Old School House pub."
+                  className="h-64 w-full object-cover"
+                  sizes="(min-width: 640px) 50vw, 100vw"
+                />
+                <div className="px-5 py-5 md:px-6 md:py-6">
+                  <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
+                    Pub-side favourites
+                  </p>
+                  <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                    Darts keeps the social side of the pub in view alongside
+                    food, drinks, and sport-led plans.
+                  </p>
+                </div>
+              </article>
+            </div>
           </div>
         </div>
       </section>

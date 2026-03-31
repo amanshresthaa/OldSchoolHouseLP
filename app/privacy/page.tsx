@@ -20,16 +20,11 @@ import {
   sitePhone,
   sitePhoneHref,
 } from "@/data/site"
+import { buildPageMetadata } from "@/lib/metadata"
 
 const route = getRouteConfig("/privacy")
 
-export const metadata: Metadata = {
-  title: route?.meta.title,
-  description: route?.meta.description,
-  alternates: {
-    canonical: route?.meta.canonical,
-  },
-}
+export const metadata: Metadata = buildPageMetadata(route!.meta)
 
 export default function PrivacyPage() {
   return (

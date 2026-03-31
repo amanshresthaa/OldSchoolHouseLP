@@ -6,15 +6,12 @@ import { PageHero } from "@/components/site/PageHero"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import { SiteActionCard } from "@/components/site/SiteActionCard"
 import { siteMenuPdfHref, sitePhone, sitePhoneHref } from "@/data/site"
+import { getRouteConfig } from "@/data/site-routes"
+import { buildPageMetadata } from "@/lib/metadata"
 
-export const metadata: Metadata = {
-  title: "Takeaway Menu",
-  description:
-    "Download the takeaway menu, then call the pub when you are ready to order or want help choosing.",
-  alternates: {
-    canonical: "/takeaway-menu",
-  },
-}
+const route = getRouteConfig("/takeaway-menu")
+
+export const metadata: Metadata = buildPageMetadata(route!.meta)
 
 const takeawayCards = [
   {

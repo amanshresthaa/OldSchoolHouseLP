@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Image from "next/image"
 import Link from "next/link"
 import {
   ArrowRight,
@@ -30,16 +31,14 @@ import {
   siteEmailHref,
 } from "@/data/site"
 import { getRouteConfig } from "@/data/site-routes"
+import { buildPageMetadata } from "@/lib/metadata"
+import beerOnTapImage from "@/images/indoor/old-school-house-pub-stony-stratford-mk-beer-on-tap.jpeg"
+import indoorSeatingImage from "@/images/indoor/old-school-house-pub-stony-stratford-mk-indoor-seating-area-2.jpeg"
+import pubExteriorImage from "@/images/outdoor/old-school-house-pub-stony-stratford-mk-pub-building-exterior.jpeg"
 
 const route = getRouteConfig("/about")
 
-export const metadata: Metadata = {
-  title: route?.meta.title,
-  description: route?.meta.description,
-  alternates: {
-    canonical: route?.meta.canonical,
-  },
-}
+export const metadata: Metadata = buildPageMetadata(route!.meta)
 
 export default function AboutPage() {
   return (
@@ -65,6 +64,34 @@ export default function AboutPage() {
                 </p>
               </article>
             ))}
+          </div>
+          <div className="grid gap-4 xl:grid-cols-[1.02fr_0.98fr]">
+            <article className="overflow-hidden rounded-[2rem] bg-[var(--color-surface-lowest)] shadow-[0px_18px_48px_rgba(27,28,28,0.06)]">
+              <Image
+                src={pubExteriorImage}
+                alt="Exterior of The Old School House pub in Stony Stratford."
+                className="h-80 w-full object-cover md:h-[28rem]"
+                sizes="(min-width: 1280px) 50vw, 100vw"
+              />
+            </article>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <article className="overflow-hidden rounded-[1.7rem] bg-[var(--color-surface-lowest)] shadow-[0px_10px_28px_rgba(27,28,28,0.05)]">
+                <Image
+                  src={indoorSeatingImage}
+                  alt="Interior seating area inside The Old School House."
+                  className="h-60 w-full object-cover"
+                  sizes="(min-width: 640px) 50vw, 100vw"
+                />
+              </article>
+              <article className="overflow-hidden rounded-[1.7rem] bg-[var(--color-surface-lowest)] shadow-[0px_10px_28px_rgba(27,28,28,0.05)]">
+                <Image
+                  src={beerOnTapImage}
+                  alt="Beer being poured at the bar inside The Old School House."
+                  className="h-60 w-full object-cover"
+                  sizes="(min-width: 640px) 50vw, 100vw"
+                />
+              </article>
+            </div>
           </div>
         </div>
       </section>

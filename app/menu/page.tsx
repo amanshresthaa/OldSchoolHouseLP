@@ -23,15 +23,12 @@ import {
   sitePhoneHref,
 } from "@/data/site"
 import { getRouteConfig } from "@/data/site-routes"
+import { buildPageMetadata } from "@/lib/metadata"
 import { menuCategories } from "@/lib/menu"
 
 const route = getRouteConfig("/menu")
 
-export const metadata: Metadata = {
-  title: route?.meta.title,
-  description: route?.meta.description,
-  alternates: { canonical: route?.meta.canonical },
-}
+export const metadata: Metadata = buildPageMetadata(route!.meta)
 
 export default function MenuPage() {
   return (

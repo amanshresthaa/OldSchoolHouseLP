@@ -7,16 +7,11 @@ import { SectionHeading } from "@/components/site/SectionHeading"
 
 import { getRouteConfig } from "@/data/site-routes"
 import { siteEmailHref, sitePhoneHref } from "@/data/site"
+import { buildPageMetadata } from "@/lib/metadata"
 
 const route = getRouteConfig("/tos")
 
-export const metadata: Metadata = {
-  title: route?.meta.title,
-  description: route?.meta.description,
-  alternates: {
-    canonical: route?.meta.canonical,
-  },
-}
+export const metadata: Metadata = buildPageMetadata(route!.meta)
 
 const termsSections = [
   {

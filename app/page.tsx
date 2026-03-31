@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import Image from "next/image"
+import Image, { type StaticImageData } from "next/image"
 import Link from "next/link"
 import Script from "next/script"
 import { ArrowRight, MapPin } from "@phosphor-icons/react/dist/ssr"
@@ -38,21 +38,25 @@ import {
   visitDetails,
 } from "@/data/site"
 import { routeConfigs } from "@/data/site-routes"
+import { buildPageMetadata } from "@/lib/metadata"
 import { featuredMenuItems, formatPrice } from "@/lib/menu"
 import { cn } from "@/lib/utils"
 
 import mixedGrillImage from "@/images/food/mixed-grill.png"
 import momoImage from "@/images/food/chicken-momo-and-veg-momo.png"
 import roastImage from "@/images/food/fish-and-chips-with-salad.png"
+import beerOnTapImage from "@/images/indoor/old-school-house-pub-stony-stratford-mk-beer-on-tap.jpeg"
+import indoorSeatingOneImage from "@/images/indoor/old-school-house-pub-stony-stratford-mk-indoor-seating-area-1.jpeg"
+import indoorSeatingTwoImage from "@/images/indoor/old-school-house-pub-stony-stratford-mk-indoor-seating-area-2.jpeg"
+import sportsTvImage from "@/images/indoor/old-school-house-pub-stony-stratford-mk-sports-tv-big-screen.jpeg"
+import pubExteriorImage from "@/images/outdoor/old-school-house-pub-stony-stratford-mk-pub-building-exterior.jpeg"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Traditional Pub in Stony Stratford",
   description:
     "A traditional pub on London Road in Stony Stratford with a standout Nepalese kitchen, Sunday roast, live sport, and easy table booking.",
-  alternates: {
-    canonical: "/",
-  },
-}
+  canonical: "/",
+})
 
 const menuShowcase = [
   {
@@ -81,7 +85,7 @@ const menuShowcase = [
 const storyFeature: ImageRouteItem = {
   href: "/menu",
   ...homeStoryFeature,
-  image: "/images/hero/placeholders/pub-kitchen-story.svg",
+  image: beerOnTapImage,
 }
 
 interface ImageRouteItem {
@@ -89,7 +93,7 @@ interface ImageRouteItem {
   eyebrow: string
   title: string
   description: string
-  image: string
+  image: string | StaticImageData
   alt: string
 }
 
@@ -97,15 +101,15 @@ const atmosphereTiles: ImageRouteItem[] = homeAtmosphereTiles.map((tile) => ({
   ...tile,
   image:
     tile.href === "/about"
-      ? "/images/hero/placeholders/traditional-pub.svg"
+      ? indoorSeatingTwoImage
       : tile.href === "/beer-garden-stony-stratford"
-        ? "/images/hero/placeholders/front-garden-courtyard.svg"
-        : "/images/hero/placeholders/covers-inside-outside.svg",
+        ? pubExteriorImage
+        : indoorSeatingOneImage,
 }))
 
 const eventsFeature: ImageRouteItem = {
   ...homeEventsFeature,
-  image: "/images/hero/placeholders/live-sport-occasions.svg",
+  image: sportsTvImage,
 }
 
 function ImageRoutePanel({
@@ -594,15 +598,16 @@ export default function HomePage() {
         id="old-school-house-routes"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
-            routeConfigs
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": routeConfigs
               .filter((route) => route.primaryNav && route.published)
               .map((route) => ({
                 "@type": "SiteNavigationElement",
                 name: route.label,
                 url: `https://oldschoolhousestony.co.uk${route.href}`,
-              }))
-          ),
+              })),
+          }),
         }}
       />
     </main>

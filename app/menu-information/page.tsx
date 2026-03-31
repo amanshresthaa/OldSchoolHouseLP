@@ -7,15 +7,12 @@ import { SectionHeading } from "@/components/site/SectionHeading"
 
 import { Button } from "@/components/ui/button"
 import { siteMenuPdfHref, sitePhone, sitePhoneHref } from "@/data/site"
+import { getRouteConfig } from "@/data/site-routes"
+import { buildPageMetadata } from "@/lib/metadata"
 
-export const metadata: Metadata = {
-  title: "Menu Information & Dietary Help",
-  description:
-    "Find the easiest way to check allergens, dietary questions, and whether to use the live menu or the PDF before you visit.",
-  alternates: {
-    canonical: "/menu-information",
-  },
-}
+const route = getRouteConfig("/menu-information")
+
+export const metadata: Metadata = buildPageMetadata(route!.meta)
 
 const menuFaqs = [
   {

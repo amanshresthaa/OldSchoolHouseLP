@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation"
 import * as React from "react"
 import { List, X } from "@phosphor-icons/react"
 
-import logo from "@/images/logos/OldSchoolHouse.png"
+import logo from "@/images/logos/old-school-house-pub-stony-stratford-mk-logo.png"
 import { Button } from "@/components/ui/button"
 import {
   bookOnlineHref,

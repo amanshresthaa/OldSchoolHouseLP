@@ -227,6 +227,124 @@ export const routeConfigs: RouteConfig[] = [
     stickySecondaryAction: { href: "/menu", label: "Menu" },
   },
   {
+    href: "/what-is-nepalese-food",
+    label: "What Is Nepalese Food",
+    resource: true,
+    sitemap: true,
+    published: true,
+    meta: {
+      title: "What Is Nepalese Food?",
+      description:
+        "A simple guide to Nepalese food at The Old School House, from momo and grilled dishes to the way the kitchen fits naturally into a traditional pub visit.",
+      canonical: "/what-is-nepalese-food",
+    },
+    hero: {
+      eyebrow: "Food guide",
+      title: "A simple way to understand Nepalese food before you order.",
+      description:
+        "Use this page when the food sounds interesting but you want the dishes explained plainly before the booking or the first order.",
+      primaryAction: { href: "/nepalese-kitchen", label: "See the kitchen" },
+      secondaryAction: { href: "/menu", label: "Browse the menu" },
+    },
+    schema: { faq: true },
+    stickySecondaryAction: { href: "/menu", label: "Menu" },
+  },
+  {
+    href: "/momo",
+    label: "Momo",
+    resource: true,
+    sitemap: true,
+    published: true,
+    meta: {
+      title: "What Is Momo?",
+      description:
+        "Learn why momo is the easiest first dish to try at The Old School House and how it opens up the Nepalese side of the menu.",
+      canonical: "/momo",
+    },
+    hero: {
+      eyebrow: "Signature dish",
+      title: "Momo is the first dish many tables should start with.",
+      description:
+        "If you want one Nepalese dish that makes the menu feel approachable straight away, this is the clearest starting point.",
+      primaryAction: { href: "/menu", label: "Browse the menu" },
+      secondaryAction: { href: bookOnlineHref, label: "Book a table" },
+    },
+    schema: { faq: true },
+    stickySecondaryAction: { href: "/menu", label: "Menu" },
+  },
+  {
+    href: "/nepalese-vs-indian-food",
+    label: "Nepalese vs Indian Food",
+    resource: true,
+    sitemap: true,
+    published: true,
+    meta: {
+      title: "Nepalese vs Indian Food",
+      description:
+        "A plain-English guide to the difference between Nepalese and Indian food, with examples that make the menu at The Old School House easier to understand.",
+      canonical: "/nepalese-vs-indian-food",
+    },
+    hero: {
+      eyebrow: "Comparison guide",
+      title:
+        "Nepalese and Indian food overlap in places, but they do not land the same on the plate.",
+      description:
+        "Use this page if you know Indian dishes already and want a quick, clearer picture of what changes when you move into the Nepalese side of the menu.",
+      primaryAction: { href: "/nepalese-kitchen", label: "See the kitchen" },
+      secondaryAction: { href: "/menu", label: "Browse the menu" },
+    },
+    schema: { faq: true },
+    stickySecondaryAction: { href: "/menu", label: "Menu" },
+  },
+  {
+    href: "/traditional-pub-with-nepalese-kitchen",
+    label: "Traditional Pub with Nepalese Kitchen",
+    resource: true,
+    sitemap: true,
+    published: true,
+    meta: {
+      title: "Traditional Pub with a Nepalese Kitchen",
+      description:
+        "See why The Old School House works as both a proper Stony Stratford pub and a venue with a more memorable food offer.",
+      canonical: "/traditional-pub-with-nepalese-kitchen",
+    },
+    hero: {
+      eyebrow: "Comparison guide",
+      title:
+        "The pub feel comes first here, and the Nepalese kitchen makes the meal more memorable second.",
+      description:
+        "This guide helps when you are comparing familiar local pub comfort with the idea of a venue that gives the food more identity once you sit down.",
+      primaryAction: { href: "/about", label: "About the pub" },
+      secondaryAction: { href: "/menu", label: "Browse the menu" },
+    },
+    schema: { faq: true },
+    stickySecondaryAction: { href: "/menu", label: "Menu" },
+  },
+  {
+    href: "/where-to-eat-in-stony-stratford",
+    label: "Where to Eat in Stony Stratford",
+    resource: true,
+    sitemap: true,
+    published: true,
+    meta: {
+      title: "Where to Eat in Stony Stratford",
+      description:
+        "A practical local guide to choosing where to eat in Stony Stratford, and why The Old School House works for more than one kind of plan.",
+      canonical: "/where-to-eat-in-stony-stratford",
+    },
+    hero: {
+      eyebrow: "Local guide",
+      title:
+        "When you have not chosen the venue yet, start with the kind of outing you want.",
+      description:
+        "This page helps when the question is still where to eat in Stony Stratford rather than whether you are ready to book already.",
+      primaryAction: { href: "/menu", label: "Browse the menu" },
+      secondaryAction: { href: bookOnlineHref, label: "Book a table" },
+    },
+    schema: { faq: true },
+    stickySecondaryAction: { href: directionsHref, label: "Directions" },
+  },
+  {
     href: "/live-sport",
     label: "Live Sport",
     sitemap: true,
