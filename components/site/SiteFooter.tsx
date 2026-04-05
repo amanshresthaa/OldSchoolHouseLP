@@ -28,6 +28,7 @@ import {
   siteFooterCoreLinks,
   siteLegalLinks,
   siteNav,
+  siteResources,
 } from "@/data/site-routes"
 
 export function SiteFooter() {
@@ -143,6 +144,22 @@ export function SiteFooter() {
               </Link>
             ))}
           </nav>
+          <div className="space-y-4 pt-4">
+            <p className="text-xs font-semibold tracking-[0.22em] text-[var(--color-on-tertiary-container)] uppercase">
+              Helpful pages
+            </p>
+            <nav className="grid gap-3 text-sm text-white/72">
+              {siteResources.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="transition hover:text-white"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
         </div>
         <div className="space-y-4">
           <p className="text-xs font-semibold tracking-[0.22em] text-[var(--color-on-tertiary-container)] uppercase">

@@ -18,6 +18,7 @@ export const metadata: Metadata = buildPageMetadata(route!.meta)
 export default function LiveSportPage() {
   return (
     <FeaturePage
+      route={route!}
       hero={route!.hero!}
       sections={liveSportSections}
       faqSection={liveSportFaqSection}

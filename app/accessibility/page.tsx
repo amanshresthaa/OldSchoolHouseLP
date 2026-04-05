@@ -19,6 +19,7 @@ export const metadata: Metadata = buildPageMetadata(route!.meta)
 export default function AccessibilityPage() {
   return (
     <FeaturePage
+      route={route!}
       hero={route!.hero!}
       sections={accessibilitySections}
       faqSection={accessibilityFaqSection}

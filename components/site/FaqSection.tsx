@@ -86,14 +86,14 @@ export function FaqSection({
                 aria-expanded={openQuestion === faq.question}
                 aria-controls={`faq-panel-${index}`}
               >
-                <h2
+                <h3
                   className={cn(
                     "font-heading text-[1.55rem] leading-[1.08] md:text-[1.8rem]",
                     invert && "text-white"
                   )}
                 >
                   {faq.question}
-                </h2>
+                </h3>
                 <span
                   className={cn(
                     "mt-1 inline-flex size-10 shrink-0 items-center justify-center rounded-full border transition",

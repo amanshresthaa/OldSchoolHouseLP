@@ -4,8 +4,15 @@ import { FaqSection } from "@/components/site/FaqSection"
 import { InlineBookingCta } from "@/components/site/InlineBookingCta"
 import { PageHero } from "@/components/site/PageHero"
 import { PageSignoff } from "@/components/site/PageSignoff"
+import { RouteStructuredData } from "@/components/site/RouteStructuredData"
 import { SectionHeading } from "@/components/site/SectionHeading"
-import type { HighlightItem, LocalFaq, PageHeroConfig } from "@/data/site"
+import type {
+  HighlightItem,
+  LocalFaq,
+  PageHeroConfig,
+  PageMeta,
+  SchemaConfig,
+} from "@/data/site"
 import {
   type SiteAction,
   SiteActionCard,
@@ -42,9 +49,20 @@ interface FeaturePageSignoff {
   details?: ReactNode
 }
 
+interface FeaturePageRoute {
+  href: string
+  label: string
+  navLabel?: string
+  meta: PageMeta
+  schema?: SchemaConfig
+}
+
 interface FeaturePageProps {
+  route?: FeaturePageRoute
   hero: PageHeroConfig
   sections: FeaturePageSection[]
+  pageType?: "AboutPage" | "CollectionPage" | "ContactPage" | "WebPage"
+  prelude?: ReactNode
   checklist?: FeaturePageChecklist
   faqSection?: {
     eyebrow: string
@@ -57,20 +75,35 @@ interface FeaturePageProps {
     description: string
     actions?: SiteAction[]
   }
+  epilogue?: ReactNode
   signoff?: FeaturePageSignoff
 }
 
 export function FeaturePage({
+  route,
   hero,
   sections,
+  pageType = "WebPage",
+  prelude,
   checklist,
   faqSection,
   inlineCta,
+  epilogue,
   signoff,
 }: FeaturePageProps) {
   return (
     <main>
-      <PageHero {...hero} />
+      {route ? (
+        <RouteStructuredData
+          route={route}
+          faqItems={faqSection?.faqs}
+          pageType={pageType}
+        />
+      ) : null}
+
+      <PageHero {...hero} route={route} />
+
+      {prelude}
 
       {sections.map((section, index) => (
         <section
@@ -117,7 +150,7 @@ export function FeaturePage({
                       : "surface-panel-muted"
                   }
                 >
-                  <h2 className="section-title">{card.title}</h2>
+                  <h3 className="section-title">{card.title}</h3>
                   <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
                     {card.description}
                   </p>
@@ -192,6 +225,8 @@ export function FeaturePage({
           faqs={faqSection.faqs}
         />
       ) : null}
+
+      {epilogue}
 
       {signoff ? (
         <PageSignoff

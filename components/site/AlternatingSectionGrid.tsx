@@ -22,7 +22,7 @@ export function AlternatingSectionGrid({
                 : "surface-pane surface-pane-muted"
             }
           >
-            <h2 className="section-title">{section.title}</h2>
+            <h3 className="section-title">{section.title}</h3>
             <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
               {section.paragraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>

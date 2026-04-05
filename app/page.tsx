@@ -9,6 +9,7 @@ import { GuestReviewSlideshow } from "@/components/site/GuestReviewSlideshow"
 import { HomeHeroSlideshow } from "@/components/site/HomeHeroSlideshow"
 import { InlineBookingCta } from "@/components/site/InlineBookingCta"
 import { MapEmbed } from "@/components/site/MapEmbed"
+import { RouteStructuredData } from "@/components/site/RouteStructuredData"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import { SiteActionCard } from "@/components/site/SiteActionCard"
 import {
@@ -25,19 +26,21 @@ import {
   arrivalNotes,
   directionsHref,
   eventsHighlights,
-  googleReviewHref,
-  googleReviewsPageHref,
   guestReviews,
   homeMenuHighlights,
   homeReasons,
-  localBusinessSchema,
+  buildLocalBusinessSchema,
   localFaqs,
+  organizationSchema,
+  reassuranceHighlights,
+  sanjogGautamPersonSchema,
   siteEmailHref,
   sitePhone,
   sitePhoneHref,
+  siteUrl,
   visitDetails,
 } from "@/data/site"
-import { routeConfigs } from "@/data/site-routes"
+import { getRouteConfig, routeConfigs } from "@/data/site-routes"
 import { buildPageMetadata } from "@/lib/metadata"
 import { featuredMenuItems, formatPrice } from "@/lib/menu"
 import { cn } from "@/lib/utils"
@@ -51,12 +54,9 @@ import indoorSeatingTwoImage from "@/images/indoor/old-school-house-pub-stony-st
 import sportsTvImage from "@/images/indoor/old-school-house-pub-stony-stratford-mk-sports-tv-big-screen.jpeg"
 import pubExteriorImage from "@/images/outdoor/old-school-house-pub-stony-stratford-mk-pub-building-exterior.jpeg"
 
-export const metadata: Metadata = buildPageMetadata({
-  title: "Traditional Pub in Stony Stratford",
-  description:
-    "A traditional pub on London Road in Stony Stratford with a standout Nepalese kitchen, Sunday roast, live sport, and easy table booking.",
-  canonical: "/",
-})
+const route = getRouteConfig("/")
+
+export const metadata: Metadata = buildPageMetadata(route!.meta)
 
 const menuShowcase = [
   {
@@ -93,7 +93,7 @@ interface ImageRouteItem {
   eyebrow: string
   title: string
   description: string
-  image: string | StaticImageData
+  image: StaticImageData
   alt: string
 }
 
@@ -129,9 +129,10 @@ function ImageRoutePanel({
     >
       <Image
         src={item.image}
+        width={item.image.width}
+        height={item.image.height}
         alt={item.alt}
-        fill
-        className="object-cover transition duration-500 ease-out group-hover:scale-[1.03]"
+        className="absolute inset-0 h-full w-full object-cover transition duration-500 ease-out group-hover:scale-[1.03]"
         sizes="(min-width: 1280px) 40vw, 100vw"
       />
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,17,11,0.14)_0%,rgba(7,17,11,0.52)_45%,rgba(7,17,11,0.9)_100%)]" />
@@ -155,33 +156,23 @@ function ImageRoutePanel({
 }
 
 export default function HomePage() {
-  const faqSchema = {
+  const homeEntityGraph = {
     "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: localFaqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
-      },
-    })),
+    "@graph": [
+      organizationSchema,
+      sanjogGautamPersonSchema,
+      buildLocalBusinessSchema(`${siteUrl}/`),
+    ],
   }
 
   return (
     <main>
+      <RouteStructuredData route={route!} faqItems={localFaqs} />
       <Script
-        id="old-school-house-local-business"
+        id="old-school-house-home-entities"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(localBusinessSchema),
-        }}
-      />
-      <Script
-        id="old-school-house-home-faq"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(faqSchema),
+          __html: JSON.stringify(homeEntityGraph),
         }}
       />
 
@@ -405,8 +396,8 @@ export default function HomePage() {
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <SectionHeading
               eyebrow="What’s on"
-              title="From match days to tasting evenings, there is more than one reason to come back."
-              description="Live sport, quiz nights, tasting evenings, and informal occasions all give regulars more than one reason to return."
+              title="From match days to local team socials, there is more than one reason to come back."
+              description="Live sport, theme-led nights, tastings, and informal community occasions all give regulars more than one reason to return."
             />
             <div className="shrink-0">
               <SiteActionCard
@@ -434,7 +425,7 @@ export default function HomePage() {
                     index === 1 ? "surface-panel-muted" : "surface-panel"
                   }
                 >
-                  <h2 className="section-title">{highlight.title}</h2>
+                  <h3 className="section-title">{highlight.title}</h3>
                   <p className="pt-2 text-sm leading-6 text-on-surface md:text-base">
                     {highlight.description}
                   </p>
@@ -447,35 +438,75 @@ export default function HomePage() {
 
       <section className="bg-background py-10 md:py-14 lg:py-16">
         <div className="section-shell space-y-5">
-          <SectionHeading
-            eyebrow="Guest reviews"
-            title="People mostly remember the food, the warmth, and how easy it is to stay for another round."
-            description="The food stands out, the room feels easy, and the whole visit lands the way guests hope it will."
-            className="max-w-none"
-          />
-          <div className="rounded-[2rem] bg-primary p-6 text-white shadow-[0px_18px_48px_rgba(27,28,28,0.08)] md:p-7">
-            <div className="mx-auto flex max-w-4xl flex-col justify-between gap-8">
-              <GuestReviewSlideshow reviews={guestReviews} />
-
-              <div className="flex flex-col gap-3 sm:flex-row">
-                <a
-                  href={googleReviewHref}
-                  target="_blank"
-                  rel="noreferrer"
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <SectionHeading
+              eyebrow="Reviews"
+              title="The pub works for more than one kind of visit."
+              description="From easy daytime visits to family meals and match nights, The Old School House suits more than one kind of plan."
+              className="max-w-none"
+            />
+            <div className="shrink-0">
+              <SiteActionCard
+                actions={[
+                  {
+                    href: "/about",
+                    label: "About the pub",
+                    icon: <ArrowRight className="size-4" />,
+                  },
+                  { href: "/book", label: "Book a table" },
+                ]}
+                supportingText="A quick feel for the atmosphere, the guest mix, and why people come back."
+                showDivider
+              />
+            </div>
+          </div>
+          <div className="grid gap-4 xl:grid-cols-[0.92fr_1.08fr] xl:items-start">
+            <GuestReviewSlideshow
+              reviews={guestReviews}
+              className="max-w-none"
+            />
+            <div className="grid gap-4 md:grid-cols-3 xl:grid-cols-1">
+              {reassuranceHighlights.map((highlight, index) => (
+                <article
+                  key={highlight.title}
+                  className={
+                    index === 1 ? "surface-panel-muted" : "surface-panel"
+                  }
+                >
+                  <h3 className="section-title">{highlight.title}</h3>
+                  <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                    {highlight.description}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </div>
+          <div className="rounded-[1.85rem] bg-primary p-5 text-white shadow-[0px_18px_48px_rgba(27,28,28,0.08)] md:p-6">
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+              <div className="max-w-2xl">
+                <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-[var(--color-on-tertiary-container)] uppercase">
+                  What this means in practice
+                </p>
+                <p className="pt-3 text-sm leading-7 text-white/78 md:text-base">
+                  Come in for a proper pub atmosphere, then stay for a menu,
+                  welcome, and sense of occasion that give the visit a little
+                  more character than the average local stop.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  href="/about"
+                  className="cta-secondary-dark inline-flex h-12 items-center justify-center px-6 text-sm font-semibold"
+                >
+                  About the pub
+                </Link>
+                <Link
+                  href="/private-hire"
                   className="cta-primary inline-flex h-12 items-center justify-center gap-2.5 px-6 text-sm font-semibold"
                 >
-                  Write a Google review
+                  Plan a bigger visit
                   <ArrowRight className="size-4" />
-                </a>
-                <a
-                  href={googleReviewsPageHref}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="cta-secondary-dark inline-flex h-12 items-center justify-center gap-2.5 px-6 text-sm font-semibold"
-                >
-                  See latest reviews
-                  <ArrowRight className="size-4" />
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -573,15 +604,13 @@ export default function HomePage() {
                       See full visit guide
                       <ArrowRight className="size-4" />
                     </Link>
-                    <a
-                      href={googleReviewsPageHref}
-                      target="_blank"
-                      rel="noreferrer"
+                    <Link
+                      href="/events"
                       className="inline-flex items-center gap-2 text-sm font-semibold text-secondary transition hover:text-secondary/80"
                     >
-                      Latest Google reviews
+                      See events and private hire
                       <ArrowRight className="size-4" />
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

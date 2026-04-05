@@ -6,19 +6,19 @@
 
 export const eventsWhatOnCards = [
   {
-    title: "Live sport that keeps the pub feel intact",
+    title: "Sky Sports and TNT Sports without losing the pub feel",
     description:
-      "Fixtures matter here, but so do the drinks, the table, and the atmosphere around them. That makes the pub a better all-round choice than a screen-only venue.",
+      "Fixtures matter here, but so do the drinks, the table, and the room around them. That makes the pub a better all-round choice than a screen-only venue.",
   },
   {
-    title: "Quiz nights and tastings",
+    title: "Theme nights, tastings, and weeknight footfall",
     description:
-      "Community-led reasons to return help the pub feel active without needing to become a crowded event machine every night of the week.",
+      "Theme-led reasons to return help the pub feel active without needing to become a crowded event machine every night of the week.",
   },
   {
-    title: "Food-led nights with stronger identity",
+    title: "Local teams, socials, and community gatherings",
     description:
-      "The Nepalese kitchen gives tasting nights and special menus more shape than the usual generic pub promo.",
+      "The room and layout work for pool teams, sports groups, birthdays, and informal community-led nights without losing the warmth of a proper local.",
   },
 ]
 
@@ -26,12 +26,17 @@ export const eventsWhatOnFaqs = [
   {
     question: "What kinds of events does The Old School House suit?",
     answer:
-      "The pub suits live sport, quiz nights, tastings, community meetups, and other repeat-visit reasons to come back through the week and across the year.",
+      "The pub suits live sport, theme nights, tastings, community meetups, and other lively pub nights through the week and across the year.",
   },
   {
-    question: "Can I book a table for event nights?",
+    question: "Do you show Sky Sports and TNT Sports?",
     answer:
-      "Yes. Booking ahead is the safest route if you know you are coming in for a fixture, quiz night, or a busier evening.",
+      "Yes. Sky Sports and TNT Sports are part of the live sport offer here.",
+  },
+  {
+    question: "Can I book a table or team night for event-led visits?",
+    answer:
+      "Yes. Booking ahead is the safest route if you know you are coming in for a fixture, a team social, or a busier themed evening.",
   },
   {
     question: "What if I want to organise a bigger private occasion instead?",
@@ -42,23 +47,23 @@ export const eventsWhatOnFaqs = [
 
 export const eventsWhatOnSectionCopy = {
   eyebrow: "What's on at the pub",
-  title: "Repeat visits matter just as much as the first one.",
+  title: "There is usually something worth coming back for.",
   description:
-    "The Old School House should stay in mind for a match, a quiz night, a tasting, or the kind of evening that only becomes a plan once the messages start flying.",
+    "From match nights to themed evenings and tastings, The Old School House is built for more than a one-off visit.",
 }
 
 export const eventsActionCardText =
-  "Use What's On for public reasons to visit. Use Private Hire when you are planning something centred around your own group."
+  "Looking for a bigger group booking instead? Head to Private Hire."
 
 export const eventsReturnVisitSection = {
   eyebrow: "Built for return visits",
   title: "The pub should work for more than one kind of night.",
   description:
-    "Live sport, local meetups, and tasting-led evenings help people think of The Old School House more often than just when they happen to need dinner.",
+    "Live sport, local meetups, team socials, and tasting-led evenings help people think of The Old School House more often than just when they happen to need dinner.",
 }
 
 export const eventsInlineCtaCopy = {
-  title: "Heading in for the match, the quiz, or a busier night?",
+  title: "Heading in for the match, the team social, or a busier night?",
   description:
     "Book ahead and let the pub side of the visit feel straightforward before the evening gets moving.",
 }
@@ -85,7 +90,7 @@ export const eventsPrivateHireCard = {
 
 export const eventsFaqSectionCopy = {
   eyebrow: "What's on FAQs",
-  title: "Keep public event nights easy to understand.",
+  title: "A few quick answers before you head over.",
   description:
-    "A few clear answers help you work out whether it is a public event night, a live sport visit, or something better suited to a private enquiry.",
+    "Everything you need to know before a match night, themed evening, or busier visit.",
 }

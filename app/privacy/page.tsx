@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { AlternatingSectionGrid } from "@/components/site/AlternatingSectionGrid"
 import { PageSignoff } from "@/components/site/PageSignoff"
 import { PageHero } from "@/components/site/PageHero"
+import { RouteStructuredData } from "@/components/site/RouteStructuredData"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import {
   privacyHeroCopy,
@@ -29,8 +30,10 @@ export const metadata: Metadata = buildPageMetadata(route!.meta)
 export default function PrivacyPage() {
   return (
     <main>
+      <RouteStructuredData route={route!} />
       <PageHero
         {...privacyHeroCopy}
+        route={route!}
         primaryAction={{
           href: siteEmailHref,
           label: "Email a privacy question",

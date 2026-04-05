@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import localFont from "next/font/local"
+import Script from "next/script"
 
 import "./globals.css"
 import { CookieBanner } from "@/components/site/CookieBanner"
@@ -7,7 +8,15 @@ import { SiteFooter } from "@/components/site/SiteFooter"
 import { SiteHeader } from "@/components/site/SiteHeader"
 import { StickyBookingBar } from "@/components/site/StickyBookingBar"
 import { ThemeProvider } from "@/components/theme-provider"
-import { siteDescription, siteName, siteOgImage, siteUrl } from "@/data/site"
+import {
+  siteDescription,
+  siteName,
+  siteOgImage,
+  siteOrganizationId,
+  siteUrl,
+  siteWebsiteId,
+} from "@/data/site"
+import { criticalAboveTheFoldCss } from "@/lib/critical-css"
 import { cn } from "@/lib/utils"
 
 const newsreader = localFont({
@@ -57,7 +66,7 @@ const manrope = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${siteName} | Traditional Pub in Stony Stratford`,
+    default: `${siteName} | Pub in Stony Stratford with Nepalese Kitchen`,
     template: `%s | ${siteName}`,
   },
   description: siteDescription,
@@ -76,7 +85,7 @@ export const metadata: Metadata = {
     locale: "en_GB",
     url: siteUrl,
     siteName,
-    title: `${siteName} | Traditional Pub in Stony Stratford`,
+    title: `${siteName} | Pub in Stony Stratford with Nepalese Kitchen`,
     description: siteDescription,
     images: [
       {
@@ -89,7 +98,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteName} | Traditional Pub in Stony Stratford`,
+    title: `${siteName} | Pub in Stony Stratford with Nepalese Kitchen`,
     description: siteDescription,
     images: [siteOgImage],
   },
@@ -106,7 +115,31 @@ export default function RootLayout({
       suppressHydrationWarning
       className={cn("antialiased", newsreader.variable, manrope.variable)}
     >
+      <head>
+        <style
+          id="critical-above-the-fold"
+          dangerouslySetInnerHTML={{ __html: criticalAboveTheFoldCss }}
+        />
+      </head>
       <body className="min-h-svh">
+        <Script
+          id="old-school-house-website"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "@id": siteWebsiteId,
+              name: siteName,
+              url: siteUrl,
+              description: siteDescription,
+              inLanguage: "en-GB",
+              publisher: {
+                "@id": siteOrganizationId,
+              },
+            }),
+          }}
+        />
         <ThemeProvider>
           <div className="relative min-h-svh pb-28 md:pb-0">
             <SiteHeader />

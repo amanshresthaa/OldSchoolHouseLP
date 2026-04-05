@@ -18,6 +18,7 @@ export const metadata: Metadata = buildPageMetadata(route!.meta)
 export default function TraditionalPubWithNepaleseKitchenPage() {
   return (
     <FeaturePage
+      route={route!}
       hero={route!.hero!}
       sections={traditionalPubSections}
       faqSection={traditionalPubFaqSection}

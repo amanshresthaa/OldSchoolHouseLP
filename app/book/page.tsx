@@ -11,6 +11,7 @@ import {
 import { FaqSection } from "@/components/site/FaqSection"
 import { PageHero } from "@/components/site/PageHero"
 import { PageSignoff } from "@/components/site/PageSignoff"
+import { RouteStructuredData } from "@/components/site/RouteStructuredData"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import { SiteActionCard } from "@/components/site/SiteActionCard"
 import {
@@ -50,7 +51,8 @@ const bookingFaqs = localFaqs.filter((faq) =>
 export default function BookPage() {
   return (
     <main>
-      <PageHero {...route!.hero!} />
+      <RouteStructuredData route={route!} faqItems={bookingFaqs} />
+      <PageHero {...route!.hero!} route={route!} />
 
       <section className="bg-background py-10 md:py-14 lg:py-16">
         <div className="section-shell space-y-5">
@@ -123,7 +125,7 @@ export default function BookPage() {
               className="surface-panel transition hover:-translate-y-0.5"
             >
               <CalendarDots className="size-5 text-secondary" />
-              <h2 className="section-title pt-3">{bookSundayCard.title}</h2>
+              <h3 className="section-title pt-3">{bookSundayCard.title}</h3>
               <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
                 {bookSundayCard.description}
               </p>
@@ -133,9 +135,9 @@ export default function BookPage() {
               className="surface-panel-muted transition hover:-translate-y-0.5"
             >
               <UsersThree className="size-5 text-secondary" />
-              <h2 className="section-title pt-3">
+              <h3 className="section-title pt-3">
                 {bookPrivateHireCard.title}
-              </h2>
+              </h3>
               <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
                 {bookPrivateHireCard.description}
               </p>
@@ -145,7 +147,7 @@ export default function BookPage() {
               className="surface-panel transition hover:-translate-y-0.5"
             >
               <Phone className="size-5 text-secondary" />
-              <h2 className="section-title pt-3">{bookFindUsCard.title}</h2>
+              <h3 className="section-title pt-3">{bookFindUsCard.title}</h3>
               <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
                 {bookFindUsCard.description}
               </p>

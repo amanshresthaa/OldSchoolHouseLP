@@ -9,11 +9,11 @@ export const findUsAddressSection = {
   title:
     "The Old School House sits on London Road in the heart of Stony Stratford.",
   description:
-    "Use this page for directions, parking, booking, and arrival checks before you set off from the High Street, Horsefair Green, or elsewhere in town.",
+    "You will find directions, parking details, contact information, and opening hours all in one place before you set off.",
 }
 
 export const findUsActionCardText =
-  "Use this page as the practical visit guide rather than hunting through the footer for key details."
+  "Everything you need before you arrive, all in one place."
 
 export const findUsInlineCtaCopy = {
   title: "Book before you travel if the visit is already set.",
@@ -23,14 +23,14 @@ export const findUsInlineCtaCopy = {
 
 export const findUsAccessibilitySection = {
   eyebrow: "Accessibility and arrival help",
-  title: "Call ahead if you want the smoothest way into the pub.",
+  title: "Plan the smoothest arrival at our Stony Stratford pub.",
   description:
     "Historic pub buildings can vary, so calling ahead is still the best option if access, seating, prams, or the best way in matter to your visit.",
 }
 
 export const findUsFaqSectionCopy = {
   eyebrow: "Visit FAQs",
-  title: "Useful questions before you set off.",
+  title: "Useful questions before you head to London Road.",
   description:
     "Keep the practical details on one page, then use a call if you need the latest answer before you travel.",
 }

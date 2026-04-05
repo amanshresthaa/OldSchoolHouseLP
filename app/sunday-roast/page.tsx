@@ -19,6 +19,7 @@ export const metadata: Metadata = buildPageMetadata(route!.meta)
 export default function SundayRoastPage() {
   return (
     <FeaturePage
+      route={route!}
       hero={route!.hero!}
       sections={sundayRoastSections}
       checklist={sundayRoastChecklist}

@@ -1,0 +1,16 @@
+{
+  "label": "Standard daily licensed hours",
+  "display": "10:00 - 00:30",
+  "opens": "10:00",
+  "closes": "00:30",
+  "days": [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday"
+  ],
+  "note": "Licensed opening hours are shown here. Food service windows, events, and bank holidays can vary, so call the pub if your visit depends on a specific kitchen or service time."
+}

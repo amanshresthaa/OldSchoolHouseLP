@@ -6,6 +6,13 @@
 
 export const guidesGroups = [
   {
+    eyebrow: "Pillar guide",
+    title: "Start with the full Nepalese food guide for Milton Keynes",
+    description:
+      "Best when you want the main cuisine explained properly first, then want clear routes into the deeper spoke guides.",
+    href: "/nepalese-food-milton-keynes",
+  },
+  {
     eyebrow: "Local guide",
     title: "Start with the outing itself",
     description:
@@ -45,6 +52,12 @@ export const guidesGroups = [
 
 export const guidesLinkedGuides = [
   {
+    href: "/nepalese-food-milton-keynes",
+    title: "The ultimate guide to Nepalese food in Milton Keynes",
+    description:
+      "The main pillar page that explains the cuisine, anchors the cluster, and routes you into the exact guide that matches your question.",
+  },
+  {
     href: "/where-to-eat-in-stony-stratford",
     title: "Where to eat in Stony Stratford",
     description:
@@ -69,6 +82,12 @@ export const guidesLinkedGuides = [
       "A straightforward comparison page for you if you want a little more context before ordering.",
   },
   {
+    href: "/gluten-free-curries-stony-stratford",
+    title: "Gluten-free curries in Stony Stratford",
+    description:
+      "A dietary guide grounded in the live menu for guests who need a practical shortlist before they visit.",
+  },
+  {
     href: "/traditional-pub-with-nepalese-kitchen",
     title: "Traditional pub with a Nepalese kitchen",
     description:
@@ -81,14 +100,14 @@ export const guidesHowToUseSection = {
   title:
     "The best guide depends on what kind of question you are trying to answer.",
   description:
-    "Some visitors need help choosing where to eat in Stony Stratford. Others want to understand the Nepalese dishes first. Others are already comparing this pub with more standard options.",
+    "Some visitors need the full Nepalese pillar guide first. Others want a dish explainer, a dietary answer, or help comparing the food with something they already know.",
 }
 
 export const guidesBrowseSection = {
   eyebrow: "Browse all guides",
   title: "Each page is built to move you one step closer to a real visit.",
   description:
-    "These are not blog posts for the sake of it. Each one should make the menu, the venue, or the booking decision easier.",
+    "These are not blog posts for the sake of it. They are a connected hub-and-spoke library built to make the menu, the venue, or the booking decision easier.",
 }
 
 export const guidesFaqs = [
@@ -105,7 +124,7 @@ export const guidesFaqs = [
   {
     question: "What is the best first guide if I am new to the site?",
     answer:
-      "Start with Where to Eat in Stony Stratford if the outing is still broad, or What is Nepalese Food if the food curiosity is what brought you here.",
+      "Start with the Nepalese food in Milton Keynes pillar page if the cuisine itself is the question, or Where to Eat in Stony Stratford if the outing is still broad.",
   },
 ]
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Image from "next/image"
+import Link from "next/link"
 import {
   Clock,
   EnvelopeSimple,
@@ -11,6 +12,7 @@ import { FaqSection } from "@/components/site/FaqSection"
 import { InlineBookingCta } from "@/components/site/InlineBookingCta"
 import { MapEmbed } from "@/components/site/MapEmbed"
 import { PageHero } from "@/components/site/PageHero"
+import { RouteStructuredData } from "@/components/site/RouteStructuredData"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import { SiteActionCard } from "@/components/site/SiteActionCard"
 import {
@@ -27,6 +29,7 @@ import {
   mapHref,
   openingHours,
   openingHoursNote,
+  organizationFactSheet,
   siteAddress,
   siteEmail,
   siteEmailHref,
@@ -50,13 +53,66 @@ const visitFaqs = localFaqs.filter((faq) =>
   ].includes(faq.question)
 )
 
+const localVisitHighlights = [
+  {
+    title: "Near Stony Stratford High Street",
+    description:
+      "The Old School House sits on London Road, close enough for planned dinners, town-centre drinks, and meals that start after time on the High Street or Horsefair Green.",
+  },
+  {
+    title: "Useful for local and Milton Keynes visitors",
+    description:
+      "The location works for Stony Stratford regulars, nearby Milton Keynes diners, and visitors who want a characterful pub with food before heading back out.",
+  },
+  {
+    title: "Easy next steps once you know where we are",
+    description:
+      "Use the menu when you want to browse first, or move straight to booking if the route check has already turned into dinner plans.",
+  },
+]
+
 export default function FindUsPage() {
   return (
     <main>
-      <PageHero {...route!.hero!} />
+      <RouteStructuredData
+        route={route!}
+        faqItems={visitFaqs}
+        pageType="ContactPage"
+      />
+      <PageHero {...route!.hero!} route={route!} />
 
       <section className="bg-background py-10 md:py-14 lg:py-16">
         <div className="section-shell space-y-5">
+          <div className="surface-panel space-y-5">
+            <SectionHeading
+              eyebrow="Location in town"
+              title="Looking for a pub on London Road in Stony Stratford?"
+              description="Everything you need before you head over: where we are, how to get here, and what to expect when you arrive."
+            />
+            <div className="grid gap-4 md:grid-cols-3">
+              {localVisitHighlights.map((item, index) => (
+                <article
+                  key={item.title}
+                  className={
+                    index === 1 ? "surface-panel-muted" : "surface-panel"
+                  }
+                >
+                  <h3 className="section-title">{item.title}</h3>
+                  <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                    {item.description}
+                  </p>
+                </article>
+              ))}
+            </div>
+            <div className="flex flex-wrap gap-4 text-sm font-semibold text-secondary">
+              <Link href="/menu" className="transition hover:text-secondary/80">
+                Browse the pub menu
+              </Link>
+              <Link href="/book" className="transition hover:text-secondary/80">
+                Book a table in Stony Stratford
+              </Link>
+            </div>
+          </div>
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <SectionHeading {...findUsAddressSection} />
             <SiteActionCard
@@ -104,6 +160,23 @@ export default function FindUsPage() {
                   <p className="text-on-surface/72">{openingHoursNote}</p>
                 </div>
               </div>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {organizationFactSheet.slice(0, 4).map((item, index) => (
+                  <article
+                    key={item.label}
+                    className={
+                      index % 2 === 1 ? "surface-panel-muted" : "surface-panel"
+                    }
+                  >
+                    <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
+                      {item.label}
+                    </p>
+                    <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                      {item.value}
+                    </p>
+                  </article>
+                ))}
+              </div>
               <div className="grid gap-4">
                 {arrivalNotes.map((note, index) => (
                   <article
@@ -135,7 +208,7 @@ export default function FindUsPage() {
             <article className="overflow-hidden rounded-[1.9rem] bg-[var(--color-surface-lowest)] shadow-[0px_18px_48px_rgba(27,28,28,0.06)]">
               <Image
                 src={pubExteriorImage}
-                alt="Exterior of The Old School House pub on London Road in Stony Stratford."
+                alt="Exterior of The Old School House pub on London Road in Stony Stratford, close to the High Street."
                 className="h-72 w-full object-cover md:h-80"
                 sizes="(min-width: 768px) 50vw, 100vw"
               />
@@ -143,6 +216,9 @@ export default function FindUsPage() {
                 <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
                   Frontage
                 </p>
+                <h3 className="section-title pt-3">
+                  Recognise the pub from London Road
+                </h3>
                 <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
                   The pub is easy to recognise on London Road once you know the
                   brick frontage you are looking for.
@@ -152,7 +228,7 @@ export default function FindUsPage() {
             <article className="overflow-hidden rounded-[1.9rem] bg-[var(--color-surface-lowest)] shadow-[0px_18px_48px_rgba(27,28,28,0.06)]">
               <Image
                 src={customerParkingImage}
-                alt="Customer parking area at The Old School House in Stony Stratford."
+                alt="Customer parking area at The Old School House pub in Stony Stratford."
                 className="h-72 w-full object-cover md:h-80"
                 sizes="(min-width: 768px) 50vw, 100vw"
               />
@@ -160,6 +236,9 @@ export default function FindUsPage() {
                 <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
                   Arrival
                 </p>
+                <h3 className="section-title pt-3">
+                  Parking and easier arrival
+                </h3>
                 <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
                   A small customer parking area helps make planned dinners,
                   family visits, and longer stays feel simpler from the start.

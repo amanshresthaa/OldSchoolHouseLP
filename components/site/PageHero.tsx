@@ -1,7 +1,9 @@
 import type { ComponentProps } from "react"
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr"
 
+import { PageBreadcrumbs } from "@/components/site/PageBreadcrumbs"
 import { OpenStatusBadge } from "@/components/site/OpenStatusBadge"
+import { buildBreadcrumbItems, type BreadcrumbRoute } from "@/lib/metadata"
 import { SiteActionCard } from "@/components/site/SiteActionCard"
 import { cn } from "@/lib/utils"
 
@@ -18,6 +20,7 @@ interface PageHeroProps extends ComponentProps<"section"> {
   description: string
   primaryAction: HeroAction
   secondaryAction?: HeroAction
+  route?: BreadcrumbRoute
 }
 
 export function PageHero({
@@ -27,10 +30,14 @@ export function PageHero({
   description,
   primaryAction,
   secondaryAction,
+  route,
   ...props
 }: PageHeroProps) {
+  const breadcrumbs = route ? buildBreadcrumbItems(route) : null
+
   return (
     <section
+      data-critical-page-hero
       className={cn(
         "relative overflow-hidden bg-primary text-white",
         className
@@ -68,6 +75,7 @@ export function PageHero({
           <div className="grid gap-8 py-10 md:py-14 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-12 lg:py-16">
             {/* Left column — title */}
             <div className="hero-entrance-delay-1 space-y-5">
+              {breadcrumbs ? <PageBreadcrumbs items={breadcrumbs} /> : null}
               <h1 className="max-w-[22ch] text-[clamp(2.2rem,5vw,3.5rem)] leading-[1.05] font-normal tracking-[-0.03em] text-white">
                 {title}
               </h1>

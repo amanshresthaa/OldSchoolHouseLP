@@ -1,3 +1,5 @@
+import openingHoursData from "@/data/opening-hours.json"
+
 export interface NavItem {
   href: string
   label: string
@@ -23,11 +25,25 @@ export interface OpeningHoursItem {
   hours: string
 }
 
+export interface StructuredValue {
+  label: string
+  value: string
+}
+
 export interface GuestReview {
   name: string
   guestType: string
   focus: string[]
   summary: string
+}
+
+interface OpeningHoursSource {
+  label: string
+  display: string
+  opens: string
+  closes: string
+  days: string[]
+  note: string
 }
 
 export interface LocalFaq {
@@ -85,8 +101,10 @@ export interface RouteConfig {
   stickySecondaryAction?: CtaConfig
 }
 
+const standardOpeningHours: OpeningHoursSource = openingHoursData
+
 export const featureFlags: FeatureFlags = {
-  hoursConfirmed: false,
+  hoursConfirmed: true,
   dogPolicyConfirmed: true,
   familyPolicyConfirmed: true,
   accessibilityConfirmed: true,
@@ -97,11 +115,14 @@ export const featureFlags: FeatureFlags = {
 export const siteName = "The Old School House"
 export const siteDescriptor = "Traditional pub and Nepalese kitchen"
 export const siteLocation = "Stony Stratford, Milton Keynes"
+export const siteLegalName = "Lapen Inns OSH Ltd"
+export const siteCompanyNumber = "16699719"
 export const siteAddress =
   "London Road, Stony Stratford, Milton Keynes, MK11 1JA"
 export const siteUrl = "https://oldschoolhousestony.co.uk"
 export const siteOgImage =
   "https://oldschoolhousestony.co.uk/wp-content/uploads/2026/02/old-school-house-restaurant-.jpg"
+export const siteLogoUrl = `${siteUrl}/icon-512.png`
 export const sitePhone = "01908 561936"
 export const sitePhoneHref = "tel:01908561936"
 export const siteEmail = "hellotheoldschoolhouse@gmail.com"
@@ -115,18 +136,22 @@ export const bookingHref =
   "https://www.nabatable.com/restaurants/the-old-school-house/book"
 export const bookOnlineHref = "/book"
 export const legacyBookOnlineHref = "/book-online"
-export const googleReviewsPageHref =
-  "https://www.google.com/search?q=The+Old+School+House+Stony+Stratford+Reviews#lrd=0x487701c45888b76d:0xaeebe77da7ae4e4e,1,,,,"
-export const googleReviewHref =
-  "https://search.google.com/local/writereview?placeid=ChIJbbeIWMQBd0gRTk6up33n664"
 export const socialLinks = [
   "https://www.facebook.com/OldSchoolHouseStony/",
   "https://www.instagram.com/oldschoolhousestony/",
 ]
 export const siteMenuPdfHref = "/downloads/old-school-house-menu.pdf"
+export const siteOrganizationId = `${siteUrl}/#organization`
+export const siteWebsiteId = `${siteUrl}/#website`
+export const siteRestaurantId = `${siteUrl}/#restaurant`
+export const siteMenuPageUrl = `${siteUrl}/menu`
+export const siteMenuId = `${siteMenuPageUrl}#menu`
+export const sanjogGautamPagePath = "/about/sanjog-gautam"
+export const sanjogGautamPageUrl = `${siteUrl}${sanjogGautamPagePath}`
+export const sanjogGautamId = `${sanjogGautamPageUrl}#person`
 
 export const siteDescription =
-  "A traditional pub on London Road in Stony Stratford with a standout Nepalese kitchen, Sunday roast, live sport, and a welcoming place to book for food and drinks."
+  "A recently refurbished traditional pub on London Road in Stony Stratford with a Nepalese kitchen, live sport, private hire, and room to book inside and out."
 
 export const heroSignals = [
   "Traditional pub on London Road",
@@ -136,97 +161,88 @@ export const heroSignals = [
 
 export const proofPoints: ProofPoint[] = [
   {
-    title: "Traditional pub, central Stony Stratford setting",
+    title: "Traditional pub and Nepalese kitchen on the busiest road in town",
     description:
-      "A characterful brick pub on London Road with exposed brick, wooden floors, and the easy feel of a proper local.",
+      "The Old School House stands out on London Road with the look and feel of a proper local, then gives the visit more identity once the Nepalese kitchen comes into play.",
   },
   {
-    title: "Nepalese kitchen with dishes people actually remember",
+    title: "Recently invested in, inside and out",
     description:
-      "Momo, curries, and grills give the menu a stronger identity than a standard pub food offer without changing the pub-first feel.",
+      "Recent internal and external investment gives the pub a stronger first impression while keeping the exposed brick, wooden floors, and traditional character intact.",
   },
   {
-    title: "65 covers inside, 60 outside",
+    title: "125 covers across the pub, front garden, and courtyard",
     description:
-      "There is room for quieter lunches, bigger tables, sport-led visits, and the kind of evening that turns into another round.",
+      "With 65 covers inside and 60 outside, the venue can handle everyday meals, larger tables, sport-led nights, and longer stays with ease.",
   },
   {
-    title: "Front garden, private courtyard, easier arrival",
+    title: "Front garden, private courtyard, and small car park",
     description:
-      "Outdoor drinks and dining have more than one setting here, with a small car park helping to make arrival simpler too.",
+      "Outdoor drinks and dining have more than one setting here, and the arrival side stays easier thanks to the small car park and visible roadside plot.",
   },
   {
-    title: "Live sport, quiz nights, and repeat-visit reasons",
+    title: "Sky Sports, TNT Sports, and local reasons to return",
     description:
-      "The room suits match days, quiz nights, tasting evenings, and informal celebrations without losing its local pub atmosphere.",
+      "Match days, theme nights, tastings, and community gatherings help keep the pub active without losing the local atmosphere.",
   },
   {
-    title: "Close to the High Street and Horsefair Green",
+    title: "Lapen Inns warmth with award-backed sustainability",
     description:
-      "The location works well for planned dinners, walk-ins, and visits that start elsewhere in town before settling in here.",
+      "Lapen Inns pairs Nepalese warmth with beloved East Anglian pubs, and the group’s BII Sustainability Champion Award adds another layer of trust.",
   },
 ]
 
 export const homeReasons: HighlightItem[] = [
   {
-    title: "A proper pub, with food people mention afterwards",
+    title: "Keep the local alive",
     description:
-      "The traditional pub feel gets people through the door. The Nepalese dishes are what make the visit feel different once the food arrives.",
+      "The offer is built around the rituals that make a proper local matter: sport, quiz-led nights, community gatherings, and a room that still works for a casual pint as well as dinner.",
   },
   {
-    title: "Built for a pint, a dinner table, or a longer Sunday stay",
+    title: "Nepalese hospitality in a pub setting",
     description:
-      "The room works for lunch, dinner, live sport, and the kind of visit that starts casually and runs longer than planned.",
+      "The Lapen Inns approach is about generosity, menu guidance, and a welcome that treats people with warmth rather than formality, while the pub itself stays easy and familiar.",
   },
   {
-    title: "Easier for mixed tables than a one-note venue",
+    title: "Family and community first",
     description:
-      "Pub favourites and Nepalese dishes sit together well, which makes family tables, group meals, and mixed tastes simpler to organise.",
+      "The venue is designed to work for daytime regulars, families, sports teams, relaxed dinners, and mixed groups who want value, comfort, and room to settle in.",
+  },
+  {
+    title: "Honest plates and pints",
+    description:
+      "Pub classics, Sunday roasts, momo, curries, and grills give tables a clear choice between familiar comfort and Nepalese signatures without compromising on quality or value.",
   },
 ]
 
 export const guestReviews: GuestReview[] = [
   {
-    name: "Asha K.",
-    guestType: "Local regular",
-    focus: ["Food", "Atmosphere", "Drinks"],
+    name: "Daytime visit",
+    guestType: "Everyday pub visit",
+    focus: ["Traditional pub", "Warm welcome", "Easy lunch"],
     summary:
-      "The chicken momo and Kathmandu Tikka Masala keep pulling me back in, especially when I want good atmosphere and a proper drink alongside dinner.",
+      "The room is set up for the kind of daytime stop that still matters in a proper local: relaxed service, familiar surroundings, and enough food choice to stay longer than planned.",
   },
   {
-    name: "Chris M.",
-    guestType: "First-time diner",
-    focus: ["Food", "Atmosphere"],
+    name: "Family meal",
+    guestType: "Mixed-age meal",
+    focus: ["Pub classics", "Nepalese dishes", "Value"],
     summary:
-      "My first visit felt different from the usual curry order. The veg momo, chilli paneer, and Bhutuwa Lamb stood out straight away, and the room felt relaxed from the start.",
+      "The dual menu makes family and mixed-group meals easier because familiar pub comfort and more distinctive Nepalese dishes can both sit on the same table without compromise.",
   },
   {
-    name: "Priya S.",
-    guestType: "Date-night guest",
-    focus: ["Drinks", "Atmosphere"],
+    name: "Match night",
+    guestType: "Sport-led evening",
+    focus: ["Sky & TNT", "Team socials", "Food + rounds"],
     summary:
-      "The Kathmandu Tikka and Rara King Prawn both felt a little more special, and the drinks and atmosphere made it easy to stay for another round.",
+      "Live sport matters here, but the evening still feels like a full pub plan with food, drinks, and room for local teams and social groups to settle in.",
   },
   {
-    name: "Jordan T.",
-    guestType: "Group night out",
-    focus: ["Food", "Drinks"],
+    name: "First visit",
+    guestType: "Nepalese kitchen visit",
+    focus: ["Momo", "Menu guidance", "Warm service"],
     summary:
-      "The Large Mixed Grill, Chicken Biryani, and Lasun Kukhura Khursani were perfect for sharing, with enough heat and colour to keep the whole table talking.",
-  },
-  {
-    name: "Manish R.",
-    guestType: "Midweek visitor",
-    focus: ["Food", "Atmosphere"],
-    summary:
-      "The Khasi Ko Masu goat curry and Special Butter Chicken arrived rich, hot, and full of flavour, and the room made it easy to stay longer than planned.",
-  },
-  {
-    name: "Leah P.",
-    guestType: "Match-night diner",
-    focus: ["Food", "Atmosphere", "Drinks"],
-    summary:
-      "Chicken Chilli, momo, and the Small Mixed Grill were ideal before kick-off, and the pub still felt warm and welcoming once the screens came on.",
+      "The Nepalese kitchen gives first-time guests a clear reason to remember the visit, especially when the team helps guide the table toward momo, curries, grills, and dishes that suit the group.",
   },
 ]
 
@@ -239,7 +255,7 @@ export const aboutReasons: HighlightItem[] = [
   {
     title: "A concept that feels clear rather than confused",
     description:
-      "The pub stays pub-led, while the Nepalese kitchen gives the food a stronger point of difference once you have taken your seat.",
+      "The pub keeps its local character, while the Nepalese kitchen gives the food a stronger point of difference once you have taken your seat and the team starts guiding the table.",
   },
   {
     title: "Room for everyday visits and bigger plans",
@@ -262,13 +278,24 @@ export const aboutPubFacts: InfoItem[] = [
   {
     label: "Kitchen",
     value:
-      "A commercial trade kitchen behind both the pub and Nepalese sides of the menu",
+      "A full trade kitchen behind both the pub favourites and Nepalese dishes on the menu",
   },
   { label: "Parking", value: "A small car park helps make arrival easier" },
   {
     label: "Offer",
     value:
       "Traditional pub ethos first, Nepalese kitchen as the standout difference",
+  },
+]
+
+export const organizationFactSheet: StructuredValue[] = [
+  { label: "Official company name", value: siteLegalName },
+  { label: "Company number", value: siteCompanyNumber },
+  { label: "Registered venue address", value: siteAddress },
+  { label: "Primary phone number", value: sitePhone },
+  {
+    label: "Standard licensed opening hours",
+    value: standardOpeningHours.display,
   },
 ]
 
@@ -279,14 +306,48 @@ export const aboutStoryNotes = [
 ]
 
 export const aboutOperatorNotes = [
-  "Sanjog Gautam, known as San, took on The Old School House after years spent running a cafe, restaurant, and pub, so he arrived with a clear sense of how a room should flow and how a menu should earn repeat visits.",
+  "Sanjog Gautam, known as San, is a vastly experienced business and restaurant manager who has operated a cafe, restaurant, and pub before taking on The Old School House.",
   "His philosophy is simple: keep the classic pub welcome intact, make the service generous and relaxed, and let the Nepalese dishes add depth, warmth, and real character rather than novelty for its own sake.",
+  "The hospitality side matters just as much as the dishes. Guests are looked after with menu guidance, help around spice and dietary requests, and the warmth of a family-run room rather than a transactional stop.",
   "That is why the food feels specifically his. Momo, curries, grilled dishes, and sharper Nepalese flavours sit on the menu because he wants the pub to offer something memorable while still feeling easy for you to enjoy on an ordinary lunch, dinner, or Sunday visit.",
+]
+
+export const sanjogGautamHighlights: HighlightItem[] = [
+  {
+    title: "Hands-on operator across cafe, restaurant, and pub settings",
+    description:
+      "San's background is not theoretical. He has already run a cafe, a restaurant, and a pub, which gives him a practical sense of service rhythm, staffing, and repeat-visit hospitality.",
+  },
+  {
+    title: "Business and restaurant management grounded in real guest service",
+    description:
+      "He brings day-to-day management experience to the floor as well as the menu, from guest flow and table pacing to making sure mixed groups feel looked after rather than processed.",
+  },
+  {
+    title:
+      "Clear point of view on how a pub and Nepalese kitchen should work together",
+    description:
+      "At The Old School House, San keeps the traditional pub identity easy to recognise while using the Nepalese kitchen to give the visit more warmth, depth, and memorability.",
+  },
+]
+
+export const sanjogGautamExperienceNotes = [
+  "San is the operator behind The Old School House and the person responsible for how the room feels in practice, from the pub welcome to the way the menu is explained.",
+  "His experience across cafe, restaurant, and pub businesses means he understands the difference between a venue that looks good online and one that actually works for repeat local trade.",
+  "That shows up in the details: generous service, calm menu guidance, practical attention to group dynamics, and a belief that the food should add identity without making the pub feel hard to understand.",
+]
+
+export const sanjogGautamExpertiseAreas = [
+  "Pub operations and guest flow",
+  "Restaurant and cafe management",
+  "Menu development for mixed tables",
+  "Nepalese hospitality and dish guidance",
+  "Warm, family-led service standards",
 ]
 
 export const aboutFamilyNotes = [
   "The Old School House is part of the Lapen Inns family, a group known for pairing pub comfort with Nepalese kitchens in a way that still feels grounded in each local setting.",
-  "Across the wider family, the idea stays consistent: warm hospitality, familiar pub ease, and food that gives you a reason to come back for more than another pint.",
+  "Across the wider family, the idea stays consistent: Nepalese warmth inside beloved East Anglian pubs, familiar pub ease, and food that gives you a reason to come back for more than another pint.",
   "Here in Stony Stratford, that approach still starts with the local pub first and then lets the kitchen add its own identity once you are at the table.",
 ]
 
@@ -354,33 +415,35 @@ export const eventsHighlights: HighlightItem[] = [
   {
     title: "Live sport with a proper pub atmosphere around it",
     description:
-      "Fixtures matter here, but so do the food, drinks, and the room around them, which keeps the visit feeling like a pub night rather than a screen-only stop.",
+      "The live sport offer is designed around Sky Sports and TNT Sports, with the room still feeling like a pub night rather than a screen-only stop.",
   },
   {
-    title: "Quiz nights, tasting evenings, and local reasons to return",
+    title: "Theme nights, tastings, and local reasons to return",
     description:
-      "The calendar gives regulars and casual visitors more than one reason to come back beyond a single meal.",
+      "Theme-led nights, tastings, and community-led occasions give regulars and casual visitors more than one reason to come back beyond a single meal.",
   },
   {
     title: "A venue that handles bigger tables and informal occasions well",
     description:
-      "Birthdays, work drinks, sports socials, and family gatherings all fit easily here without losing the relaxed pub feel.",
+      "Birthdays, work drinks, sports socials, local team meetups, and family gatherings all fit here without losing the relaxed pub feel.",
   },
 ]
 
 export const reassuranceHighlights: HighlightItem[] = [
   {
-    title: "Traditional pub identity",
-    description: "The site and the venue both lead with the pub first.",
-  },
-  {
-    title: "Standout food without the confusion",
+    title: "Recent investment with traditional character still intact",
     description:
-      "The Nepalese kitchen stands out without making the offer feel split.",
+      "Recent internal and external investment has sharpened the pub up while keeping the exposed brick, wooden floors, and warm local feel people expect.",
   },
   {
-    title: "Fast paths to action",
-    description: "Book, menu, phone, and directions stay easy to reach.",
+    title: "A room built for everyday trade and bigger plans",
+    description:
+      "An open-plan bar, 125 total covers, and a flexible inside-outside layout give the venue range without making it feel overbuilt or formal.",
+  },
+  {
+    title: "A pub identity with a stronger hospitality point of difference",
+    description:
+      "The pub keeps its local feel, while the Nepalese kitchen, warmer service style, and clearer menu guidance give the visit more personality once you sit down.",
   },
 ]
 
@@ -432,12 +495,12 @@ export const bookingUrgencyNote =
   "Busier evenings and Sundays are easiest to plan when you book ahead."
 
 export const eventOccasions = [
-  "Quiz nights and tasting evenings",
+  "Sky Sports and TNT Sports match nights",
+  "Quiz nights, tastings, and theme-led evenings",
   "Birthdays and informal celebrations",
   "Work drinks and team socials",
-  "Sports group meetups",
-  "Community gatherings",
-  "Festive and seasonal pub events",
+  "Pool teams, rugby clubs, cricket clubs, and local sports groups",
+  "Community gatherings and seasonal pub events",
 ]
 
 export const drinksHighlights = [
@@ -473,13 +536,14 @@ export const accessibilityNotes = [
   "The pub has a small car park on site and a central London Road location that can make arrival easier to plan.",
 ]
 
-export const openingHours: OpeningHoursItem[] = featureFlags.hoursConfirmed
-  ? [{ label: "Monday to Sunday", hours: "10:00 - 00:30" }]
-  : [{ label: "Opening hours", hours: "Call the pub for today’s hours" }]
+export const openingHours: OpeningHoursItem[] = [
+  {
+    label: "Licensed hours",
+    hours: standardOpeningHours.display,
+  },
+]
 
-export const openingHoursNote = featureFlags.hoursConfirmed
-  ? "Bank holiday and festive hours can vary, so please call if you are travelling for a specific day."
-  : "Trading hours will be published once they are fully confirmed. Please call before travelling for a specific service or day."
+export const openingHoursNote = standardOpeningHours.note
 
 export const policyNotes = [
   "Challenge 25 is in operation for alcohol sales.",
@@ -487,47 +551,110 @@ export const policyNotes = [
   "Call ahead if your visit depends on a specific service time, event, or access arrangement.",
 ]
 
-export const localBusinessSchema = {
+const postalAddressSchema = {
+  "@type": "PostalAddress",
+  streetAddress: "London Road",
+  addressLocality: "Stony Stratford",
+  addressRegion: "Milton Keynes",
+  postalCode: "MK11 1JA",
+  addressCountry: "GB",
+}
+
+const openingHoursSpecification = [
+  {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: standardOpeningHours.days,
+    opens: standardOpeningHours.opens,
+    closes: standardOpeningHours.closes,
+  },
+]
+
+export const organizationSchema = {
   "@context": "https://schema.org",
-  "@type": "BarOrPub",
-  name: siteName,
-  description: siteDescription,
+  "@type": "Organization",
+  "@id": siteOrganizationId,
+  name: siteLegalName,
+  alternateName: siteName,
+  legalName: siteLegalName,
   url: siteUrl,
-  image: siteOgImage,
-  hasMenu: `${siteUrl}/menu`,
-  servesCuisine: ["British", "Nepalese"],
-  acceptsReservations: "True",
-  areaServed: ["Stony Stratford", "Milton Keynes"],
+  description: siteDescription,
   telephone: sitePhone,
   email: siteEmail,
-  hasMap: mapHref,
-  sameAs: socialLinks,
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "London Road",
-    addressLocality: "Stony Stratford",
-    addressRegion: "Milton Keynes",
-    postalCode: "MK11 1JA",
-    addressCountry: "GB",
+  logo: {
+    "@type": "ImageObject",
+    url: siteLogoUrl,
   },
-  ...(featureFlags.hoursConfirmed
-    ? {
-        openingHoursSpecification: [
-          {
-            "@type": "OpeningHoursSpecification",
-            dayOfWeek: [
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday",
-              "Sunday",
-            ],
-            opens: "10:00",
-            closes: "00:30",
+  address: postalAddressSchema,
+  sameAs: socialLinks,
+  identifier: {
+    "@type": "PropertyValue",
+    propertyID: "Companies House number",
+    value: siteCompanyNumber,
+  },
+  owns: {
+    "@id": siteRestaurantId,
+  },
+  employee: {
+    "@id": sanjogGautamId,
+  },
+}
+
+export function buildLocalBusinessSchema(mainEntityOfPage?: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": ["Restaurant", "BarOrPub"],
+    "@id": siteRestaurantId,
+    name: siteName,
+    legalName: siteLegalName,
+    description: siteDescription,
+    url: siteUrl,
+    image: siteOgImage,
+    servesCuisine: ["British", "Nepalese"],
+    acceptsReservations: true,
+    areaServed: ["Stony Stratford", "Milton Keynes"],
+    telephone: sitePhone,
+    email: siteEmail,
+    hasMap: mapHref,
+    sameAs: socialLinks,
+    address: postalAddressSchema,
+    parentOrganization: {
+      "@id": siteOrganizationId,
+    },
+    hasMenu: {
+      "@id": siteMenuId,
+    },
+    openingHoursSpecification,
+    ...(mainEntityOfPage
+      ? {
+          mainEntityOfPage: {
+            "@id": `${mainEntityOfPage}#webpage`,
           },
-        ],
-      }
-    : {}),
+        }
+      : {}),
+  }
+}
+
+export const localBusinessSchema = buildLocalBusinessSchema()
+
+export const sanjogGautamPersonSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": sanjogGautamId,
+  name: "Sanjog Gautam",
+  alternateName: "San Gautam",
+  description:
+    "Sanjog (San) Gautam is a vastly experienced business and restaurant manager who has operated a cafe, restaurant, and pub, and now leads The Old School House in Stony Stratford.",
+  url: sanjogGautamPageUrl,
+  jobTitle: "Business and restaurant manager",
+  worksFor: {
+    "@id": siteOrganizationId,
+  },
+  knowsAbout: [
+    "Pub operations",
+    "Restaurant management",
+    "Cafe management",
+    "Nepalese hospitality",
+    "Menu development",
+    "Guest experience",
+  ],
 }

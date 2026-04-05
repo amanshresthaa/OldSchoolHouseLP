@@ -9,19 +9,19 @@ export const homeMenuShowcase = [
     title: "Momo",
     description:
       "Steamed dumplings with a delicate wrapper, juicy filling, and a bright chutney on the side — the plate that gets passed around once and ordered again on the next visit.",
-    alt: "Steamed momo dumplings with chutney at The Old School House.",
+    alt: "Steamed momo dumplings with chutney served at The Old School House in Stony Stratford.",
   },
   {
     title: "Mixed grill",
     description:
       "Sizzling, smoky, and made for the middle of the table, with charred edges and enough spice to keep the next round of pints moving.",
-    alt: "A mixed grill platter served at The Old School House.",
+    alt: "Mixed grill platter from the menu at The Old School House in Stony Stratford.",
   },
   {
     title: "Pub classics",
     description:
       "Pub classics keep mixed tables comfortable, while the Nepalese side of the kitchen gives the meal its talking point.",
-    alt: "A comforting pub plate served at The Old School House.",
+    alt: "Pub classics served at The Old School House in Stony Stratford.",
   },
 ]
 
@@ -29,30 +29,40 @@ export const homeStoryFeature = {
   eyebrow: "Why choose us",
   title: "Traditional pub first. Nepalese kitchen as the standout difference.",
   description:
-    "You can settle into a proper pub straight away, then discover the Nepalese kitchen once the first drinks are on the table.",
-  alt: "Pints being poured at the bar inside The Old School House.",
+    "You can settle into a proper pub straight away, then discover the Nepalese kitchen once the first drinks are on the table and the team starts guiding the order.",
+  alt: "Pints being poured at the bar inside The Old School House pub in Stony Stratford.",
 }
 
 export const homeProofBarItems = [
   {
-    title: "London Road, close to the High Street",
+    title: "Recently refurbished",
     description:
-      "Easy for a planned dinner, a pub stop after time in town, or a quick decision once you are already in central Stony Stratford.",
+      "Recent investment inside and out gives the pub a sharper first impression without losing its traditional character.",
   },
   {
-    title: "65 covers inside, 60 outside",
+    title: "125 covers in total",
     description:
-      "There is enough room here for quieter meals, bigger tables, and visits that shift from one round into dinner.",
+      "With 65 covers inside and 60 outside, the venue works for quieter meals, bigger tables, and sport-led nights that roll into dinner.",
   },
   {
-    title: "Front garden, courtyard, and easier arrival",
+    title: "Pub classics + Nepalese kitchen",
     description:
-      "Outdoor seating and a small car park make the pub easier to use for garden drinks, family visits, and longer stays.",
+      "The offer is built around honest British pub comfort alongside momo, curries, and Nepalese signatures that give the table a stronger talking point.",
   },
   {
-    title: "Menu, booking, and directions in one move",
+    title: "Front garden, courtyard, and small car park",
     description:
-      "The next step stays simple whether you want to browse first, book ahead, or get here quickly.",
+      "Outdoor seating, a private courtyard, and easier arrival all help the pub work for family visits, longer stays, and everyday trade.",
+  },
+  {
+    title: "Sky Sports and TNT Sports",
+    description:
+      "The live sport offer sits inside a proper pub atmosphere, with room for match nights, team socials, and repeat local visits.",
+  },
+  {
+    title: "Lapen Inns sustainability standards",
+    description:
+      "The Lapen Inns group’s BII Sustainability Champion Award adds another layer of trust to the way the pub is run.",
   },
 ] as const
 
@@ -62,7 +72,7 @@ export const homeAtmosphereTiles = [
     eyebrow: "Inside the pub",
     title: "Traditional room, warm feel",
     description: "See the setting and character that shape the place.",
-    alt: "Interior seating area inside The Old School House pub.",
+    alt: "Interior seating area inside The Old School House pub in Stony Stratford.",
   },
   {
     href: "/beer-garden-stony-stratford",
@@ -76,23 +86,25 @@ export const homeAtmosphereTiles = [
     eyebrow: "Capacity and flow",
     title: "Room to settle in",
     description: "Get the feel for the space before you arrive.",
-    alt: "Another view of the seating area inside The Old School House.",
+    alt: "Another view of the indoor seating area at The Old School House pub in Stony Stratford.",
   },
 ]
 
 export const homeEventsFeature = {
   href: "/events",
   eyebrow: "Repeat-visit reasons",
-  title: "Sport, quiz nights, and local occasions",
-  description: "The quickest way into what is happening beyond a single meal.",
-  alt: "Large-screen sport setup inside The Old School House pub.",
+  title: "Sport, local teams, and themed nights",
+  description:
+    "The quickest way into match nights, local group use, tastings, and the occasions that turn the pub into a repeat stop.",
+  alt: "Large-screen live sport setup inside The Old School House pub in Stony Stratford.",
 }
 
 export const homeVisitSectionCopy = {
   eyebrow: "Visit us",
-  title: "Easy to work into a day or evening in central Stony Stratford.",
+  title:
+    "Easy to work into a day or evening on London Road in Stony Stratford.",
   description:
-    "Close to the High Street and Horsefair Green, with room to settle in for lunch, dinner, garden drinks, or a town-centre meet-up.",
+    "Open daily from 10:00 to 00:30, close to the High Street and Horsefair Green, with room to settle in for lunch, dinner, garden drinks, or a town-centre meet-up.",
 }
 
 export const homeInlineCtaCopy = {

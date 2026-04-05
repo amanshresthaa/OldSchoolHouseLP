@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { AlternatingSectionGrid } from "@/components/site/AlternatingSectionGrid"
 import { PageSignoff } from "@/components/site/PageSignoff"
 import { PageHero } from "@/components/site/PageHero"
+import { RouteStructuredData } from "@/components/site/RouteStructuredData"
 import { SectionHeading } from "@/components/site/SectionHeading"
 
 import { getRouteConfig } from "@/data/site-routes"
@@ -61,7 +62,9 @@ const termsSections = [
 export default function TermsOfServicePage() {
   return (
     <main>
+      <RouteStructuredData route={route!} />
       <PageHero
+        route={route!}
         eyebrow="Terms"
         title="If you are booking, checking the menu, or looking up details for today, here is the short version."
         description="The website is here to help you plan, but some things still need a quick word with the pub. This page keeps that simple."

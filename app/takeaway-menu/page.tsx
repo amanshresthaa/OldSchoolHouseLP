@@ -3,6 +3,7 @@ import { DownloadSimple, Phone } from "@phosphor-icons/react/dist/ssr"
 
 import { InlineBookingCta } from "@/components/site/InlineBookingCta"
 import { PageHero } from "@/components/site/PageHero"
+import { RouteStructuredData } from "@/components/site/RouteStructuredData"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import { SiteActionCard } from "@/components/site/SiteActionCard"
 import { siteMenuPdfHref, sitePhone, sitePhoneHref } from "@/data/site"
@@ -41,7 +42,9 @@ const takeawayChecklist = [
 export default function TakeawayMenuPage() {
   return (
     <main>
+      <RouteStructuredData route={route!} />
       <PageHero
+        route={route!}
         eyebrow="Takeaway menu"
         title="Browse at home, order by phone, collect from the pub."
         description="Our takeaway is collection only — browse the menu, give us a ring to order, and pick it up when it is ready."
@@ -58,8 +61,8 @@ export default function TakeawayMenuPage() {
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <SectionHeading
               eyebrow="How to order"
-              title="Keep it easy."
-              description="Browse first, call second, and use the live menu if you want the quickest way through the full range."
+              title="How takeaway collection works at our Stony Stratford pub."
+              description="Browse first, call second, and use the live menu if you want the quickest route through starters, curries, grills, sides, and desserts."
             />
             <div className="shrink-0">
               <SiteActionCard
@@ -107,7 +110,7 @@ export default function TakeawayMenuPage() {
                     : "bg-[var(--color-surface-lowest)]"
                 }`}
               >
-                <h2 className="section-title">{card.title}</h2>
+                <h3 className="section-title">{card.title}</h3>
                 <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
                   {card.description}
                 </p>
@@ -117,9 +120,9 @@ export default function TakeawayMenuPage() {
 
           <div className="grid gap-px overflow-hidden rounded-2xl bg-[rgba(196,189,181,0.22)] md:grid-cols-2">
             <div className="bg-[var(--color-surface-lowest)] px-5 py-5 md:px-6 md:py-6">
-              <h2 className="section-title">
+              <h3 className="section-title">
                 Best if you want to share the menu
-              </h2>
+              </h3>
               <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
                 The downloadable menu is useful when you want to compare a few
                 options, sit with the choice for a bit, or send it to someone
@@ -127,9 +130,9 @@ export default function TakeawayMenuPage() {
               </p>
             </div>
             <div className="surface-pane-muted px-5 py-5 md:px-6 md:py-6">
-              <h2 className="section-title">
+              <h3 className="section-title">
                 Best if you want to browse quickly
-              </h2>
+              </h3>
               <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
                 The live menu is better when you want to jump straight to
                 starters, mixed grills, curries, sides, or desserts without

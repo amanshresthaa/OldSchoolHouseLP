@@ -12,7 +12,7 @@ export const traditionalPubSections: FeaturePageSection[] = [
     title:
       "This works because the pub feel comes first and the Nepalese kitchen makes the visit more memorable second.",
     description:
-      "The Old School House keeps everything people want from a proper local on London Road: exposed brick, wooden floors, a warm pub interior, outdoor seating, and a relaxed atmosphere. The Nepalese kitchen then gives the menu a stronger identity once the table is already comfortable.",
+      "The Old School House keeps everything people want from a proper local on London Road: exposed brick, wooden floors, a warm pub interior, outdoor seating, and a relaxed atmosphere. The Nepalese kitchen then gives the menu a stronger identity once the table is already comfortable, and recent investment helps the room land well from the first impression.",
     columns: 3,
     cards: [
       {
@@ -23,7 +23,7 @@ export const traditionalPubSections: FeaturePageSection[] = [
       {
         title: "More distinctive once the food arrives",
         description:
-          "Momo, curries, grills, and wider kitchen favourites give people more to talk about than a standard pub menu would on its own.",
+          "Momo, curries, grills, and wider kitchen favourites give people more to talk about than a standard pub menu would on its own, while still fitting a pub visit naturally.",
       },
       {
         title: "Better for mixed groups",

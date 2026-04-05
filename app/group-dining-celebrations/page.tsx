@@ -19,6 +19,7 @@ export const metadata: Metadata = buildPageMetadata(route!.meta)
 export default function GroupDiningCelebrationsPage() {
   return (
     <FeaturePage
+      route={route!}
       hero={route!.hero!}
       sections={groupDiningSections}
       checklist={groupDiningChecklist}

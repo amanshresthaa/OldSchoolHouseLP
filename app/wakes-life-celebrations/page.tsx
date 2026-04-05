@@ -25,6 +25,7 @@ export const metadata: Metadata = buildPageMetadata(route!.meta)
 export default function WakesLifeCelebrationsPage() {
   return (
     <FeaturePage
+      route={route!}
       hero={route!.hero!}
       sections={wakesSections}
       checklist={wakesChecklist}

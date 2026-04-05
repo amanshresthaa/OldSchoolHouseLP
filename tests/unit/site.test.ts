@@ -4,7 +4,14 @@ import {
   featureFlags,
   localBusinessSchema,
   openingHours,
+  organizationSchema,
+  sanjogGautamPersonSchema,
   siteAddress,
+  siteLegalName,
+  siteName,
+  siteOrganizationId,
+  siteRestaurantId,
+  siteUrl,
 } from "../../data/site"
 import {
   getRouteConfig,
@@ -55,8 +62,8 @@ describe("site data exports", () => {
     expect(siteAddress).toContain("Stony Stratford")
     expect(openingHours).toEqual([
       {
-        label: "Opening hours",
-        hours: "Call the pub for today’s hours",
+        label: "Licensed hours",
+        hours: "10:00 - 00:30",
       },
     ])
     expect(localBusinessSchema).toEqual(
@@ -66,10 +73,44 @@ describe("site data exports", () => {
         address: expect.objectContaining({
           postalCode: "MK11 1JA",
         }),
+        openingHoursSpecification: [
+          expect.objectContaining({
+            opens: "10:00",
+            closes: "00:30",
+          }),
+        ],
       })
     )
-    expect(featureFlags.hoursConfirmed).toBe(false)
-    expect(localBusinessSchema).not.toHaveProperty("openingHoursSpecification")
+    expect(featureFlags.hoursConfirmed).toBe(true)
+  })
+
+  it("keeps the knowledge graph anchored to a single organization id", () => {
+    expect(organizationSchema).toEqual(
+      expect.objectContaining({
+        "@id": `${siteUrl}/#organization`,
+        name: siteLegalName,
+        alternateName: siteName,
+        owns: {
+          "@id": siteRestaurantId,
+        },
+      })
+    )
+
+    expect(localBusinessSchema).toEqual(
+      expect.objectContaining({
+        parentOrganization: {
+          "@id": siteOrganizationId,
+        },
+      })
+    )
+
+    expect(sanjogGautamPersonSchema).toEqual(
+      expect.objectContaining({
+        worksFor: {
+          "@id": siteOrganizationId,
+        },
+      })
+    )
   })
 
   it("returns route configs for published pages and undefined for unknown routes", () => {

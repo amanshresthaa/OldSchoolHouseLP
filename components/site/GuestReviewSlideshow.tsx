@@ -10,7 +10,7 @@ interface GuestReviewSlideshowProps extends React.ComponentPropsWithoutRef<"arti
   reviews: GuestReview[]
 }
 
-function GoogleStars() {
+function ReviewStars() {
   return (
     <div className="flex items-center gap-0.5 text-[var(--color-tertiary)]">
       {Array.from({ length: 5 }).map((_, index) => (
@@ -29,6 +29,7 @@ function getInitials(name: string) {
     .filter(Boolean)
     .slice(0, 2)
     .join("")
+    .toUpperCase()
 }
 
 export function GuestReviewSlideshow({
@@ -110,10 +111,10 @@ export function GuestReviewSlideshow({
         ) : null}
       </div>
 
-      <GoogleStars />
+      <ReviewStars />
 
       <p className="text-[0.875rem] leading-[1.6] text-on-surface md:text-[0.9375rem]">
-        &quot;{activeReview.summary}&quot;
+        {activeReview.summary}
       </p>
 
       <div className="flex flex-wrap items-end justify-between gap-4 border-t border-[rgba(196,189,181,0.2)] pt-4">

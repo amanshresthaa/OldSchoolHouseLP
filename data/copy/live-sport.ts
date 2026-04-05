@@ -11,7 +11,7 @@ export const liveSportSections = [
     eyebrow: "Live sport at the pub",
     title: "Watch live sport in a pub that still feels like a proper local.",
     description:
-      "The Old School House is the kind of place where the screen matters, but so do the drinks, the food, and the atmosphere around the table. That makes it a stronger choice than a screen-only stop.",
+      "The Old School House is the kind of place where the screen matters, but so do the drinks, the food, and the atmosphere around the table. With Sky Sports and TNT Sports in the mix, it becomes a stronger choice than a screen-only stop.",
     columns: 3,
     cards: [
       {
@@ -27,7 +27,7 @@ export const liveSportSections = [
       {
         title: "A natural fit for sports socials",
         description:
-          "If the sport is part of a bigger catch-up, the pub also works well for sports groups and casual socials that want food and drinks around the visit.",
+          "If the sport is part of a bigger catch-up, the pub also works well for sports groups, pool teams, and casual socials that want food and drinks around the visit.",
       },
     ],
   },

@@ -10,6 +10,7 @@ import {
 
 import { PageHero } from "@/components/site/PageHero"
 import { PageSignoff } from "@/components/site/PageSignoff"
+import { RouteStructuredData } from "@/components/site/RouteStructuredData"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import {
   aboutBuildingSection,
@@ -28,6 +29,11 @@ import {
   aboutReasons,
   aboutStoryNotes,
   lapenInnsHref,
+  organizationFactSheet,
+  sanjogGautamId,
+  sanjogGautamPagePath,
+  siteOrganizationId,
+  siteRestaurantId,
   siteEmailHref,
 } from "@/data/site"
 import { getRouteConfig } from "@/data/site-routes"
@@ -43,7 +49,14 @@ export const metadata: Metadata = buildPageMetadata(route!.meta)
 export default function AboutPage() {
   return (
     <main>
-      <PageHero {...route!.hero!} />
+      <RouteStructuredData
+        route={route!}
+        pageType="AboutPage"
+        authorId={sanjogGautamId}
+        aboutIds={[siteOrganizationId, siteRestaurantId, sanjogGautamId]}
+        mainEntityId={siteOrganizationId}
+      />
+      <PageHero {...route!.hero!} route={route!} />
 
       <section className="bg-background py-10 md:py-14 lg:py-16">
         <div className="section-shell space-y-5">
@@ -58,7 +71,7 @@ export default function AboutPage() {
                     : "bg-[var(--color-surface-lowest)]"
                 }`}
               >
-                <h2 className="section-title">{reason.title}</h2>
+                <h3 className="section-title">{reason.title}</h3>
                 <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
                   {reason.description}
                 </p>
@@ -69,7 +82,7 @@ export default function AboutPage() {
             <article className="overflow-hidden rounded-[2rem] bg-[var(--color-surface-lowest)] shadow-[0px_18px_48px_rgba(27,28,28,0.06)]">
               <Image
                 src={pubExteriorImage}
-                alt="Exterior of The Old School House pub in Stony Stratford."
+                alt="Exterior of The Old School House pub on London Road in Stony Stratford."
                 className="h-80 w-full object-cover md:h-[28rem]"
                 sizes="(min-width: 1280px) 50vw, 100vw"
               />
@@ -78,7 +91,7 @@ export default function AboutPage() {
               <article className="overflow-hidden rounded-[1.7rem] bg-[var(--color-surface-lowest)] shadow-[0px_10px_28px_rgba(27,28,28,0.05)]">
                 <Image
                   src={indoorSeatingImage}
-                  alt="Interior seating area inside The Old School House."
+                  alt="Interior seating area inside The Old School House pub in Stony Stratford."
                   className="h-60 w-full object-cover"
                   sizes="(min-width: 640px) 50vw, 100vw"
                 />
@@ -86,12 +99,41 @@ export default function AboutPage() {
               <article className="overflow-hidden rounded-[1.7rem] bg-[var(--color-surface-lowest)] shadow-[0px_10px_28px_rgba(27,28,28,0.05)]">
                 <Image
                   src={beerOnTapImage}
-                  alt="Beer being poured at the bar inside The Old School House."
+                  alt="Beer being poured at the bar inside The Old School House pub in Stony Stratford."
                   className="h-60 w-full object-cover"
                   sizes="(min-width: 640px) 50vw, 100vw"
                 />
               </article>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[var(--color-surface-low)] py-10 md:py-14 lg:py-16">
+        <div className="section-shell space-y-5">
+          <SectionHeading
+            eyebrow="Verified business details"
+            title="The public facts behind the pub, set out clearly."
+            description="This page is not only the story of the venue. It is also the fact sheet that ties the website to the real-world business behind it."
+          />
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+            {organizationFactSheet.map((item, index) => (
+              <article
+                key={item.label}
+                className={`rounded-2xl px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6 ${
+                  index % 2 === 1
+                    ? "surface-pane-muted"
+                    : "bg-[var(--color-surface-lowest)]"
+                }`}
+              >
+                <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
+                  {item.label}
+                </p>
+                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                  {item.value}
+                </p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
@@ -134,18 +176,25 @@ export default function AboutPage() {
             <article className="rounded-2xl bg-[var(--color-surface-lowest)] px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6">
               <div className="flex items-center gap-3">
                 <ForkKnife className="size-5 text-secondary" />
-                <h2 className="section-title">{aboutOperatorCardTitle}</h2>
+                <h3 className="section-title">{aboutOperatorCardTitle}</h3>
               </div>
               <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
                 {aboutOperatorNotes.map((note) => (
                   <p key={note}>{note}</p>
                 ))}
+                <Link
+                  href={sanjogGautamPagePath}
+                  className="inline-flex items-center gap-2 font-semibold text-secondary transition hover:text-secondary/80"
+                >
+                  Read San&apos;s full operator profile
+                  <ArrowRight className="size-4" />
+                </Link>
               </div>
             </article>
             <article className="surface-pane-muted rounded-2xl px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6">
               <div className="flex items-center gap-3">
                 <Buildings className="size-5 text-secondary" />
-                <h2 className="section-title">{aboutFamilyCardTitle}</h2>
+                <h3 className="section-title">{aboutFamilyCardTitle}</h3>
               </div>
               <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
                 {aboutFamilyNotes.map((note) => (
@@ -168,7 +217,7 @@ export default function AboutPage() {
             <article className="rounded-2xl bg-[var(--color-surface-lowest)] px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6">
               <div className="flex items-center gap-3">
                 <MapPin className="size-5 text-secondary" />
-                <h2 className="section-title">{aboutHeritageCardTitle}</h2>
+                <h3 className="section-title">{aboutHeritageCardTitle}</h3>
               </div>
               <div className="space-y-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
                 {aboutHeritageNotes.map((note) => (
@@ -187,7 +236,7 @@ export default function AboutPage() {
                     : "bg-[var(--color-surface-lowest)]"
                 }`}
               >
-                <h2 className="section-title">{item.title}</h2>
+                <h3 className="section-title">{item.title}</h3>
                 <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
                   {item.description}
                 </p>

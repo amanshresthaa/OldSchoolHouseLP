@@ -18,7 +18,7 @@ export const nepaleseKitchenSections = [
       {
         title: "Led by Nepalese warmth",
         description:
-          "Operator Sanjog Gautam has shaped the food offer around the same idea as the pub itself: welcoming, generous, and grounded enough to enjoy without fuss, with Nepalese dishes he knows should earn their place on a pub table.",
+          "Operator Sanjog Gautam has shaped the food offer around the same idea as the pub itself: welcoming, generous, and grounded enough to enjoy without fuss, with menu guidance and Nepalese dishes that earn their place on a pub table.",
       },
       {
         title: "Designed to sit comfortably inside a pub visit",
@@ -49,7 +49,7 @@ export const nepaleseKitchenSections = [
       {
         title: "Move on to curries and grilled dishes",
         description:
-          "Once the table is settled, the kitchen opens out into richer dishes that bring more depth and more flavour than a standard pub food line-up on its own.",
+          "Once the table is settled, the kitchen opens out into richer dishes that bring more depth and more flavour than a standard pub food line-up on its own, without losing the easy pub-first feel.",
       },
       {
         title: "Order across the whole menu",

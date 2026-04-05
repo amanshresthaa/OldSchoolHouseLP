@@ -18,7 +18,7 @@ export const aboutBuildingSection = {
     "Character matters in hospitality, especially when you want the pub to become somewhere you return for drinks, dinner, and occasions that sit somewhere between casual and planned.",
 }
 
-export const aboutOperatorCardTitle = "Sanjog Gautam's kitchen"
+export const aboutOperatorCardTitle = 'Sanjog "San" Gautam'
 export const aboutFamilyCardTitle = "The wider pub family"
 export const aboutHeritageCardTitle = "Why this town suits us"
 

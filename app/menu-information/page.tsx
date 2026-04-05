@@ -3,6 +3,7 @@ import Link from "next/link"
 import { DownloadSimple, Phone } from "@phosphor-icons/react/dist/ssr"
 
 import { PageHero } from "@/components/site/PageHero"
+import { RouteStructuredData } from "@/components/site/RouteStructuredData"
 import { SectionHeading } from "@/components/site/SectionHeading"
 
 import { Button } from "@/components/ui/button"
@@ -55,7 +56,9 @@ const menuInfoHighlights = [
 export default function MenuInformationPage() {
   return (
     <main>
+      <RouteStructuredData route={route!} />
       <PageHero
+        route={route!}
         eyebrow="Menu information"
         title="If you are checking allergies, dietary needs, or which menu to use, this is the easiest place to start."
         description="Use this page if you are choosing for the table, deciding between the live menu and the PDF, or want to ask a food question before you visit."
@@ -73,8 +76,8 @@ export default function MenuInformationPage() {
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <SectionHeading
               eyebrow="Start here"
-              title="The quick version."
-              description="Browse the live menu for the latest version, use the PDF when you want something printable, and call us if the answer matters to today."
+              title="How to check allergens, dietary needs, and the right menu format."
+              description="Browse the live menu for the latest version, use the PDF when you want something printable, and call the pub if the answer matters to today’s visit."
             />
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Button asChild size="lg">
@@ -123,7 +126,7 @@ export default function MenuInformationPage() {
                       : "surface-pane surface-pane-muted"
                   }
                 >
-                  <h2 className="text-[2rem]">{item.title}</h2>
+                  <h3 className="text-[2rem]">{item.title}</h3>
                   <p className="pt-4 text-sm leading-7 text-on-surface md:text-base">
                     {item.description}
                   </p>
@@ -152,8 +155,14 @@ export default function MenuInformationPage() {
 
           <div className="surface-frame rounded-2xl">
             <div className="surface-pane">
-              <h2 className="text-[2rem]">Useful next pages</h2>
-              <div className="grid gap-3 pt-4 text-sm leading-7 md:grid-cols-3 md:text-base">
+              <h3 className="text-[2rem]">Useful next pages</h3>
+              <div className="grid gap-3 pt-4 text-sm leading-7 md:grid-cols-2 md:text-base xl:grid-cols-4">
+                <Link
+                  href="/gluten-free-curries-stony-stratford"
+                  className="rounded-[1.35rem] bg-[var(--color-surface-low)] px-4 py-4 text-on-surface transition hover:-translate-y-0.5"
+                >
+                  Gluten-free curries guide
+                </Link>
                 <Link
                   href="/takeaway-menu"
                   className="rounded-[1.35rem] bg-[var(--color-surface-low)] px-4 py-4 text-on-surface transition hover:-translate-y-0.5"

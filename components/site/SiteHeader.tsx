@@ -132,7 +132,10 @@ export function SiteHeader() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 border-b border-black/5 bg-background/85 backdrop-blur-xl">
+      <header
+        data-critical-header
+        className="sticky top-0 z-40 border-b border-black/5 bg-background/85 backdrop-blur-xl"
+      >
         <div className="mx-auto max-w-7xl px-5 py-3 sm:px-6 md:px-8">
           <div className="flex items-center justify-between gap-4">
             <Link

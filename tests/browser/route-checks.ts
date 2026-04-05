@@ -17,6 +17,23 @@ export const publicRouteChecks = [
   { path: "/private-hire", title: "Private Hire in Stony Stratford" },
   { path: "/sunday-roast", title: "Sunday Roast in Stony Stratford" },
   { path: "/nepalese-kitchen", title: "Nepalese Kitchen in Stony Stratford" },
+  {
+    path: "/nepalese-food-milton-keynes",
+    title: "Nepalese Food in Milton Keynes",
+  },
+  {
+    path: "/what-is-nepalese-food",
+    title: "What Is Nepalese Food",
+  },
+  { path: "/momo", title: "What Is Momo" },
+  {
+    path: "/nepalese-vs-indian-food",
+    title: "Nepalese vs Indian Food",
+  },
+  {
+    path: "/gluten-free-curries-stony-stratford",
+    title: "Gluten-Free Curries",
+  },
   { path: "/live-sport", title: "Live Sport Pub in Stony Stratford" },
   {
     path: "/beer-garden-stony-stratford",

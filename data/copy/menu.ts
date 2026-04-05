@@ -9,7 +9,7 @@ export const menuWhatToExpect =
 
 export const menuDrinksSection = {
   eyebrow: "From the bar",
-  title: "Drinks worth asking for",
+  title: "Bar highlights that work with the food",
   description:
     "A strong bar sits alongside the food. Ask what is pouring well today, or what the team would match with the momo, grills, and richer curries.",
 }

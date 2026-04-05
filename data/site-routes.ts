@@ -18,9 +18,9 @@ export const routeConfigs: RouteConfig[] = [
     sitemap: true,
     published: true,
     meta: {
-      title: "Traditional Pub in Stony Stratford",
+      title: "Pub in Stony Stratford with Nepalese Kitchen",
       description:
-        "A traditional pub on London Road in Stony Stratford with a standout Nepalese kitchen, Sunday roast, live sport, and easy table booking.",
+        "Visit a recently refurbished traditional pub on London Road in Stony Stratford with a Nepalese kitchen, live sport, outdoor seating, and easy table booking.",
       canonical: "/",
     },
     hero: {
@@ -42,9 +42,9 @@ export const routeConfigs: RouteConfig[] = [
     sitemap: true,
     published: true,
     meta: {
-      title: "About Our Pub and Nepalese Kitchen",
+      title: "About Our Stony Stratford Pub and Nepalese Kitchen",
       description:
-        "Learn the story behind The Old School House, a traditional Stony Stratford pub with a Nepalese kitchen and a strong local welcome.",
+        "Learn about The Old School House, a traditional pub on London Road in Stony Stratford with a Nepalese kitchen, local roots, and a welcoming atmosphere.",
       canonical: "/about",
     },
     hero: {
@@ -59,15 +59,37 @@ export const routeConfigs: RouteConfig[] = [
     stickySecondaryAction: { href: "/menu", label: "Menu" },
   },
   {
+    href: "/about/sanjog-gautam",
+    label: "Sanjog Gautam",
+    sitemap: true,
+    published: true,
+    meta: {
+      title: "Sanjog Gautam | Operator Profile",
+      description:
+        'Meet Sanjog "San" Gautam, the operator behind The Old School House and a vastly experienced business and restaurant manager with cafe, restaurant, and pub experience.',
+      canonical: "/about/sanjog-gautam",
+    },
+    hero: {
+      eyebrow: "Operator profile",
+      title:
+        'Sanjog "San" Gautam leads the pub with hands-on hospitality experience.',
+      description:
+        "San brings real cafe, restaurant, and pub operating experience to The Old School House, shaping how the room feels, how the service works, and how the menu earns repeat visits.",
+      primaryAction: { href: bookOnlineHref, label: "Book a table" },
+      secondaryAction: { href: "/about", label: "Back to About" },
+    },
+    stickySecondaryAction: { href: "/about", label: "About" },
+  },
+  {
     href: "/menu",
     label: "Menu",
     primaryNav: true,
     sitemap: true,
     published: true,
     meta: {
-      title: "Pub Menu and Nepalese Food in Stony Stratford",
+      title: "Stony Stratford Pub Menu and Nepalese Food",
       description:
-        "Browse live HTML menus for pub classics, Nepalese dishes, Sunday roast favourites, and drinks at The Old School House.",
+        "Browse the live pub menu for Nepalese dishes, pub classics, Sunday roast favourites, desserts, sides, and drinks at The Old School House in Stony Stratford.",
       canonical: "/menu",
     },
     hero: {
@@ -89,9 +111,9 @@ export const routeConfigs: RouteConfig[] = [
     sitemap: true,
     published: true,
     meta: {
-      title: "Book a Table in Stony Stratford",
+      title: "Book a Table at Our Stony Stratford Pub",
       description:
-        "Reserve a table at The Old School House for pub drinks, Sunday roast, and Nepalese food in Stony Stratford.",
+        "Book a table at The Old School House for pub drinks, Nepalese food, Sunday roast, and group dining in Stony Stratford.",
       canonical: "/book",
     },
     hero: {
@@ -113,16 +135,16 @@ export const routeConfigs: RouteConfig[] = [
     sitemap: true,
     published: true,
     meta: {
-      title: "What’s On in Stony Stratford",
+      title: "Pub Events and Live Sport in Stony Stratford",
       description:
-        "See what’s on at The Old School House, from live sport and quiz nights to tasting evenings and community-led pub events.",
+        "See pub events at The Old School House, from Sky Sports and TNT Sports match nights to tastings, team socials, and community events in Stony Stratford.",
       canonical: "/events",
     },
     hero: {
       eyebrow: "What’s on",
       title: "More reasons to come back than just the first pint.",
       description:
-        "Match days, tasting evenings, quiz nights, and community-led plans all have a place here, with food and drinks strong enough to make a longer stay feel easy.",
+        "Match days, themed evenings, tastings, and community-led plans all have a place here, with food and space strong enough to make a longer stay feel easy.",
       primaryAction: { href: bookOnlineHref, label: "Book for an event night" },
       secondaryAction: {
         href: "/private-hire",
@@ -139,9 +161,9 @@ export const routeConfigs: RouteConfig[] = [
     sitemap: true,
     published: true,
     meta: {
-      title: "Private Hire in Stony Stratford",
+      title: "Private Hire Pub in Stony Stratford",
       description:
-        "Plan birthdays, family gatherings, wakes, sports socials, and work drinks at The Old School House in Stony Stratford.",
+        "Plan private hire at The Old School House for birthdays, wakes, family gatherings, sports socials, and work drinks in Stony Stratford, with 125-cover flexibility inside and out.",
       canonical: "/private-hire",
     },
     hero: {
@@ -149,7 +171,7 @@ export const routeConfigs: RouteConfig[] = [
       title:
         "A welcoming pub for birthdays, gatherings, and informal occasions.",
       description:
-        "From work drinks and sports groups to wakes and family get-togethers, The Old School House keeps planning simple and the atmosphere warm.",
+        "From work drinks and sports groups to wakes and family get-togethers, The Old School House keeps planning simple with flexible indoor and outdoor space.",
       primaryAction: { href: siteEmailHref, label: "Make an enquiry" },
       secondaryAction: {
         href: sitePhoneHref,
@@ -166,9 +188,9 @@ export const routeConfigs: RouteConfig[] = [
     sitemap: true,
     published: true,
     meta: {
-      title: "Find Our Pub on London Road, Stony Stratford",
+      title: "Find Our Stony Stratford Pub on London Road",
       description:
-        "Find The Old School House on London Road with address details, map links, parking notes, and contact options for your visit.",
+        "Find The Old School House on London Road in Stony Stratford with directions, address details, parking notes, map links, and contact options.",
       canonical: "/find-us",
     },
     hero: {
@@ -227,15 +249,39 @@ export const routeConfigs: RouteConfig[] = [
     stickySecondaryAction: { href: "/menu", label: "Menu" },
   },
   {
+    href: "/nepalese-food-milton-keynes",
+    label: "Nepalese Food in Milton Keynes",
+    resource: true,
+    sitemap: true,
+    published: true,
+    meta: {
+      title: "The Ultimate Guide to Nepalese Food in Milton Keynes",
+      description:
+        "Understand momo, curries, achaar, grilled dishes, and the core anchors of Nepalese food in Milton Keynes with this guide from The Old School House in Stony Stratford.",
+      canonical: "/nepalese-food-milton-keynes",
+    },
+    hero: {
+      eyebrow: "Pillar guide",
+      title:
+        "A complete guide to Nepalese food in Milton Keynes, built for first-time diners and curious locals alike.",
+      description:
+        "Use this page when you want the cuisine explained properly before you move into a menu, a signature dish guide, or a real booking.",
+      primaryAction: { href: "/menu", label: "Browse the menu" },
+      secondaryAction: { href: bookOnlineHref, label: "Book a table" },
+    },
+    schema: { faq: true },
+    stickySecondaryAction: { href: "/menu", label: "Menu" },
+  },
+  {
     href: "/what-is-nepalese-food",
     label: "What Is Nepalese Food",
     resource: true,
     sitemap: true,
     published: true,
     meta: {
-      title: "What Is Nepalese Food?",
+      title: "What Is Nepalese Food? A Simple Pub Guide",
       description:
-        "A simple guide to Nepalese food at The Old School House, from momo and grilled dishes to the way the kitchen fits naturally into a traditional pub visit.",
+        "Read a simple guide to Nepalese food at The Old School House, from momo and curries to grilled dishes that fit naturally into a Stony Stratford pub visit.",
       canonical: "/what-is-nepalese-food",
     },
     hero: {
@@ -256,9 +302,9 @@ export const routeConfigs: RouteConfig[] = [
     sitemap: true,
     published: true,
     meta: {
-      title: "What Is Momo?",
+      title: "What Is Momo? Nepalese Dumplings Explained",
       description:
-        "Learn why momo is the easiest first dish to try at The Old School House and how it opens up the Nepalese side of the menu.",
+        "Learn what momo is, why it is the easiest first Nepalese dish to try, and how it opens up the menu at The Old School House.",
       canonical: "/momo",
     },
     hero: {
@@ -273,15 +319,39 @@ export const routeConfigs: RouteConfig[] = [
     stickySecondaryAction: { href: "/menu", label: "Menu" },
   },
   {
+    href: "/gluten-free-curries-stony-stratford",
+    label: "Gluten-Free Curries",
+    resource: true,
+    sitemap: true,
+    published: true,
+    meta: {
+      title: "Gluten-Free Curries and Nepalese Dishes in Stony Stratford",
+      description:
+        "See which gluten-free curries, starters, grills, and Nepalese dishes are highlighted on the live menu at The Old School House in Stony Stratford.",
+      canonical: "/gluten-free-curries-stony-stratford",
+    },
+    hero: {
+      eyebrow: "Dietary guide",
+      title:
+        "A practical guide to gluten-free curries and Nepalese dishes in Stony Stratford.",
+      description:
+        "Use this page to shortlist dishes from the live menu, then confirm the detail with the team before you order.",
+      primaryAction: { href: "/menu", label: "Browse the live menu" },
+      secondaryAction: { href: "/menu-information", label: "Menu help" },
+    },
+    schema: { faq: true },
+    stickySecondaryAction: { href: sitePhoneHref, label: "Call" },
+  },
+  {
     href: "/nepalese-vs-indian-food",
     label: "Nepalese vs Indian Food",
     resource: true,
     sitemap: true,
     published: true,
     meta: {
-      title: "Nepalese vs Indian Food",
+      title: "Nepalese vs Indian Food Explained",
       description:
-        "A plain-English guide to the difference between Nepalese and Indian food, with examples that make the menu at The Old School House easier to understand.",
+        "Read a plain-English guide to the difference between Nepalese and Indian food, with menu examples from The Old School House in Stony Stratford.",
       canonical: "/nepalese-vs-indian-food",
     },
     hero: {
@@ -300,12 +370,12 @@ export const routeConfigs: RouteConfig[] = [
     href: "/traditional-pub-with-nepalese-kitchen",
     label: "Traditional Pub with Nepalese Kitchen",
     resource: true,
-    sitemap: true,
+    sitemap: false,
     published: true,
     meta: {
-      title: "Traditional Pub with a Nepalese Kitchen",
+      title: "Traditional Pub with Nepalese Food in Stony Stratford",
       description:
-        "See why The Old School House works as both a proper Stony Stratford pub and a venue with a more memorable food offer.",
+        "See why The Old School House works as both a proper Stony Stratford pub and a place for Nepalese food, pub classics, and memorable group meals.",
       canonical: "/traditional-pub-with-nepalese-kitchen",
     },
     hero: {
@@ -324,7 +394,7 @@ export const routeConfigs: RouteConfig[] = [
     href: "/where-to-eat-in-stony-stratford",
     label: "Where to Eat in Stony Stratford",
     resource: true,
-    sitemap: true,
+    sitemap: false,
     published: true,
     meta: {
       title: "Where to Eat in Stony Stratford",
@@ -372,9 +442,9 @@ export const routeConfigs: RouteConfig[] = [
     sitemap: true,
     published: true,
     meta: {
-      title: "Beer Garden in Stony Stratford",
+      title: "Beer Garden Pub in Stony Stratford",
       description:
-        "Enjoy outdoor drinks and dining in the front garden and courtyard at The Old School House on London Road.",
+        "Enjoy outdoor drinks and dining in the beer garden and courtyard at The Old School House on London Road in Stony Stratford.",
       canonical: "/beer-garden-stony-stratford",
     },
     hero: {
@@ -394,9 +464,9 @@ export const routeConfigs: RouteConfig[] = [
     sitemap: true,
     published: true,
     meta: {
-      title: "Group Dining in Stony Stratford",
+      title: "Group Dining Pub in Stony Stratford",
       description:
-        "Plan group dining, birthday meals, and easy celebrations at The Old School House in Stony Stratford.",
+        "Plan group dining, birthday meals, and easy celebrations at The Old School House, a traditional pub in Stony Stratford with Nepalese food and pub classics.",
       canonical: "/group-dining-celebrations",
     },
     hero: {
@@ -416,9 +486,9 @@ export const routeConfigs: RouteConfig[] = [
     sitemap: true,
     published: true,
     meta: {
-      title: "Wakes and Life Celebrations in Stony Stratford",
+      title: "Wake Venue in Stony Stratford",
       description:
-        "Talk to The Old School House about a calm planning process and a £13-per-guest wakes buffet in Stony Stratford.",
+        "Talk to The Old School House about a calm planning process, buffet options, and a welcoming wake venue in Stony Stratford.",
       canonical: "/wakes-life-celebrations",
     },
     hero: {
@@ -440,9 +510,9 @@ export const routeConfigs: RouteConfig[] = [
     sitemap: true,
     published: true,
     meta: {
-      title: "Menu Information and Dietary Help",
+      title: "Allergy Information and Menu Help",
       description:
-        "Find the easiest way to check allergens, dietary questions, and menu browsing options before you visit.",
+        "Find allergy information, dietary help, and the easiest way to browse the menu before you visit The Old School House.",
       canonical: "/menu-information",
     },
     hero: {
@@ -468,9 +538,9 @@ export const routeConfigs: RouteConfig[] = [
     sitemap: true,
     published: true,
     meta: {
-      title: "Takeaway Menu",
+      title: "Takeaway Menu in Stony Stratford",
       description:
-        "Browse the takeaway menu, then call The Old School House when you are ready to place a collection order.",
+        "Browse the takeaway menu, then call The Old School House in Stony Stratford when you are ready to place a collection order.",
       canonical: "/takeaway-menu",
     },
     hero: {
@@ -487,6 +557,29 @@ export const routeConfigs: RouteConfig[] = [
     },
     schema: { faq: true },
     stickySecondaryAction: { href: sitePhoneHref, label: "Call" },
+  },
+  {
+    href: "/guides",
+    label: "Guides",
+    resource: true,
+    sitemap: false,
+    published: true,
+    meta: {
+      title: "Stony Stratford Food and Pub Guides",
+      description:
+        "Browse guides on Nepalese food, momo, local dining in Stony Stratford, and how The Old School House pub and menu work.",
+      canonical: "/guides",
+    },
+    hero: {
+      eyebrow: "Guides",
+      title: "Guides that make the pub, the food, and the next step clearer.",
+      description:
+        "Use these pages when you are comparing places to eat, trying to understand Nepalese food, or narrowing down whether this pub is the right fit.",
+      primaryAction: { href: "/menu", label: "Browse the menu" },
+      secondaryAction: { href: bookOnlineHref, label: "Book a table" },
+    },
+    schema: { faq: true },
+    stickySecondaryAction: { href: "/menu", label: "Menu" },
   },
   {
     href: "/privacy",
@@ -589,9 +682,9 @@ export const routeConfigs: RouteConfig[] = [
     sitemap: featureFlags.accessibilityConfirmed,
     published: featureFlags.accessibilityConfirmed,
     meta: {
-      title: "Accessibility Information",
+      title: "Pub Accessibility Information in Stony Stratford",
       description:
-        "Accessibility information for visiting The Old School House on London Road, including arrival help, parking notes, and the best way to plan ahead.",
+        "Read accessibility information for visiting The Old School House on London Road in Stony Stratford, including arrival help, parking notes, and planning advice.",
       canonical: "/accessibility",
     },
     hero: {
@@ -630,6 +723,8 @@ export const siteFooterCoreLinks: NavItem[] = routeConfigs
   }))
 
 const supportRouteHrefs = new Set([
+  "/guides",
+  "/nepalese-food-milton-keynes",
   "/menu-information",
   "/takeaway-menu",
   "/accessibility",

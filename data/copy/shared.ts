@@ -5,7 +5,7 @@
 // ── Shared component copy ──────────────────────────────────────────────────
 
 export const footerTagline =
-  "A traditional Stony Stratford pub for pints, momo, roasts, and longer stays."
+  "A recently refreshed Stony Stratford pub for pints, momo, roasts, match nights, and longer stays."
 
 export const cookieBannerCopy = {
   eyebrow: "Cookies",

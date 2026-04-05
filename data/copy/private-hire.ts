@@ -13,7 +13,7 @@ export const privateHireSuitabilityCards = [
   {
     title: "Wakes and life celebrations",
     description:
-      "A calmer, more straightforward planning route matters here. The aim is to keep the conversation clear and the day itself easier to handle.",
+      "A calm, welcoming setting helps make these occasions feel a little easier to organise and a little easier on the day itself.",
   },
   {
     title: "Work drinks and sports socials",
@@ -24,26 +24,26 @@ export const privateHireSuitabilityCards = [
 
 export const privateHirePracticalCards = [
   {
-    title: "Indoor and outdoor flexibility",
+    title: "125 covers across inside and out",
     description:
       "With 65 covers inside and 60 outside across the front garden and courtyard, the venue can flex around seated meals, drinks-led plans, and mixed setups.",
   },
   {
-    title: "Food that suits mixed groups",
+    title: "Open-plan bar space and flexible layouts",
     description:
-      "The menu works well when some of you want the comfort of a traditional pub order and others want to try the Nepalese kitchen.",
+      "Open-plan bar space and a flexible layout help the room work well for both standing and seated gatherings.",
   },
   {
-    title: "Simple enquiry process",
+    title: "Food, Wi-Fi, and a simple enquiry path",
     description:
-      "The best way in is a quick email or phone call with rough numbers, dates, and the kind of gathering you have in mind.",
+      "The menu works for mixed groups, the venue is positioned around high-speed Wi-Fi, and the easiest route in is a short enquiry with the basics.",
   },
 ]
 
 export const privateHireEnquiryChecklist = [
   "Your preferred date and rough arrival time",
   "Estimated guest numbers",
-  "Whether the plan is food-led, drinks-led, or mixed",
+  "Whether the plan is food-led, drinks-led, standing, seated, or mixed",
   "Any reason the gathering needs to feel especially calm, flexible, or private",
   "Anything we should know about timing, seating, or the shape of the room",
 ]
@@ -52,7 +52,7 @@ export const privateHireFaqs = [
   {
     question: "What kinds of occasions suit The Old School House?",
     answer:
-      "The pub suits birthdays, family gatherings, work drinks, sports socials, wakes, and other informal occasions that need a welcoming room and a clear planning route.",
+      "The pub suits birthdays, family gatherings, work drinks, sports socials, wakes, and other informal occasions that need a warm, welcoming setting.",
   },
   {
     question: "Do I need a fully private room to enquire?",
@@ -64,11 +64,17 @@ export const privateHireFaqs = [
     answer:
       "Yes. The menu and drinks offer can be discussed around the kind of gathering you are planning and how you want the visit to feel.",
   },
+  {
+    question: "What spaces can groups use?",
+    answer:
+      "The venue combines open-plan pub space with indoor seating, a front garden, and a private courtyard, so the best setup depends on your group size and the style of the occasion.",
+  },
 ]
 
 export const privateHireSuitabilitySection = {
   eyebrow: "What the venue suits",
-  title: "Private hire here is about flexibility, not over-formality.",
+  title:
+    "Private hire in Stony Stratford should still feel like a proper pub gathering.",
   description:
     "The pub works best for occasions that still want warmth, food, and a sociable room around them, rather than a stiff event space with no sense of place.",
 }
@@ -78,7 +84,7 @@ export const privateHireActionCardText =
 
 export const privateHirePracticalSection = {
   eyebrow: "Practical fit",
-  title: "Enough room, enough menu flexibility, and a clearer planning path.",
+  title: "Room, layout flexibility, and an easy way to get things moving.",
   description:
     "You want to know quickly whether the room, the food, and the enquiry process will make your gathering simple to organise.",
 }
@@ -93,14 +99,14 @@ export const privateHireEnquirySection = {
   eyebrow: "What to send in your enquiry",
   title: "A little context makes the conversation easier.",
   description:
-    "The first message does not need to be polished. A few basics are enough for us to understand the table shape, the food direction, and how we can help.",
+    "The first message does not need to be polished. A few basics are enough for us to understand the guest count, the room shape, and how we can help.",
 }
 
 export const privateHireFaqSectionCopy = {
   eyebrow: "Private hire FAQs",
-  title: "The aim is to answer enough before you need to call.",
+  title: "A few useful answers before you get in touch.",
   description:
-    "That keeps the page commercial and useful without making the process feel formal or heavy.",
+    "The key details, without turning the whole thing into a long event-planning process.",
 }
 
 export const privateHireSignoffCopy = {

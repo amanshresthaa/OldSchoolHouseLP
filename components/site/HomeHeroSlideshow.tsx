@@ -6,7 +6,14 @@ import Link from "next/link"
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr"
 
 import { OpenStatusBadge } from "@/components/site/OpenStatusBadge"
-import { proofPoints, siteName, type ProofPoint } from "@/data/site"
+import {
+  openingHours,
+  proofPoints,
+  siteDescriptor,
+  siteLocation,
+  siteName,
+  type ProofPoint,
+} from "@/data/site"
 import momoImage from "@/images/food/chicken-momo-and-veg-momo.png"
 import beerOnTapImage from "@/images/indoor/old-school-house-pub-stony-stratford-mk-beer-on-tap.jpeg"
 import indoorSeatingImage from "@/images/indoor/old-school-house-pub-stony-stratford-mk-indoor-seating-area-1.jpeg"
@@ -15,7 +22,7 @@ import customerParkingImage from "@/images/outdoor/old-school-house-pub-stony-st
 import pubExteriorImage from "@/images/outdoor/old-school-house-pub-stony-stratford-mk-pub-building-exterior.jpeg"
 
 interface HeroSlide extends ProofPoint {
-  image: string | StaticImageData
+  image: StaticImageData
   alt: string
   eyebrow: string
   signals: string[]
@@ -153,6 +160,7 @@ export function HomeHeroSlideshow() {
 
   return (
     <section
+      data-critical-home-hero
       className="relative h-[36rem] overflow-hidden bg-primary text-white sm:h-[43rem] md:h-[46rem] lg:h-[50rem] xl:h-[52rem]"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
@@ -174,10 +182,11 @@ export function HomeHeroSlideshow() {
           >
             <Image
               src={slide.image}
+              width={slide.image.width}
+              height={slide.image.height}
               alt={slide.alt}
-              fill
               priority={index === 0}
-              className={`object-cover object-center transition-transform duration-[1800ms] ease-out ${
+              className={`absolute inset-0 h-full w-full object-cover object-center transition-transform duration-[1800ms] ease-out ${
                 index === currentIndex
                   ? "scale-100 brightness-[0.86] saturate-[1.02]"
                   : "scale-[1.04] brightness-[0.78] saturate-[0.96]"
@@ -204,32 +213,56 @@ export function HomeHeroSlideshow() {
           </div>
 
           <div className="grid h-[23.5rem] flex-1 content-end gap-4 py-5 sm:h-[28rem] sm:gap-6 sm:py-8 md:h-[30rem] md:py-10 lg:h-[21rem] lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-14 lg:py-12 xl:h-[22rem]">
-            <div className="flex min-h-[19.5rem] max-w-3xl flex-col rounded-[1.9rem] border border-white/12 bg-[rgba(6,18,11,0.34)] px-5 py-5 shadow-[0px_18px_48px_rgba(6,18,11,0.18)] backdrop-blur-[5px] sm:min-h-[21rem] sm:px-6 sm:py-6 md:min-h-[22.5rem] md:px-7 md:py-7">
+            <div
+              data-critical-hero-panel
+              className="flex min-h-[19.5rem] max-w-3xl flex-col rounded-[1.9rem] border border-white/12 bg-[rgba(6,18,11,0.34)] px-5 py-5 shadow-[0px_18px_48px_rgba(6,18,11,0.18)] backdrop-blur-[5px] sm:min-h-[21rem] sm:px-6 sm:py-6 md:min-h-[22.5rem] md:px-7 md:py-7"
+            >
               <div className="eyebrow-row">
                 <span
                   aria-hidden="true"
                   className="h-px w-6 bg-[var(--color-tertiary)]"
                 />
                 <p className="text-[0.6875rem] font-semibold tracking-[0.12em] text-[var(--color-tertiary)] uppercase">
-                  {activeSlide.eyebrow}
+                  {siteName}
                 </p>
               </div>
+              <p className="pt-4 text-[0.72rem] font-semibold tracking-[0.18em] text-[var(--color-on-tertiary-container)] uppercase sm:pt-5">
+                Nepalese warmth inside beloved East Anglian pubs
+              </p>
               <h1
-                className={`pt-4 font-normal text-white sm:pt-5 ${getHeroTitleClass(
-                  activeSlide.title
-                )}`}
+                data-critical-hero-title
+                className="max-w-[16ch] pt-3 text-[clamp(2.2rem,6.8vw,4.8rem)] leading-[0.98] font-normal text-white"
               >
-                {activeSlide.title}
+                Traditional pub and Nepalese kitchen on London Road in Stony
+                Stratford.
               </h1>
-              <p
-                className={`pt-3 ${getHeroDescriptionClass(activeSlide.description)}`}
-              >
-                {activeSlide.description}
+              <p className="max-w-2xl pt-3 text-sm leading-6 text-white/78 sm:text-base sm:leading-7 md:text-lg md:leading-8">
+                A recently refurbished, modern but traditional hostelry that
+                stays welcoming to one and all, then gives the table more to
+                talk about with momo, curries, grills, Sunday roasts, and a
+                proper local atmosphere.
               </p>
-              <p className="max-w-md pt-3 text-[0.82rem] leading-5 text-white/68 sm:hidden">
-                London Road, Stony Stratford. Book quickly, browse the menu, or
-                call if today&apos;s plan needs a quick answer.
+              <p className="max-w-2xl pt-3 text-[0.82rem] leading-5 text-white/68 sm:text-sm md:max-w-3xl md:leading-6">
+                {siteDescriptor} · {siteLocation} · Open daily{" "}
+                {openingHours[0].hours}
               </p>
+              <div className="rounded-[1.4rem] border border-white/10 bg-black/18 p-4 sm:p-5">
+                <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-[var(--color-on-tertiary-container)] uppercase">
+                  {activeSlide.eyebrow}
+                </p>
+                <h2
+                  className={`pt-3 font-normal text-white ${getHeroTitleClass(
+                    activeSlide.title
+                  )}`}
+                >
+                  {activeSlide.title}
+                </h2>
+                <p
+                  className={`pt-3 ${getHeroDescriptionClass(activeSlide.description)}`}
+                >
+                  {activeSlide.description}
+                </p>
+              </div>
               <div className="mt-auto flex min-h-[3.75rem] flex-wrap content-start gap-2 pt-4 text-[0.68rem] font-semibold tracking-[0.18em] text-white/78 uppercase sm:min-h-[4.5rem] sm:gap-3 sm:pt-5 sm:text-xs">
                 {activeSlide.signals.map((signal, index) => (
                   <span

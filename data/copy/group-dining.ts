@@ -49,7 +49,7 @@ export const groupDiningSections: FeaturePageSection[] = [
       {
         title: "Enquire if it needs more shaping",
         description:
-          "If timings, numbers, or the room setup matter more, use the private hire page so the team can help shape the visit around you.",
+          "If timings, numbers, screens, or the room setup matter more, use the private hire page so the team can help shape the visit around you.",
       },
     ],
   },
@@ -78,7 +78,7 @@ export const groupDiningFaqSection = {
     {
       question: "What kinds of groups does this suit best?",
       answer:
-        "It suits birthdays, family get-togethers, friend groups, and informal work plans that want good food, drinks, and a pub setting without full event formality.",
+        "It suits birthdays, family get-togethers, friend groups, sports socials, and informal work plans that want good food, drinks, and a pub setting without full event formality.",
     },
     {
       question: "Do I need private hire for a larger table?",

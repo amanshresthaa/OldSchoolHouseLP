@@ -42,10 +42,18 @@ describe("site config smoke", () => {
     expect(publishedRouteHrefs).toContain("/accessibility")
   })
 
-  it("keeps discovery explainers out of the indexed commercial route set", () => {
+  it("indexes the Nepalese pillar and the core spoke pages", () => {
+    expect(publishedRouteHrefs).toContain("/nepalese-food-milton-keynes")
+    expect(publishedRouteHrefs).toContain("/what-is-nepalese-food")
+    expect(publishedRouteHrefs).toContain("/momo")
+    expect(publishedRouteHrefs).toContain("/nepalese-vs-indian-food")
+    expect(publishedRouteHrefs).toContain(
+      "/gluten-free-curries-stony-stratford"
+    )
+  })
+
+  it("still keeps the broader guide directory and soft comparison pages out of the sitemap", () => {
     expect(publishedRouteHrefs).not.toContain("/guides")
-    expect(publishedRouteHrefs).not.toContain("/momo")
-    expect(publishedRouteHrefs).not.toContain("/what-is-nepalese-food")
     expect(publishedRouteHrefs).not.toContain(
       "/traditional-pub-with-nepalese-kitchen"
     )

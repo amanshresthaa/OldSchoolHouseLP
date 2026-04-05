@@ -1,11 +1,14 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import Script from "next/script"
 import { DownloadSimple, Phone } from "@phosphor-icons/react/dist/ssr"
 
 import { InlineBookingCta } from "@/components/site/InlineBookingCta"
 import { PageSignoff } from "@/components/site/PageSignoff"
 import { MenuInteractive } from "@/components/site/MenuInteractive"
 import { PageHero } from "@/components/site/PageHero"
+import { RouteStructuredData } from "@/components/site/RouteStructuredData"
+import { SectionHeading } from "@/components/site/SectionHeading"
 import { Button } from "@/components/ui/button"
 import {
   menuDrinksSection,
@@ -19,8 +22,13 @@ import {
   drinksHighlights,
   foodHours,
   policyNotes,
+  sanjogGautamId,
+  siteMenuId,
   siteMenuPdfHref,
+  siteOrganizationId,
   sitePhoneHref,
+  siteRestaurantId,
+  siteUrl,
 } from "@/data/site"
 import { getRouteConfig } from "@/data/site-routes"
 import { buildPageMetadata } from "@/lib/metadata"
@@ -30,18 +38,69 @@ const route = getRouteConfig("/menu")
 
 export const metadata: Metadata = buildPageMetadata(route!.meta)
 
+const menuLocalIntentCards = [
+  {
+    title: "Built for mixed tables in Stony Stratford",
+    description:
+      "The menu works when one person wants a familiar pub classic and someone else wants momo, curries, grills, or another Nepalese dish worth exploring.",
+  },
+  {
+    title: "Useful for lunch, dinner, and Sunday plans",
+    description:
+      "Browse this live menu before a midweek meal, a weekend catch-up, or a Sunday visit when you want the table and the food direction sorted in advance.",
+  },
+  {
+    title: "Live HTML menu for local search and real visits",
+    description:
+      "Because the menu is readable on-page, it is easier to search, easier to browse on your phone, and more useful when you are deciding whether to book.",
+  },
+]
+
 export default function MenuPage() {
   return (
     <main>
-      <script
+      <RouteStructuredData
+        route={route!}
+        pageType="CollectionPage"
+        authorId={sanjogGautamId}
+        aboutIds={[siteOrganizationId, siteRestaurantId, sanjogGautamId]}
+        mainEntityId={siteMenuId}
+      />
+      <Script
+        id="old-school-house-menu-structured-data"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Menu",
+            "@id": siteMenuId,
             name: "The Old School House Menu",
             description: menuSchemaDescription,
+            url: `${siteUrl}/menu`,
             inLanguage: "en-GB",
+            mainEntityOfPage: {
+              "@id": `${siteUrl}/menu#webpage`,
+            },
+            isPartOf: {
+              "@id": siteRestaurantId,
+            },
+            about: [
+              {
+                "@id": siteOrganizationId,
+              },
+              {
+                "@id": siteRestaurantId,
+              },
+            ],
+            author: {
+              "@id": sanjogGautamId,
+            },
+            publisher: {
+              "@id": siteOrganizationId,
+            },
+            provider: {
+              "@id": siteOrganizationId,
+            },
             hasMenuSection: menuCategories.map((category) => ({
               "@type": "MenuSection",
               name: category.title,
@@ -62,7 +121,7 @@ export default function MenuPage() {
       />
 
       {/* A. Hero */}
-      <PageHero {...route!.hero!} />
+      <PageHero {...route!.hero!} route={route!} />
 
       {/* B. Quick-info strip */}
       <section className="bg-[var(--color-surface-low)] py-10 md:py-12">
@@ -98,6 +157,31 @@ export default function MenuPage() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-background py-10 md:py-14">
+        <div className="section-shell space-y-5">
+          <SectionHeading
+            eyebrow="Menu for local dining"
+            title="A Stony Stratford pub menu built for real lunch and dinner plans."
+            description="This is not just a list of dishes. It is a clearer picture of how The Old School House works for town-centre meals, group plans, and bookings that need broad menu appeal."
+          />
+          <div className="grid gap-4 md:grid-cols-3">
+            {menuLocalIntentCards.map((card, index) => (
+              <article
+                key={card.title}
+                className={
+                  index === 1 ? "surface-panel-muted" : "surface-panel"
+                }
+              >
+                <h3 className="section-title">{card.title}</h3>
+                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                  {card.description}
+                </p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
