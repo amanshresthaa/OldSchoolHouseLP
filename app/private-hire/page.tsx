@@ -93,18 +93,15 @@ export default function PrivateHirePage() {
                 },
               ]}
               supportingText={privateHireActionCardText}
-              showDivider
             />
           </div>
           <div className="grid gap-4 lg:grid-cols-3">
             {privateHireSuitabilityCards.map((card, index) => (
               <article
                 key={card.title}
-                className={`rounded-2xl px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6 ${
-                  index === 1
-                    ? "surface-pane-muted"
-                    : "bg-[var(--color-surface-lowest)]"
-                }`}
+                className={
+                  index === 1 ? "surface-panel-muted" : "surface-panel"
+                }
               >
                 <h3 className="section-title">{card.title}</h3>
                 <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
@@ -123,11 +120,9 @@ export default function PrivateHirePage() {
             {privateHirePracticalCards.map((card, index) => (
               <article
                 key={card.title}
-                className={`rounded-2xl px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6 ${
-                  index === 1
-                    ? "surface-pane-muted"
-                    : "bg-[var(--color-surface-lowest)]"
-                }`}
+                className={
+                  index === 1 ? "surface-panel-muted" : "surface-panel"
+                }
               >
                 <h3 className="section-title">{card.title}</h3>
                 <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
@@ -145,39 +140,41 @@ export default function PrivateHirePage() {
         <div className="section-shell space-y-5">
           <SectionHeading {...privateHireEnquirySection} />
           <div className="grid gap-4 xl:grid-cols-[1.05fr_0.95fr]">
-            <div className="rounded-[2rem] bg-[var(--color-surface-lowest)] p-5 shadow-[0px_18px_48px_rgba(27,28,28,0.06)] md:p-6">
-              <div className="max-w-2xl space-y-3">
-                <p className="eyebrow">Make an enquiry</p>
-                <h3 className="section-title">
-                  Email the pub team with the basics.
-                </h3>
-                <p className="text-sm leading-7 text-on-surface md:text-base">
-                  If you already know the rough date, numbers, and shape of the
-                  gathering, email the team directly and they can help shape the
-                  next step from there.
+            <div className="surface-frame">
+              <div className="surface-pane">
+                <div className="max-w-2xl space-y-3">
+                  <p className="eyebrow">Make an enquiry</p>
+                  <h3 className="section-title">
+                    Email the pub team with the basics.
+                  </h3>
+                  <p className="text-sm leading-7 text-on-surface md:text-base">
+                    If you already know the rough date, numbers, and shape of
+                    the gathering, email the team directly and they can help
+                    shape the next step from there.
+                  </p>
+                </div>
+                <div className="flex flex-col gap-3 pt-6 sm:flex-row">
+                  <a
+                    href={siteEmailHref}
+                    className="cta-primary inline-flex h-12 items-center justify-center gap-2.5 px-6 text-sm font-semibold"
+                  >
+                    Email the team
+                    <EnvelopeSimple className="size-4" />
+                  </a>
+                  <a
+                    href={sitePhoneHref}
+                    className="cta-secondary inline-flex h-12 items-center justify-center px-6"
+                  >
+                    Call the pub
+                  </a>
+                </div>
+                <p className="pt-4 text-sm leading-7 text-on-surface/72 md:text-base">
+                  Include your preferred date, guest numbers, and whether the
+                  setup needs to be seated, standing, or mixed.
                 </p>
               </div>
-              <div className="flex flex-col gap-3 pt-6 sm:flex-row">
-                <a
-                  href={siteEmailHref}
-                  className="cta-primary inline-flex h-12 items-center justify-center gap-2.5 px-6 text-sm font-semibold"
-                >
-                  Email the team
-                  <EnvelopeSimple className="size-4" />
-                </a>
-                <a
-                  href={sitePhoneHref}
-                  className="cta-secondary inline-flex h-12 items-center justify-center px-6"
-                >
-                  Call the pub
-                </a>
-              </div>
-              <p className="pt-4 text-sm leading-7 text-on-surface/72 md:text-base">
-                Include your preferred date, guest numbers, and whether the
-                setup needs to be seated, standing, or mixed.
-              </p>
             </div>
-            <div className="rounded-2xl bg-[var(--color-surface-lowest)] px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6">
+            <div className="surface-panel">
               <p className="pb-4 text-sm leading-7 text-on-surface md:text-base">
                 A quick note with the basics is enough to get things moving. We
                 can help you shape the details after that.
@@ -192,7 +189,7 @@ export default function PrivateHirePage() {
                   </li>
                 ))}
               </ol>
-              <div className="mt-5 rounded-[1.4rem] bg-[var(--color-surface-low)] px-4 py-4 text-sm leading-7 text-on-surface md:text-base">
+              <div className="surface-panel-muted mt-5 px-4 py-4 text-sm leading-7 text-on-surface md:text-base">
                 There is room to shape the occasion your way, with 125 total
                 covers, a front garden, a private courtyard, and open-plan bar
                 space.

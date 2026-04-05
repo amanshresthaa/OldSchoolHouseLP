@@ -87,7 +87,7 @@ export default function TakeawayMenuPage() {
             </div>
           </div>
 
-          <div className="rounded-2xl bg-[var(--color-surface-lowest)] px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6">
+          <div className="surface-panel">
             <ol className="space-y-3 text-sm leading-7 text-on-surface md:text-base">
               {takeawayChecklist.map((step, index) => (
                 <li key={step} className="flex gap-3">
@@ -104,11 +104,9 @@ export default function TakeawayMenuPage() {
             {takeawayCards.map((card, index) => (
               <article
                 key={card.title}
-                className={`rounded-2xl px-5 py-5 md:px-6 md:py-6 ${
-                  index === 1
-                    ? "surface-pane-muted"
-                    : "bg-[var(--color-surface-lowest)]"
-                }`}
+                className={
+                  index === 1 ? "surface-panel-muted" : "surface-panel"
+                }
               >
                 <h3 className="section-title">{card.title}</h3>
                 <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">

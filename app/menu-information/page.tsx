@@ -140,9 +140,7 @@ export default function MenuInformationPage() {
               <article
                 key={item.title}
                 className={
-                  index === 1
-                    ? "surface-frame surface-pane surface-pane-muted rounded-2xl"
-                    : "surface-frame surface-pane rounded-2xl bg-[var(--color-surface-lowest)]"
+                  index === 1 ? "surface-panel-muted" : "surface-panel"
                 }
               >
                 <p className="eyebrow">{item.title}</p>
@@ -159,25 +157,25 @@ export default function MenuInformationPage() {
               <div className="grid gap-3 pt-4 text-sm leading-7 md:grid-cols-2 md:text-base xl:grid-cols-4">
                 <Link
                   href="/gluten-free-curries-stony-stratford"
-                  className="rounded-[1.35rem] bg-[var(--color-surface-low)] px-4 py-4 text-on-surface transition hover:-translate-y-0.5"
+                  className="surface-panel-muted px-4 py-4 text-on-surface transition hover:-translate-y-0.5"
                 >
                   Gluten-free curries guide
                 </Link>
                 <Link
                   href="/takeaway-menu"
-                  className="rounded-[1.35rem] bg-[var(--color-surface-low)] px-4 py-4 text-on-surface transition hover:-translate-y-0.5"
+                  className="surface-panel-muted px-4 py-4 text-on-surface transition hover:-translate-y-0.5"
                 >
                   Takeaway menu
                 </Link>
                 <Link
                   href="/wakes-life-celebrations"
-                  className="rounded-[1.35rem] bg-[var(--color-surface-low)] px-4 py-4 text-on-surface transition hover:-translate-y-0.5"
+                  className="surface-panel-muted px-4 py-4 text-on-surface transition hover:-translate-y-0.5"
                 >
                   Wakes & life celebrations
                 </Link>
                 <Link
                   href="/book"
-                  className="rounded-[1.35rem] bg-[var(--color-surface-low)] px-4 py-4 text-on-surface transition hover:-translate-y-0.5"
+                  className="surface-panel-muted px-4 py-4 text-on-surface transition hover:-translate-y-0.5"
                 >
                   Book a table
                 </Link>

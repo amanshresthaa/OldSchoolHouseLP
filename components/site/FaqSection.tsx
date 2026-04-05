@@ -48,21 +48,17 @@ export function FaqSection({
         />
         <div
           className={cn(
-            "overflow-hidden rounded-[2rem] border shadow-[0px_14px_36px_rgba(27,28,28,0.05)]",
+            "overflow-hidden rounded-[2rem]",
             invert
-              ? "border-white/10 bg-white/[0.04]"
-              : "border-[rgba(196,189,181,0.35)] bg-[var(--color-surface-lowest)]"
+              ? "bg-white/[0.04] shadow-[var(--shadow-frame)] backdrop-blur-md"
+              : "surface-frame"
           )}
         >
           {faqs.map((faq, index) => (
             <article
               key={faq.question}
               className={cn(
-                "px-5 py-5 md:px-7 md:py-6",
-                index > 0 &&
-                  (invert
-                    ? "border-t border-white/10"
-                    : "border-t border-[rgba(196,189,181,0.32)]"),
+                "px-5 py-5 md:px-6 md:py-6",
                 invert
                   ? index % 2 === 0
                     ? "bg-white/[0.02]"
@@ -110,10 +106,8 @@ export function FaqSection({
                 <div id={`faq-panel-${index}`} className="pt-4 md:max-w-3xl">
                   <p
                     className={cn(
-                      "border-t pt-4 text-sm leading-6 md:text-base md:leading-7",
-                      invert
-                        ? "border-white/10 text-white/72"
-                        : "border-[rgba(196,189,181,0.32)] text-on-surface"
+                      "text-sm leading-6 md:text-base md:leading-7",
+                      invert ? "text-white/72" : "text-on-surface"
                     )}
                   >
                     {faq.answer}

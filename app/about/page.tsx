@@ -65,11 +65,9 @@ export default function AboutPage() {
             {aboutReasons.map((reason, index) => (
               <article
                 key={reason.title}
-                className={`rounded-2xl px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6 ${
-                  index === 1
-                    ? "surface-pane-muted"
-                    : "bg-[var(--color-surface-lowest)]"
-                }`}
+                className={
+                  index === 1 ? "surface-panel-muted" : "surface-panel"
+                }
               >
                 <h3 className="section-title">{reason.title}</h3>
                 <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
@@ -79,7 +77,7 @@ export default function AboutPage() {
             ))}
           </div>
           <div className="grid gap-4 xl:grid-cols-[1.02fr_0.98fr]">
-            <article className="overflow-hidden rounded-[2rem] bg-[var(--color-surface-lowest)] shadow-[0px_18px_48px_rgba(27,28,28,0.06)]">
+            <article className="surface-frame">
               <Image
                 src={pubExteriorImage}
                 alt="Exterior of The Old School House pub on London Road in Stony Stratford."
@@ -88,7 +86,7 @@ export default function AboutPage() {
               />
             </article>
             <div className="grid gap-4 sm:grid-cols-2">
-              <article className="overflow-hidden rounded-[1.7rem] bg-[var(--color-surface-lowest)] shadow-[0px_10px_28px_rgba(27,28,28,0.05)]">
+              <article className="surface-frame">
                 <Image
                   src={indoorSeatingImage}
                   alt="Interior seating area inside The Old School House pub in Stony Stratford."
@@ -96,7 +94,7 @@ export default function AboutPage() {
                   sizes="(min-width: 640px) 50vw, 100vw"
                 />
               </article>
-              <article className="overflow-hidden rounded-[1.7rem] bg-[var(--color-surface-lowest)] shadow-[0px_10px_28px_rgba(27,28,28,0.05)]">
+              <article className="surface-frame">
                 <Image
                   src={beerOnTapImage}
                   alt="Beer being poured at the bar inside The Old School House pub in Stony Stratford."
@@ -120,11 +118,9 @@ export default function AboutPage() {
             {organizationFactSheet.map((item, index) => (
               <article
                 key={item.label}
-                className={`rounded-2xl px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6 ${
-                  index % 2 === 1
-                    ? "surface-pane-muted"
-                    : "bg-[var(--color-surface-lowest)]"
-                }`}
+                className={
+                  index % 2 === 1 ? "surface-panel-muted" : "surface-panel"
+                }
               >
                 <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
                   {item.label}
@@ -152,11 +148,9 @@ export default function AboutPage() {
             {aboutPubFacts.map((fact, index) => (
               <article
                 key={fact.label}
-                className={`rounded-2xl px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6 ${
-                  index % 2 === 0
-                    ? "bg-[var(--color-surface-lowest)]"
-                    : "surface-pane-muted"
-                }`}
+                className={
+                  index % 2 === 0 ? "surface-panel" : "surface-panel-muted"
+                }
               >
                 <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
                   {fact.label}
@@ -173,7 +167,7 @@ export default function AboutPage() {
       <section className="bg-background py-10 md:py-14 lg:py-16">
         <div className="section-shell space-y-5">
           <div className="grid gap-4 lg:grid-cols-3">
-            <article className="rounded-2xl bg-[var(--color-surface-lowest)] px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6">
+            <article className="surface-panel">
               <div className="flex items-center gap-3">
                 <ForkKnife className="size-5 text-secondary" />
                 <h3 className="section-title">{aboutOperatorCardTitle}</h3>
@@ -191,7 +185,7 @@ export default function AboutPage() {
                 </Link>
               </div>
             </article>
-            <article className="surface-pane-muted rounded-2xl px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6">
+            <article className="surface-panel-muted">
               <div className="flex items-center gap-3">
                 <Buildings className="size-5 text-secondary" />
                 <h3 className="section-title">{aboutFamilyCardTitle}</h3>
@@ -214,7 +208,7 @@ export default function AboutPage() {
                 </p>
               </div>
             </article>
-            <article className="rounded-2xl bg-[var(--color-surface-lowest)] px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6">
+            <article className="surface-panel">
               <div className="flex items-center gap-3">
                 <MapPin className="size-5 text-secondary" />
                 <h3 className="section-title">{aboutHeritageCardTitle}</h3>
@@ -230,11 +224,9 @@ export default function AboutPage() {
             {aboutLocationHighlights.map((item, index) => (
               <article
                 key={item.title}
-                className={`rounded-2xl px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6 ${
-                  index === 1
-                    ? "surface-pane-muted"
-                    : "bg-[var(--color-surface-lowest)]"
-                }`}
+                className={
+                  index === 1 ? "surface-panel-muted" : "surface-panel"
+                }
               >
                 <h3 className="section-title">{item.title}</h3>
                 <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">

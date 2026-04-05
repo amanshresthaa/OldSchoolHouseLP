@@ -124,7 +124,6 @@ export default function FindUsPage() {
                 { href: mapHref, label: "Open map" },
               ]}
               supportingText={findUsActionCardText}
-              showDivider
             />
           </div>
           <div className="grid gap-4 xl:grid-cols-[0.85fr_1.15fr]">
@@ -205,14 +204,14 @@ export default function FindUsPage() {
             description="Use these quick views to recognise the building and get a feel for the easier arrival setup."
           />
           <div className="grid gap-4 md:grid-cols-2">
-            <article className="overflow-hidden rounded-[1.9rem] bg-[var(--color-surface-lowest)] shadow-[0px_18px_48px_rgba(27,28,28,0.06)]">
+            <article className="surface-frame">
               <Image
                 src={pubExteriorImage}
                 alt="Exterior of The Old School House pub on London Road in Stony Stratford, close to the High Street."
                 className="h-72 w-full object-cover md:h-80"
                 sizes="(min-width: 768px) 50vw, 100vw"
               />
-              <div className="px-5 py-5 md:px-6 md:py-6">
+              <div className="surface-pane">
                 <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
                   Frontage
                 </p>
@@ -225,14 +224,14 @@ export default function FindUsPage() {
                 </p>
               </div>
             </article>
-            <article className="overflow-hidden rounded-[1.9rem] bg-[var(--color-surface-lowest)] shadow-[0px_18px_48px_rgba(27,28,28,0.06)]">
+            <article className="surface-frame">
               <Image
                 src={customerParkingImage}
                 alt="Customer parking area at The Old School House pub in Stony Stratford."
                 className="h-72 w-full object-cover md:h-80"
                 sizes="(min-width: 768px) 50vw, 100vw"
               />
-              <div className="px-5 py-5 md:px-6 md:py-6">
+              <div className="surface-pane">
                 <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
                   Arrival
                 </p>

@@ -14,7 +14,6 @@ interface SiteActionCardProps extends ComponentProps<"div"> {
   actions: SiteAction[]
   supportingText?: string
   tone?: "dark" | "light"
-  showDivider?: boolean
 }
 
 function isExternalHref(href: string) {
@@ -71,13 +70,12 @@ export function SiteActionCard({
   className,
   supportingText,
   tone = "light",
-  showDivider = false,
   ...props
 }: SiteActionCardProps) {
   const cardClassName =
     tone === "dark"
-      ? "rounded-[1.75rem] border border-white/10 bg-white/[0.06] p-5 backdrop-blur-md sm:p-6"
-      : "surface-panel border border-[rgba(196,189,181,0.35)] bg-[var(--color-surface-lowest)]/88 p-5 backdrop-blur-xl sm:p-6"
+      ? "rounded-2xl bg-white/[0.06] p-5 backdrop-blur-md sm:p-6"
+      : "surface-panel bg-[var(--color-surface-lowest)]/92 backdrop-blur-xl"
 
   const primaryClassName =
     "cta-primary group/cta inline-flex h-12 w-full items-center justify-center gap-2.5 px-6 text-sm font-semibold lg:w-auto"
@@ -94,17 +92,6 @@ export function SiteActionCard({
             key={`${action.href}-${action.label}`}
             className="contents lg:flex lg:items-center"
           >
-            {showDivider && index === 1 ? (
-              <span
-                aria-hidden="true"
-                className={cn(
-                  "hidden h-6 w-px lg:block",
-                  tone === "dark"
-                    ? "bg-white/16"
-                    : "bg-[rgba(196,189,181,0.48)]"
-                )}
-              />
-            ) : null}
             <ActionLink
               action={action}
               className={index === 0 ? primaryClassName : secondaryClassName}

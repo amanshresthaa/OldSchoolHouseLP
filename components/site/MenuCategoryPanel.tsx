@@ -43,7 +43,7 @@ export function MenuCategoryPanel({
             {category.items.map((item) => (
               <article
                 key={`${category.slug}-${item.name}`}
-                className="space-y-3 border-t border-[var(--color-outline-variant)]/24 pt-5 first:border-t-0 first:pt-0"
+                className="space-y-3"
               >
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
                   <div className="min-w-0 space-y-2">

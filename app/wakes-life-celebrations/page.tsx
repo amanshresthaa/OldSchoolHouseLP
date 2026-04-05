@@ -73,7 +73,7 @@ export default function WakesLifeCelebrationsPage() {
           },
         ],
         details: (
-          <div className="rounded-2xl bg-[var(--color-surface-lowest)] px-5 py-5 text-sm leading-7 text-on-surface shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6 md:text-base">
+          <div className="surface-panel text-sm leading-7 text-on-surface md:text-base">
             <div className="flex items-start gap-3">
               <Tray className="mt-1 size-5 shrink-0 text-secondary" />
               <div className="space-y-2">

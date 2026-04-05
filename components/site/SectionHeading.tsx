@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils"
 interface SectionHeadingProps extends ComponentProps<"div"> {
   eyebrow?: string
   title: string
+  titleId?: string
   description?: string
   invert?: boolean
 }
@@ -13,6 +14,7 @@ export function SectionHeading({
   className,
   eyebrow,
   title,
+  titleId,
   description,
   invert = false,
   ...props
@@ -43,7 +45,9 @@ export function SectionHeading({
           </p>
         </div>
       ) : null}
-      <h2 className={cn("section-title", invert && "text-white")}>{title}</h2>
+      <h2 id={titleId} className={cn("section-title", invert && "text-white")}>
+        {title}
+      </h2>
       {description ? (
         <p
           className={cn(

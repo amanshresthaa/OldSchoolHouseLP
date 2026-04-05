@@ -33,6 +33,18 @@ export const homeStoryFeature = {
   alt: "Pints being poured at the bar inside The Old School House pub in Stony Stratford.",
 }
 
+export const homeProofBarSectionCopy = {
+  eyebrow: "At a glance",
+  title:
+    "A pub visit that works for lunch, dinner, match nights, and longer stays.",
+  description:
+    "The Old School House pairs a familiar pub feel with practical reasons to choose it again, from flexible seating to a food offer that gives the table more range.",
+  highlightLabel: "Capacity",
+  highlightValue: "125 covers",
+  highlightNote:
+    "65 inside and 60 outside, giving the pub room to flex between quieter meals and fuller nights.",
+}
+
 export const homeProofBarItems = [
   {
     title: "Recently refurbished",

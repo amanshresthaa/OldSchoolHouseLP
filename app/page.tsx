@@ -7,6 +7,7 @@ import { ArrowRight, MapPin } from "@phosphor-icons/react/dist/ssr"
 import { FaqSection } from "@/components/site/FaqSection"
 import { GuestReviewSlideshow } from "@/components/site/GuestReviewSlideshow"
 import { HomeHeroSlideshow } from "@/components/site/HomeHeroSlideshow"
+import { HomeProofBarSection } from "@/components/site/HomeProofBarSection"
 import { InlineBookingCta } from "@/components/site/InlineBookingCta"
 import { MapEmbed } from "@/components/site/MapEmbed"
 import { RouteStructuredData } from "@/components/site/RouteStructuredData"
@@ -19,6 +20,7 @@ import {
   homeInlineCtaCopy,
   homeMenuShowcase,
   homeProofBarItems,
+  homeProofBarSectionCopy,
   homeStoryFeature,
   homeVisitSectionCopy,
 } from "@/data/copy"
@@ -123,7 +125,7 @@ function ImageRoutePanel({
     <Link
       href={item.href}
       className={cn(
-        "group relative block overflow-hidden rounded-[1.9rem] bg-primary text-white",
+        "group relative block overflow-hidden rounded-2xl bg-primary text-white",
         className
       )}
     >
@@ -178,25 +180,10 @@ export default function HomePage() {
 
       <HomeHeroSlideshow />
 
-      <section className="bg-background py-4 md:py-5">
-        <div className="section-shell">
-          <div className="grid auto-cols-[84%] grid-flow-col gap-px overflow-x-auto rounded-[1.6rem] bg-[rgba(196,189,181,0.38)] [-ms-overflow-style:none] [scrollbar-width:none] md:auto-cols-auto md:grid-flow-row md:grid-cols-2 xl:grid-cols-4 [&::-webkit-scrollbar]:hidden">
-            {homeProofBarItems.map((item) => (
-              <article
-                key={item.title}
-                className="snap-start bg-[var(--color-surface-lowest)] px-5 py-5 md:px-6 md:py-5"
-              >
-                <p className="text-[0.7rem] font-semibold tracking-[0.16em] text-secondary uppercase">
-                  {item.title}
-                </p>
-                <p className="pt-2 text-sm leading-6 text-on-surface">
-                  {item.description}
-                </p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      <HomeProofBarSection
+        items={homeProofBarItems}
+        copy={homeProofBarSectionCopy}
+      />
 
       <section className="bg-[var(--color-surface-low)] py-10 md:py-14 lg:py-16">
         <div className="section-shell">
@@ -205,43 +192,42 @@ export default function HomePage() {
               item={storyFeature}
               className="min-h-[26rem] xl:min-h-[34rem]"
             />
-            <div className="rounded-[1.9rem] bg-[var(--color-surface-lowest)] p-5 shadow-[0px_18px_48px_rgba(27,28,28,0.06)] md:p-7">
-              <SectionHeading
-                eyebrow="Why choose us"
-                title="A proper pub atmosphere first, then food that gives the table a reason to come back."
-                description="The room feels familiar from the first drink, while the food gives the visit more identity than the average pub stop."
-                className="max-w-none"
-              />
-              <div className="space-y-4 pt-6">
-                {homeReasons.map((reason) => (
-                  <article
-                    key={reason.title}
-                    className="border-t border-[rgba(196,189,181,0.42)] pt-4 first:border-t-0 first:pt-0"
+            <div className="surface-frame">
+              <div className="surface-pane space-y-5 md:px-7 md:py-7">
+                <SectionHeading
+                  eyebrow="Why choose us"
+                  title="A proper pub atmosphere first, then food that gives the table a reason to come back."
+                  description="The room feels familiar from the first drink, while the food gives the visit more identity than the average pub stop."
+                  className="max-w-none"
+                />
+                <div className="space-y-4">
+                  {homeReasons.map((reason) => (
+                    <article key={reason.title} className="space-y-2">
+                      <h3 className="font-heading text-[1.5rem] leading-tight text-on-background">
+                        {reason.title}
+                      </h3>
+                      <p className="max-w-xl text-sm leading-6 text-on-surface md:text-base">
+                        {reason.description}
+                      </p>
+                    </article>
+                  ))}
+                </div>
+                <div className="flex flex-wrap items-center gap-4">
+                  <Link
+                    href="/menu"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-secondary transition hover:text-secondary/80"
                   >
-                    <h3 className="font-heading text-[1.5rem] leading-tight text-on-background">
-                      {reason.title}
-                    </h3>
-                    <p className="max-w-xl pt-2 text-sm leading-6 text-on-surface md:text-base">
-                      {reason.description}
-                    </p>
-                  </article>
-                ))}
-              </div>
-              <div className="flex flex-wrap items-center gap-4 pt-6">
-                <Link
-                  href="/menu"
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-secondary transition hover:text-secondary/80"
-                >
-                  Browse the menu
-                  <ArrowRight className="size-4" />
-                </Link>
-                <Link
-                  href="/book"
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-secondary transition hover:text-secondary/80"
-                >
-                  Book a table
-                  <ArrowRight className="size-4" />
-                </Link>
+                    Browse the menu
+                    <ArrowRight className="size-4" />
+                  </Link>
+                  <Link
+                    href="/book"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-secondary transition hover:text-secondary/80"
+                  >
+                    Book a table
+                    <ArrowRight className="size-4" />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -251,21 +237,21 @@ export default function HomePage() {
       <section className="bg-background py-10 md:py-14 lg:py-16">
         <div className="section-shell space-y-5">
           <div className="grid gap-4 xl:grid-cols-[1.04fr_0.96fr]">
-            <article className="overflow-hidden rounded-[2rem] bg-[var(--color-surface-lowest)] shadow-[0px_18px_48px_rgba(27,28,28,0.06)]">
+            <article className="surface-frame">
               <Image
                 src={menuShowcase[0].image}
                 alt={menuShowcase[0].alt}
                 className="h-72 w-full object-cover md:h-[26rem]"
                 sizes="(min-width: 1280px) 50vw, 100vw"
               />
-              <div className="space-y-4 px-5 py-5 md:px-7 md:py-7">
+              <div className="surface-pane space-y-4 md:px-7 md:py-7">
                 <SectionHeading
                   eyebrow="Menu highlights"
                   title="Pub comfort and Nepalese dishes should both feel easy to order."
                   description="Start with the signatures, then use the full menu to build the table around the kind of visit you want."
                   className="max-w-none"
                 />
-                <div className="border-t border-[rgba(196,189,181,0.4)] pt-4">
+                <div className="space-y-3">
                   <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
                     {formatPrice(menuShowcase[0].item.price)}
                   </p>
@@ -298,17 +284,14 @@ export default function HomePage() {
             <div className="space-y-4">
               <div className="grid gap-4 sm:grid-cols-2">
                 {menuShowcase.slice(1).map((item) => (
-                  <article
-                    key={item.title}
-                    className="overflow-hidden rounded-[1.8rem] bg-[var(--color-surface-lowest)] shadow-[0px_10px_28px_rgba(27,28,28,0.05)]"
-                  >
+                  <article key={item.title} className="surface-frame">
                     <Image
                       src={item.image}
                       alt={item.alt}
                       className="h-52 w-full object-cover"
                       sizes="(min-width: 640px) 50vw, 100vw"
                     />
-                    <div className="px-5 py-5 md:px-6 md:py-6">
+                    <div className="surface-pane">
                       <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
                         {formatPrice(item.item.price)}
                       </p>
@@ -327,12 +310,12 @@ export default function HomePage() {
                   </article>
                 ))}
               </div>
-              <div className="rounded-[1.8rem] bg-[var(--color-surface-low)] p-5 md:p-6">
+              <div className="surface-panel-muted">
                 <div className="grid auto-cols-[84%] grid-flow-col gap-4 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] sm:auto-cols-auto sm:grid-flow-row sm:grid-cols-3 sm:overflow-visible sm:pb-0 [&::-webkit-scrollbar]:hidden">
                   {homeMenuHighlights.map((highlight) => (
                     <article
                       key={highlight.title}
-                      className="snap-start border-t border-[rgba(196,189,181,0.45)] pt-4 first:border-t-0 first:pt-0 sm:first:border-t sm:first:pt-4"
+                      className="snap-start space-y-2"
                     >
                       <h3 className="text-[0.72rem] font-semibold tracking-[0.16em] text-secondary uppercase">
                         {highlight.title}
@@ -456,7 +439,6 @@ export default function HomePage() {
                   { href: "/book", label: "Book a table" },
                 ]}
                 supportingText="A quick feel for the atmosphere, the guest mix, and why people come back."
-                showDivider
               />
             </div>
           </div>
@@ -481,7 +463,7 @@ export default function HomePage() {
               ))}
             </div>
           </div>
-          <div className="rounded-[1.85rem] bg-primary p-5 text-white shadow-[0px_18px_48px_rgba(27,28,28,0.08)] md:p-6">
+          <div className="night-panel">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
               <div className="max-w-2xl">
                 <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-[var(--color-on-tertiary-container)] uppercase">
@@ -517,7 +499,7 @@ export default function HomePage() {
         <div className="section-shell space-y-5">
           <div className="grid gap-4 xl:grid-cols-[1.02fr_0.98fr]">
             <div className="grid gap-4">
-              <div className="surface-panel rounded-[1.85rem] p-5 md:p-6">
+              <div className="surface-panel">
                 <SectionHeading
                   {...homeVisitSectionCopy}
                   className="max-w-none"
@@ -579,7 +561,7 @@ export default function HomePage() {
                 ))}
               </div>
 
-              <div className="surface-panel-muted rounded-[1.75rem] p-5 md:p-6">
+              <div className="surface-panel-muted">
                 <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
                   <div className="max-w-xl">
                     <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
@@ -589,7 +571,7 @@ export default function HomePage() {
                       {arrivalNotes.map((note) => (
                         <p
                           key={note}
-                          className="border-t border-[rgba(196,189,181,0.42)] pt-3 text-sm leading-6 text-on-surface first:border-t-0 first:pt-0 md:text-base"
+                          className="text-sm leading-6 text-on-surface md:text-base"
                         >
                           {note}
                         </p>

@@ -187,10 +187,10 @@ export function FeaturePage({
 
       {inlineCta ? (
         inlineCta.actions ? (
-          <section className="bg-tertiary-container py-12 text-white md:py-14">
-            <div className="section-shell">
-              <div className="grid gap-6 lg:grid-cols-[minmax(0,1.04fr)_minmax(19rem,0.96fr)] lg:gap-10">
-                <div className="space-y-2.5">
+          <section className="page-section bg-tertiary-container text-white">
+            <div className="section-shell space-y-5">
+              <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+                <div className="max-w-2xl space-y-2.5">
                   <p className="text-xs font-semibold tracking-[0.22em] text-[var(--color-on-tertiary-container)] uppercase">
                     Next step
                   </p>
@@ -199,12 +199,8 @@ export function FeaturePage({
                     {inlineCta.description}
                   </p>
                 </div>
-                <div className="border-t border-white/10 pt-4 lg:border-t-0 lg:border-l lg:pt-1 lg:pl-8">
-                  <SiteActionCard
-                    actions={inlineCta.actions}
-                    tone="dark"
-                    showDivider={inlineCta.actions.length > 1}
-                  />
+                <div className="shrink-0">
+                  <SiteActionCard actions={inlineCta.actions} tone="dark" />
                 </div>
               </div>
             </div>

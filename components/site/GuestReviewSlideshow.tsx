@@ -117,7 +117,7 @@ export function GuestReviewSlideshow({
         {activeReview.summary}
       </p>
 
-      <div className="flex flex-wrap items-end justify-between gap-4 border-t border-[rgba(196,189,181,0.2)] pt-4">
+      <div className="surface-pane-muted -mx-5 -mb-5 flex flex-wrap items-end justify-between gap-4 rounded-b-2xl pt-4 md:-mx-6 md:-mb-6">
         <div className="flex flex-wrap gap-1.5">
           {activeReview.focus.map((item) => (
             <span

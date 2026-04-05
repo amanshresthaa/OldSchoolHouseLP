@@ -34,26 +34,19 @@ function isSameAction(action: CtaConfig | undefined, comparison: CtaConfig) {
 function getActionPresentation(action: CtaConfig) {
   const normalizedLabel = action.label.toLowerCase()
 
-  if (normalizedLabel.includes("menu") || action.href === "/menu") {
-    return "🍽️"
-  }
-
   if (normalizedLabel.includes("direction") || action.href === directionsHref) {
-    return "📍"
+    return "Directions"
   }
 
-  if (
-    normalizedLabel.includes("enquire") ||
-    action.href.startsWith("mailto:")
-  ) {
-    return "✉️"
+  if (normalizedLabel.includes("menu") || action.href === "/menu") {
+    return "Menu"
   }
 
   if (normalizedLabel.includes("book")) {
-    return "📅"
+    return "Book"
   }
 
-  return "📞"
+  return action.label
 }
 
 function resolveActiveRoute(pathname: string) {
@@ -182,41 +175,29 @@ export function StickyBookingBar() {
     pathname,
     primaryAction
   )
-  const primaryPresentation = getActionPresentation(primaryAction)
-  const secondaryPresentation = getActionPresentation(secondaryAction)
-
   return (
     <div
-      className="fixed inset-x-0 bottom-0 z-50 border-t border-black/5 bg-[var(--color-surface-lowest)]/95 px-4 pt-3 backdrop-blur-xl md:hidden"
+      className="fixed inset-x-0 bottom-0 z-50 bg-[var(--color-surface-lowest)]/95 px-4 pt-3 backdrop-blur-xl md:hidden"
       style={{ paddingBottom: "calc(0.75rem + env(safe-area-inset-bottom))" }}
     >
       <div className="mx-auto max-w-md">
         <div className="grid grid-cols-2 gap-3">
           <Button asChild size="lg" variant="default" className="w-full">
             <Link href={primaryAction.href} aria-label={primaryAction.label}>
-              <span aria-hidden="true" className="text-base leading-none">
-                {primaryPresentation}
-              </span>
-              <span>{primaryAction.label}</span>
+              <span>{getActionPresentation(primaryAction)}</span>
             </Link>
           </Button>
           <Button asChild size="lg" variant="outline" className="w-full">
             {isExternalHref(secondaryAction.href) ? (
               <a href={secondaryAction.href} aria-label={secondaryAction.label}>
-                <span aria-hidden="true" className="text-base leading-none">
-                  {secondaryPresentation}
-                </span>
-                <span>{secondaryAction.label}</span>
+                <span>{getActionPresentation(secondaryAction)}</span>
               </a>
             ) : (
               <Link
                 href={secondaryAction.href}
                 aria-label={secondaryAction.label}
               >
-                <span aria-hidden="true" className="text-base leading-none">
-                  {secondaryPresentation}
-                </span>
-                <span>{secondaryAction.label}</span>
+                <span>{getActionPresentation(secondaryAction)}</span>
               </Link>
             )}
           </Button>

@@ -93,7 +93,7 @@ export default function SanjogGautamPage() {
           </article>
 
           <div className="grid gap-4">
-            <article className="surface-panel-muted rounded-2xl">
+            <article className="surface-panel-muted">
               <div className="flex items-center gap-3">
                 <Buildings className="size-5 text-secondary" />
                 <h2 className="section-title">Works for {siteLegalName}</h2>
@@ -114,12 +114,7 @@ export default function SanjogGautamPage() {
               <h2 className="section-title">Areas of expertise</h2>
               <ul className="grid gap-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
                 {sanjogGautamExpertiseAreas.map((item) => (
-                  <li
-                    key={item}
-                    className="border-t border-[rgba(196,189,181,0.42)] pt-3 first:border-t-0 first:pt-0"
-                  >
-                    {item}
-                  </li>
+                  <li key={item}>{item}</li>
                 ))}
               </ul>
             </article>

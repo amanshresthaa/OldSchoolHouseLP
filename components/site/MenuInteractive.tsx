@@ -168,7 +168,7 @@ export function MenuInteractive({ categories }: MenuInteractiveProps) {
       <div
         className={cn(
           "sticky top-[4.5rem] z-30 bg-[var(--color-surface)]/85 backdrop-blur-[20px] transition-shadow duration-[var(--duration-transition)] ease-[var(--easing-standard)]",
-          isStuck && "shadow-[0_4px_16px_rgba(27,28,28,0.06)]"
+          isStuck && "shadow-[var(--shadow-card)]"
         )}
       >
         <div className="section-shell">

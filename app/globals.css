@@ -329,7 +329,7 @@
       rgba(8, 24, 14, 0.92),
       rgba(26, 50, 35, 0.82)
     );
-    box-shadow: 0px 20px 60px rgba(6, 27, 14, 0.28);
+    box-shadow: var(--shadow-frame);
     backdrop-filter: blur(14px);
   }
 
@@ -471,7 +471,7 @@
   }
 
   .eyebrow {
-    @apply text-[0.6875rem] font-semibold tracking-[0.1em] text-secondary uppercase;
+    @apply text-[0.6875rem] font-semibold tracking-[0.1em] text-[var(--color-tertiary)] uppercase;
   }
 
   .eyebrow-row {

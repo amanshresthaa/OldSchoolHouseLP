@@ -82,7 +82,6 @@ export default function EventsPage() {
                 },
               ]}
               supportingText={eventsActionCardText}
-              showDivider
             />
           </div>
           <div className="grid gap-4 lg:grid-cols-3">
@@ -92,11 +91,9 @@ export default function EventsPage() {
               return (
                 <article
                   key={card.title}
-                  className={`rounded-2xl px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6 ${
-                    index === 1
-                      ? "surface-pane-muted"
-                      : "bg-[var(--color-surface-lowest)]"
-                  }`}
+                  className={
+                    index === 1 ? "surface-panel-muted" : "surface-panel"
+                  }
                 >
                   <Icon className="size-5 text-secondary" />
                   <h3 className="section-title pt-3">{card.title}</h3>
@@ -108,14 +105,14 @@ export default function EventsPage() {
             })}
           </div>
           <div className="grid gap-4 xl:grid-cols-[1.02fr_0.98fr]">
-            <article className="overflow-hidden rounded-[2rem] bg-[var(--color-surface-lowest)] shadow-[0px_18px_48px_rgba(27,28,28,0.06)]">
+            <article className="surface-frame">
               <Image
                 src={sportsTvImage}
                 alt="Large-screen live sport setup inside The Old School House pub in Stony Stratford."
                 className="h-80 w-full object-cover md:h-[28rem]"
                 sizes="(min-width: 1280px) 50vw, 100vw"
               />
-              <div className="px-5 py-5 md:px-6 md:py-6">
+              <div className="surface-pane">
                 <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
                   Match nights
                 </p>
@@ -127,14 +124,14 @@ export default function EventsPage() {
               </div>
             </article>
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-1">
-              <article className="overflow-hidden rounded-[1.7rem] bg-[var(--color-surface-lowest)] shadow-[0px_10px_28px_rgba(27,28,28,0.05)]">
+              <article className="surface-frame">
                 <Image
                   src={poolTableImage}
                   alt="Pool table and fruit machine inside The Old School House pub in Stony Stratford."
                   className="h-64 w-full object-cover"
                   sizes="(min-width: 640px) 50vw, 100vw"
                 />
-                <div className="px-5 py-5 md:px-6 md:py-6">
+                <div className="surface-pane">
                   <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
                     Casual nights
                   </p>
@@ -144,14 +141,14 @@ export default function EventsPage() {
                   </p>
                 </div>
               </article>
-              <article className="overflow-hidden rounded-[1.7rem] bg-[var(--color-surface-lowest)] shadow-[0px_10px_28px_rgba(27,28,28,0.05)]">
+              <article className="surface-frame">
                 <Image
                   src={dartBoardImage}
                   alt="Dart board area inside The Old School House pub in Stony Stratford."
                   className="h-64 w-full object-cover"
                   sizes="(min-width: 640px) 50vw, 100vw"
                 />
-                <div className="px-5 py-5 md:px-6 md:py-6">
+                <div className="surface-pane">
                   <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
                     Pub-side favourites
                   </p>
@@ -173,10 +170,8 @@ export default function EventsPage() {
             {eventOccasions.map((occasion, index) => (
               <article
                 key={occasion}
-                className={`rounded-2xl px-5 py-5 text-sm leading-7 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6 md:text-base ${
-                  index % 2 === 0
-                    ? "bg-[var(--color-surface-lowest)]"
-                    : "surface-pane-muted"
+                className={`text-sm leading-7 md:text-base ${
+                  index % 2 === 0 ? "surface-panel" : "surface-panel-muted"
                 }`}
               >
                 {occasion}
@@ -207,18 +202,15 @@ export default function EventsPage() {
                 },
               ]}
               supportingText="Ideal for team socials, sport-led group visits, and busier event nights."
-              showDivider
             />
           </div>
           <div className="grid gap-4 lg:grid-cols-3">
             {eventsPlanningCards.map((card, index) => (
               <article
                 key={card.title}
-                className={`rounded-2xl px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] md:px-6 md:py-6 ${
-                  index === 1
-                    ? "surface-pane-muted"
-                    : "bg-[var(--color-surface-lowest)]"
-                }`}
+                className={
+                  index === 1 ? "surface-panel-muted" : "surface-panel"
+                }
               >
                 <h3 className="section-title">{card.title}</h3>
                 <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
@@ -227,37 +219,39 @@ export default function EventsPage() {
               </article>
             ))}
           </div>
-          <div className="rounded-[2rem] bg-[var(--color-surface-lowest)] p-5 shadow-[0px_18px_48px_rgba(27,28,28,0.06)] md:p-6">
-            <div className="max-w-2xl space-y-3">
-              <p className="eyebrow">Need more than a standard booking?</p>
-              <h3 className="section-title">
-                Email the team if the visit needs a little more context.
-              </h3>
-              <p className="text-sm leading-7 text-on-surface md:text-base">
-                It is the easiest option when the evening depends on screens,
-                group size, timing, or a team and social setup rather than just
-                a normal table booking.
+          <div className="surface-frame">
+            <div className="surface-pane">
+              <div className="max-w-2xl space-y-3">
+                <p className="eyebrow">Need more than a standard booking?</p>
+                <h3 className="section-title">
+                  Email the team if the visit needs a little more context.
+                </h3>
+                <p className="text-sm leading-7 text-on-surface md:text-base">
+                  It is the easiest option when the evening depends on screens,
+                  group size, timing, or a team and social setup rather than
+                  just a normal table booking.
+                </p>
+              </div>
+              <div className="flex flex-col gap-3 pt-6 sm:flex-row">
+                <a
+                  href={siteEmailHref}
+                  className="cta-primary inline-flex h-12 items-center justify-center gap-2.5 px-6 text-sm font-semibold"
+                >
+                  Email the team
+                  <EnvelopeSimple className="size-4" />
+                </a>
+                <a
+                  href={sitePhoneHref}
+                  className="cta-secondary inline-flex h-12 items-center justify-center px-6"
+                >
+                  Call the pub
+                </a>
+              </div>
+              <p className="pt-4 text-sm leading-7 text-on-surface/72 md:text-base">
+                Mention the fixture or occasion, rough guest numbers, preferred
+                date, and anything the team should know about the setup.
               </p>
             </div>
-            <div className="flex flex-col gap-3 pt-6 sm:flex-row">
-              <a
-                href={siteEmailHref}
-                className="cta-primary inline-flex h-12 items-center justify-center gap-2.5 px-6 text-sm font-semibold"
-              >
-                Email the team
-                <EnvelopeSimple className="size-4" />
-              </a>
-              <a
-                href={sitePhoneHref}
-                className="cta-secondary inline-flex h-12 items-center justify-center px-6"
-              >
-                Call the pub
-              </a>
-            </div>
-            <p className="pt-4 text-sm leading-7 text-on-surface/72 md:text-base">
-              Mention the fixture or occasion, rough guest numbers, preferred
-              date, and anything the team should know about the setup.
-            </p>
           </div>
         </div>
       </section>
@@ -270,7 +264,7 @@ export default function EventsPage() {
           <div className="grid gap-4 md:grid-cols-2">
             <Link
               href="/live-sport"
-              className="rounded-2xl bg-[var(--color-surface-lowest)] px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] transition hover:-translate-y-0.5 md:px-6 md:py-6"
+              className="surface-panel transition hover:-translate-y-0.5"
             >
               <Television className="size-5 text-secondary" />
               <h3 className="section-title pt-3">
@@ -282,7 +276,7 @@ export default function EventsPage() {
             </Link>
             <Link
               href="/private-hire"
-              className="surface-pane-muted rounded-2xl px-5 py-5 shadow-[0px_10px_28px_rgba(27,28,28,0.05)] transition hover:-translate-y-0.5 md:px-6 md:py-6"
+              className="surface-panel-muted transition hover:-translate-y-0.5"
             >
               <UsersThree className="size-5 text-secondary" />
               <h3 className="section-title pt-3">

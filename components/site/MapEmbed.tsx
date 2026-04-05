@@ -41,12 +41,9 @@ export function MapEmbed({
 
   if (!isReady || !hasConsent) {
     return (
-      <div
-        className="overflow-hidden rounded-3xl bg-[var(--color-surface-highest)]"
-        {...props}
-      >
+      <div className="surface-frame" {...props}>
         <div
-          className={`flex flex-col justify-between gap-6 p-6 md:p-8 ${blockedHeightClass}`}
+          className={`surface-pane surface-pane-muted flex flex-col justify-between gap-6 ${blockedHeightClass}`}
         >
           <div className="max-w-xl space-y-3">
             <p className="eyebrow">{mapEmbedCopy.privacyEyebrow}</p>
@@ -80,10 +77,7 @@ export function MapEmbed({
   }
 
   return (
-    <div
-      className="overflow-hidden rounded-3xl bg-[var(--color-surface-highest)]"
-      {...props}
-    >
+    <div className="surface-frame" {...props}>
       <iframe
         title={title}
         src="https://www.google.com/maps?q=The+Old+School+House+London+Road+Stony+Stratford+Milton+Keynes+MK11+1JA&z=15&output=embed"
@@ -91,7 +85,7 @@ export function MapEmbed({
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
       />
-      <div className="flex flex-col items-start gap-3 bg-[var(--color-surface-lowest)] px-5 py-4 text-sm text-on-surface sm:flex-row sm:items-center sm:justify-between">
+      <div className="surface-pane flex flex-col items-start gap-3 text-sm text-on-surface sm:flex-row sm:items-center sm:justify-between">
         <p>{mapEmbedCopy.directionsPrompt}</p>
         <a
           href={directionsHref}

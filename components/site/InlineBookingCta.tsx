@@ -20,12 +20,12 @@ export function InlineBookingCta({
 }: InlineBookingCtaProps) {
   return (
     <section
-      className="bg-tertiary-container py-12 text-white md:py-14"
+      className="page-section bg-tertiary-container text-white"
       {...props}
     >
-      <div className="section-shell">
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,1.04fr)_minmax(19rem,0.96fr)] lg:gap-10">
-          <div className="space-y-2.5">
+      <div className="section-shell space-y-5">
+        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div className="max-w-2xl space-y-2.5">
             <p className="text-xs font-semibold tracking-[0.22em] text-[var(--color-on-tertiary-container)] uppercase">
               Book ahead
             </p>
@@ -34,7 +34,7 @@ export function InlineBookingCta({
               {description}
             </p>
           </div>
-          <div className="border-t border-white/10 pt-4 lg:border-t-0 lg:border-l lg:pt-1 lg:pl-8">
+          <div className="shrink-0">
             <SiteActionCard
               actions={[
                 {
@@ -49,7 +49,6 @@ export function InlineBookingCta({
                 },
               ]}
               supportingText={`${bookingUrgencyNote} Prefer to speak first? Give the pub a ring.`}
-              showDivider
               tone="dark"
             />
           </div>

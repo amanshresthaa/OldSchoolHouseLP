@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, type CSSProperties } from "react"
 import Image, { type StaticImageData } from "next/image"
 import Link from "next/link"
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr"
@@ -107,6 +107,161 @@ const heroCtaRotation: Array<[keyof typeof heroCtas, keyof typeof heroCtas]> = [
   ["call", "book"],
 ]
 
+const heroLayoutVars = {
+  "--hero-safe-space": "clamp(1rem, 0.8rem + 1.4vw, 2.5rem)",
+  "--hero-inner-space": "clamp(0.25rem, 0.1rem + 0.9vw, 0.875rem)",
+  "--hero-safe-inline": "var(--hero-safe-space)",
+  "--hero-shell-inset": "clamp(1rem, 7vw, 12rem)",
+  "--hero-shell-width":
+    "min(96%, max(80%, calc(100% - (var(--hero-shell-inset) * 2))))",
+  "--hero-title-width": "92%",
+  "--hero-body-width": "96%",
+  "--hero-signals-width": "100%",
+  "--hero-cta-width": "94%",
+  "--hero-meta-width": "88%",
+  "--hero-meta-gap": "clamp(0.375rem, 0.55vw, 0.625rem)",
+  "--hero-zone-gap": "clamp(1rem, 2vw, 1.6rem)",
+  "--hero-copy-gap": "clamp(0.875rem, 1.2vw, 1.35rem)",
+  "--hero-meta-zone": "clamp(2.25rem, 5vw, 3.25rem)",
+  "--hero-copy-zone": "clamp(10.75rem, 25vw, 14.75rem)",
+  "--hero-signals-zone": "clamp(2.75rem, 7vw, 4rem)",
+  "--hero-cta-zone": "clamp(3rem, 7vw, 4.25rem)",
+  "--hero-hours-size": "clamp(0.56rem, 0.54rem + 0.1vw, 0.64rem)",
+  "--hero-cta-gap": "clamp(0.25rem, 0.35vw, 0.45rem)",
+  "--hero-cta-offset": "clamp(0.25rem, 0.5vw, 0.65rem)",
+  "--hero-cta-height": "clamp(2.5rem, 2.2rem + 0.9vw, 3.5rem)",
+  "--hero-cta-font-size": "clamp(0.78rem, 0.72rem + 0.25vw, 1.02rem)",
+  "--hero-cta-padding-x": "clamp(0.625rem, 1.3vw, 2rem)",
+  "--hero-cta-icon-gap": "clamp(0.25rem, 0.45vw, 0.375rem)",
+  "--hero-progress-width": "clamp(14rem, 28vw, 20rem)",
+} as CSSProperties
+
+const heroShellStyle = {
+  width: "var(--hero-shell-width)",
+} as CSSProperties
+
+const heroTitleStyle = {
+  maxWidth: "var(--hero-title-width)",
+  fontSize: "var(--hero-title-size)",
+  lineHeight: "var(--hero-title-leading)",
+  letterSpacing: "var(--hero-title-tracking)",
+} as CSSProperties
+
+const heroBodyStyle = {
+  maxWidth: "var(--hero-body-width)",
+  fontSize: "var(--hero-body-size)",
+  lineHeight: "var(--hero-body-leading)",
+} as CSSProperties
+
+const heroMetaStyle = {
+  maxWidth: "var(--hero-meta-width)",
+} as CSSProperties
+
+const heroSignalsStyle = {
+  maxWidth: "var(--hero-signals-width)",
+  minHeight: "var(--hero-signals-zone)",
+} as CSSProperties
+
+const heroCtaStyle = {
+  maxWidth: "var(--hero-cta-width)",
+  minHeight: "var(--hero-cta-zone)",
+} as CSSProperties
+
+const heroSignalChipStyle = {
+  fontSize: "var(--hero-signal-size)",
+  letterSpacing: "var(--hero-signal-tracking)",
+  paddingInline: "var(--hero-signal-pad-x)",
+  paddingBlock: "var(--hero-signal-pad-y)",
+} as CSSProperties
+
+function clampNumber(value: number, min: number, max: number) {
+  return Math.min(Math.max(value, min), max)
+}
+
+function getHeroContentVars(slide: HeroSlide): CSSProperties {
+  const titleLength = slide.title.length
+  const descriptionLength = slide.description.length
+  const longestSignal = Math.max(
+    ...slide.signals.map((signal) => signal.length)
+  )
+  const signalAverage =
+    slide.signals.reduce((total, signal) => total + signal.length, 0) /
+    slide.signals.length
+
+  const densityScore =
+    titleLength * 1.15 +
+    descriptionLength * 0.38 +
+    longestSignal * 0.5 +
+    signalAverage * 0.35
+
+  const density = clampNumber((densityScore - 86) / 110, 0, 1)
+
+  const titleWidth = 96 - density * 6.2
+  const bodyWidth = 100 - density * 3.4
+  const signalsWidth = 100 - density * 6
+  const metaWidth = 91 - density * 3.4
+
+  const titleMin = 1.62 - density * 0.08
+  const titleFluid = 4.55 - density * 0.4
+  const titleMax = 3.75 - density * 0.22
+  const titleLeading = 0.98 - density * 0.02
+  const titleTracking = -0.03 - density * 0.01
+
+  const bodyMin = 0.92 - density * 0.025
+  const bodyFluid = 2.2 - density * 0.1
+  const bodyMax = 1.16 - density * 0.04
+  const bodyLeading = 1.31 + density * 0.03
+
+  const signalSize = 0.7 - density * 0.05
+  const signalTracking = 0.05 - density * 0.01
+  const signalPadX = 0.8 - density * 0.08
+  const signalPadY = 0.36 - density * 0.04
+
+  const metaGap = 0.5 - density * 0.06
+  const hoursSize = 0.6 - density * 0.03
+  const ctaOffset = 0.45 - density * 0.08
+  const ctaGap = 0.32 - density * 0.05
+  const copyZone = 15.2 - density * 1
+  const signalsZone = 3.6 - density * 0.25
+
+  return {
+    "--hero-title-width": `${titleWidth.toFixed(2)}%`,
+    "--hero-body-width": `${bodyWidth.toFixed(2)}%`,
+    "--hero-signals-width": `${signalsWidth.toFixed(2)}%`,
+    "--hero-meta-width": `${metaWidth.toFixed(2)}%`,
+    "--hero-title-size": `clamp(${titleMin.toFixed(3)}rem, ${titleFluid.toFixed(
+      3
+    )}vw, ${titleMax.toFixed(3)}rem)`,
+    "--hero-title-leading": titleLeading.toFixed(3),
+    "--hero-title-tracking": `${titleTracking.toFixed(4)}em`,
+    "--hero-body-size": `clamp(${bodyMin.toFixed(3)}rem, ${bodyFluid.toFixed(
+      3
+    )}vw, ${bodyMax.toFixed(3)}rem)`,
+    "--hero-body-leading": bodyLeading.toFixed(3),
+    "--hero-signal-size": `${signalSize.toFixed(3)}rem`,
+    "--hero-signal-tracking": `${signalTracking.toFixed(4)}em`,
+    "--hero-signal-pad-x": `${signalPadX.toFixed(3)}rem`,
+    "--hero-signal-pad-y": `${signalPadY.toFixed(3)}rem`,
+    "--hero-meta-gap": `${metaGap.toFixed(3)}rem`,
+    "--hero-hours-size": `${hoursSize.toFixed(3)}rem`,
+    "--hero-copy-zone": `clamp(9.75rem, 26vw, ${copyZone.toFixed(3)}rem)`,
+    "--hero-signals-zone": `clamp(2.75rem, 8vw, ${signalsZone.toFixed(3)}rem)`,
+    "--hero-cta-offset": `${Math.max(ctaOffset, 0.45).toFixed(3)}rem`,
+    "--hero-cta-gap": `${Math.max(ctaGap, 0.2).toFixed(3)}rem`,
+  } as CSSProperties
+}
+
+function getSlideEnterStyle(
+  prefersReducedMotion: boolean,
+  delayMs: number
+): CSSProperties {
+  return {
+    animation: prefersReducedMotion
+      ? "none"
+      : `osh-slide-up-fade 0.5s ease-out ${delayMs}ms both`,
+  }
+}
+
 export function HomeHeroSlideshow() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
@@ -181,6 +336,7 @@ export function HomeHeroSlideshow() {
   }
 
   const activeSlide = heroSlides[currentIndex]
+  const heroContentVars = getHeroContentVars(activeSlide)
   const visibleCtas = heroCtaRotation[
     currentIndex % heroCtaRotation.length
   ].map((ctaKey) => heroCtas[ctaKey])
@@ -189,6 +345,7 @@ export function HomeHeroSlideshow() {
     <section
       data-critical-home-hero
       className="relative isolate h-[33rem] w-full overflow-hidden bg-primary text-white sm:h-[35rem] md:h-[39rem] lg:h-[43rem] xl:h-[45rem]"
+      style={{ ...heroLayoutVars, ...heroContentVars }}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onFocusCapture={() => setIsPaused(true)}
@@ -239,110 +396,136 @@ export function HomeHeroSlideshow() {
         Traditional pub and Nepalese kitchen on London Road in Stony Stratford.
       </h1>
 
-      <div className="relative z-10 mx-auto flex h-full w-full max-w-7xl flex-col justify-center px-16 py-6 sm:px-16 sm:py-8 md:px-20 md:py-10 lg:px-24 lg:py-12 xl:px-28 xl:py-14">
-        <div className="mx-auto w-full max-w-[48rem] px-0">
+      <div
+        className="relative z-10 mx-auto flex h-full w-full max-w-[84rem] flex-col items-center justify-center"
+        style={{ padding: "var(--hero-safe-space)" }}
+      >
+        <div
+          className="mx-auto flex flex-col items-center"
+          style={heroShellStyle}
+        >
           <div
             key={`slide-content-${currentIndex}`}
-            className="mx-auto w-full max-w-[40rem] px-0 py-2 text-center sm:max-w-[42rem] sm:py-4 md:py-5 lg:py-6"
+            className="mx-auto grid w-full justify-items-center text-center"
+            style={{
+              padding: "var(--hero-inner-space)",
+              gridTemplateRows:
+                "var(--hero-meta-zone) minmax(0, var(--hero-copy-zone)) var(--hero-signals-zone) var(--hero-cta-zone)",
+              rowGap: "var(--hero-zone-gap)",
+            }}
           >
             <div
-              className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2.5 md:gap-3"
+              className="flex h-full w-full flex-col items-center justify-center gap-[var(--hero-meta-gap)]"
               style={{
-                animation: prefersReducedMotion
-                  ? "none"
-                  : "osh-slide-up-fade 0.5s ease-out 0ms both",
+                ...heroMetaStyle,
+                ...getSlideEnterStyle(prefersReducedMotion, 0),
               }}
             >
-              <span className="inline-flex rounded-full border border-[rgba(245,208,107,0.28)] bg-[rgba(245,208,107,0.12)] px-2.5 py-1 text-[0.54rem] font-semibold tracking-[0.12em] text-[var(--color-on-tertiary-container)] uppercase backdrop-blur-md sm:px-3 sm:py-1.5 sm:text-[0.6rem] md:px-4 md:text-[0.68rem]">
-                {activeSlide.eyebrow}
-              </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-[rgba(245,208,107,0.28)] bg-[rgba(245,208,107,0.12)] px-2.5 py-1 text-[0.54rem] font-semibold tracking-[0.12em] text-[var(--color-on-tertiary-container)] uppercase backdrop-blur-md sm:gap-2 sm:px-3 sm:py-1.5 sm:text-[0.6rem] md:px-4 md:text-[0.68rem]">
-                <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-on-tertiary-container)]" />
+              <div className="eyebrow-row justify-center">
+                <span
+                  aria-hidden="true"
+                  className="eyebrow-line bg-[var(--color-on-tertiary-container)]"
+                />
+                <span className="eyebrow text-[var(--color-on-tertiary-container)]">
+                  {activeSlide.eyebrow}
+                </span>
+              </div>
+              <p className="text-[length:var(--hero-hours-size)] font-semibold tracking-[0.18em] text-[var(--color-on-tertiary-container)]/86 uppercase">
                 Hours {openingHours[0].hours}
-              </span>
+              </p>
             </div>
 
             <div
-              className="flex flex-col items-center gap-3 py-2.5 sm:gap-4 sm:py-4 md:gap-4 md:py-5 lg:gap-5 lg:py-6"
+              className="flex h-full w-full flex-col items-center justify-center py-2 sm:py-3 md:py-4"
               style={{
-                animation: prefersReducedMotion
-                  ? "none"
-                  : "osh-slide-up-fade 0.5s ease-out 90ms both",
+                ...getSlideEnterStyle(prefersReducedMotion, 90),
+                gap: "var(--hero-copy-gap)",
               }}
             >
-              <h2 className="max-w-[15ch] font-heading text-[clamp(1.55rem,7.6vw,2.7rem)] leading-[0.98] tracking-[-0.03em] text-balance text-white sm:max-w-[15ch] sm:text-[clamp(2.1rem,6vw,3.2rem)] sm:leading-[0.97] md:max-w-[14ch] md:text-[clamp(2.5rem,5.3vw,3.9rem)] md:leading-[0.96] lg:text-[clamp(3.05rem,4.7vw,4.7rem)] lg:leading-[0.95] lg:tracking-[-0.04em] xl:text-[clamp(3.35rem,4.4vw,5rem)]">
+              <h2
+                className="w-full font-heading text-balance text-white"
+                style={heroTitleStyle}
+              >
                 {activeSlide.title}
               </h2>
 
-              <p className="max-w-[28rem] px-1 text-[clamp(0.82rem,3.4vw,0.96rem)] leading-[1.4] text-pretty text-white/88 sm:max-w-[30rem] sm:px-0 sm:text-[clamp(0.94rem,2.3vw,1.06rem)] sm:leading-[1.46] md:max-w-[32rem] md:text-[clamp(1rem,1.9vw,1.14rem)] md:leading-[1.52] lg:max-w-[34rem] lg:text-[clamp(1.08rem,1.7vw,1.24rem)] lg:leading-[1.58]">
+              <p
+                className="w-full px-1 text-white/88 sm:px-0"
+                style={heroBodyStyle}
+              >
                 {activeSlide.description}
               </p>
             </div>
 
             <div
-              className="flex w-full max-w-[32rem] flex-wrap items-center justify-center gap-2 self-center px-2 pb-2.5 sm:max-w-[32rem] sm:gap-2.5 sm:px-0 sm:pb-4 md:max-w-[34rem] md:gap-3 md:pb-5"
+              className="flex h-full w-full flex-wrap content-center items-center justify-center gap-2 self-center px-2 pb-2 sm:gap-2.5 sm:px-0 sm:pb-3 md:gap-3 md:pb-4"
               style={{
-                animation: prefersReducedMotion
-                  ? "none"
-                  : "osh-slide-up-fade 0.5s ease-out 175ms both",
+                ...heroSignalsStyle,
+                ...getSlideEnterStyle(prefersReducedMotion, 175),
               }}
             >
               {activeSlide.signals.map((signal, index) => (
                 <span
                   key={signal}
-                  className={`rounded-full border border-white/25 bg-white/10 px-3 py-1 text-[0.62rem] font-medium tracking-[0.05em] text-white/95 backdrop-blur-sm sm:px-3.5 sm:py-1.5 sm:text-[0.72rem] sm:tracking-[0.06em] md:px-4 md:py-2 md:text-[0.8rem] md:tracking-[0.08em] lg:text-[0.84rem] ${
+                  className={`rounded-full border border-white/25 bg-white/10 font-medium text-white/95 backdrop-blur-sm ${
                     index > 1 ? "hidden sm:inline-flex" : "inline-flex"
                   }`}
+                  style={heroSignalChipStyle}
                 >
                   {signal}
                 </span>
               ))}
             </div>
-          </div>
 
-          <div
-            data-critical-hero-panel
-            className="mx-auto mt-1 grid w-full max-w-[24rem] grid-cols-2 gap-2 px-4 sm:mt-2 sm:max-w-[34rem] sm:gap-3 sm:px-0 md:max-w-[36rem] md:gap-4 lg:max-w-[38rem]"
-            style={{
-              animation: prefersReducedMotion
-                ? "none"
-                : "osh-slide-up-fade 0.5s ease-out 245ms both",
-            }}
-          >
-            {visibleCtas.map((cta, ctaIndex) => {
-              const ctaClassName =
-                ctaIndex === 0
-                  ? "cta-primary inline-flex h-10 items-center justify-center gap-1.5 whitespace-nowrap px-2.5 text-[0.78rem] font-semibold sm:h-12 sm:px-6 sm:text-[0.94rem] md:h-13 md:px-7 md:text-[0.98rem] lg:h-14 lg:px-8 lg:text-[1.02rem]"
-                  : "cta-secondary-dark inline-flex h-10 items-center justify-center whitespace-nowrap px-2.5 text-[0.78rem] font-semibold sm:h-12 sm:px-6 sm:text-[0.94rem] md:h-13 md:px-7 md:text-[0.98rem] lg:h-14 lg:px-8 lg:text-[1.02rem]"
+            <div
+              data-critical-hero-panel
+              className="grid h-full w-full grid-cols-2 items-center justify-items-stretch gap-[var(--hero-cta-gap)]"
+              style={{
+                ...heroCtaStyle,
+                ...getSlideEnterStyle(prefersReducedMotion, 245),
+              }}
+            >
+              {visibleCtas.map((cta, ctaIndex) => {
+                const ctaClassName =
+                  ctaIndex === 0
+                    ? "cta-primary inline-flex h-[var(--hero-cta-height)] items-center justify-center gap-[var(--hero-cta-icon-gap)] whitespace-nowrap px-[var(--hero-cta-padding-x)] text-[length:var(--hero-cta-font-size)] font-semibold"
+                    : "cta-secondary-dark inline-flex h-[var(--hero-cta-height)] items-center justify-center whitespace-nowrap px-[var(--hero-cta-padding-x)] text-[length:var(--hero-cta-font-size)] font-semibold"
 
-              if (cta.href.startsWith("tel:")) {
+                if (cta.href.startsWith("tel:")) {
+                  return (
+                    <a key={cta.href} href={cta.href} className={ctaClassName}>
+                      {cta.label}
+                    </a>
+                  )
+                }
+
                 return (
-                  <a key={cta.href} href={cta.href} className={ctaClassName}>
-                    {cta.label}
-                  </a>
+                  <Link key={cta.href} href={cta.href} className={ctaClassName}>
+                    <span>{cta.label}</span>
+                    {ctaIndex === 0 ? (
+                      <ArrowRight className="size-4 md:size-[1.125rem] lg:size-5" />
+                    ) : null}
+                  </Link>
                 )
-              }
-
-              return (
-                <Link key={cta.href} href={cta.href} className={ctaClassName}>
-                  <span>{cta.label}</span>
-                  {ctaIndex === 0 ? (
-                    <ArrowRight className="size-4 md:size-[1.125rem] lg:size-5" />
-                  ) : null}
-                </Link>
-              )
-            })}
+              })}
+            </div>
           </div>
         </div>
       </div>
 
       {heroSlides.length > 1 && (
         <>
-          <div className="pointer-events-none absolute inset-x-2 top-[53%] z-20 flex -translate-y-1/2 justify-between sm:inset-x-5 sm:top-1/2 md:inset-x-6 lg:inset-x-8">
+          <div
+            className="pointer-events-none absolute top-[53%] z-20 flex -translate-y-1/2 justify-between sm:top-1/2"
+            style={{
+              left: "var(--hero-safe-space)",
+              right: "var(--hero-safe-space)",
+            }}
+          >
             <button
               type="button"
               onClick={() => handleManualNav("prev")}
-              className="pointer-events-auto inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-black/35 text-white backdrop-blur-md transition hover:bg-black/55 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-black/30 focus-visible:outline-none sm:h-10.5 sm:w-10.5 md:h-11 md:w-11 lg:h-12 lg:w-12"
+              className="pointer-events-auto inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-primary/45 text-white backdrop-blur-md transition hover:bg-primary/70 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-primary/30 focus-visible:outline-none sm:h-10.5 sm:w-10.5 md:h-11 md:w-11 lg:h-12 lg:w-12"
               aria-label="Previous hero slide"
             >
               <ArrowRight className="size-4 rotate-180 lg:size-5" />
@@ -351,7 +534,7 @@ export function HomeHeroSlideshow() {
             <button
               type="button"
               onClick={() => handleManualNav("next")}
-              className="pointer-events-auto inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-black/35 text-white backdrop-blur-md transition hover:bg-black/55 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-black/30 focus-visible:outline-none sm:h-10.5 sm:w-10.5 md:h-11 md:w-11 lg:h-12 lg:w-12"
+              className="pointer-events-auto inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-primary/45 text-white backdrop-blur-md transition hover:bg-primary/70 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-primary/30 focus-visible:outline-none sm:h-10.5 sm:w-10.5 md:h-11 md:w-11 lg:h-12 lg:w-12"
               aria-label="Next hero slide"
             >
               <ArrowRight className="size-4 lg:size-5" />
@@ -359,7 +542,10 @@ export function HomeHeroSlideshow() {
           </div>
 
           <div className="absolute right-0 bottom-4 left-0 z-20 sm:bottom-5 md:bottom-6">
-            <div className="mx-auto flex max-w-7xl flex-col items-center gap-2 px-4 sm:px-6 md:gap-2.5">
+            <div
+              className="mx-auto flex w-full max-w-[84rem] flex-col items-center gap-2 md:gap-2.5"
+              style={{ paddingInline: "var(--hero-safe-space)" }}
+            >
               <div className="text-[0.62rem] font-semibold tracking-[0.2em] text-white/72 uppercase sm:text-[0.66rem] md:text-[0.68rem] md:tracking-[0.24em]">
                 <span className="text-white">
                   {String(currentIndex + 1).padStart(2, "0")}
@@ -368,7 +554,10 @@ export function HomeHeroSlideshow() {
                 <span>{String(heroSlides.length).padStart(2, "0")}</span>
               </div>
 
-              <div className="h-1 w-full max-w-[14rem] overflow-hidden rounded-full bg-white/18 sm:max-w-[16rem] md:max-w-[18rem] lg:max-w-[20rem]">
+              <div
+                className="h-1 w-full overflow-hidden rounded-full bg-white/18"
+                style={{ maxWidth: "var(--hero-progress-width)" }}
+              >
                 <div
                   ref={progressRef}
                   className="h-full w-0 rounded-full bg-[var(--color-on-tertiary-container)]"

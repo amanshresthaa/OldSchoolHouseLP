@@ -56,15 +56,10 @@ export function PageHero({
       <div className="relative">
         <div className="mx-auto max-w-[84rem] px-5 sm:px-6 md:px-8">
           {/* Top bar — eyebrow + open badge */}
-          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/8 py-5">
-            <div className="hero-entrance flex items-center gap-3">
-              <span
-                aria-hidden="true"
-                className="h-px w-6 bg-[var(--color-tertiary)]"
-              />
-              <p className="text-[0.6875rem] font-semibold tracking-[0.12em] text-[var(--color-tertiary)] uppercase">
-                {eyebrow}
-              </p>
+          <div className="flex flex-wrap items-center justify-between gap-4 py-5">
+            <div className="hero-entrance eyebrow-row">
+              <span aria-hidden="true" className="eyebrow-line" />
+              <p className="eyebrow text-[var(--color-tertiary)]">{eyebrow}</p>
             </div>
             <div className="hero-entrance">
               <OpenStatusBadge />
@@ -105,7 +100,6 @@ export function PageHero({
                       ]
                     : []),
                 ]}
-                showDivider={Boolean(secondaryAction)}
                 tone="dark"
               />
             </div>

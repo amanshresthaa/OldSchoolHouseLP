@@ -134,7 +134,7 @@ export function SiteHeader() {
     <>
       <header
         data-critical-header
-        className="sticky top-0 z-40 border-b border-black/5 bg-background/85 backdrop-blur-xl"
+        className="sticky top-0 z-40 bg-background/85 backdrop-blur-xl"
       >
         <div className="mx-auto max-w-7xl px-5 py-3 sm:px-6 md:px-8">
           <div className="flex items-center justify-between gap-4">
@@ -201,7 +201,7 @@ export function SiteHeader() {
           </div>
           <nav
             aria-label="Primary navigation"
-            className="mt-3 hidden flex-wrap items-center gap-2 border-t border-black/5 pt-3 md:flex xl:hidden"
+            className="mt-3 hidden flex-wrap items-center gap-2 pt-3 md:flex xl:hidden"
           >
             {siteNav
               .filter((item) => item.href !== "/book")
