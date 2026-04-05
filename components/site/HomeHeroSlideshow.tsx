@@ -1,17 +1,14 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Image, { type StaticImageData } from "next/image"
 import Link from "next/link"
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr"
 
-import { OpenStatusBadge } from "@/components/site/OpenStatusBadge"
 import {
   openingHours,
   proofPoints,
-  siteDescriptor,
-  siteLocation,
-  siteName,
+  sitePhoneHref,
   type ProofPoint,
 } from "@/data/site"
 import momoImage from "@/images/food/chicken-momo-and-veg-momo.png"
@@ -26,6 +23,12 @@ interface HeroSlide extends ProofPoint {
   alt: string
   eyebrow: string
   signals: string[]
+  kenBurnsOrigin: string
+}
+
+interface HeroCta {
+  href: string
+  label: string
 }
 
 const heroSlides: HeroSlide[] = [
@@ -33,90 +36,87 @@ const heroSlides: HeroSlide[] = [
     ...proofPoints[0],
     image: pubExteriorImage,
     alt: "Exterior of The Old School House pub on London Road in Stony Stratford.",
-    eyebrow: "Traditional pub in Stony Stratford",
+    eyebrow: "Traditional pub · Stony Stratford",
     signals: [
       "Warm local welcome",
       "London Road setting",
       "Proper pub atmosphere",
     ],
+    kenBurnsOrigin: "center center",
   },
   {
     ...proofPoints[1],
     image: momoImage,
     alt: "Steamed momo dumplings with chutney served at The Old School House.",
-    eyebrow: "Traditional pub in Stony Stratford",
+    eyebrow: "House kitchen · Nepalese & British",
     signals: [
       "Momo and house dishes",
       "Food worth talking about",
       "More than standard pub fare",
     ],
+    kenBurnsOrigin: "top right",
   },
   {
     ...proofPoints[2],
     image: indoorSeatingImage,
     alt: "Indoor seating area at The Old School House showing the room layout and pub atmosphere.",
-    eyebrow: "Traditional pub in Stony Stratford",
+    eyebrow: "Space for every occasion",
     signals: ["65 covers inside", "60 outside", "Lunches to group tables"],
+    kenBurnsOrigin: "bottom left",
   },
   {
     ...proofPoints[3],
     image: customerParkingImage,
-    alt: "Customer parking area at The Old School House in Stony Stratford.",
-    eyebrow: "Traditional pub in Stony Stratford",
+    alt: "Outdoor seating and arrival area at The Old School House in Stony Stratford.",
+    eyebrow: "Garden · Courtyard · Outdoor dining",
     signals: [
       "Front garden seating",
       "Private courtyard",
       "Outdoor food and drinks",
     ],
+    kenBurnsOrigin: "top left",
   },
   {
     ...proofPoints[4],
     image: sportsTvImage,
     alt: "Large-screen sports area inside The Old School House pub.",
-    eyebrow: "Traditional pub in Stony Stratford",
+    eyebrow: "Live sport · Events · Celebrations",
     signals: ["Live sport", "Quiz nights", "Informal celebrations"],
+    kenBurnsOrigin: "bottom right",
   },
   {
     ...proofPoints[5],
     image: beerOnTapImage,
     alt: "Beer being poured at the bar inside The Old School House pub.",
-    eyebrow: "Traditional pub in Stony Stratford",
+    eyebrow: "Easy to find · Easy to love",
     signals: ["Central Stony Stratford", "Easy for walk-ins", "Simple to find"],
+    kenBurnsOrigin: "center top",
   },
 ]
 
 const AUTOPLAY_INTERVAL_MS = 6200
-
-function getHeroTitleClass(title: string) {
-  if (title.length > 42) {
-    return "max-w-[18ch] text-[clamp(1.85rem,5vw,4rem)] leading-[1.02] sm:max-w-[19ch] lg:text-[clamp(2.4rem,4.6vw,4.15rem)]"
-  }
-
-  if (title.length > 32) {
-    return "max-w-[17ch] text-[clamp(2rem,6vw,4.35rem)] leading-[1] sm:max-w-[18ch] lg:text-[clamp(2.7rem,4.9vw,4.45rem)]"
-  }
-
-  return "max-w-[16ch] text-[clamp(2.2rem,6.8vw,4.8rem)] leading-[0.98]"
+const RESUME_AFTER_MANUAL_NAV_MS = 4000
+const heroCtas: Record<"book" | "menu" | "call", HeroCta> = {
+  book: { href: "/book", label: "Book a table" },
+  menu: { href: "/menu", label: "View menu" },
+  call: { href: sitePhoneHref, label: "Call" },
 }
-
-function getHeroDescriptionClass(description: string) {
-  if (description.length > 135) {
-    return "max-w-2xl text-sm leading-6 text-white/78 sm:text-[0.95rem] sm:leading-7 md:text-base md:leading-7"
-  }
-
-  return "max-w-2xl text-sm leading-6 text-white/78 sm:text-base sm:leading-7 md:text-lg md:leading-8"
-}
+const heroCtaRotation: Array<[keyof typeof heroCtas, keyof typeof heroCtas]> = [
+  ["book", "menu"],
+  ["menu", "call"],
+  ["call", "book"],
+]
 
 export function HomeHeroSlideshow() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
+  const progressRef = useRef<HTMLDivElement | null>(null)
+  const resumeTimerRef = useRef<number | null>(null)
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
-    const handleChange = () => {
-      setPrefersReducedMotion(mediaQuery.matches)
-    }
+    const handleChange = () => setPrefersReducedMotion(mediaQuery.matches)
 
     handleChange()
     mediaQuery.addEventListener("change", handleChange)
@@ -127,46 +127,80 @@ export function HomeHeroSlideshow() {
   }, [])
 
   useEffect(() => {
+    if (progressRef.current) {
+      progressRef.current.style.transition = "none"
+      progressRef.current.style.width = "0%"
+      void progressRef.current.offsetWidth
+    }
+
     if (prefersReducedMotion || isPaused || heroSlides.length < 2) {
       return
+    }
+
+    if (progressRef.current) {
+      progressRef.current.style.transition = `width ${AUTOPLAY_INTERVAL_MS}ms linear`
+      progressRef.current.style.width = "100%"
     }
 
     const intervalId = window.setInterval(() => {
       setCurrentIndex((index) => (index + 1) % heroSlides.length)
     }, AUTOPLAY_INTERVAL_MS)
 
+    return () => window.clearInterval(intervalId)
+  }, [currentIndex, isPaused, prefersReducedMotion])
+
+  useEffect(() => {
     return () => {
-      window.clearInterval(intervalId)
+      if (resumeTimerRef.current) {
+        window.clearTimeout(resumeTimerRef.current)
+      }
     }
-  }, [isPaused, prefersReducedMotion])
+  }, [])
 
   const goToSlide = (index: number) => {
-    const lastIndex = heroSlides.length - 1
+    const totalSlides = heroSlides.length
 
-    if (index < 0) {
-      setCurrentIndex(lastIndex)
+    if (totalSlides < 1) {
       return
     }
 
-    if (index > lastIndex) {
-      setCurrentIndex(0)
-      return
+    setCurrentIndex((index + totalSlides) % totalSlides)
+  }
+
+  const handleManualNav = (direction: "prev" | "next") => {
+    setIsPaused(true)
+    goToSlide(direction === "prev" ? currentIndex - 1 : currentIndex + 1)
+
+    if (resumeTimerRef.current) {
+      window.clearTimeout(resumeTimerRef.current)
     }
 
-    setCurrentIndex(index)
+    resumeTimerRef.current = window.setTimeout(() => {
+      setIsPaused(false)
+    }, RESUME_AFTER_MANUAL_NAV_MS)
   }
 
   const activeSlide = heroSlides[currentIndex]
+  const visibleCtas = heroCtaRotation[
+    currentIndex % heroCtaRotation.length
+  ].map((ctaKey) => heroCtas[ctaKey])
 
   return (
     <section
       data-critical-home-hero
-      className="relative h-[36rem] overflow-hidden bg-primary text-white sm:h-[43rem] md:h-[46rem] lg:h-[50rem] xl:h-[52rem]"
+      className="relative isolate h-[33rem] w-full overflow-hidden bg-primary text-white sm:h-[35rem] md:h-[39rem] lg:h-[43rem] xl:h-[45rem]"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onFocusCapture={() => setIsPaused(true)}
       onBlurCapture={() => setIsPaused(false)}
     >
+      <style>{`
+        @keyframes osh-slide-up-fade {
+          from { opacity: 0; transform: translateY(14px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
+
       <div
         className="absolute inset-0"
         role="region"
@@ -175,167 +209,175 @@ export function HomeHeroSlideshow() {
         {heroSlides.map((slide, index) => (
           <div
             key={slide.title}
-            className={`absolute inset-0 transition-opacity duration-700 ease-[var(--easing-standard)] ${
-              index === currentIndex ? "opacity-100" : "opacity-0"
+            className={`absolute inset-0 transition-opacity duration-1000 ease-out ${
+              index === currentIndex ? "z-0 opacity-100" : "-z-10 opacity-0"
             }`}
             aria-hidden={index !== currentIndex}
           >
             <Image
               src={slide.image}
-              width={slide.image.width}
-              height={slide.image.height}
               alt={slide.alt}
+              fill
               priority={index === 0}
-              className={`absolute inset-0 h-full w-full object-cover object-center transition-transform duration-[1800ms] ease-out ${
-                index === currentIndex
-                  ? "scale-100 brightness-[0.86] saturate-[1.02]"
-                  : "scale-[1.04] brightness-[0.78] saturate-[0.96]"
-              }`}
+              loading={index === 0 ? "eager" : "lazy"}
               sizes="100vw"
+              style={{ transformOrigin: slide.kenBurnsOrigin }}
+              className={`absolute inset-0 h-full w-full object-cover object-center transition-transform duration-[8000ms] ease-out ${
+                index === currentIndex
+                  ? "scale-100 brightness-[0.92] saturate-105"
+                  : "scale-110 brightness-[0.8] saturate-95"
+              }`}
             />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,27,14,0.28)_0%,rgba(7,18,13,0.54)_30%,rgba(7,17,12,0.82)_100%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(245,208,107,0.08),transparent_30%),linear-gradient(90deg,rgba(6,27,14,0.34),transparent_40%,rgba(6,27,14,0.3))]" />
           </div>
         ))}
       </div>
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,13,8,0.12)_0%,rgba(4,13,8,0.06)_24%,rgba(4,13,8,0.18)_62%,rgba(4,13,8,0.46)_100%)]" />
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,13,8,0.32)_0%,rgba(4,13,8,0.12)_34%,rgba(4,13,8,0.04)_62%,rgba(4,13,8,0.12)_100%)]" />
-      <div className="absolute top-0 right-0 left-0 h-px bg-gradient-to-r from-transparent via-[var(--color-on-tertiary-container)]/30 to-transparent" />
 
-      <div className="relative h-full">
-        <div className="mx-auto flex h-full max-w-[84rem] flex-col px-5 sm:px-6 md:px-8">
-          <div className="hidden flex-wrap items-center justify-between gap-4 border-b border-white/8 py-5 sm:flex">
-            <div className="flex items-center gap-3">
-              <span className="inline-block size-1.5 rounded-full bg-[var(--color-on-tertiary-container)]" />
-              <p className="text-[0.68rem] font-semibold tracking-[0.28em] text-[var(--color-on-tertiary-container)] uppercase">
-                {siteName}
+      <div className="absolute top-0 right-0 left-0 h-px bg-gradient-to-r from-transparent via-[var(--color-on-tertiary-container)]/30 to-transparent" />
+      <h1 data-critical-hero-title className="sr-only">
+        Traditional pub and Nepalese kitchen on London Road in Stony Stratford.
+      </h1>
+
+      <div className="relative z-10 mx-auto flex h-full w-full max-w-7xl flex-col justify-center px-16 py-6 sm:px-16 sm:py-8 md:px-20 md:py-10 lg:px-24 lg:py-12 xl:px-28 xl:py-14">
+        <div className="mx-auto w-full max-w-[48rem] px-0">
+          <div
+            key={`slide-content-${currentIndex}`}
+            className="mx-auto w-full max-w-[40rem] px-0 py-2 text-center sm:max-w-[42rem] sm:py-4 md:py-5 lg:py-6"
+          >
+            <div
+              className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2.5 md:gap-3"
+              style={{
+                animation: prefersReducedMotion
+                  ? "none"
+                  : "osh-slide-up-fade 0.5s ease-out 0ms both",
+              }}
+            >
+              <span className="inline-flex rounded-full border border-[rgba(245,208,107,0.28)] bg-[rgba(245,208,107,0.12)] px-2.5 py-1 text-[0.54rem] font-semibold tracking-[0.12em] text-[var(--color-on-tertiary-container)] uppercase backdrop-blur-md sm:px-3 sm:py-1.5 sm:text-[0.6rem] md:px-4 md:text-[0.68rem]">
+                {activeSlide.eyebrow}
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-[rgba(245,208,107,0.28)] bg-[rgba(245,208,107,0.12)] px-2.5 py-1 text-[0.54rem] font-semibold tracking-[0.12em] text-[var(--color-on-tertiary-container)] uppercase backdrop-blur-md sm:gap-2 sm:px-3 sm:py-1.5 sm:text-[0.6rem] md:px-4 md:text-[0.68rem]">
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-on-tertiary-container)]" />
+                Hours {openingHours[0].hours}
+              </span>
+            </div>
+
+            <div
+              className="flex flex-col items-center gap-3 py-2.5 sm:gap-4 sm:py-4 md:gap-4 md:py-5 lg:gap-5 lg:py-6"
+              style={{
+                animation: prefersReducedMotion
+                  ? "none"
+                  : "osh-slide-up-fade 0.5s ease-out 90ms both",
+              }}
+            >
+              <h2 className="max-w-[15ch] font-heading text-[clamp(1.55rem,7.6vw,2.7rem)] leading-[0.98] tracking-[-0.03em] text-balance text-white sm:max-w-[15ch] sm:text-[clamp(2.1rem,6vw,3.2rem)] sm:leading-[0.97] md:max-w-[14ch] md:text-[clamp(2.5rem,5.3vw,3.9rem)] md:leading-[0.96] lg:text-[clamp(3.05rem,4.7vw,4.7rem)] lg:leading-[0.95] lg:tracking-[-0.04em] xl:text-[clamp(3.35rem,4.4vw,5rem)]">
+                {activeSlide.title}
+              </h2>
+
+              <p className="max-w-[28rem] px-1 text-[clamp(0.82rem,3.4vw,0.96rem)] leading-[1.4] text-pretty text-white/88 sm:max-w-[30rem] sm:px-0 sm:text-[clamp(0.94rem,2.3vw,1.06rem)] sm:leading-[1.46] md:max-w-[32rem] md:text-[clamp(1rem,1.9vw,1.14rem)] md:leading-[1.52] lg:max-w-[34rem] lg:text-[clamp(1.08rem,1.7vw,1.24rem)] lg:leading-[1.58]">
+                {activeSlide.description}
               </p>
             </div>
-            <OpenStatusBadge />
+
+            <div
+              className="flex w-full max-w-[32rem] flex-wrap items-center justify-center gap-2 self-center px-2 pb-2.5 sm:max-w-[32rem] sm:gap-2.5 sm:px-0 sm:pb-4 md:max-w-[34rem] md:gap-3 md:pb-5"
+              style={{
+                animation: prefersReducedMotion
+                  ? "none"
+                  : "osh-slide-up-fade 0.5s ease-out 175ms both",
+              }}
+            >
+              {activeSlide.signals.map((signal, index) => (
+                <span
+                  key={signal}
+                  className={`rounded-full border border-white/25 bg-white/10 px-3 py-1 text-[0.62rem] font-medium tracking-[0.05em] text-white/95 backdrop-blur-sm sm:px-3.5 sm:py-1.5 sm:text-[0.72rem] sm:tracking-[0.06em] md:px-4 md:py-2 md:text-[0.8rem] md:tracking-[0.08em] lg:text-[0.84rem] ${
+                    index > 1 ? "hidden sm:inline-flex" : "inline-flex"
+                  }`}
+                >
+                  {signal}
+                </span>
+              ))}
+            </div>
           </div>
 
-          <div className="grid h-[23.5rem] flex-1 content-end gap-4 py-5 sm:h-[28rem] sm:gap-6 sm:py-8 md:h-[30rem] md:py-10 lg:h-[21rem] lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-14 lg:py-12 xl:h-[22rem]">
-            <div
-              data-critical-hero-panel
-              className="flex min-h-[19.5rem] max-w-3xl flex-col rounded-[1.9rem] border border-white/12 bg-[rgba(6,18,11,0.34)] px-5 py-5 shadow-[0px_18px_48px_rgba(6,18,11,0.18)] backdrop-blur-[5px] sm:min-h-[21rem] sm:px-6 sm:py-6 md:min-h-[22.5rem] md:px-7 md:py-7"
-            >
-              <div className="eyebrow-row">
-                <span
-                  aria-hidden="true"
-                  className="h-px w-6 bg-[var(--color-tertiary)]"
-                />
-                <p className="text-[0.6875rem] font-semibold tracking-[0.12em] text-[var(--color-tertiary)] uppercase">
-                  {siteName}
-                </p>
-              </div>
-              <p className="pt-4 text-[0.72rem] font-semibold tracking-[0.18em] text-[var(--color-on-tertiary-container)] uppercase sm:pt-5">
-                Nepalese warmth inside beloved East Anglian pubs
-              </p>
-              <h1
-                data-critical-hero-title
-                className="max-w-[16ch] pt-3 text-[clamp(2.2rem,6.8vw,4.8rem)] leading-[0.98] font-normal text-white"
-              >
-                Traditional pub and Nepalese kitchen on London Road in Stony
-                Stratford.
-              </h1>
-              <p className="max-w-2xl pt-3 text-sm leading-6 text-white/78 sm:text-base sm:leading-7 md:text-lg md:leading-8">
-                A recently refurbished, modern but traditional hostelry that
-                stays welcoming to one and all, then gives the table more to
-                talk about with momo, curries, grills, Sunday roasts, and a
-                proper local atmosphere.
-              </p>
-              <p className="max-w-2xl pt-3 text-[0.82rem] leading-5 text-white/68 sm:text-sm md:max-w-3xl md:leading-6">
-                {siteDescriptor} · {siteLocation} · Open daily{" "}
-                {openingHours[0].hours}
-              </p>
-              <div className="rounded-[1.4rem] border border-white/10 bg-black/18 p-4 sm:p-5">
-                <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-[var(--color-on-tertiary-container)] uppercase">
-                  {activeSlide.eyebrow}
-                </p>
-                <h2
-                  className={`pt-3 font-normal text-white ${getHeroTitleClass(
-                    activeSlide.title
-                  )}`}
-                >
-                  {activeSlide.title}
-                </h2>
-                <p
-                  className={`pt-3 ${getHeroDescriptionClass(activeSlide.description)}`}
-                >
-                  {activeSlide.description}
-                </p>
-              </div>
-              <div className="mt-auto flex min-h-[3.75rem] flex-wrap content-start gap-2 pt-4 text-[0.68rem] font-semibold tracking-[0.18em] text-white/78 uppercase sm:min-h-[4.5rem] sm:gap-3 sm:pt-5 sm:text-xs">
-                {activeSlide.signals.map((signal, index) => (
-                  <span
-                    key={signal}
-                    className={`rounded-full border border-white/10 bg-white/[0.06] px-2.5 py-1.5 sm:px-3 sm:py-2 ${
-                      index > 1 ? "hidden sm:inline-flex" : "inline-flex"
-                    }`}
-                  >
-                    {signal}
-                  </span>
-                ))}
-              </div>
-              <div className="flex items-center gap-2 pt-4 sm:pt-5">
-                {heroSlides.map((slide, index) => (
-                  <button
-                    key={slide.title}
-                    type="button"
-                    onClick={() => goToSlide(index)}
-                    className={`h-2.5 rounded-full transition-all focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-black/30 focus-visible:outline-none ${
-                      index === currentIndex
-                        ? "w-8 bg-white"
-                        : "w-2.5 bg-white/45 hover:bg-white/70"
-                    }`}
-                    aria-label={`Go to hero slide ${index + 1}`}
-                    aria-current={index === currentIndex ? "true" : "false"}
-                  />
-                ))}
-              </div>
-            </div>
+          <div
+            data-critical-hero-panel
+            className="mx-auto mt-1 grid w-full max-w-[24rem] grid-cols-2 gap-2 px-4 sm:mt-2 sm:max-w-[34rem] sm:gap-3 sm:px-0 md:max-w-[36rem] md:gap-4 lg:max-w-[38rem]"
+            style={{
+              animation: prefersReducedMotion
+                ? "none"
+                : "osh-slide-up-fade 0.5s ease-out 245ms both",
+            }}
+          >
+            {visibleCtas.map((cta, ctaIndex) => {
+              const ctaClassName =
+                ctaIndex === 0
+                  ? "cta-primary inline-flex h-10 items-center justify-center gap-1.5 whitespace-nowrap px-2.5 text-[0.78rem] font-semibold sm:h-12 sm:px-6 sm:text-[0.94rem] md:h-13 md:px-7 md:text-[0.98rem] lg:h-14 lg:px-8 lg:text-[1.02rem]"
+                  : "cta-secondary-dark inline-flex h-10 items-center justify-center whitespace-nowrap px-2.5 text-[0.78rem] font-semibold sm:h-12 sm:px-6 sm:text-[0.94rem] md:h-13 md:px-7 md:text-[0.98rem] lg:h-14 lg:px-8 lg:text-[1.02rem]"
 
-            <div className="space-y-3 rounded-[1.7rem] border border-white/10 bg-[rgba(6,18,11,0.24)] p-4 shadow-[0px_14px_36px_rgba(6,18,11,0.14)] backdrop-blur-[4px] sm:space-y-4 sm:p-5">
-              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-                <Link
-                  href="/book"
-                  className="cta-primary inline-flex h-12 items-center justify-center gap-2 px-5 text-sm font-semibold"
-                >
-                  <span>Book a table</span>
-                  <ArrowRight className="size-4" />
+              if (cta.href.startsWith("tel:")) {
+                return (
+                  <a key={cta.href} href={cta.href} className={ctaClassName}>
+                    {cta.label}
+                  </a>
+                )
+              }
+
+              return (
+                <Link key={cta.href} href={cta.href} className={ctaClassName}>
+                  <span>{cta.label}</span>
+                  {ctaIndex === 0 ? (
+                    <ArrowRight className="size-4 md:size-[1.125rem] lg:size-5" />
+                  ) : null}
                 </Link>
-                <Link
-                  href="/menu"
-                  className="cta-secondary-dark inline-flex h-12 items-center justify-center px-5 text-sm font-semibold"
-                >
-                  View menu
-                </Link>
-              </div>
-              <p className="hidden max-w-md text-sm leading-6 text-white/72 md:block">
-                London Road, Stony Stratford, Milton Keynes. Use the menu to
-                explore the food, or book first and decide over a drink when you
-                arrive.
-              </p>
-              <div className="hidden justify-end gap-2 pt-1 sm:flex">
-                <button
-                  type="button"
-                  onClick={() => goToSlide(currentIndex - 1)}
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/12 bg-black/28 text-lg text-white transition hover:bg-black/40 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-black/30 focus-visible:outline-none sm:h-11 sm:w-11"
-                  aria-label="Previous hero slide"
-                >
-                  &#8249;
-                </button>
-                <button
-                  type="button"
-                  onClick={() => goToSlide(currentIndex + 1)}
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/12 bg-black/28 text-lg text-white transition hover:bg-black/40 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-black/30 focus-visible:outline-none sm:h-11 sm:w-11"
-                  aria-label="Next hero slide"
-                >
-                  &#8250;
-                </button>
-              </div>
-            </div>
+              )
+            })}
           </div>
         </div>
       </div>
+
+      {heroSlides.length > 1 && (
+        <>
+          <div className="pointer-events-none absolute inset-x-2 top-[53%] z-20 flex -translate-y-1/2 justify-between sm:inset-x-5 sm:top-1/2 md:inset-x-6 lg:inset-x-8">
+            <button
+              type="button"
+              onClick={() => handleManualNav("prev")}
+              className="pointer-events-auto inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-black/35 text-white backdrop-blur-md transition hover:bg-black/55 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-black/30 focus-visible:outline-none sm:h-10.5 sm:w-10.5 md:h-11 md:w-11 lg:h-12 lg:w-12"
+              aria-label="Previous hero slide"
+            >
+              <ArrowRight className="size-4 rotate-180 lg:size-5" />
+            </button>
+
+            <button
+              type="button"
+              onClick={() => handleManualNav("next")}
+              className="pointer-events-auto inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-black/35 text-white backdrop-blur-md transition hover:bg-black/55 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-black/30 focus-visible:outline-none sm:h-10.5 sm:w-10.5 md:h-11 md:w-11 lg:h-12 lg:w-12"
+              aria-label="Next hero slide"
+            >
+              <ArrowRight className="size-4 lg:size-5" />
+            </button>
+          </div>
+
+          <div className="absolute right-0 bottom-4 left-0 z-20 sm:bottom-5 md:bottom-6">
+            <div className="mx-auto flex max-w-7xl flex-col items-center gap-2 px-4 sm:px-6 md:gap-2.5">
+              <div className="text-[0.62rem] font-semibold tracking-[0.2em] text-white/72 uppercase sm:text-[0.66rem] md:text-[0.68rem] md:tracking-[0.24em]">
+                <span className="text-white">
+                  {String(currentIndex + 1).padStart(2, "0")}
+                </span>
+                <span className="px-2">/</span>
+                <span>{String(heroSlides.length).padStart(2, "0")}</span>
+              </div>
+
+              <div className="h-1 w-full max-w-[14rem] overflow-hidden rounded-full bg-white/18 sm:max-w-[16rem] md:max-w-[18rem] lg:max-w-[20rem]">
+                <div
+                  ref={progressRef}
+                  className="h-full w-0 rounded-full bg-[var(--color-on-tertiary-container)]"
+                />
+              </div>
+            </div>
+          </div>
+        </>
+      )}
 
       <div className="sr-only" aria-live="polite" aria-atomic="true">
         Slide {currentIndex + 1} of {heroSlides.length}: {activeSlide.title}

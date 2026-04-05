@@ -24,7 +24,31 @@ export const criticalAboveTheFoldCss = `
   }
 
   [data-critical-home-hero] {
-    min-height: 36rem;
+    height: 33rem;
+  }
+
+  @media (min-width: 640px) {
+    [data-critical-home-hero] {
+      height: 35rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    [data-critical-home-hero] {
+      height: 39rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    [data-critical-home-hero] {
+      height: 43rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    [data-critical-home-hero] {
+      height: 45rem;
+    }
   }
 
   [data-critical-page-hero] {
@@ -32,9 +56,9 @@ export const criticalAboveTheFoldCss = `
   }
 
   [data-critical-hero-panel] {
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    background: rgba(6, 18, 11, 0.34);
-    box-shadow: 0 18px 48px rgba(6, 18, 11, 0.18);
+    border: 0;
+    background: transparent;
+    box-shadow: none;
   }
 
   [data-critical-hero-title] {

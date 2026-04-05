@@ -161,7 +161,7 @@ export const heroSignals = [
 
 export const proofPoints: ProofPoint[] = [
   {
-    title: "Traditional pub and Nepalese kitchen on the busiest road in town",
+    title: "Traditional pub warmth with a standout Nepalese kitchen",
     description:
       "The Old School House stands out on London Road with the look and feel of a proper local, then gives the visit more identity once the Nepalese kitchen comes into play.",
   },
