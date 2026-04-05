@@ -7,7 +7,9 @@ import { ArrowRight, MapPin } from "@phosphor-icons/react/dist/ssr"
 import { FaqSection } from "@/components/site/FaqSection"
 import { GuestReviewSlideshow } from "@/components/site/GuestReviewSlideshow"
 import { HomeHeroSlideshow } from "@/components/site/HomeHeroSlideshow"
+import { HomeMenuHighlightsSection } from "@/components/site/HomeMenuHighlightsSection"
 import { HomeProofBarSection } from "@/components/site/HomeProofBarSection"
+import { HomeReasonsPanel } from "@/components/site/HomeReasonsPanel"
 import { InlineBookingCta } from "@/components/site/InlineBookingCta"
 import { MapEmbed } from "@/components/site/MapEmbed"
 import { RouteStructuredData } from "@/components/site/RouteStructuredData"
@@ -18,9 +20,11 @@ import {
   homeEventsFeature,
   homeFaqSectionCopy,
   homeInlineCtaCopy,
+  homeMenuSectionCopy,
   homeMenuShowcase,
   homeProofBarItems,
   homeProofBarSectionCopy,
+  homeReasonsSectionCopy,
   homeStoryFeature,
   homeVisitSectionCopy,
 } from "@/data/copy"
@@ -44,7 +48,7 @@ import {
 } from "@/data/site"
 import { getRouteConfig, routeConfigs } from "@/data/site-routes"
 import { buildPageMetadata } from "@/lib/metadata"
-import { featuredMenuItems, formatPrice } from "@/lib/menu"
+import { featuredMenuItems } from "@/lib/menu"
 import { cn } from "@/lib/utils"
 
 import mixedGrillImage from "@/images/food/mixed-grill.png"
@@ -187,166 +191,26 @@ export default function HomePage() {
 
       <section className="bg-[var(--color-surface-low)] py-10 md:py-14 lg:py-16">
         <div className="section-shell">
-          <div className="grid gap-4 xl:grid-cols-[1.02fr_0.98fr]">
+          <div className="grid gap-4 xl:grid-cols-[minmax(0,3fr)_minmax(0,5fr)]">
             <ImageRoutePanel
               item={storyFeature}
               className="min-h-[26rem] xl:min-h-[34rem]"
             />
             <div className="surface-frame">
-              <div className="surface-pane space-y-5 md:px-7 md:py-7">
-                <SectionHeading
-                  eyebrow="Why choose us"
-                  title="A proper pub atmosphere first, then food that gives the table a reason to come back."
-                  description="The room feels familiar from the first drink, while the food gives the visit more identity than the average pub stop."
-                  className="max-w-none"
-                />
-                <div className="space-y-4">
-                  {homeReasons.map((reason) => (
-                    <article key={reason.title} className="space-y-2">
-                      <h3 className="font-heading text-[1.5rem] leading-tight text-on-background">
-                        {reason.title}
-                      </h3>
-                      <p className="max-w-xl text-sm leading-6 text-on-surface md:text-base">
-                        {reason.description}
-                      </p>
-                    </article>
-                  ))}
-                </div>
-                <div className="flex flex-wrap items-center gap-4">
-                  <Link
-                    href="/menu"
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-secondary transition hover:text-secondary/80"
-                  >
-                    Browse the menu
-                    <ArrowRight className="size-4" />
-                  </Link>
-                  <Link
-                    href="/book"
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-secondary transition hover:text-secondary/80"
-                  >
-                    Book a table
-                    <ArrowRight className="size-4" />
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-background py-10 md:py-14 lg:py-16">
-        <div className="section-shell space-y-5">
-          <div className="grid gap-4 xl:grid-cols-[1.04fr_0.96fr]">
-            <article className="surface-frame">
-              <Image
-                src={menuShowcase[0].image}
-                alt={menuShowcase[0].alt}
-                className="h-72 w-full object-cover md:h-[26rem]"
-                sizes="(min-width: 1280px) 50vw, 100vw"
+              <HomeReasonsPanel
+                copy={homeReasonsSectionCopy}
+                reasons={homeReasons}
               />
-              <div className="surface-pane space-y-4 md:px-7 md:py-7">
-                <SectionHeading
-                  eyebrow="Menu highlights"
-                  title="Pub comfort and Nepalese dishes should both feel easy to order."
-                  description="Start with the signatures, then use the full menu to build the table around the kind of visit you want."
-                  className="max-w-none"
-                />
-                <div className="space-y-3">
-                  <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
-                    {formatPrice(menuShowcase[0].item.price)}
-                  </p>
-                  <h3 className="pt-3 font-heading text-[2rem] leading-[1.02] text-on-background md:text-[2.4rem]">
-                    {menuShowcase[0].title}
-                  </h3>
-                  <p className="max-w-xl pt-2 text-sm leading-6 text-on-surface md:text-base">
-                    {menuShowcase[0].description}
-                  </p>
-                </div>
-                <div className="flex flex-wrap items-center gap-4 pt-1">
-                  <Link
-                    href="/menu"
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-secondary transition hover:text-secondary/80"
-                  >
-                    Browse the menu
-                    <ArrowRight className="size-4" />
-                  </Link>
-                  <Link
-                    href="/book"
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-secondary transition hover:text-secondary/80"
-                  >
-                    Book a table
-                    <ArrowRight className="size-4" />
-                  </Link>
-                </div>
-              </div>
-            </article>
-
-            <div className="space-y-4">
-              <div className="grid gap-4 sm:grid-cols-2">
-                {menuShowcase.slice(1).map((item) => (
-                  <article key={item.title} className="surface-frame">
-                    <Image
-                      src={item.image}
-                      alt={item.alt}
-                      className="h-52 w-full object-cover"
-                      sizes="(min-width: 640px) 50vw, 100vw"
-                    />
-                    <div className="surface-pane">
-                      <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
-                        {formatPrice(item.item.price)}
-                      </p>
-                      <h3 className="section-title pt-3">{item.title}</h3>
-                      <p className="pt-2 text-sm leading-6 text-on-surface md:text-base">
-                        {item.description}
-                      </p>
-                      <Link
-                        href={item.href}
-                        className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-secondary transition hover:text-secondary/80"
-                      >
-                        {item.ctaLabel}
-                        <ArrowRight className="size-4" />
-                      </Link>
-                    </div>
-                  </article>
-                ))}
-              </div>
-              <div className="surface-panel-muted">
-                <div className="grid auto-cols-[84%] grid-flow-col gap-4 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] sm:auto-cols-auto sm:grid-flow-row sm:grid-cols-3 sm:overflow-visible sm:pb-0 [&::-webkit-scrollbar]:hidden">
-                  {homeMenuHighlights.map((highlight) => (
-                    <article
-                      key={highlight.title}
-                      className="snap-start space-y-2"
-                    >
-                      <h3 className="text-[0.72rem] font-semibold tracking-[0.16em] text-secondary uppercase">
-                        {highlight.title}
-                      </h3>
-                      <p className="pt-2 text-sm leading-6 text-on-surface">
-                        {highlight.description}
-                      </p>
-                    </article>
-                  ))}
-                </div>
-                <div className="flex flex-wrap items-center gap-4 pt-5">
-                  <Link
-                    href="/menu"
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-secondary transition hover:text-secondary/80"
-                  >
-                    See full menu
-                    <ArrowRight className="size-4" />
-                  </Link>
-                  <Link
-                    href="/book"
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-secondary transition hover:text-secondary/80"
-                  >
-                    Book a table
-                    <ArrowRight className="size-4" />
-                  </Link>
-                </div>
-              </div>
             </div>
           </div>
         </div>
       </section>
+
+      <HomeMenuHighlightsSection
+        copy={homeMenuSectionCopy}
+        items={menuShowcase}
+        guidanceItems={homeMenuHighlights}
+      />
 
       <section className="bg-[var(--color-surface-low)] py-10 md:py-14 lg:py-16">
         <div className="section-shell space-y-5">

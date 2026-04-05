@@ -25,6 +25,18 @@ export const homeMenuShowcase = [
   },
 ]
 
+export const homeMenuSectionCopy = {
+  eyebrow: "Menu highlights",
+  title: "Pub comfort and Nepalese dishes should both feel easy to order.",
+  description:
+    "Start with the signatures, then use the full menu to build the table around the kind of visit you want.",
+  guidanceLabel: "How to order",
+  primaryCtaLabel: "See full menu",
+  primaryCtaHref: "/menu",
+  secondaryCtaLabel: "Book a table",
+  secondaryCtaHref: "/book",
+}
+
 export const homeStoryFeature = {
   eyebrow: "Why choose us",
   title: "Traditional pub first. Nepalese kitchen as the standout difference.",
@@ -77,6 +89,18 @@ export const homeProofBarItems = [
       "The Lapen Inns group’s BII Sustainability Champion Award adds another layer of trust to the way the pub is run.",
   },
 ] as const
+
+export const homeReasonsSectionCopy = {
+  eyebrow: "Why choose us",
+  title:
+    "A proper pub atmosphere first, then food that gives the table a reason to come back.",
+  description:
+    "The room feels familiar from the first drink, while the food gives the visit more identity than the average pub stop.",
+  primaryCtaLabel: "Browse the menu",
+  primaryCtaHref: "/menu",
+  secondaryCtaLabel: "Book a table",
+  secondaryCtaHref: "/book",
+}
 
 export const homeAtmosphereTiles = [
   {

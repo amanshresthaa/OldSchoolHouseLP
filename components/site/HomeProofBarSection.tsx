@@ -32,8 +32,24 @@ export function HomeProofBarSection({
 }: HomeProofBarSectionProps) {
   const cardStackRef = React.useRef<HTMLDivElement | null>(null)
   const cardTrackRef = React.useRef<HTMLDivElement | null>(null)
+  const [isPhoneViewport, setIsPhoneViewport] = React.useState(false)
   const [isFirstCardActive, setIsFirstCardActive] = React.useState(true)
   const [stackPeekOffset, setStackPeekOffset] = React.useState(0)
+
+  React.useEffect(() => {
+    const mobileQuery = window.matchMedia("(max-width: 639px)")
+
+    function updateViewportState() {
+      setIsPhoneViewport(mobileQuery.matches)
+    }
+
+    updateViewportState()
+    mobileQuery.addEventListener("change", updateViewportState)
+
+    return () => {
+      mobileQuery.removeEventListener("change", updateViewportState)
+    }
+  }, [])
 
   React.useEffect(() => {
     const cardStack = cardStackRef.current
@@ -44,12 +60,12 @@ export function HomeProofBarSection({
 
     const stack = cardStack
 
-    const mobileQuery = window.matchMedia("(max-width: 767px)")
     const reducedMotionQuery = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     )
 
-    if (!mobileQuery.matches || reducedMotionQuery.matches) {
+    if (!isPhoneViewport || reducedMotionQuery.matches) {
+      setIsFirstCardActive(true)
       return
     }
 
@@ -63,12 +79,13 @@ export function HomeProofBarSection({
     return () => {
       stack.removeEventListener("scroll", updateActiveCard)
     }
-  }, [items.length])
+  }, [isPhoneViewport, items.length])
 
   React.useEffect(() => {
     const cardTrack = cardTrackRef.current
 
-    if (!cardTrack) {
+    if (!cardTrack || !isPhoneViewport) {
+      setStackPeekOffset(0)
       return
     }
 
@@ -109,7 +126,7 @@ export function HomeProofBarSection({
       resizeObserver.disconnect()
       window.removeEventListener("resize", updatePeekOffset)
     }
-  }, [items.length])
+  }, [isPhoneViewport, items.length])
 
   return (
     <section
@@ -154,18 +171,15 @@ export function HomeProofBarSection({
 
             <div className="overflow-hidden bg-[rgba(196,189,181,0.4)]">
               <div className="flex items-center justify-between px-5 py-4 text-[0.7rem] font-semibold tracking-[0.16em] text-secondary uppercase md:hidden">
-                <div className="flex items-center gap-3">
-                  <span className="relative flex h-8 w-5 items-start justify-center rounded-full border border-[rgba(175,43,62,0.24)] bg-[var(--color-surface-lowest)]/82">
-                    <span
-                      aria-hidden="true"
-                      className="mt-1.5 h-2 w-2 rounded-full bg-secondary motion-reduce:animate-none"
-                      style={{
-                        animation: "osh-scroll-cue 1.65s ease-in-out infinite",
-                      }}
-                    />
-                  </span>
-                  <p>Scroll through the highlights</p>
-                </div>
+                <span className="relative flex h-8 w-5 items-start justify-center rounded-full border border-[rgba(175,43,62,0.24)] bg-[var(--color-surface-lowest)]/82">
+                  <span
+                    aria-hidden="true"
+                    className="mt-1.5 h-2 w-2 rounded-full bg-secondary motion-reduce:animate-none"
+                    style={{
+                      animation: "osh-scroll-cue 1.65s ease-in-out infinite",
+                    }}
+                  />
+                </span>
                 <p>{String(items.length).padStart(2, "0")} stories</p>
               </div>
               <div className="relative px-5 pb-5 md:px-0 md:pb-0">
@@ -179,7 +193,9 @@ export function HomeProofBarSection({
                     ref={cardTrackRef}
                     className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-px xl:grid-cols-3"
                     style={
-                      isFirstCardActive && stackPeekOffset > 0
+                      isPhoneViewport &&
+                      isFirstCardActive &&
+                      stackPeekOffset > 0
                         ? {
                             ["--osh-stack-peek-offset" as string]: `${stackPeekOffset}px`,
                             animation: "osh-stack-peek 3s ease-in-out infinite",
@@ -204,12 +220,7 @@ export function HomeProofBarSection({
                           </p>
                         </div>
                         <div className="relative pt-6">
-                          <p className="text-[0.68rem] font-semibold tracking-[0.16em] text-primary/52 uppercase">
-                            {index === items.length - 1
-                              ? "Final highlight"
-                              : "Reason to visit"}
-                          </p>
-                          <h3 className="pt-3 font-heading text-[1.55rem] leading-[1.08] tracking-[-0.03em] text-primary md:text-[1.35rem] md:leading-[1.18] md:tracking-[-0.02em]">
+                          <h3 className="font-heading text-[1.55rem] leading-[1.08] tracking-[-0.03em] text-primary md:text-[1.35rem] md:leading-[1.18] md:tracking-[-0.02em]">
                             {item.title}
                           </h3>
                           <p className="pt-3 text-sm leading-6 text-on-surface md:text-[0.9375rem]">
@@ -220,11 +231,6 @@ export function HomeProofBarSection({
                           <p className="text-[0.72rem] font-semibold tracking-[0.12em] text-primary/55 uppercase">
                             {String(index + 1).padStart(2, "0")} of{" "}
                             {String(items.length).padStart(2, "0")}
-                          </p>
-                          <p className="text-[0.78rem] text-on-surface/68">
-                            {index === items.length - 1
-                              ? "You’ve seen the full set"
-                              : "Keep scrolling"}
                           </p>
                         </div>
                       </article>
