@@ -3,6 +3,10 @@
 import * as React from "react"
 import { CaretLeft, CaretRight } from "@phosphor-icons/react/dist/ssr"
 
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
 import type { GuestReview } from "@/data/site"
 import { cn } from "@/lib/utils"
 
@@ -64,21 +68,24 @@ export function GuestReviewSlideshow({
   return (
     <article
       className={cn(
-        "surface-panel mx-auto w-full max-w-[29rem] space-y-4",
+        "surface-panel mx-auto flex h-full w-full max-w-[29rem] flex-col gap-4 md:min-h-[23rem] xl:min-h-[24rem]",
         className
       )}
       {...props}
     >
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div
+          <Avatar
+            size="lg"
             className={cn(
-              "inline-flex size-10 shrink-0 items-center justify-center rounded-full text-[0.8125rem] font-bold text-white",
+              "text-white after:border-white/0",
               activeIndex % 2 === 0 ? "bg-primary" : "bg-secondary"
             )}
           >
-            {getInitials(activeReview.name)}
-          </div>
+            <AvatarFallback className="bg-transparent text-[0.8125rem] font-bold text-white">
+              {getInitials(activeReview.name)}
+            </AvatarFallback>
+          </Avatar>
           <div>
             <h3 className="text-[0.875rem] font-semibold text-on-background">
               {activeReview.name}
@@ -91,62 +98,76 @@ export function GuestReviewSlideshow({
 
         {total > 1 ? (
           <div className="flex gap-2">
-            <button
+            <Button
               type="button"
+              variant="outline"
+              size="icon"
               onClick={showPreviousReview}
-              className="inline-flex size-9 items-center justify-center rounded-full border border-[rgba(196,189,181,0.15)] bg-[var(--color-surface)] text-primary transition hover:bg-[var(--color-surface-low)] focus-visible:ring-2 focus-visible:ring-secondary/40 focus-visible:outline-none"
+              className="bg-[var(--color-surface)] text-primary hover:bg-[var(--color-surface-low)]"
               aria-label="Show previous review"
             >
-              <CaretLeft className="size-4" />
-            </button>
-            <button
+              <CaretLeft data-icon="inline-start" />
+            </Button>
+            <Button
               type="button"
+              variant="outline"
+              size="icon"
               onClick={showNextReview}
-              className="inline-flex size-9 items-center justify-center rounded-full border border-[rgba(196,189,181,0.15)] bg-[var(--color-surface)] text-primary transition hover:bg-[var(--color-surface-low)] focus-visible:ring-2 focus-visible:ring-secondary/40 focus-visible:outline-none"
+              className="bg-[var(--color-surface)] text-primary hover:bg-[var(--color-surface-low)]"
               aria-label="Show next review"
             >
-              <CaretRight className="size-4" />
-            </button>
+              <CaretRight data-icon="inline-start" />
+            </Button>
           </div>
         ) : null}
       </div>
 
-      <ReviewStars />
+      <div className="flex items-center gap-3">
+        <ReviewStars />
+        <Separator className="max-w-14 bg-[rgba(196,189,181,0.3)]" />
+      </div>
 
       <p className="text-[0.875rem] leading-[1.6] text-on-surface md:text-[0.9375rem]">
         {activeReview.summary}
       </p>
 
-      <div className="surface-pane-muted -mx-5 -mb-5 flex flex-wrap items-end justify-between gap-4 rounded-b-2xl pt-4 md:-mx-6 md:-mb-6">
+      <div className="surface-pane-muted -mx-5 mt-auto -mb-5 flex flex-wrap items-end justify-between gap-4 rounded-b-2xl pt-4 md:-mx-6 md:-mb-6">
         <div className="flex flex-wrap gap-1.5">
           {activeReview.focus.map((item) => (
-            <span
+            <Badge
               key={item}
-              className="rounded-full bg-[var(--color-surface-highest)] px-2.5 py-1 text-[0.65rem] font-medium text-on-surface"
+              variant="muted"
+              className="h-auto px-2.5 py-1 text-[0.65rem] font-medium"
             >
               {item}
-            </span>
+            </Badge>
           ))}
         </div>
-        <div className="flex items-center gap-3">
-          {total > 1 ? (
-            <div className="flex items-center gap-2">
-              {reviews.map((review, index) => (
-                <button
+        <div className="flex items-center gap-1.5">
+          {total > 1
+            ? reviews.map((review, index) => (
+                <Button
                   key={`${review.name}-${index}`}
                   type="button"
+                  variant="ghost"
+                  size="icon-xs"
                   onClick={() => setActiveIndex(index)}
-                  className={`h-2.5 rounded-full transition focus-visible:ring-2 focus-visible:ring-secondary/40 focus-visible:outline-none ${
+                  className={cn(
+                    "rounded-full focus-visible:ring-secondary/40",
                     index === activeIndex
-                      ? "w-7 bg-secondary"
-                      : "w-2.5 bg-[var(--color-outline-variant)] hover:bg-secondary/55"
-                  }`}
+                      ? "w-7 bg-secondary text-white hover:bg-secondary/90"
+                      : "bg-[var(--color-outline-variant)] text-transparent hover:bg-secondary/55"
+                  )}
                   aria-label={`Show review ${index + 1}`}
                   aria-current={index === activeIndex}
-                />
-              ))}
-            </div>
-          ) : null}
+                >
+                  <span
+                    aria-hidden="true"
+                    className="size-1.5 rounded-full bg-current"
+                  />
+                </Button>
+              ))
+            : null}
         </div>
       </div>
     </article>

@@ -1,10 +1,14 @@
 "use client"
 
-import { CaretDown } from "@phosphor-icons/react/dist/ssr"
 import type { ComponentProps } from "react"
-import * as React from "react"
 
 import { SectionHeading } from "@/components/site/SectionHeading"
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
 import type { LocalFaq } from "@/data/site"
 import { cn } from "@/lib/utils"
 
@@ -25,10 +29,6 @@ export function FaqSection({
   className,
   ...props
 }: FaqSectionProps) {
-  const [openQuestion, setOpenQuestion] = React.useState<string | null>(
-    faqs[0]?.question ?? null
-  )
-
   return (
     <section
       className={cn(
@@ -54,56 +54,45 @@ export function FaqSection({
               : "surface-frame"
           )}
         >
-          {faqs.map((faq, index) => (
-            <article
-              key={faq.question}
-              className={cn(
-                "px-5 py-5 md:px-6 md:py-6",
-                invert
-                  ? index % 2 === 0
-                    ? "bg-white/[0.02]"
-                    : "bg-white/[0.05]"
-                  : index % 2 === 0
-                    ? "bg-[var(--color-surface-lowest)]"
-                    : "bg-[var(--color-surface-low)]"
-              )}
-            >
-              <button
-                type="button"
+          <Accordion
+            type="single"
+            collapsible
+            defaultValue={faqs[0]?.question}
+            className="w-full"
+          >
+            {faqs.map((faq, index) => (
+              <AccordionItem
+                key={faq.question}
+                value={faq.question}
                 className={cn(
-                  "flex w-full items-start justify-between gap-4 text-left",
-                  invert ? "text-white" : "text-on-background"
+                  "border-b-0 px-5 py-5 md:px-6 md:py-6",
+                  invert
+                    ? index % 2 === 0
+                      ? "bg-white/[0.02]"
+                      : "bg-white/[0.05]"
+                    : index % 2 === 0
+                      ? "bg-[var(--color-surface-lowest)]"
+                      : "bg-[var(--color-surface-low)]"
                 )}
-                onClick={() =>
-                  setOpenQuestion((currentQuestion) =>
-                    currentQuestion === faq.question ? null : faq.question
-                  )
-                }
-                aria-expanded={openQuestion === faq.question}
-                aria-controls={`faq-panel-${index}`}
               >
-                <h3
+                <AccordionTrigger
                   className={cn(
-                    "font-heading text-[1.55rem] leading-[1.08] md:text-[1.8rem]",
-                    invert && "text-white"
-                  )}
-                >
-                  {faq.question}
-                </h3>
-                <span
-                  className={cn(
-                    "mt-1 inline-flex size-10 shrink-0 items-center justify-center rounded-full border transition",
+                    "gap-4 py-0 text-left hover:no-underline [&>[data-slot=accordion-trigger-icon]]:mt-1 [&>[data-slot=accordion-trigger-icon]]:inline-flex [&>[data-slot=accordion-trigger-icon]]:size-10 [&>[data-slot=accordion-trigger-icon]]:shrink-0 [&>[data-slot=accordion-trigger-icon]]:items-center [&>[data-slot=accordion-trigger-icon]]:justify-center [&>[data-slot=accordion-trigger-icon]]:rounded-full [&>[data-slot=accordion-trigger-icon]]:border [&>[data-slot=accordion-trigger-icon]]:text-base",
                     invert
-                      ? "border-white/10 bg-white/[0.04]"
-                      : "border-[rgba(196,189,181,0.35)] bg-[var(--color-surface-lowest)]",
-                    openQuestion === faq.question && "rotate-180"
+                      ? "text-white [&>[data-slot=accordion-trigger-icon]]:border-white/10 [&>[data-slot=accordion-trigger-icon]]:bg-white/[0.04]"
+                      : "text-on-background [&>[data-slot=accordion-trigger-icon]]:border-[rgba(196,189,181,0.35)] [&>[data-slot=accordion-trigger-icon]]:bg-[var(--color-surface-lowest)]"
                   )}
                 >
-                  <CaretDown className="size-4" />
-                </span>
-              </button>
-              {openQuestion === faq.question ? (
-                <div id={`faq-panel-${index}`} className="pt-4 md:max-w-3xl">
+                  <span
+                    className={cn(
+                      "font-heading text-[1.55rem] leading-[1.08] md:text-[1.8rem]",
+                      invert && "text-white"
+                    )}
+                  >
+                    {faq.question}
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent className="md:max-w-3xl">
                   <p
                     className={cn(
                       "text-sm leading-6 md:text-base md:leading-7",
@@ -112,10 +101,10 @@ export function FaqSection({
                   >
                     {faq.answer}
                   </p>
-                </div>
-              ) : null}
-            </article>
-          ))}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </div>
     </section>

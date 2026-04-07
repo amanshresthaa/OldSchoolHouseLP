@@ -1,6 +1,8 @@
 import type { ComponentProps, ReactNode } from "react"
 import Link from "next/link"
 
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 
 export interface SiteAction {
@@ -27,21 +29,18 @@ function isExternalHref(href: string) {
 function ActionLink({
   action,
   className,
-}: {
-  action: SiteAction
-  className: string
-}) {
-  const content = (
-    <>
-      <span>{action.label}</span>
-      {action.icon ? action.icon : null}
-    </>
-  )
-
+  ...props
+}: { action: SiteAction } & ComponentProps<"a">) {
   if (action.download) {
     return (
-      <a href={action.href} download={action.download} className={className}>
-        {content}
+      <a
+        href={action.href}
+        download={action.download}
+        className={className}
+        {...props}
+      >
+        <span>{action.label}</span>
+        {action.icon ? action.icon : null}
       </a>
     )
   }
@@ -52,15 +51,17 @@ function ActionLink({
       : {}
 
     return (
-      <a href={action.href} className={className} {...externalProps}>
-        {content}
+      <a href={action.href} className={className} {...externalProps} {...props}>
+        <span>{action.label}</span>
+        {action.icon ? action.icon : null}
       </a>
     )
   }
 
   return (
-    <Link href={action.href} className={className}>
-      {content}
+    <Link href={action.href} className={className} {...props}>
+      <span>{action.label}</span>
+      {action.icon ? action.icon : null}
     </Link>
   )
 }
@@ -74,41 +75,47 @@ export function SiteActionCard({
 }: SiteActionCardProps) {
   const cardClassName =
     tone === "dark"
-      ? "rounded-2xl bg-white/[0.06] p-5 backdrop-blur-md sm:p-6"
-      : "surface-panel bg-[var(--color-surface-lowest)]/92 backdrop-blur-xl"
-
-  const primaryClassName =
-    "cta-primary group/cta inline-flex h-12 w-full items-center justify-center gap-2.5 px-6 text-sm font-semibold lg:w-auto"
-  const secondaryClassName =
-    tone === "dark"
-      ? "cta-secondary-dark group/cta-secondary inline-flex h-12 w-full items-center justify-center gap-2.5 px-6 lg:w-auto"
-      : "cta-secondary group/cta-secondary inline-flex h-12 w-full items-center justify-center gap-2.5 px-6 lg:w-auto"
+      ? "rounded-2xl bg-white/[0.06] py-0 backdrop-blur-md"
+      : "surface-panel bg-[var(--color-surface-lowest)]/92 py-0 backdrop-blur-xl"
 
   return (
-    <div className={cn(cardClassName, className)} {...props}>
-      <div className="flex flex-col gap-4 lg:flex-row lg:flex-wrap lg:items-center">
-        {actions.map((action, index) => (
-          <div
-            key={`${action.href}-${action.label}`}
-            className="contents lg:flex lg:items-center"
+    <Card className={cn(cardClassName, className)} {...props}>
+      <CardContent
+        className={cn(
+          "px-5 py-5 sm:px-6 sm:py-6",
+          tone === "dark" && "px-5 py-5 sm:px-6 sm:py-6"
+        )}
+      >
+        <div className="flex flex-col gap-4 lg:flex-row lg:flex-wrap lg:items-center">
+          {actions.map((action, index) => (
+            <Button
+              key={`${action.href}-${action.label}`}
+              asChild
+              variant={
+                index === 0
+                  ? "default"
+                  : tone === "dark"
+                    ? "darkOutline"
+                    : "outline"
+              }
+              size="lg"
+              className="w-full lg:w-auto"
+            >
+              <ActionLink action={action} />
+            </Button>
+          ))}
+        </div>
+        {supportingText ? (
+          <p
+            className={cn(
+              "mt-5 max-w-lg text-sm leading-6",
+              tone === "dark" ? "text-white/72" : "text-on-surface"
+            )}
           >
-            <ActionLink
-              action={action}
-              className={index === 0 ? primaryClassName : secondaryClassName}
-            />
-          </div>
-        ))}
-      </div>
-      {supportingText ? (
-        <p
-          className={cn(
-            "mt-5 max-w-lg text-sm leading-6",
-            tone === "dark" ? "text-white/72" : "text-on-surface"
-          )}
-        >
-          {supportingText}
-        </p>
-      ) : null}
-    </div>
+            {supportingText}
+          </p>
+        ) : null}
+      </CardContent>
+    </Card>
   )
 }

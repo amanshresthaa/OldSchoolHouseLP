@@ -15,6 +15,8 @@ import { MapEmbed } from "@/components/site/MapEmbed"
 import { RouteStructuredData } from "@/components/site/RouteStructuredData"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import { SiteActionCard } from "@/components/site/SiteActionCard"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
 import {
   homeAtmosphereTiles,
   homeEventsFeature,
@@ -103,6 +105,11 @@ interface ImageRouteItem {
   alt: string
 }
 
+interface CompactHighlightItem {
+  title: string
+  description: string
+}
+
 const atmosphereTiles: ImageRouteItem[] = homeAtmosphereTiles.map((tile) => ({
   ...tile,
   image:
@@ -161,6 +168,47 @@ function ImageRoutePanel({
   )
 }
 
+function EditorialHighlightsPanel({
+  items,
+  eyebrow,
+}: {
+  items: readonly CompactHighlightItem[]
+  eyebrow: string
+}) {
+  return (
+    <div className="surface-frame overflow-hidden">
+      <div className="grid gap-px bg-[rgba(196,189,181,0.2)]">
+        {items.map((item, index) => (
+          <article
+            key={item.title}
+            className={cn(
+              "grid gap-4 px-5 py-5 md:px-6 md:py-6",
+              index % 2 === 0
+                ? "bg-[var(--color-surface-lowest)]"
+                : "bg-[color-mix(in_srgb,var(--color-surface-low)_82%,white_18%)]"
+            )}
+          >
+            <div className="flex items-center justify-between gap-3">
+              <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
+                {eyebrow}
+              </p>
+              <span className="font-heading text-[2.8rem] leading-none tracking-[-0.08em] text-primary/12">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+            </div>
+            <div className="grid gap-3 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:items-start">
+              <h3 className="section-title">{item.title}</h3>
+              <p className="text-sm leading-7 text-on-surface md:text-base">
+                {item.description}
+              </p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export default function HomePage() {
   const homeEntityGraph = {
     "@context": "https://schema.org",
@@ -184,11 +232,6 @@ export default function HomePage() {
 
       <HomeHeroSlideshow />
 
-      <HomeProofBarSection
-        items={homeProofBarItems}
-        copy={homeProofBarSectionCopy}
-      />
-
       <section className="bg-[var(--color-surface-low)] py-10 md:py-14 lg:py-16">
         <div className="section-shell">
           <div className="grid gap-4 xl:grid-cols-[minmax(0,3fr)_minmax(0,5fr)]">
@@ -205,6 +248,11 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <HomeProofBarSection
+        items={homeProofBarItems}
+        copy={homeProofBarSectionCopy}
+      />
 
       <HomeMenuHighlightsSection
         copy={homeMenuSectionCopy}
@@ -242,51 +290,6 @@ export default function HomePage() {
         <div className="section-shell space-y-5">
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <SectionHeading
-              eyebrow="What’s on"
-              title="From match days to local team socials, there is more than one reason to come back."
-              description="Live sport, theme-led nights, tastings, and informal community occasions all give regulars more than one reason to return."
-            />
-            <div className="shrink-0">
-              <SiteActionCard
-                actions={[
-                  {
-                    href: "/events",
-                    label: "See what’s on",
-                    icon: <ArrowRight className="size-4" />,
-                  },
-                  { href: "/private-hire", label: "Private hire" },
-                ]}
-              />
-            </div>
-          </div>
-          <div className="grid gap-4 xl:grid-cols-[1.02fr_0.98fr]">
-            <ImageRoutePanel
-              item={eventsFeature}
-              className="min-h-[24rem] xl:min-h-[30rem]"
-            />
-            <div className="grid gap-4 md:grid-cols-3 xl:grid-cols-1">
-              {eventsHighlights.map((highlight, index) => (
-                <article
-                  key={highlight.title}
-                  className={
-                    index === 1 ? "surface-panel-muted" : "surface-panel"
-                  }
-                >
-                  <h3 className="section-title">{highlight.title}</h3>
-                  <p className="pt-2 text-sm leading-6 text-on-surface md:text-base">
-                    {highlight.description}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-background py-10 md:py-14 lg:py-16">
-        <div className="section-shell space-y-5">
-          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <SectionHeading
               eyebrow="Reviews"
               title="The pub works for more than one kind of visit."
               description="From easy daytime visits to family meals and match nights, The Old School House suits more than one kind of plan."
@@ -311,20 +314,25 @@ export default function HomePage() {
               reviews={guestReviews}
               className="max-w-none"
             />
-            <div className="grid gap-4 md:grid-cols-3 xl:grid-cols-1">
-              {reassuranceHighlights.map((highlight, index) => (
-                <article
-                  key={highlight.title}
-                  className={
-                    index === 1 ? "surface-panel-muted" : "surface-panel"
-                  }
-                >
-                  <h3 className="section-title">{highlight.title}</h3>
-                  <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
-                    {highlight.description}
-                  </p>
-                </article>
-              ))}
+            <div className="surface-frame overflow-hidden">
+              <div className="grid gap-px bg-[rgba(196,189,181,0.2)] md:grid-cols-3 xl:grid-cols-1">
+                {reassuranceHighlights.map((highlight, index) => (
+                  <article
+                    key={highlight.title}
+                    className={cn(
+                      "px-5 py-5 md:px-6 md:py-6",
+                      index === 1
+                        ? "bg-[color-mix(in_srgb,var(--color-surface-low)_82%,white_18%)]"
+                        : "bg-[var(--color-surface-lowest)]"
+                    )}
+                  >
+                    <h3 className="section-title">{highlight.title}</h3>
+                    <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                      {highlight.description}
+                    </p>
+                  </article>
+                ))}
+              </div>
             </div>
           </div>
           <div className="night-panel">
@@ -361,31 +369,61 @@ export default function HomePage() {
 
       <section className="bg-[var(--color-surface-low)] py-10 md:py-14 lg:py-16">
         <div className="section-shell space-y-5">
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <SectionHeading
+              eyebrow="What’s on"
+              title="From match days to local team socials, there is more than one reason to come back."
+              description="Live sport, theme-led nights, tastings, and informal community occasions all give regulars more than one reason to return."
+            />
+            <div className="shrink-0">
+              <SiteActionCard
+                actions={[
+                  {
+                    href: "/events",
+                    label: "See what’s on",
+                    icon: <ArrowRight className="size-4" />,
+                  },
+                  { href: "/private-hire", label: "Private hire" },
+                ]}
+              />
+            </div>
+          </div>
+          <div className="grid gap-4 xl:grid-cols-[1.02fr_0.98fr]">
+            <ImageRoutePanel
+              item={eventsFeature}
+              className="min-h-[24rem] xl:min-h-[30rem]"
+            />
+            <EditorialHighlightsPanel
+              items={eventsHighlights}
+              eyebrow="Return reasons"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-background py-10 md:py-14 lg:py-16">
+        <div className="section-shell space-y-5">
           <div className="grid gap-4 xl:grid-cols-[1.02fr_0.98fr]">
             <div className="grid gap-4">
-              <div className="surface-panel">
-                <SectionHeading
-                  {...homeVisitSectionCopy}
-                  className="max-w-none"
-                />
-                <div className="grid gap-3 pt-5 sm:grid-cols-2">
-                  <a
-                    href={directionsHref}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="cta-primary inline-flex h-12 items-center justify-center gap-2.5 px-6 text-sm font-semibold"
-                  >
-                    Get directions
-                    <MapPin className="size-4" />
-                  </a>
-                  <a
-                    href={sitePhoneHref}
-                    className="cta-secondary inline-flex h-12 items-center justify-center px-6"
-                  >
-                    Call {sitePhone}
-                  </a>
-                </div>
-              </div>
+              <Card className="surface-panel gap-0 py-0">
+                <CardContent className="px-5 py-5 md:px-6 md:py-6">
+                  <SectionHeading
+                    {...homeVisitSectionCopy}
+                    className="max-w-none"
+                  />
+                  <div className="grid gap-3 pt-5 sm:grid-cols-2">
+                    <Button asChild size="lg">
+                      <a href={directionsHref} target="_blank" rel="noreferrer">
+                        <span>Get directions</span>
+                        <MapPin data-icon="inline-end" />
+                      </a>
+                    </Button>
+                    <Button asChild variant="outline" size="lg">
+                      <a href={sitePhoneHref}>Call {sitePhone}</a>
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
 
               <MapEmbed compact />
             </div>
@@ -393,73 +431,79 @@ export default function HomePage() {
             <div className="grid gap-4">
               <div className="grid gap-4 sm:grid-cols-2">
                 {visitDetails.map((detail, index) => (
-                  <div
+                  <Card
                     key={detail.label}
                     className={
-                      index % 2 === 0 ? "surface-panel" : "surface-panel-muted"
+                      index % 2 === 0
+                        ? "surface-panel gap-0 py-0"
+                        : "surface-panel-muted gap-0 py-0"
                     }
                   >
-                    <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
-                      {detail.label}
-                    </p>
-                    {detail.label === "Phone" ? (
-                      <a
-                        href={sitePhoneHref}
-                        className="block pt-2 text-sm leading-6 text-on-surface transition hover:text-secondary md:text-base"
-                      >
-                        {detail.value}
-                      </a>
-                    ) : detail.label === "Email" ? (
-                      <a
-                        href={siteEmailHref}
-                        className="block pt-2 text-sm leading-6 text-on-surface transition hover:text-secondary md:text-base"
-                      >
-                        {detail.value}
-                      </a>
-                    ) : (
-                      <p className="pt-2 text-sm leading-6 text-on-surface md:text-base">
-                        {detail.value}
+                    <CardContent className="px-5 py-5 md:px-6 md:py-6">
+                      <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
+                        {detail.label}
                       </p>
-                    )}
-                  </div>
+                      {detail.label === "Phone" ? (
+                        <a
+                          href={sitePhoneHref}
+                          className="block pt-2 text-sm leading-6 text-on-surface transition hover:text-secondary md:text-base"
+                        >
+                          {detail.value}
+                        </a>
+                      ) : detail.label === "Email" ? (
+                        <a
+                          href={siteEmailHref}
+                          className="block pt-2 text-sm leading-6 text-on-surface transition hover:text-secondary md:text-base"
+                        >
+                          {detail.value}
+                        </a>
+                      ) : (
+                        <p className="pt-2 text-sm leading-6 text-on-surface md:text-base">
+                          {detail.value}
+                        </p>
+                      )}
+                    </CardContent>
+                  </Card>
                 ))}
               </div>
 
-              <div className="surface-panel-muted">
-                <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
-                  <div className="max-w-xl">
-                    <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
-                      Arrival notes
-                    </p>
-                    <div className="space-y-3 pt-4">
-                      {arrivalNotes.map((note) => (
-                        <p
-                          key={note}
-                          className="text-sm leading-6 text-on-surface md:text-base"
-                        >
-                          {note}
-                        </p>
-                      ))}
+              <Card className="surface-panel-muted gap-0 py-0">
+                <CardContent className="px-5 py-5 md:px-6 md:py-6">
+                  <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
+                    <div className="max-w-xl">
+                      <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
+                        Arrival notes
+                      </p>
+                      <div className="space-y-3 pt-4">
+                        {arrivalNotes.map((note) => (
+                          <p
+                            key={note}
+                            className="text-sm leading-6 text-on-surface md:text-base"
+                          >
+                            {note}
+                          </p>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="flex shrink-0 flex-col items-start gap-3">
+                      <Link
+                        href="/find-us"
+                        className="inline-flex items-center gap-2 text-sm font-semibold text-secondary transition hover:text-secondary/80"
+                      >
+                        See full visit guide
+                        <ArrowRight className="size-4" />
+                      </Link>
+                      <Link
+                        href="/events"
+                        className="inline-flex items-center gap-2 text-sm font-semibold text-secondary transition hover:text-secondary/80"
+                      >
+                        See events and private hire
+                        <ArrowRight className="size-4" />
+                      </Link>
                     </div>
                   </div>
-                  <div className="flex shrink-0 flex-col items-start gap-3">
-                    <Link
-                      href="/find-us"
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-secondary transition hover:text-secondary/80"
-                    >
-                      See full visit guide
-                      <ArrowRight className="size-4" />
-                    </Link>
-                    <Link
-                      href="/events"
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-secondary transition hover:text-secondary/80"
-                    >
-                      See events and private hire
-                      <ArrowRight className="size-4" />
-                    </Link>
-                  </div>
-                </div>
-              </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>

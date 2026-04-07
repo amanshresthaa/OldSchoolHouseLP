@@ -11,6 +11,7 @@ export const buttonVariants = cva(
       variant: {
         default: "cta-primary text-white",
         outline: "cta-secondary",
+        darkOutline: "cta-secondary-dark text-white",
         secondary:
           "rounded-full bg-primary text-white hover:-translate-y-0.5 hover:bg-primary-container aria-expanded:bg-primary-container",
         ghost: "cta-ghost aria-expanded:bg-secondary/6",

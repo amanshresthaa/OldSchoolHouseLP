@@ -1,22 +1,27 @@
 "use client"
 
-import { useEffect, useRef, useState, type CSSProperties } from "react"
+import {
+  useEffect,
+  useEffectEvent,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+} from "react"
 import Image, { type StaticImageData } from "next/image"
 import Link from "next/link"
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr"
 
-import {
-  openingHours,
-  proofPoints,
-  sitePhoneHref,
-  type ProofPoint,
-} from "@/data/site"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { openingHours, proofPoints, type ProofPoint } from "@/data/site"
 import momoImage from "@/images/food/chicken-momo-and-veg-momo.png"
 import beerOnTapImage from "@/images/indoor/old-school-house-pub-stony-stratford-mk-beer-on-tap.jpeg"
 import indoorSeatingImage from "@/images/indoor/old-school-house-pub-stony-stratford-mk-indoor-seating-area-1.jpeg"
 import sportsTvImage from "@/images/indoor/old-school-house-pub-stony-stratford-mk-sports-tv-big-screen.jpeg"
 import customerParkingImage from "@/images/outdoor/old-school-house-pub-stony-stratford-mk-customer-parking.jpeg"
 import pubExteriorImage from "@/images/outdoor/old-school-house-pub-stony-stratford-mk-pub-building-exterior.jpeg"
+import { cn } from "@/lib/utils"
 
 interface HeroSlide extends ProofPoint {
   image: StaticImageData
@@ -96,18 +101,13 @@ const heroSlides: HeroSlide[] = [
 
 const AUTOPLAY_INTERVAL_MS = 6200
 const RESUME_AFTER_MANUAL_NAV_MS = 4000
-const heroCtas: Record<"book" | "menu" | "call", HeroCta> = {
-  book: { href: "/book", label: "Book a table" },
-  menu: { href: "/menu", label: "View menu" },
-  call: { href: sitePhoneHref, label: "Call" },
-}
-const heroCtaRotation: Array<[keyof typeof heroCtas, keyof typeof heroCtas]> = [
-  ["book", "menu"],
-  ["menu", "call"],
-  ["call", "book"],
+const heroCtas: readonly HeroCta[] = [
+  { href: "/book", label: "Book a table" },
+  { href: "/menu", label: "View menu" },
 ]
 
 const heroLayoutVars = {
+  "--hero-fit-scale": 1,
   "--hero-safe-space": "clamp(1rem, 0.8rem + 1.4vw, 2.5rem)",
   "--hero-inner-space": "clamp(0.25rem, 0.1rem + 0.9vw, 0.875rem)",
   "--hero-safe-inline": "var(--hero-safe-space)",
@@ -142,14 +142,14 @@ const heroShellStyle = {
 
 const heroTitleStyle = {
   maxWidth: "var(--hero-title-width)",
-  fontSize: "var(--hero-title-size)",
+  fontSize: "calc(var(--hero-title-size) * var(--hero-fit-scale))",
   lineHeight: "var(--hero-title-leading)",
   letterSpacing: "var(--hero-title-tracking)",
 } as CSSProperties
 
 const heroBodyStyle = {
   maxWidth: "var(--hero-body-width)",
-  fontSize: "var(--hero-body-size)",
+  fontSize: "calc(var(--hero-body-size) * var(--hero-fit-scale))",
   lineHeight: "var(--hero-body-leading)",
 } as CSSProperties
 
@@ -157,21 +157,32 @@ const heroMetaStyle = {
   maxWidth: "var(--hero-meta-width)",
 } as CSSProperties
 
+const heroHoursStyle = {
+  fontSize: "calc(var(--hero-hours-size) * var(--hero-fit-scale))",
+} as CSSProperties
+
 const heroSignalsStyle = {
   maxWidth: "var(--hero-signals-width)",
-  minHeight: "var(--hero-signals-zone)",
+  minHeight: "calc(var(--hero-signals-zone) * var(--hero-fit-scale))",
 } as CSSProperties
 
 const heroCtaStyle = {
   maxWidth: "var(--hero-cta-width)",
-  minHeight: "var(--hero-cta-zone)",
+  minHeight: "calc(var(--hero-cta-zone) * var(--hero-fit-scale))",
 } as CSSProperties
 
 const heroSignalChipStyle = {
-  fontSize: "var(--hero-signal-size)",
+  fontSize: "calc(var(--hero-signal-size) * var(--hero-fit-scale))",
   letterSpacing: "var(--hero-signal-tracking)",
-  paddingInline: "var(--hero-signal-pad-x)",
-  paddingBlock: "var(--hero-signal-pad-y)",
+  paddingInline: "calc(var(--hero-signal-pad-x) * var(--hero-fit-scale))",
+  paddingBlock: "calc(var(--hero-signal-pad-y) * var(--hero-fit-scale))",
+} as CSSProperties
+
+const heroButtonStyle = {
+  height: "calc(var(--hero-cta-height) * var(--hero-fit-scale))",
+  paddingInline:
+    "calc(var(--hero-cta-padding-x) * max(var(--hero-fit-scale), 0.9))",
+  fontSize: "calc(var(--hero-cta-font-size) * var(--hero-fit-scale))",
 } as CSSProperties
 
 function clampNumber(value: number, min: number, max: number) {
@@ -266,8 +277,19 @@ export function HomeHeroSlideshow() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
+  const [fitState, setFitState] = useState({
+    slideIndex: 0,
+    scale: 1,
+  })
   const progressRef = useRef<HTMLDivElement | null>(null)
   const resumeTimerRef = useRef<number | null>(null)
+  const heroViewportRef = useRef<HTMLDivElement | null>(null)
+  const contentGridRef = useRef<HTMLDivElement | null>(null)
+  const metaRef = useRef<HTMLDivElement | null>(null)
+  const copyRef = useRef<HTMLDivElement | null>(null)
+  const signalsRef = useRef<HTMLDivElement | null>(null)
+  const ctaRef = useRef<HTMLDivElement | null>(null)
+  const fitScale = fitState.slideIndex === currentIndex ? fitState.scale : 1
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
@@ -312,6 +334,103 @@ export function HomeHeroSlideshow() {
     }
   }, [])
 
+  const measureHeroFit = useEffectEvent(() => {
+    const viewport = heroViewportRef.current
+    const grid = contentGridRef.current
+    const sections = [
+      metaRef.current,
+      copyRef.current,
+      signalsRef.current,
+      ctaRef.current,
+    ]
+
+    if (!viewport || !grid || sections.some((section) => section === null)) {
+      return
+    }
+
+    const viewportStyles = window.getComputedStyle(viewport)
+    const gridStyles = window.getComputedStyle(grid)
+
+    const viewportPadding =
+      Number.parseFloat(viewportStyles.paddingTop) +
+      Number.parseFloat(viewportStyles.paddingBottom)
+    const gridPadding =
+      Number.parseFloat(gridStyles.paddingTop) +
+      Number.parseFloat(gridStyles.paddingBottom)
+    const rowGap = Number.parseFloat(gridStyles.rowGap)
+    const sectionHeights = sections.reduce((total, section) => {
+      return total + (section?.getBoundingClientRect().height ?? 0)
+    }, 0)
+
+    const availableHeight = viewport.clientHeight - viewportPadding
+    const requiredHeight =
+      sectionHeights + gridPadding + rowGap * (sections.length - 1)
+
+    if (availableHeight <= 0 || requiredHeight <= 0) {
+      return
+    }
+
+    const ratio = availableHeight / requiredHeight
+    const nextScale = clampNumber(
+      ratio >= 1
+        ? Math.min(1, fitScale * Math.min(ratio, 1.04))
+        : fitScale * ratio * 0.992,
+      0.72,
+      1
+    )
+
+    setFitState((currentFit) => {
+      const currentScale =
+        currentFit.slideIndex === currentIndex ? currentFit.scale : 1
+
+      if (
+        currentFit.slideIndex === currentIndex &&
+        Math.abs(nextScale - currentScale) <= 0.01
+      ) {
+        return currentFit
+      }
+
+      return {
+        slideIndex: currentIndex,
+        scale: nextScale,
+      }
+    })
+  })
+
+  useLayoutEffect(() => {
+    const viewport = heroViewportRef.current
+    const grid = contentGridRef.current
+
+    if (!viewport || !grid) {
+      return
+    }
+
+    const resizeObserver = new ResizeObserver(() => {
+      measureHeroFit()
+    })
+
+    resizeObserver.observe(viewport)
+    resizeObserver.observe(grid)
+
+    const rafId = window.requestAnimationFrame(() => {
+      measureHeroFit()
+    })
+
+    const fontsReady =
+      "fonts" in document
+        ? document.fonts.ready.then(() => {
+            measureHeroFit()
+          })
+        : Promise.resolve()
+
+    void fontsReady
+
+    return () => {
+      window.cancelAnimationFrame(rafId)
+      resizeObserver.disconnect()
+    }
+  }, [currentIndex])
+
   const goToSlide = (index: number) => {
     const totalSlides = heroSlides.length
 
@@ -337,15 +456,19 @@ export function HomeHeroSlideshow() {
 
   const activeSlide = heroSlides[currentIndex]
   const heroContentVars = getHeroContentVars(activeSlide)
-  const visibleCtas = heroCtaRotation[
-    currentIndex % heroCtaRotation.length
-  ].map((ctaKey) => heroCtas[ctaKey])
+  const visibleCtas = heroCtas
 
   return (
     <section
       data-critical-home-hero
       className="relative isolate h-[33rem] w-full overflow-hidden bg-primary text-white sm:h-[35rem] md:h-[39rem] lg:h-[43rem] xl:h-[45rem]"
-      style={{ ...heroLayoutVars, ...heroContentVars }}
+      style={
+        {
+          ...heroLayoutVars,
+          ...heroContentVars,
+          "--hero-fit-scale": fitScale.toFixed(3),
+        } as CSSProperties
+      }
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onFocusCapture={() => setIsPaused(true)}
@@ -397,6 +520,7 @@ export function HomeHeroSlideshow() {
       </h1>
 
       <div
+        ref={heroViewportRef}
         className="relative z-10 mx-auto flex h-full w-full max-w-[84rem] flex-col items-center justify-center"
         style={{ padding: "var(--hero-safe-space)" }}
       >
@@ -405,20 +529,22 @@ export function HomeHeroSlideshow() {
           style={heroShellStyle}
         >
           <div
+            ref={contentGridRef}
             key={`slide-content-${currentIndex}`}
             className="mx-auto grid w-full justify-items-center text-center"
             style={{
               padding: "var(--hero-inner-space)",
-              gridTemplateRows:
-                "var(--hero-meta-zone) minmax(0, var(--hero-copy-zone)) var(--hero-signals-zone) var(--hero-cta-zone)",
-              rowGap: "var(--hero-zone-gap)",
+              gridTemplateRows: "repeat(4, auto)",
+              rowGap: "calc(var(--hero-zone-gap) * var(--hero-fit-scale))",
             }}
           >
             <div
-              className="flex h-full w-full flex-col items-center justify-center gap-[var(--hero-meta-gap)]"
+              ref={metaRef}
+              className="flex h-full w-full flex-col items-center justify-center"
               style={{
                 ...heroMetaStyle,
                 ...getSlideEnterStyle(prefersReducedMotion, 0),
+                gap: "calc(var(--hero-meta-gap) * var(--hero-fit-scale))",
               }}
             >
               <div className="eyebrow-row justify-center">
@@ -430,16 +556,20 @@ export function HomeHeroSlideshow() {
                   {activeSlide.eyebrow}
                 </span>
               </div>
-              <p className="text-[length:var(--hero-hours-size)] font-semibold tracking-[0.18em] text-[var(--color-on-tertiary-container)]/86 uppercase">
+              <p
+                className="font-semibold tracking-[0.18em] text-[var(--color-on-tertiary-container)]/86 uppercase"
+                style={heroHoursStyle}
+              >
                 Hours {openingHours[0].hours}
               </p>
             </div>
 
             <div
+              ref={copyRef}
               className="flex h-full w-full flex-col items-center justify-center py-2 sm:py-3 md:py-4"
               style={{
                 ...getSlideEnterStyle(prefersReducedMotion, 90),
-                gap: "var(--hero-copy-gap)",
+                gap: "calc(var(--hero-copy-gap) * var(--hero-fit-scale))",
               }}
             >
               <h2
@@ -458,6 +588,7 @@ export function HomeHeroSlideshow() {
             </div>
 
             <div
+              ref={signalsRef}
               className="flex h-full w-full flex-wrap content-center items-center justify-center gap-2 self-center px-2 pb-2 sm:gap-2.5 sm:px-0 sm:pb-3 md:gap-3 md:pb-4"
               style={{
                 ...heroSignalsStyle,
@@ -465,47 +596,65 @@ export function HomeHeroSlideshow() {
               }}
             >
               {activeSlide.signals.map((signal, index) => (
-                <span
+                <Badge
                   key={signal}
-                  className={`rounded-full border border-white/25 bg-white/10 font-medium text-white/95 backdrop-blur-sm ${
+                  variant="signal"
+                  className={cn(
+                    "h-auto font-medium text-white/95",
                     index > 1 ? "hidden sm:inline-flex" : "inline-flex"
-                  }`}
+                  )}
                   style={heroSignalChipStyle}
                 >
                   {signal}
-                </span>
+                </Badge>
               ))}
             </div>
 
             <div
+              ref={ctaRef}
               data-critical-hero-panel
               className="grid h-full w-full grid-cols-2 items-center justify-items-stretch gap-[var(--hero-cta-gap)]"
               style={{
                 ...heroCtaStyle,
                 ...getSlideEnterStyle(prefersReducedMotion, 245),
+                gap: "calc(var(--hero-cta-gap) * var(--hero-fit-scale))",
               }}
             >
               {visibleCtas.map((cta, ctaIndex) => {
-                const ctaClassName =
-                  ctaIndex === 0
-                    ? "cta-primary inline-flex h-[var(--hero-cta-height)] items-center justify-center gap-[var(--hero-cta-icon-gap)] whitespace-nowrap px-[var(--hero-cta-padding-x)] text-[length:var(--hero-cta-font-size)] font-semibold"
-                    : "cta-secondary-dark inline-flex h-[var(--hero-cta-height)] items-center justify-center whitespace-nowrap px-[var(--hero-cta-padding-x)] text-[length:var(--hero-cta-font-size)] font-semibold"
+                const ctaClassName = "whitespace-nowrap"
+                const ctaVariant = ctaIndex === 0 ? "default" : "darkOutline"
 
                 if (cta.href.startsWith("tel:")) {
                   return (
-                    <a key={cta.href} href={cta.href} className={ctaClassName}>
-                      {cta.label}
-                    </a>
+                    <Button
+                      key={cta.href}
+                      asChild
+                      variant={ctaVariant}
+                      size="lg"
+                      className={ctaClassName}
+                      style={heroButtonStyle}
+                    >
+                      <a href={cta.href}>{cta.label}</a>
+                    </Button>
                   )
                 }
 
                 return (
-                  <Link key={cta.href} href={cta.href} className={ctaClassName}>
-                    <span>{cta.label}</span>
-                    {ctaIndex === 0 ? (
-                      <ArrowRight className="size-4 md:size-[1.125rem] lg:size-5" />
-                    ) : null}
-                  </Link>
+                  <Button
+                    key={cta.href}
+                    asChild
+                    variant={ctaVariant}
+                    size="lg"
+                    className={ctaClassName}
+                    style={heroButtonStyle}
+                  >
+                    <Link href={cta.href}>
+                      <span>{cta.label}</span>
+                      {ctaIndex === 0 ? (
+                        <ArrowRight data-icon="inline-end" />
+                      ) : null}
+                    </Link>
+                  </Button>
                 )
               })}
             </div>
@@ -522,23 +671,27 @@ export function HomeHeroSlideshow() {
               right: "var(--hero-safe-space)",
             }}
           >
-            <button
+            <Button
               type="button"
+              variant="ghost"
+              size="icon-lg"
               onClick={() => handleManualNav("prev")}
-              className="pointer-events-auto inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-primary/45 text-white backdrop-blur-md transition hover:bg-primary/70 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-primary/30 focus-visible:outline-none sm:h-10.5 sm:w-10.5 md:h-11 md:w-11 lg:h-12 lg:w-12"
+              className="pointer-events-auto size-9 border border-white/20 bg-primary/45 text-white backdrop-blur-md hover:bg-primary/70 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-primary/30 sm:size-[2.625rem] md:size-11 lg:size-12"
               aria-label="Previous hero slide"
             >
-              <ArrowRight className="size-4 rotate-180 lg:size-5" />
-            </button>
+              <ArrowRight className="rotate-180" />
+            </Button>
 
-            <button
+            <Button
               type="button"
+              variant="ghost"
+              size="icon-lg"
               onClick={() => handleManualNav("next")}
-              className="pointer-events-auto inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-primary/45 text-white backdrop-blur-md transition hover:bg-primary/70 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-primary/30 focus-visible:outline-none sm:h-10.5 sm:w-10.5 md:h-11 md:w-11 lg:h-12 lg:w-12"
+              className="pointer-events-auto size-9 border border-white/20 bg-primary/45 text-white backdrop-blur-md hover:bg-primary/70 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-primary/30 sm:size-[2.625rem] md:size-11 lg:size-12"
               aria-label="Next hero slide"
             >
-              <ArrowRight className="size-4 lg:size-5" />
-            </button>
+              <ArrowRight />
+            </Button>
           </div>
 
           <div className="absolute right-0 bottom-4 left-0 z-20 sm:bottom-5 md:bottom-6">
