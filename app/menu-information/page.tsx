@@ -2,14 +2,20 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { DownloadSimple, Phone } from "@phosphor-icons/react/dist/ssr"
 
+import {
+  CompactHighlightGrid,
+  EditorialLinkCardContent,
+} from "@/components/site/HomepagePatternPrimitives"
 import { PageHero } from "@/components/site/PageHero"
 import { RouteStructuredData } from "@/components/site/RouteStructuredData"
+import { ScrollReveal } from "@/components/site/ScrollReveal"
 import { SectionHeading } from "@/components/site/SectionHeading"
 
 import { Button } from "@/components/ui/button"
 import { siteMenuPdfHref, sitePhone, sitePhoneHref } from "@/data/site"
 import { getRouteConfig } from "@/data/site-routes"
 import { buildPageMetadata } from "@/lib/metadata"
+import { getSectionBandClass } from "@/lib/section-bands"
 
 const route = getRouteConfig("/menu-information")
 
@@ -71,9 +77,12 @@ export default function MenuInformationPage() {
         }}
       />
 
-      <section className="bg-background py-10 md:py-14 lg:py-16">
-        <div className="section-shell space-y-5">
-          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <section className={getSectionBandClass("paper", "page-section")}>
+        <div className="section-shell flex flex-col gap-5">
+          <ScrollReveal
+            delayMs={0}
+            className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"
+          >
             <SectionHeading
               eyebrow="Start here"
               title="How to check allergens, dietary needs, and the right menu format."
@@ -96,9 +105,12 @@ export default function MenuInformationPage() {
                 </a>
               </Button>
             </div>
-          </div>
+          </ScrollReveal>
 
-          <div className="space-y-4 text-sm leading-7 text-on-surface md:text-base">
+          <ScrollReveal
+            delayMs={120}
+            className="space-y-4 text-sm leading-relaxed text-on-surface md:text-base"
+          >
             <p>
               If you want a quick answer, ring{" "}
               <a
@@ -113,75 +125,94 @@ export default function MenuInformationPage() {
               The website menu is best for browsing on your phone. The PDF is
               best for printing, sharing, or keeping a copy to hand.
             </p>
-          </div>
+          </ScrollReveal>
 
-          <div className="surface-frame overflow-hidden rounded-2xl">
-            <div className="grid gap-px bg-[rgba(196,189,181,0.22)]">
-              {menuFaqs.map((item, index) => (
-                <article
-                  key={item.title}
-                  className={
-                    index % 2 === 0
-                      ? "surface-pane bg-[var(--color-surface-lowest)]"
-                      : "surface-pane surface-pane-muted"
-                  }
-                >
-                  <h3 className="text-[2rem]">{item.title}</h3>
-                  <p className="pt-4 text-sm leading-7 text-on-surface md:text-base">
-                    {item.description}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid gap-4 md:grid-cols-3">
-            {menuInfoHighlights.map((item, index) => (
-              <article
-                key={item.title}
-                className={
-                  index === 1 ? "surface-panel-muted" : "surface-panel"
-                }
-              >
-                <p className="eyebrow">{item.title}</p>
-                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
-                  {item.body}
-                </p>
-              </article>
-            ))}
-          </div>
-
-          <div className="surface-frame rounded-2xl">
-            <div className="surface-pane">
-              <h3 className="text-[2rem]">Useful next pages</h3>
-              <div className="grid gap-3 pt-4 text-sm leading-7 md:grid-cols-2 md:text-base xl:grid-cols-4">
-                <Link
-                  href="/gluten-free-curries-stony-stratford"
-                  className="surface-panel-muted px-4 py-4 text-on-surface transition hover:-translate-y-0.5"
-                >
-                  Gluten-free curries guide
-                </Link>
-                <Link
-                  href="/takeaway-menu"
-                  className="surface-panel-muted px-4 py-4 text-on-surface transition hover:-translate-y-0.5"
-                >
-                  Takeaway menu
-                </Link>
-                <Link
-                  href="/wakes-life-celebrations"
-                  className="surface-panel-muted px-4 py-4 text-on-surface transition hover:-translate-y-0.5"
-                >
-                  Wakes & life celebrations
-                </Link>
-                <Link
-                  href="/book"
-                  className="surface-panel-muted px-4 py-4 text-on-surface transition hover:-translate-y-0.5"
-                >
-                  Book a table
-                </Link>
+          <ScrollReveal delayMs={180}>
+            <div className="surface-frame overflow-hidden rounded-2xl">
+              <div className="grid gap-px bg-[rgba(196,189,181,0.22)]">
+                {menuFaqs.map((item, index) => (
+                  <article
+                    key={item.title}
+                    className={
+                      index % 2 === 0
+                        ? "surface-pane bg-[var(--color-surface-lowest)]"
+                        : "surface-pane surface-pane-muted"
+                    }
+                  >
+                    <h3 className="font-heading text-[1.28rem] leading-[1.12] tracking-[-0.02em] text-on-background md:text-[1.42rem]">
+                      {item.title}
+                    </h3>
+                    <p className="pt-3 text-sm leading-relaxed text-on-surface">
+                      {item.description}
+                    </p>
+                  </article>
+                ))}
               </div>
             </div>
-          </div>
+          </ScrollReveal>
+
+          <ScrollReveal delayMs={240}>
+            <CompactHighlightGrid
+              items={menuInfoHighlights.map((item) => ({
+                title: item.title,
+                description: item.body,
+              }))}
+              cueOrder={1}
+              cueLabel="menu notes"
+            />
+          </ScrollReveal>
+
+          <ScrollReveal delayMs={300}>
+            <div className="surface-frame rounded-2xl">
+              <div className="surface-pane">
+                <h3 className="font-heading text-[1.5rem] leading-[1.08] tracking-[-0.025em] text-on-background md:text-[1.7rem]">
+                  Useful next pages
+                </h3>
+                <div className="grid gap-3 pt-4 md:grid-cols-2 xl:grid-cols-4">
+                  <Link
+                    href="/gluten-free-curries-stony-stratford"
+                    className="surface-panel-muted block h-full rounded-2xl py-0 transition hover:-translate-y-0.5"
+                  >
+                    <EditorialLinkCardContent
+                      title="Gluten-free curries guide"
+                      description="Practical shortlist help for guests who want a clearer dietary route before they visit."
+                      className="px-4 py-4"
+                    />
+                  </Link>
+                  <Link
+                    href="/takeaway-menu"
+                    className="surface-panel-muted block h-full rounded-2xl py-0 transition hover:-translate-y-0.5"
+                  >
+                    <EditorialLinkCardContent
+                      title="Takeaway menu"
+                      description="Order-by-phone collection guidance when staying in is still the plan."
+                      className="px-4 py-4"
+                    />
+                  </Link>
+                  <Link
+                    href="/wakes-life-celebrations"
+                    className="surface-panel-muted block h-full rounded-2xl py-0 transition hover:-translate-y-0.5"
+                  >
+                    <EditorialLinkCardContent
+                      title="Wakes & life celebrations"
+                      description="See how the pub handles calmer gatherings that need a little more context."
+                      className="px-4 py-4"
+                    />
+                  </Link>
+                  <Link
+                    href="/book"
+                    className="surface-panel-muted block h-full rounded-2xl py-0 transition hover:-translate-y-0.5"
+                  >
+                    <EditorialLinkCardContent
+                      title="Book a table"
+                      description="Jump straight into a reservation once the menu questions are settled."
+                      className="px-4 py-4"
+                    />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
     </main>

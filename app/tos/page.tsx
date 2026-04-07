@@ -4,11 +4,13 @@ import { AlternatingSectionGrid } from "@/components/site/AlternatingSectionGrid
 import { PageSignoff } from "@/components/site/PageSignoff"
 import { PageHero } from "@/components/site/PageHero"
 import { RouteStructuredData } from "@/components/site/RouteStructuredData"
+import { ScrollReveal } from "@/components/site/ScrollReveal"
 import { SectionHeading } from "@/components/site/SectionHeading"
 
 import { getRouteConfig } from "@/data/site-routes"
 import { siteEmailHref, sitePhoneHref } from "@/data/site"
 import { buildPageMetadata } from "@/lib/metadata"
+import { getSectionBandClass } from "@/lib/section-bands"
 
 const route = getRouteConfig("/tos")
 
@@ -75,19 +77,25 @@ export default function TermsOfServicePage() {
         secondaryAction={{ href: siteEmailHref, label: "Email the team" }}
       />
 
-      <section className="bg-background py-10 md:py-14 lg:py-16">
-        <div className="section-shell space-y-5">
-          <SectionHeading
-            eyebrow="Short version"
-            title="Use the site to plan. Use the pub to confirm."
-            description="That is the easiest way to think about bookings, menus, opening hours, and anything time-sensitive."
-          />
-          <p className="text-sm leading-7 text-on-surface md:text-base">
-            If the answer affects your visit today, a quick call is always the
-            safest route. If your question is about privacy or cookies, the
-            separate privacy page explains that in plain language too.
-          </p>
-          <AlternatingSectionGrid sections={termsSections} />
+      <section className={getSectionBandClass("paper", "page-section")}>
+        <div className="section-shell flex flex-col gap-5">
+          <ScrollReveal delayMs={0}>
+            <SectionHeading
+              eyebrow="Short version"
+              title="Use the site to plan. Use the pub to confirm."
+              description="That is the easiest way to think about bookings, menus, opening hours, and anything time-sensitive."
+            />
+          </ScrollReveal>
+          <ScrollReveal delayMs={120}>
+            <p className="text-sm leading-relaxed text-on-surface md:text-base">
+              If the answer affects your visit today, a quick call is always the
+              safest route. If your question is about privacy or cookies, the
+              separate privacy page explains that in plain language too.
+            </p>
+          </ScrollReveal>
+          <ScrollReveal delayMs={180}>
+            <AlternatingSectionGrid sections={termsSections} />
+          </ScrollReveal>
         </div>
       </section>
 

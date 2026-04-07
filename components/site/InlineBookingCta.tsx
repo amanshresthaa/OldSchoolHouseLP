@@ -7,6 +7,7 @@ import {
   sitePhone,
   sitePhoneHref,
 } from "@/data/site"
+import { cn } from "@/lib/utils"
 
 interface InlineBookingCtaProps extends React.ComponentProps<"section"> {
   title: string
@@ -16,11 +17,12 @@ interface InlineBookingCtaProps extends React.ComponentProps<"section"> {
 export function InlineBookingCta({
   title,
   description,
+  className,
   ...props
 }: InlineBookingCtaProps) {
   return (
     <section
-      className="page-section bg-tertiary-container text-white"
+      className={cn("page-section bg-tertiary-container text-white", className)}
       {...props}
     >
       <div className="section-shell space-y-5">

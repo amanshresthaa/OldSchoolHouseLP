@@ -137,10 +137,9 @@ export const homeEventsFeature = {
 
 export const homeVisitSectionCopy = {
   eyebrow: "Visit us",
-  title:
-    "Easy to work into a day or evening on London Road in Stony Stratford.",
+  title: "Easy to reach for lunch, dinner, or a later round on London Road.",
   description:
-    "Open daily from 10:00 to 00:30, close to the High Street and Horsefair Green, with room to settle in for lunch, dinner, garden drinks, or a town-centre meet-up.",
+    "A short walk from Stony Stratford High Street, open daily from 10:00 to 00:30, with straightforward parking and quick route planning when you are on the move.",
 }
 
 export const homeInlineCtaCopy = {

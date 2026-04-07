@@ -32,32 +32,44 @@ export function MapEmbed({
     setIsReady(true)
   }, [])
 
-  const frameHeightClass = compact
-    ? "h-[17rem] md:h-[21rem]"
-    : "h-[22rem] md:h-[28rem]"
+  const frameHeightClass = compact ? "fluid-map-compact" : "fluid-map-standard"
   const blockedHeightClass = compact
-    ? "min-h-[17rem] md:min-h-[21rem]"
-    : "min-h-[22rem] md:min-h-[28rem]"
+    ? "fluid-map-compact"
+    : "fluid-map-standard"
 
   if (!isReady || !hasConsent) {
     return (
       <div className="surface-frame" {...props}>
         <div
-          className={`surface-pane surface-pane-muted flex flex-col justify-between gap-6 ${blockedHeightClass}`}
+          className={`surface-pane surface-pane-muted flex flex-col justify-between ${compact ? "gap-4" : "gap-6"} ${blockedHeightClass}`}
         >
-          <div className="max-w-xl space-y-3">
+          <div
+            className={compact ? "max-w-lg space-y-2" : "max-w-xl space-y-3"}
+          >
             <p className="eyebrow">{mapEmbedCopy.privacyEyebrow}</p>
-            <h3 className="text-[2rem] leading-tight text-on-background">
+            <h3
+              className={
+                compact
+                  ? "text-[1.55rem] leading-[1.12] text-on-background"
+                  : "text-[2rem] leading-tight text-on-background"
+              }
+            >
               {mapEmbedCopy.privacyHeading}
             </h3>
-            <p className="text-sm leading-7 text-on-surface md:text-base">
+            <p
+              className={
+                compact
+                  ? "text-sm leading-6 text-on-surface"
+                  : "section-copy text-on-surface"
+              }
+            >
               {mapEmbedCopy.privacyBody}
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row">
             <Button
               type="button"
-              size="lg"
+              size={compact ? "default" : "lg"}
               onClick={() => {
                 writeCookieConsent("accepted")
                 setHasConsent(true)
@@ -65,7 +77,7 @@ export function MapEmbed({
             >
               {mapEmbedCopy.allowButton}
             </Button>
-            <Button asChild size="lg" variant="outline">
+            <Button asChild size={compact ? "default" : "lg"} variant="outline">
               <a href={directionsHref} target="_blank" rel="noreferrer">
                 {mapEmbedCopy.directionsButton}
               </a>

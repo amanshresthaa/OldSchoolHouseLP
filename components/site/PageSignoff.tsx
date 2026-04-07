@@ -44,7 +44,7 @@ export function PageSignoff({
           </div>
         </div>
         <div className="night-panel space-y-4 p-5 md:p-6">
-          <div className="text-sm leading-7 text-white/72 md:text-base">
+          <div className="text-sm leading-relaxed text-white/72 md:text-base">
             {body}
           </div>
           {details ? <div className="space-y-4">{details}</div> : null}

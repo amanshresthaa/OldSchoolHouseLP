@@ -135,8 +135,17 @@ export function SiteHeader() {
       <header
         data-critical-header
         className="sticky top-0 z-40 bg-background/85 backdrop-blur-xl"
+        style={{ paddingTop: "env(safe-area-inset-top)" }}
       >
-        <div className="mx-auto max-w-7xl px-5 py-3 sm:px-6 md:px-8">
+        <div
+          className="mx-auto max-w-7xl px-5 py-3 sm:px-6 md:px-8"
+          style={{
+            paddingLeft:
+              "max(1.25rem, calc(env(safe-area-inset-left) + 0.75rem))",
+            paddingRight:
+              "max(1.25rem, calc(env(safe-area-inset-right) + 0.75rem))",
+          }}
+        >
           <div className="flex items-center justify-between gap-4">
             <Link
               href="/"
@@ -193,7 +202,7 @@ export function SiteHeader() {
                   isOpen ? "Close navigation menu" : "Open navigation menu"
                 }
                 onClick={() => setIsOpen((value) => !value)}
-                className="inline-flex size-10 items-center justify-center rounded-full bg-primary text-white transition hover:bg-primary-container"
+                className="inline-flex size-11 items-center justify-center rounded-full bg-primary text-white transition hover:bg-primary-container"
               >
                 {isOpen ? <X size={20} /> : <List size={20} />}
               </button>
@@ -223,6 +232,15 @@ export function SiteHeader() {
           aria-modal="true"
           aria-labelledby="mobile-site-navigation-title"
           className="fixed inset-0 z-50 overflow-y-auto bg-primary/96 px-5 py-6 text-white backdrop-blur-xl md:hidden"
+          style={{
+            paddingTop: "max(1.5rem, calc(env(safe-area-inset-top) + 1rem))",
+            paddingBottom:
+              "max(1.5rem, calc(env(safe-area-inset-bottom) + 1rem))",
+            paddingLeft:
+              "max(1.25rem, calc(env(safe-area-inset-left) + 0.75rem))",
+            paddingRight:
+              "max(1.25rem, calc(env(safe-area-inset-right) + 0.75rem))",
+          }}
         >
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0 flex-1 pr-2">
@@ -248,7 +266,7 @@ export function SiteHeader() {
               type="button"
               aria-label="Close navigation menu"
               onClick={() => setIsOpen(false)}
-              className="inline-flex size-10 items-center justify-center rounded-full bg-white/10 text-white"
+              className="inline-flex size-11 items-center justify-center rounded-full bg-white/10 text-white"
             >
               <X size={20} />
             </button>

@@ -6,12 +6,16 @@ import Link from "next/link"
 import * as React from "react"
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr"
 
+import {
+  getCueIndicatorAnimation,
+  getCueTrackAnimation,
+} from "@/components/site/cueMotion"
 import { ScrollReveal } from "@/components/site/ScrollReveal"
 import { SectionHeading } from "@/components/site/SectionHeading"
+import { useMobileRailCue } from "@/components/site/useMobileRailCue"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Separator } from "@/components/ui/separator"
+import { Card } from "@/components/ui/card"
 import type { MenuPrice } from "@/lib/menu"
 import { formatPrice } from "@/lib/menu"
 import { cn } from "@/lib/utils"
@@ -52,78 +56,53 @@ interface HomeMenuHighlightsSectionProps extends React.ComponentProps<"section">
 
 function MenuShowcaseCard({
   item,
-  featured = false,
-  railItem = false,
   className,
 }: {
   item: MenuShowcaseItem
-  featured?: boolean
-  railItem?: boolean
   className?: string
 }) {
   return (
     <Link
       href={item.href}
-      data-menu-card={railItem ? "true" : undefined}
-      className={cn(
-        "group relative isolate block overflow-hidden rounded-[1.75rem] bg-primary text-white",
-        className
-      )}
+      data-menu-card="true"
+      className={cn("group block h-full", className)}
     >
-      <Image
-        src={item.image}
-        alt={item.alt}
-        width={item.image.width}
-        height={item.image.height}
-        className="absolute inset-0 h-full w-full object-cover transition duration-500 ease-out group-hover:scale-[1.03]"
-        sizes={
-          featured
-            ? "(min-width: 1280px) 42vw, (min-width: 640px) 100vw, 86vw"
-            : "(min-width: 1280px) 28vw, (min-width: 640px) 50vw, 86vw"
-        }
-      />
-      <div
-        className={cn(
-          "absolute inset-0 bg-[linear-gradient(180deg,rgba(7,17,11,0.18)_0%,rgba(7,17,11,0.48)_38%,rgba(7,17,11,0.92)_100%)]",
-          featured &&
-            "bg-[linear-gradient(180deg,rgba(7,17,11,0.12)_0%,rgba(7,17,11,0.42)_34%,rgba(7,17,11,0.94)_100%)]"
-        )}
-      />
-      <div
-        className={cn(
-          "relative flex min-h-[22rem] flex-col justify-end p-5 md:p-6",
-          featured && "min-h-[27rem] xl:min-h-[30rem]"
-        )}
-      >
-        <Badge
-          variant="price"
-          className="absolute top-5 left-5 h-auto px-3 py-1.5 text-[0.68rem] font-semibold tracking-[0.16em] uppercase md:top-6 md:left-6"
-        >
-          {formatPrice(item.item.price)}
-        </Badge>
-        <div className="max-w-[24rem]">
-          <h3
-            className={cn(
-              "font-heading text-[1.9rem] leading-[1.02] tracking-[-0.04em] text-white",
-              featured ? "md:text-[2.6rem]" : "md:text-[1.65rem]"
-            )}
-          >
-            {item.title}
-          </h3>
-          <p
-            className={cn(
-              "pt-3 text-sm leading-6 text-white/78",
-              featured && "max-w-[26rem] md:text-[0.98rem]"
-            )}
-          >
-            {item.description}
-          </p>
-          <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-white">
+      <Card className="surface-frame flex h-full flex-col overflow-hidden rounded-2xl py-0 shadow-none">
+        <div className="relative h-[11rem] shrink-0 overflow-hidden">
+          <Image
+            src={item.image}
+            alt={item.alt}
+            width={item.image.width}
+            height={item.image.height}
+            className="absolute inset-0 h-full w-full object-cover transition duration-500 ease-out group-hover:scale-[1.02]"
+            sizes="(min-width: 1280px) 28vw, (min-width: 640px) 45vw, 88vw"
+          />
+        </div>
+        <div className="flex flex-1 flex-col justify-between gap-3 px-5 py-4">
+          <div className="flex flex-col gap-2.5">
+            <div className="flex flex-wrap items-center gap-2">
+              <Badge variant="pill" className="h-auto px-3 py-1">
+                Signature dish
+              </Badge>
+              <Badge variant="muted" className="h-auto px-3 py-1">
+                {formatPrice(item.item.price)}
+              </Badge>
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <h3 className="font-heading text-[1.2rem] leading-[1.12] tracking-[-0.02em] text-on-background">
+                {item.title}
+              </h3>
+              <p className="text-sm leading-relaxed text-on-surface">
+                {item.description}
+              </p>
+            </div>
+          </div>
+          <span className="inline-flex items-center gap-2 text-sm font-semibold text-secondary transition group-hover:text-secondary/80">
             {item.ctaLabel}
             <ArrowRight className="size-4" />
           </span>
         </div>
-      </div>
+      </Card>
     </Link>
   )
 }
@@ -135,200 +114,22 @@ export function HomeMenuHighlightsSection({
   className,
   ...props
 }: HomeMenuHighlightsSectionProps) {
-  const cardRailRef = React.useRef<HTMLDivElement | null>(null)
-  const cardTrackRef = React.useRef<HTMLDivElement | null>(null)
-  const [isPhoneViewport, setIsPhoneViewport] = React.useState(false)
-  const [isRailVisible, setIsRailVisible] = React.useState(false)
-  const [isFirstCardActive, setIsFirstCardActive] = React.useState(true)
-  const [isCueAnimating, setIsCueAnimating] = React.useState(false)
-  const [railPeekOffset, setRailPeekOffset] = React.useState(0)
-  const featuredItem = items[0]
-  const supportingItems = items.slice(1)
-
-  React.useEffect(() => {
-    const phoneQuery = window.matchMedia("(max-width: 639px)")
-
-    function updateViewportState() {
-      setIsPhoneViewport(phoneQuery.matches)
-    }
-
-    updateViewportState()
-    phoneQuery.addEventListener("change", updateViewportState)
-
-    return () => {
-      phoneQuery.removeEventListener("change", updateViewportState)
-    }
-  }, [])
-
-  React.useEffect(() => {
-    const cardRail = cardRailRef.current
-
-    if (!cardRail || !isPhoneViewport) {
-      setIsRailVisible(false)
-      return
-    }
-
-    function updateVisibility() {
-      if (!cardRail) {
-        setIsRailVisible(false)
-        return
-      }
-
-      const rect = cardRail.getBoundingClientRect()
-      const visibleHeight =
-        Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0)
-      const visibleRatio = visibleHeight <= 0 ? 0 : visibleHeight / rect.height
-
-      setIsRailVisible(visibleRatio >= 0.6)
-    }
-
-    updateVisibility()
-    window.addEventListener("scroll", updateVisibility, { passive: true })
-    window.addEventListener("resize", updateVisibility)
-
-    return () => {
-      window.removeEventListener("scroll", updateVisibility)
-      window.removeEventListener("resize", updateVisibility)
-    }
-  }, [isPhoneViewport])
-
-  React.useEffect(() => {
-    const cardRail = cardRailRef.current
-
-    if (!cardRail || items.length < 2) {
-      return
-    }
-
-    const rail = cardRail
-    const reducedMotionQuery = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    )
-
-    if (!isPhoneViewport || reducedMotionQuery.matches) {
-      setIsFirstCardActive(true)
-      return
-    }
-
-    function updateActiveCard() {
-      setIsFirstCardActive(rail.scrollLeft <= 4)
-    }
-
-    updateActiveCard()
-    rail.addEventListener("scroll", updateActiveCard, { passive: true })
-
-    return () => {
-      rail.removeEventListener("scroll", updateActiveCard)
-    }
-  }, [isPhoneViewport, items.length])
-
-  React.useEffect(() => {
-    const cardTrack = cardTrackRef.current
-
-    if (!cardTrack || !isPhoneViewport) {
-      setRailPeekOffset(0)
-      return
-    }
-
-    const track = cardTrack
-
-    function updatePeekOffset() {
-      const firstCard = track.querySelector('[data-menu-card="true"]')
-
-      if (!(firstCard instanceof HTMLElement)) {
-        setRailPeekOffset(0)
-        return
-      }
-
-      const trackStyles = window.getComputedStyle(track)
-      const columnGap = Number.parseFloat(trackStyles.columnGap || "0") || 0
-      const nextCardPeek = (firstCard.offsetWidth + columnGap) * 0.42
-
-      setRailPeekOffset(nextCardPeek)
-    }
-
-    updatePeekOffset()
-
-    const resizeObserver = new ResizeObserver(() => {
-      updatePeekOffset()
-    })
-
-    resizeObserver.observe(track)
-
-    const firstCard = track.querySelector('[data-menu-card="true"]')
-
-    if (firstCard instanceof HTMLElement) {
-      resizeObserver.observe(firstCard)
-    }
-
-    window.addEventListener("resize", updatePeekOffset)
-
-    return () => {
-      resizeObserver.disconnect()
-      window.removeEventListener("resize", updatePeekOffset)
-    }
-  }, [isPhoneViewport, items.length])
-
-  React.useEffect(() => {
-    const reducedMotionQuery = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    )
-
-    if (
-      !isPhoneViewport ||
-      !isRailVisible ||
-      !isFirstCardActive ||
-      railPeekOffset <= 0 ||
-      reducedMotionQuery.matches
-    ) {
-      setIsCueAnimating(false)
-      return
-    }
-
-    let animationTimeout = 0
-    let cooldownTimeout = 0
-    let animationFrame = 0
-
-    function startCueCycle() {
-      setIsCueAnimating(false)
-
-      animationFrame = window.requestAnimationFrame(() => {
-        setIsCueAnimating(true)
-      })
-
-      animationTimeout = window.setTimeout(() => {
-        setIsCueAnimating(false)
-        cooldownTimeout = window.setTimeout(startCueCycle, 15000)
-      }, 3000)
-    }
-
-    startCueCycle()
-
-    return () => {
-      window.cancelAnimationFrame(animationFrame)
-      window.clearTimeout(animationTimeout)
-      window.clearTimeout(cooldownTimeout)
-      setIsCueAnimating(false)
-    }
-  }, [isFirstCardActive, isPhoneViewport, isRailVisible, railPeekOffset])
+  const {
+    railRef: showcaseRailRef,
+    trackRef: showcaseTrackRef,
+    isCueAnimating: isShowcaseCueAnimating,
+    peekOffset: showcasePeekOffset,
+  } = useMobileRailCue({
+    itemCount: items.length,
+    itemSelector: '[data-menu-card="true"]',
+    order: 3,
+    peekRatio: 0.28,
+    variant: "peek",
+  })
 
   return (
-    <section
-      className={cn("bg-background py-10 md:py-14 lg:py-16", className)}
-      {...props}
-    >
-      <style>{`
-        @keyframes osh-menu-horizontal-cue {
-          0%, 100% { transform: translateX(0); opacity: 0.55; }
-          50% { transform: translateX(9px); opacity: 1; }
-        }
-
-        @keyframes osh-menu-rail-peek {
-          0%, 70%, 100% { transform: translateX(0); }
-          36% { transform: translateX(calc(var(--osh-menu-peek-offset, 0px) * -1)); }
-        }
-      `}</style>
-
-      <div className="section-shell space-y-5">
+    <section className={cn("page-section bg-background", className)} {...props}>
+      <div className="section-shell flex flex-col gap-5">
         <ScrollReveal
           delayMs={0}
           className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"
@@ -351,172 +152,86 @@ export function HomeMenuHighlightsSection({
           </div>
         </ScrollReveal>
 
-        <div className="space-y-4 sm:hidden">
-          <ScrollReveal
-            delayMs={120}
-            className="surface-frame overflow-hidden bg-[rgba(196,189,181,0.28)]"
-          >
-            <div className="flex items-center justify-between px-5 py-4 text-[0.7rem] font-semibold tracking-[0.16em] text-secondary uppercase">
+        <ScrollReveal delayMs={120} className="hidden sm:block">
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {items.map((item) => (
+              <MenuShowcaseCard key={item.title} item={item} />
+            ))}
+          </div>
+        </ScrollReveal>
+
+        <div className="sm:hidden">
+          <ScrollReveal delayMs={120}>
+            <div className="mb-3 flex items-center justify-between text-[0.7rem] font-semibold tracking-[0.16em] text-secondary uppercase">
               <span className="relative flex h-5 w-9 items-center rounded-full border border-[rgba(175,43,62,0.24)] bg-[var(--color-surface-lowest)]/84 px-1">
                 <span
                   aria-hidden="true"
                   className="h-2.5 w-2.5 rounded-full bg-secondary motion-reduce:animate-none"
                   style={{
-                    animation:
-                      "osh-menu-horizontal-cue 1.65s ease-in-out infinite",
+                    animation: getCueIndicatorAnimation(
+                      "x",
+                      "peek",
+                      isShowcaseCueAnimating
+                    ),
                   }}
                 />
               </span>
               <p>{String(items.length).padStart(2, "0")} dishes</p>
             </div>
-            <div className="relative px-5 pb-5">
-              <div className="pointer-events-none absolute inset-y-0 left-5 z-10 w-8 rounded-l-[1.5rem] bg-[linear-gradient(90deg,rgba(241,236,230,0.94)_0%,rgba(241,236,230,0)_100%)]" />
-              <div className="pointer-events-none absolute inset-y-0 right-5 z-10 w-10 rounded-r-[1.5rem] bg-[linear-gradient(270deg,rgba(241,236,230,0.96)_0%,rgba(241,236,230,0)_100%)]" />
-
+            <div
+              ref={showcaseRailRef}
+              className="overflow-x-auto overscroll-x-contain [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            >
               <div
-                ref={cardRailRef}
-                className="overflow-x-auto overscroll-x-contain rounded-[1.5rem] [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                ref={showcaseTrackRef}
+                className="grid auto-cols-[84%] grid-flow-col gap-3 pb-1"
+                style={
+                  isShowcaseCueAnimating
+                    ? ({
+                        "--osh-cue-offset": `${showcasePeekOffset}px`,
+                        animation: getCueTrackAnimation("x", "peek"),
+                      } as React.CSSProperties)
+                    : undefined
+                }
               >
-                <div
-                  ref={cardTrackRef}
-                  className="grid auto-cols-[86%] grid-flow-col gap-3"
-                  style={
-                    isCueAnimating
-                      ? ({
-                          "--osh-menu-peek-offset": `${railPeekOffset}px`,
-                          animation: "osh-menu-rail-peek 3s ease-in-out 1",
-                        } as React.CSSProperties)
-                      : undefined
-                  }
-                >
-                  {items.map((item, index) => (
-                    <MenuShowcaseCard
-                      key={item.title}
-                      item={item}
-                      featured={index === 0}
-                      className="media-lift"
-                      railItem
-                    />
-                  ))}
-                </div>
+                {items.map((item) => (
+                  <MenuShowcaseCard key={item.title} item={item} />
+                ))}
               </div>
             </div>
-          </ScrollReveal>
-
-          <ScrollReveal delayMs={180}>
-            <Card className="surface-panel-muted gap-0 py-0">
-              <CardHeader className="px-5 pt-5">
-                <p className="text-[0.72rem] font-semibold tracking-[0.16em] text-secondary uppercase">
-                  {copy.guidanceLabel}
-                </p>
-              </CardHeader>
-              <CardContent className="grid gap-3 px-5 pb-5">
-                {guidanceItems.map((highlight) => (
-                  <Card
-                    key={highlight.title}
-                    className="media-lift rounded-[1.2rem] bg-[var(--color-surface-lowest)] py-0 shadow-none ring-0"
-                  >
-                    <CardHeader className="gap-2 px-4 pt-4">
-                      <p className="text-[0.72rem] font-semibold tracking-[0.16em] text-secondary uppercase">
-                        {highlight.title}
-                      </p>
-                    </CardHeader>
-                    <CardContent className="px-4 pb-4">
-                      <p className="text-sm leading-6 text-on-surface">
-                        {highlight.description}
-                      </p>
-                    </CardContent>
-                  </Card>
-                ))}
-              </CardContent>
-            </Card>
-          </ScrollReveal>
-        </div>
-
-        <div className="hidden gap-4 sm:grid xl:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)]">
-          <ScrollReveal delayMs={120}>
-            <MenuShowcaseCard
-              item={featuredItem}
-              featured
-              className="media-lift"
-            />
-          </ScrollReveal>
-
-          <ScrollReveal delayMs={180} className="grid gap-4">
-            {supportingItems.map((item) => (
-              <Card
-                key={item.title}
-                className="surface-frame media-lift grid gap-0 overflow-hidden py-0 md:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)]"
-              >
-                <Image
-                  src={item.image}
-                  alt={item.alt}
-                  width={item.image.width}
-                  height={item.image.height}
-                  className="h-60 w-full object-cover md:h-full"
-                  sizes="(min-width: 1280px) 26vw, (min-width: 640px) 50vw, 100vw"
-                />
-                <div className="surface-pane flex flex-col justify-between gap-5 md:px-5 md:py-5">
-                  <div className="space-y-3">
-                    <Badge variant="pill" className="h-auto w-fit px-3 py-1">
-                      {formatPrice(item.item.price)}
-                    </Badge>
-                    <CardTitle className="font-heading text-[1.65rem] leading-[1.04] tracking-[-0.03em] text-on-background">
-                      {item.title}
-                    </CardTitle>
-                    <p className="text-sm leading-6 text-on-surface">
-                      {item.description}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Separator className="flex-1 bg-[rgba(175,43,62,0.18)]" />
-                    <Link
-                      href={item.href}
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-secondary transition hover:text-secondary/80"
-                    >
-                      {item.ctaLabel}
-                      <ArrowRight className="size-4" />
-                    </Link>
-                  </div>
-                </div>
-              </Card>
-            ))}
           </ScrollReveal>
         </div>
 
         <ScrollReveal delayMs={240}>
-          <Card className="surface-panel-muted hidden gap-0 py-0 sm:block">
-            <CardHeader className="flex flex-row items-center justify-between gap-4 px-5 pt-5">
-              <p className="text-[0.72rem] font-semibold tracking-[0.16em] text-secondary uppercase">
-                {copy.guidanceLabel}
-              </p>
-              <p className="text-[0.72rem] font-semibold tracking-[0.12em] text-primary/48 uppercase">
-                {String(guidanceItems.length).padStart(2, "0")} quick cues
-              </p>
-            </CardHeader>
-            <CardContent className="grid gap-4 px-5 pb-5 sm:grid-cols-3">
+          <div className="surface-frame px-5 py-5 md:px-6 md:py-6">
+            <p className="mb-4 text-[0.72rem] font-semibold tracking-[0.16em] text-secondary uppercase">
+              {copy.guidanceLabel}
+            </p>
+            <div className="grid gap-0 sm:grid-cols-3">
               {guidanceItems.map((highlight, index) => (
-                <Card
+                <div
                   key={highlight.title}
-                  className="media-lift rounded-[1.2rem] bg-[var(--color-surface-lowest)] py-0 shadow-none ring-0"
+                  className={cn(
+                    "flex gap-3.5 py-4 first:pt-0 last:pb-0 sm:flex-col sm:gap-2.5 sm:py-0 sm:pr-5 last:sm:pr-0",
+                    index > 0 &&
+                      "border-t border-[rgba(196,189,181,0.28)] sm:border-t-0 sm:border-l sm:pl-5"
+                  )}
                 >
-                  <CardHeader className="gap-3 px-4 pt-4">
-                    <Badge variant="pill" className="h-auto w-fit px-3 py-1">
-                      {String(index + 1).padStart(2, "0")}
-                    </Badge>
-                    <CardTitle className="text-[0.72rem] font-semibold tracking-[0.16em] text-primary uppercase">
+                  <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-[0.68rem] font-bold text-white">
+                    {index + 1}
+                  </span>
+                  <div className="min-w-0">
+                    <h4 className="text-[0.95rem] leading-[1.2] font-semibold tracking-[-0.01em] text-on-background">
                       {highlight.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="px-4 pb-4">
-                    <p className="text-sm leading-6 text-on-surface">
+                    </h4>
+                    <p className="mt-1 text-[0.84rem] leading-relaxed text-on-surface">
                       {highlight.description}
                     </p>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               ))}
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </ScrollReveal>
       </div>
     </section>

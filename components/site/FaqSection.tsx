@@ -33,8 +33,8 @@ export function FaqSection({
     <section
       className={cn(
         invert
-          ? "bg-primary py-10 text-white md:py-14 lg:py-16"
-          : "bg-background py-10 md:py-14 lg:py-16",
+          ? "page-section bg-primary text-white"
+          : "page-section bg-background",
         className
       )}
       {...props}

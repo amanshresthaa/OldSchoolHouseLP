@@ -9,10 +9,12 @@ import {
 } from "@phosphor-icons/react/dist/ssr"
 
 import { FaqSection } from "@/components/site/FaqSection"
+import { CompactHighlightGrid } from "@/components/site/HomepagePatternPrimitives"
 import { InlineBookingCta } from "@/components/site/InlineBookingCta"
 import { MapEmbed } from "@/components/site/MapEmbed"
 import { PageHero } from "@/components/site/PageHero"
 import { RouteStructuredData } from "@/components/site/RouteStructuredData"
+import { ScrollReveal } from "@/components/site/ScrollReveal"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import { SiteActionCard } from "@/components/site/SiteActionCard"
 import {
@@ -38,6 +40,7 @@ import {
 } from "@/data/site"
 import { getRouteConfig } from "@/data/site-routes"
 import { buildPageMetadata } from "@/lib/metadata"
+import { getSectionBandClass } from "@/lib/section-bands"
 import customerParkingImage from "@/images/outdoor/old-school-house-pub-stony-stratford-mk-customer-parking.jpeg"
 import pubExteriorImage from "@/images/outdoor/old-school-house-pub-stony-stratford-mk-pub-building-exterior.jpeg"
 
@@ -81,29 +84,17 @@ export default function FindUsPage() {
       />
       <PageHero {...route!.hero!} route={route!} />
 
-      <section className="bg-background py-10 md:py-14 lg:py-16">
-        <div className="section-shell space-y-5">
-          <div className="surface-panel space-y-5">
+      <section className={getSectionBandClass("plain", "page-section")}>
+        <div className="section-shell flex flex-col gap-5">
+          <ScrollReveal
+            delayMs={0}
+            className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"
+          >
             <SectionHeading
               eyebrow="Location in town"
               title="Looking for a pub on London Road in Stony Stratford?"
               description="Everything you need before you head over: where we are, how to get here, and what to expect when you arrive."
             />
-            <div className="grid gap-4 md:grid-cols-3">
-              {localVisitHighlights.map((item, index) => (
-                <article
-                  key={item.title}
-                  className={
-                    index === 1 ? "surface-panel-muted" : "surface-panel"
-                  }
-                >
-                  <h3 className="section-title">{item.title}</h3>
-                  <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
-                    {item.description}
-                  </p>
-                </article>
-              ))}
-            </div>
             <div className="flex flex-wrap gap-4 text-sm font-semibold text-secondary">
               <Link href="/menu" className="transition hover:text-secondary/80">
                 Browse the pub menu
@@ -112,8 +103,18 @@ export default function FindUsPage() {
                 Book a table in Stony Stratford
               </Link>
             </div>
-          </div>
-          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          </ScrollReveal>
+          <ScrollReveal delayMs={120}>
+            <CompactHighlightGrid
+              items={localVisitHighlights}
+              cueOrder={1}
+              cueLabel="visit notes"
+            />
+          </ScrollReveal>
+          <ScrollReveal
+            delayMs={180}
+            className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"
+          >
             <SectionHeading {...findUsAddressSection} />
             <SiteActionCard
               actions={[
@@ -125,11 +126,14 @@ export default function FindUsPage() {
               ]}
               supportingText={findUsActionCardText}
             />
-          </div>
-          <div className="grid gap-4 xl:grid-cols-[0.85fr_1.15fr]">
+          </ScrollReveal>
+          <ScrollReveal
+            delayMs={240}
+            className="grid gap-4 xl:grid-cols-[0.85fr_1.15fr]"
+          >
             <div className="space-y-4">
               <div className="surface-panel">
-                <div className="space-y-4 text-sm leading-7 text-on-surface md:text-base">
+                <div className="space-y-4 text-sm leading-relaxed text-on-surface md:text-base">
                   <p className="flex items-start gap-3">
                     <MapPin className="mt-1 size-4 shrink-0 text-secondary" />
                     <span>{siteAddress}</span>
@@ -170,7 +174,7 @@ export default function FindUsPage() {
                     <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
                       {item.label}
                     </p>
-                    <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                    <p className="pt-3 text-sm leading-relaxed text-on-surface">
                       {item.value}
                     </p>
                   </article>
@@ -184,7 +188,7 @@ export default function FindUsPage() {
                       index === 1 ? "surface-panel-muted" : "surface-panel"
                     }
                   >
-                    <p className="text-sm leading-7 text-on-surface md:text-base">
+                    <p className="text-sm leading-relaxed text-on-surface">
                       {note}
                     </p>
                   </article>
@@ -192,18 +196,20 @@ export default function FindUsPage() {
               </div>
             </div>
             <MapEmbed />
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
-      <section className="bg-[var(--color-surface-low)] py-10 md:py-14 lg:py-16">
-        <div className="section-shell space-y-5">
-          <SectionHeading
-            eyebrow="On arrival"
-            title="A clearer picture of the frontage and approach before you set off."
-            description="Use these quick views to recognise the building and get a feel for the easier arrival setup."
-          />
-          <div className="grid gap-4 md:grid-cols-2">
+      <section className={getSectionBandClass("warm", "page-section")}>
+        <div className="section-shell flex flex-col gap-5">
+          <ScrollReveal delayMs={0}>
+            <SectionHeading
+              eyebrow="On arrival"
+              title="A clearer picture of the frontage and approach before you set off."
+              description="Use these quick views to recognise the building and get a feel for the easier arrival setup."
+            />
+          </ScrollReveal>
+          <ScrollReveal delayMs={120} className="grid gap-4 md:grid-cols-2">
             <article className="surface-frame">
               <Image
                 src={pubExteriorImage}
@@ -215,10 +221,10 @@ export default function FindUsPage() {
                 <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
                   Frontage
                 </p>
-                <h3 className="section-title pt-3">
+                <h3 className="pt-3 font-heading text-[1.2rem] leading-[1.12] tracking-[-0.02em] text-on-background">
                   Recognise the pub from London Road
                 </h3>
-                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                <p className="pt-2 text-sm leading-relaxed text-on-surface">
                   The pub is easy to recognise on London Road once you know the
                   brick frontage you are looking for.
                 </p>
@@ -235,25 +241,30 @@ export default function FindUsPage() {
                 <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
                   Arrival
                 </p>
-                <h3 className="section-title pt-3">
+                <h3 className="pt-3 font-heading text-[1.2rem] leading-[1.12] tracking-[-0.02em] text-on-background">
                   Parking and easier arrival
                 </h3>
-                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                <p className="pt-2 text-sm leading-relaxed text-on-surface">
                   A small customer parking area helps make planned dinners,
                   family visits, and longer stays feel simpler from the start.
                 </p>
               </div>
             </article>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
-      <InlineBookingCta {...findUsInlineCtaCopy} />
+      <InlineBookingCta
+        className={getSectionBandClass("dark")}
+        {...findUsInlineCtaCopy}
+      />
 
-      <section className="bg-[var(--color-surface-low)] py-10 md:py-14 lg:py-16">
-        <div className="section-shell space-y-5">
-          <SectionHeading {...findUsAccessibilitySection} />
-          <div className="grid gap-4 md:grid-cols-3">
+      <section className={getSectionBandClass("paper", "page-section")}>
+        <div className="section-shell flex flex-col gap-5">
+          <ScrollReveal delayMs={0}>
+            <SectionHeading {...findUsAccessibilitySection} />
+          </ScrollReveal>
+          <ScrollReveal delayMs={120} className="grid gap-4 md:grid-cols-3">
             {accessibilityNotes.map((note, index) => (
               <article
                 key={note}
@@ -261,16 +272,20 @@ export default function FindUsPage() {
                   index === 1 ? "surface-panel-muted" : "surface-panel"
                 }
               >
-                <p className="text-sm leading-7 text-on-surface md:text-base">
+                <p className="text-sm leading-relaxed text-on-surface">
                   {note}
                 </p>
               </article>
             ))}
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
-      <FaqSection {...findUsFaqSectionCopy} faqs={visitFaqs} />
+      <FaqSection
+        className={getSectionBandClass("paper")}
+        {...findUsFaqSectionCopy}
+        faqs={visitFaqs}
+      />
     </main>
   )
 }

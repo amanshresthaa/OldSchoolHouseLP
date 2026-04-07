@@ -21,7 +21,11 @@ export function SectionHeading({
 }: SectionHeadingProps) {
   return (
     <div
-      className={cn("max-w-2xl space-y-3", invert && "text-white", className)}
+      className={cn(
+        "max-w-2xl space-y-[clamp(0.625rem,0.45rem+0.45vw,0.9rem)]",
+        invert && "text-white",
+        className
+      )}
       {...props}
     >
       {eyebrow ? (
@@ -51,7 +55,7 @@ export function SectionHeading({
       {description ? (
         <p
           className={cn(
-            "max-w-[35rem] text-sm leading-[1.65] md:text-[0.9375rem]",
+            "section-copy max-w-[35rem]",
             invert ? "text-white/55" : "text-on-surface"
           )}
         >

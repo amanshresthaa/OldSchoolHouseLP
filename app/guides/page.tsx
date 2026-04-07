@@ -2,10 +2,12 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { ArrowRight, BookOpenText } from "@phosphor-icons/react/dist/ssr"
 
+import { EditorialLinkCardContent } from "@/components/site/HomepagePatternPrimitives"
 import { FaqSection } from "@/components/site/FaqSection"
 import { PageHero } from "@/components/site/PageHero"
 import { PageSignoff } from "@/components/site/PageSignoff"
 import { RouteStructuredData } from "@/components/site/RouteStructuredData"
+import { ScrollReveal } from "@/components/site/ScrollReveal"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import {
   guidesBrowseSection,
@@ -18,6 +20,7 @@ import {
 } from "@/data/copy"
 import { getRouteConfig } from "@/data/site-routes"
 import { buildPageMetadata } from "@/lib/metadata"
+import { getSectionBandClass } from "@/lib/section-bands"
 
 const route = getRouteConfig("/guides")
 
@@ -33,61 +36,76 @@ export default function GuidesPage() {
       />
       <PageHero {...route!.hero!} route={route!} />
 
-      <section className="bg-background py-10 md:py-14 lg:py-16">
-        <div className="section-shell space-y-5">
-          <SectionHeading {...guidesHowToUseSection} />
-          <div className="grid gap-4 lg:grid-cols-2 xl:grid-cols-3">
+      <section className={getSectionBandClass("plain", "page-section")}>
+        <div className="section-shell flex flex-col gap-5">
+          <ScrollReveal delayMs={0}>
+            <SectionHeading {...guidesHowToUseSection} />
+          </ScrollReveal>
+          <ScrollReveal
+            delayMs={120}
+            className="grid gap-4 lg:grid-cols-2 xl:grid-cols-3"
+          >
             {guidesGroups.map((guide, index) => (
               <Link
                 key={guide.href}
                 href={guide.href}
                 className={
                   index % 2 === 1
-                    ? "surface-panel-muted transition hover:-translate-y-0.5"
-                    : "surface-panel transition hover:-translate-y-0.5"
+                    ? "surface-panel-muted block h-full rounded-2xl py-0 transition hover:-translate-y-0.5"
+                    : "surface-frame block h-full rounded-2xl py-0 transition hover:-translate-y-0.5"
                 }
               >
-                <p className="eyebrow">{guide.eyebrow}</p>
-                <h3 className="section-title pt-3">{guide.title}</h3>
-                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
-                  {guide.description}
-                </p>
-                <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-secondary">
-                  Open guide
-                  <ArrowRight className="size-4" />
-                </span>
+                <EditorialLinkCardContent
+                  eyebrow={guide.eyebrow}
+                  title={guide.title}
+                  description={guide.description}
+                  ctaLabel="Open guide"
+                  className={index % 2 === 0 ? "surface-pane" : undefined}
+                />
               </Link>
             ))}
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
-      <section className="bg-[var(--color-surface-low)] py-10 md:py-14 lg:py-16">
-        <div className="section-shell space-y-5">
-          <SectionHeading {...guidesBrowseSection} />
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <section className={getSectionBandClass("paper", "page-section")}>
+        <div className="section-shell flex flex-col gap-5">
+          <ScrollReveal delayMs={0}>
+            <SectionHeading {...guidesBrowseSection} />
+          </ScrollReveal>
+          <ScrollReveal
+            delayMs={120}
+            className="grid gap-4 md:grid-cols-2 xl:grid-cols-3"
+          >
             {guidesLinkedGuides.map((guide, index) => (
               <Link
                 key={guide.href}
                 href={guide.href}
                 className={
                   index === 1 || index === 4
-                    ? "surface-panel-muted transition hover:-translate-y-0.5"
-                    : "surface-panel transition hover:-translate-y-0.5"
+                    ? "surface-panel-muted block h-full rounded-2xl py-0 transition hover:-translate-y-0.5"
+                    : "surface-frame block h-full rounded-2xl py-0 transition hover:-translate-y-0.5"
                 }
               >
-                <BookOpenText className="size-5 text-secondary" />
-                <h3 className="section-title pt-3">{guide.title}</h3>
-                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
-                  {guide.description}
-                </p>
+                <EditorialLinkCardContent
+                  title={guide.title}
+                  description={guide.description}
+                  className={
+                    index === 1 || index === 4 ? undefined : "surface-pane"
+                  }
+                  icon={<BookOpenText className="size-5" />}
+                />
               </Link>
             ))}
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
-      <FaqSection {...guidesFaqSectionCopy} faqs={guidesFaqs} />
+      <FaqSection
+        className={getSectionBandClass("paper")}
+        {...guidesFaqSectionCopy}
+        faqs={guidesFaqs}
+      />
 
       <PageSignoff
         eyebrow={guidesSignoffCopy.eyebrow}

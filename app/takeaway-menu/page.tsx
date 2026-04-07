@@ -1,14 +1,20 @@
 import type { Metadata } from "next"
 import { DownloadSimple, Phone } from "@phosphor-icons/react/dist/ssr"
 
+import {
+  CompactHighlightGrid,
+  NumberedStepFlow,
+} from "@/components/site/HomepagePatternPrimitives"
 import { InlineBookingCta } from "@/components/site/InlineBookingCta"
 import { PageHero } from "@/components/site/PageHero"
 import { RouteStructuredData } from "@/components/site/RouteStructuredData"
+import { ScrollReveal } from "@/components/site/ScrollReveal"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import { SiteActionCard } from "@/components/site/SiteActionCard"
 import { siteMenuPdfHref, sitePhone, sitePhoneHref } from "@/data/site"
 import { getRouteConfig } from "@/data/site-routes"
 import { buildPageMetadata } from "@/lib/metadata"
+import { getSectionBandClass } from "@/lib/section-bands"
 
 const route = getRouteConfig("/takeaway-menu")
 
@@ -39,6 +45,11 @@ const takeawayChecklist = [
   "Collect once the team gives you a ready time.",
 ]
 
+const takeawaySteps = takeawayChecklist.map((step, index) => ({
+  title: `Step ${index + 1}`,
+  description: step,
+}))
+
 export default function TakeawayMenuPage() {
   return (
     <main>
@@ -56,9 +67,12 @@ export default function TakeawayMenuPage() {
         secondaryAction={{ href: sitePhoneHref, label: "Call the pub" }}
       />
 
-      <section className="bg-background py-10 md:py-14 lg:py-16">
-        <div className="section-shell space-y-5">
-          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <section className={getSectionBandClass("paper", "page-section")}>
+        <div className="section-shell flex flex-col gap-5">
+          <ScrollReveal
+            delayMs={0}
+            className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"
+          >
             <SectionHeading
               eyebrow="How to order"
               title="How takeaway collection works at our Stony Stratford pub."
@@ -85,63 +99,50 @@ export default function TakeawayMenuPage() {
                 ]}
               />
             </div>
-          </div>
+          </ScrollReveal>
 
-          <div className="surface-panel">
-            <ol className="space-y-3 text-sm leading-7 text-on-surface md:text-base">
-              {takeawayChecklist.map((step, index) => (
-                <li key={step} className="flex gap-3">
-                  <span className="mt-0.5 inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-secondary text-xs font-semibold text-white">
-                    {index + 1}
-                  </span>
-                  <span>{step}</span>
-                </li>
-              ))}
-            </ol>
-          </div>
+          <ScrollReveal delayMs={120}>
+            <NumberedStepFlow items={takeawaySteps} label="Collection steps" />
+          </ScrollReveal>
 
-          <div className="grid gap-4 md:grid-cols-3">
-            {takeawayCards.map((card, index) => (
-              <article
-                key={card.title}
-                className={
-                  index === 1 ? "surface-panel-muted" : "surface-panel"
-                }
-              >
-                <h3 className="section-title">{card.title}</h3>
-                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
-                  {card.description}
-                </p>
-              </article>
-            ))}
-          </div>
+          <ScrollReveal delayMs={180}>
+            <CompactHighlightGrid
+              items={takeawayCards}
+              cueOrder={1}
+              cueLabel="takeaway notes"
+            />
+          </ScrollReveal>
 
-          <div className="grid gap-px overflow-hidden rounded-2xl bg-[rgba(196,189,181,0.22)] md:grid-cols-2">
+          <ScrollReveal
+            delayMs={240}
+            className="grid gap-px overflow-hidden rounded-2xl bg-[rgba(196,189,181,0.22)] md:grid-cols-2"
+          >
             <div className="bg-[var(--color-surface-lowest)] px-5 py-5 md:px-6 md:py-6">
-              <h3 className="section-title">
+              <h3 className="font-heading text-[1.32rem] leading-[1.1] tracking-[-0.02em] text-on-background">
                 Best if you want to share the menu
               </h3>
-              <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+              <p className="pt-3 text-sm leading-relaxed text-on-surface">
                 The downloadable menu is useful when you want to compare a few
                 options, sit with the choice for a bit, or send it to someone
                 else before ordering.
               </p>
             </div>
             <div className="surface-pane-muted px-5 py-5 md:px-6 md:py-6">
-              <h3 className="section-title">
+              <h3 className="font-heading text-[1.32rem] leading-[1.1] tracking-[-0.02em] text-on-background">
                 Best if you want to browse quickly
               </h3>
-              <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+              <p className="pt-3 text-sm leading-relaxed text-on-surface">
                 The live menu is better when you want to jump straight to
                 starters, mixed grills, curries, sides, or desserts without
                 scrolling through a PDF.
               </p>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
       <InlineBookingCta
+        className={getSectionBandClass("dark")}
         title="Changed your mind about staying home?"
         description="If collection turns into dinner plans, book a table and come sit with us instead."
       />

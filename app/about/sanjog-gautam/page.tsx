@@ -3,10 +3,12 @@ import Link from "next/link"
 import Script from "next/script"
 import { ArrowRight, Buildings } from "@phosphor-icons/react/dist/ssr"
 
+import { CompactHighlightGrid } from "@/components/site/HomepagePatternPrimitives"
 import { InlineBookingCta } from "@/components/site/InlineBookingCta"
 import { PageHero } from "@/components/site/PageHero"
 import { PageSignoff } from "@/components/site/PageSignoff"
 import { RouteStructuredData } from "@/components/site/RouteStructuredData"
+import { ScrollReveal } from "@/components/site/ScrollReveal"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import {
   organizationFactSheet,
@@ -22,6 +24,7 @@ import {
 } from "@/data/site"
 import { getRouteConfig } from "@/data/site-routes"
 import { buildPageMetadata } from "@/lib/metadata"
+import { getSectionBandClass } from "@/lib/section-bands"
 
 const route = getRouteConfig("/about/sanjog-gautam")
 
@@ -46,37 +49,32 @@ export default function SanjogGautamPage() {
       />
       <PageHero {...route!.hero!} route={route!} />
 
-      <section className="bg-background py-10 md:py-14 lg:py-16">
-        <div className="section-shell space-y-5">
-          <SectionHeading
-            eyebrow="Experience and expertise"
-            title="A real operator profile, not a generic hospitality byline."
-            description="This page exists to show who is behind the venue and what experience supports the way The Old School House is run day to day."
-          />
-          <div className="grid gap-4 lg:grid-cols-3">
-            {sanjogGautamHighlights.map((item, index) => (
-              <article
-                key={item.title}
-                className={
-                  index === 1 ? "surface-panel-muted" : "surface-panel"
-                }
-              >
-                <h2 className="section-title">{item.title}</h2>
-                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
-                  {item.description}
-                </p>
-              </article>
-            ))}
-          </div>
+      <section className={getSectionBandClass("plain", "page-section")}>
+        <div className="section-shell flex flex-col gap-5">
+          <ScrollReveal delayMs={0}>
+            <SectionHeading
+              eyebrow="Experience and expertise"
+              title="A real operator profile, not a generic hospitality byline."
+              description="This page exists to show who is behind the venue and what experience supports the way The Old School House is run day to day."
+            />
+          </ScrollReveal>
+          <ScrollReveal delayMs={120}>
+            <CompactHighlightGrid
+              items={sanjogGautamHighlights}
+              cueOrder={1}
+              cueLabel="highlights"
+            />
+          </ScrollReveal>
         </div>
       </section>
 
       <InlineBookingCta
+        className={getSectionBandClass("dark")}
         title="See how that experience lands in the room."
         description="Book a table if you want to experience the pub atmosphere, service style, and Nepalese kitchen for yourself."
       />
 
-      <section className="bg-[var(--color-surface-low)] py-10 md:py-14 lg:py-16">
+      <section className={getSectionBandClass("paper", "page-section")}>
         <div className="section-shell grid gap-4 xl:grid-cols-[1.05fr_0.95fr]">
           <article className="surface-panel space-y-4">
             <SectionHeading
@@ -85,7 +83,7 @@ export default function SanjogGautamPage() {
               description="The strongest trust signal for a hospitality brand is when the person behind it can be connected to real-world operating experience."
               className="max-w-none"
             />
-            <div className="space-y-3 text-sm leading-7 text-on-surface md:text-base">
+            <div className="space-y-3 text-sm leading-relaxed text-on-surface">
               {sanjogGautamExperienceNotes.map((note) => (
                 <p key={note}>{note}</p>
               ))}
@@ -96,9 +94,11 @@ export default function SanjogGautamPage() {
             <article className="surface-panel-muted">
               <div className="flex items-center gap-3">
                 <Buildings className="size-5 text-secondary" />
-                <h2 className="section-title">Works for {siteLegalName}</h2>
+                <h2 className="font-heading text-[1.32rem] leading-[1.1] tracking-[-0.02em] text-on-background">
+                  Works for {siteLegalName}
+                </h2>
               </div>
-              <div className="grid gap-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
+              <div className="grid gap-3 pt-4 text-sm leading-relaxed text-on-surface">
                 {organizationFactSheet.slice(0, 4).map((item) => (
                   <div key={item.label}>
                     <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
@@ -111,8 +111,10 @@ export default function SanjogGautamPage() {
             </article>
 
             <article className="surface-panel">
-              <h2 className="section-title">Areas of expertise</h2>
-              <ul className="grid gap-3 pt-4 text-sm leading-7 text-on-surface md:text-base">
+              <h2 className="font-heading text-[1.32rem] leading-[1.1] tracking-[-0.02em] text-on-background">
+                Areas of expertise
+              </h2>
+              <ul className="grid gap-3 pt-4 text-sm leading-relaxed text-on-surface">
                 {sanjogGautamExpertiseAreas.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
@@ -144,7 +146,7 @@ export default function SanjogGautamPage() {
           },
         ]}
         details={
-          <div className="grid gap-2 text-sm leading-7">
+          <div className="grid gap-2 text-sm leading-relaxed">
             <Link
               href="/menu"
               className="text-white/72 transition hover:text-white"

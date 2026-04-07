@@ -177,8 +177,12 @@ export function StickyBookingBar() {
   )
   return (
     <div
-      className="fixed inset-x-0 bottom-0 z-50 bg-[var(--color-surface-lowest)]/95 px-4 pt-3 backdrop-blur-xl md:hidden"
-      style={{ paddingBottom: "calc(0.75rem + env(safe-area-inset-bottom))" }}
+      className="fixed bottom-0 left-1/2 z-50 w-[100dvw] max-w-full -translate-x-1/2 bg-[var(--color-surface-lowest)]/95 px-4 pt-3 backdrop-blur-xl md:hidden"
+      style={{
+        paddingBottom: "calc(0.75rem + env(safe-area-inset-bottom))",
+        paddingLeft: "max(1rem, calc(env(safe-area-inset-left) + 0.75rem))",
+        paddingRight: "max(1rem, calc(env(safe-area-inset-right) + 0.75rem))",
+      }}
     >
       <div className="mx-auto max-w-md">
         <div className="grid grid-cols-2 gap-3">

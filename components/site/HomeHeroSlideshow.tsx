@@ -109,6 +109,7 @@ const heroCtas: readonly HeroCta[] = [
 const heroLayoutVars = {
   "--hero-fit-scale": 1,
   "--hero-safe-space": "clamp(1rem, 0.8rem + 1.4vw, 2.5rem)",
+  "--hero-min-fit-scale": 0.76,
   "--hero-inner-space": "clamp(0.25rem, 0.1rem + 0.9vw, 0.875rem)",
   "--hero-safe-inline": "var(--hero-safe-space)",
   "--hero-shell-inset": "clamp(1rem, 7vw, 12rem)",
@@ -371,11 +372,14 @@ export function HomeHeroSlideshow() {
     }
 
     const ratio = availableHeight / requiredHeight
+    const minimumScale = Number.parseFloat(
+      viewportStyles.getPropertyValue("--hero-min-fit-scale") || "0.76"
+    )
     const nextScale = clampNumber(
       ratio >= 1
         ? Math.min(1, fitScale * Math.min(ratio, 1.04))
         : fitScale * ratio * 0.992,
-      0.72,
+      minimumScale,
       1
     )
 
@@ -461,12 +465,16 @@ export function HomeHeroSlideshow() {
   return (
     <section
       data-critical-home-hero
-      className="relative isolate h-[33rem] w-full overflow-hidden bg-primary text-white sm:h-[35rem] md:h-[39rem] lg:h-[43rem] xl:h-[45rem]"
+      className="relative isolate h-[clamp(33rem,90svh,45rem)] w-full overflow-hidden bg-primary text-white"
       style={
         {
           ...heroLayoutVars,
           ...heroContentVars,
           "--hero-fit-scale": fitScale.toFixed(3),
+          "--hero-safe-space-top":
+            "max(var(--hero-safe-space), calc(env(safe-area-inset-top) + 0.75rem))",
+          "--hero-safe-space-bottom":
+            "max(var(--hero-safe-space), calc(env(safe-area-inset-bottom) + 1rem))",
         } as CSSProperties
       }
       onMouseEnter={() => setIsPaused(true)}
@@ -522,7 +530,12 @@ export function HomeHeroSlideshow() {
       <div
         ref={heroViewportRef}
         className="relative z-10 mx-auto flex h-full w-full max-w-[84rem] flex-col items-center justify-center"
-        style={{ padding: "var(--hero-safe-space)" }}
+        style={{
+          paddingLeft: "var(--hero-safe-space)",
+          paddingRight: "var(--hero-safe-space)",
+          paddingTop: "var(--hero-safe-space-top)",
+          paddingBottom: "var(--hero-safe-space-bottom)",
+        }}
       >
         <div
           className="mx-auto flex flex-col items-center"

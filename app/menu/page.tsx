@@ -4,11 +4,14 @@ import Script from "next/script"
 import { DownloadSimple, Phone } from "@phosphor-icons/react/dist/ssr"
 
 import { InlineBookingCta } from "@/components/site/InlineBookingCta"
+import { CompactHighlightGrid } from "@/components/site/HomepagePatternPrimitives"
 import { PageSignoff } from "@/components/site/PageSignoff"
 import { MenuInteractive } from "@/components/site/MenuInteractive"
 import { PageHero } from "@/components/site/PageHero"
 import { RouteStructuredData } from "@/components/site/RouteStructuredData"
 import { SectionHeading } from "@/components/site/SectionHeading"
+import { ScrollReveal } from "@/components/site/ScrollReveal"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
   menuDrinksSection,
@@ -32,7 +35,9 @@ import {
 } from "@/data/site"
 import { getRouteConfig } from "@/data/site-routes"
 import { buildPageMetadata } from "@/lib/metadata"
+import { getSectionBandClass } from "@/lib/section-bands"
 import { menuCategories } from "@/lib/menu"
+import { cn } from "@/lib/utils"
 
 const route = getRouteConfig("/menu")
 
@@ -124,106 +129,118 @@ export default function MenuPage() {
       <PageHero {...route!.hero!} route={route!} />
 
       {/* B. Quick-info strip */}
-      <section className="bg-[var(--color-surface-low)] py-10 md:py-12">
-        <div className="section-shell">
-          <div className="surface-frame">
-            <div className="surface-pane">
-              <div className="grid gap-6 lg:grid-cols-3 lg:gap-px">
-                <div className="space-y-1 text-sm leading-7 text-on-surface">
-                  <p className="eyebrow">Hours</p>
-                  {foodHours.map((line) => (
-                    <p key={line}>{line}</p>
-                  ))}
-                </div>
+      <section className={cn("page-section", getSectionBandClass("paper"))}>
+        <div className="section-shell flex flex-col gap-5">
+          <ScrollReveal delayMs={0}>
+            <div className="surface-frame">
+              <div className="surface-pane">
+                <div className="grid gap-6 lg:grid-cols-3 lg:gap-8">
+                  <div className="space-y-1 text-sm leading-7 text-on-surface">
+                    <p className="mb-3 text-[0.72rem] font-semibold tracking-[0.16em] text-secondary uppercase">
+                      Hours
+                    </p>
+                    {foodHours.map((line) => (
+                      <p key={line}>{line}</p>
+                    ))}
+                  </div>
 
-                <div className="space-y-1 text-sm leading-7 text-on-surface">
-                  <p className="eyebrow">What to expect</p>
-                  <p>{menuWhatToExpect}</p>
-                </div>
+                  <div className="space-y-1 text-sm leading-7 text-on-surface">
+                    <p className="mb-3 text-[0.72rem] font-semibold tracking-[0.16em] text-secondary uppercase">
+                      What to expect
+                    </p>
+                    <p>{menuWhatToExpect}</p>
+                  </div>
 
-                <div className="space-y-3">
-                  <p className="eyebrow">Resources</p>
-                  <div className="flex flex-wrap gap-3">
-                    <Button asChild size="sm" variant="outline">
-                      <a href={siteMenuPdfHref} download>
-                        Download PDF
-                        <DownloadSimple />
-                      </a>
-                    </Button>
-                    <Button asChild size="sm" variant="outline">
-                      <Link href="/menu-information">Menu info</Link>
-                    </Button>
+                  <div className="space-y-3">
+                    <p className="mb-3 text-[0.72rem] font-semibold tracking-[0.16em] text-secondary uppercase">
+                      Resources
+                    </p>
+                    <div className="flex flex-wrap gap-3">
+                      <Button asChild size="sm" variant="outline">
+                        <a href={siteMenuPdfHref} download>
+                          Download PDF
+                          <DownloadSimple />
+                        </a>
+                      </Button>
+                      <Button asChild size="sm" variant="outline">
+                        <Link href="/menu-information">Menu info</Link>
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
-      <section className="bg-background py-10 md:py-14">
-        <div className="section-shell space-y-5">
-          <SectionHeading
-            eyebrow="Menu for local dining"
-            title="A Stony Stratford pub menu built for real lunch and dinner plans."
-            description="This is not just a list of dishes. It is a clearer picture of how The Old School House works for town-centre meals, group plans, and bookings that need broad menu appeal."
-          />
-          <div className="grid gap-4 md:grid-cols-3">
-            {menuLocalIntentCards.map((card, index) => (
-              <article
-                key={card.title}
-                className={
-                  index === 1 ? "surface-panel-muted" : "surface-panel"
-                }
-              >
-                <h3 className="section-title">{card.title}</h3>
-                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
-                  {card.description}
-                </p>
-              </article>
-            ))}
-          </div>
+      <section className={cn("page-section", getSectionBandClass("plain"))}>
+        <div className="section-shell flex flex-col gap-5">
+          <ScrollReveal delayMs={0}>
+            <SectionHeading
+              eyebrow="Menu for local dining"
+              title="A Stony Stratford pub menu built for real lunch and dinner plans."
+              description="This is not just a list of dishes. It is a clearer picture of how The Old School House works for town-centre meals, group plans, and bookings that need broad menu appeal."
+            />
+          </ScrollReveal>
+
+          <ScrollReveal delayMs={120}>
+            <CompactHighlightGrid
+              items={menuLocalIntentCards}
+              cueOrder={1}
+              cueLabel="reasons"
+            />
+          </ScrollReveal>
         </div>
       </section>
 
       {/* C. Interactive menu */}
-      <section className="bg-background py-10 md:py-14">
+      <section className={cn("page-section", getSectionBandClass("paper"))}>
         <MenuInteractive categories={menuCategories} />
       </section>
 
       {/* C2. Drinks highlights */}
-      <section className="page-section bg-[var(--color-surface-low)]">
-        <div className="section-shell">
-          <div className="surface-frame">
-            <div className="grid gap-px bg-[rgba(196,189,181,0.22)] lg:grid-cols-[0.55fr_1.45fr]">
-              <div className="surface-pane surface-pane-muted">
-                <p className="eyebrow">{menuDrinksSection.eyebrow}</p>
-                <h2 className="section-title pt-3">
-                  {menuDrinksSection.title}
-                </h2>
-                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
-                  {menuDrinksSection.description}
-                </p>
-              </div>
-              <div className="surface-pane bg-[var(--color-surface-lowest)]">
-                <div className="grid gap-3 sm:grid-cols-2">
-                  {drinksHighlights.map((item) => (
-                    <div
-                      key={item}
-                      className="content-card bg-[var(--color-surface-low)]/72 px-5 py-4 text-sm leading-7 text-on-surface"
-                    >
-                      {item}
-                    </div>
-                  ))}
+      <section className={cn("page-section", getSectionBandClass("warm"))}>
+        <div className="section-shell flex flex-col gap-5">
+          <ScrollReveal
+            delayMs={0}
+            className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"
+          >
+            <SectionHeading
+              eyebrow={menuDrinksSection.eyebrow}
+              title={menuDrinksSection.title}
+              description={menuDrinksSection.description}
+            />
+          </ScrollReveal>
+
+          <ScrollReveal delayMs={120}>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {drinksHighlights.map((item, index) => (
+                <div
+                  key={item}
+                  className="flex items-center gap-3 rounded-2xl bg-[var(--color-surface-lowest)] px-5 py-4 shadow-[0_1px_2px_rgba(0,0,0,0.02)]"
+                >
+                  <Badge
+                    variant="pill"
+                    className="h-auto shrink-0 border-[rgba(196,189,181,0.32)] px-2.5 py-0.5 text-[0.7rem]"
+                  >
+                    {String(index + 1).padStart(2, "0")}
+                  </Badge>
+                  <span className="text-[0.95rem] leading-[1.18] font-medium tracking-[-0.01em] text-on-background">
+                    {item}
+                  </span>
                 </div>
-              </div>
+              ))}
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* D. Inline booking CTA */}
-      <InlineBookingCta {...menuInlineCtaCopy} />
+      <InlineBookingCta
+        className={getSectionBandClass("dark")}
+        {...menuInlineCtaCopy}
+      />
 
       {/* E. Good to know */}
       <PageSignoff

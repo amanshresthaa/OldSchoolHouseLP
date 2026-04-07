@@ -1,20 +1,18 @@
 import Image from "next/image"
 import Link from "next/link"
 import {
-  ArrowUpRight,
   Clock,
+  EnvelopeSimple,
   FacebookLogo,
   InstagramLogo,
   MapPin,
   Phone,
 } from "@phosphor-icons/react/dist/ssr"
 
+import { Button } from "@/components/ui/button"
 import { footerTagline } from "@/data/copy"
-import logo from "@/images/logos/old-school-house-pub-stony-stratford-mk-logo.png"
 import {
   directionsHref,
-  mapHref,
-  openingHoursNote,
   openingHours,
   siteAddress,
   siteEmail,
@@ -27,9 +25,49 @@ import {
 import {
   siteFooterCoreLinks,
   siteLegalLinks,
-  siteNav,
   siteResources,
 } from "@/data/site-routes"
+import logo from "@/images/logos/old-school-house-pub-stony-stratford-mk-logo.png"
+
+interface FooterContactItem {
+  label: string
+  value: string
+  href?: string
+  icon: typeof Clock
+}
+
+const contactItems: FooterContactItem[] = [
+  {
+    label: "Hours",
+    value: openingHours[0].hours,
+    icon: Clock,
+  },
+  {
+    label: "Phone",
+    value: sitePhone,
+    href: sitePhoneHref,
+    icon: Phone,
+  },
+  {
+    label: "Email",
+    value: siteEmail,
+    href: siteEmailHref,
+    icon: EnvelopeSimple,
+  },
+  {
+    label: "Find us",
+    value: "London Road, Stony Stratford",
+    href: "/find-us",
+    icon: MapPin,
+  },
+]
+
+const footerLinks = [
+  ...siteFooterCoreLinks,
+  ...siteResources.filter((item) =>
+    ["/guides", "/takeaway-menu", "/accessibility"].includes(item.href)
+  ),
+]
 
 export function SiteFooter() {
   const socialItems = [
@@ -54,45 +92,98 @@ export function SiteFooter() {
   )
 
   return (
-    <footer className="bg-primary text-white">
-      <div className="section-shell grid gap-10 py-12 lg:grid-cols-[1.25fr_0.8fr_0.85fr_0.9fr]">
-        <div className="space-y-5">
-          <div className="space-y-2">
-            <Image
-              src={logo}
-              alt="The Old School House logo"
-              className="h-10 w-auto brightness-0 invert"
-              priority
-            />
-            <h2 className="max-w-md pt-3 text-white">{footerTagline}</h2>
-          </div>
-          <div className="space-y-3 text-sm leading-7 text-white/72">
-            <p>{siteAddress}</p>
-            <p className="break-words">
-              <a className="transition hover:text-white" href={sitePhoneHref}>
-                {sitePhone}
-              </a>
-              {" · "}
-              <a
-                className="break-all transition hover:text-white"
-                href={siteEmailHref}
-              >
-                {siteEmail}
-              </a>
+    <footer className="border-t border-[rgba(196,189,181,0.32)] bg-[var(--color-surface-low)]">
+      <div className="section-shell py-8 md:py-10">
+        <div className="grid gap-0 lg:grid-cols-[minmax(0,1.05fr)_minmax(20rem,0.95fr)]">
+          <div className="py-6 lg:pr-10">
+            <div className="flex items-center gap-3">
+              <Image
+                src={logo}
+                alt="The Old School House logo"
+                className="h-11 w-auto"
+                priority
+              />
+              <div>
+                <p className="eyebrow">The Old School House</p>
+                <p className="text-sm text-on-surface md:text-base">
+                  Traditional pub and Nepalese kitchen
+                </p>
+              </div>
+            </div>
+
+            <h2 className="max-w-2xl pt-5 font-heading text-[clamp(1.8rem,3vw,2.85rem)] leading-[1.04] text-on-background">
+              {footerTagline}
+            </h2>
+
+            <p className="max-w-xl pt-4 text-sm leading-7 text-on-surface md:text-base">
+              {siteAddress}
             </p>
-            <p>
-              <a
-                className="inline-flex items-center gap-2 text-[var(--color-on-tertiary-container)] transition hover:text-white"
-                href={directionsHref}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Get directions
-                <ArrowUpRight className="size-4" />
-              </a>
-            </p>
+
+            <div className="flex flex-wrap gap-3 pt-5">
+              <Button asChild>
+                <Link href="/book">Book a table</Link>
+              </Button>
+              <Button asChild variant="outline">
+                <Link href="/menu">View menu</Link>
+              </Button>
+              <Button asChild variant="ghost">
+                <a href={directionsHref} target="_blank" rel="noreferrer">
+                  Get directions
+                </a>
+              </Button>
+            </div>
           </div>
-          <div className="flex flex-wrap gap-3">
+
+          <div className="border-t border-[rgba(196,189,181,0.32)] py-6 lg:border-t-0 lg:border-l lg:pl-10">
+            <div className="grid gap-5 sm:grid-cols-2">
+              {contactItems.map((item) => {
+                const Icon = item.icon
+                const content = item.href ? (
+                  <Link
+                    href={item.href}
+                    className="break-words transition hover:text-secondary"
+                  >
+                    {item.value}
+                  </Link>
+                ) : (
+                  <span>{item.value}</span>
+                )
+
+                return (
+                  <div
+                    key={item.label}
+                    className="space-y-2 border-t border-[rgba(196,189,181,0.35)] pt-4 first:border-t-0 first:pt-0 sm:first:border-t sm:first:pt-4"
+                  >
+                    <div className="flex items-center gap-2 text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
+                      <Icon className="size-3.5" />
+                      <span>{item.label}</span>
+                    </div>
+                    <div className="text-sm leading-7 text-on-surface md:text-base">
+                      {content}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        </div>
+
+        <div className="surface-divider mt-1 h-px" />
+
+        <div className="flex flex-col gap-4 py-5 lg:flex-row lg:items-center lg:justify-between">
+          <nav className="flex flex-wrap gap-x-5 gap-y-2">
+            {footerLinks.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-sm text-on-surface transition hover:text-secondary"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="flex flex-wrap items-center gap-3">
             {socialItems.map((item) => {
               const Icon = item.icon
 
@@ -103,107 +194,27 @@ export function SiteFooter() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={item.label}
-                  className="inline-flex size-11 items-center justify-center rounded-full border border-white/10 bg-white/6 text-white/72 transition hover:-translate-y-0.5 hover:text-white"
+                  className="inline-flex size-10 items-center justify-center rounded-full bg-[var(--color-surface)] text-on-surface transition hover:-translate-y-0.5 hover:bg-[var(--color-surface-highest)] hover:text-secondary"
                 >
-                  <Icon className="size-5" />
+                  <Icon className="size-4.5" />
                 </a>
               )
             })}
           </div>
         </div>
-        <div className="space-y-4">
-          <p className="text-xs font-semibold tracking-[0.22em] text-[var(--color-on-tertiary-container)] uppercase">
-            Main pages
+
+        <div className="surface-divider h-px" />
+
+        <div className="flex flex-col items-center justify-between gap-3 px-0 pt-5 text-center sm:flex-row sm:text-left">
+          <p className="text-[0.72rem] tracking-[0.16em] text-on-surface/70 uppercase">
+            © {new Date().getFullYear()} {siteName} · Stony Stratford
           </p>
-          <nav className="grid gap-3 text-sm text-white/72">
-            {siteNav
-              .filter((item) => item.href !== "/")
-              .map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="transition hover:text-white"
-                >
-                  {item.label}
-                </Link>
-              ))}
-          </nav>
-        </div>
-        <div className="space-y-4">
-          <p className="text-xs font-semibold tracking-[0.22em] text-[var(--color-on-tertiary-container)] uppercase">
-            Plan your visit
-          </p>
-          <nav className="grid gap-3 text-sm text-white/72">
-            {siteFooterCoreLinks.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="transition hover:text-white"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-          <div className="space-y-4 pt-4">
-            <p className="text-xs font-semibold tracking-[0.22em] text-[var(--color-on-tertiary-container)] uppercase">
-              Helpful pages
-            </p>
-            <nav className="grid gap-3 text-sm text-white/72">
-              {siteResources.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="transition hover:text-white"
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
-          </div>
-        </div>
-        <div className="space-y-4">
-          <p className="text-xs font-semibold tracking-[0.22em] text-[var(--color-on-tertiary-container)] uppercase">
-            Visit
-          </p>
-          <div className="space-y-3 text-sm text-white/72">
-            <p className="flex items-start gap-3">
-              <Clock className="mt-0.5 size-4 shrink-0 text-[var(--color-on-tertiary-container)]" />
-              <span>{openingHours[0].hours}</span>
-            </p>
-            <p className="flex items-start gap-3">
-              <MapPin className="mt-0.5 size-4 shrink-0 text-[var(--color-on-tertiary-container)]" />
-              <span>{siteAddress}</span>
-            </p>
-            <p className="flex items-start gap-3">
-              <Phone className="mt-0.5 size-4 shrink-0 text-[var(--color-on-tertiary-container)]" />
-              <a className="transition hover:text-white" href={sitePhoneHref}>
-                {sitePhone}
-              </a>
-            </p>
-            <p className="text-white/55">{openingHoursNote}</p>
-            <p className="pt-1">
-              <a
-                className="inline-flex items-center gap-2 text-[var(--color-on-tertiary-container)] transition hover:text-white"
-                href={mapHref}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Open map
-                <ArrowUpRight className="size-4" />
-              </a>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div className="border-t border-white/8 py-4 text-xs tracking-[0.16em] text-white/55 uppercase">
-        <div className="section-shell flex flex-col items-center justify-center gap-2 text-center sm:flex-row sm:justify-between sm:text-left">
-          <p>{siteName} · London Road · Stony Stratford · Milton Keynes</p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             {siteLegalLinks.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="transition hover:text-white"
+                className="text-[0.72rem] tracking-[0.16em] text-on-surface/70 uppercase transition hover:text-secondary"
               >
                 {item.label}
               </Link>

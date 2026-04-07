@@ -3,17 +3,20 @@ import Image from "next/image"
 import Link from "next/link"
 import {
   ArrowRight,
-  CalendarDots,
   EnvelopeSimple,
-  ForkKnife,
   Television,
   UsersThree,
 } from "@phosphor-icons/react/dist/ssr"
 
 import { FaqSection } from "@/components/site/FaqSection"
+import {
+  CompactHighlightGrid,
+  EditorialLinkCardContent,
+} from "@/components/site/HomepagePatternPrimitives"
 import { InlineBookingCta } from "@/components/site/InlineBookingCta"
 import { PageHero } from "@/components/site/PageHero"
 import { RouteStructuredData } from "@/components/site/RouteStructuredData"
+import { ScrollReveal } from "@/components/site/ScrollReveal"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import { SiteActionCard } from "@/components/site/SiteActionCard"
 import {
@@ -31,6 +34,7 @@ import {
 import { eventOccasions, siteEmailHref, sitePhoneHref } from "@/data/site"
 import { getRouteConfig } from "@/data/site-routes"
 import { buildPageMetadata } from "@/lib/metadata"
+import { getSectionBandClass } from "@/lib/section-bands"
 import dartBoardImage from "@/images/indoor/old-school-house-pub-stony-stratford-mk-dart-board.jpeg"
 import poolTableImage from "@/images/indoor/old-school-house-pub-stony-stratford-mk-pool-table-and-fruit-machine.jpeg"
 import sportsTvImage from "@/images/indoor/old-school-house-pub-stony-stratford-mk-sports-tv-big-screen.jpeg"
@@ -38,8 +42,6 @@ import sportsTvImage from "@/images/indoor/old-school-house-pub-stony-stratford-
 const route = getRouteConfig("/events")
 
 export const metadata: Metadata = buildPageMetadata(route!.meta)
-
-const whatOnIcons = [Television, CalendarDots, ForkKnife]
 
 const eventsPlanningCards = [
   {
@@ -65,9 +67,12 @@ export default function EventsPage() {
       <RouteStructuredData route={route!} faqItems={eventsWhatOnFaqs} />
       <PageHero {...route!.hero!} route={route!} />
 
-      <section className="bg-background py-10 md:py-14 lg:py-16">
-        <div className="section-shell space-y-5">
-          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <section className={getSectionBandClass("plain", "page-section")}>
+        <div className="section-shell flex flex-col gap-5">
+          <ScrollReveal
+            delayMs={0}
+            className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"
+          >
             <SectionHeading {...eventsWhatOnSectionCopy} />
             <SiteActionCard
               actions={[
@@ -83,28 +88,18 @@ export default function EventsPage() {
               ]}
               supportingText={eventsActionCardText}
             />
-          </div>
-          <div className="grid gap-4 lg:grid-cols-3">
-            {eventsWhatOnCards.map((card, index) => {
-              const Icon = whatOnIcons[index]
-
-              return (
-                <article
-                  key={card.title}
-                  className={
-                    index === 1 ? "surface-panel-muted" : "surface-panel"
-                  }
-                >
-                  <Icon className="size-5 text-secondary" />
-                  <h3 className="section-title pt-3">{card.title}</h3>
-                  <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
-                    {card.description}
-                  </p>
-                </article>
-              )
-            })}
-          </div>
-          <div className="grid gap-4 xl:grid-cols-[1.02fr_0.98fr]">
+          </ScrollReveal>
+          <ScrollReveal delayMs={120}>
+            <CompactHighlightGrid
+              items={eventsWhatOnCards}
+              cueOrder={1}
+              cueLabel="reasons"
+            />
+          </ScrollReveal>
+          <ScrollReveal
+            delayMs={180}
+            className="grid gap-4 xl:grid-cols-[1.02fr_0.98fr]"
+          >
             <article className="surface-frame">
               <Image
                 src={sportsTvImage}
@@ -116,7 +111,10 @@ export default function EventsPage() {
                 <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
                   Match nights
                 </p>
-                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                <h3 className="pt-3 font-heading text-[1.2rem] leading-[1.12] tracking-[-0.02em] text-on-background">
+                  Big-screen sport with a proper pub backdrop
+                </h3>
+                <p className="pt-2 text-sm leading-relaxed text-on-surface">
                   Big-screen sport, shaped around the Sky Sports and TNT Sports
                   offer, still lands inside a room that feels like a proper pub
                   rather than just somewhere to watch a fixture.
@@ -135,7 +133,10 @@ export default function EventsPage() {
                   <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
                     Casual nights
                   </p>
-                  <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                  <h3 className="pt-3 font-heading text-[1.2rem] leading-[1.12] tracking-[-0.02em] text-on-background">
+                    Pool, rounds, and easy evening energy
+                  </h3>
+                  <p className="pt-2 text-sm leading-relaxed text-on-surface">
                     Pool, drinks, and easy pub energy give local teams and
                     casual evenings more to do between rounds and conversation.
                   </p>
@@ -152,38 +153,49 @@ export default function EventsPage() {
                   <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
                     Pub-side favourites
                   </p>
-                  <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+                  <h3 className="pt-3 font-heading text-[1.2rem] leading-[1.12] tracking-[-0.02em] text-on-background">
+                    Darts keeps the social side in view
+                  </h3>
+                  <p className="pt-2 text-sm leading-relaxed text-on-surface">
                     Darts keeps the social side of the pub in view alongside
                     food, drinks, and sport-led plans.
                   </p>
                 </div>
               </article>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
-      <section className="bg-[var(--color-surface-low)] py-10 md:py-14 lg:py-16">
-        <div className="section-shell space-y-5">
-          <SectionHeading {...eventsReturnVisitSection} />
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <section className={getSectionBandClass("paper", "page-section")}>
+        <div className="section-shell flex flex-col gap-5">
+          <ScrollReveal delayMs={0}>
+            <SectionHeading {...eventsReturnVisitSection} />
+          </ScrollReveal>
+          <ScrollReveal
+            delayMs={120}
+            className="grid gap-4 md:grid-cols-2 xl:grid-cols-3"
+          >
             {eventOccasions.map((occasion, index) => (
               <article
                 key={occasion}
-                className={`text-sm leading-7 md:text-base ${
+                className={`text-sm leading-relaxed md:text-base ${
                   index % 2 === 0 ? "surface-panel" : "surface-panel-muted"
                 }`}
               >
                 {occasion}
               </article>
             ))}
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
-      <section className="bg-background py-10 md:py-14 lg:py-16">
-        <div className="section-shell space-y-5">
-          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <section className={getSectionBandClass("warm", "page-section")}>
+        <div className="section-shell flex flex-col gap-5">
+          <ScrollReveal
+            delayMs={0}
+            className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"
+          >
             <SectionHeading
               eyebrow="Planning around the calendar"
               title="Need to sort a bigger sport night, team social, or themed visit?"
@@ -203,94 +215,95 @@ export default function EventsPage() {
               ]}
               supportingText="Ideal for team socials, sport-led group visits, and busier event nights."
             />
-          </div>
-          <div className="grid gap-4 lg:grid-cols-3">
-            {eventsPlanningCards.map((card, index) => (
-              <article
-                key={card.title}
-                className={
-                  index === 1 ? "surface-panel-muted" : "surface-panel"
-                }
-              >
-                <h3 className="section-title">{card.title}</h3>
-                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
-                  {card.description}
-                </p>
-              </article>
-            ))}
-          </div>
-          <div className="surface-frame">
-            <div className="surface-pane">
-              <div className="max-w-2xl space-y-3">
-                <p className="eyebrow">Need more than a standard booking?</p>
-                <h3 className="section-title">
-                  Email the team if the visit needs a little more context.
-                </h3>
-                <p className="text-sm leading-7 text-on-surface md:text-base">
-                  It is the easiest option when the evening depends on screens,
-                  group size, timing, or a team and social setup rather than
-                  just a normal table booking.
+          </ScrollReveal>
+          <ScrollReveal delayMs={120}>
+            <CompactHighlightGrid
+              items={eventsPlanningCards}
+              cueOrder={2}
+              cueLabel="planning notes"
+            />
+          </ScrollReveal>
+          <ScrollReveal delayMs={180}>
+            <div className="surface-frame">
+              <div className="surface-pane">
+                <div className="max-w-2xl space-y-3">
+                  <p className="eyebrow">Need more than a standard booking?</p>
+                  <h3 className="font-heading text-[1.5rem] leading-[1.08] tracking-[-0.025em] text-on-background md:text-[1.7rem]">
+                    Email the team if the visit needs a little more context.
+                  </h3>
+                  <p className="text-sm leading-relaxed text-on-surface">
+                    It is the easiest option when the evening depends on
+                    screens, group size, timing, or a team and social setup
+                    rather than just a normal table booking.
+                  </p>
+                </div>
+                <div className="flex flex-col gap-3 pt-6 sm:flex-row">
+                  <a
+                    href={siteEmailHref}
+                    className="cta-primary inline-flex h-12 items-center justify-center gap-2.5 px-6 text-sm font-semibold"
+                  >
+                    Email the team
+                    <EnvelopeSimple className="size-4" />
+                  </a>
+                  <a
+                    href={sitePhoneHref}
+                    className="cta-secondary inline-flex h-12 items-center justify-center px-6"
+                  >
+                    Call the pub
+                  </a>
+                </div>
+                <p className="pt-4 text-sm leading-relaxed text-on-surface/72">
+                  Mention the fixture or occasion, rough guest numbers,
+                  preferred date, and anything the team should know about the
+                  setup.
                 </p>
               </div>
-              <div className="flex flex-col gap-3 pt-6 sm:flex-row">
-                <a
-                  href={siteEmailHref}
-                  className="cta-primary inline-flex h-12 items-center justify-center gap-2.5 px-6 text-sm font-semibold"
-                >
-                  Email the team
-                  <EnvelopeSimple className="size-4" />
-                </a>
-                <a
-                  href={sitePhoneHref}
-                  className="cta-secondary inline-flex h-12 items-center justify-center px-6"
-                >
-                  Call the pub
-                </a>
-              </div>
-              <p className="pt-4 text-sm leading-7 text-on-surface/72 md:text-base">
-                Mention the fixture or occasion, rough guest numbers, preferred
-                date, and anything the team should know about the setup.
-              </p>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
-      <InlineBookingCta {...eventsInlineCtaCopy} />
+      <InlineBookingCta
+        className={getSectionBandClass("dark")}
+        {...eventsInlineCtaCopy}
+      />
 
-      <section className="bg-background py-10 md:py-14 lg:py-16">
-        <div className="section-shell space-y-5">
-          <SectionHeading {...eventsRouteSection} />
-          <div className="grid gap-4 md:grid-cols-2">
+      <section className={getSectionBandClass("plain", "page-section")}>
+        <div className="section-shell flex flex-col gap-5">
+          <ScrollReveal delayMs={0}>
+            <SectionHeading {...eventsRouteSection} />
+          </ScrollReveal>
+          <ScrollReveal delayMs={120} className="grid gap-4 md:grid-cols-2">
             <Link
               href="/live-sport"
-              className="surface-panel transition hover:-translate-y-0.5"
+              className="surface-frame block h-full rounded-2xl py-0 transition hover:-translate-y-0.5"
             >
-              <Television className="size-5 text-secondary" />
-              <h3 className="section-title pt-3">
-                {eventsLiveSportCard.title}
-              </h3>
-              <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
-                {eventsLiveSportCard.description}
-              </p>
+              <EditorialLinkCardContent
+                title={eventsLiveSportCard.title}
+                description={eventsLiveSportCard.description}
+                className="surface-pane"
+                icon={<Television className="size-5" />}
+              />
             </Link>
             <Link
               href="/private-hire"
-              className="surface-panel-muted transition hover:-translate-y-0.5"
+              className="surface-panel-muted block h-full rounded-2xl py-0 transition hover:-translate-y-0.5"
             >
-              <UsersThree className="size-5 text-secondary" />
-              <h3 className="section-title pt-3">
-                {eventsPrivateHireCard.title}
-              </h3>
-              <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
-                {eventsPrivateHireCard.description}
-              </p>
+              <EditorialLinkCardContent
+                title={eventsPrivateHireCard.title}
+                description={eventsPrivateHireCard.description}
+                icon={<UsersThree className="size-5" />}
+              />
             </Link>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
-      <FaqSection {...eventsFaqSectionCopy} faqs={eventsWhatOnFaqs} />
+      <FaqSection
+        className={getSectionBandClass("paper")}
+        {...eventsFaqSectionCopy}
+        faqs={eventsWhatOnFaqs}
+      />
     </main>
   )
 }

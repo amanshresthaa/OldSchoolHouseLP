@@ -1,10 +1,15 @@
 import type { ReactNode } from "react"
 
 import { FaqSection } from "@/components/site/FaqSection"
+import {
+  CompactHighlightGrid,
+  NumberedStepFlow,
+} from "@/components/site/HomepagePatternPrimitives"
 import { InlineBookingCta } from "@/components/site/InlineBookingCta"
 import { PageHero } from "@/components/site/PageHero"
 import { PageSignoff } from "@/components/site/PageSignoff"
 import { RouteStructuredData } from "@/components/site/RouteStructuredData"
+import { ScrollReveal } from "@/components/site/ScrollReveal"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import type {
   HighlightItem,
@@ -17,6 +22,10 @@ import {
   type SiteAction,
   SiteActionCard,
 } from "@/components/site/SiteActionCard"
+import {
+  getAlternatingSectionBand,
+  getSectionBandClass,
+} from "@/lib/section-bands"
 import { cn } from "@/lib/utils"
 
 export interface FeaturePageSection {
@@ -81,48 +90,29 @@ interface FeaturePageProps {
 }
 
 function getFeaturePageSectionLayout(
-  section: FeaturePageSection,
-  index: number
+  section: FeaturePageSection
 ): NonNullable<FeaturePageSection["layout"]> {
-  if (section.layout) {
-    return section.layout
-  }
-
-  if (section.cards.length <= 2) {
-    return "grid"
-  }
-
-  return index % 2 === 0 ? "feature-split" : "numbered-list"
+  return section.layout ?? "grid"
 }
 
 function FeaturePageCardGrid({
   cards,
   columns,
+  cueOrder,
+  cueLabel,
 }: {
   cards: HighlightItem[]
   columns?: 2 | 3
+  cueOrder?: number
+  cueLabel?: string
 }) {
   return (
-    <div
-      className={cn(
-        "grid gap-4",
-        columns === 2 ? "md:grid-cols-2" : "lg:grid-cols-3"
-      )}
-    >
-      {cards.map((card, cardIndex) => (
-        <article
-          key={card.title}
-          className={
-            cardIndex % 2 === 0 ? "surface-panel" : "surface-panel-muted"
-          }
-        >
-          <h3 className="section-title">{card.title}</h3>
-          <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
-            {card.description}
-          </p>
-        </article>
-      ))}
-    </div>
+    <CompactHighlightGrid
+      items={cards}
+      columns={columns}
+      cueOrder={cueOrder}
+      cueLabel={cueLabel}
+    />
   )
 }
 
@@ -137,57 +127,44 @@ function FeaturePageFeatureSplit({ cards }: { cards: HighlightItem[] }) {
     <div
       className={cn(
         "grid gap-4",
-        supportingCards.length > 0 &&
-          "xl:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)]"
+        supportingCards.length > 0 && "xl:grid-cols-[0.9fr_1.1fr]"
       )}
     >
-      <article className="surface-frame relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(212,160,23,0.14),transparent_34%),linear-gradient(135deg,rgba(255,255,255,0.68)_0%,rgba(240,235,227,0.95)_100%)]" />
-        <div className="surface-pane relative flex min-h-[18rem] flex-col justify-between gap-8 md:min-h-[20rem]">
-          <div className="flex items-center gap-3">
-            <span className="inline-flex h-11 min-w-11 items-center justify-center rounded-full bg-secondary px-3 text-sm font-semibold tracking-[0.12em] text-white">
+      <article className="surface-frame">
+        <div className="surface-pane flex h-full flex-col justify-between gap-5">
+          <div className="flex items-center gap-2.5">
+            <span className="inline-flex rounded-full bg-primary px-2.5 py-1 text-[0.68rem] font-bold tracking-[0.14em] text-white uppercase">
+              Lead story
+            </span>
+            <span className="text-[0.72rem] font-semibold tracking-[0.16em] text-secondary uppercase">
               01
             </span>
-            <p className="text-[0.72rem] font-semibold tracking-[0.18em] text-secondary uppercase">
-              Start here
-            </p>
           </div>
-          <div className="max-w-2xl">
-            <h3 className="font-heading text-[2rem] leading-[1.02] tracking-[-0.04em] text-on-background md:text-[2.35rem]">
+          <div className="space-y-3">
+            <h3 className="font-heading text-[1.8rem] leading-[1.06] tracking-[-0.03em] text-on-background md:text-[2.15rem]">
               {featuredCard.title}
             </h3>
-            <p className="max-w-xl pt-4 text-sm leading-7 text-on-surface md:text-base">
+            <p className="max-w-xl text-sm leading-relaxed text-on-surface md:text-base">
               {featuredCard.description}
             </p>
           </div>
-          <p className="font-heading text-[4.5rem] leading-none tracking-[-0.08em] text-primary/10 md:text-[5.4rem]">
-            01
-          </p>
         </div>
       </article>
 
       {supportingCards.length > 0 ? (
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-1">
+        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-1 xl:content-start">
           {supportingCards.map((card, index) => (
             <article
               key={card.title}
-              className={
-                index % 2 === 0
-                  ? "surface-panel relative overflow-hidden"
-                  : "surface-panel-muted relative overflow-hidden"
-              }
+              className="rounded-2xl bg-[var(--color-surface-lowest)] px-5 py-4 shadow-none"
             >
-              <div className="absolute inset-x-0 top-0 h-16 bg-[radial-gradient(circle_at_top_left,rgba(175,43,62,0.08),transparent_58%)]" />
-              <div className="relative flex items-start justify-between gap-3">
-                <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
-                  Point {String(index + 2).padStart(2, "0")}
-                </p>
-                <span className="font-heading text-[2.65rem] leading-none tracking-[-0.08em] text-primary/12">
-                  {String(index + 2).padStart(2, "0")}
-                </span>
-              </div>
-              <h3 className="section-title max-w-[18rem] pt-2">{card.title}</h3>
-              <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
+              <p className="text-[0.72rem] font-semibold tracking-[0.16em] text-secondary uppercase">
+                {String(index + 2).padStart(2, "0")}
+              </p>
+              <h4 className="pt-2 text-[0.95rem] leading-[1.2] font-semibold tracking-[-0.01em] text-on-background">
+                {card.title}
+              </h4>
+              <p className="pt-2 text-[0.84rem] leading-relaxed text-on-surface">
                 {card.description}
               </p>
             </article>
@@ -198,50 +175,14 @@ function FeaturePageFeatureSplit({ cards }: { cards: HighlightItem[] }) {
   )
 }
 
-function FeaturePageNumberedList({ cards }: { cards: HighlightItem[] }) {
-  return (
-    <div className="surface-frame overflow-hidden">
-      <div className="grid gap-px bg-[rgba(196,189,181,0.2)]">
-        {cards.map((card, index) => (
-          <article
-            key={card.title}
-            className={cn(
-              "grid gap-4 px-5 py-5 md:px-6 md:py-6 lg:grid-cols-[auto_minmax(0,0.75fr)_minmax(0,1.25fr)] lg:items-start",
-              index % 2 === 0
-                ? "bg-[var(--color-surface-lowest)]"
-                : "bg-[color-mix(in_srgb,var(--color-surface-low)_82%,white_18%)]"
-            )}
-          >
-            <div className="flex items-center gap-3 lg:pt-1">
-              <span className="inline-flex h-11 min-w-11 items-center justify-center rounded-full bg-primary text-sm font-semibold tracking-[0.12em] text-white">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase lg:hidden">
-                {index === 0
-                  ? "Start here"
-                  : index === cards.length - 1
-                    ? "Worth finishing on"
-                    : "Worth knowing"}
-              </p>
-            </div>
-            <div className="space-y-2">
-              <p className="hidden text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase lg:block">
-                {index === 0
-                  ? "Start here"
-                  : index === cards.length - 1
-                    ? "Worth finishing on"
-                    : "Worth knowing"}
-              </p>
-              <h3 className="section-title">{card.title}</h3>
-            </div>
-            <p className="max-w-2xl text-sm leading-7 text-on-surface md:text-base">
-              {card.description}
-            </p>
-          </article>
-        ))}
-      </div>
-    </div>
-  )
+function FeaturePageNumberedList({
+  cards,
+  label,
+}: {
+  cards: HighlightItem[]
+  label: string
+}) {
+  return <NumberedStepFlow items={cards} label={label} />
 }
 
 export function FeaturePage({
@@ -271,19 +212,28 @@ export function FeaturePage({
       {prelude}
 
       {sections.map((section, index) => {
-        const layout = getFeaturePageSectionLayout(section, index)
+        const layout = getFeaturePageSectionLayout(section)
 
         return (
           <section
             key={section.title}
             className={cn(
-              section.muted || index % 2 === 1
-                ? "bg-[var(--color-surface-low)] py-10 md:py-14 lg:py-16"
-                : "bg-background py-10 md:py-14 lg:py-16"
+              "page-section",
+              getSectionBandClass(
+                section.muted
+                  ? "paper"
+                  : getAlternatingSectionBand(index, {
+                      even: "plain",
+                      odd: "paper",
+                    })
+              )
             )}
           >
-            <div className="section-shell space-y-5">
-              <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div className="section-shell flex flex-col gap-5">
+              <ScrollReveal
+                delayMs={0}
+                className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"
+              >
                 <SectionHeading
                   eyebrow={section.eyebrow}
                   title={section.title}
@@ -302,24 +252,31 @@ export function FeaturePage({
                     />
                   </div>
                 ) : null}
-              </div>
-              {layout === "feature-split" ? (
-                <FeaturePageFeatureSplit cards={section.cards} />
-              ) : layout === "numbered-list" ? (
-                <FeaturePageNumberedList cards={section.cards} />
-              ) : (
-                <FeaturePageCardGrid
-                  cards={section.cards}
-                  columns={section.columns}
-                />
-              )}
+              </ScrollReveal>
+              <ScrollReveal delayMs={120}>
+                {layout === "feature-split" ? (
+                  <FeaturePageFeatureSplit cards={section.cards} />
+                ) : layout === "numbered-list" ? (
+                  <FeaturePageNumberedList
+                    cards={section.cards}
+                    label={section.eyebrow}
+                  />
+                ) : (
+                  <FeaturePageCardGrid
+                    cards={section.cards}
+                    columns={section.columns}
+                    cueOrder={index + 1}
+                    cueLabel="highlights"
+                  />
+                )}
+              </ScrollReveal>
             </div>
           </section>
         )
       })}
 
       {checklist ? (
-        <section className="bg-background py-10 md:py-14 lg:py-16">
+        <section className={cn("page-section", getSectionBandClass("paper"))}>
           <div className="section-shell space-y-5">
             <SectionHeading
               eyebrow={checklist.eyebrow}
@@ -344,7 +301,12 @@ export function FeaturePage({
 
       {inlineCta ? (
         inlineCta.actions ? (
-          <section className="page-section bg-tertiary-container text-white">
+          <section
+            className={cn(
+              "page-section text-white",
+              getSectionBandClass("dark")
+            )}
+          >
             <div className="section-shell space-y-5">
               <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
                 <div className="max-w-2xl space-y-2.5">
@@ -364,6 +326,7 @@ export function FeaturePage({
           </section>
         ) : (
           <InlineBookingCta
+            className={getSectionBandClass("dark")}
             title={inlineCta.title}
             description={inlineCta.description}
           />
@@ -372,6 +335,7 @@ export function FeaturePage({
 
       {faqSection ? (
         <FaqSection
+          className={getSectionBandClass("paper")}
           eyebrow={faqSection.eyebrow}
           title={faqSection.title}
           description={faqSection.description}

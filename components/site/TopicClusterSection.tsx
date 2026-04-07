@@ -1,8 +1,10 @@
 import type { ComponentProps } from "react"
 import Link from "next/link"
-import { ArrowRight } from "@phosphor-icons/react/dist/ssr"
 
+import { EditorialLinkCardContent } from "@/components/site/HomepagePatternPrimitives"
+import { ScrollReveal } from "@/components/site/ScrollReveal"
 import { SectionHeading } from "@/components/site/SectionHeading"
+import { getSectionBandClass } from "@/lib/section-bands"
 import { cn } from "@/lib/utils"
 
 export interface TopicClusterLink {
@@ -32,42 +34,44 @@ export function TopicClusterSection({
   return (
     <section
       className={cn(
-        muted
-          ? "bg-[var(--color-surface-low)] py-10 md:py-14 lg:py-16"
-          : "bg-background py-10 md:py-14 lg:py-16",
+        "page-section",
+        getSectionBandClass(muted ? "paper" : "plain"),
         className
       )}
       {...props}
     >
-      <div className="section-shell space-y-5">
-        <SectionHeading
-          eyebrow={eyebrow}
-          title={title}
-          description={description}
-        />
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+      <div className="section-shell flex flex-col gap-5">
+        <ScrollReveal delayMs={0}>
+          <SectionHeading
+            eyebrow={eyebrow}
+            title={title}
+            description={description}
+          />
+        </ScrollReveal>
+        <ScrollReveal
+          delayMs={120}
+          className="grid gap-4 md:grid-cols-2 xl:grid-cols-4"
+        >
           {links.map((link, index) => (
             <Link
               key={link.href}
               href={link.href}
               className={
                 index % 2 === 0
-                  ? "surface-panel transition hover:-translate-y-0.5"
-                  : "surface-panel-muted transition hover:-translate-y-0.5"
+                  ? "surface-frame block h-full rounded-2xl py-0 transition hover:-translate-y-0.5"
+                  : "surface-panel-muted block h-full rounded-2xl py-0 transition hover:-translate-y-0.5"
               }
             >
-              <p className="eyebrow">{link.eyebrow}</p>
-              <h3 className="section-title pt-3">{link.title}</h3>
-              <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
-                {link.description}
-              </p>
-              <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-secondary">
-                Open guide
-                <ArrowRight className="size-4" />
-              </span>
+              <EditorialLinkCardContent
+                eyebrow={link.eyebrow}
+                title={link.title}
+                description={link.description}
+                ctaLabel="Open guide"
+                className={index % 2 === 0 ? "surface-pane" : undefined}
+              />
             </Link>
           ))}
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   )

@@ -2,10 +2,12 @@ import type { Metadata } from "next"
 import { EnvelopeSimple, Phone } from "@phosphor-icons/react/dist/ssr"
 
 import { FaqSection } from "@/components/site/FaqSection"
+import { CompactHighlightGrid } from "@/components/site/HomepagePatternPrimitives"
 import { InlineBookingCta } from "@/components/site/InlineBookingCta"
 import { PageHero } from "@/components/site/PageHero"
 import { PageSignoff } from "@/components/site/PageSignoff"
 import { RouteStructuredData } from "@/components/site/RouteStructuredData"
+import { ScrollReveal } from "@/components/site/ScrollReveal"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import { SiteActionCard } from "@/components/site/SiteActionCard"
 import {
@@ -24,6 +26,7 @@ import {
 import { siteEmailHref, sitePhoneHref } from "@/data/site"
 import { getRouteConfig } from "@/data/site-routes"
 import { buildPageMetadata } from "@/lib/metadata"
+import { getSectionBandClass } from "@/lib/section-bands"
 
 const route = getRouteConfig("/private-hire")
 
@@ -53,31 +56,26 @@ export default function PrivateHirePage() {
       <RouteStructuredData route={route!} faqItems={privateHireFaqs} />
       <PageHero {...route!.hero!} route={route!} />
 
-      <section className="bg-background py-10 md:py-14 lg:py-16">
-        <div className="section-shell space-y-5">
-          <div className="surface-panel space-y-5">
+      <section className={getSectionBandClass("plain", "page-section")}>
+        <div className="section-shell flex flex-col gap-5">
+          <ScrollReveal delayMs={0}>
             <SectionHeading
               eyebrow="Private hire in town"
               title="Looking for private hire in Stony Stratford that still feels like a proper pub?"
               description="For birthdays, gatherings, and group plans that need a welcoming room, flexible food and drinks, and an easy way to get started."
             />
-            <div className="grid gap-4 md:grid-cols-3">
-              {privateHireLocalIntentCards.map((card, index) => (
-                <article
-                  key={card.title}
-                  className={
-                    index === 1 ? "surface-panel-muted" : "surface-panel"
-                  }
-                >
-                  <h3 className="section-title">{card.title}</h3>
-                  <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
-                    {card.description}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </div>
-          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          </ScrollReveal>
+          <ScrollReveal delayMs={120}>
+            <CompactHighlightGrid
+              items={privateHireLocalIntentCards}
+              cueOrder={1}
+              cueLabel="reasons"
+            />
+          </ScrollReveal>
+          <ScrollReveal
+            delayMs={180}
+            className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"
+          >
             <SectionHeading {...privateHireSuitabilitySection} />
             <SiteActionCard
               actions={[
@@ -94,60 +92,54 @@ export default function PrivateHirePage() {
               ]}
               supportingText={privateHireActionCardText}
             />
-          </div>
-          <div className="grid gap-4 lg:grid-cols-3">
-            {privateHireSuitabilityCards.map((card, index) => (
-              <article
-                key={card.title}
-                className={
-                  index === 1 ? "surface-panel-muted" : "surface-panel"
-                }
-              >
-                <h3 className="section-title">{card.title}</h3>
-                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
-                  {card.description}
-                </p>
-              </article>
-            ))}
-          </div>
+          </ScrollReveal>
+          <ScrollReveal delayMs={240}>
+            <CompactHighlightGrid
+              items={privateHireSuitabilityCards}
+              cueOrder={2}
+              cueLabel="occasions"
+            />
+          </ScrollReveal>
         </div>
       </section>
 
-      <section className="bg-[var(--color-surface-low)] py-10 md:py-14 lg:py-16">
-        <div className="section-shell space-y-5">
-          <SectionHeading {...privateHirePracticalSection} />
-          <div className="grid gap-4 lg:grid-cols-3">
-            {privateHirePracticalCards.map((card, index) => (
-              <article
-                key={card.title}
-                className={
-                  index === 1 ? "surface-panel-muted" : "surface-panel"
-                }
-              >
-                <h3 className="section-title">{card.title}</h3>
-                <p className="pt-3 text-sm leading-7 text-on-surface md:text-base">
-                  {card.description}
-                </p>
-              </article>
-            ))}
-          </div>
+      <section className={getSectionBandClass("paper", "page-section")}>
+        <div className="section-shell flex flex-col gap-5">
+          <ScrollReveal delayMs={0}>
+            <SectionHeading {...privateHirePracticalSection} />
+          </ScrollReveal>
+          <ScrollReveal delayMs={120}>
+            <CompactHighlightGrid
+              items={privateHirePracticalCards}
+              cueOrder={3}
+              cueLabel="practical notes"
+            />
+          </ScrollReveal>
         </div>
       </section>
 
-      <InlineBookingCta {...privateHireInlineCtaCopy} />
+      <InlineBookingCta
+        className={getSectionBandClass("dark")}
+        {...privateHireInlineCtaCopy}
+      />
 
-      <section className="bg-background py-10 md:py-14 lg:py-16">
-        <div className="section-shell space-y-5">
-          <SectionHeading {...privateHireEnquirySection} />
-          <div className="grid gap-4 xl:grid-cols-[1.05fr_0.95fr]">
+      <section className={getSectionBandClass("warm", "page-section")}>
+        <div className="section-shell flex flex-col gap-5">
+          <ScrollReveal delayMs={0}>
+            <SectionHeading {...privateHireEnquirySection} />
+          </ScrollReveal>
+          <ScrollReveal
+            delayMs={120}
+            className="grid gap-4 xl:grid-cols-[1.05fr_0.95fr]"
+          >
             <div className="surface-frame">
               <div className="surface-pane">
                 <div className="max-w-2xl space-y-3">
                   <p className="eyebrow">Make an enquiry</p>
-                  <h3 className="section-title">
+                  <h3 className="font-heading text-[1.5rem] leading-[1.08] tracking-[-0.025em] text-on-background md:text-[1.7rem]">
                     Email the pub team with the basics.
                   </h3>
-                  <p className="text-sm leading-7 text-on-surface md:text-base">
+                  <p className="text-sm leading-relaxed text-on-surface">
                     If you already know the rough date, numbers, and shape of
                     the gathering, email the team directly and they can help
                     shape the next step from there.
@@ -168,18 +160,18 @@ export default function PrivateHirePage() {
                     Call the pub
                   </a>
                 </div>
-                <p className="pt-4 text-sm leading-7 text-on-surface/72 md:text-base">
+                <p className="pt-4 text-sm leading-relaxed text-on-surface/72">
                   Include your preferred date, guest numbers, and whether the
                   setup needs to be seated, standing, or mixed.
                 </p>
               </div>
             </div>
             <div className="surface-panel">
-              <p className="pb-4 text-sm leading-7 text-on-surface md:text-base">
+              <p className="pb-4 text-sm leading-relaxed text-on-surface">
                 A quick note with the basics is enough to get things moving. We
                 can help you shape the details after that.
               </p>
-              <ol className="space-y-3 text-sm leading-7 text-on-surface md:text-base">
+              <ol className="space-y-3 text-sm leading-relaxed text-on-surface">
                 {privateHireEnquiryChecklist.map((item, index) => (
                   <li key={item} className="flex gap-3">
                     <span className="mt-0.5 inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-secondary text-xs font-semibold text-white">
@@ -189,17 +181,21 @@ export default function PrivateHirePage() {
                   </li>
                 ))}
               </ol>
-              <div className="surface-panel-muted mt-5 px-4 py-4 text-sm leading-7 text-on-surface md:text-base">
+              <div className="surface-panel-muted mt-5 px-4 py-4 text-sm leading-relaxed text-on-surface">
                 There is room to shape the occasion your way, with 125 total
                 covers, a front garden, a private courtyard, and open-plan bar
                 space.
               </div>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
-      <FaqSection {...privateHireFaqSectionCopy} faqs={privateHireFaqs} />
+      <FaqSection
+        className={getSectionBandClass("paper")}
+        {...privateHireFaqSectionCopy}
+        faqs={privateHireFaqs}
+      />
 
       <PageSignoff
         eyebrow={privateHireSignoffCopy.eyebrow}
