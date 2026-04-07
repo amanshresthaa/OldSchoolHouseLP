@@ -385,6 +385,18 @@
     animation: rise-fade 700ms 270ms var(--easing-standard) both;
   }
 
+  .scroll-reveal[data-ready="true"][data-revealed="false"] {
+    opacity: 0;
+    transform: translateY(18px);
+    will-change: transform, opacity;
+  }
+
+  .scroll-reveal[data-revealed="true"] {
+    animation: rise-fade 700ms var(--scroll-reveal-delay, 0ms)
+      var(--easing-standard) both;
+    will-change: transform, opacity;
+  }
+
   .review-marquee {
     overflow: hidden;
   }
@@ -504,6 +516,15 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal[data-ready="true"][data-revealed="false"],
+  .scroll-reveal[data-revealed="true"] {
+    opacity: 1;
+    transform: none;
+    animation: none;
   }
 }
 

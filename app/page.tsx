@@ -13,6 +13,7 @@ import { HomeReasonsPanel } from "@/components/site/HomeReasonsPanel"
 import { InlineBookingCta } from "@/components/site/InlineBookingCta"
 import { MapEmbed } from "@/components/site/MapEmbed"
 import { RouteStructuredData } from "@/components/site/RouteStructuredData"
+import { ScrollReveal } from "@/components/site/ScrollReveal"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import { SiteActionCard } from "@/components/site/SiteActionCard"
 import { Button } from "@/components/ui/button"
@@ -235,16 +236,18 @@ export default function HomePage() {
       <section className="bg-[var(--color-surface-low)] py-10 md:py-14 lg:py-16">
         <div className="section-shell">
           <div className="grid gap-4 xl:grid-cols-[minmax(0,3fr)_minmax(0,5fr)]">
-            <ImageRoutePanel
-              item={storyFeature}
-              className="min-h-[26rem] xl:min-h-[34rem]"
-            />
-            <div className="surface-frame">
+            <ScrollReveal delayMs={0}>
+              <ImageRoutePanel
+                item={storyFeature}
+                className="min-h-[26rem] xl:min-h-[34rem]"
+              />
+            </ScrollReveal>
+            <ScrollReveal delayMs={120} className="surface-frame">
               <HomeReasonsPanel
                 copy={homeReasonsSectionCopy}
                 reasons={homeReasons}
               />
-            </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
