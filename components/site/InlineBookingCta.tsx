@@ -12,11 +12,13 @@ import { cn } from "@/lib/utils"
 interface InlineBookingCtaProps extends React.ComponentProps<"section"> {
   title: string
   description: string
+  bookingHref?: string
 }
 
 export function InlineBookingCta({
   title,
   description,
+  bookingHref = bookOnlineHref,
   className,
   ...props
 }: InlineBookingCtaProps) {
@@ -40,7 +42,7 @@ export function InlineBookingCta({
             <SiteActionCard
               actions={[
                 {
-                  href: bookOnlineHref,
+                  href: bookingHref,
                   label: "Book a table",
                   icon: <ArrowRight className="size-4" />,
                 },

@@ -14,7 +14,12 @@ import { ArrowRight } from "@phosphor-icons/react/dist/ssr"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { openingHours, proofPoints, type ProofPoint } from "@/data/site"
+import {
+  bookingHref,
+  openingHours,
+  proofPoints,
+  type ProofPoint,
+} from "@/data/site"
 import momoImage from "@/images/food/chicken-momo-and-veg-momo.png"
 import beerOnTapImage from "@/images/indoor/old-school-house-pub-stony-stratford-mk-beer-on-tap.jpeg"
 import indoorSeatingImage from "@/images/indoor/old-school-house-pub-stony-stratford-mk-indoor-seating-area-1.jpeg"
@@ -102,9 +107,17 @@ const heroSlides: HeroSlide[] = [
 const AUTOPLAY_INTERVAL_MS = 6200
 const RESUME_AFTER_MANUAL_NAV_MS = 4000
 const heroCtas: readonly HeroCta[] = [
-  { href: "/book", label: "Book a table" },
+  { href: bookingHref, label: "Book a table" },
   { href: "/menu", label: "View menu" },
 ]
+
+function isExternalHref(href: string) {
+  return (
+    href.startsWith("http") ||
+    href.startsWith("mailto:") ||
+    href.startsWith("tel:")
+  )
+}
 
 const heroLayoutVars = {
   "--hero-fit-scale": 1,
@@ -637,7 +650,7 @@ export function HomeHeroSlideshow() {
                 const ctaClassName = "whitespace-nowrap"
                 const ctaVariant = ctaIndex === 0 ? "default" : "darkOutline"
 
-                if (cta.href.startsWith("tel:")) {
+                if (isExternalHref(cta.href)) {
                   return (
                     <Button
                       key={cta.href}

@@ -106,11 +106,7 @@ export default function TakeawayMenuPage() {
           </ScrollReveal>
 
           <ScrollReveal delayMs={180}>
-            <CompactHighlightGrid
-              items={takeawayCards}
-              cueOrder={1}
-              cueLabel="takeaway notes"
-            />
+            <CompactHighlightGrid items={takeawayCards} />
           </ScrollReveal>
 
           <ScrollReveal

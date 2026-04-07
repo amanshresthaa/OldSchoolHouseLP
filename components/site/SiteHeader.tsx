@@ -10,6 +10,7 @@ import logo from "@/images/logos/old-school-house-pub-stony-stratford-mk-logo.pn
 import { Button } from "@/components/ui/button"
 import {
   bookOnlineHref,
+  bookingHref,
   siteDescriptor,
   siteLocation,
   siteName,
@@ -53,6 +54,7 @@ function HeaderNavLink({
 
 export function SiteHeader() {
   const pathname = usePathname()
+  const homeBookingHref = pathname === "/" ? bookingHref : bookOnlineHref
   const [isOpen, setIsOpen] = React.useState(false)
   const dialogRef = React.useRef<HTMLDivElement>(null)
   const closeButtonRef = React.useRef<HTMLButtonElement>(null)
@@ -187,12 +189,20 @@ export function SiteHeader() {
             </nav>
             <div className="hidden shrink-0 items-center gap-3 md:flex">
               <Button asChild size="sm">
-                <Link href={bookOnlineHref}>Book</Link>
+                {pathname === "/" ? (
+                  <a href={homeBookingHref}>Book</a>
+                ) : (
+                  <Link href={homeBookingHref}>Book</Link>
+                )}
               </Button>
             </div>
             <div className="flex shrink-0 items-center gap-2 md:hidden">
               <Button asChild size="sm">
-                <Link href={bookOnlineHref}>Book</Link>
+                {pathname === "/" ? (
+                  <a href={homeBookingHref}>Book</a>
+                ) : (
+                  <Link href={homeBookingHref}>Book</Link>
+                )}
               </Button>
               <button
                 type="button"
@@ -292,12 +302,21 @@ export function SiteHeader() {
               })}
           </nav>
           <div className="mt-10 border-t border-white/10 pt-8">
-            <Link
-              href={bookOnlineHref}
-              className="cta-primary inline-flex h-14 w-full items-center justify-center gap-2.5 px-8 text-base font-semibold"
-            >
-              Book a table
-            </Link>
+            {pathname === "/" ? (
+              <a
+                href={homeBookingHref}
+                className="cta-primary inline-flex h-14 w-full items-center justify-center gap-2.5 px-8 text-base font-semibold"
+              >
+                Book a table
+              </a>
+            ) : (
+              <Link
+                href={homeBookingHref}
+                className="cta-primary inline-flex h-14 w-full items-center justify-center gap-2.5 px-8 text-base font-semibold"
+              >
+                Book a table
+              </Link>
+            )}
             <p className="pt-3 text-center text-sm text-white/55">
               Booking options and contact details
             </p>

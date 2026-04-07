@@ -54,6 +54,14 @@ interface HomeMenuHighlightsSectionProps extends React.ComponentProps<"section">
   guidanceItems: readonly MenuGuidanceItem[]
 }
 
+function isExternalHref(href: string) {
+  return (
+    href.startsWith("http") ||
+    href.startsWith("mailto:") ||
+    href.startsWith("tel:")
+  )
+}
+
 function MenuShowcaseCard({
   item,
   className,
@@ -61,48 +69,64 @@ function MenuShowcaseCard({
   item: MenuShowcaseItem
   className?: string
 }) {
+  const cardContent = (
+    <Card className="surface-frame flex h-full flex-col overflow-hidden rounded-2xl py-0 shadow-none">
+      <div className="relative h-[11rem] shrink-0 overflow-hidden">
+        <Image
+          src={item.image}
+          alt={item.alt}
+          width={item.image.width}
+          height={item.image.height}
+          className="absolute inset-0 h-full w-full object-cover transition duration-500 ease-out group-hover:scale-[1.02]"
+          sizes="(min-width: 1280px) 28vw, (min-width: 640px) 45vw, 88vw"
+        />
+      </div>
+      <div className="flex flex-1 flex-col justify-between gap-3 px-5 py-4">
+        <div className="flex flex-col gap-2.5">
+          <div className="flex flex-wrap items-center gap-2">
+            <Badge variant="pill" className="h-auto px-3 py-1">
+              Signature dish
+            </Badge>
+            <Badge variant="muted" className="h-auto px-3 py-1">
+              {formatPrice(item.item.price)}
+            </Badge>
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <h3 className="font-heading text-[1.2rem] leading-[1.12] tracking-[-0.02em] text-on-background">
+              {item.title}
+            </h3>
+            <p className="text-sm leading-relaxed text-on-surface">
+              {item.description}
+            </p>
+          </div>
+        </div>
+        <span className="inline-flex items-center gap-2 text-sm font-semibold text-secondary transition group-hover:text-secondary/80">
+          {item.ctaLabel}
+          <ArrowRight className="size-4" />
+        </span>
+      </div>
+    </Card>
+  )
+
+  if (isExternalHref(item.href)) {
+    return (
+      <a
+        href={item.href}
+        data-menu-card="true"
+        className={cn("group block h-full", className)}
+      >
+        {cardContent}
+      </a>
+    )
+  }
+
   return (
     <Link
       href={item.href}
       data-menu-card="true"
       className={cn("group block h-full", className)}
     >
-      <Card className="surface-frame flex h-full flex-col overflow-hidden rounded-2xl py-0 shadow-none">
-        <div className="relative h-[11rem] shrink-0 overflow-hidden">
-          <Image
-            src={item.image}
-            alt={item.alt}
-            width={item.image.width}
-            height={item.image.height}
-            className="absolute inset-0 h-full w-full object-cover transition duration-500 ease-out group-hover:scale-[1.02]"
-            sizes="(min-width: 1280px) 28vw, (min-width: 640px) 45vw, 88vw"
-          />
-        </div>
-        <div className="flex flex-1 flex-col justify-between gap-3 px-5 py-4">
-          <div className="flex flex-col gap-2.5">
-            <div className="flex flex-wrap items-center gap-2">
-              <Badge variant="pill" className="h-auto px-3 py-1">
-                Signature dish
-              </Badge>
-              <Badge variant="muted" className="h-auto px-3 py-1">
-                {formatPrice(item.item.price)}
-              </Badge>
-            </div>
-            <div className="flex flex-col gap-1.5">
-              <h3 className="font-heading text-[1.2rem] leading-[1.12] tracking-[-0.02em] text-on-background">
-                {item.title}
-              </h3>
-              <p className="text-sm leading-relaxed text-on-surface">
-                {item.description}
-              </p>
-            </div>
-          </div>
-          <span className="inline-flex items-center gap-2 text-sm font-semibold text-secondary transition group-hover:text-secondary/80">
-            {item.ctaLabel}
-            <ArrowRight className="size-4" />
-          </span>
-        </div>
-      </Card>
+      {cardContent}
     </Link>
   )
 }

@@ -98,22 +98,11 @@ function getFeaturePageSectionLayout(
 function FeaturePageCardGrid({
   cards,
   columns,
-  cueOrder,
-  cueLabel,
 }: {
   cards: HighlightItem[]
   columns?: 2 | 3
-  cueOrder?: number
-  cueLabel?: string
 }) {
-  return (
-    <CompactHighlightGrid
-      items={cards}
-      columns={columns}
-      cueOrder={cueOrder}
-      cueLabel={cueLabel}
-    />
-  )
+  return <CompactHighlightGrid items={cards} columns={columns} />
 }
 
 function FeaturePageFeatureSplit({ cards }: { cards: HighlightItem[] }) {
@@ -265,8 +254,6 @@ export function FeaturePage({
                   <FeaturePageCardGrid
                     cards={section.cards}
                     columns={section.columns}
-                    cueOrder={index + 1}
-                    cueLabel="highlights"
                   />
                 )}
               </ScrollReveal>

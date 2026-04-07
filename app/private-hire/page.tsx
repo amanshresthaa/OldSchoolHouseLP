@@ -66,11 +66,7 @@ export default function PrivateHirePage() {
             />
           </ScrollReveal>
           <ScrollReveal delayMs={120}>
-            <CompactHighlightGrid
-              items={privateHireLocalIntentCards}
-              cueOrder={1}
-              cueLabel="reasons"
-            />
+            <CompactHighlightGrid items={privateHireLocalIntentCards} />
           </ScrollReveal>
           <ScrollReveal
             delayMs={180}
@@ -94,11 +90,7 @@ export default function PrivateHirePage() {
             />
           </ScrollReveal>
           <ScrollReveal delayMs={240}>
-            <CompactHighlightGrid
-              items={privateHireSuitabilityCards}
-              cueOrder={2}
-              cueLabel="occasions"
-            />
+            <CompactHighlightGrid items={privateHireSuitabilityCards} />
           </ScrollReveal>
         </div>
       </section>
@@ -109,11 +101,7 @@ export default function PrivateHirePage() {
             <SectionHeading {...privateHirePracticalSection} />
           </ScrollReveal>
           <ScrollReveal delayMs={120}>
-            <CompactHighlightGrid
-              items={privateHirePracticalCards}
-              cueOrder={3}
-              cueLabel="practical notes"
-            />
+            <CompactHighlightGrid items={privateHirePracticalCards} />
           </ScrollReveal>
         </div>
       </section>

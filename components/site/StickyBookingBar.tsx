@@ -74,6 +74,13 @@ function getPrimaryAction(
   activeRoute: RouteConfig | undefined,
   pathname: string
 ): CtaConfig {
+  if (pathname === "/") {
+    return {
+      href: bookingHref,
+      label: "Book",
+    }
+  }
+
   if (pathname === "/book" || pathname === "/book-online") {
     return (
       activeRoute?.hero?.primaryAction ?? {
@@ -187,9 +194,15 @@ export function StickyBookingBar() {
       <div className="mx-auto max-w-md">
         <div className="grid grid-cols-2 gap-3">
           <Button asChild size="lg" variant="default" className="w-full">
-            <Link href={primaryAction.href} aria-label={primaryAction.label}>
-              <span>{getActionPresentation(primaryAction)}</span>
-            </Link>
+            {isExternalHref(primaryAction.href) ? (
+              <a href={primaryAction.href} aria-label={primaryAction.label}>
+                <span>{getActionPresentation(primaryAction)}</span>
+              </a>
+            ) : (
+              <Link href={primaryAction.href} aria-label={primaryAction.label}>
+                <span>{getActionPresentation(primaryAction)}</span>
+              </Link>
+            )}
           </Button>
           <Button asChild size="lg" variant="outline" className="w-full">
             {isExternalHref(secondaryAction.href) ? (

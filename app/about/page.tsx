@@ -71,11 +71,7 @@ export default function AboutPage() {
           </ScrollReveal>
 
           <ScrollReveal delayMs={120}>
-            <CompactHighlightGrid
-              items={aboutReasons}
-              cueOrder={1}
-              cueLabel="reasons"
-            />
+            <CompactHighlightGrid items={aboutReasons} />
           </ScrollReveal>
 
           <ScrollReveal delayMs={180}>
@@ -264,11 +260,7 @@ export default function AboutPage() {
           </ScrollReveal>
 
           <ScrollReveal delayMs={120}>
-            <CompactHighlightGrid
-              items={aboutLocationHighlights}
-              cueOrder={2}
-              cueLabel="stories"
-            />
+            <CompactHighlightGrid items={aboutLocationHighlights} />
           </ScrollReveal>
         </div>
       </section>

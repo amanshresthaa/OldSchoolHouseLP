@@ -1,13 +1,5 @@
-"use client"
+import type { ReactNode } from "react"
 
-import * as React from "react"
-
-import {
-  getCueIndicatorAnimation,
-  getCueTrackAnimation,
-  type CueVariant,
-} from "@/components/site/cueMotion"
-import { useMobileRailCue } from "@/components/site/useMobileRailCue"
 import { Badge } from "@/components/ui/badge"
 import {
   Card,
@@ -35,10 +27,6 @@ interface CompactHighlightGridProps extends React.ComponentProps<"div"> {
   columns?: 2 | 3
   tone?: "muted" | "lowest"
   itemClassName?: string
-  cueLabel?: string
-  cueOrder?: number
-  cuePeekRatio?: number
-  cueVariant?: Extract<CueVariant, "peek" | "spring" | "magnetic">
 }
 
 interface NumberedStepItem {
@@ -56,7 +44,7 @@ interface EditorialLinkCardContentProps extends React.ComponentProps<"div"> {
   title: string
   description: string
   ctaLabel?: string
-  icon?: React.ReactNode
+  icon?: ReactNode
 }
 
 export function CompactHighlightCard({
@@ -104,90 +92,27 @@ export function CompactHighlightGrid({
   tone = "muted",
   className,
   itemClassName,
-  cueLabel = "highlights",
-  cueOrder,
-  cuePeekRatio = 0.32,
-  cueVariant = "spring",
   ...props
 }: CompactHighlightGridProps) {
-  const cueEnabled = typeof cueOrder === "number" && items.length > 1
-  const { railRef, trackRef, isCueAnimating, peekOffset } = useMobileRailCue({
-    itemCount: items.length,
-    itemSelector: '[data-compact-highlight="true"]',
-    order: cueOrder,
-    peekRatio: cuePeekRatio,
-    variant: cueVariant,
-  })
-
-  const gridClassName = cn(
-    "grid gap-3",
-    columns === 2 ? "sm:grid-cols-2" : "sm:grid-cols-2 xl:grid-cols-3",
-    className
-  )
-
-  const cards = items.map((item, index) => (
-    <CompactHighlightCard
-      key={item.title}
-      data-compact-highlight="true"
-      index={index}
-      title={item.title}
-      description={item.description}
-      tone={tone}
-      className={itemClassName}
-    />
-  ))
-
-  if (!cueEnabled) {
-    return (
-      <div className={gridClassName} {...props}>
-        {cards}
-      </div>
-    )
-  }
-
   return (
-    <div {...props}>
-      <div className={cn("hidden", gridClassName, "sm:grid")}>{cards}</div>
-
-      <div className="sm:hidden">
-        <div className="mb-3 flex items-center justify-between text-[0.7rem] font-semibold tracking-[0.16em] text-secondary uppercase">
-          <span className="relative flex h-5 w-9 items-center rounded-full border border-[rgba(175,43,62,0.24)] bg-[var(--color-surface-lowest)]/84 px-1">
-            <span
-              aria-hidden="true"
-              className="h-2.5 w-2.5 rounded-full bg-secondary motion-reduce:animate-none"
-              style={{
-                animation: getCueIndicatorAnimation(
-                  "x",
-                  cueVariant,
-                  isCueAnimating
-                ),
-              }}
-            />
-          </span>
-          <p>
-            {String(items.length).padStart(2, "0")} {cueLabel}
-          </p>
-        </div>
-        <div
-          ref={railRef}
-          className="overflow-x-auto overscroll-x-contain [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        >
-          <div
-            ref={trackRef}
-            className="grid auto-cols-[84%] grid-flow-col gap-3 pb-1"
-            style={
-              isCueAnimating
-                ? ({
-                    "--osh-cue-offset": `${peekOffset}px`,
-                    animation: getCueTrackAnimation("x", cueVariant),
-                  } as React.CSSProperties)
-                : undefined
-            }
-          >
-            {cards}
-          </div>
-        </div>
-      </div>
+    <div
+      className={cn(
+        "grid gap-3",
+        columns === 2 ? "sm:grid-cols-2" : "sm:grid-cols-2 xl:grid-cols-3",
+        className
+      )}
+      {...props}
+    >
+      {items.map((item, index) => (
+        <CompactHighlightCard
+          key={item.title}
+          index={index}
+          title={item.title}
+          description={item.description}
+          tone={tone}
+          className={itemClassName}
+        />
+      ))}
     </div>
   )
 }

@@ -14,6 +14,7 @@ import { SectionHeading } from "@/components/site/SectionHeading"
 import { useMobileRailCue } from "@/components/site/useMobileRailCue"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { bookingHref } from "@/data/site"
 import {
   Card,
   CardContent,
@@ -157,10 +158,10 @@ function ReviewsMeaningPanel() {
             size="lg"
             className="bg-[var(--color-tertiary)] text-primary hover:bg-[var(--color-on-tertiary-container)]"
           >
-            <Link href="/book">
+            <a href={bookingHref}>
               <CalendarDots data-icon="inline-start" />
               <span>Book a table</span>
-            </Link>
+            </a>
           </Button>
           <Button asChild variant="darkOutline" size="lg">
             <Link href="/private-hire">

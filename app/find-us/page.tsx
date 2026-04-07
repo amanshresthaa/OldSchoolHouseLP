@@ -105,11 +105,7 @@ export default function FindUsPage() {
             </div>
           </ScrollReveal>
           <ScrollReveal delayMs={120}>
-            <CompactHighlightGrid
-              items={localVisitHighlights}
-              cueOrder={1}
-              cueLabel="visit notes"
-            />
+            <CompactHighlightGrid items={localVisitHighlights} />
           </ScrollReveal>
           <ScrollReveal
             delayMs={180}

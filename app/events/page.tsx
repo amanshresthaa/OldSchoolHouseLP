@@ -90,11 +90,7 @@ export default function EventsPage() {
             />
           </ScrollReveal>
           <ScrollReveal delayMs={120}>
-            <CompactHighlightGrid
-              items={eventsWhatOnCards}
-              cueOrder={1}
-              cueLabel="reasons"
-            />
+            <CompactHighlightGrid items={eventsWhatOnCards} />
           </ScrollReveal>
           <ScrollReveal
             delayMs={180}
@@ -217,11 +213,7 @@ export default function EventsPage() {
             />
           </ScrollReveal>
           <ScrollReveal delayMs={120}>
-            <CompactHighlightGrid
-              items={eventsPlanningCards}
-              cueOrder={2}
-              cueLabel="planning notes"
-            />
+            <CompactHighlightGrid items={eventsPlanningCards} />
           </ScrollReveal>
           <ScrollReveal delayMs={180}>
             <div className="surface-frame">

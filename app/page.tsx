@@ -31,6 +31,7 @@ import {
   homeStoryFeature,
 } from "@/data/copy"
 import {
+  bookingHref,
   eventsHighlights,
   guestReviews,
   homeMenuHighlights,
@@ -78,7 +79,7 @@ const menuShowcase = [
   },
   {
     ...homeMenuShowcase[2],
-    href: "/book",
+    href: bookingHref,
     ctaLabel: "Book a table",
     image: roastImage,
     item: featuredMenuItems[3],
@@ -369,6 +370,7 @@ export default function HomePage() {
 
       <InlineBookingCta
         className={getSectionBandClass(homeSectionBands.cta)}
+        bookingHref={bookingHref}
         {...homeInlineCtaCopy}
       />
 

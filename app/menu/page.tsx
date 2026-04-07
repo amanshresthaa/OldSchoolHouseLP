@@ -185,11 +185,7 @@ export default function MenuPage() {
           </ScrollReveal>
 
           <ScrollReveal delayMs={120}>
-            <CompactHighlightGrid
-              items={menuLocalIntentCards}
-              cueOrder={1}
-              cueLabel="reasons"
-            />
+            <CompactHighlightGrid items={menuLocalIntentCards} />
           </ScrollReveal>
         </div>
       </section>

@@ -157,8 +157,6 @@ export default function MenuInformationPage() {
                 title: item.title,
                 description: item.body,
               }))}
-              cueOrder={1}
-              cueLabel="menu notes"
             />
           </ScrollReveal>
 

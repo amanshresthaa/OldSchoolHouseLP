@@ -59,11 +59,7 @@ export default function SanjogGautamPage() {
             />
           </ScrollReveal>
           <ScrollReveal delayMs={120}>
-            <CompactHighlightGrid
-              items={sanjogGautamHighlights}
-              cueOrder={1}
-              cueLabel="highlights"
-            />
+            <CompactHighlightGrid items={sanjogGautamHighlights} />
           </ScrollReveal>
         </div>
       </section>
