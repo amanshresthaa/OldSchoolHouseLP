@@ -4,9 +4,11 @@ import { ArrowRight, ForkKnife } from "@phosphor-icons/react/dist/ssr"
 import { FeaturePage } from "@/components/site/FeaturePage"
 import { TopicClusterSection } from "@/components/site/TopicClusterSection"
 import {
+  commonActionLabels,
   getNepaleseCuisineClusterLinks,
   momoFaqSection,
   momoInlineCtaCopy,
+  momoPreludeCopy,
   momoSections,
   momoSignoffCopy,
 } from "@/data/copy"
@@ -24,9 +26,9 @@ export default function MomoPage() {
       hero={route!.hero!}
       prelude={
         <TopicClusterSection
-          eyebrow="Read next"
-          title="This momo guide feeds back into the full Nepalese cuisine pillar."
-          description="If you arrived through a dish-specific search, use the pillar guide next for the broader cuisine overview and the other spoke pages for comparison or dietary detail."
+          eyebrow={momoPreludeCopy.eyebrow}
+          title={momoPreludeCopy.title}
+          description={momoPreludeCopy.description}
           links={getNepaleseCuisineClusterLinks(route!.href)}
           muted
         />
@@ -41,12 +43,12 @@ export default function MomoPage() {
         actions: [
           {
             href: "/nepalese-food-milton-keynes",
-            label: "Read the pillar guide",
+            label: commonActionLabels.readPillarGuide,
             icon: <ForkKnife className="size-4" />,
           },
           {
             href: "/book",
-            label: "Book a table",
+            label: commonActionLabels.bookTable,
             icon: <ArrowRight className="size-4" />,
           },
         ],

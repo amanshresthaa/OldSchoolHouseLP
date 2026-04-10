@@ -4,9 +4,11 @@ import { ArrowRight, Phone } from "@phosphor-icons/react/dist/ssr"
 import { FeaturePage } from "@/components/site/FeaturePage"
 import { TopicClusterSection } from "@/components/site/TopicClusterSection"
 import {
+  commonActionLabels,
   getNepaleseCuisineClusterLinks,
   glutenFreeCurriesFaqSection,
   glutenFreeCurriesInlineCtaCopy,
+  nepaleseClusterPreludeCopy,
   glutenFreeCurriesSections,
   glutenFreeCurriesSignoffCopy,
 } from "@/data/copy"
@@ -24,9 +26,9 @@ export default function GlutenFreeCurriesStonyStratfordPage() {
       hero={route!.hero!}
       prelude={
         <TopicClusterSection
-          eyebrow="Read next"
-          title="This dietary spoke belongs to a wider Nepalese cuisine cluster."
-          description="Start with the pillar guide for the full cuisine overview, then use the related spokes if you want dish-level or comparison-level detail."
+          eyebrow={nepaleseClusterPreludeCopy.glutenFreeCurries.eyebrow}
+          title={nepaleseClusterPreludeCopy.glutenFreeCurries.title}
+          description={nepaleseClusterPreludeCopy.glutenFreeCurries.description}
           links={getNepaleseCuisineClusterLinks(route!.href)}
           muted
         />
@@ -41,12 +43,12 @@ export default function GlutenFreeCurriesStonyStratfordPage() {
         actions: [
           {
             href: "/nepalese-food-milton-keynes",
-            label: "Read the pillar guide",
+            label: commonActionLabels.readPillarGuide,
             icon: <ArrowRight className="size-4" />,
           },
           {
             href: "/menu-information",
-            label: "Check menu info",
+            label: commonActionLabels.checkMenuInfo,
             icon: <Phone className="size-4" />,
           },
         ],

@@ -14,6 +14,7 @@ import { ArrowRight } from "@phosphor-icons/react/dist/ssr"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { footerBrandCopy } from "@/data/copy"
 import {
   bookingHref,
   openingHours,
@@ -107,8 +108,8 @@ const heroSlides: HeroSlide[] = [
 const AUTOPLAY_INTERVAL_MS = 6200
 const RESUME_AFTER_MANUAL_NAV_MS = 4000
 const heroCtas: readonly HeroCta[] = [
-  { href: bookingHref, label: "Book a table" },
-  { href: "/menu", label: "View menu" },
+  { href: bookingHref, label: footerBrandCopy.primaryActionLabel },
+  { href: "/menu", label: footerBrandCopy.secondaryActionLabel },
 ]
 
 function isExternalHref(href: string) {

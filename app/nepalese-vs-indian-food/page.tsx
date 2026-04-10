@@ -4,7 +4,9 @@ import { ArrowRight, ForkKnife } from "@phosphor-icons/react/dist/ssr"
 import { FeaturePage } from "@/components/site/FeaturePage"
 import { TopicClusterSection } from "@/components/site/TopicClusterSection"
 import {
+  commonActionLabels,
   getNepaleseCuisineClusterLinks,
+  nepaleseClusterPreludeCopy,
   nepaleseVsIndianFaqSection,
   nepaleseVsIndianInlineCtaCopy,
   nepaleseVsIndianSections,
@@ -24,9 +26,9 @@ export default function NepaleseVsIndianFoodPage() {
       hero={route!.hero!}
       prelude={
         <TopicClusterSection
-          eyebrow="Read next"
-          title="This comparison page is one spoke in the Nepalese cuisine hub."
-          description="Use the pillar guide for the full cuisine overview, then move through the dish and dietary spokes if you need a more practical next answer."
+          eyebrow={nepaleseClusterPreludeCopy.nepaleseVsIndian.eyebrow}
+          title={nepaleseClusterPreludeCopy.nepaleseVsIndian.title}
+          description={nepaleseClusterPreludeCopy.nepaleseVsIndian.description}
           links={getNepaleseCuisineClusterLinks(route!.href)}
           muted
         />
@@ -41,12 +43,12 @@ export default function NepaleseVsIndianFoodPage() {
         actions: [
           {
             href: "/nepalese-food-milton-keynes",
-            label: "Read the pillar guide",
+            label: commonActionLabels.readPillarGuide,
             icon: <ForkKnife className="size-4" />,
           },
           {
             href: "/menu",
-            label: "Browse the menu",
+            label: commonActionLabels.browseMenu,
             icon: <ArrowRight className="size-4" />,
           },
         ],

@@ -12,6 +12,13 @@ import { ScrollReveal } from "@/components/site/ScrollReveal"
 import { SectionHeading } from "@/components/site/SectionHeading"
 
 import { Button } from "@/components/ui/button"
+import {
+  menuInformationFaqs,
+  menuInformationHeroCopy,
+  menuInformationHighlights,
+  menuInformationNextPagesCopy,
+  menuInformationStartSectionCopy,
+} from "@/data/copy"
 import { siteMenuPdfHref, sitePhone, sitePhoneHref } from "@/data/site"
 import { getRouteConfig } from "@/data/site-routes"
 import { buildPageMetadata } from "@/lib/metadata"
@@ -21,57 +28,22 @@ const route = getRouteConfig("/menu-information")
 
 export const metadata: Metadata = buildPageMetadata(route!.meta)
 
-const menuFaqs = [
-  {
-    title: "Got an allergy? Please tell us before you order.",
-    description:
-      "The menu helps you browse, but the safest thing is always a quick word with the team so we can guide you properly on the day.",
-  },
-  {
-    title: "Need vegetarian, vegan, or gluten-free options?",
-    description:
-      "Yes, in many cases. We are happy to talk through dishes if you want something milder, meat-free, or simply easier for the table to agree on.",
-  },
-  {
-    title: "Use the website menu for browsing. Use the PDF for sharing.",
-    description:
-      "The website menu is the clearest and most up to date. The PDF is there if you want something printable or easy to send to someone else.",
-  },
-  {
-    title: "Need a quick answer today?",
-    description:
-      "If the answer matters to today’s visit, please ring the pub rather than guessing from an old screenshot or a saved menu.",
-  },
-]
-
-const menuInfoHighlights = [
-  {
-    title: "Before you come in",
-    body: "If anyone in your group has a serious allergy or wants to check dishes in advance, please give us a quick ring before you visit.",
-  },
-  {
-    title: "At the table",
-    body: "Please mention allergies or dietary needs again when you order. It helps us get the advice right there and then.",
-  },
-  {
-    title: "For takeaway orders",
-    body: "If you are ordering to collect, mention allergies on the phone so the kitchen can talk you through things clearly before you set off.",
-  },
-]
-
 export default function MenuInformationPage() {
   return (
     <main>
       <RouteStructuredData route={route!} />
       <PageHero
         route={route!}
-        eyebrow="Menu information"
-        title="If you are checking allergies, dietary needs, or which menu to use, this is the easiest place to start."
-        description="Use this page if you are choosing for the table, deciding between the live menu and the PDF, or want to ask a food question before you visit."
-        primaryAction={{ href: "/menu", label: "Browse the live menu" }}
+        eyebrow={menuInformationHeroCopy.eyebrow}
+        title={menuInformationHeroCopy.title}
+        description={menuInformationHeroCopy.description}
+        primaryAction={{
+          href: "/menu",
+          label: menuInformationHeroCopy.primaryActionLabel,
+        }}
         secondaryAction={{
           href: siteMenuPdfHref,
-          label: "Download PDF menu",
+          label: menuInformationHeroCopy.secondaryActionLabel,
           download: true,
           variant: "outline",
         }}
@@ -83,24 +55,22 @@ export default function MenuInformationPage() {
             delayMs={0}
             className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"
           >
-            <SectionHeading
-              eyebrow="Start here"
-              title="How to check allergens, dietary needs, and the right menu format."
-              description="Browse the live menu for the latest version, use the PDF when you want something printable, and call the pub if the answer matters to today’s visit."
-            />
+            <SectionHeading {...menuInformationStartSectionCopy} />
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Button asChild size="lg">
-                <Link href="/menu">View HTML menu</Link>
+                <Link href="/menu">
+                  {menuInformationStartSectionCopy.liveMenuLabel}
+                </Link>
               </Button>
               <Button asChild size="lg" variant="outline">
                 <a href={siteMenuPdfHref} download>
-                  Download PDF
+                  {menuInformationStartSectionCopy.pdfLabel}
                   <DownloadSimple />
                 </a>
               </Button>
               <Button asChild size="lg" variant="outline">
                 <a href={sitePhoneHref}>
-                  Call the pub
+                  {menuInformationStartSectionCopy.callLabel}
                   <Phone />
                 </a>
               </Button>
@@ -112,7 +82,7 @@ export default function MenuInformationPage() {
             className="space-y-4 text-sm leading-relaxed text-on-surface md:text-base"
           >
             <p>
-              If you want a quick answer, ring{" "}
+              {menuInformationStartSectionCopy.quickAnswerPrefix}{" "}
               <a
                 href={sitePhoneHref}
                 className="text-secondary transition hover:text-secondary/80"
@@ -121,16 +91,13 @@ export default function MenuInformationPage() {
               </a>
               .
             </p>
-            <p>
-              The website menu is best for browsing on your phone. The PDF is
-              best for printing, sharing, or keeping a copy to hand.
-            </p>
+            <p>{menuInformationStartSectionCopy.quickAnswerSuffix}</p>
           </ScrollReveal>
 
           <ScrollReveal delayMs={180}>
             <div className="surface-frame overflow-hidden rounded-2xl">
               <div className="grid gap-px bg-[rgba(196,189,181,0.22)]">
-                {menuFaqs.map((item, index) => (
+                {menuInformationFaqs.map((item, index) => (
                   <article
                     key={item.title}
                     className={
@@ -153,9 +120,9 @@ export default function MenuInformationPage() {
 
           <ScrollReveal delayMs={240}>
             <CompactHighlightGrid
-              items={menuInfoHighlights.map((item) => ({
+              items={menuInformationHighlights.map((item) => ({
                 title: item.title,
-                description: item.body,
+                description: item.description,
               }))}
             />
           </ScrollReveal>
@@ -164,49 +131,22 @@ export default function MenuInformationPage() {
             <div className="surface-frame rounded-2xl">
               <div className="surface-pane">
                 <h3 className="font-heading text-[1.5rem] leading-[1.08] tracking-[-0.025em] text-on-background md:text-[1.7rem]">
-                  Useful next pages
+                  {menuInformationNextPagesCopy.title}
                 </h3>
                 <div className="grid gap-3 pt-4 md:grid-cols-2 xl:grid-cols-4">
-                  <Link
-                    href="/gluten-free-curries-stony-stratford"
-                    className="surface-panel-muted block h-full rounded-2xl py-0 transition hover:-translate-y-0.5"
-                  >
-                    <EditorialLinkCardContent
-                      title="Gluten-free curries guide"
-                      description="Practical shortlist help for guests who want a clearer dietary route before they visit."
-                      className="px-4 py-4"
-                    />
-                  </Link>
-                  <Link
-                    href="/takeaway-menu"
-                    className="surface-panel-muted block h-full rounded-2xl py-0 transition hover:-translate-y-0.5"
-                  >
-                    <EditorialLinkCardContent
-                      title="Takeaway menu"
-                      description="Order-by-phone collection guidance when staying in is still the plan."
-                      className="px-4 py-4"
-                    />
-                  </Link>
-                  <Link
-                    href="/wakes-life-celebrations"
-                    className="surface-panel-muted block h-full rounded-2xl py-0 transition hover:-translate-y-0.5"
-                  >
-                    <EditorialLinkCardContent
-                      title="Wakes & life celebrations"
-                      description="See how the pub handles calmer gatherings that need a little more context."
-                      className="px-4 py-4"
-                    />
-                  </Link>
-                  <Link
-                    href="/book"
-                    className="surface-panel-muted block h-full rounded-2xl py-0 transition hover:-translate-y-0.5"
-                  >
-                    <EditorialLinkCardContent
-                      title="Book a table"
-                      description="Jump straight into a reservation once the menu questions are settled."
-                      className="px-4 py-4"
-                    />
-                  </Link>
+                  {menuInformationNextPagesCopy.cards.map((card) => (
+                    <Link
+                      key={card.href}
+                      href={card.href}
+                      className="surface-panel-muted block h-full rounded-2xl py-0 transition hover:-translate-y-0.5"
+                    >
+                      <EditorialLinkCardContent
+                        title={card.title}
+                        description={card.description}
+                        className="px-4 py-4"
+                      />
+                    </Link>
+                  ))}
                 </div>
               </div>
             </div>

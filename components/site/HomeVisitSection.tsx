@@ -19,20 +19,10 @@ import {
 } from "@/data/site"
 import { cn } from "@/lib/utils"
 
-const visitSignals = [
-  {
-    label: "Open daily",
-    value: openingHours[0].hours,
-  },
-  {
-    label: "Parking",
-    value: "Small car park on site",
-  },
-  {
-    label: "In town",
-    value: "A short walk from the High Street and Horsefair Green",
-  },
-]
+const visitSignals = homeVisitSectionCopy.visitSignals.map((item) => ({
+  label: item.label,
+  value: item.valueKey === "hours" ? openingHours[0].hours : item.value,
+}))
 
 export function HomeVisitSection({
   className,
@@ -41,7 +31,7 @@ export function HomeVisitSection({
   return (
     <section className={cn("page-section bg-background", className)} {...props}>
       <div className="section-shell">
-        <div className="grid gap-4 xl:grid-cols-[minmax(0,1.04fr)_minmax(0,0.96fr)] xl:items-stretch">
+        <div className="grid gap-4 lg:grid-cols-[minmax(0,1.04fr)_minmax(0,0.96fr)] lg:items-stretch">
           <article className="relative overflow-hidden rounded-[1.5rem] text-white shadow-[var(--shadow-frame)] md:rounded-[2rem]">
             <div className="absolute inset-0 bg-[linear-gradient(145deg,rgba(245,208,107,0.16)_0%,rgba(245,208,107,0)_28%),radial-gradient(circle_at_top_right,rgba(245,208,107,0.14),transparent_36%),linear-gradient(160deg,rgba(6,27,14,0.98),rgba(27,48,34,0.94))]" />
             <div className="absolute top-0 right-0 h-40 w-40 translate-x-1/4 -translate-y-1/3 rounded-full bg-[rgba(212,160,23,0.16)] blur-3xl" />
@@ -56,7 +46,7 @@ export function HomeVisitSection({
               <dl className="grid grid-cols-2 gap-3 sm:grid-cols-3">
                 <div className="col-span-2 rounded-[1.25rem] bg-white/7 px-4 py-4 backdrop-blur-sm sm:col-span-3 md:rounded-[1.5rem]">
                   <dt className="text-[0.68rem] font-semibold tracking-[0.18em] text-[var(--color-on-tertiary-container)] uppercase">
-                    Address
+                    {homeVisitSectionCopy.addressLabel}
                   </dt>
                   <dd className="pt-2 text-sm leading-6 text-white/84 md:text-base">
                     {siteAddress}
@@ -84,13 +74,13 @@ export function HomeVisitSection({
               <div className="grid gap-3 pt-1 sm:grid-cols-2">
                 <Button asChild size="default">
                   <a href={directionsHref} target="_blank" rel="noreferrer">
-                    <span>Get directions</span>
+                    <span>{homeVisitSectionCopy.directionsLabel}</span>
                     <MapPin data-icon="inline-end" />
                   </a>
                 </Button>
                 <Button asChild variant="darkOutline" size="default">
                   <a href={sitePhoneHref}>
-                    <span>Call the pub</span>
+                    <span>{homeVisitSectionCopy.callLabel}</span>
                     <Phone data-icon="inline-end" />
                   </a>
                 </Button>
@@ -106,7 +96,7 @@ export function HomeVisitSection({
                   href="/find-us"
                   className="inline-flex items-center gap-2 font-semibold text-[var(--color-on-tertiary-container)] transition hover:text-white"
                 >
-                  See full visit guide
+                  {homeVisitSectionCopy.visitGuideLabel}
                   <ArrowRight className="size-4" />
                 </Link>
               </div>

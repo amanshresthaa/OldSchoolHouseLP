@@ -55,6 +55,35 @@ export const eventsWhatOnSectionCopy = {
 export const eventsActionCardText =
   "Looking for a bigger group booking instead? Head to Private Hire."
 
+export const eventsActionLabels = {
+  primary: "Book for an event night",
+  secondary: "Private hire",
+}
+
+export const eventsMediaCards = [
+  {
+    eyebrow: "Match nights",
+    title: "Big-screen sport with a proper pub backdrop",
+    description:
+      "Big-screen sport, shaped around the Sky Sports and TNT Sports offer, still lands inside a room that feels like a proper pub rather than just somewhere to watch a fixture.",
+    alt: "Large-screen live sport setup inside The Old School House pub in Stony Stratford.",
+  },
+  {
+    eyebrow: "Casual nights",
+    title: "Pool, rounds, and easy evening energy",
+    description:
+      "Pool, drinks, and easy pub energy give local teams and casual evenings more to do between rounds and conversation.",
+    alt: "Pool table and fruit machine inside The Old School House pub in Stony Stratford.",
+  },
+  {
+    eyebrow: "Pub-side favourites",
+    title: "Darts keeps the social side in view",
+    description:
+      "Darts keeps the social side of the pub in view alongside food, drinks, and sport-led plans.",
+    alt: "Dart board area inside The Old School House pub in Stony Stratford.",
+  },
+]
+
 export const eventsReturnVisitSection = {
   eyebrow: "Built for return visits",
   title: "The pub should work for more than one kind of night.",
@@ -66,6 +95,49 @@ export const eventsInlineCtaCopy = {
   title: "Heading in for the match, the team social, or a busier night?",
   description:
     "Book ahead and let the pub side of the visit feel straightforward before the evening gets moving.",
+}
+
+export const eventsPlanningSectionCopy = {
+  eyebrow: "Planning around the calendar",
+  title: "Need to sort a bigger sport night, team social, or themed visit?",
+  description:
+    "If the plan needs a little more than a standard booking, this is the easiest place to start.",
+}
+
+export const eventsPlanningActionCardCopy = {
+  primaryActionLabel: "Private hire options",
+  secondaryActionLabel: "Standard table booking",
+  supportingText:
+    "Ideal for team socials, sport-led group visits, and busier event nights.",
+}
+
+export const eventsPlanningCards = [
+  {
+    title: "Sky Sports and TNT Sports in a proper pub room",
+    description:
+      "The sport offer is a reason to visit, but the table, food, and atmosphere around it are what keep the visit feeling like a local pub night.",
+  },
+  {
+    title: "Local teams and socials are part of the plan",
+    description:
+      "Pool teams, rugby clubs, cricket clubs, and other local groups all fit naturally into the rhythm of the pub.",
+  },
+  {
+    title: "Theme nights and tastings keep the week moving",
+    description:
+      "Tasting evenings, themed nights, and other weeknight plans help keep the pub lively without making it feel chaotic.",
+  },
+]
+
+export const eventsInquiryCardCopy = {
+  eyebrow: "Need more than a standard booking?",
+  title: "Email the team if the visit needs a little more context.",
+  description:
+    "It is the easiest option when the evening depends on screens, group size, timing, or a team and social setup rather than just a normal table booking.",
+  primaryActionLabel: "Email the team",
+  secondaryActionLabel: "Call the pub",
+  footer:
+    "Mention the fixture or occasion, rough guest numbers, preferred date, and anything the team should know about the setup.",
 }
 
 export const eventsRouteSection = {

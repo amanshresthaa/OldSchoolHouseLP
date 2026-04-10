@@ -7,6 +7,7 @@ import {
   beerGardenInlineCtaCopy,
   beerGardenSections,
   beerGardenSignoffCopy,
+  commonActionLabels,
 } from "@/data/copy"
 import { getRouteConfig } from "@/data/site-routes"
 import { buildPageMetadata } from "@/lib/metadata"
@@ -30,12 +31,12 @@ export default function BeerGardenPage() {
         actions: [
           {
             href: "/book",
-            label: "Book a table",
+            label: commonActionLabels.bookTable,
             icon: <ArrowRight className="size-4" />,
           },
           {
             href: "/find-us",
-            label: "Plan your visit",
+            label: commonActionLabels.planVisit,
             icon: <MapPin className="size-4" />,
           },
         ],

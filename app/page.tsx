@@ -19,7 +19,9 @@ import { ScrollReveal } from "@/components/site/ScrollReveal"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import { SiteActionCard } from "@/components/site/SiteActionCard"
 import {
+  homeAtmosphereSectionCopy,
   homeAtmosphereTiles,
+  homeEventsSectionCopy,
   homeEventsFeature,
   homeFaqSectionCopy,
   homeInlineCtaCopy,
@@ -66,21 +68,18 @@ const menuShowcase = [
   {
     ...homeMenuShowcase[0],
     href: "/menu",
-    ctaLabel: "Browse the menu",
     image: momoImage,
     item: featuredMenuItems[0],
   },
   {
     ...homeMenuShowcase[1],
     href: "/menu",
-    ctaLabel: "See menu highlights",
     image: mixedGrillImage,
     item: featuredMenuItems[1],
   },
   {
     ...homeMenuShowcase[2],
     href: bookingHref,
-    ctaLabel: "Book a table",
     image: roastImage,
     item: featuredMenuItems[3],
   },
@@ -167,7 +166,7 @@ function ImageRoutePanel({
           {item.description}
         </p>
         <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-white">
-          Explore
+          {homeAtmosphereSectionCopy.exploreLabel}
           <ArrowRight className="size-4" />
         </span>
       </div>
@@ -193,7 +192,7 @@ function ImageRouteStackCard({ item }: { item: ImageRouteItem }) {
         </p>
       </div>
       <span className="inline-flex items-center gap-2 px-5 pt-4 pb-5 text-sm font-semibold text-secondary md:px-6 md:pb-6">
-        Explore
+        {homeAtmosphereSectionCopy.exploreLabel}
         <ArrowRight className="size-4" />
       </span>
     </Link>
@@ -240,7 +239,7 @@ function LeadMediaStackSection({
           />
         </ScrollReveal>
 
-        <div className="grid gap-4 xl:grid-cols-[minmax(0,1.22fr)_minmax(0,0.78fr)]">
+        <div className="grid gap-4 lg:grid-cols-[minmax(0,1.22fr)_minmax(0,0.78fr)]">
           <ScrollReveal delayMs={120}>
             <ImageRoutePanel item={leadItem} className="fluid-media-hero" />
           </ScrollReveal>
@@ -283,7 +282,7 @@ export default function HomePage() {
 
       <HomepageSection band={homeSectionBands.story}>
         <div className="section-shell">
-          <div className="grid gap-4 xl:grid-cols-[minmax(0,3fr)_minmax(0,5fr)]">
+          <div className="grid gap-4 lg:grid-cols-[minmax(0,3fr)_minmax(0,5fr)]">
             <ScrollReveal delayMs={0}>
               <ImageRoutePanel
                 item={storyFeature}
@@ -315,9 +314,9 @@ export default function HomePage() {
 
       <LeadMediaStackSection
         band={homeSectionBands.atmosphere}
-        eyebrow="Atmosphere"
-        title="A pub that feels welcoming before the food even arrives."
-        description="One strong first impression up front, then the practical details that help you picture the room, the outdoor spaces, and how the visit will flow."
+        eyebrow={homeAtmosphereSectionCopy.eyebrow}
+        title={homeAtmosphereSectionCopy.title}
+        description={homeAtmosphereSectionCopy.description}
         leadItem={atmosphereTiles[0]}
         supportingItems={atmosphereTiles.slice(1)}
       />
@@ -332,9 +331,9 @@ export default function HomePage() {
         <div className="section-shell space-y-5">
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <SectionHeading
-              eyebrow="What’s on"
-              title="From match days to local team socials, there is more than one reason to come back."
-              description="Live sport, theme-led nights, tastings, and informal community occasions all give regulars more than one reason to return."
+              eyebrow={homeEventsSectionCopy.eyebrow}
+              title={homeEventsSectionCopy.title}
+              description={homeEventsSectionCopy.description}
               className="max-w-[40rem]"
             />
             <div className="shrink-0">
@@ -342,19 +341,22 @@ export default function HomePage() {
                 actions={[
                   {
                     href: "/events",
-                    label: "See what’s on",
+                    label: homeEventsSectionCopy.primaryActionLabel,
                     icon: <ArrowRight className="size-4" />,
                   },
-                  { href: "/private-hire", label: "Private hire" },
+                  {
+                    href: "/private-hire",
+                    label: homeEventsSectionCopy.secondaryActionLabel,
+                  },
                 ]}
               />
             </div>
           </div>
-          <div className="grid gap-4 xl:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)]">
+          <div className="grid gap-4 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)]">
             <ScrollReveal delayMs={120}>
               <ImageRoutePanel
                 item={eventsFeature}
-                className="fluid-media-feature xl:fluid-media-hero"
+                className="fluid-media-feature lg:fluid-media-hero"
               />
             </ScrollReveal>
             <ScrollReveal delayMs={180}>

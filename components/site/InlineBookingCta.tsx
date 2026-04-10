@@ -1,6 +1,7 @@
 import { ArrowRight, Phone } from "@phosphor-icons/react/dist/ssr"
 
 import { SiteActionCard } from "@/components/site/SiteActionCard"
+import { inlineBookingCtaFixedCopy } from "@/data/copy"
 import {
   bookOnlineHref,
   bookingUrgencyNote,
@@ -31,7 +32,7 @@ export function InlineBookingCta({
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl space-y-2.5">
             <p className="text-xs font-semibold tracking-[0.22em] text-[var(--color-on-tertiary-container)] uppercase">
-              Book ahead
+              {inlineBookingCtaFixedCopy.eyebrow}
             </p>
             <h2 className="text-white">{title}</h2>
             <p className="max-w-2xl text-sm leading-6 text-white/72 md:text-base md:leading-7">
@@ -43,7 +44,7 @@ export function InlineBookingCta({
               actions={[
                 {
                   href: bookingHref,
-                  label: "Book a table",
+                  label: inlineBookingCtaFixedCopy.primaryActionLabel,
                   icon: <ArrowRight className="size-4" />,
                 },
                 {
@@ -52,7 +53,7 @@ export function InlineBookingCta({
                   icon: <Phone className="size-4" />,
                 },
               ]}
-              supportingText={`${bookingUrgencyNote} Prefer to speak first? Give the pub a ring.`}
+              supportingText={`${bookingUrgencyNote} ${inlineBookingCtaFixedCopy.supportingTextSuffix}`}
               tone="dark"
             />
           </div>

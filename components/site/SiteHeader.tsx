@@ -8,6 +8,7 @@ import { List, X } from "@phosphor-icons/react"
 
 import logo from "@/images/logos/old-school-house-pub-stony-stratford-mk-logo.png"
 import { Button } from "@/components/ui/button"
+import { siteHeaderCopy } from "@/data/copy"
 import {
   bookOnlineHref,
   bookingHref,
@@ -190,18 +191,22 @@ export function SiteHeader() {
             <div className="hidden shrink-0 items-center gap-3 md:flex">
               <Button asChild size="sm">
                 {pathname === "/" ? (
-                  <a href={homeBookingHref}>Book</a>
+                  <a href={homeBookingHref}>{siteHeaderCopy.bookingLabel}</a>
                 ) : (
-                  <Link href={homeBookingHref}>Book</Link>
+                  <Link href={homeBookingHref}>
+                    {siteHeaderCopy.bookingLabel}
+                  </Link>
                 )}
               </Button>
             </div>
             <div className="flex shrink-0 items-center gap-2 md:hidden">
               <Button asChild size="sm">
                 {pathname === "/" ? (
-                  <a href={homeBookingHref}>Book</a>
+                  <a href={homeBookingHref}>{siteHeaderCopy.bookingLabel}</a>
                 ) : (
-                  <Link href={homeBookingHref}>Book</Link>
+                  <Link href={homeBookingHref}>
+                    {siteHeaderCopy.bookingLabel}
+                  </Link>
                 )}
               </Button>
               <button
@@ -209,7 +214,9 @@ export function SiteHeader() {
                 aria-controls="mobile-site-navigation"
                 aria-expanded={isOpen}
                 aria-label={
-                  isOpen ? "Close navigation menu" : "Open navigation menu"
+                  isOpen
+                    ? siteHeaderCopy.closeNavigationLabel
+                    : siteHeaderCopy.openNavigationLabel
                 }
                 onClick={() => setIsOpen((value) => !value)}
                 className="inline-flex size-11 items-center justify-center rounded-full bg-primary text-white transition hover:bg-primary-container"

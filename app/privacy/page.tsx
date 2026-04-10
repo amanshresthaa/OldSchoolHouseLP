@@ -7,6 +7,7 @@ import { RouteStructuredData } from "@/components/site/RouteStructuredData"
 import { ScrollReveal } from "@/components/site/ScrollReveal"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import {
+  privacyContactStripCopy,
   privacyHeroCopy,
   privacyLastUpdated,
   privacySections,
@@ -38,9 +39,12 @@ export default function PrivacyPage() {
         route={route!}
         primaryAction={{
           href: siteEmailHref,
-          label: "Email a privacy question",
+          label: privacyHeroCopy.primaryActionLabel,
         }}
-        secondaryAction={{ href: sitePhoneHref, label: "Call the pub" }}
+        secondaryAction={{
+          href: sitePhoneHref,
+          label: privacyHeroCopy.secondaryActionLabel,
+        }}
       />
 
       <section className={getSectionBandClass("paper", "page-section")}>
@@ -53,13 +57,15 @@ export default function PrivacyPage() {
             <div className="surface-frame px-5 py-4 md:px-6 md:py-5">
               <div className="flex flex-col gap-3 text-sm leading-relaxed text-on-surface md:flex-row md:flex-wrap md:items-center md:gap-0 md:divide-x md:divide-on-surface/12 md:text-base">
                 <p className="md:pr-4">
-                  <strong>Venue:</strong> {siteName}
+                  <strong>{privacyContactStripCopy.venueLabel}</strong>{" "}
+                  {siteName}
                 </p>
                 <p className="md:px-4">
-                  <strong>Address:</strong> {siteAddress}
+                  <strong>{privacyContactStripCopy.addressLabel}</strong>{" "}
+                  {siteAddress}
                 </p>
                 <p className="md:px-4">
-                  <strong>Email:</strong>{" "}
+                  <strong>{privacyContactStripCopy.emailLabel}</strong>{" "}
                   <a
                     href={siteEmailHref}
                     className="text-secondary transition hover:text-secondary/80"
@@ -68,7 +74,7 @@ export default function PrivacyPage() {
                   </a>
                 </p>
                 <p className="md:px-4">
-                  <strong>Phone:</strong>{" "}
+                  <strong>{privacyContactStripCopy.phoneLabel}</strong>{" "}
                   <a
                     href={sitePhoneHref}
                     className="text-secondary transition hover:text-secondary/80"
@@ -97,11 +103,11 @@ export default function PrivacyPage() {
         actions={[
           {
             href: siteEmailHref,
-            label: "Email a privacy question",
+            label: privacySignoffCopy.primaryActionLabel,
           },
           {
             href: sitePhoneHref,
-            label: "Call the pub",
+            label: privacySignoffCopy.secondaryActionLabel,
           },
         ]}
       />

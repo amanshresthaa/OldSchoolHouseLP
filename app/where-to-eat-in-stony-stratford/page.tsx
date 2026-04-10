@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { ArrowRight, MapPin } from "@phosphor-icons/react/dist/ssr"
 
 import { FeaturePage } from "@/components/site/FeaturePage"
+import { commonActionLabels } from "@/data/copy"
 import {
   whereToEatFaqSection,
   whereToEatInlineCtaCopy,
@@ -30,12 +31,12 @@ export default function WhereToEatInStonyStratfordPage() {
         actions: [
           {
             href: "/find-us",
-            label: "Plan your visit",
+            label: commonActionLabels.planVisit,
             icon: <MapPin className="size-4" />,
           },
           {
             href: "/book",
-            label: "Book a table",
+            label: commonActionLabels.bookTable,
             icon: <ArrowRight className="size-4" />,
           },
         ],

@@ -4,6 +4,8 @@ import { ArrowRight, BookOpenText } from "@phosphor-icons/react/dist/ssr"
 import { FeaturePage } from "@/components/site/FeaturePage"
 import { TopicClusterSection } from "@/components/site/TopicClusterSection"
 import {
+  commonActionLabels,
+  nepaleseClusterPreludeCopy,
   nepaleseCuisineSpokeLinks,
   nepaleseFoodMiltonKeynesFaqSection,
   nepaleseFoodMiltonKeynesInlineCtaCopy,
@@ -25,9 +27,11 @@ export default function NepaleseFoodMiltonKeynesPage() {
       pageType="CollectionPage"
       prelude={
         <TopicClusterSection
-          eyebrow="Hub and spoke"
-          title="This pillar guide connects the questions guests actually search."
-          description="Use the spoke that matches the exact question you still have. Each one goes deeper on a single intent, then feeds authority back into this main Nepalese cuisine guide."
+          eyebrow={nepaleseClusterPreludeCopy.nepaleseFoodMiltonKeynes.eyebrow}
+          title={nepaleseClusterPreludeCopy.nepaleseFoodMiltonKeynes.title}
+          description={
+            nepaleseClusterPreludeCopy.nepaleseFoodMiltonKeynes.description
+          }
           links={nepaleseCuisineSpokeLinks}
           muted
         />
@@ -42,12 +46,12 @@ export default function NepaleseFoodMiltonKeynesPage() {
         actions: [
           {
             href: "/menu",
-            label: "Browse the menu",
+            label: commonActionLabels.browseMenu,
             icon: <BookOpenText className="size-4" />,
           },
           {
             href: "/book",
-            label: "Book a table",
+            label: commonActionLabels.bookTable,
             icon: <ArrowRight className="size-4" />,
           },
         ],

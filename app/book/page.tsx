@@ -20,11 +20,14 @@ import { ScrollReveal } from "@/components/site/ScrollReveal"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import { SiteActionCard } from "@/components/site/SiteActionCard"
 import {
+  bookActionCardCopy,
   bookBeforeSection,
+  bookBookingSteps,
   bookFaqSectionCopy,
   bookFindUsCard,
   bookOnlineSectionCopy,
   bookPrivateHireCard,
+  bookReserveCardCopy,
   bookSignoffCopy,
   bookSundayCard,
 } from "@/data/copy"
@@ -54,20 +57,10 @@ const bookingFaqs = localFaqs.filter((faq) =>
   ].includes(faq.question)
 )
 
-const bookingSteps = [
-  {
-    title: "Book standard tables online first",
-    description: bookingNotes[0],
-  },
-  {
-    title: "Call or email when timing matters",
-    description: bookingNotes[1],
-  },
-  {
-    title: "Use the dedicated enquiry routes for bigger plans",
-    description: bookingNotes[2],
-  },
-]
+const bookingSteps = bookBookingSteps.map((step, index) => ({
+  title: step.title,
+  description: bookingNotes[index],
+}))
 
 export default function BookPage() {
   return (
@@ -86,29 +79,27 @@ export default function BookPage() {
               actions={[
                 {
                   href: sitePhoneHref,
-                  label: `Call ${sitePhone}`,
+                  label: `${bookActionCardCopy.phoneLabelPrefix} ${sitePhone}`,
                   icon: <Phone className="size-4" />,
                 },
                 {
                   href: siteEmailHref,
-                  label: `Email ${siteEmail}`,
+                  label: `${bookActionCardCopy.emailLabelPrefix} ${siteEmail}`,
                   icon: <EnvelopeSimple className="size-4" />,
                 },
               ]}
-              supportingText={`${openingHours[0].hours}. If your booking depends on a specific service time, please contact the pub directly.`}
+              supportingText={`${openingHours[0].hours}. ${bookActionCardCopy.supportingTextSuffix}`}
             />
           </ScrollReveal>
           <ScrollReveal delayMs={120}>
-            <div className="grid gap-4 xl:grid-cols-[1.05fr_0.95fr]">
+            <div className="grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
               <article className="surface-frame">
                 <div className="surface-pane space-y-4">
                   <p className="text-[0.72rem] font-semibold tracking-[0.16em] text-secondary uppercase">
-                    Reserve your table
+                    {bookReserveCardCopy.eyebrow}
                   </p>
                   <p className="text-sm leading-relaxed text-on-surface md:text-base">
-                    Online booking is still the fastest route for planned meals,
-                    while the call and email options stay visible when your
-                    booking needs a real person to sanity-check the timing.
+                    {bookReserveCardCopy.description}
                   </p>
                   <div className="flex flex-col gap-3 sm:flex-row">
                     <a
@@ -117,14 +108,14 @@ export default function BookPage() {
                       rel="noreferrer"
                       className="cta-primary inline-flex h-12 items-center justify-center gap-2.5 px-6 text-sm font-semibold"
                     >
-                      Book online
+                      {bookReserveCardCopy.primaryActionLabel}
                       <ArrowRight className="size-4" />
                     </a>
                     <Link
                       href="/menu"
                       className="cta-secondary inline-flex h-12 items-center justify-center gap-2.5 px-6"
                     >
-                      View menu first
+                      {bookReserveCardCopy.secondaryActionLabel}
                     </Link>
                   </div>
                 </div>
@@ -193,12 +184,12 @@ export default function BookPage() {
         actions={[
           {
             href: bookingHref,
-            label: "Book online",
+            label: bookSignoffCopy.primaryActionLabel,
             icon: <ArrowRight className="size-4" />,
           },
           {
             href: "/menu",
-            label: "View menu",
+            label: bookSignoffCopy.secondaryActionLabel,
           },
         ]}
       />

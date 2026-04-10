@@ -82,6 +82,37 @@ export const privateHireSuitabilitySection = {
 export const privateHireActionCardText =
   "Tell us the rough date, numbers, and shape of the gathering first. We can work from there."
 
+export const privateHireLocalIntentSectionCopy = {
+  eyebrow: "Private hire in town",
+  title:
+    "Looking for private hire in Stony Stratford that still feels like a proper pub?",
+  description:
+    "For birthdays, gatherings, and group plans that need a welcoming room, flexible food and drinks, and an easy way to get started.",
+}
+
+export const privateHireLocalIntentCards = [
+  {
+    title: "A Stony Stratford pub for birthdays and family gatherings",
+    description:
+      "The Old School House works well when the occasion needs warmth, flexible seating, and a menu that does more than drinks alone.",
+  },
+  {
+    title: "Useful for wakes, work drinks, and sports socials",
+    description:
+      "The location on London Road, the pub atmosphere, and the food all help when the gathering needs to feel easy to organise.",
+  },
+  {
+    title: "A better fit than a generic function room",
+    description:
+      "Private hire here still feels rooted in a real pub setting, with open-plan bar space, flexible layouts, and enough capacity to make bigger groups feel straightforward.",
+  },
+]
+
+export const privateHireActionLabels = {
+  enquiry: "Make an enquiry",
+  call: "Call the pub",
+}
+
 export const privateHirePracticalSection = {
   eyebrow: "Practical fit",
   title: "Room, layout flexibility, and an easy way to get things moving.",
@@ -102,6 +133,21 @@ export const privateHireEnquirySection = {
     "The first message does not need to be polished. A few basics are enough for us to understand the guest count, the room shape, and how we can help.",
 }
 
+export const privateHireEnquiryCardCopy = {
+  eyebrow: "Make an enquiry",
+  title: "Email the pub team with the basics.",
+  description:
+    "If you already know the rough date, numbers, and shape of the gathering, email the team directly and they can help shape the next step from there.",
+  primaryActionLabel: "Email the team",
+  secondaryActionLabel: "Call the pub",
+  footer:
+    "Include your preferred date, guest numbers, and whether the setup needs to be seated, standing, or mixed.",
+  checklistIntro:
+    "A quick note with the basics is enough to get things moving. We can help you shape the details after that.",
+  checklistSummary:
+    "There is room to shape the occasion your way, with 125 total covers, a front garden, a private courtyard, and open-plan bar space.",
+}
+
 export const privateHireFaqSectionCopy = {
   eyebrow: "Private hire FAQs",
   title: "A few useful answers before you get in touch.",
@@ -113,4 +159,6 @@ export const privateHireSignoffCopy = {
   eyebrow: "Next step",
   title: "Send the basics and we will help shape the rest.",
   body: 'A clear email or a quick call is all it takes to move from "could this work?" to the first practical next step.',
+  primaryActionLabel: "Make an enquiry",
+  secondaryActionLabel: "Call the pub",
 }

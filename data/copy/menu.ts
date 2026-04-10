@@ -7,6 +7,39 @@
 export const menuWhatToExpect =
   "Nepalese dishes, pub classics, kids' meals, and desserts"
 
+export const menuQuickInfoCopy = {
+  hoursLabel: "Hours",
+  whatToExpectLabel: "What to expect",
+  resourcesLabel: "Resources",
+  pdfLabel: "Download PDF",
+  infoLabel: "Menu info",
+}
+
+export const menuLocalDiningSectionCopy = {
+  eyebrow: "Menu for local dining",
+  title: "A Stony Stratford pub menu built for real lunch and dinner plans.",
+  description:
+    "This is not just a list of dishes. It is a clearer picture of how The Old School House works for town-centre meals, group plans, and bookings that need broad menu appeal.",
+}
+
+export const menuLocalIntentCards = [
+  {
+    title: "Built for mixed tables in Stony Stratford",
+    description:
+      "The menu works when one person wants a familiar pub classic and someone else wants momo, curries, grills, or another Nepalese dish worth exploring.",
+  },
+  {
+    title: "Useful for lunch, dinner, and Sunday plans",
+    description:
+      "Browse this live menu before a midweek meal, a weekend catch-up, or a Sunday visit when you want the table and the food direction sorted in advance.",
+  },
+  {
+    title: "Live HTML menu for local search and real visits",
+    description:
+      "Because the menu is readable on-page, it is easier to search, easier to browse on your phone, and more useful when you are deciding whether to book.",
+  },
+]
+
 export const menuDrinksSection = {
   eyebrow: "From the bar",
   title: "Bar highlights that work with the food",
@@ -24,6 +57,8 @@ export const menuSignoffCopy = {
   eyebrow: "Good to know",
   title: "A few helpful details before you order.",
   body: "If you have an allergy, want to double-check a dish, or need a quick answer before you come in, a call to the pub is always the safest route.",
+  primaryActionLabel: "Call the bar",
+  secondaryActionLabel: "Book a table",
   servingSizes:
     "Beer and cider are available by the half pint, spirits in 25ml or 35ml servings, and still wine in 125ml measures.",
   allergyNote:

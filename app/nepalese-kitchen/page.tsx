@@ -4,6 +4,8 @@ import { ArrowRight, ForkKnife } from "@phosphor-icons/react/dist/ssr"
 import { FeaturePage } from "@/components/site/FeaturePage"
 import { TopicClusterSection } from "@/components/site/TopicClusterSection"
 import {
+  commonActionLabels,
+  nepaleseClusterPreludeCopy,
   nepaleseCuisineHubLink,
   nepaleseCuisineSpokeLinks,
   nepaleseKitchenFaqSection,
@@ -25,9 +27,9 @@ export default function NepaleseKitchenPage() {
       hero={route!.hero!}
       prelude={
         <TopicClusterSection
-          eyebrow="Authority cluster"
-          title="The commercial kitchen page now sits inside a wider Nepalese content hub."
-          description="Use the pillar guide for the full cuisine overview, then open the supporting spokes if you want dish-level, comparison-level, or dietary detail before you book."
+          eyebrow={nepaleseClusterPreludeCopy.nepaleseKitchen.eyebrow}
+          title={nepaleseClusterPreludeCopy.nepaleseKitchen.title}
+          description={nepaleseClusterPreludeCopy.nepaleseKitchen.description}
           links={[nepaleseCuisineHubLink, ...nepaleseCuisineSpokeLinks]}
           muted
         />
@@ -42,12 +44,12 @@ export default function NepaleseKitchenPage() {
         actions: [
           {
             href: "/nepalese-food-milton-keynes",
-            label: "Read the pillar guide",
+            label: commonActionLabels.readPillarGuide,
             icon: <ForkKnife className="size-4" />,
           },
           {
             href: "/book",
-            label: "Book a table",
+            label: commonActionLabels.bookTable,
             icon: <ArrowRight className="size-4" />,
           },
         ],

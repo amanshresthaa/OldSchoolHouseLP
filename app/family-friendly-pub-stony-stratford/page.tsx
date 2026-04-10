@@ -7,6 +7,7 @@ import {
 
 import { FeaturePage } from "@/components/site/FeaturePage"
 import {
+  commonActionLabels,
   familyFriendlyFaqSection,
   familyFriendlyInlineCtaCopy,
   familyFriendlySections,
@@ -34,17 +35,17 @@ export default function FamilyFriendlyPubPage() {
         actions: [
           {
             href: "/menu",
-            label: "Browse the menu",
+            label: commonActionLabels.browseMenu,
             icon: <ForkKnife className="size-4" />,
           },
           {
             href: "/book",
-            label: "Book a family table",
+            label: commonActionLabels.bookFamilyTable,
             icon: <UsersThree className="size-4" />,
           },
           {
             href: "/sunday-roast",
-            label: "See Sunday roast",
+            label: commonActionLabels.sundayRoast,
             icon: <ArrowRight className="size-4" />,
           },
         ],

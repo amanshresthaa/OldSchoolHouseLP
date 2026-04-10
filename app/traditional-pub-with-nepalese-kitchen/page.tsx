@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { ArrowRight, ForkKnife } from "@phosphor-icons/react/dist/ssr"
 
 import { FeaturePage } from "@/components/site/FeaturePage"
+import { commonActionLabels } from "@/data/copy"
 import {
   traditionalPubFaqSection,
   traditionalPubInlineCtaCopy,
@@ -30,12 +31,12 @@ export default function TraditionalPubWithNepaleseKitchenPage() {
         actions: [
           {
             href: "/about",
-            label: "About the pub",
+            label: commonActionLabels.aboutPub,
             icon: <ArrowRight className="size-4" />,
           },
           {
             href: "/menu",
-            label: "Browse the menu",
+            label: commonActionLabels.browseMenu,
             icon: <ForkKnife className="size-4" />,
           },
         ],

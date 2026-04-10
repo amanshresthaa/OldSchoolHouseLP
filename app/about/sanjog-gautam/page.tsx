@@ -11,6 +11,14 @@ import { RouteStructuredData } from "@/components/site/RouteStructuredData"
 import { ScrollReveal } from "@/components/site/ScrollReveal"
 import { SectionHeading } from "@/components/site/SectionHeading"
 import {
+  sanjogGautamExperienceSectionCopy,
+  sanjogGautamExpertiseTitle,
+  sanjogGautamFactSheetTitlePrefix,
+  sanjogGautamInlineCtaCopy,
+  sanjogGautamOverviewSectionCopy,
+  sanjogGautamSignoffCopy,
+} from "@/data/copy"
+import {
   organizationFactSheet,
   sanjogGautamExperienceNotes,
   sanjogGautamExpertiseAreas,
@@ -52,11 +60,7 @@ export default function SanjogGautamPage() {
       <section className={getSectionBandClass("plain", "page-section")}>
         <div className="section-shell flex flex-col gap-5">
           <ScrollReveal delayMs={0}>
-            <SectionHeading
-              eyebrow="Experience and expertise"
-              title="A real operator profile, not a generic hospitality byline."
-              description="This page exists to show who is behind the venue and what experience supports the way The Old School House is run day to day."
-            />
+            <SectionHeading {...sanjogGautamExperienceSectionCopy} />
           </ScrollReveal>
           <ScrollReveal delayMs={120}>
             <CompactHighlightGrid items={sanjogGautamHighlights} />
@@ -66,17 +70,14 @@ export default function SanjogGautamPage() {
 
       <InlineBookingCta
         className={getSectionBandClass("dark")}
-        title="See how that experience lands in the room."
-        description="Book a table if you want to experience the pub atmosphere, service style, and Nepalese kitchen for yourself."
+        {...sanjogGautamInlineCtaCopy}
       />
 
       <section className={getSectionBandClass("paper", "page-section")}>
         <div className="section-shell grid gap-4 xl:grid-cols-[1.05fr_0.95fr]">
           <article className="surface-panel space-y-4">
             <SectionHeading
-              eyebrow="Operator overview"
-              title="San's work is visible in the guest experience as much as the food."
-              description="The strongest trust signal for a hospitality brand is when the person behind it can be connected to real-world operating experience."
+              {...sanjogGautamOverviewSectionCopy}
               className="max-w-none"
             />
             <div className="space-y-3 text-sm leading-relaxed text-on-surface">
@@ -91,7 +92,7 @@ export default function SanjogGautamPage() {
               <div className="flex items-center gap-3">
                 <Buildings className="size-5 text-secondary" />
                 <h2 className="font-heading text-[1.32rem] leading-[1.1] tracking-[-0.02em] text-on-background">
-                  Works for {siteLegalName}
+                  {sanjogGautamFactSheetTitlePrefix} {siteLegalName}
                 </h2>
               </div>
               <div className="grid gap-3 pt-4 text-sm leading-relaxed text-on-surface">
@@ -108,7 +109,7 @@ export default function SanjogGautamPage() {
 
             <article className="surface-panel">
               <h2 className="font-heading text-[1.32rem] leading-[1.1] tracking-[-0.02em] text-on-background">
-                Areas of expertise
+                {sanjogGautamExpertiseTitle}
               </h2>
               <ul className="grid gap-3 pt-4 text-sm leading-relaxed text-on-surface">
                 {sanjogGautamExpertiseAreas.map((item) => (
@@ -121,24 +122,19 @@ export default function SanjogGautamPage() {
       </section>
 
       <PageSignoff
-        eyebrow="Next step"
-        title="See the venue this profile supports."
-        description="The strongest proof still comes from the guest experience itself, so the best next move is to explore the pub or make a booking."
-        body={
-          <p>
-            Read more about the venue, browse the live menu, or call the pub if
-            you want to talk through a booking directly with the team.
-          </p>
-        }
+        eyebrow={sanjogGautamSignoffCopy.eyebrow}
+        title={sanjogGautamSignoffCopy.title}
+        description={sanjogGautamSignoffCopy.description}
+        body={<p>{sanjogGautamSignoffCopy.body}</p>}
         actions={[
           {
             href: "/about",
-            label: "Back to About",
+            label: sanjogGautamSignoffCopy.primaryActionLabel,
             icon: <ArrowRight className="size-4" />,
           },
           {
             href: sitePhoneHref,
-            label: "Call the pub",
+            label: sanjogGautamSignoffCopy.secondaryActionLabel,
           },
         ]}
         details={
@@ -147,13 +143,13 @@ export default function SanjogGautamPage() {
               href="/menu"
               className="text-white/72 transition hover:text-white"
             >
-              Browse the menu
+              {sanjogGautamSignoffCopy.menuLinkLabel}
             </Link>
             <Link
               href="/book"
               className="text-white/72 transition hover:text-white"
             >
-              Book a table
+              {sanjogGautamSignoffCopy.bookingLinkLabel}
             </Link>
           </div>
         }

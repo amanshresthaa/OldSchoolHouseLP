@@ -3,6 +3,7 @@ import { ArrowRight, Television } from "@phosphor-icons/react/dist/ssr"
 
 import { FeaturePage } from "@/components/site/FeaturePage"
 import {
+  commonActionLabels,
   liveSportFaqSection,
   liveSportInlineCtaCopy,
   liveSportSections,
@@ -30,12 +31,12 @@ export default function LiveSportPage() {
         actions: [
           {
             href: "/book",
-            label: "Book a table",
+            label: commonActionLabels.bookTable,
             icon: <Television className="size-4" />,
           },
           {
             href: "/events",
-            label: "See what's on",
+            label: commonActionLabels.seeWhatsOn,
             icon: <ArrowRight className="size-4" />,
           },
         ],

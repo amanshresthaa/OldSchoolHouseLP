@@ -14,6 +14,10 @@ import { SectionHeading } from "@/components/site/SectionHeading"
 import { useMobileRailCue } from "@/components/site/useMobileRailCue"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import {
+  homeReviewsMeaningPanelCopy,
+  homeReviewsSectionCopy,
+} from "@/data/copy"
 import { bookingHref } from "@/data/site"
 import {
   Card,
@@ -107,7 +111,10 @@ function ReviewHighlightsPanel({
               }}
             />
           </span>
-          <p>{String(highlights.length).padStart(2, "0")} highlights</p>
+          <p>
+            {String(highlights.length).padStart(2, "0")}{" "}
+            {homeReviewsSectionCopy.mobileHighlightsSuffix}
+          </p>
         </div>
         <div
           ref={railRef}
@@ -145,11 +152,10 @@ function ReviewsMeaningPanel() {
       <div className="relative z-10 flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
         <div className="max-w-2xl">
           <p className="text-[0.62rem] font-bold tracking-[0.22em] text-[var(--color-on-tertiary-container)] uppercase">
-            In Practice
+            {homeReviewsMeaningPanelCopy.eyebrow}
           </p>
           <p className="section-copy pt-2.5 text-white/78 md:text-[1.04rem]">
-            Enjoy a proper pub atmosphere with a menu, welcome, and sense of
-            occasion that make every visit feel a little more memorable.
+            {homeReviewsMeaningPanelCopy.description}
           </p>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row">
@@ -160,13 +166,13 @@ function ReviewsMeaningPanel() {
           >
             <a href={bookingHref}>
               <CalendarDots data-icon="inline-start" />
-              <span>Book a table</span>
+              <span>{homeReviewsMeaningPanelCopy.primaryActionLabel}</span>
             </a>
           </Button>
           <Button asChild variant="darkOutline" size="lg">
             <Link href="/private-hire">
               <UsersThree data-icon="inline-start" />
-              <span>Plan a group visit</span>
+              <span>{homeReviewsMeaningPanelCopy.secondaryActionLabel}</span>
             </Link>
           </Button>
         </div>
@@ -202,9 +208,9 @@ export function HomeReviewsSection({
       <div className="section-shell flex flex-col gap-5 overflow-x-clip">
         <ScrollReveal delayMs={0}>
           <SectionHeading
-            eyebrow="Guest experiences"
-            title="A pub for every kind of visit."
-            description="From quiet roasts to lively match nights, guests come back because the room feels right and the visit feels looked after."
+            eyebrow={homeReviewsSectionCopy.eyebrow}
+            title={homeReviewsSectionCopy.title}
+            description={homeReviewsSectionCopy.description}
             className="max-w-2xl"
           />
         </ScrollReveal>

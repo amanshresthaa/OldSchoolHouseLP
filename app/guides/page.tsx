@@ -59,7 +59,7 @@ export default function GuidesPage() {
                   eyebrow={guide.eyebrow}
                   title={guide.title}
                   description={guide.description}
-                  ctaLabel="Open guide"
+                  ctaLabel={guidesSignoffCopy.openGuideLabel}
                   className={index % 2 === 0 ? "surface-pane" : undefined}
                 />
               </Link>
@@ -114,12 +114,12 @@ export default function GuidesPage() {
         actions={[
           {
             href: "/menu",
-            label: "Browse the menu",
+            label: guidesSignoffCopy.primaryActionLabel,
             icon: <BookOpenText className="size-4" />,
           },
           {
             href: "/book",
-            label: "Book a table",
+            label: guidesSignoffCopy.secondaryActionLabel,
             icon: <ArrowRight className="size-4" />,
           },
         ]}

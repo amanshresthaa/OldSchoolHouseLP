@@ -7,6 +7,7 @@ import {
   accessibilityInlineCtaCopy,
   accessibilitySections,
   accessibilitySignoffCopy,
+  commonActionLabels,
 } from "@/data/copy"
 import { sitePhoneHref } from "@/data/site"
 import { getRouteConfig } from "@/data/site-routes"
@@ -31,17 +32,17 @@ export default function AccessibilityPage() {
         actions: [
           {
             href: sitePhoneHref,
-            label: "Call the pub",
+            label: commonActionLabels.callPub,
             icon: <Phone className="size-4" />,
           },
           {
             href: "/find-us",
-            label: "Find us",
+            label: commonActionLabels.findUs,
             icon: <MapPin className="size-4" />,
           },
           {
             href: "/book",
-            label: "Book a table",
+            label: commonActionLabels.bookTable,
             icon: <Car className="size-4" />,
           },
         ],

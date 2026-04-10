@@ -16,11 +16,14 @@ import { SectionHeading } from "@/components/site/SectionHeading"
 import { ScrollReveal } from "@/components/site/ScrollReveal"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
+  aboutBusinessSectionCopy,
   aboutBuildingSection,
   aboutConceptSection,
   aboutFamilyCardTitle,
   aboutHeritageCardTitle,
+  aboutLapenInnsLinkCopy,
   aboutOperatorCardTitle,
+  aboutOperatorProfileLinkLabel,
   aboutSignoffCopy,
 } from "@/data/copy"
 import {
@@ -75,7 +78,7 @@ export default function AboutPage() {
           </ScrollReveal>
 
           <ScrollReveal delayMs={180}>
-            <div className="grid gap-4 xl:grid-cols-[1.02fr_0.98fr]">
+            <div className="grid gap-4 lg:grid-cols-[1.02fr_0.98fr]">
               <article className="surface-frame overflow-hidden">
                 <Image
                   src={pubExteriorImage}
@@ -89,7 +92,7 @@ export default function AboutPage() {
                   <Image
                     src={indoorSeatingImage}
                     alt="Interior seating area inside The Old School House pub in Stony Stratford."
-                    className="h-60 w-full object-cover xl:h-full"
+                    className="h-60 w-full object-cover lg:h-full"
                     sizes="(min-width: 640px) 50vw, 100vw"
                   />
                 </article>
@@ -97,7 +100,7 @@ export default function AboutPage() {
                   <Image
                     src={beerOnTapImage}
                     alt="Beer being poured at the bar inside The Old School House pub in Stony Stratford."
-                    className="h-60 w-full object-cover xl:h-full"
+                    className="h-60 w-full object-cover lg:h-full"
                     sizes="(min-width: 640px) 50vw, 100vw"
                   />
                 </article>
@@ -110,15 +113,11 @@ export default function AboutPage() {
       <section className={cn("page-section", getSectionBandClass("paper"))}>
         <div className="section-shell flex flex-col gap-5">
           <ScrollReveal delayMs={0}>
-            <SectionHeading
-              eyebrow="Verified business details"
-              title="The public facts behind the pub, set out clearly."
-              description="This page is not only the story of the venue. It is also the fact sheet that ties the website to the real-world business behind it."
-            />
+            <SectionHeading {...aboutBusinessSectionCopy} />
           </ScrollReveal>
 
           <ScrollReveal delayMs={120}>
-            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
               {organizationFactSheet.map((item) => (
                 <article
                   key={item.label}
@@ -152,7 +151,7 @@ export default function AboutPage() {
           </ScrollReveal>
 
           <ScrollReveal delayMs={120}>
-            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {aboutPubFacts.map((fact) => (
                 <article
                   key={fact.label}
@@ -196,7 +195,7 @@ export default function AboutPage() {
                       href={sanjogGautamPagePath}
                       className="inline-flex items-center gap-2 font-semibold text-secondary transition hover:text-secondary/80"
                     >
-                      Read San&apos;s full operator profile
+                      {aboutOperatorProfileLinkLabel}
                       <ArrowRight className="size-4" />
                     </Link>
                   </div>
@@ -221,14 +220,14 @@ export default function AboutPage() {
                       <p key={note}>{note}</p>
                     ))}
                     <p>
-                      Find the wider group at{" "}
+                      {aboutLapenInnsLinkCopy.prefix}{" "}
                       <a
                         href={lapenInnsHref}
                         target="_blank"
                         rel="noreferrer"
                         className="text-secondary transition hover:text-secondary/80"
                       >
-                        lapeninns.com
+                        {aboutLapenInnsLinkCopy.label}
                       </a>
                       .
                     </p>
@@ -273,12 +272,12 @@ export default function AboutPage() {
         actions={[
           {
             href: "/menu",
-            label: "View the menu",
+            label: aboutSignoffCopy.primaryActionLabel,
             icon: <ArrowRight className="size-4" />,
           },
           {
             href: "/nepalese-kitchen",
-            label: "Explore the kitchen",
+            label: aboutSignoffCopy.secondaryActionLabel,
           },
         ]}
         details={

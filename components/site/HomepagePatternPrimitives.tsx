@@ -98,7 +98,7 @@ export function CompactHighlightGrid({
     <div
       className={cn(
         "grid gap-3",
-        columns === 2 ? "sm:grid-cols-2" : "sm:grid-cols-2 xl:grid-cols-3",
+        columns === 2 ? "sm:grid-cols-2" : "sm:grid-cols-2 lg:grid-cols-3",
         className
       )}
       {...props}

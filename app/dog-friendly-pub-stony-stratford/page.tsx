@@ -3,6 +3,7 @@ import { ArrowRight, MapPin, PawPrint } from "@phosphor-icons/react/dist/ssr"
 
 import { FeaturePage } from "@/components/site/FeaturePage"
 import {
+  commonActionLabels,
   dogFriendlyFaqSection,
   dogFriendlyInlineCtaCopy,
   dogFriendlySections,
@@ -30,17 +31,17 @@ export default function DogFriendlyPubPage() {
         actions: [
           {
             href: "/book",
-            label: "Book a table",
+            label: commonActionLabels.bookTable,
             icon: <PawPrint className="size-4" />,
           },
           {
             href: "/find-us",
-            label: "Plan your visit",
+            label: commonActionLabels.planVisit,
             icon: <MapPin className="size-4" />,
           },
           {
             href: "/beer-garden-stony-stratford",
-            label: "See outdoor seating",
+            label: commonActionLabels.seeOutdoorSeating,
             icon: <ArrowRight className="size-4" />,
           },
         ],

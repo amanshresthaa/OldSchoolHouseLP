@@ -10,7 +10,7 @@ import {
 } from "@phosphor-icons/react/dist/ssr"
 
 import { Button } from "@/components/ui/button"
-import { footerTagline } from "@/data/copy"
+import { footerBrandCopy, footerTagline } from "@/data/copy"
 import {
   directionsHref,
   openingHours,
@@ -38,25 +38,25 @@ interface FooterContactItem {
 
 const contactItems: FooterContactItem[] = [
   {
-    label: "Hours",
+    label: footerBrandCopy.contactLabels.hours,
     value: openingHours[0].hours,
     icon: Clock,
   },
   {
-    label: "Phone",
+    label: footerBrandCopy.contactLabels.phone,
     value: sitePhone,
     href: sitePhoneHref,
     icon: Phone,
   },
   {
-    label: "Email",
+    label: footerBrandCopy.contactLabels.email,
     value: siteEmail,
     href: siteEmailHref,
     icon: EnvelopeSimple,
   },
   {
-    label: "Find us",
-    value: "London Road, Stony Stratford",
+    label: footerBrandCopy.contactLabels.findUs,
+    value: footerBrandCopy.shortAddress,
     href: "/find-us",
     icon: MapPin,
   },
@@ -73,12 +73,12 @@ export function SiteFooter() {
   const socialItems = [
     {
       href: socialLinks.find((link) => link.includes("facebook.com")),
-      label: "Facebook",
+      label: footerBrandCopy.socialLabels.facebook,
       icon: FacebookLogo,
     },
     {
       href: socialLinks.find((link) => link.includes("instagram.com")),
-      label: "Instagram",
+      label: footerBrandCopy.socialLabels.instagram,
       icon: InstagramLogo,
     },
   ].filter(
@@ -104,9 +104,9 @@ export function SiteFooter() {
                 priority
               />
               <div>
-                <p className="eyebrow">The Old School House</p>
+                <p className="eyebrow">{footerBrandCopy.eyebrow}</p>
                 <p className="text-sm text-on-surface md:text-base">
-                  Traditional pub and Nepalese kitchen
+                  {footerBrandCopy.description}
                 </p>
               </div>
             </div>
@@ -121,14 +121,14 @@ export function SiteFooter() {
 
             <div className="flex flex-wrap gap-3 pt-5">
               <Button asChild>
-                <Link href="/book">Book a table</Link>
+                <Link href="/book">{footerBrandCopy.primaryActionLabel}</Link>
               </Button>
               <Button asChild variant="outline">
-                <Link href="/menu">View menu</Link>
+                <Link href="/menu">{footerBrandCopy.secondaryActionLabel}</Link>
               </Button>
               <Button asChild variant="ghost">
                 <a href={directionsHref} target="_blank" rel="noreferrer">
-                  Get directions
+                  {footerBrandCopy.directionsActionLabel}
                 </a>
               </Button>
             </div>

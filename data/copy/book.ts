@@ -11,6 +11,33 @@ export const bookOnlineSectionCopy = {
     "If you are booking a standard table, start online first. Use the phone or email if your plans need more context than a simple table reservation. If the pub is full when you look, call us to check for later availability or move to the menu, Sunday roast, and private hire pages for another way to plan the visit.",
 }
 
+export const bookActionCardCopy = {
+  phoneLabelPrefix: "Call",
+  emailLabelPrefix: "Email",
+  supportingTextSuffix:
+    "If your booking depends on a specific service time, please contact the pub directly.",
+}
+
+export const bookReserveCardCopy = {
+  eyebrow: "Reserve your table",
+  description:
+    "Online booking is still the fastest route for planned meals, while the call and email options stay visible when your booking needs a real person to sanity-check the timing.",
+  primaryActionLabel: "Book online",
+  secondaryActionLabel: "View menu first",
+}
+
+export const bookBookingSteps = [
+  {
+    title: "Book standard tables online first",
+  },
+  {
+    title: "Call or email when timing matters",
+  },
+  {
+    title: "Use the dedicated enquiry routes for bigger plans",
+  },
+]
+
 export const bookBeforeSection = {
   eyebrow: "Before you book",
   title: "The pub and the kitchen should both feel clear before you commit.",
@@ -47,4 +74,6 @@ export const bookSignoffCopy = {
   eyebrow: "Next step",
   title: "Book first, then let the menu do the persuading.",
   body: "The Old School House works best when the table is sorted and the menu is something you can enjoy discovering once the visit already feels easy to say yes to.",
+  primaryActionLabel: "Book online",
+  secondaryActionLabel: "View menu",
 }

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation"
 import * as React from "react"
 
 import { Button } from "@/components/ui/button"
+import { stickyBookingBarCopy } from "@/data/copy"
 import {
   bookOnlineHref,
   bookingHref,
@@ -35,15 +36,15 @@ function getActionPresentation(action: CtaConfig) {
   const normalizedLabel = action.label.toLowerCase()
 
   if (normalizedLabel.includes("direction") || action.href === directionsHref) {
-    return "Directions"
+    return stickyBookingBarCopy.directionsLabel
   }
 
   if (normalizedLabel.includes("menu") || action.href === "/menu") {
-    return "Menu"
+    return stickyBookingBarCopy.menuLabel
   }
 
   if (normalizedLabel.includes("book")) {
-    return "Book"
+    return stickyBookingBarCopy.bookLabel
   }
 
   return action.label
@@ -77,7 +78,7 @@ function getPrimaryAction(
   if (pathname === "/") {
     return {
       href: bookingHref,
-      label: "Book",
+      label: stickyBookingBarCopy.bookLabel,
     }
   }
 
@@ -85,37 +86,37 @@ function getPrimaryAction(
     return (
       activeRoute?.hero?.primaryAction ?? {
         href: bookingHref,
-        label: "Book online",
+        label: stickyBookingBarCopy.bookOnlineLabel,
       }
     )
   }
 
   return {
     href: bookOnlineHref,
-    label: "Book",
+    label: stickyBookingBarCopy.bookLabel,
   }
 }
 
 function getFallbackActions(pathname: string) {
   if (pathname === "/") {
     return [
-      { href: "/menu", label: "Menu" },
-      { href: sitePhoneHref, label: "Call" },
-      { href: directionsHref, label: "Directions" },
+      { href: "/menu", label: stickyBookingBarCopy.menuLabel },
+      { href: sitePhoneHref, label: stickyBookingBarCopy.callLabel },
+      { href: directionsHref, label: stickyBookingBarCopy.directionsLabel },
     ]
   }
 
   if (pathname === "/find-us") {
     return [
-      { href: directionsHref, label: "Directions" },
-      { href: sitePhoneHref, label: "Call" },
+      { href: directionsHref, label: stickyBookingBarCopy.directionsLabel },
+      { href: sitePhoneHref, label: stickyBookingBarCopy.callLabel },
     ]
   }
 
   if (pathname === "/menu") {
     return [
-      { href: sitePhoneHref, label: "Call" },
-      { href: "/menu-information", label: "Info" },
+      { href: sitePhoneHref, label: stickyBookingBarCopy.callLabel },
+      { href: "/menu-information", label: stickyBookingBarCopy.infoLabel },
     ]
   }
 
@@ -126,14 +127,14 @@ function getFallbackActions(pathname: string) {
     pathname === "/wakes-life-celebrations"
   ) {
     return [
-      { href: sitePhoneHref, label: "Call" },
-      { href: directionsHref, label: "Directions" },
+      { href: sitePhoneHref, label: stickyBookingBarCopy.callLabel },
+      { href: directionsHref, label: stickyBookingBarCopy.directionsLabel },
     ]
   }
 
   return [
-    { href: "/menu", label: "Menu" },
-    { href: sitePhoneHref, label: "Call" },
+    { href: "/menu", label: stickyBookingBarCopy.menuLabel },
+    { href: sitePhoneHref, label: stickyBookingBarCopy.callLabel },
   ]
 }
 
@@ -159,7 +160,7 @@ function getSecondaryAction(
       }
 
       return true
-    }) ?? { href: sitePhoneHref, label: "Call" }
+    }) ?? { href: sitePhoneHref, label: stickyBookingBarCopy.callLabel }
   )
 }
 

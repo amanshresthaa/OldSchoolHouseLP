@@ -78,7 +78,7 @@ export function EditorialHighlightsPanel({
 
   return (
     <div className="surface-frame p-5 md:p-6">
-      <div className="hidden gap-3 sm:grid sm:grid-cols-2 xl:grid-cols-3">
+      <div className="hidden gap-3 sm:grid sm:grid-cols-2 lg:grid-cols-3">
         {items.map((item, index) => (
           <EditorialHighlightCard key={item.title} item={item} index={index} />
         ))}

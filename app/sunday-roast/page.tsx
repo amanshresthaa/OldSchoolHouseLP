@@ -3,6 +3,7 @@ import { ArrowRight, ForkKnife } from "@phosphor-icons/react/dist/ssr"
 
 import { FeaturePage } from "@/components/site/FeaturePage"
 import {
+  commonActionLabels,
   sundayRoastChecklist,
   sundayRoastFaqSection,
   sundayRoastInlineCtaCopy,
@@ -32,12 +33,12 @@ export default function SundayRoastPage() {
         actions: [
           {
             href: "/menu",
-            label: "View menu",
+            label: commonActionLabels.viewMenu,
             icon: <ForkKnife className="size-4" />,
           },
           {
             href: "/group-dining-celebrations",
-            label: "Group dining",
+            label: commonActionLabels.groupDining,
             icon: <ArrowRight className="size-4" />,
           },
         ],

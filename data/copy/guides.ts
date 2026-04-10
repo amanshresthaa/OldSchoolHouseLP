@@ -139,4 +139,7 @@ export const guidesSignoffCopy = {
   eyebrow: "Next step",
   title: "Once the right guide has done its job, move into menu or booking.",
   body: "The point of the guides is simple: help you make the visit feel clearer, then get you to the page that actually finishes the job.",
+  openGuideLabel: "Open guide",
+  primaryActionLabel: "Browse the menu",
+  secondaryActionLabel: "Book a table",
 }

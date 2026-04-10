@@ -10,18 +10,21 @@ export const homeMenuShowcase = [
     description:
       "Steamed dumplings with a delicate wrapper, juicy filling, and a bright chutney on the side — the plate that gets passed around once and ordered again on the next visit.",
     alt: "Steamed momo dumplings with chutney served at The Old School House in Stony Stratford.",
+    ctaLabel: "Browse the menu",
   },
   {
     title: "Mixed grill",
     description:
       "Sizzling, smoky, and made for the middle of the table, with charred edges and enough spice to keep the next round of pints moving.",
     alt: "Mixed grill platter from the menu at The Old School House in Stony Stratford.",
+    ctaLabel: "See menu highlights",
   },
   {
     title: "Pub classics",
     description:
       "Pub classics keep mixed tables comfortable, while the Nepalese side of the kitchen gives the meal its talking point.",
     alt: "Pub classics served at The Old School House in Stony Stratford.",
+    ctaLabel: "Book a table",
   },
 ]
 
@@ -126,6 +129,14 @@ export const homeAtmosphereTiles = [
   },
 ]
 
+export const homeAtmosphereSectionCopy = {
+  eyebrow: "Atmosphere",
+  title: "A pub that feels welcoming before the food even arrives.",
+  description:
+    "One strong first impression up front, then the practical details that help you picture the room, the outdoor spaces, and how the visit will flow.",
+  exploreLabel: "Explore",
+}
+
 export const homeEventsFeature = {
   href: "/events",
   eyebrow: "Repeat-visit reasons",
@@ -135,11 +146,39 @@ export const homeEventsFeature = {
   alt: "Large-screen live sport setup inside The Old School House pub in Stony Stratford.",
 }
 
+export const homeEventsSectionCopy = {
+  eyebrow: "What’s on",
+  title:
+    "From match days to local team socials, there is more than one reason to come back.",
+  description:
+    "Live sport, theme-led nights, tastings, and informal community occasions all give regulars more than one reason to return.",
+  primaryActionLabel: "See what’s on",
+  secondaryActionLabel: "Private hire",
+}
+
 export const homeVisitSectionCopy = {
   eyebrow: "Visit us",
   title: "Easy to reach for lunch, dinner, or a later round on London Road.",
   description:
     "A short walk from Stony Stratford High Street, open daily from 10:00 to 00:30, with straightforward parking and quick route planning when you are on the move.",
+  addressLabel: "Address",
+  visitSignals: [
+    {
+      label: "Open daily",
+      valueKey: "hours",
+    },
+    {
+      label: "Parking",
+      value: "Small car park on site",
+    },
+    {
+      label: "In town",
+      value: "A short walk from the High Street and Horsefair Green",
+    },
+  ],
+  directionsLabel: "Get directions",
+  callLabel: "Call the pub",
+  visitGuideLabel: "See full visit guide",
 }
 
 export const homeInlineCtaCopy = {

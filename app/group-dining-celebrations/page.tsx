@@ -3,6 +3,7 @@ import { ArrowRight, UsersThree } from "@phosphor-icons/react/dist/ssr"
 
 import { FeaturePage } from "@/components/site/FeaturePage"
 import {
+  commonActionLabels,
   groupDiningChecklist,
   groupDiningFaqSection,
   groupDiningInlineCtaCopy,
@@ -32,12 +33,12 @@ export default function GroupDiningCelebrationsPage() {
         actions: [
           {
             href: "/book",
-            label: "Book a table",
+            label: commonActionLabels.bookTable,
             icon: <UsersThree className="size-4" />,
           },
           {
             href: "/private-hire",
-            label: "Private hire",
+            label: commonActionLabels.privateHire,
             icon: <ArrowRight className="size-4" />,
           },
         ],

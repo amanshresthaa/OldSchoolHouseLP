@@ -21,9 +21,15 @@ import { SectionHeading } from "@/components/site/SectionHeading"
 import { SiteActionCard } from "@/components/site/SiteActionCard"
 import {
   eventsActionCardText,
+  eventsActionLabels,
   eventsFaqSectionCopy,
+  eventsInquiryCardCopy,
   eventsInlineCtaCopy,
   eventsLiveSportCard,
+  eventsMediaCards,
+  eventsPlanningActionCardCopy,
+  eventsPlanningCards,
+  eventsPlanningSectionCopy,
   eventsPrivateHireCard,
   eventsRouteSection,
   eventsReturnVisitSection,
@@ -43,24 +49,6 @@ const route = getRouteConfig("/events")
 
 export const metadata: Metadata = buildPageMetadata(route!.meta)
 
-const eventsPlanningCards = [
-  {
-    title: "Sky Sports and TNT Sports in a proper pub room",
-    description:
-      "The sport offer is a reason to visit, but the table, food, and atmosphere around it are what keep the visit feeling like a local pub night.",
-  },
-  {
-    title: "Local teams and socials are part of the plan",
-    description:
-      "Pool teams, rugby clubs, cricket clubs, and other local groups all fit naturally into the rhythm of the pub.",
-  },
-  {
-    title: "Theme nights and tastings keep the week moving",
-    description:
-      "Tasting evenings, themed nights, and other weeknight plans help keep the pub lively without making it feel chaotic.",
-  },
-]
-
 export default function EventsPage() {
   return (
     <main>
@@ -78,12 +66,12 @@ export default function EventsPage() {
               actions={[
                 {
                   href: "/book",
-                  label: "Book for an event night",
+                  label: eventsActionLabels.primary,
                   icon: <ArrowRight className="size-4" />,
                 },
                 {
                   href: "/private-hire",
-                  label: "Private hire",
+                  label: eventsActionLabels.secondary,
                 },
               ]}
               supportingText={eventsActionCardText}
@@ -94,67 +82,63 @@ export default function EventsPage() {
           </ScrollReveal>
           <ScrollReveal
             delayMs={180}
-            className="grid gap-4 xl:grid-cols-[1.02fr_0.98fr]"
+            className="grid gap-4 lg:grid-cols-[1.02fr_0.98fr]"
           >
             <article className="surface-frame">
               <Image
                 src={sportsTvImage}
-                alt="Large-screen live sport setup inside The Old School House pub in Stony Stratford."
+                alt={eventsMediaCards[0].alt}
                 className="h-80 w-full object-cover md:h-[28rem]"
                 sizes="(min-width: 1280px) 50vw, 100vw"
               />
               <div className="surface-pane">
                 <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
-                  Match nights
+                  {eventsMediaCards[0].eyebrow}
                 </p>
                 <h3 className="pt-3 font-heading text-[1.2rem] leading-[1.12] tracking-[-0.02em] text-on-background">
-                  Big-screen sport with a proper pub backdrop
+                  {eventsMediaCards[0].title}
                 </h3>
                 <p className="pt-2 text-sm leading-relaxed text-on-surface">
-                  Big-screen sport, shaped around the Sky Sports and TNT Sports
-                  offer, still lands inside a room that feels like a proper pub
-                  rather than just somewhere to watch a fixture.
+                  {eventsMediaCards[0].description}
                 </p>
               </div>
             </article>
-            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-1">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
               <article className="surface-frame">
                 <Image
                   src={poolTableImage}
-                  alt="Pool table and fruit machine inside The Old School House pub in Stony Stratford."
+                  alt={eventsMediaCards[1].alt}
                   className="h-64 w-full object-cover"
                   sizes="(min-width: 640px) 50vw, 100vw"
                 />
                 <div className="surface-pane">
                   <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
-                    Casual nights
+                    {eventsMediaCards[1].eyebrow}
                   </p>
                   <h3 className="pt-3 font-heading text-[1.2rem] leading-[1.12] tracking-[-0.02em] text-on-background">
-                    Pool, rounds, and easy evening energy
+                    {eventsMediaCards[1].title}
                   </h3>
                   <p className="pt-2 text-sm leading-relaxed text-on-surface">
-                    Pool, drinks, and easy pub energy give local teams and
-                    casual evenings more to do between rounds and conversation.
+                    {eventsMediaCards[1].description}
                   </p>
                 </div>
               </article>
               <article className="surface-frame">
                 <Image
                   src={dartBoardImage}
-                  alt="Dart board area inside The Old School House pub in Stony Stratford."
+                  alt={eventsMediaCards[2].alt}
                   className="h-64 w-full object-cover"
                   sizes="(min-width: 640px) 50vw, 100vw"
                 />
                 <div className="surface-pane">
                   <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
-                    Pub-side favourites
+                    {eventsMediaCards[2].eyebrow}
                   </p>
                   <h3 className="pt-3 font-heading text-[1.2rem] leading-[1.12] tracking-[-0.02em] text-on-background">
-                    Darts keeps the social side in view
+                    {eventsMediaCards[2].title}
                   </h3>
                   <p className="pt-2 text-sm leading-relaxed text-on-surface">
-                    Darts keeps the social side of the pub in view alongside
-                    food, drinks, and sport-led plans.
+                    {eventsMediaCards[2].description}
                   </p>
                 </div>
               </article>
@@ -170,7 +154,7 @@ export default function EventsPage() {
           </ScrollReveal>
           <ScrollReveal
             delayMs={120}
-            className="grid gap-4 md:grid-cols-2 xl:grid-cols-3"
+            className="grid gap-4 md:grid-cols-2 lg:grid-cols-3"
           >
             {eventOccasions.map((occasion, index) => (
               <article
@@ -193,23 +177,23 @@ export default function EventsPage() {
             className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"
           >
             <SectionHeading
-              eyebrow="Planning around the calendar"
-              title="Need to sort a bigger sport night, team social, or themed visit?"
-              description="If the plan needs a little more than a standard booking, this is the easiest place to start."
+              eyebrow={eventsPlanningSectionCopy.eyebrow}
+              title={eventsPlanningSectionCopy.title}
+              description={eventsPlanningSectionCopy.description}
             />
             <SiteActionCard
               actions={[
                 {
                   href: "/private-hire",
-                  label: "Private hire options",
+                  label: eventsPlanningActionCardCopy.primaryActionLabel,
                   icon: <ArrowRight className="size-4" />,
                 },
                 {
                   href: "/book",
-                  label: "Standard table booking",
+                  label: eventsPlanningActionCardCopy.secondaryActionLabel,
                 },
               ]}
-              supportingText="Ideal for team socials, sport-led group visits, and busier event nights."
+              supportingText={eventsPlanningActionCardCopy.supportingText}
             />
           </ScrollReveal>
           <ScrollReveal delayMs={120}>
@@ -219,14 +203,12 @@ export default function EventsPage() {
             <div className="surface-frame">
               <div className="surface-pane">
                 <div className="max-w-2xl space-y-3">
-                  <p className="eyebrow">Need more than a standard booking?</p>
+                  <p className="eyebrow">{eventsInquiryCardCopy.eyebrow}</p>
                   <h3 className="font-heading text-[1.5rem] leading-[1.08] tracking-[-0.025em] text-on-background md:text-[1.7rem]">
-                    Email the team if the visit needs a little more context.
+                    {eventsInquiryCardCopy.title}
                   </h3>
                   <p className="text-sm leading-relaxed text-on-surface">
-                    It is the easiest option when the evening depends on
-                    screens, group size, timing, or a team and social setup
-                    rather than just a normal table booking.
+                    {eventsInquiryCardCopy.description}
                   </p>
                 </div>
                 <div className="flex flex-col gap-3 pt-6 sm:flex-row">
@@ -234,20 +216,18 @@ export default function EventsPage() {
                     href={siteEmailHref}
                     className="cta-primary inline-flex h-12 items-center justify-center gap-2.5 px-6 text-sm font-semibold"
                   >
-                    Email the team
+                    {eventsInquiryCardCopy.primaryActionLabel}
                     <EnvelopeSimple className="size-4" />
                   </a>
                   <a
                     href={sitePhoneHref}
                     className="cta-secondary inline-flex h-12 items-center justify-center px-6"
                   >
-                    Call the pub
+                    {eventsInquiryCardCopy.secondaryActionLabel}
                   </a>
                 </div>
                 <p className="pt-4 text-sm leading-relaxed text-on-surface/72">
-                  Mention the fixture or occasion, rough guest numbers,
-                  preferred date, and anything the team should know about the
-                  setup.
+                  {eventsInquiryCardCopy.footer}
                 </p>
               </div>
             </div>

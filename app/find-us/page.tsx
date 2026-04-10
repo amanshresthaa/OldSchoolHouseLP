@@ -21,8 +21,13 @@ import {
   findUsAccessibilitySection,
   findUsActionCardText,
   findUsFaqSectionCopy,
+  findUsArrivalCards,
+  findUsArrivalSectionCopy,
   findUsAddressSection,
   findUsInlineCtaCopy,
+  findUsLocalVisitHighlights,
+  findUsLocationSectionCopy,
+  findUsMapActionLabel,
 } from "@/data/copy"
 import {
   accessibilityNotes,
@@ -56,24 +61,6 @@ const visitFaqs = localFaqs.filter((faq) =>
   ].includes(faq.question)
 )
 
-const localVisitHighlights = [
-  {
-    title: "Near Stony Stratford High Street",
-    description:
-      "The Old School House sits on London Road, close enough for planned dinners, town-centre drinks, and meals that start after time on the High Street or Horsefair Green.",
-  },
-  {
-    title: "Useful for local and Milton Keynes visitors",
-    description:
-      "The location works for Stony Stratford regulars, nearby Milton Keynes diners, and visitors who want a characterful pub with food before heading back out.",
-  },
-  {
-    title: "Easy next steps once you know where we are",
-    description:
-      "Use the menu when you want to browse first, or move straight to booking if the route check has already turned into dinner plans.",
-  },
-]
-
 export default function FindUsPage() {
   return (
     <main>
@@ -90,22 +77,18 @@ export default function FindUsPage() {
             delayMs={0}
             className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"
           >
-            <SectionHeading
-              eyebrow="Location in town"
-              title="Looking for a pub on London Road in Stony Stratford?"
-              description="Everything you need before you head over: where we are, how to get here, and what to expect when you arrive."
-            />
+            <SectionHeading {...findUsLocationSectionCopy} />
             <div className="flex flex-wrap gap-4 text-sm font-semibold text-secondary">
               <Link href="/menu" className="transition hover:text-secondary/80">
-                Browse the pub menu
+                {findUsLocationSectionCopy.menuLinkLabel}
               </Link>
               <Link href="/book" className="transition hover:text-secondary/80">
-                Book a table in Stony Stratford
+                {findUsLocationSectionCopy.bookingLinkLabel}
               </Link>
             </div>
           </ScrollReveal>
           <ScrollReveal delayMs={120}>
-            <CompactHighlightGrid items={localVisitHighlights} />
+            <CompactHighlightGrid items={findUsLocalVisitHighlights} />
           </ScrollReveal>
           <ScrollReveal
             delayMs={180}
@@ -118,14 +101,14 @@ export default function FindUsPage() {
                   href: route!.hero!.primaryAction.href,
                   label: route!.hero!.primaryAction.label,
                 },
-                { href: mapHref, label: "Open map" },
+                { href: mapHref, label: findUsMapActionLabel },
               ]}
               supportingText={findUsActionCardText}
             />
           </ScrollReveal>
           <ScrollReveal
             delayMs={240}
-            className="grid gap-4 xl:grid-cols-[0.85fr_1.15fr]"
+            className="grid gap-4 lg:grid-cols-[0.85fr_1.15fr]"
           >
             <div className="space-y-4">
               <div className="surface-panel">
@@ -199,50 +182,44 @@ export default function FindUsPage() {
       <section className={getSectionBandClass("warm", "page-section")}>
         <div className="section-shell flex flex-col gap-5">
           <ScrollReveal delayMs={0}>
-            <SectionHeading
-              eyebrow="On arrival"
-              title="A clearer picture of the frontage and approach before you set off."
-              description="Use these quick views to recognise the building and get a feel for the easier arrival setup."
-            />
+            <SectionHeading {...findUsArrivalSectionCopy} />
           </ScrollReveal>
           <ScrollReveal delayMs={120} className="grid gap-4 md:grid-cols-2">
             <article className="surface-frame">
               <Image
                 src={pubExteriorImage}
-                alt="Exterior of The Old School House pub on London Road in Stony Stratford, close to the High Street."
+                alt={findUsArrivalCards[0].alt}
                 className="h-72 w-full object-cover md:h-80"
                 sizes="(min-width: 768px) 50vw, 100vw"
               />
               <div className="surface-pane">
                 <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
-                  Frontage
+                  {findUsArrivalCards[0].eyebrow}
                 </p>
                 <h3 className="pt-3 font-heading text-[1.2rem] leading-[1.12] tracking-[-0.02em] text-on-background">
-                  Recognise the pub from London Road
+                  {findUsArrivalCards[0].title}
                 </h3>
                 <p className="pt-2 text-sm leading-relaxed text-on-surface">
-                  The pub is easy to recognise on London Road once you know the
-                  brick frontage you are looking for.
+                  {findUsArrivalCards[0].description}
                 </p>
               </div>
             </article>
             <article className="surface-frame">
               <Image
                 src={customerParkingImage}
-                alt="Customer parking area at The Old School House pub in Stony Stratford."
+                alt={findUsArrivalCards[1].alt}
                 className="h-72 w-full object-cover md:h-80"
                 sizes="(min-width: 768px) 50vw, 100vw"
               />
               <div className="surface-pane">
                 <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-secondary uppercase">
-                  Arrival
+                  {findUsArrivalCards[1].eyebrow}
                 </p>
                 <h3 className="pt-3 font-heading text-[1.2rem] leading-[1.12] tracking-[-0.02em] text-on-background">
-                  Parking and easier arrival
+                  {findUsArrivalCards[1].title}
                 </h3>
                 <p className="pt-2 text-sm leading-relaxed text-on-surface">
-                  A small customer parking area helps make planned dinners,
-                  family visits, and longer stays feel simpler from the start.
+                  {findUsArrivalCards[1].description}
                 </p>
               </div>
             </article>

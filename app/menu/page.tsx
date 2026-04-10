@@ -16,6 +16,9 @@ import { Button } from "@/components/ui/button"
 import {
   menuDrinksSection,
   menuInlineCtaCopy,
+  menuLocalDiningSectionCopy,
+  menuLocalIntentCards,
+  menuQuickInfoCopy,
   menuSchemaDescription,
   menuSignoffCopy,
   menuWhatToExpect,
@@ -42,24 +45,6 @@ import { cn } from "@/lib/utils"
 const route = getRouteConfig("/menu")
 
 export const metadata: Metadata = buildPageMetadata(route!.meta)
-
-const menuLocalIntentCards = [
-  {
-    title: "Built for mixed tables in Stony Stratford",
-    description:
-      "The menu works when one person wants a familiar pub classic and someone else wants momo, curries, grills, or another Nepalese dish worth exploring.",
-  },
-  {
-    title: "Useful for lunch, dinner, and Sunday plans",
-    description:
-      "Browse this live menu before a midweek meal, a weekend catch-up, or a Sunday visit when you want the table and the food direction sorted in advance.",
-  },
-  {
-    title: "Live HTML menu for local search and real visits",
-    description:
-      "Because the menu is readable on-page, it is easier to search, easier to browse on your phone, and more useful when you are deciding whether to book.",
-  },
-]
 
 export default function MenuPage() {
   return (
@@ -137,7 +122,7 @@ export default function MenuPage() {
                 <div className="grid gap-6 lg:grid-cols-3 lg:gap-8">
                   <div className="space-y-1 text-sm leading-7 text-on-surface">
                     <p className="mb-3 text-[0.72rem] font-semibold tracking-[0.16em] text-secondary uppercase">
-                      Hours
+                      {menuQuickInfoCopy.hoursLabel}
                     </p>
                     {foodHours.map((line) => (
                       <p key={line}>{line}</p>
@@ -146,24 +131,26 @@ export default function MenuPage() {
 
                   <div className="space-y-1 text-sm leading-7 text-on-surface">
                     <p className="mb-3 text-[0.72rem] font-semibold tracking-[0.16em] text-secondary uppercase">
-                      What to expect
+                      {menuQuickInfoCopy.whatToExpectLabel}
                     </p>
                     <p>{menuWhatToExpect}</p>
                   </div>
 
                   <div className="space-y-3">
                     <p className="mb-3 text-[0.72rem] font-semibold tracking-[0.16em] text-secondary uppercase">
-                      Resources
+                      {menuQuickInfoCopy.resourcesLabel}
                     </p>
                     <div className="flex flex-wrap gap-3">
                       <Button asChild size="sm" variant="outline">
                         <a href={siteMenuPdfHref} download>
-                          Download PDF
+                          {menuQuickInfoCopy.pdfLabel}
                           <DownloadSimple />
                         </a>
                       </Button>
                       <Button asChild size="sm" variant="outline">
-                        <Link href="/menu-information">Menu info</Link>
+                        <Link href="/menu-information">
+                          {menuQuickInfoCopy.infoLabel}
+                        </Link>
                       </Button>
                     </div>
                   </div>
@@ -177,11 +164,7 @@ export default function MenuPage() {
       <section className={cn("page-section", getSectionBandClass("plain"))}>
         <div className="section-shell flex flex-col gap-5">
           <ScrollReveal delayMs={0}>
-            <SectionHeading
-              eyebrow="Menu for local dining"
-              title="A Stony Stratford pub menu built for real lunch and dinner plans."
-              description="This is not just a list of dishes. It is a clearer picture of how The Old School House works for town-centre meals, group plans, and bookings that need broad menu appeal."
-            />
+            <SectionHeading {...menuLocalDiningSectionCopy} />
           </ScrollReveal>
 
           <ScrollReveal delayMs={120}>
@@ -246,12 +229,12 @@ export default function MenuPage() {
         actions={[
           {
             href: sitePhoneHref,
-            label: "Call the bar",
+            label: menuSignoffCopy.primaryActionLabel,
             icon: <Phone className="size-4" />,
           },
           {
             href: bookOnlineHref,
-            label: "Book a table",
+            label: menuSignoffCopy.secondaryActionLabel,
           },
         ]}
         details={

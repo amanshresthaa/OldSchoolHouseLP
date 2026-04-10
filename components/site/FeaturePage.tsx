@@ -116,7 +116,7 @@ function FeaturePageFeatureSplit({ cards }: { cards: HighlightItem[] }) {
     <div
       className={cn(
         "grid gap-4",
-        supportingCards.length > 0 && "xl:grid-cols-[0.9fr_1.1fr]"
+        supportingCards.length > 0 && "lg:grid-cols-[0.9fr_1.1fr]"
       )}
     >
       <article className="surface-frame">
@@ -141,7 +141,7 @@ function FeaturePageFeatureSplit({ cards }: { cards: HighlightItem[] }) {
       </article>
 
       {supportingCards.length > 0 ? (
-        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-1 xl:content-start">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1 lg:content-start">
           {supportingCards.map((card, index) => (
             <article
               key={card.title}

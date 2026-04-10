@@ -8,6 +8,7 @@ import {
 
 import { FeaturePage } from "@/components/site/FeaturePage"
 import {
+  commonActionLabels,
   wakesChecklist,
   wakesFaqSection,
   wakesInlineCtaCopy,
@@ -35,12 +36,12 @@ export default function WakesLifeCelebrationsPage() {
         actions: [
           {
             href: sitePhoneHref,
-            label: "Call to plan the wake",
+            label: commonActionLabels.callToPlanWake,
             icon: <Phone className="size-4" />,
           },
           {
             href: siteEmailHref,
-            label: "Request availability by email",
+            label: commonActionLabels.requestAvailabilityByEmail,
             icon: <EnvelopeSimple className="size-4" />,
           },
         ],
@@ -58,17 +59,17 @@ export default function WakesLifeCelebrationsPage() {
         actions: [
           {
             href: sitePhoneHref,
-            label: "Call to plan the wake",
+            label: commonActionLabels.callToPlanWake,
             icon: <Phone className="size-4" />,
           },
           {
             href: siteEmailHref,
-            label: "Email the team",
+            label: commonActionLabels.emailTeam,
             icon: <EnvelopeSimple className="size-4" />,
           },
           {
             href: "/menu",
-            label: "Browse the main menu",
+            label: commonActionLabels.browseMainMenu,
             icon: <ForkKnife className="size-4" />,
           },
         ],

@@ -10,6 +10,8 @@ export const privacyHeroCopy = {
     "When you message us or make a booking, here is how we use that information.",
   description:
     "We keep this simple: we use the details you share to answer your message, help with your visit, and keep the website working as it should.",
+  primaryActionLabel: "Email a privacy question",
+  secondaryActionLabel: "Call the pub",
 }
 
 export const privacyShortVersionSection = {
@@ -59,10 +61,19 @@ export const privacySections = [
 
 export const privacyLastUpdated = "Last updated: 23 March 2026"
 
+export const privacyContactStripCopy = {
+  venueLabel: "Venue:",
+  addressLabel: "Address:",
+  emailLabel: "Email:",
+  phoneLabel: "Phone:",
+}
+
 export const privacySignoffCopy = {
   eyebrow: "Questions?",
   title: "Contact the pub directly if you want to ask about your information.",
   description:
     "We keep this page plain on purpose, and we will do the same if you get in touch with a privacy question.",
   body: "Whether you want to correct something, ask what we hold, or simply check how a booking detail is used, we are happy to point you in the right direction.",
+  primaryActionLabel: "Email a privacy question",
+  secondaryActionLabel: "Call the pub",
 }
