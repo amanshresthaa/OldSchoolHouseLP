@@ -271,7 +271,7 @@ export default function AboutPage() {
         body={<p>{aboutSignoffCopy.body}</p>}
         actions={[
           {
-            href: "/menu",
+            href: "/our-menus",
             label: aboutSignoffCopy.primaryActionLabel,
             icon: <ArrowRight className="size-4" />,
           },

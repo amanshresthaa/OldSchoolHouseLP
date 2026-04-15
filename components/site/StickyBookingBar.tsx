@@ -39,7 +39,7 @@ function getActionPresentation(action: CtaConfig) {
     return stickyBookingBarCopy.directionsLabel
   }
 
-  if (normalizedLabel.includes("menu") || action.href === "/menu") {
+  if (normalizedLabel.includes("menu") || action.href === "/our-menus") {
     return stickyBookingBarCopy.menuLabel
   }
 
@@ -100,20 +100,20 @@ function getPrimaryAction(
 function getFallbackActions(pathname: string) {
   if (pathname === "/") {
     return [
-      { href: "/menu", label: stickyBookingBarCopy.menuLabel },
+      { href: "/our-menus", label: stickyBookingBarCopy.menuLabel },
       { href: sitePhoneHref, label: stickyBookingBarCopy.callLabel },
       { href: directionsHref, label: stickyBookingBarCopy.directionsLabel },
     ]
   }
 
-  if (pathname === "/find-us") {
+  if (pathname === "/contact-us") {
     return [
       { href: directionsHref, label: stickyBookingBarCopy.directionsLabel },
       { href: sitePhoneHref, label: stickyBookingBarCopy.callLabel },
     ]
   }
 
-  if (pathname === "/menu") {
+  if (pathname === "/our-menus") {
     return [
       { href: sitePhoneHref, label: stickyBookingBarCopy.callLabel },
       { href: "/menu-information", label: stickyBookingBarCopy.infoLabel },
@@ -121,7 +121,7 @@ function getFallbackActions(pathname: string) {
   }
 
   if (
-    pathname === "/events" ||
+    pathname === "/whats-on" ||
     pathname === "/private-hire" ||
     pathname === "/group-dining-celebrations" ||
     pathname === "/wakes-life-celebrations"
@@ -133,7 +133,7 @@ function getFallbackActions(pathname: string) {
   }
 
   return [
-    { href: "/menu", label: stickyBookingBarCopy.menuLabel },
+    { href: "/our-menus", label: stickyBookingBarCopy.menuLabel },
     { href: sitePhoneHref, label: stickyBookingBarCopy.callLabel },
   ]
 }

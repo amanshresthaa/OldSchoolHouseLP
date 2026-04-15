@@ -30,10 +30,10 @@ export const routeConfigs: RouteConfig[] = [
       description:
         "Come for the familiar pub comfort, stay for the full English, momo, curries, roasts, and the kind of welcome that makes a second visit easy.",
       primaryAction: { href: bookOnlineHref, label: "Book a table" },
-      secondaryAction: { href: "/menu", label: "View menu" },
+      secondaryAction: { href: "/our-menus", label: "View menu" },
     },
     schema: { localBusiness: true, faq: true },
-    stickySecondaryAction: { href: "/menu", label: "Menu" },
+    stickySecondaryAction: { href: "/our-menus", label: "Menu" },
   },
   {
     href: "/about",
@@ -53,10 +53,10 @@ export const routeConfigs: RouteConfig[] = [
       description:
         "The Old School House keeps the classic pub ethos front and centre, then adds a Nepalese kitchen that gives the menu a stronger identity.",
       primaryAction: { href: bookOnlineHref, label: "Book a table" },
-      secondaryAction: { href: "/menu", label: "Browse the menu" },
+      secondaryAction: { href: "/our-menus", label: "Browse the menu" },
     },
     schema: { localBusiness: true },
-    stickySecondaryAction: { href: "/menu", label: "Menu" },
+    stickySecondaryAction: { href: "/our-menus", label: "Menu" },
   },
   {
     href: "/about/sanjog-gautam",
@@ -81,7 +81,7 @@ export const routeConfigs: RouteConfig[] = [
     stickySecondaryAction: { href: "/about", label: "About" },
   },
   {
-    href: "/menu",
+    href: "/our-menus",
     label: "Menu",
     primaryNav: true,
     sitemap: true,
@@ -90,7 +90,7 @@ export const routeConfigs: RouteConfig[] = [
       title: "Stony Stratford Pub Menu and Nepalese Food",
       description:
         "Browse the live pub menu for the full English, lunch menu favourites, Nepalese dishes, pub classics, Sunday roast, desserts, sides, and drinks at The Old School House in Stony Stratford.",
-      canonical: "/menu",
+      canonical: "/our-menus",
     },
     hero: {
       eyebrow: "Food and drink",
@@ -128,7 +128,7 @@ export const routeConfigs: RouteConfig[] = [
     stickySecondaryAction: { href: sitePhoneHref, label: "Call" },
   },
   {
-    href: "/events",
+    href: "/whats-on",
     label: "Events",
     navLabel: "Events",
     primaryNav: true,
@@ -138,7 +138,7 @@ export const routeConfigs: RouteConfig[] = [
       title: "Pub Events and Live Sport in Stony Stratford",
       description:
         "See pub events at The Old School House, from Sky Sports and TNT Sports match nights to tastings, team socials, and community events in Stony Stratford.",
-      canonical: "/events",
+      canonical: "/whats-on",
     },
     hero: {
       eyebrow: "What’s on",
@@ -182,7 +182,7 @@ export const routeConfigs: RouteConfig[] = [
     stickySecondaryAction: { href: siteEmailHref, label: "Enquire" },
   },
   {
-    href: "/find-us",
+    href: "/contact-us",
     label: "Find Us",
     primaryNav: true,
     sitemap: true,
@@ -191,7 +191,7 @@ export const routeConfigs: RouteConfig[] = [
       title: "Find Our Stony Stratford Pub on London Road",
       description:
         "Find The Old School House on London Road in Stony Stratford with directions, address details, parking notes, map links, and contact options.",
-      canonical: "/find-us",
+      canonical: "/contact-us",
     },
     hero: {
       eyebrow: "Find us",
@@ -205,7 +205,7 @@ export const routeConfigs: RouteConfig[] = [
     stickySecondaryAction: { href: directionsHref, label: "Directions" },
   },
   {
-    href: "/sunday-roast",
+    href: "/sunday-lunch",
     label: "Sunday Roast",
     sitemap: true,
     published: featureFlags.sundayRoastConfirmed,
@@ -213,7 +213,7 @@ export const routeConfigs: RouteConfig[] = [
       title: "Sunday Roast in Stony Stratford",
       description:
         "Join us for Sunday roast at a traditional Stony Stratford pub with a menu that gives everyone at the table a reason to stay.",
-      canonical: "/sunday-roast",
+      canonical: "/sunday-lunch",
     },
     hero: {
       eyebrow: "Sunday roast",
@@ -221,10 +221,10 @@ export const routeConfigs: RouteConfig[] = [
       description:
         "Available every Sunday from 12pm, with roast potatoes, seasonal vegetables, Yorkshire pudding, and gravy served as standard.",
       primaryAction: { href: bookOnlineHref, label: "Book Sunday lunch" },
-      secondaryAction: { href: "/menu", label: "See the menu" },
+      secondaryAction: { href: "/our-menus", label: "See the menu" },
     },
     schema: { faq: true },
-    stickySecondaryAction: { href: "/menu", label: "Menu" },
+    stickySecondaryAction: { href: "/our-menus", label: "Menu" },
   },
   {
     href: "/nepalese-kitchen",
@@ -243,10 +243,10 @@ export const routeConfigs: RouteConfig[] = [
       description:
         "The pub brings people in. The kitchen is what makes the meal more memorable, especially if you start with the momo and order across the house favourites.",
       primaryAction: { href: bookOnlineHref, label: "Book to try it" },
-      secondaryAction: { href: "/menu", label: "View menu" },
+      secondaryAction: { href: "/our-menus", label: "View menu" },
     },
     schema: { faq: true },
-    stickySecondaryAction: { href: "/menu", label: "Menu" },
+    stickySecondaryAction: { href: "/our-menus", label: "Menu" },
   },
   {
     href: "/nepalese-food-milton-keynes",
@@ -266,11 +266,11 @@ export const routeConfigs: RouteConfig[] = [
         "A complete guide to Nepalese food in Milton Keynes, built for first-time diners and curious locals alike.",
       description:
         "Use this page when you want the cuisine explained properly before you move into a menu, a signature dish guide, or a real booking.",
-      primaryAction: { href: "/menu", label: "Browse the menu" },
+      primaryAction: { href: "/our-menus", label: "Browse the menu" },
       secondaryAction: { href: bookOnlineHref, label: "Book a table" },
     },
     schema: { faq: true },
-    stickySecondaryAction: { href: "/menu", label: "Menu" },
+    stickySecondaryAction: { href: "/our-menus", label: "Menu" },
   },
   {
     href: "/what-is-nepalese-food",
@@ -290,10 +290,10 @@ export const routeConfigs: RouteConfig[] = [
       description:
         "Use this page when the food sounds interesting but you want the dishes explained plainly before the booking or the first order.",
       primaryAction: { href: "/nepalese-kitchen", label: "See the kitchen" },
-      secondaryAction: { href: "/menu", label: "Browse the menu" },
+      secondaryAction: { href: "/our-menus", label: "Browse the menu" },
     },
     schema: { faq: true },
-    stickySecondaryAction: { href: "/menu", label: "Menu" },
+    stickySecondaryAction: { href: "/our-menus", label: "Menu" },
   },
   {
     href: "/momo",
@@ -312,11 +312,11 @@ export const routeConfigs: RouteConfig[] = [
       title: "Momo is the first dish many tables should start with.",
       description:
         "If you want one Nepalese dish that makes the menu feel approachable straight away, this is the clearest starting point.",
-      primaryAction: { href: "/menu", label: "Browse the menu" },
+      primaryAction: { href: "/our-menus", label: "Browse the menu" },
       secondaryAction: { href: bookOnlineHref, label: "Book a table" },
     },
     schema: { faq: true },
-    stickySecondaryAction: { href: "/menu", label: "Menu" },
+    stickySecondaryAction: { href: "/our-menus", label: "Menu" },
   },
   {
     href: "/gluten-free-curries-stony-stratford",
@@ -336,7 +336,7 @@ export const routeConfigs: RouteConfig[] = [
         "A practical guide to gluten-free curries and Nepalese dishes in Stony Stratford.",
       description:
         "Use this page to shortlist dishes from the live menu, then confirm the detail with the team before you order.",
-      primaryAction: { href: "/menu", label: "Browse the live menu" },
+      primaryAction: { href: "/our-menus", label: "Browse the live menu" },
       secondaryAction: { href: "/menu-information", label: "Menu help" },
     },
     schema: { faq: true },
@@ -361,10 +361,10 @@ export const routeConfigs: RouteConfig[] = [
       description:
         "Use this page if you know Indian dishes already and want a quick, clearer picture of what changes when you move into the Nepalese side of the menu.",
       primaryAction: { href: "/nepalese-kitchen", label: "See the kitchen" },
-      secondaryAction: { href: "/menu", label: "Browse the menu" },
+      secondaryAction: { href: "/our-menus", label: "Browse the menu" },
     },
     schema: { faq: true },
-    stickySecondaryAction: { href: "/menu", label: "Menu" },
+    stickySecondaryAction: { href: "/our-menus", label: "Menu" },
   },
   {
     href: "/traditional-pub-with-nepalese-kitchen",
@@ -385,10 +385,10 @@ export const routeConfigs: RouteConfig[] = [
       description:
         "This guide helps when you are comparing familiar local pub comfort with the idea of a venue that gives the food more identity once you sit down.",
       primaryAction: { href: "/about", label: "About the pub" },
-      secondaryAction: { href: "/menu", label: "Browse the menu" },
+      secondaryAction: { href: "/our-menus", label: "Browse the menu" },
     },
     schema: { faq: true },
-    stickySecondaryAction: { href: "/menu", label: "Menu" },
+    stickySecondaryAction: { href: "/our-menus", label: "Menu" },
   },
   {
     href: "/where-to-eat-in-stony-stratford",
@@ -408,14 +408,14 @@ export const routeConfigs: RouteConfig[] = [
         "When you have not chosen the venue yet, start with the kind of outing you want.",
       description:
         "This page helps when the question is still where to eat in Stony Stratford rather than whether you are ready to book already.",
-      primaryAction: { href: "/menu", label: "Browse the menu" },
+      primaryAction: { href: "/our-menus", label: "Browse the menu" },
       secondaryAction: { href: bookOnlineHref, label: "Book a table" },
     },
     schema: { faq: true },
     stickySecondaryAction: { href: directionsHref, label: "Directions" },
   },
   {
-    href: "/live-sport",
+    href: "/live-sports",
     label: "Live Sport",
     sitemap: true,
     published: true,
@@ -423,7 +423,7 @@ export const routeConfigs: RouteConfig[] = [
       title: "Live Sport Pub in Stony Stratford",
       description:
         "Watch live sport at The Old School House, a traditional Stony Stratford pub with food, drinks, and easy booking for sport-led visits.",
-      canonical: "/live-sport",
+      canonical: "/live-sports",
     },
     hero: {
       eyebrow: "Live sport",
@@ -431,7 +431,7 @@ export const routeConfigs: RouteConfig[] = [
       description:
         "Come in for the sport, stay for the food, and book ahead when you want the table sorted before you arrive.",
       primaryAction: { href: bookOnlineHref, label: "Book a table" },
-      secondaryAction: { href: "/events", label: "See what’s on" },
+      secondaryAction: { href: "/whats-on", label: "See what’s on" },
     },
     schema: { faq: true },
     stickySecondaryAction: { href: bookOnlineHref, label: "Book" },
@@ -453,7 +453,7 @@ export const routeConfigs: RouteConfig[] = [
       description:
         "The front garden and courtyard give you more than one way to settle in when the weather is on your side.",
       primaryAction: { href: bookOnlineHref, label: "Book a table" },
-      secondaryAction: { href: "/find-us", label: "Plan your visit" },
+      secondaryAction: { href: "/contact-us", label: "Plan your visit" },
     },
     schema: { faq: true },
     stickySecondaryAction: { href: directionsHref, label: "Directions" },
@@ -521,7 +521,7 @@ export const routeConfigs: RouteConfig[] = [
         "The easiest place to start if you have a menu or allergy question.",
       description:
         "Use this page for dietary guidance, menu-format help, and the quickest route to asking the pub directly when something matters to today.",
-      primaryAction: { href: "/menu", label: "Browse the live menu" },
+      primaryAction: { href: "/our-menus", label: "Browse the live menu" },
       secondaryAction: {
         href: siteDinnerMenuPdfHref,
         label: "Download dinner PDF",
@@ -573,11 +573,11 @@ export const routeConfigs: RouteConfig[] = [
       title: "Guides that make the pub, the food, and the next step clearer.",
       description:
         "Use these pages when you are comparing places to eat, trying to understand Nepalese food, or narrowing down whether this pub is the right fit.",
-      primaryAction: { href: "/menu", label: "Browse the menu" },
+      primaryAction: { href: "/our-menus", label: "Browse the menu" },
       secondaryAction: { href: bookOnlineHref, label: "Book a table" },
     },
     schema: { faq: true },
-    stickySecondaryAction: { href: "/menu", label: "Menu" },
+    stickySecondaryAction: { href: "/our-menus", label: "Menu" },
   },
   {
     href: "/privacy",
@@ -645,7 +645,7 @@ export const routeConfigs: RouteConfig[] = [
       description:
         "With a front garden, private courtyard, and an easy London Road location, The Old School House works well when the dog is part of the plan too.",
       primaryAction: { href: bookOnlineHref, label: "Book a table" },
-      secondaryAction: { href: "/find-us", label: "Plan your visit" },
+      secondaryAction: { href: "/contact-us", label: "Plan your visit" },
     },
     schema: { faq: true },
     stickySecondaryAction: { href: directionsHref, label: "Directions" },
@@ -668,10 +668,10 @@ export const routeConfigs: RouteConfig[] = [
       description:
         "The Old School House is built around a warm traditional pub setting, outdoor space, and a menu that makes family visits easier to organise.",
       primaryAction: { href: bookOnlineHref, label: "Book a family table" },
-      secondaryAction: { href: "/menu", label: "Browse the menu" },
+      secondaryAction: { href: "/our-menus", label: "Browse the menu" },
     },
     schema: { faq: true },
-    stickySecondaryAction: { href: "/menu", label: "Menu" },
+    stickySecondaryAction: { href: "/our-menus", label: "Menu" },
   },
   {
     href: "/accessibility",
@@ -691,7 +691,7 @@ export const routeConfigs: RouteConfig[] = [
       description:
         "If you need help with access, parking, prams, seating, or the best route into the pub, The Old School House team is happy to talk it through before you travel.",
       primaryAction: { href: sitePhoneHref, label: "Call the pub" },
-      secondaryAction: { href: "/find-us", label: "Find us" },
+      secondaryAction: { href: "/contact-us", label: "Find us" },
     },
     schema: { faq: true },
     stickySecondaryAction: { href: sitePhoneHref, label: "Call" },
@@ -706,11 +706,11 @@ export const siteNav: NavItem[] = routeConfigs
   }))
 
 const footerCoreRouteHrefs = new Set([
-  "/menu",
+  "/our-menus",
   "/book",
-  "/events",
+  "/whats-on",
   "/private-hire",
-  "/find-us",
+  "/contact-us",
 ])
 
 export const siteFooterCoreLinks: NavItem[] = routeConfigs

@@ -43,7 +43,7 @@ test("homepage keeps the pub-led headline and conversion links visible", async (
   await page.goto("/", { waitUntil: "domcontentloaded" })
 
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "Traditional pub, Stony Stratford first"
+    "Traditional pub and Nepalese kitchen on London Road in Stony Stratford."
   )
   await expect(
     page.getByRole("link", { name: /book a table/i }).first()
@@ -51,12 +51,8 @@ test("homepage keeps the pub-led headline and conversion links visible", async (
   await expect(
     page.getByRole("link", { name: /view menu/i }).first()
   ).toBeVisible()
-  await expect(
-    page.getByRole("link", { name: /where to eat in stony stratford/i })
-  ).toBeVisible()
-  await expect(
-    page.getByRole("link", { name: /more about the pub/i })
-  ).toBeVisible()
+  await expect(page.locator('a[href="/about"]').first()).toBeVisible()
+  await expect(page.locator('a[href="/contact-us"]').first()).toBeVisible()
 })
 
 test("nepalese kitchen page links back into menu and booking", async ({
@@ -66,6 +62,6 @@ test("nepalese kitchen page links back into menu and booking", async ({
 
   await expect(
     page.getByRole("link", { name: /view menu/i }).first()
-  ).toHaveAttribute("href", "/menu")
+  ).toHaveAttribute("href", "/our-menus")
   await expect(page.getByRole("link", { name: /book/i }).first()).toBeVisible()
 })

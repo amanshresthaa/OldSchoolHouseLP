@@ -35,7 +35,7 @@ export default function BeerGardenPage() {
             icon: <ArrowRight className="size-4" />,
           },
           {
-            href: "/find-us",
+            href: "/contact-us",
             label: commonActionLabels.planVisit,
             icon: <MapPin className="size-4" />,
           },

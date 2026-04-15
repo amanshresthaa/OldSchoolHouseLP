@@ -11,10 +11,10 @@ import {
 const requiredPublicRoutes = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
-  { href: "/menu", label: "Menu" },
-  { href: "/events", label: "Events" },
+  { href: "/our-menus", label: "Menu" },
+  { href: "/whats-on", label: "Events" },
   { href: "/private-hire", label: "Private Hire" },
-  { href: "/find-us", label: "Find Us" },
+  { href: "/contact-us", label: "Find Us" },
   { href: "/book", label: "Book" },
 ] as const
 
@@ -65,14 +65,14 @@ describe("site config smoke", () => {
   it("keeps the footer core links aligned with the commercial journey pages", () => {
     expect(siteFooterCoreLinks).toEqual(
       expect.arrayContaining([
-        expect.objectContaining({ href: "/menu", label: "Menu" }),
+        expect.objectContaining({ href: "/our-menus", label: "Menu" }),
         expect.objectContaining({ href: "/book", label: "Book" }),
-        expect.objectContaining({ href: "/events", label: "Events" }),
+        expect.objectContaining({ href: "/whats-on", label: "Events" }),
         expect.objectContaining({
           href: "/private-hire",
           label: "Private Hire",
         }),
-        expect.objectContaining({ href: "/find-us", label: "Find Us" }),
+        expect.objectContaining({ href: "/contact-us", label: "Find Us" }),
       ])
     )
   })

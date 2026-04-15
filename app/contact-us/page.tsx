@@ -49,7 +49,7 @@ import { getSectionBandClass } from "@/lib/section-bands"
 import customerParkingImage from "@/images/outdoor/old-school-house-pub-stony-stratford-mk-customer-parking.jpeg"
 import pubExteriorImage from "@/images/outdoor/old-school-house-pub-stony-stratford-mk-pub-building-exterior.jpeg"
 
-const route = getRouteConfig("/find-us")
+const route = getRouteConfig("/contact-us")
 
 export const metadata: Metadata = buildPageMetadata(route!.meta)
 
@@ -79,7 +79,10 @@ export default function FindUsPage() {
           >
             <SectionHeading {...findUsLocationSectionCopy} />
             <div className="flex flex-wrap gap-4 text-sm font-semibold text-secondary">
-              <Link href="/menu" className="transition hover:text-secondary/80">
+              <Link
+                href="/our-menus"
+                className="transition hover:text-secondary/80"
+              >
                 {findUsLocationSectionCopy.menuLinkLabel}
               </Link>
               <Link href="/book" className="transition hover:text-secondary/80">

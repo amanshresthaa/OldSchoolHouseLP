@@ -47,7 +47,7 @@ export default function NepaleseVsIndianFoodPage() {
             icon: <ForkKnife className="size-4" />,
           },
           {
-            href: "/menu",
+            href: "/our-menus",
             label: commonActionLabels.browseMenu,
             icon: <ArrowRight className="size-4" />,
           },

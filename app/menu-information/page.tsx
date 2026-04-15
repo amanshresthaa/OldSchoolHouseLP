@@ -38,7 +38,7 @@ export default function MenuInformationPage() {
         title={menuInformationHeroCopy.title}
         description={menuInformationHeroCopy.description}
         primaryAction={{
-          href: "/menu",
+          href: "/our-menus",
           label: menuInformationHeroCopy.primaryActionLabel,
         }}
         secondaryAction={{
@@ -57,12 +57,16 @@ export default function MenuInformationPage() {
             <SectionHeading {...menuInformationStartSectionCopy} />
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Button asChild size="lg">
-                <Link href="/menu">
+                <Link href="/our-menus">
                   {menuInformationStartSectionCopy.liveMenuLabel}
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline">
-                <a href={siteDinnerMenuPdfHref} target="_blank" rel="noreferrer">
+                <a
+                  href={siteDinnerMenuPdfHref}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   {menuInformationStartSectionCopy.pdfLabel}
                 </a>
               </Button>

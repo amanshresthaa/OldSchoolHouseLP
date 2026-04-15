@@ -13,7 +13,7 @@ import {
 import { getRouteConfig } from "@/data/site-routes"
 import { buildPageMetadata } from "@/lib/metadata"
 
-const route = getRouteConfig("/sunday-roast")
+const route = getRouteConfig("/sunday-lunch")
 
 export const metadata: Metadata = buildPageMetadata(route!.meta)
 
@@ -32,7 +32,7 @@ export default function SundayRoastPage() {
         body: <p>{sundayRoastSignoffCopy.body}</p>,
         actions: [
           {
-            href: "/menu",
+            href: "/our-menus",
             label: commonActionLabels.viewMenu,
             icon: <ForkKnife className="size-4" />,
           },

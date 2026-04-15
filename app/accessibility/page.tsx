@@ -36,7 +36,7 @@ export default function AccessibilityPage() {
             icon: <Phone className="size-4" />,
           },
           {
-            href: "/find-us",
+            href: "/contact-us",
             label: commonActionLabels.findUs,
             icon: <MapPin className="size-4" />,
           },

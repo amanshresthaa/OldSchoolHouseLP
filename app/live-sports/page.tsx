@@ -12,7 +12,7 @@ import {
 import { getRouteConfig } from "@/data/site-routes"
 import { buildPageMetadata } from "@/lib/metadata"
 
-const route = getRouteConfig("/live-sport")
+const route = getRouteConfig("/live-sports")
 
 export const metadata: Metadata = buildPageMetadata(route!.meta)
 
@@ -35,7 +35,7 @@ export default function LiveSportPage() {
             icon: <Television className="size-4" />,
           },
           {
-            href: "/events",
+            href: "/whats-on",
             label: commonActionLabels.seeWhatsOn,
             icon: <ArrowRight className="size-4" />,
           },

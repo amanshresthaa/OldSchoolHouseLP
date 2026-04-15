@@ -34,7 +34,7 @@ export default function FamilyFriendlyPubPage() {
         body: <p>{familyFriendlySignoffCopy.body}</p>,
         actions: [
           {
-            href: "/menu",
+            href: "/our-menus",
             label: commonActionLabels.browseMenu,
             icon: <ForkKnife className="size-4" />,
           },
@@ -44,7 +44,7 @@ export default function FamilyFriendlyPubPage() {
             icon: <UsersThree className="size-4" />,
           },
           {
-            href: "/sunday-roast",
+            href: "/sunday-lunch",
             label: commonActionLabels.sundayRoast,
             icon: <ArrowRight className="size-4" />,
           },

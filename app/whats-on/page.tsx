@@ -45,7 +45,7 @@ import dartBoardImage from "@/images/indoor/old-school-house-pub-stony-stratford
 import poolTableImage from "@/images/indoor/old-school-house-pub-stony-stratford-mk-pool-table-and-fruit-machine.jpeg"
 import sportsTvImage from "@/images/indoor/old-school-house-pub-stony-stratford-mk-sports-tv-big-screen.jpeg"
 
-const route = getRouteConfig("/events")
+const route = getRouteConfig("/whats-on")
 
 export const metadata: Metadata = buildPageMetadata(route!.meta)
 
@@ -247,7 +247,7 @@ export default function EventsPage() {
           </ScrollReveal>
           <ScrollReveal delayMs={120} className="grid gap-4 md:grid-cols-2">
             <Link
-              href="/live-sport"
+              href="/live-sports"
               className="surface-frame block h-full rounded-2xl py-0 transition hover:-translate-y-0.5"
             >
               <EditorialLinkCardContent

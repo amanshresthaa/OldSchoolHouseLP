@@ -43,7 +43,7 @@ import { buildPageMetadata } from "@/lib/metadata"
 import { getSectionBandClass } from "@/lib/section-bands"
 import { cn } from "@/lib/utils"
 
-const route = getRouteConfig("/menu")
+const route = getRouteConfig("/our-menus")
 
 export const metadata: Metadata = buildPageMetadata(route!.meta)
 
@@ -67,10 +67,10 @@ export default function MenuPage() {
             "@id": siteMenuId,
             name: "The Old School House Menu",
             description: menuSchemaDescription,
-            url: `${siteUrl}/menu`,
+            url: `${siteUrl}/our-menus`,
             inLanguage: "en-GB",
             mainEntityOfPage: {
-              "@id": `${siteUrl}/menu#webpage`,
+              "@id": `${siteUrl}/our-menus#webpage`,
             },
             isPartOf: {
               "@id": siteRestaurantId,
@@ -297,7 +297,7 @@ export default function MenuPage() {
                   .join(" · ")}
               </p>
               <Link
-                href="/sunday-roast"
+                href="/sunday-lunch"
                 className="text-white/72 transition hover:text-white"
               >
                 {menuSignoffCopy.sundayLink}

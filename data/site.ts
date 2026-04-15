@@ -120,8 +120,7 @@ export const siteCompanyNumber = "16699719"
 export const siteAddress =
   "London Road, Stony Stratford, Milton Keynes, MK11 1JA"
 export const siteUrl = "https://oldschoolhousestony.co.uk"
-export const siteOgImage =
-  "https://oldschoolhousestony.co.uk/wp-content/uploads/2026/02/old-school-house-restaurant-.jpg"
+export const siteOgImage = `${siteUrl}/social/old-school-house-og.jpeg`
 export const siteLogoUrl = `${siteUrl}/icon-512.png`
 export const sitePhone = "01908 561936"
 export const sitePhoneHref = "tel:01908561936"
@@ -151,7 +150,7 @@ export const siteLunchMenuPdfHref =
 export const siteOrganizationId = `${siteUrl}/#organization`
 export const siteWebsiteId = `${siteUrl}/#website`
 export const siteRestaurantId = `${siteUrl}/#restaurant`
-export const siteMenuPageUrl = `${siteUrl}/menu`
+export const siteMenuPageUrl = `${siteUrl}/our-menus`
 export const siteMenuId = `${siteMenuPageUrl}#menu`
 export const sanjogGautamPagePath = "/about/sanjog-gautam"
 export const sanjogGautamPageUrl = `${siteUrl}${sanjogGautamPagePath}`

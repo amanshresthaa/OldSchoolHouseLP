@@ -67,13 +67,13 @@ export const metadata: Metadata = buildPageMetadata(route!.meta)
 const menuShowcase = [
   {
     ...homeMenuShowcase[0],
-    href: "/menu",
+    href: "/our-menus",
     image: momoImage,
     item: featuredMenuItems[0],
   },
   {
     ...homeMenuShowcase[1],
-    href: "/menu",
+    href: "/our-menus",
     image: mixedGrillImage,
     item: featuredMenuItems[1],
   },
@@ -86,7 +86,7 @@ const menuShowcase = [
 ]
 
 const storyFeature: ImageRouteItem = {
-  href: "/menu",
+  href: "/our-menus",
   ...homeStoryFeature,
   image: beerOnTapImage,
 }
@@ -340,7 +340,7 @@ export default function HomePage() {
               <SiteActionCard
                 actions={[
                   {
-                    href: "/events",
+                    href: "/whats-on",
                     label: homeEventsSectionCopy.primaryActionLabel,
                     icon: <ArrowRight className="size-4" />,
                   },

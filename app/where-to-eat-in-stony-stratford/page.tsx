@@ -30,7 +30,7 @@ export default function WhereToEatInStonyStratfordPage() {
         body: <p>{whereToEatSignoffCopy.body}</p>,
         actions: [
           {
-            href: "/find-us",
+            href: "/contact-us",
             label: commonActionLabels.planVisit,
             icon: <MapPin className="size-4" />,
           },

@@ -45,7 +45,7 @@ export default function NepaleseFoodMiltonKeynesPage() {
         body: <p>{nepaleseFoodMiltonKeynesSignoffCopy.body}</p>,
         actions: [
           {
-            href: "/menu",
+            href: "/our-menus",
             label: commonActionLabels.browseMenu,
             icon: <BookOpenText className="size-4" />,
           },

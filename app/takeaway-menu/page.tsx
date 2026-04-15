@@ -72,7 +72,7 @@ export default function TakeawayMenuPage() {
                     icon: <Phone className="size-4" />,
                   },
                   {
-                    href: "/menu",
+                    href: "/our-menus",
                     label: takeawayOrderSectionCopy.liveMenuLabel,
                   },
                 ]}

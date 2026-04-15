@@ -35,7 +35,7 @@ export default function TraditionalPubWithNepaleseKitchenPage() {
             icon: <ArrowRight className="size-4" />,
           },
           {
-            href: "/menu",
+            href: "/our-menus",
             label: commonActionLabels.browseMenu,
             icon: <ForkKnife className="size-4" />,
           },

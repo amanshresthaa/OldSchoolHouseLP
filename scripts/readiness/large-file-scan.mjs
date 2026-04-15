@@ -4,6 +4,7 @@ import path from "node:path"
 const ROOT_DIR = process.cwd()
 const MAX_BYTES = 250 * 1024
 const MAX_LINES = 1000
+const STAGED_PATHS = process.argv.slice(2)
 
 const IGNORED_DIRECTORIES = new Set([
   ".git",
@@ -26,6 +27,8 @@ const IGNORED_FILENAMES = new Set([
   "yarn.lock",
   "tsconfig.tsbuildinfo",
 ])
+
+const IGNORED_PATH_PREFIXES = ["public/menus/theoldschoolhousemenu-standalone"]
 
 const TEXT_EXTENSIONS = new Set([
   "",
@@ -73,7 +76,7 @@ async function collectFiles(directoryPath, collectedFiles = []) {
     const relativePath = path.relative(ROOT_DIR, absolutePath)
 
     if (entry.isDirectory()) {
-      if (IGNORED_DIRECTORIES.has(entry.name)) {
+      if (shouldIgnorePath(relativePath, entry.name)) {
         continue
       }
 
@@ -86,6 +89,10 @@ async function collectFiles(directoryPath, collectedFiles = []) {
     }
 
     if (IGNORED_FILENAMES.has(entry.name)) {
+      continue
+    }
+
+    if (shouldIgnorePath(relativePath, entry.name)) {
       continue
     }
 
@@ -104,6 +111,57 @@ async function collectFiles(directoryPath, collectedFiles = []) {
   return collectedFiles
 }
 
+function shouldIgnorePath(
+  relativePath,
+  baseName = path.basename(relativePath)
+) {
+  if (!relativePath || relativePath === ".") {
+    return false
+  }
+
+  if (IGNORED_DIRECTORIES.has(baseName) || IGNORED_FILENAMES.has(baseName)) {
+    return true
+  }
+
+  return IGNORED_PATH_PREFIXES.some(
+    (ignoredPrefix) =>
+      relativePath === ignoredPrefix ||
+      relativePath.startsWith(`${ignoredPrefix}/`)
+  )
+}
+
+async function collectProvidedPath(inputPath, collectedFiles) {
+  const absolutePath = path.resolve(ROOT_DIR, inputPath)
+  const fileStats = await stat(absolutePath)
+  const relativePath = path.relative(ROOT_DIR, absolutePath)
+  const baseName = path.basename(absolutePath)
+
+  if (shouldIgnorePath(relativePath, baseName)) {
+    return collectedFiles
+  }
+
+  if (fileStats.isDirectory()) {
+    return collectFiles(absolutePath, collectedFiles)
+  }
+
+  if (!fileStats.isFile()) {
+    return collectedFiles
+  }
+
+  const extension = path.extname(baseName).toLowerCase()
+
+  if (BINARY_EXTENSIONS.has(extension)) {
+    return collectedFiles
+  }
+
+  collectedFiles.push({
+    absolutePath,
+    relativePath,
+  })
+
+  return collectedFiles
+}
+
 async function getLineCount(filePath) {
   const content = await readFile(filePath, "utf8")
 
@@ -115,8 +173,26 @@ async function getLineCount(filePath) {
 }
 
 async function main() {
-  const files = await collectFiles(ROOT_DIR)
+  const files = []
+  const seenRelativePaths = new Set()
+  const scanTargets = STAGED_PATHS.length > 0 ? STAGED_PATHS : [ROOT_DIR]
   const violations = []
+
+  for (const target of scanTargets) {
+    const collectedFiles =
+      target === ROOT_DIR
+        ? await collectFiles(ROOT_DIR, [])
+        : await collectProvidedPath(target, [])
+
+    for (const file of collectedFiles) {
+      if (seenRelativePaths.has(file.relativePath)) {
+        continue
+      }
+
+      seenRelativePaths.add(file.relativePath)
+      files.push(file)
+    }
+  }
 
   for (const file of files) {
     const fileStats = await stat(file.absolutePath)

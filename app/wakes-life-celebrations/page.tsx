@@ -68,7 +68,7 @@ export default function WakesLifeCelebrationsPage() {
             icon: <EnvelopeSimple className="size-4" />,
           },
           {
-            href: "/menu",
+            href: "/our-menus",
             label: commonActionLabels.browseMainMenu,
             icon: <ForkKnife className="size-4" />,
           },

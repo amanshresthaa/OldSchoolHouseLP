@@ -112,7 +112,7 @@ export default function BookPage() {
                       <ArrowRight className="size-4" />
                     </a>
                     <Link
-                      href="/menu"
+                      href="/our-menus"
                       className="cta-secondary inline-flex h-12 items-center justify-center gap-2.5 px-6"
                     >
                       {bookReserveCardCopy.secondaryActionLabel}
@@ -136,7 +136,7 @@ export default function BookPage() {
           </ScrollReveal>
           <ScrollReveal delayMs={120} className="grid gap-4 md:grid-cols-3">
             <Link
-              href="/sunday-roast"
+              href="/sunday-lunch"
               className="surface-frame block h-full rounded-2xl py-0 transition hover:-translate-y-0.5"
             >
               <EditorialLinkCardContent
@@ -157,7 +157,7 @@ export default function BookPage() {
               />
             </Link>
             <Link
-              href="/find-us"
+              href="/contact-us"
               className="surface-frame block h-full rounded-2xl py-0 transition hover:-translate-y-0.5"
             >
               <EditorialLinkCardContent
@@ -188,7 +188,7 @@ export default function BookPage() {
             icon: <ArrowRight className="size-4" />,
           },
           {
-            href: "/menu",
+            href: "/our-menus",
             label: bookSignoffCopy.secondaryActionLabel,
           },
         ]}

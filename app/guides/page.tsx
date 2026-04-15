@@ -113,7 +113,7 @@ export default function GuidesPage() {
         body={<p>{guidesSignoffCopy.body}</p>}
         actions={[
           {
-            href: "/menu",
+            href: "/our-menus",
             label: guidesSignoffCopy.primaryActionLabel,
             icon: <BookOpenText className="size-4" />,
           },

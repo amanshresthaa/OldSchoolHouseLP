@@ -26,7 +26,7 @@ describe("site data exports", () => {
     expect(siteNav).toEqual(
       expect.arrayContaining([
         expect.objectContaining({ href: "/", label: "Home" }),
-        expect.objectContaining({ href: "/menu", label: "Menu" }),
+        expect.objectContaining({ href: "/our-menus", label: "Menu" }),
         expect.objectContaining({ href: "/book", label: "Book" }),
       ])
     )
@@ -42,11 +42,11 @@ describe("site data exports", () => {
 
     expect(siteFooterCoreLinks).toEqual(
       expect.arrayContaining([
-        expect.objectContaining({ href: "/menu" }),
+        expect.objectContaining({ href: "/our-menus" }),
         expect.objectContaining({ href: "/book" }),
-        expect.objectContaining({ href: "/events" }),
+        expect.objectContaining({ href: "/whats-on" }),
         expect.objectContaining({ href: "/private-hire" }),
-        expect.objectContaining({ href: "/find-us" }),
+        expect.objectContaining({ href: "/contact-us" }),
       ])
     )
 

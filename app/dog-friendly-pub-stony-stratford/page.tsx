@@ -35,7 +35,7 @@ export default function DogFriendlyPubPage() {
             icon: <PawPrint className="size-4" />,
           },
           {
-            href: "/find-us",
+            href: "/contact-us",
             label: commonActionLabels.planVisit,
             icon: <MapPin className="size-4" />,
           },

@@ -95,7 +95,7 @@ export function HomeVisitSection({
                 </div>
                 <span className="hidden h-1 w-1 rounded-full bg-white/35 sm:block" />
                 <Link
-                  href="/find-us"
+                  href="/contact-us"
                   className="inline-flex items-center gap-2 font-semibold text-[var(--color-on-tertiary-container)] transition hover:text-white"
                 >
                   {homeVisitSectionCopy.visitGuideLabel}

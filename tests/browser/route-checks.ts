@@ -1,21 +1,27 @@
 export const publicRouteChecks = [
-  { path: "/", title: "Traditional Pub in Stony Stratford" },
-  { path: "/about", title: "About Our Pub and Nepalese Kitchen" },
+  { path: "/", title: "Pub in Stony Stratford with Nepalese Kitchen" },
   {
-    path: "/menu",
-    title: "Pub Menu and Nepalese Food in Stony Stratford",
+    path: "/about",
+    title: "About Our Stony Stratford Pub and Nepalese Kitchen",
+  },
+  {
+    path: "/our-menus",
+    title: "Stony Stratford Pub Menu and Nepalese Food",
   },
   {
     path: "/book",
-    title: "Book a Table in Stony Stratford",
+    title: "Book a Table at Our Stony Stratford Pub",
   },
   {
-    path: "/events",
-    title: "What’s On in Stony Stratford",
+    path: "/whats-on",
+    title: "Pub Events and Live Sport in Stony Stratford",
   },
-  { path: "/find-us", title: "Find Our Pub on London Road, Stony Stratford" },
-  { path: "/private-hire", title: "Private Hire in Stony Stratford" },
-  { path: "/sunday-roast", title: "Sunday Roast in Stony Stratford" },
+  {
+    path: "/contact-us",
+    title: "Find Our Stony Stratford Pub on London Road",
+  },
+  { path: "/private-hire", title: "Private Hire Pub in Stony Stratford" },
+  { path: "/sunday-lunch", title: "Sunday Roast in Stony Stratford" },
   { path: "/nepalese-kitchen", title: "Nepalese Kitchen in Stony Stratford" },
   {
     path: "/nepalese-food-milton-keynes",
@@ -34,14 +40,14 @@ export const publicRouteChecks = [
     path: "/gluten-free-curries-stony-stratford",
     title: "Gluten-Free Curries",
   },
-  { path: "/live-sport", title: "Live Sport Pub in Stony Stratford" },
+  { path: "/live-sports", title: "Live Sport Pub in Stony Stratford" },
   {
     path: "/beer-garden-stony-stratford",
-    title: "Beer Garden in Stony Stratford",
+    title: "Beer Garden Pub in Stony Stratford",
   },
   {
     path: "/group-dining-celebrations",
-    title: "Group Dining in Stony Stratford",
+    title: "Group Dining Pub in Stony Stratford",
   },
   {
     path: "/dog-friendly-pub-stony-stratford",
@@ -65,7 +71,7 @@ export const publicRouteChecks = [
   },
   {
     path: "/wakes-life-celebrations",
-    title: "Wakes and Life Celebrations in Stony Stratford",
+    title: "Wake Venue in Stony Stratford",
   },
 ] as const
 
@@ -73,11 +79,11 @@ export const responsivePages = [
   "/",
   "/about",
   "/book",
-  "/events",
-  "/find-us",
+  "/whats-on",
+  "/contact-us",
   "/private-hire",
-  "/sunday-roast",
-  "/live-sport",
+  "/sunday-lunch",
+  "/live-sports",
   "/dog-friendly-pub-stony-stratford",
   "/family-friendly-pub-stony-stratford",
   "/accessibility",

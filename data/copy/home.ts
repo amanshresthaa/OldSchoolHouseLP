@@ -36,7 +36,7 @@ export const homeMenuSectionCopy = {
     "Come in for a full English on the lunch menu, a quick weekday bite, a Sunday roast, or a longer dinner and use the full menu to build the table around the kind of visit you want.",
   guidanceLabel: "How to order",
   primaryCtaLabel: "See full menu",
-  primaryCtaHref: "/menu",
+  primaryCtaHref: "/our-menus",
   secondaryCtaLabel: "Book a table",
   secondaryCtaHref: "/book",
 }
@@ -101,7 +101,7 @@ export const homeReasonsSectionCopy = {
   description:
     "The room feels familiar from the first drink, while the food gives the visit more identity than the average pub stop.",
   primaryCtaLabel: "Browse the menu",
-  primaryCtaHref: "/menu",
+  primaryCtaHref: "/our-menus",
   secondaryCtaLabel: "Book a table",
   secondaryCtaHref: "/book",
 }
@@ -122,7 +122,7 @@ export const homeAtmosphereTiles = [
     alt: "Exterior of The Old School House pub on London Road in Stony Stratford.",
   },
   {
-    href: "/find-us",
+    href: "/contact-us",
     eyebrow: "Capacity and flow",
     title: "Room to settle in",
     description: "Get the feel for the space before you arrive.",
@@ -139,7 +139,7 @@ export const homeAtmosphereSectionCopy = {
 }
 
 export const homeEventsFeature = {
-  href: "/events",
+  href: "/whats-on",
   eyebrow: "Repeat-visit reasons",
   title: "Sport, local teams, and themed nights",
   description:

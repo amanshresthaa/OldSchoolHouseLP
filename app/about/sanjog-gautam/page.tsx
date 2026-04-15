@@ -140,7 +140,7 @@ export default function SanjogGautamPage() {
         details={
           <div className="grid gap-2 text-sm leading-relaxed">
             <Link
-              href="/menu"
+              href="/our-menus"
               className="text-white/72 transition hover:text-white"
             >
               {sanjogGautamSignoffCopy.menuLinkLabel}

@@ -57,7 +57,7 @@ const contactItems: FooterContactItem[] = [
   {
     label: footerBrandCopy.contactLabels.findUs,
     value: footerBrandCopy.shortAddress,
-    href: "/find-us",
+    href: "/contact-us",
     icon: MapPin,
   },
 ]
@@ -124,7 +124,9 @@ export function SiteFooter() {
                 <Link href="/book">{footerBrandCopy.primaryActionLabel}</Link>
               </Button>
               <Button asChild variant="outline">
-                <Link href="/menu">{footerBrandCopy.secondaryActionLabel}</Link>
+                <Link href="/our-menus">
+                  {footerBrandCopy.secondaryActionLabel}
+                </Link>
               </Button>
               <Button asChild variant="ghost">
                 <a href={directionsHref} target="_blank" rel="noreferrer">

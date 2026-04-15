@@ -109,7 +109,7 @@ const AUTOPLAY_INTERVAL_MS = 6200
 const RESUME_AFTER_MANUAL_NAV_MS = 4000
 const heroCtas: readonly HeroCta[] = [
   { href: bookingHref, label: footerBrandCopy.primaryActionLabel },
-  { href: "/menu", label: footerBrandCopy.secondaryActionLabel },
+  { href: "/our-menus", label: footerBrandCopy.secondaryActionLabel },
 ]
 
 function isExternalHref(href: string) {
