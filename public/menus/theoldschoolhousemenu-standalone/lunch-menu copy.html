@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Old School House - Lunch Menu</title>
+    <link rel="icon" href="data:,">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,wght@0,600;0,700;1,600&display=swap"
+      rel="stylesheet"
+    >
+    <style>
+      @page { size: A4 portrait; margin: 0; }
+
+      :root {
+        --paper: #f7f3eb;
+        --ink: #2b241d;
+        --gold: #b98132;
+        --gold-deep: #96492b;
+        --pine: #1f3127;
+        --mild: #c7903e;
+        --medium: #b85e36;
+        --hot: #8f3528;
+        --veg: #617246;
+        --gf: #8b6038;
+        --sheet-width: 210mm;
+        --sheet-height: 297mm;
+        --fb: 0.53mm; /* font bump */
+        --sheet-frame-pad: 4mm;
+        --sheet-border-pad: 1.5mm;
+        --sheet-panel-pad: 5.5mm;
+        /* Menu item sizing — generous for lunch */
+        --title-size: 3.55mm;
+        --price-size: 3.30mm;
+        --desc-size: 3.00mm;
+        --section-title-size: 4.6mm;
+        --section-sub-size: 2.45mm;
+        --price-col: 20mm;
+        --item-pad: 1.15mm;
+        --item-pad-compact: 0.85mm;
+        --card-pad: 4mm;
+        --card-pad-tight: 3.2mm;
+      }
+
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; }
+      body {
+        background: linear-gradient(180deg, #e6ddd1, #d8cfbf);
+        color: var(--ink);
+        font-family: "Source Sans 3", sans-serif;
+      }
+
+      /* ─── SHELL ─── */
+      .menu-system {
+        min-height: 100vh;
+        padding: 8mm 0 12mm;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8mm;
+      }
+
+      .sheet {
+        width: var(--sheet-width);
+        height: var(--sheet-height);
+        background: var(--paper);
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 10mm 22mm rgba(44,36,27,.18);
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+      .sheet::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: .12;
+        background:
+          radial-gradient(circle at top, rgba(255,255,255,.85), transparent 34%),
+          radial-gradient(circle at bottom right, rgba(200,125,38,.08), transparent 32%);
+      }
+      .sheet-frame { width: 100%; height: 100%; padding: var(--sheet-frame-pad); }
+      .sheet-border {
+        width: 100%; height: 100%;
+        border: 1.5px solid var(--ink);
+        padding: var(--sheet-border-pad);
+        background: var(--paper);
+      }
+      .sheet-panel {
+        width: 100%; height: 100%;
+        border: .5px solid var(--ink);
+        padding: var(--sheet-panel-pad);
+        display: flex;
+        flex-direction: column;
+        background: var(--paper);
+        position: relative;
+      }
+
+      .page {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* ─── PAGE LAYOUT STRATEGY ───
+         P1 (5 sections, lighter): fixed gap + one flex-fill
+             wrapper absorbs remaining height.
+         P2 (7 sections, denser): NO flex-fill — space-between
+             distributes the small leftover evenly as gaps.
+      */
+      .lunch-p1 { gap: 3mm; }
+      .lunch-p1 > * { margin: 0; }
+
+      .lunch-p2 {
+        justify-content: space-between;
+      }
+      .lunch-p2 > * { margin: 0; flex-shrink: 0; }
+
+      /* P1 only: wrapper that absorbs leftover height */
+      .flex-fill {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 0;
+      }
+      .flex-fill > * { flex-shrink: 0; }
+
+      /* ─── PRINT BUTTON ─── */
+      .print-button {
+        position: fixed; right: 24px; bottom: 24px; z-index: 50;
+        display: inline-flex; align-items: center; gap: 10px;
+        border: 0; border-radius: 999px;
+        background: var(--gold-deep); color: #fff; cursor: pointer;
+        padding: 14px 18px;
+        box-shadow: 0 18px 34px rgba(44,36,27,.25);
+        text-transform: uppercase; letter-spacing: .18em;
+        font-size: 11px; font-weight: 700;
+      }
+      .print-button:hover { background: #7a2e18; }
+
+      /* ─── SECTION HEADERS ─── */
+      .sh { text-align: center; margin-bottom: 2.8mm; }
+      .sh-t {
+        font-family: "Source Serif 4", serif;
+        font-size: var(--section-title-size);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .15em;
+        color: var(--gold-deep);
+        margin: 0;
+      }
+      .sh.dark .sh-t { color: #fff; }
+      .sh-sub {
+        font-size: var(--section-sub-size);
+        text-transform: uppercase;
+        letter-spacing: .2em;
+        color: rgba(200,125,38,.92);
+        margin-top: 1mm;
+      }
+      .sh.dark .sh-sub { color: rgba(217,139,44,.92); }
+      .sh-rule {
+        display: block;
+        width: 18mm; height: .5mm;
+        margin: 1.2mm auto 0;
+        background: linear-gradient(90deg, transparent, rgba(185,129,50,.7), transparent);
+      }
+
+      /* ─── GRIDS ─── */
+      .g2 { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 0 7mm; }
+      .g3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 0 5.5mm; }
+
+      /* ─── MENU ITEMS ─── */
+      .ml { display: flex; flex-direction: column; }
+      .mi {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0,1fr) var(--price-col);
+        column-gap: 4mm;
+        gap: .35mm;
+        padding: var(--item-pad) 0;
+        border-bottom: 1px solid rgba(44,36,27,.1);
+        align-items: start;
+      }
+      .mi:last-child { border-bottom: 0; }
+      .mi.c { padding: var(--item-pad-compact) 0; }
+      .mi.starred {
+        padding-left: 3.2mm;
+        background: rgba(200,125,38,.05);
+        border-radius: 2px;
+      }
+      .mi.starred::before {
+        content: "";
+        position: absolute;
+        left: .35mm; top: 10%; bottom: 10%;
+        width: 2.5px;
+        border-radius: 0 2px 2px 0;
+        background: var(--gold);
+      }
+      .mi.dk { color: #faf6f0; }
+      .mi.dk.starred { background: rgba(255,255,255,.06); }
+      .mi.dk.starred::before { background: var(--mild); }
+      .mi-h { display: contents; }
+      .mi-n { min-width: 0; }
+      .mi-tr { display: flex; flex-wrap: wrap; align-items: center; gap: .8mm 0; min-width: 0; }
+      .mi-t {
+        font-family: "Source Serif 4", serif;
+        font-size: var(--title-size);
+        font-weight: 600;
+        line-height: 1.08;
+        text-transform: uppercase;
+        color: var(--ink);
+        overflow-wrap: anywhere;
+      }
+      .mi.dk .mi-t { color: #faf6f0; }
+      .mi-p {
+        grid-column: 2;
+        justify-self: end;
+        width: var(--price-col);
+        text-align: right;
+        font-size: var(--price-size);
+        line-height: 1.04;
+        letter-spacing: .03em;
+        color: #a45432;
+        white-space: nowrap;
+      }
+      .mi.dk .mi-p { color: var(--mild); }
+      .mi-d {
+        grid-column: 1;
+        margin-top: .3mm;
+        font-size: var(--desc-size);
+        font-style: italic;
+        line-height: 1.2;
+        color: rgba(44,36,27,.62);
+        overflow-wrap: anywhere;
+      }
+      .mi.dk .mi-d { color: rgba(250,246,240,.72); }
+
+      /* ─── LABELS ─── */
+      .lg { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 2px; margin-left: 1.6mm; }
+      .badge {
+        display: inline-flex; align-items: center;
+        margin-left: 1.6mm;
+        padding: .5mm 1.4mm;
+        border-radius: 2px;
+        font-size: calc(1.75mm + var(--fb));
+        line-height: 1; font-weight: 700;
+        text-transform: uppercase; letter-spacing: .1em;
+        box-shadow: 0 1px 4px rgba(44,36,27,.12);
+      }
+      .badge.gold { background: var(--gold); color: #fff; }
+      .badge.dark { background: var(--ink); color: #fff; }
+      .ii { display: inline-flex; align-items: center; justify-content: center; }
+      .il svg { color: var(--veg); }
+      .ifl.mild svg { color: var(--mild); }
+      .ifl.medium svg { color: var(--medium); }
+      .ifl.hot svg { color: var(--hot); }
+      .ifs { display: inline-flex; }
+      .ifs .ii + .ii { margin-left: -5px; }
+      .lc {
+        display: inline-flex; align-items: center;
+        border: 1px solid rgba(140,70,39,.3);
+        color: var(--gf);
+        font-size: calc(1.75mm + var(--fb));
+        line-height: 1; font-weight: 700;
+        letter-spacing: .08em;
+        padding: .45mm .95mm;
+        border-radius: 2px;
+      }
+
+      /* ─── CARDS ─── */
+      .dark-card {
+        background: var(--ink); color: #fff;
+        padding: var(--card-pad);
+        box-shadow: 0 12px 24px rgba(44,36,27,.16);
+        position: relative;
+      }
+      .dark-card::before {
+        content: ""; position: absolute; inset: 3px;
+        border: 1px solid rgba(255,255,255,.12); pointer-events: none;
+      }
+      .plain-card {
+        background: #fff;
+        border: 1px solid rgba(44,36,27,.14);
+        padding: var(--card-pad);
+        box-shadow: 0 8px 18px rgba(44,36,27,.08);
+      }
+
+      /* ─── HEADER BANNER ─── */
+      .lh {
+        display: grid;
+        grid-template-columns: 28mm minmax(0,1fr) 26mm;
+        gap: 4.5mm;
+        align-items: center;
+        padding: 4.5mm 5mm;
+        background: linear-gradient(180deg, rgba(255,255,255,.97), rgba(247,243,235,.92));
+        border: 1px solid rgba(44,36,27,.14);
+        box-shadow: 0 10px 24px rgba(44,36,27,.08);
+        position: relative;
+      }
+      .lh::before {
+        content: ""; position: absolute; inset: 3px;
+        border: 1px solid rgba(185,129,50,.2); pointer-events: none;
+      }
+      .lh-logo-wrap {
+        width: 28mm; height: 28mm;
+        border-radius: 999px;
+        display: flex; align-items: center; justify-content: center;
+        background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.94), rgba(247,243,235,.62));
+        border: 1px solid rgba(44,36,27,.14);
+      }
+      .lh-logo { width: 22mm; height: auto; object-fit: contain; }
+      .lh-copy { min-width: 0; }
+      .lh-topline {
+        font-size: calc(1.8mm + var(--fb));
+        font-weight: 700; letter-spacing: .22em;
+        text-transform: uppercase; color: var(--gold-deep);
+      }
+      .lh-name {
+        margin: 1.4mm 0 1.2mm;
+        font-family: "Source Serif 4", serif;
+        font-size: calc(10.5mm + var(--fb));
+        line-height: .9;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        color: var(--ink);
+      }
+      .lh-subtitle {
+        font-size: calc(2.7mm + var(--fb));
+        font-weight: 700; letter-spacing: .26em;
+        text-transform: uppercase; color: var(--gold);
+      }
+      .lh-badge {
+        margin-top: 2mm;
+        display: inline-block;
+        padding: 1mm 4mm;
+        background: var(--ink); color: #fff;
+        font-size: calc(2.2mm + var(--fb));
+        font-weight: 700; letter-spacing: .2em;
+        text-transform: uppercase;
+      }
+      .lh-qr {
+        display: flex; flex-direction: column;
+        align-items: center; gap: 1.2mm;
+        text-decoration: none;
+      }
+      .lh-qr-img {
+        width: 22mm; height: 22mm;
+        object-fit: contain;
+        background: #fff; padding: 1mm;
+        border: 1px solid rgba(44,36,27,.12);
+      }
+      .lh-qr-label {
+        font-size: calc(1.6mm + var(--fb));
+        font-weight: 700; letter-spacing: .1em;
+        text-transform: uppercase; color: var(--gold-deep);
+        text-align: center;
+      }
+
+      /* ─── INFO BAR ─── */
+      .info-bar {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0,1fr));
+        gap: 2.4mm;
+      }
+      .info-cell {
+        padding: 2.2mm 2.5mm;
+        background: #fff;
+        border: 1px solid rgba(44,36,27,.12);
+        text-align: center;
+      }
+      .info-lbl {
+        font-size: calc(1.55mm + var(--fb));
+        font-weight: 700; letter-spacing: .16em;
+        text-transform: uppercase;
+        color: rgba(150,73,43,.82);
+      }
+      .info-val {
+        margin-top: .8mm;
+        font-size: calc(2.2mm + var(--fb));
+        line-height: 1.24;
+        color: rgba(44,36,27,.7);
+      }
+      .info-val strong { font-weight: 700; color: var(--gold); }
+
+      /* ─── GRILL CARD (dark pine) ─── */
+      .grill-card {
+        position: relative;
+        background: var(--pine);
+        border: 1px solid var(--pine);
+        box-shadow: 0 14px 26px rgba(24,43,35,.22);
+        color: #fff;
+        padding: 4mm 4.5mm;
+      }
+      .grill-card::before {
+        content: ""; position: absolute; inset: 3px;
+        border: 1px solid rgba(217,139,44,.28); pointer-events: none;
+      }
+      .grill-star {
+        position: absolute; top: 0; right: 6mm;
+        background: var(--mild); color: #fff;
+        padding: 2mm; border-radius: 0 0 2px 2px;
+        box-shadow: 0 6px 12px rgba(24,43,35,.16);
+      }
+      .grill-card .sh { margin-bottom: 2.2mm; }
+
+      /* ─── WRAPS & CURRIES SPLIT ─── */
+      .wc-split {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0,1fr));
+        gap: 0;
+      }
+      .wc-pane { padding: 3mm 4mm; }
+      .wc-pane:first-child {
+        border-right: 1px solid rgba(44,36,27,.12);
+        padding-left: 0;
+      }
+      .wc-pane:last-child { padding-right: 0; }
+      .wc-pane .sh { margin-bottom: 2.2mm; }
+
+      /* ─── ROAST BANNER ─── */
+      .roast {
+        position: relative;
+        padding: 3.5mm 5mm 3.2mm;
+        background: var(--ink); color: #fff;
+        box-shadow: 0 10px 22px rgba(44,36,27,.14);
+        text-align: center;
+      }
+      .roast::before {
+        content: ""; position: absolute; inset: 3px;
+        border: 1px solid rgba(255,255,255,.12); pointer-events: none;
+      }
+      .roast-k {
+        font-size: calc(1.75mm + var(--fb));
+        font-weight: 700; letter-spacing: .22em;
+        text-transform: uppercase; color: rgba(255,255,255,.7);
+      }
+      .roast-t {
+        margin: 1.2mm 0;
+        font-family: "Source Serif 4", serif;
+        font-size: calc(5.2mm + var(--fb));
+        font-weight: 700; letter-spacing: .12em;
+        text-transform: uppercase;
+      }
+      .roast-pr {
+        font-size: calc(4mm + var(--fb));
+        font-weight: 700; color: var(--gold);
+      }
+      .roast-desc {
+        margin-top: 1.2mm;
+        font-size: calc(2.5mm + var(--fb));
+        line-height: 1.38;
+        color: rgba(255,255,255,.72);
+      }
+      .roast-note {
+        margin-top: 1.4mm;
+        display: inline-block;
+        padding: .7mm 4mm;
+        background: var(--gold-deep);
+        font-size: calc(1.85mm + var(--fb));
+        font-weight: 700; letter-spacing: .16em;
+        text-transform: uppercase;
+      }
+
+      /* ─── KIDS CARD ─── */
+      .kids-card {
+        position: relative;
+        padding: 4mm 4.5mm 3mm;
+        border: 1px dashed rgba(200,125,38,.5);
+        background: rgba(255,255,255,.45);
+      }
+      .kids-lbl {
+        position: absolute; top: -3.2mm; left: 50%;
+        transform: translateX(-50%);
+        background: var(--paper); padding: 0 5mm;
+        white-space: nowrap;
+        font-family: "Source Serif 4", serif;
+        font-size: calc(3.4mm + var(--fb));
+        font-weight: 700; letter-spacing: .14em;
+        text-transform: uppercase; color: var(--gold-deep);
+      }
+      .kids-note {
+        margin: 0.8mm 0 2.2mm;
+        text-align: center;
+        font-size: calc(2.2mm + var(--fb));
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        color: rgba(44,36,29,.6);
+      }
+
+      /* ─── ACCOMPANIMENT PANELS ─── */
+      .acc-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0,1fr));
+        gap: 2.2mm 3.2mm;
+      }
+      .acc-panel {
+        display: flex; flex-direction: column;
+        padding: 2.2mm 2.6mm 1.8mm;
+        background: #fff;
+        border: 1px solid rgba(44,36,27,.14);
+        box-shadow: 0 6px 14px rgba(44,36,27,.06);
+      }
+      .acc-title {
+        position: relative;
+        margin: 0 0 1.6mm;
+        padding-bottom: 1.2mm;
+        text-align: center;
+        font-family: "Source Serif 4", serif;
+        font-size: calc(3.1mm + var(--fb));
+        font-weight: 700; letter-spacing: .14em;
+        text-transform: uppercase; color: var(--gold-deep);
+      }
+      .acc-title::after {
+        content: "";
+        position: absolute; left: 50%; bottom: .4mm;
+        width: 16mm; height: .5mm;
+        transform: translateX(-50%);
+        background: linear-gradient(90deg, transparent, rgba(200,125,38,.7), transparent);
+      }
+
+      /* ─── ESSENTIALS / BURGERS SPLIT ─── */
+      .eb-split {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 3.2mm;
+      }
+      .eb-card {
+        background: #fff;
+        border: 1px solid rgba(44,36,27,.14);
+        padding: var(--card-pad);
+        box-shadow: 0 8px 18px rgba(44,36,27,.08);
+      }
+
+      /* ─── BAGUETTES / JACKETS SPLIT ─── */
+      .bj-split {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0,1fr));
+        gap: 0;
+        border-top: 1px solid rgba(44,36,27,.12);
+        border-bottom: 1px solid rgba(44,36,27,.12);
+        padding: 2.5mm 0;
+      }
+      .bj-pane { padding: 0 4mm; }
+      .bj-pane:first-child {
+        border-right: 1px solid rgba(44,36,27,.12);
+        padding-left: 0;
+      }
+      .bj-pane:last-child { padding-right: 0; }
+
+      /* ─── NAKED GREENS BAR ─── */
+      .ng-bar {
+        padding: 1.5mm 0;
+      }
+      .ng-bar .g3 { gap: 0 6mm; }
+
+      /* ─── FOOTER NOTES ─── */
+      .foot-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0,1fr));
+        gap: 2.6mm;
+      }
+      .foot-card {
+        padding: 2.2mm 2.8mm;
+        background: rgba(255,255,255,.72);
+        border: 1px solid rgba(44,36,27,.1);
+      }
+      .foot-title {
+        display: inline-flex; align-items: center; gap: 1.2mm;
+        font-size: calc(1.9mm + var(--fb));
+        font-weight: 700; text-transform: uppercase;
+        letter-spacing: .15em; color: var(--gold-deep);
+      }
+      .foot-body {
+        margin-top: 1mm;
+        font-size: calc(2.15mm + var(--fb));
+        line-height: 1.38;
+        color: rgba(44,36,27,.7);
+      }
+
+      /* ─── PAGE 2 FOOTER STRIPE ─── */
+      .p2-footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5mm;
+        padding: 1.8mm 0 0;
+        border-top: 1px solid rgba(44,36,27,.14);
+        text-align: center;
+        flex-shrink: 0;
+      }
+      .p2-footer-item {
+        font-size: calc(2mm + var(--fb));
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: rgba(44,36,27,.52);
+      }
+      .p2-footer-item strong {
+        color: var(--gold-deep);
+        font-weight: 700;
+      }
+      .p2-footer-dot {
+        width: 3px; height: 3px;
+        border-radius: 50%;
+        background: rgba(185,129,50,.6);
+      }
+
+      /* ─── PRINT ─── */
+      @media print {
+        html, body {
+          width: var(--sheet-width);
+          height: var(--sheet-height);
+          background: transparent !important;
+          margin: 0 !important; padding: 0 !important;
+          print-color-adjust: exact !important;
+          -webkit-print-color-adjust: exact !important;
+        }
+        body { display: block; }
+        .menu-system { display: block; padding: 0; background: transparent !important; }
+        .print-hidden { display: none !important; }
+        .sheet {
+          margin: 0 !important;
+          box-shadow: none !important;
+          page-break-after: always;
+          break-after: page;
+        }
+        .sheet::before,
+        .sheet *, .sheet *::before, .sheet *::after {
+          box-shadow: none !important;
+          text-shadow: none !important;
+          filter: none !important;
+        }
+        .sheet::before { display: none !important; }
+        .sheet:last-of-type { page-break-after: auto; break-after: auto; }
+      }
+    </style>
+  </head>
+  <body>
+    <button id="print-button" class="print-button print-hidden" type="button">
+      <span class="ii" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M7 8V3h10v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M6 17H4a2 2 0 0 1-2-2v-4a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v4a2 2 0 0 1-2 2h-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M7 14h10v7H7z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span>Print Lunch Menu</span>
+    </button>
+
+    <main id="app" class="menu-system"></main>
+
+    <script>
+      /* ═══════════════════════════════════════════
+         DATA
+      ═══════════════════════════════════════════ */
+      const D = {
+        venue: {
+          name: "The Old School House",
+          subtitle: "Pub and Nepalese Dining",
+          allergyNote: "Please tell us before ordering if you have any food allergies. Every care is taken, but traces of allergens may remain.",
+          spiceNote: "Bespoke spice levels available - just ask.",
+          address: "London Rd, Stony Stratford, Milton Keynes MK11 1JA",
+          phone: "01908 561936",
+          website: "oldschoolhousestony.co.uk",
+          locals: "Stony Stratford",
+          lunchHours: "Mon–Sat 12 pm – 3 pm",
+          sundayRoast: "Sunday 12 pm – 4 pm"
+        },
+        entree: [
+          { name: "Onion Bhaji", price: "4.50", labels: ["veg"] },
+          { name: "Samosa", price: "4.50 / 4.75", desc: "Choose veg or meat" },
+          { name: "Garlic Mushroom", price: "6.00", labels: ["veg"] },
+          { name: "Crispy Squid", price: "6.50" },
+          { name: "Chicken Wings", price: "6.75" },
+          { name: "Chicken Tikka", price: "7.50" },
+          { name: "Battered King Prawn", price: "8.50" }
+        ],
+        fromTheGrill: [
+          { name: "Veg Grill", price: "12.00", desc: "Onion Bhaji, Mogo, Samosa, Paneer", labels: ["veg","GF"] },
+          { name: "Small Mix Grill", price: "13.00", desc: "Chicken Wings, Chicken Tikka, Sheekh Kebab, Chicken Pakora", labels: ["GF"] },
+          { name: "Regular Mix Grill", price: "16.00", desc: "Small grill plus Lamb Chops", labels: ["GF"] },
+          { name: "Large Mix Grill", price: "20.00", desc: "Regular grill plus Kathmandu Tikka & Fish Pakora", labels: ["GF"] },
+          { name: "XLarge Mix Grill", price: "24.00", desc: "Large grill plus King Prawn", labels: ["GF"], badges: [{ text: "Best Value", type: "gold" }] },
+          { name: "Rack of Lamb", price: "17.00", labels: ["GF"], star: true, badges: [{ text: "Signature", type: "gold" }] }
+        ],
+        wraps: [
+          { name: "Paneer Wrap", price: "9.50", labels: ["veg"] },
+          { name: "Chicken Tikka Wrap", price: "10.95" },
+          { name: "Sweet Chilli Wrap", price: "10.95" },
+          { name: "Kebab Wrap", price: "11.50" },
+          { name: "Special Wrap (Mixed)", price: "12.50", badges: [{ text: "Popular", type: "gold" }] }
+        ],
+        curries: [
+          { name: "Chicken Korma", price: "12.00", labels: ["GF"] },
+          { name: "Chicken Tikka Masala", price: "13.00", labels: ["GF"] },
+          { name: "Special Butter Chicken", price: "13.00", desc: "Luxurious butter-infused tomato sauce with cashews, cream & fragrant spices.", labels: ["GF"], badges: [{ text: "Popular", type: "gold" }] },
+          { name: "Goat Curry", price: "14.50", desc: "Slow cooked goat with a unique blend of Nepalese spices.", labels: ["GF"] },
+          { name: "Himali Lamb", price: "14.50", desc: "Green curry with Himalayan salt, yoghurt, fresh mint & green chilli.", labels: ["GF"] }
+        ],
+        theEssentials: [
+          { name: "Chicken Strips & Chips", price: "12.95" },
+          { name: "Scampi, Chips & Peas", price: "14.50" },
+          { name: "Beer-Battered Haddock", price: "14.95", desc: "With chips & peas or mushy peas" },
+          { name: "Ham, Egg, Chips & Peas", price: "14.95" },
+          { name: "Grilled Salmon", price: "17.95", desc: "With basmati rice & Mediterranean vegetables" }
+        ],
+        burgerBar: [
+          { name: "Beef Burger & Chips", price: "12.95 / 13.95", desc: "4oz or 8oz — cheddar, lettuce, tomato & onion" },
+          { name: "Chicken Bacon Burger", price: "13.95", desc: "Bacon, cheese, lettuce, tomato & onions" },
+          { name: "Louisiana Cheeseburger", price: "14.95", desc: "Cheese, onion, lettuce, cajun & BBQ sauce" }
+        ],
+        nakedGreens: [
+          { name: "Tuna Salad", price: "10.95", labels: ["GF"] },
+          { name: "Prawn Salad", price: "11.95", labels: ["GF"] },
+          { name: "Chicken & Bacon Salad", price: "11.95", labels: ["GF"] }
+        ],
+        baguettes: [
+          { name: "English Cheddar & Pickle", price: "6.95", labels: ["veg"] },
+          { name: "Tuna Mayonnaise", price: "6.95" },
+          { name: "Bacon & English Cheddar", price: "7.25" },
+          { name: "Butchers Sliced Ham", price: "7.95" },
+          { name: "Prawn In Marie Rose", price: "7.95" },
+          { name: "Southern Fried Chicken", price: "7.95" }
+        ],
+        jacketPotato: [
+          { name: "English Cheddar", price: "7.95", labels: ["veg","GF"] },
+          { name: "Baked Beans", price: "7.95", labels: ["veg","GF"] },
+          { name: "Tuna Mayonnaise", price: "7.95", labels: ["GF"] },
+          { name: "Prawn In Marie Rose", price: "7.95" },
+          { name: "Additional Toppings", price: "1.95" }
+        ],
+        rice: [
+          { name: "Boiled Rice", price: "3.50" },
+          { name: "Pilau Rice", price: "4.50" },
+          { name: "Mushroom Rice", price: "4.75" },
+          { name: "Egg Fried Rice", price: "4.75" }
+        ],
+        naan: [
+          { name: "Plain Naan", price: "3.75", labels: ["veg"] },
+          { name: "Garlic Naan", price: "4.25", labels: ["veg"] },
+          { name: "Peshwari Naan", price: "4.75", labels: ["veg"] },
+          { name: "Keema Naan", price: "4.75" }
+        ],
+        sides: [
+          { name: "Garlic Bread", price: "3.25", labels: ["veg"] },
+          { name: "Skinny / Chunky Chips", price: "3.50 / 4.50", labels: ["veg"] },
+          { name: "Sweet Potato Chips", price: "4.95", labels: ["veg"] },
+          { name: "Side Salad", price: "4.95", labels: ["veg"] },
+          { name: "Saag Aloo", price: "5.25", labels: ["veg"] }
+        ],
+        kids: [
+          { name: "Nuggets", price: "7.00" },
+          { name: "Scampi", price: "7.00" },
+          { name: "CTM", price: "8.50", desc: "Chicken Tikka Masala" }
+        ],
+        roast: {
+          name: "Traditional Roast",
+          price: "15.95",
+          desc: "Choice of Beef, Pork, Turkey, or Plant-Based (V). Served with roast potatoes, cabbage, green beans, roast carrots & parsnips, Yorkshire pudding and gravy.",
+          note: "Served Sundays only, 12 pm – 4 pm"
+        }
+      };
+
+      /* ═══════════════════════════════════════════
+         RENDER HELPERS
+      ═══════════════════════════════════════════ */
+      const E = v => String(v).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+
+      const svgLeaf = `<span class="ii il" title="Vegetarian"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M6 19c8-8 12-11 15-12-1 4-4 12-12 15-2 .7-3 0-3-3Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 16c2-2 4-4 8-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>`;
+
+      const svgFlame = t => `<span class="ii ifl ${t}"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M12 3c1 4-2 4-2 8 0 2 1 3 2 3 2 0 3-2 3-4 2 2 4 4 4 7a7 7 0 1 1-14 0c0-4 3-6 7-14Z" fill="currentColor"/></svg></span>`;
+
+      function labels(ls) {
+        if (!ls || !ls.length) return "";
+        const b = [];
+        if (ls.includes("veg")) b.push(svgLeaf);
+        if (ls.includes("GF")) b.push('<span class="lc" title="Gluten Free">GF</span>');
+        if (ls.includes("spice-1")) b.push(svgFlame("mild"));
+        if (ls.includes("spice-2")) b.push(`<span class="ifs" title="Medium">${svgFlame("medium")}${svgFlame("medium")}</span>`);
+        if (ls.includes("spice-3")) b.push(`<span class="ifs" title="Hot">${svgFlame("hot")}${svgFlame("hot")}${svgFlame("hot")}</span>`);
+        return b.length ? `<span class="lg">${b.join("")}</span>` : "";
+      }
+
+      function badges(bs) {
+        if (!bs || !bs.length) return "";
+        return bs.map(b => `<span class="badge ${b.type==="gold"?"gold":"dark"}">${E(b.text)}</span>`).join("");
+      }
+
+      function mi(item, opts = {}) {
+        const dk = opts.dk, c = opts.c;
+        const cls = ["mi", dk?"dk":"", c?"c":"", item.star?"starred":""].filter(Boolean).join(" ");
+        return `<article class="${cls}">
+          <div class="mi-h"><div class="mi-n"><div class="mi-tr">
+            <div class="mi-t">${E(item.name)}</div>${labels(item.labels)}${badges(item.badges)}
+          </div></div><div class="mi-p">${E(item.price)}</div></div>
+          ${item.desc ? `<div class="mi-d">${E(item.desc)}</div>` : ""}
+        </article>`;
+      }
+
+      function ml(items, opts = {}) {
+        return `<div class="ml">${items.map(i => mi(i, opts)).join("")}</div>`;
+      }
+
+      function sh(title, sub, dark) {
+        return `<header class="sh${dark?" dark":""}">
+          <h2 class="sh-t">${E(title)}</h2>
+          ${sub ? `<div class="sh-sub">${E(sub)}</div>` : ""}
+          <div class="sh-rule" aria-hidden="true"></div>
+        </header>`;
+      }
+
+      function accPanel(title, items) {
+        return `<section class="acc-panel">
+          <h3 class="acc-title">${E(title)}</h3>
+          ${ml(items, { c: true })}
+        </section>`;
+      }
+
+      /* ═══════════════════════════════════════════
+         PAGE 1 — FRONT
+      ═══════════════════════════════════════════ */
+      function page1() {
+        const v = D.venue;
+        return `<section class="sheet"><div class="sheet-frame"><div class="sheet-border"><div class="sheet-panel">
+          <div class="page lunch-p1">
+
+            <!-- HEADER -->
+            <section class="lh">
+              <div class="lh-logo-wrap">
+                <img class="lh-logo" src="./assets/theoldschoolhouse_logo.png" alt="The Old School House logo">
+              </div>
+              <div class="lh-copy">
+                <div class="lh-topline">${E(v.locals)} Local</div>
+                <h1 class="lh-name">${E(v.name)}</h1>
+                <div class="lh-subtitle">${E(v.subtitle)}</div>
+                <div class="lh-badge">Lunch Menu</div>
+              </div>
+              <a class="lh-qr" href="https://${E(v.website)}">
+                <img class="lh-qr-img" src="./assets/theoldschoolhouse_qrcode.png" alt="QR code">
+                <div class="lh-qr-label">Scan Menu</div>
+              </a>
+            </section>
+
+            <!-- INFO BAR -->
+            <section class="info-bar">
+              <div class="info-cell">
+                <div class="info-lbl">Lunch Service</div>
+                <div class="info-val"><strong>${E(v.lunchHours)}</strong></div>
+              </div>
+              <div class="info-cell">
+                <div class="info-lbl">Phone</div>
+                <div class="info-val">${E(v.phone)}</div>
+              </div>
+              <div class="info-cell">
+                <div class="info-lbl">Sunday Roast</div>
+                <div class="info-val"><strong>${E(v.sundayRoast)}</strong></div>
+              </div>
+            </section>
+
+            <!-- ENTRÉE -->
+            <section>
+              ${sh("Entrée", "Small Plates & Starters")}
+              <div class="g2">${ml(D.entree.slice(0,4))}${ml(D.entree.slice(4))}</div>
+            </section>
+
+            <!-- FROM THE GRILL -->
+            <section class="grill-card">
+              <div class="grill-star" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="m12 2.5 2.9 5.88 6.49.95-4.69 4.58 1.1 6.47L12 17.27l-5.8 3.11 1.1-6.47L2.61 9.33l6.49-.95L12 2.5Z"/>
+                </svg>
+              </div>
+              ${sh("From The Grill", "Sizzling Sharing Platters", true)}
+              <div class="g2">${ml(D.fromTheGrill.slice(0,3),{dk:true})}${ml(D.fromTheGrill.slice(3),{dk:true})}</div>
+            </section>
+
+            <!-- WRAPS & CURRIES -->
+            <div class="flex-fill">
+              <section class="wc-split">
+                <div class="wc-pane">
+                  ${sh("Wraps", "With chips, salad & sweet chilli")}
+                  ${ml(D.wraps)}
+                </div>
+                <div class="wc-pane">
+                  ${sh("Curries", "Served with rice or naan")}
+                  ${ml(D.curries)}
+                </div>
+              </section>
+            </div>
+
+            <!-- FOOTER -->
+            <section class="foot-grid">
+              <div class="foot-card">
+                <div class="foot-title">${svgLeaf}<span>Allergy Notice</span></div>
+                <div class="foot-body">${E(v.allergyNote)}</div>
+              </div>
+              <div class="foot-card">
+                <div class="foot-title">${svgFlame("medium")}<span>Spice & Info</span></div>
+                <div class="foot-body">VEG and GF labels are marked throughout. ${E(v.spiceNote)}</div>
+              </div>
+            </section>
+
+          </div>
+        </div></div></div></section>`;
+      }
+
+      /* ═══════════════════════════════════════════
+         PAGE 2 — BACK
+      ═══════════════════════════════════════════ */
+      function page2() {
+        const r = D.roast;
+        return `<section class="sheet"><div class="sheet-frame"><div class="sheet-border"><div class="sheet-panel">
+          <div class="page lunch-p2">
+
+            <!-- ESSENTIALS & BURGERS -->
+            <section class="eb-split">
+              <div class="eb-card">
+                ${sh("The Essentials", "Pub Classics")}
+                ${ml(D.theEssentials)}
+              </div>
+              <div class="eb-card">
+                ${sh("Burger Bar")}
+                ${ml(D.burgerBar)}
+              </div>
+            </section>
+
+            <!-- BAGUETTES & JACKET POTATOES -->
+            <section class="bj-split">
+              <div class="bj-pane">
+                ${sh("Baguettes")}
+                ${ml(D.baguettes)}
+              </div>
+              <div class="bj-pane">
+                ${sh("Jacket Potatoes", "Served with a dressed salad")}
+                ${ml(D.jacketPotato)}
+              </div>
+            </section>
+
+            <!-- NAKED GREENS -->
+            <section class="ng-bar">
+              ${sh("Naked Greens", "Served on a dressed mixed salad")}
+              <div class="g3">${D.nakedGreens.map(i => ml([i])).join("")}</div>
+            </section>
+
+            <!-- RICE / NAAN / SIDES -->
+            <section class="acc-grid">
+              ${accPanel("Rice", D.rice)}
+              ${accPanel("Naan Breads", D.naan)}
+              ${accPanel("Sides", D.sides)}
+            </section>
+
+            <!-- KIDS -->
+            <section class="kids-card">
+              <div class="kids-lbl">Kids Plates</div>
+              <div class="kids-note">Choose chips or rice</div>
+              <div class="g3">${D.kids.map(i => ml([i])).join("")}</div>
+            </section>
+
+            <!-- TRADITIONAL ROAST -->
+            <section class="roast">
+              <div class="roast-k">Sunday Special</div>
+              <h2 class="roast-t">${E(r.name)}</h2>
+              <div class="roast-pr">${E(r.price)}</div>
+              <div class="roast-desc">${E(r.desc)}</div>
+              <div class="roast-note">${E(r.note)}</div>
+            </section>
+
+            <!-- FOOTER STRIPE -->
+            <div class="p2-footer">
+              <div class="p2-footer-item"><strong>${E(D.venue.phone)}</strong></div>
+              <div class="p2-footer-dot"></div>
+              <div class="p2-footer-item">${E(D.venue.address)}</div>
+              <div class="p2-footer-dot"></div>
+              <div class="p2-footer-item"><strong>${E(D.venue.website)}</strong></div>
+            </div>
+
+          </div>
+        </div></div></div></section>`;
+      }
+
+      /* ═══════════════════════════════════════════
+         INIT
+      ═══════════════════════════════════════════ */
+      document.getElementById("app").innerHTML = page1() + page2();
+      document.getElementById("print-button").addEventListener("click", () => window.print());
+    </script>
+  </body>
+</html>

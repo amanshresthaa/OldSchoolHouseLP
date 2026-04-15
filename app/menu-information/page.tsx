@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { DownloadSimple, Phone } from "@phosphor-icons/react/dist/ssr"
+import { Phone } from "@phosphor-icons/react/dist/ssr"
 
 import {
   CompactHighlightGrid,
@@ -19,7 +19,7 @@ import {
   menuInformationNextPagesCopy,
   menuInformationStartSectionCopy,
 } from "@/data/copy"
-import { siteMenuPdfHref, sitePhone, sitePhoneHref } from "@/data/site"
+import { siteDinnerMenuPdfHref, sitePhone, sitePhoneHref } from "@/data/site"
 import { getRouteConfig } from "@/data/site-routes"
 import { buildPageMetadata } from "@/lib/metadata"
 import { getSectionBandClass } from "@/lib/section-bands"
@@ -42,9 +42,8 @@ export default function MenuInformationPage() {
           label: menuInformationHeroCopy.primaryActionLabel,
         }}
         secondaryAction={{
-          href: siteMenuPdfHref,
+          href: siteDinnerMenuPdfHref,
           label: menuInformationHeroCopy.secondaryActionLabel,
-          download: true,
           variant: "outline",
         }}
       />
@@ -63,9 +62,8 @@ export default function MenuInformationPage() {
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline">
-                <a href={siteMenuPdfHref} download>
+                <a href={siteDinnerMenuPdfHref} target="_blank" rel="noreferrer">
                   {menuInformationStartSectionCopy.pdfLabel}
-                  <DownloadSimple />
                 </a>
               </Button>
               <Button asChild size="lg" variant="outline">

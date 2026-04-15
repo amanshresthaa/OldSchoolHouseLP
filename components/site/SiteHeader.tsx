@@ -153,7 +153,7 @@ export function SiteHeader() {
             <Link
               href="/"
               className="min-w-0 flex-1 pr-1 xl:flex-none xl:pr-0"
-              aria-label={siteName}
+              aria-label={`${siteName}, ${siteLocation}`}
             >
               <div className="flex min-w-0 items-center gap-3">
                 <div className="shrink-0">

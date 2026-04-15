@@ -38,7 +38,9 @@ export function HomeVisitSection({
 
             <div className="relative flex h-full flex-col gap-6 px-5 py-5 md:px-6 md:py-6">
               <SectionHeading
-                {...homeVisitSectionCopy}
+                eyebrow={homeVisitSectionCopy.eyebrow}
+                title={homeVisitSectionCopy.title}
+                description={homeVisitSectionCopy.description}
                 invert
                 className="max-w-[36rem]"
               />

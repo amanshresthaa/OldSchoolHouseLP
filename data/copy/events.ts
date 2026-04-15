@@ -8,7 +8,7 @@ export const eventsWhatOnCards = [
   {
     title: "Sky Sports and TNT Sports without losing the pub feel",
     description:
-      "Fixtures matter here, but so do the drinks, the table, and the room around them. That makes the pub a better all-round choice than a screen-only venue.",
+      "Fixtures matter here, but so do the drinks, the table, and the room around them. That makes the pub a better all-round choice than a screen-only venue, especially when the food needs to cover a fuller menu rather than just bar snacks.",
   },
   {
     title: "Theme nights, tastings, and weeknight footfall",
@@ -94,7 +94,7 @@ export const eventsReturnVisitSection = {
 export const eventsInlineCtaCopy = {
   title: "Heading in for the match, the team social, or a busier night?",
   description:
-    "Book ahead and let the pub side of the visit feel straightforward before the evening gets moving.",
+    "Book ahead and let the pub side of the visit feel straightforward before the evening gets moving, especially if the group wants the full menu lined up around the night.",
 }
 
 export const eventsPlanningSectionCopy = {
@@ -115,7 +115,7 @@ export const eventsPlanningCards = [
   {
     title: "Sky Sports and TNT Sports in a proper pub room",
     description:
-      "The sport offer is a reason to visit, but the table, food, and atmosphere around it are what keep the visit feeling like a local pub night.",
+      "The sport offer is a reason to visit, but the table, full menu, and atmosphere around it are what keep the visit feeling like a local pub night.",
   },
   {
     title: "Local teams and socials are part of the plan",

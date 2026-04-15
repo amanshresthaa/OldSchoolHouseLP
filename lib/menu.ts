@@ -1,8 +1,26 @@
-import allMenu from "@/menu/all.json"
+import {
+  lunchMenuSource,
+  mainMenuSource,
+  type SourceMenuBadge,
+  type SourceMenuCategory,
+  type SourceMenuItem,
+} from "@/data/menu"
 
 export interface MenuPrice {
-  amount: number
+  amount: number | null
   currency: string
+  display: string
+}
+
+export interface MenuBadge {
+  key: string
+  label: string
+  className: string
+}
+
+export interface MenuItemBadge {
+  text: string
+  type: "gold" | "dark"
 }
 
 export interface MenuItem {
@@ -10,6 +28,7 @@ export interface MenuItem {
   price: MenuPrice
   description?: string
   labels?: string[]
+  badges?: MenuItemBadge[]
 }
 
 export interface MenuCategory {
@@ -19,78 +38,112 @@ export interface MenuCategory {
   items: MenuItem[]
 }
 
-export interface MenuBadge {
-  key: string
-  label: string
-  className: string
+function parsePriceAmount(value: string) {
+  const match = value.match(/\d+(?:\.\d{1,2})?/)
+  return match ? Number(match[0]) : null
 }
 
-interface MenuRecord {
-  [key: string]: MenuItem[]
-}
-
-const menuData = allMenu as MenuRecord
-
-const categoryIntros: Record<string, string> = {
-  Starters:
-    "A mix of Nepalese small plates, fried pub-time bites, and signature momo to start the table properly.",
-  "Mixed Grills":
-    "Sizzling mixed grills that lean into the pub’s more celebratory, high-impact side.",
-  "Speciality Dishes":
-    "House signatures and richer Nepalese mains that give the menu its point of difference.",
-  "Authentic Dishes":
-    "Classic curry styles with vegetable, chicken, lamb, and king prawn options.",
-  Naans:
-    "Warm breads and sides for balancing heat, sauce, and longer-table meals.",
-  Fries: "Quick add-ons and sharers for drinks, wraps, and casual pub grazing.",
-  "Pub Grub":
-    "Wraps and easy plates that work for lunch, a pint stop, or an in-between meal.",
-  Rice: "Kitchen staples to pair with curries, grills, and speciality dishes.",
-  "Pub Classic":
-    "Straightforward pub comfort for guests who want familiar favourites.",
-  Salads:
-    "Lighter options that keep the menu flexible through lunch and warmer days.",
-  Sides:
-    "Extra vegetable dishes and supporting plates for building a full Nepalese spread.",
-  Kids: "Short, easy kids choices with simple formats for family visits.",
-  Desserts: "A concise finish with Nepalese sweets, ice cream, and fondant.",
-}
-
-const categoryTitles: Record<string, string> = {
-  "Pub Classic": "Pub Classics",
-  Kids: "Kids Menu",
-}
-
-function slugify(value: string) {
+function formatPriceDisplay(value: string) {
   return value
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "")
+    .split("/")
+    .map((part) => {
+      const trimmed = part.trim()
+      return /^\d/.test(trimmed) ? `£${trimmed}` : trimmed
+    })
+    .join(" / ")
 }
 
-export const menuCategories: MenuCategory[] = Object.entries(menuData).map(
-  ([title, items]) => ({
-    slug: slugify(title),
-    title: categoryTitles[title] ?? title,
-    intro: categoryIntros[title] ?? "Seasonal dishes and house favourites.",
-    items,
-  })
-)
+function buildMenuPrice(value: string): MenuPrice {
+  return {
+    amount: parsePriceAmount(value),
+    currency: "GBP",
+    display: formatPriceDisplay(value),
+  }
+}
+
+function buildMenuBadges(badges?: SourceMenuBadge[]): MenuItemBadge[] | undefined {
+  if (!badges?.length) return undefined
+
+  return badges.map((badge) => ({
+    text: badge.text,
+    type: badge.type,
+  }))
+}
+
+function buildMenuItem(item: SourceMenuItem): MenuItem {
+  return {
+    name: item.name,
+    price: buildMenuPrice(item.price),
+    description: item.desc,
+    labels: item.labels,
+    badges: buildMenuBadges(item.badges),
+  }
+}
+
+function buildMenuCategory(category: SourceMenuCategory): MenuCategory {
+  return {
+    slug: category.slug,
+    title: category.title,
+    intro: category.intro,
+    items: category.items.map(buildMenuItem),
+  }
+}
+
+function getRequiredMenuItem(
+  categories: MenuCategory[],
+  categorySlug: string,
+  itemName: string
+) {
+  const category = categories.find((entry) => entry.slug === categorySlug)
+  const item = category?.items.find((entry) => entry.name === itemName)
+
+  if (!item) {
+    throw new Error(`Missing menu item: ${categorySlug} / ${itemName}`)
+  }
+
+  return item
+}
+
+export const dinnerMenuCategories: MenuCategory[] =
+  mainMenuSource.map(buildMenuCategory)
+
+export const lunchMenuCategories: MenuCategory[] =
+  lunchMenuSource.map(buildMenuCategory)
+
+export const menuCategories: MenuCategory[] = dinnerMenuCategories
 
 export const menuPreviewCategories = menuCategories.filter((category) =>
-  ["starters", "speciality-dishes", "pub-classic", "desserts"].includes(
-    category.slug
-  )
+  [
+    "main-starters",
+    "main-chef-selection",
+    "main-pub-classics",
+    "main-desserts",
+  ].includes(category.slug)
 )
 
 export const featuredMenuItems: MenuItem[] = [
-  menuData["Starters"][8],
-  menuData["Mixed Grills"][3],
-  menuData["Speciality Dishes"][16],
-  menuData["Pub Classic"][0],
+  getRequiredMenuItem(
+    dinnerMenuCategories,
+    "main-starters",
+    "Chicken Momo (Steam / Chilli)"
+  ),
+  getRequiredMenuItem(
+    dinnerMenuCategories,
+    "main-mixed-grills",
+    "Large Mixed Grill"
+  ),
+  getRequiredMenuItem(
+    dinnerMenuCategories,
+    "main-chef-selection",
+    "Kathmandu Tikka Masala"
+  ),
+  getRequiredMenuItem(dinnerMenuCategories, "main-pub-classics", "Fish & Chips"),
 ]
 
 export function formatPrice(price: MenuPrice) {
+  if (price.display) return price.display
+  if (price.amount === null) return ""
+
   return new Intl.NumberFormat("en-GB", {
     style: "currency",
     currency: price.currency,

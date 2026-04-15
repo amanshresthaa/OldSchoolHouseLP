@@ -1,0 +1,3222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Old School House - Elegant Four Page Menu</title>
+    <link rel="icon" href="data:,">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,wght@0,600;0,700;1,600&display=swap"
+      rel="stylesheet"
+    >
+    <style>
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
+
+      :root {
+        --paper: #f7f3eb;
+        --paper-shadow: #e4dbcf;
+        --ink: #2b241d;
+        --ink-soft: rgba(43, 36, 29, 0.72);
+        --ink-faint: rgba(43, 36, 29, 0.54);
+        --gold: #b98132;
+        --gold-soft: rgba(185, 129, 50, 0.08);
+        --gold-deep: #96492b;
+        --pine: #1f3127;
+        --pine-soft: rgba(31, 49, 39, 0.16);
+        --mild: #c7903e;
+        --medium: #b85e36;
+        --hot: #8f3528;
+        --veg: #617246;
+        --gf: #8b6038;
+        --sheet-width: 210mm;
+        --sheet-height: 297mm;
+        --content-font-bump: 0.53mm;
+        /* 🛠️ MASTER SPACING CONTROLS */
+        --menu-stack-gap: 8mm;
+        --menu-stack-pad-top: 8mm;
+        --menu-stack-pad-bottom: 12mm;
+        --sheet-frame-pad: 4mm;
+        --sheet-border-pad: 1.5mm;
+        --sheet-panel-pad: 6mm;
+        --section-gap: 2.55mm;
+        --section-rule-margin-top: 0.9mm;
+        --section-title-size: 4.78mm;
+        --section-subtitle-size: 2.48mm;
+        --panel-title-size: calc(3.15mm + var(--content-font-bump));
+        --subheader-gap: 2.2mm;
+        --subheader-pad-bottom: 1mm;
+        --grid-gap-x: 8mm;
+        --grid-gap-x-tight: 6mm;
+        --grid-gap-x-compact: 5mm;
+        --grid-gap-y: 3.6mm;
+        --item-gap-y: 0.36mm;
+        --item-pad-y: 0.92mm;
+        --item-pad-y-compact: 0.68mm;
+        --item-head-gap: 4mm;
+        --item-meta-gap: 1mm;
+        --item-meta-margin-top: 0.55mm;
+        --menu-title-size: 3.60mm;
+        --menu-price-size: 3.30mm;
+        --menu-desc-size: 3.10mm;
+        --price-col-width: 20mm;
+        --star-inset-x: 2mm;
+        --label-gap: 1.6mm;
+        --badge-pad-y: 0.55mm;
+        --badge-pad-x: 1.4mm;
+        --chip-pad-y: 0.45mm;
+        --chip-pad-x: 0.9mm;
+        --cover-top-pad-top: 5.2mm;
+        --cover-top-pad-bottom: 6mm;
+        --cover-middle-gap: 2.7mm;
+        --cover-middle-inline-pad: 10mm;
+        --cover-footer-gap-x: 8mm;
+        --cover-footer-pad-top: 4.3mm;
+        --hours-card-pad: 8mm;
+        --hours-title-gap: 6mm;
+        --hours-grid-gap-x: 10mm;
+        --card-pad: 3.65mm;
+        --card-pad-tight: 2.85mm;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: linear-gradient(180deg, #e6ddd1 0%, #d8cfbf 100%);
+        color: var(--ink);
+        font-family: "Source Sans 3", sans-serif;
+      }
+
+      .menu-system {
+        min-height: 100vh;
+        padding: var(--menu-stack-pad-top) 0 var(--menu-stack-pad-bottom);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--menu-stack-gap);
+      }
+
+      .print-button {
+        position: fixed;
+        right: 24px;
+        bottom: 24px;
+        z-index: 50;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        border: 0;
+        border-radius: 999px;
+        background: var(--gold-deep);
+        color: #fff;
+        cursor: pointer;
+        padding: 14px 18px;
+        box-shadow: 0 18px 34px rgba(44, 36, 27, 0.25);
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        font-size: 11px;
+        font-weight: 700;
+      }
+
+      .print-button:hover {
+        background: #7a2e18;
+      }
+
+      .sheet {
+        width: var(--sheet-width);
+        height: var(--sheet-height);
+        background: var(--paper);
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 10mm 22mm rgba(44, 36, 27, 0.18);
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      .sheet::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.12;
+        background:
+          radial-gradient(circle at top, rgba(255, 255, 255, 0.85), transparent 34%),
+          radial-gradient(circle at bottom right, rgba(200, 125, 38, 0.08), transparent 32%);
+      }
+
+      .sheet-frame {
+        width: 100%;
+        height: 100%;
+        padding: var(--sheet-frame-pad);
+      }
+
+      .sheet-border {
+        width: 100%;
+        height: 100%;
+        border: 1.5px solid var(--ink);
+        padding: var(--sheet-border-pad);
+        background: var(--paper);
+      }
+
+      .sheet-panel {
+        width: 100%;
+        height: 100%;
+        border: 0.5px solid var(--ink);
+        padding: var(--sheet-panel-pad);
+        display: flex;
+        flex-direction: column;
+        background: var(--paper);
+        position: relative;
+      }
+
+      .page {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .font-serif {
+        font-family: "Source Serif 4", serif;
+      }
+
+      .centered {
+        text-align: center;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: var(--section-gap);
+      }
+
+      .section-title {
+        font-family: "Source Serif 4", serif;
+        font-size: var(--section-title-size);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--gold-deep);
+        margin: 0;
+      }
+
+      .section-header.dark .section-title {
+        color: #ffffff;
+      }
+
+      .section-subtitle {
+        font-size: var(--section-subtitle-size);
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        color: rgba(200, 125, 38, 0.92);
+        margin-top: 1mm;
+      }
+
+      .section-header.dark .section-subtitle {
+        color: rgba(217, 139, 44, 0.92);
+      }
+
+      .section-rule {
+        display: block;
+        width: 18mm;
+        height: 0.5mm;
+        margin-top: var(--section-rule-margin-top);
+        margin-left: auto;
+        margin-right: auto;
+        background: linear-gradient(90deg, transparent, rgba(185, 129, 50, 0.7), transparent);
+      }
+
+      .section-rule-line {
+        display: none;
+      }
+
+      .section-header.dark .section-rule-line {
+        display: none;
+      }
+
+      .section-rule-diamond {
+        display: none;
+      }
+
+      .section-header.dark .section-rule-diamond {
+        display: none;
+      }
+
+      .subheader {
+        margin: 0 0 var(--subheader-gap);
+        padding-bottom: var(--subheader-pad-bottom);
+        border-bottom: 1px solid rgba(44, 36, 27, 0.16);
+        font-size: var(--panel-title-size);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--gold-deep);
+      }
+
+      .two-col {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0 var(--grid-gap-x);
+      }
+
+      .three-col {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0 var(--grid-gap-x-tight);
+      }
+
+      .four-col {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0 var(--grid-gap-x-compact);
+      }
+
+      .menu-list {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .menu-item {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) var(--price-col-width);
+        column-gap: var(--item-head-gap);
+        gap: var(--item-gap-y);
+        padding: var(--item-pad-y) 0;
+        border-bottom: 1px solid rgba(44, 36, 27, 0.1);
+        align-items: start;
+      }
+
+      .menu-item.compact {
+        padding: var(--item-pad-y-compact) 0;
+      }
+
+      .menu-item:last-child {
+        border-bottom: 0;
+      }
+
+      .menu-item.starred {
+        margin: 0;
+        padding-left: calc(var(--star-inset-x) + 1.1mm);
+        padding-right: 0;
+        background: rgba(200, 125, 38, 0.05);
+        border-radius: 2px;
+      }
+
+      .menu-item.dark.starred {
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .menu-item.starred::before {
+        content: "";
+        position: absolute;
+        left: 0.35mm;
+        top: 10%;
+        bottom: 10%;
+        width: 2.5px;
+        border-radius: 0 2px 2px 0;
+        background: var(--gold);
+      }
+
+      .menu-item.dark.starred::before {
+        background: var(--mild);
+      }
+
+      .menu-item-head {
+        display: contents;
+      }
+
+      .menu-item-name {
+        min-width: 0;
+      }
+
+      .menu-item-title-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.8mm 0;
+        min-width: 0;
+      }
+
+      .menu-item-title {
+        font-family: "Source Serif 4", serif;
+        font-size: var(--menu-title-size);
+        font-weight: 600;
+        line-height: 1.06;
+        text-transform: uppercase;
+        color: var(--ink);
+        overflow-wrap: anywhere;
+      }
+
+      .menu-item.compact .menu-item-title {
+        font-size: var(--menu-title-size);
+      }
+
+      .menu-item.starred .menu-item-title {
+        font-size: calc(var(--menu-title-size) * 1.05);
+      }
+
+      .menu-item.compact.starred .menu-item-title {
+        font-size: calc(var(--menu-title-size) * 1.05);
+      }
+
+      .menu-item.dark .menu-item-title {
+        color: #faf6f0;
+      }
+
+      .menu-item-price {
+        grid-column: 2;
+        justify-self: end;
+        width: var(--price-col-width);
+        text-align: right;
+        padding-top: 0.12mm;
+        font-size: var(--menu-price-size);
+        line-height: 1.02;
+        letter-spacing: 0.03em;
+        color: #a45432;
+        white-space: nowrap;
+      }
+
+      .menu-item.compact .menu-item-price {
+        font-size: var(--menu-price-size);
+      }
+
+      .menu-item.dark .menu-item-price {
+        color: var(--mild);
+      }
+
+      .menu-item-desc {
+        grid-column: 1;
+        margin-top: 0.22mm;
+        font-size: var(--menu-desc-size);
+        font-style: italic;
+        line-height: 1.16;
+        color: rgba(44, 36, 27, 0.62);
+        overflow-wrap: anywhere;
+      }
+
+      .menu-item.compact .menu-item-desc {
+        margin-top: 0.2mm;
+        font-size: var(--menu-desc-size);
+        line-height: 1.14;
+      }
+
+      .menu-item.dark .menu-item-desc {
+        color: rgba(250, 246, 240, 0.72);
+      }
+
+      .label-group {
+        display: inline-flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 2px;
+        margin-left: var(--label-gap);
+        min-width: 0;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        margin-left: var(--label-gap);
+        padding: var(--badge-pad-y) var(--badge-pad-x);
+        border-radius: 2px;
+        font-size: calc(1.8mm + var(--content-font-bump));
+        line-height: 1;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        box-shadow: 0 1px 4px rgba(44, 36, 27, 0.12);
+      }
+
+      .badge.gold {
+        background: var(--gold);
+        color: #ffffff;
+      }
+
+      .badge.dark {
+        background: var(--ink);
+        color: #ffffff;
+      }
+
+      .dark-context .badge.dark {
+        background: #faf6f0;
+        color: var(--ink);
+      }
+
+      .icon-inline {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .icon-leaf svg {
+        color: var(--veg);
+      }
+
+      .icon-flame.mild svg {
+        color: var(--mild);
+      }
+
+      .icon-flame.medium svg {
+        color: var(--medium);
+      }
+
+      .icon-flame.hot svg {
+        color: var(--hot);
+      }
+
+      .icon-flame-stack {
+        display: inline-flex;
+      }
+
+      .icon-flame-stack .icon-inline + .icon-inline {
+        margin-left: -5px;
+      }
+
+      .label-chip {
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid rgba(140, 70, 39, 0.3);
+        color: var(--gf);
+        font-size: calc(1.8mm + var(--content-font-bump));
+        line-height: 1;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        padding: var(--chip-pad-y) var(--chip-pad-x);
+        border-radius: 2px;
+      }
+
+      .label-chip.dry {
+        border-color: rgba(44, 36, 27, 0.3);
+        color: rgba(44, 36, 27, 0.7);
+      }
+
+      .cover-page {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        min-height: 100%;
+        padding-top: var(--cover-top-pad-top);
+        padding-bottom: calc(var(--cover-top-pad-bottom) + 12mm);
+        padding-left: 5.4mm;
+        padding-right: 5.4mm;
+      }
+
+      .cover-core {
+        display: flex;
+        flex-direction: column;
+        gap: 2.8mm;
+      }
+
+      .cover-support {
+        display: flex;
+        flex-direction: column;
+        gap: 2mm;
+        margin-top: 3mm;
+      }
+
+      .cover-hero {
+        position: relative;
+        display: grid;
+        grid-template-columns: 25mm minmax(0, 1fr);
+        gap: 5mm;
+        align-items: center;
+        padding: 4.6mm 5.2mm 4.2mm;
+        border: 1px solid rgba(44, 36, 27, 0.15);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(247, 243, 235, 0.9) 100%);
+        box-shadow: 0 10px 24px rgba(44, 36, 27, 0.08);
+      }
+
+      .cover-hero::before {
+        content: "";
+        position: absolute;
+        inset: 3px;
+        border: 1px solid rgba(185, 129, 50, 0.22);
+        pointer-events: none;
+      }
+
+      .cover-logo-badge {
+        width: 25mm;
+        height: 25mm;
+        border-radius: 999px;
+        background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9), rgba(247, 243, 235, 0.55));
+        border: 1px solid rgba(44, 36, 27, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      }
+
+      .cover-logo {
+        width: 18.5mm;
+        height: auto;
+        object-fit: contain;
+        margin: 0;
+      }
+
+      .cover-hero-copy {
+        min-width: 0;
+      }
+
+      .cover-kicker {
+        font-size: calc(1.95mm + var(--content-font-bump));
+        line-height: 1.1;
+        font-weight: 700;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--gold-deep);
+      }
+
+      .cover-name {
+        margin: 1.4mm 0 1.8mm;
+        font-family: "Source Serif 4", serif;
+        font-size: calc(12.4mm + var(--content-font-bump));
+        line-height: 0.9;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .cover-subtitle {
+        font-size: calc(2.9mm + var(--content-font-bump));
+        font-weight: 700;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--gold);
+      }
+
+      .cover-social {
+        margin-top: 1.6mm;
+        font-size: calc(2.1mm + var(--content-font-bump));
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(44, 36, 27, 0.58);
+      }
+
+      .cover-intro-band {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 42mm;
+        gap: 4.2mm;
+        align-items: stretch;
+      }
+
+      .cover-intro {
+        padding: 4.2mm 4.8mm 4.1mm;
+        background: rgba(255, 255, 255, 0.8);
+        border-left: 1.6mm solid rgba(150, 73, 43, 0.9);
+        box-shadow: 0 8px 20px rgba(44, 36, 27, 0.06);
+      }
+
+      .cover-intro-kicker {
+        font-size: calc(1.85mm + var(--content-font-bump));
+        line-height: 1.1;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--gold-deep);
+      }
+
+      .cover-intro-title {
+        margin: 1.6mm 0 1.8mm;
+        font-family: "Source Serif 4", serif;
+        font-size: calc(5.2mm + var(--content-font-bump));
+        line-height: 1.05;
+        letter-spacing: 0.01em;
+        color: var(--ink);
+      }
+
+      .cover-intro-body {
+        font-size: calc(2.55mm + var(--content-font-bump));
+        line-height: 1.42;
+        color: rgba(44, 36, 27, 0.72);
+      }
+
+      .cover-side-stack {
+        display: grid;
+        grid-template-rows: auto auto;
+        gap: 3.1mm;
+      }
+
+      .cover-qr-card,
+      .cover-mini-card,
+      .hours-card {
+        background: #ffffff;
+        border: 1px solid rgba(44, 36, 27, 0.14);
+        box-shadow: 0 8px 18px rgba(44, 36, 27, 0.08);
+      }
+
+      .cover-qr-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1mm;
+        padding: 2.4mm 2.2mm;
+        text-align: center;
+        text-decoration: none;
+      }
+
+      .cover-qr-image {
+        width: 20mm;
+        height: 20mm;
+        object-fit: contain;
+        display: block;
+      }
+
+      .cover-qr-kicker {
+        font-size: calc(1.85mm + var(--content-font-bump));
+        line-height: 1.1;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--gold-deep);
+      }
+
+      .cover-qr-note {
+        font-size: calc(1.9mm + var(--content-font-bump));
+        line-height: 1.18;
+        color: rgba(44, 36, 27, 0.64);
+      }
+
+      .cover-qr-url {
+        font-size: calc(1.8mm + var(--content-font-bump));
+        line-height: 1.1;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        color: var(--gold);
+      }
+
+      .cover-mini-card {
+        padding: 2.8mm 3.1mm;
+      }
+
+      .cover-mini-title {
+        font-size: calc(1.85mm + var(--content-font-bump));
+        line-height: 1.1;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--gold-deep);
+      }
+
+      .cover-mini-body {
+        margin-top: 1.2mm;
+        font-size: calc(2.2mm + var(--content-font-bump));
+        line-height: 1.34;
+        color: rgba(44, 36, 27, 0.66);
+      }
+
+      .cover-contact-list {
+        display: grid;
+        gap: 1.15mm;
+        margin-top: 1.2mm;
+      }
+
+      .cover-contact-line {
+        display: grid;
+        gap: 0.35mm;
+      }
+
+      .cover-contact-label {
+        font-size: calc(1.55mm + var(--content-font-bump));
+        line-height: 1.05;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: rgba(150, 73, 43, 0.78);
+      }
+
+      .cover-contact-value {
+        font-size: calc(2.05mm + var(--content-font-bump));
+        line-height: 1.24;
+        color: rgba(44, 36, 27, 0.7);
+      }
+
+      .hours-card {
+        width: 100%;
+        padding: 3.4mm 4.4mm 3.2mm;
+      }
+
+      .hours-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 3mm;
+        margin-bottom: 2.2mm;
+        padding-bottom: 1.4mm;
+        border-bottom: 1px solid rgba(44, 36, 27, 0.12);
+      }
+
+      .hours-title {
+        margin: 0;
+        font-family: "Source Serif 4", serif;
+        font-size: calc(3.15mm + var(--content-font-bump));
+        font-weight: 700;
+        color: var(--gold-deep);
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+      }
+
+      .hours-subtitle {
+        font-size: calc(1.7mm + var(--content-font-bump));
+        line-height: 1.1;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: rgba(44, 36, 27, 0.46);
+      }
+
+      .hours-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0 5.2mm;
+      }
+
+      .hours-column-title {
+        margin: 0 0 1.35mm;
+        padding-bottom: 0.8mm;
+        border-bottom: 1px solid rgba(44, 36, 27, 0.15);
+        font-size: calc(2.05mm + var(--content-font-bump));
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .hours-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.8mm;
+      }
+
+      .hours-list li {
+        display: grid;
+        grid-template-columns: 16mm 1fr;
+        gap: 1.4mm;
+        align-items: baseline;
+      }
+
+      .hours-day {
+        display: block;
+        font-size: calc(1.85mm + var(--content-font-bump));
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: rgba(44, 36, 27, 0.52);
+      }
+
+      .hours-time {
+        display: block;
+        font-size: calc(2.25mm + var(--content-font-bump));
+        font-weight: 700;
+        color: var(--gold);
+      }
+
+      .cover-footer {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 4.2mm;
+      }
+
+      .cover-note {
+        padding: 3.1mm 3.5mm;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(44, 36, 27, 0.1);
+      }
+
+      .note-title {
+        display: inline-flex;
+        align-items: center;
+        gap: 1.5mm;
+        font-size: calc(2.3mm + var(--content-font-bump));
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--gold-deep);
+        margin-bottom: 1.6mm;
+      }
+
+      .note-body {
+        font-size: calc(2.3mm + var(--content-font-bump));
+        line-height: 1.42;
+        color: rgba(44, 36, 27, 0.72);
+      }
+
+      .spice-legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.1mm 3mm;
+        font-size: calc(2.25mm + var(--content-font-bump));
+        color: rgba(44, 36, 27, 0.72);
+      }
+
+      .spice-legend-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 1mm;
+      }
+
+      .tiny-note {
+        margin-top: 1.5mm;
+        font-size: calc(2.1mm + var(--content-font-bump));
+        font-style: italic;
+        color: rgba(44, 36, 27, 0.62);
+      }
+
+      .cover-bottom-line {
+        padding-top: var(--cover-footer-pad-top);
+        border-top: 1px solid rgba(44, 36, 27, 0.14);
+        text-align: center;
+      }
+
+      .drinks-note {
+        font-size: calc(2.05mm + var(--content-font-bump));
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        color: var(--gold);
+      }
+
+      .cover-chef-spotlight {
+        position: relative;
+        margin-top: 2.5mm;
+        padding: 4.8mm 5.6mm 4.4mm;
+        background:
+          radial-gradient(ellipse at 20% 50%, rgba(185, 129, 50, 0.12) 0%, transparent 60%),
+          radial-gradient(ellipse at 80% 50%, rgba(150, 73, 43, 0.08) 0%, transparent 50%),
+          linear-gradient(135deg, #1a1410 0%, #2b1e14 40%, #1a1410 100%);
+        border: 1.5px solid rgba(185, 129, 50, 0.55);
+        box-shadow:
+          0 0 0 3px rgba(185, 129, 50, 0.08),
+          0 12px 28px rgba(26, 20, 16, 0.28),
+          inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        color: #faf6f0;
+        text-align: center;
+        overflow: hidden;
+      }
+
+      .cover-chef-spotlight::before {
+        content: "";
+        position: absolute;
+        inset: 4px;
+        border: 1px solid rgba(185, 129, 50, 0.3);
+        pointer-events: none;
+      }
+
+      .cover-chef-spotlight::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1.2mm;
+        background: linear-gradient(90deg, transparent 8%, rgba(185, 129, 50, 0.9) 30%, rgba(199, 144, 62, 1) 50%, rgba(185, 129, 50, 0.9) 70%, transparent 92%);
+      }
+
+      .cover-chef-spotlight-top-rule {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 3mm;
+        margin-bottom: 1.8mm;
+      }
+
+      .cover-chef-spotlight-rule-line {
+        flex: 1;
+        height: 0.4px;
+        background: linear-gradient(90deg, transparent, rgba(185, 129, 50, 0.5), transparent);
+      }
+
+      .cover-chef-spotlight-rule-diamond {
+        width: 4px;
+        height: 4px;
+        background: var(--gold);
+        transform: rotate(45deg);
+        flex-shrink: 0;
+      }
+
+      .cover-chef-spotlight-kicker {
+        font-size: calc(1.85mm + var(--content-font-bump));
+        line-height: 1.1;
+        font-weight: 700;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--gold);
+      }
+
+      .cover-chef-spotlight-flame {
+        display: flex;
+        justify-content: center;
+        gap: 1mm;
+        margin: 1.2mm 0;
+      }
+
+      .cover-chef-spotlight-flame svg {
+        width: 12px;
+        height: 12px;
+        color: var(--gold);
+        opacity: 0.7;
+      }
+
+      .cover-chef-spotlight-name {
+        margin: 0.6mm 0 1.4mm;
+        font-family: "Source Serif 4", serif;
+        font-size: calc(5.4mm + var(--content-font-bump));
+        line-height: 1.02;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #faf6f0;
+      }
+
+      .cover-chef-spotlight-desc {
+        max-width: 155mm;
+        margin: 0 auto;
+        font-size: calc(2.45mm + var(--content-font-bump));
+        line-height: 1.48;
+        color: rgba(250, 246, 240, 0.72);
+        font-style: italic;
+      }
+
+      .cover-chef-spotlight-price-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 3.5mm;
+        margin-top: 2mm;
+      }
+
+      .cover-chef-spotlight-price-line {
+        width: 14mm;
+        height: 0.4px;
+        background: linear-gradient(90deg, transparent, rgba(185, 129, 50, 0.5));
+      }
+
+      .cover-chef-spotlight-price-line.right {
+        background: linear-gradient(90deg, rgba(185, 129, 50, 0.5), transparent);
+      }
+
+      .cover-chef-spotlight-price {
+        font-family: "Source Serif 4", serif;
+        font-size: calc(4.6mm + var(--content-font-bump));
+        font-weight: 700;
+        color: var(--gold);
+        letter-spacing: 0.08em;
+      }
+
+      .cover-focus-stage {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 48mm;
+        gap: 4mm;
+        align-items: stretch;
+      }
+
+      .cover-brand-stage {
+        position: relative;
+        padding: 5mm 5.1mm 4.8mm;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(247, 243, 235, 0.92));
+        border: 1px solid rgba(44, 36, 27, 0.14);
+        box-shadow: 0 10px 24px rgba(44, 36, 27, 0.08);
+      }
+
+      .cover-brand-stage::before {
+        content: "";
+        position: absolute;
+        inset: 3px;
+        border: 1px solid rgba(185, 129, 50, 0.2);
+        pointer-events: none;
+      }
+
+      .cover-brand-topline {
+        font-size: calc(1.75mm + var(--content-font-bump));
+        line-height: 1.1;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--gold-deep);
+      }
+
+      .cover-brand-lockup {
+        display: grid;
+        grid-template-columns: 36mm minmax(0, 1fr);
+        gap: 5.2mm;
+        align-items: center;
+        margin-top: 3mm;
+      }
+
+      .cover-brand-logo {
+        width: 36mm;
+        height: auto;
+        display: block;
+        object-fit: contain;
+      }
+
+      .cover-brand-name {
+        margin: 0;
+        font-family: "Source Serif 4", serif;
+        font-size: calc(13.8mm + var(--content-font-bump));
+        line-height: 0.9;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--ink);
+      }
+
+      .cover-brand-subtitle {
+        margin-top: 1.75mm;
+        font-size: calc(2.85mm + var(--content-font-bump));
+        line-height: 1.16;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--gold);
+      }
+
+      .cover-brand-social {
+        margin-top: 2mm;
+        font-size: calc(2.05mm + var(--content-font-bump));
+        line-height: 1.1;
+        font-weight: 600;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: rgba(44, 36, 27, 0.58);
+      }
+
+      .cover-brand-message {
+        margin-top: 3.4mm;
+        font-size: calc(2.75mm + var(--content-font-bump));
+        line-height: 1.38;
+        color: rgba(44, 36, 27, 0.72);
+      }
+
+      .cover-qr-hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.6mm;
+        padding: 4.5mm 3.5mm;
+        text-align: center;
+        text-decoration: none;
+        background: var(--ink);
+        color: #faf6f0;
+        box-shadow: 0 12px 24px rgba(44, 36, 27, 0.14);
+        position: relative;
+      }
+
+      .cover-qr-hero::before {
+        content: "";
+        position: absolute;
+        inset: 3px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        pointer-events: none;
+      }
+
+      .cover-qr-hero-kicker {
+        font-size: calc(1.7mm + var(--content-font-bump));
+        line-height: 1.1;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.72);
+      }
+
+      .cover-qr-hero-image {
+        width: 30mm;
+        height: 30mm;
+        object-fit: contain;
+        display: block;
+        background: #fff;
+        padding: 1.2mm;
+      }
+
+      .cover-qr-hero-url {
+        font-size: calc(1.9mm + var(--content-font-bump));
+        line-height: 1.1;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        color: var(--mild);
+      }
+
+      .cover-qr-hero-note {
+        font-size: calc(1.95mm + var(--content-font-bump));
+        line-height: 1.28;
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .cover-story-strip {
+        padding: 2.8mm 3.3mm 2.7mm;
+        background: rgba(255, 255, 255, 0.76);
+        border-left: 1.4mm solid rgba(150, 73, 43, 0.9);
+      }
+
+      .cover-story-kicker {
+        font-size: calc(1.7mm + var(--content-font-bump));
+        line-height: 1.1;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--gold-deep);
+      }
+
+      .cover-story-title {
+        margin-top: 1.1mm;
+        font-family: "Source Serif 4", serif;
+        font-size: calc(3.7mm + var(--content-font-bump));
+        line-height: 1.04;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--ink);
+      }
+
+      .cover-story-body {
+        margin-top: 1.5mm;
+        font-size: calc(2.8mm + var(--content-font-bump));
+        line-height: 1.48;
+        color: rgba(44, 36, 27, 0.72);
+      }
+
+      .cover-facts-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 2.4mm;
+      }
+
+      .cover-fact-card {
+        padding: 2.2mm 2.35mm;
+        background: #ffffff;
+        border: 1px solid rgba(44, 36, 27, 0.12);
+      }
+
+      .cover-fact-label {
+        font-size: calc(1.45mm + var(--content-font-bump));
+        line-height: 1.08;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: rgba(150, 73, 43, 0.82);
+      }
+
+      .cover-fact-value {
+        margin-top: 1mm;
+        font-size: calc(2.15mm + var(--content-font-bump));
+        line-height: 1.3;
+        color: rgba(44, 36, 27, 0.68);
+      }
+
+      .cover-service-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2.6mm;
+      }
+
+      .cover-service-card {
+        padding: 2.15mm 2.45mm;
+        background: rgba(255, 255, 255, 0.86);
+        border-top: 1.2mm solid rgba(185, 129, 50, 0.85);
+        box-shadow: 0 8px 18px rgba(44, 36, 27, 0.06);
+      }
+
+      .cover-service-title {
+        margin: 0 0 1.45mm;
+        font-family: "Source Serif 4", serif;
+        font-size: calc(2.45mm + var(--content-font-bump));
+        line-height: 1.08;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--gold-deep);
+      }
+
+      .cover-service-list {
+        display: grid;
+        gap: 0.7mm;
+      }
+
+      .cover-service-row {
+        display: grid;
+        grid-template-columns: 19mm 1fr;
+        gap: 1.3mm;
+        align-items: baseline;
+      }
+
+      .cover-service-day {
+        font-size: calc(1.7mm + var(--content-font-bump));
+        line-height: 1.08;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(44, 36, 27, 0.5);
+      }
+
+      .cover-service-time {
+        font-size: calc(2mm + var(--content-font-bump));
+        line-height: 1.18;
+        font-weight: 700;
+        color: var(--gold);
+      }
+
+      .cover-foot-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2.6mm;
+      }
+
+      .cover-foot-card {
+        padding: 2.15mm 2.45mm;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(44, 36, 27, 0.1);
+      }
+
+      .cover-foot-title {
+        display: inline-flex;
+        align-items: center;
+        gap: 1.2mm;
+        font-size: calc(1.9mm + var(--content-font-bump));
+        line-height: 1.1;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--gold-deep);
+      }
+
+      .cover-foot-body {
+        margin-top: 1.3mm;
+        font-size: calc(2.2mm + var(--content-font-bump));
+        line-height: 1.38;
+        color: rgba(44, 36, 27, 0.7);
+      }
+
+      .stack {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .gap-5 {
+        gap: 5mm;
+      }
+
+      .gap-6 {
+        gap: 6mm;
+      }
+
+      .highlight-card {
+        position: relative;
+        padding: 4.1mm 5.4mm;
+        border-radius: 2px;
+      }
+
+      .mixed-platter-card {
+        margin: 4mm 0 4.5mm;
+        border: 1px solid rgba(200, 125, 38, 0.4);
+        background: var(--ink);
+        box-shadow: 0 10px 24px rgba(44, 36, 27, 0.18);
+        text-align: center;
+        color: #ffffff;
+      }
+
+      .mixed-platter-tag {
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--paper);
+        color: #1a1a1a;
+        border: 1px solid var(--ink);
+        padding: 0.8mm 4mm;
+        font-size: calc(2.2mm + var(--content-font-bump));
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      .mixed-platter-note {
+        margin-top: 2mm;
+        font-size: calc(2.2mm + var(--content-font-bump));
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--mild);
+      }
+
+      .mixed-platter-name {
+        margin: 1.5mm 0;
+        font-family: "Source Serif 4", serif;
+        font-size: calc(4.5mm + var(--content-font-bump));
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .mixed-platter-desc {
+        font-size: calc(2.4mm + var(--content-font-bump));
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.72);
+      }
+
+      .mixed-platter-price {
+        margin-top: 2mm;
+        font-size: calc(3.8mm + var(--content-font-bump));
+        font-weight: 700;
+        color: var(--gold);
+      }
+
+      .split-platter-card {
+        position: relative;
+        margin: 4mm 0 4.5mm;
+        min-height: 30mm;
+        border: 1px solid rgba(44, 36, 27, 0.14);
+        box-shadow: 0 8px 18px rgba(44, 36, 27, 0.08);
+        overflow: hidden;
+        background: var(--paper);
+      }
+
+      .split-platter-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(108deg,
+            transparent 42.8%,
+            rgba(200, 125, 38, 0.55) 43.2%,
+            rgba(200, 125, 38, 0.55) 43.8%,
+            transparent 44.2%);
+        pointer-events: none;
+        z-index: 2;
+      }
+
+      .split-platter-card::after {
+        content: "";
+        position: absolute;
+        inset: 3px;
+        border: 1px solid rgba(44, 36, 27, 0.08);
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .split-platter-bg-left,
+      .split-platter-bg-right {
+        position: absolute;
+        inset: 0;
+      }
+
+      .split-platter-bg-left {
+        width: 64%;
+        background:
+          linear-gradient(180deg, rgba(44, 36, 27, 0.08), rgba(44, 36, 27, 0.03));
+        clip-path: polygon(0 0, 84% 0, 67% 100%, 0 100%);
+      }
+
+      .split-platter-bg-right {
+        left: auto;
+        right: 0;
+        width: 58%;
+        background:
+          linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(248,245,240,1) 100%);
+        clip-path: polygon(32% 0, 100% 0, 100% 100%, 15% 100%);
+      }
+
+      .split-platter-grid {
+        position: relative;
+        z-index: 3;
+        display: grid;
+        grid-template-columns: 1.12fr 0.88fr;
+        min-height: 30mm;
+      }
+
+      .split-platter-pane {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 4.2mm 4.8mm 3.8mm;
+      }
+
+      .split-platter-pane.left {
+        color: var(--ink);
+        padding-right: 9mm;
+      }
+
+      .split-platter-pane.right {
+        color: var(--ink);
+        padding-left: 8mm;
+      }
+
+      .split-platter-kicker {
+        font-size: var(--section-subtitle-size);
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--gold-deep);
+        margin-bottom: 1.2mm;
+      }
+
+      .split-platter-pane.right .split-platter-kicker {
+        color: var(--gold);
+      }
+
+      .split-platter-title {
+        margin: 0;
+        font-family: "Source Serif 4", serif;
+        font-size: calc(var(--menu-title-size) * 1.14);
+        line-height: 1.04;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .split-platter-meta {
+        margin-top: 1.1mm;
+        font-size: var(--menu-desc-size);
+        line-height: 1.18;
+        color: rgba(44, 36, 27, 0.62);
+      }
+
+      .split-platter-pane.right .split-platter-meta {
+        color: rgba(44, 36, 27, 0.66);
+      }
+
+      .split-platter-price {
+        margin-top: 1.4mm;
+        font-size: calc(var(--menu-price-size) * 1.1);
+        line-height: 1.02;
+        font-weight: 700;
+        color: var(--gold-deep);
+      }
+
+      .split-platter-pane.right .split-platter-price {
+        color: var(--gold);
+      }
+
+      .chef-card {
+        position: relative;
+        background: var(--pine);
+        border: 1px solid var(--pine);
+        box-shadow: 0 14px 26px rgba(24, 43, 35, 0.22);
+        color: #ffffff;
+      }
+
+      .chef-card::before {
+        content: "";
+        position: absolute;
+        inset: 3px;
+        border: 1px solid rgba(217, 139, 44, 0.3);
+        pointer-events: none;
+      }
+
+      .chef-star {
+        position: absolute;
+        top: 0;
+        right: 6mm;
+        background: var(--mild);
+        color: #ffffff;
+        padding: 2mm;
+        border-radius: 0 0 2px 2px;
+        box-shadow: 0 6px 12px rgba(24, 43, 35, 0.16);
+      }
+
+      .chef-inner,
+      .pub-hero-inner {
+        position: relative;
+        z-index: 1;
+      }
+
+      .page-two-layout .section-header {
+        margin-bottom: 2.3mm;
+      }
+
+      .page-two-layout {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        gap: 0;
+        padding-bottom: 12mm;
+      }
+
+      .page-two-content {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1.2mm;
+      }
+
+      .page-two-content > * {
+        margin: 0;
+      }
+
+      .page-two-layout .section-rule {
+        margin-top: 1.45mm;
+      }
+
+      .page-two-layout .two-col {
+        gap: 0 6mm;
+      }
+
+      .page-two-layout .split-platter-card {
+        margin: 0.8mm 0 0.9mm;
+        min-height: 19.5mm;
+      }
+
+      .page-two-layout .split-platter-grid {
+        min-height: 19.5mm;
+      }
+
+      .page-two-layout .split-platter-pane {
+        padding: 1.5mm 2.8mm 1.4mm;
+      }
+
+      .page-two-layout .split-platter-pane.left {
+        padding-right: 7.5mm;
+      }
+
+      .page-two-layout .split-platter-pane.right {
+        padding-left: 6.8mm;
+      }
+
+      .page-two-layout .split-platter-kicker {
+        margin-bottom: 0.8mm;
+      }
+
+      .page-two-layout .split-platter-meta {
+        margin-top: 0.45mm;
+        font-size: calc(1.85mm + var(--content-font-bump));
+        line-height: 1.18;
+      }
+
+      .page-two-layout .split-platter-price {
+        margin-top: 0.55mm;
+      }
+
+      .page-two-layout .chef-card {
+        padding: 2.15mm 3mm;
+      }
+
+      .page-two-layout .chef-star {
+        right: 5mm;
+        padding: 1.6mm;
+      }
+
+      .page-two-layout .chef-card .section-header {
+        margin-bottom: 1.15mm;
+      }
+
+      .page-two-layout .chef-card .menu-item.compact {
+        gap: 0.35mm;
+        padding-top: 0.34mm;
+        padding-bottom: 0.34mm;
+      }
+
+      .page-two-layout .page-two-bottom-row {
+        padding-top: 0;
+      }
+
+      .page-two-layout .page-two-bottom-grid {
+        gap: 0;
+        margin-bottom: 0;
+      }
+
+      .page-two-layout .compact-card {
+        padding: 1.95mm;
+      }
+
+      .page-two-layout .compact-card .section-header {
+        margin-bottom: 1.05mm;
+      }
+
+      .page-two-layout .compact-card .menu-item.compact {
+        gap: 0.35mm;
+        padding-top: 0.2mm;
+        padding-bottom: 0.2mm;
+      }
+
+      .top-grid-page-three {
+        display: flex;
+        flex-direction: column;
+        gap: 2.05mm;
+        margin-bottom: 0;
+      }
+
+      .paired-matrix-row {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2.6mm;
+      }
+
+      .paired-feature-card {
+        position: relative;
+        padding: 2.9mm 3.4mm 2.85mm;
+        overflow: hidden;
+      }
+
+      .paired-feature-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 1.1mm;
+        background: linear-gradient(90deg, rgba(185, 129, 50, 0.95), rgba(150, 73, 43, 0.7));
+      }
+
+      .paired-feature-card.noodle-theme {
+        background: var(--ink);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 10px 22px rgba(44, 36, 27, 0.14);
+      }
+
+      .paired-feature-card.noodle-theme::before {
+        background: linear-gradient(90deg, rgba(185, 129, 50, 1), rgba(255, 255, 255, 0.7));
+      }
+
+      .paired-feature-card.biryani-theme {
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(247, 243, 235, 0.92));
+        border: 1px solid rgba(44, 36, 27, 0.14);
+        box-shadow: 0 8px 18px rgba(44, 36, 27, 0.08);
+      }
+
+      .paired-feature-header {
+        margin-bottom: 1.8mm;
+      }
+
+      .paired-feature-kicker {
+        font-size: calc(1.65mm + var(--content-font-bump));
+        line-height: 1.1;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(150, 73, 43, 0.9);
+      }
+
+      .paired-feature-card.noodle-theme .paired-feature-kicker {
+        color: rgba(255, 255, 255, 0.72);
+      }
+
+      .paired-feature-title {
+        margin: 0.7mm 0 0;
+        font-family: "Source Serif 4", serif;
+        font-size: var(--panel-title-size);
+        line-height: 1.05;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--ink);
+      }
+
+      .paired-feature-card.noodle-theme .paired-feature-title {
+        color: #faf6f0;
+      }
+
+      .paired-feature-subtitle {
+        margin-top: 0.8mm;
+        font-size: calc(1.75mm + var(--content-font-bump));
+        line-height: 1.2;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(44, 36, 27, 0.56);
+      }
+
+      .paired-feature-card.noodle-theme .paired-feature-subtitle {
+        color: rgba(255, 255, 255, 0.66);
+      }
+
+      .paired-feature-list {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .paired-feature-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 3mm;
+        padding: 1.15mm 0;
+        border-top: 1px solid rgba(44, 36, 27, 0.1);
+      }
+
+      .paired-feature-item:first-child {
+        border-top: 0;
+        padding-top: 0.4mm;
+      }
+
+      .paired-feature-card.noodle-theme .paired-feature-item {
+        border-top-color: rgba(255, 255, 255, 0.12);
+      }
+
+      .paired-feature-name {
+        min-width: 0;
+        font-family: "Source Serif 4", serif;
+        font-size: var(--menu-title-size);
+        line-height: 1.05;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--ink);
+      }
+
+      .paired-feature-card.noodle-theme .paired-feature-name {
+        color: #faf6f0;
+      }
+
+      .paired-feature-price {
+        flex-shrink: 0;
+        font-size: var(--menu-price-size);
+        line-height: 1;
+        font-weight: 700;
+        color: var(--gold-deep);
+      }
+
+      .paired-feature-card.noodle-theme .paired-feature-price {
+        color: var(--mild);
+      }
+
+      .mixed-grills-card {
+        padding: 3.15mm 3.7mm 3.05mm;
+      }
+
+      .mixed-grills-card .section-header {
+        margin-bottom: 2mm;
+      }
+
+      .mixed-grills-card .two-col {
+        gap: 0 7mm;
+      }
+
+      .mid-grid-page-three {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2.6mm;
+        margin-bottom: 0;
+      }
+
+      .page-three-layout {
+        position: relative;
+        gap: 2.45mm;
+        padding-bottom: 12mm;
+      }
+
+      .page-three-layout > * {
+        margin: 0;
+      }
+
+      .page-three-layout .section-header {
+        margin-bottom: 1.95mm;
+      }
+
+      .page-three-layout .section-rule {
+        margin-top: 1.2mm;
+      }
+
+      .page-three-layout .section-rule-line {
+        width: 6.5mm;
+      }
+
+      .dark-card {
+        background: var(--ink);
+        color: #ffffff;
+        padding: var(--card-pad);
+        box-shadow: 0 12px 24px rgba(44, 36, 27, 0.16);
+        position: relative;
+      }
+
+      .dark-card::before,
+      .dessert-card::before {
+        content: "";
+        position: absolute;
+        inset: 3px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        pointer-events: none;
+      }
+
+      .plain-card {
+        background: #ffffff;
+        border: 1px solid rgba(44, 36, 27, 0.14);
+        padding: var(--card-pad);
+        box-shadow: 0 8px 18px rgba(44, 36, 27, 0.08);
+      }
+
+      .compact-card {
+        padding: var(--card-pad-tight);
+      }
+
+      .matrix-card {
+        position: relative;
+        overflow: visible;
+        flex-shrink: 0;
+        margin-bottom: 0;
+      }
+
+      .matrix-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1mm;
+        height: 100%;
+        background: var(--gold);
+      }
+
+      .matrix-inner {
+        width: 100%;
+        margin-top: 2.15mm;
+        padding: 0 1.2mm;
+      }
+
+      .matrix-head {
+        display: grid;
+        grid-template-columns: minmax(0, 1.3fr) repeat(var(--matrix-column-count, 3), minmax(0, 1fr));
+        align-items: flex-end;
+        padding-bottom: 1.3mm;
+        border-bottom: 2px solid rgba(44, 36, 27, 0.24);
+        margin-bottom: 1.1mm;
+      }
+
+      .matrix-head > div,
+      .matrix-row > div {
+        min-width: 0;
+      }
+
+      .matrix-protein {
+        min-width: 0;
+      }
+
+      .matrix-col {
+        text-align: center;
+        font-size: calc(2.55mm + var(--content-font-bump));
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--ink);
+      }
+
+      .matrix-wide {
+        text-align: center;
+        font-size: calc(2.05mm + var(--content-font-bump));
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        line-height: 1.25;
+        color: var(--ink);
+      }
+
+      .matrix-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1.3fr) repeat(var(--matrix-column-count, 3), minmax(0, 1fr));
+        align-items: center;
+        padding: 1.65mm 0;
+        border-bottom: 1px solid rgba(44, 36, 27, 0.12);
+      }
+
+      .matrix-row:last-child {
+        border-bottom: 0;
+      }
+
+      .matrix-row .matrix-protein {
+        display: flex;
+        align-items: center;
+        font-family: "Source Serif 4", serif;
+        font-size: var(--menu-title-size);
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      .matrix-row .matrix-col,
+      .matrix-row .matrix-wide {
+        font-size: var(--menu-price-size);
+        font-weight: 700;
+        letter-spacing: 0;
+        text-transform: none;
+        color: var(--gold-deep);
+      }
+
+      .matrix-head .matrix-wide.long {
+        font-size: calc(1.8mm + var(--content-font-bump));
+        line-height: 1.25;
+      }
+
+      .accompaniments {
+        margin-top: 0;
+        padding-top: 2.25mm;
+        border-top: 1px solid rgba(44, 36, 27, 0.15);
+      }
+
+      .accompaniments-shell {
+        padding-top: 0;
+      }
+
+      .accompaniments-header {
+        display: none;
+      }
+
+      .accompaniments-heading {
+        margin: 0;
+        font-family: "Source Serif 4", serif;
+        font-size: var(--panel-title-size);
+        line-height: 1;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--gold-deep);
+      }
+
+      .accompaniments-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.95mm 3.7mm;
+      }
+
+      .accompaniment-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 1.7mm;
+      }
+
+      .accompaniment-panel {
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        padding: 1.95mm 2.45mm 1.55mm;
+        background: #ffffff;
+        border: 1px solid rgba(44, 36, 27, 0.14);
+        box-shadow: 0 6px 14px rgba(44, 36, 27, 0.06);
+      }
+
+      .accompaniment-title {
+        position: relative;
+        margin: 0 0 1.35mm;
+        padding-bottom: 1.15mm;
+        border-bottom: 0;
+        text-align: center;
+        font-family: "Source Serif 4", serif;
+        font-size: calc(3.15mm + var(--content-font-bump));
+        line-height: 1.05;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--gold-deep);
+      }
+
+      .accompaniment-title::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 0.4mm;
+        width: 18mm;
+        height: 0.5mm;
+        transform: translateX(-50%);
+        background:
+          linear-gradient(90deg, transparent, rgba(200, 125, 38, 0.7), transparent);
+      }
+
+      .accompaniment-panel .menu-item.compact {
+        padding-top: 0.24mm;
+        padding-bottom: 0.24mm;
+      }
+
+      .accompaniment-columns {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0 2.6mm;
+      }
+
+      .pub-hero {
+        margin-bottom: 0;
+      }
+
+      .chips-band {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 4.6mm;
+        margin-bottom: 0;
+      }
+
+      .band-section {
+        padding: 3.6mm 0;
+        border-top: 1px solid rgba(44, 36, 27, 0.15);
+        border-bottom: 1px solid rgba(44, 36, 27, 0.15);
+      }
+
+      .salad-band {
+        background: rgba(255, 255, 255, 0.5);
+        padding-left: 4mm;
+        padding-right: 4mm;
+      }
+
+      .bottom-split {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 4.6mm;
+        flex: 1;
+      }
+
+      .page-four-layout {
+        position: relative;
+        gap: 3.6mm;
+        padding-bottom: 12mm;
+      }
+
+      .page-four-layout > * {
+        margin: 0;
+      }
+
+      .page-four-layout .pub-hero-grid {
+        margin-top: 3.5mm;
+      }
+
+      .page-four-layout .pub-classics-list {
+        margin-top: 2.2mm;
+      }
+
+      .page-four-layout .wrap-note {
+        margin: -0.55mm 0 1.45mm;
+        font-size: calc(2.2mm + var(--content-font-bump));
+        color: rgba(44, 36, 27, 0.6);
+        font-style: italic;
+      }
+
+      .page-four-layout .chips-band-list,
+      .page-four-layout .salad-list,
+      .page-four-layout .dessert-list {
+        margin-top: 2.2mm;
+      }
+
+      .kids-card {
+        position: relative;
+        height: 100%;
+        padding: 5.1mm;
+        border: 1px dashed rgba(200, 125, 38, 0.5);
+        background: rgba(255, 255, 255, 0.45);
+      }
+
+      .kids-label {
+        position: absolute;
+        top: -3mm;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--paper);
+        padding: 0 4mm;
+        white-space: nowrap;
+        font-family: "Source Serif 4", serif;
+        font-size: var(--panel-title-size);
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--gold-deep);
+      }
+
+      .kids-note {
+        margin: 1.1mm 0 3.35mm;
+        text-align: center;
+        font-size: calc(2.2mm + var(--content-font-bump));
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: rgba(44, 36, 27, 0.6);
+      }
+
+      .dessert-card {
+        position: relative;
+        background: var(--ink);
+        color: #ffffff;
+        height: 100%;
+        padding: 5.1mm;
+        box-shadow: 0 10px 22px rgba(44, 36, 27, 0.16);
+      }
+
+      .sister-pubs {
+        margin-top: 0;
+        border: 1px solid rgba(200, 125, 38, 0.4);
+        background: #ffffff;
+        padding: 4mm 4.3mm;
+        box-shadow: 0 8px 18px rgba(44, 36, 27, 0.08);
+      }
+
+      .sister-kicker {
+        margin: 0 0 0.8mm;
+        text-align: center;
+        font-size: calc(1.75mm + var(--content-font-bump));
+        line-height: 1.1;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(150, 73, 43, 0.82);
+      }
+
+      .sister-title {
+        margin: 0 0 1.3mm;
+        font-family: "Source Serif 4", serif;
+        font-size: var(--section-title-size);
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--gold);
+        text-align: center;
+      }
+
+      .sister-intro {
+        margin: 0 0 1.55mm;
+        text-align: center;
+        font-size: calc(2.15mm + var(--content-font-bump));
+        line-height: 1.36;
+        color: rgba(44, 36, 27, 0.66);
+      }
+
+      .sister-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.35mm 5mm;
+      }
+
+      .sister-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2mm;
+        min-width: 0;
+      }
+
+      .sister-pub {
+        font-family: "Source Serif 4", serif;
+        font-size: calc(2.95mm + var(--content-font-bump));
+        line-height: 1.12;
+        font-weight: 700;
+        color: var(--ink);
+      }
+
+      .sister-dish {
+        font-size: calc(2.35mm + var(--content-font-bump));
+        line-height: 1.28;
+        color: rgba(44, 36, 27, 0.68);
+      }
+
+      .page-contact-footer {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 4.5mm;
+        margin-top: 0;
+        min-height: 10.5mm;
+        padding: 2.4mm 4.4mm 0;
+        border-top: 1px solid rgba(44, 36, 27, 0.16);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(185, 129, 50, 0.05));
+        text-align: center;
+        flex-shrink: 0;
+        z-index: 2;
+      }
+
+      .page-contact-footer::before {
+        content: "";
+        position: absolute;
+        top: 0.9mm;
+        left: 4.4mm;
+        right: 4.4mm;
+        height: 0.5px;
+        background: linear-gradient(90deg, transparent, rgba(185, 129, 50, 0.72), transparent);
+        pointer-events: none;
+      }
+
+      .page-contact-footer-item {
+        font-size: calc(2mm + var(--content-font-bump));
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(44, 36, 27, 0.52);
+      }
+
+      .page-contact-footer-item strong {
+        color: var(--gold-deep);
+        font-weight: 700;
+      }
+
+      .page-contact-footer-dot {
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background: rgba(185, 129, 50, 0.6);
+        flex-shrink: 0;
+      }
+
+      @media print {
+        html,
+        body {
+          width: var(--sheet-width);
+          height: var(--sheet-height);
+          background: transparent !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          print-color-adjust: exact !important;
+          -webkit-print-color-adjust: exact !important;
+        }
+
+        body {
+          display: block;
+        }
+
+        .menu-system {
+          display: block;
+          padding: 0;
+          background: transparent !important;
+        }
+
+        .print-hidden {
+          display: none !important;
+        }
+
+        .sheet {
+          margin: 0 !important;
+          box-shadow: none !important;
+          page-break-after: always;
+          break-after: page;
+        }
+
+        .sheet::before,
+        .sheet *,
+        .sheet *::before,
+        .sheet *::after {
+          box-shadow: none !important;
+          text-shadow: none !important;
+          filter: none !important;
+        }
+
+        .sheet::before {
+          display: none !important;
+        }
+
+        .sheet:last-of-type {
+          page-break-after: auto;
+          break-after: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <button id="print-button" class="print-button print-hidden" type="button">
+      <span class="icon-inline" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M7 8V3h10v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M6 17H4a2 2 0 0 1-2-2v-4a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v4a2 2 0 0 1-2 2h-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M7 14h10v7H7z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span>Print Menu</span>
+    </button>
+
+    <main id="app" class="menu-system"></main>
+
+    <script src="./menu-data.js"></script>
+    <script>
+      const fallbackMenuData = {
+        venue: {
+          name: "The Old School House",
+          subtitle: "Pub and Nepalese Dining",
+          description:
+            "British pub comfort and Himalayan kitchen flavours come together at The Old School House, Stony Stratford.",
+          allergyNote:
+            "Please tell us before ordering if you have any food allergies.",
+          spiceNote: "Bespoke spice levels available - just ask.",
+          drinksNote: "Please see our drinks menu for seasonal pours and bar specials.",
+          socialHandle: "@oldschoolhousestony",
+          address: "London Rd, Stony Stratford, Milton Keynes MK11 1JA",
+          phone: "01908 561936",
+          locals: "Stony Stratford",
+          website: "oldschoolhousestony.co.uk",
+          openingHours: {
+            kitchen: [
+              { day: "Mon - Thu", hours: "4 pm - 10 pm" },
+              { day: "Fri - Sat", hours: "3 pm - 10 pm" },
+              { day: "Sunday", hours: "12 pm - 9 pm" }
+            ],
+            bar: [
+              { day: "Mon - Thu", hours: "2 pm - 10 pm" },
+              { day: "Friday", hours: "2 pm - 11 pm" },
+              { day: "Saturday", hours: "12 pm - 11 pm" },
+              { day: "Sunday", hours: "12 pm - 10 pm" }
+            ]
+          }
+        },
+        starters: [
+          { name: "Mixed Platter", price: "7.50", desc: "Includes onion bhaji, chicken tikka, seekh kebab", star: true, badges: [{ text: "Perfect for Sharing", type: "gold" }] },
+          { name: "Veg Platter", price: "7.00", labels: ["veg"] },
+          { name: "Onion Bhaji", price: "4.25", labels: ["veg", "GF"] },
+          { name: "Samosa Chaat", price: "5.50", labels: ["veg"] },
+          { name: "Momo (Veg)", price: "6.25", desc: "Traditional Nepalese dumplings", labels: ["veg"] },
+          { name: "Momo (Chicken)", price: "6.75", desc: "Made with chicken mince and herbs" }
+        ],
+        crisp: [
+          { name: "Chilli Mogo", price: "5.25", labels: ["veg", "GF", "spice-2"] },
+          { name: "Chicken Wings", price: "6.75", labels: ["GF"] },
+          { name: "Lamb Chops", price: "8.25", labels: ["GF"], star: true, badges: [{ text: "Chef's Pick", type: "gold" }] }
+        ],
+        chefSelection: [
+          { name: "Himali Lamb", price: "14.00", labels: ["GF"], desc: "Green curry seasoned with Himalayan salt and yoghurt blend with fresh mint, green chilli and Nepalese spice" },
+          { name: "Special Veggie Tarkari (V)", price: "12.00", labels: ["veg", "GF"], desc: "Nepalese style vegetarian semi dry curry cooked with aromatic spices and herbs full of flavours" },
+          { name: "Bhutuwa (Chicken/Lamb)", price: "13.00 / 14.00", labels: ["GF"], desc: "Traditional Nepalese speciality cooked with dried crushed chilli and crushed garlic." },
+          { name: "Special Butter Chicken", price: "14.00", labels: ["GF", "spice-1"], badges: [{ text: "Popular", type: "gold" }], desc: "One butter chicken is irresistibility creamy with methi flavour and a hint of chilli. Fancy a mild one? Let us know." },
+          { name: "Lasun Kukhura/Khursani (LKK/LLK)", price: "13.00 / 14.00", labels: ["GF", "spice-2"], desc: "Tender pieces of chicken cooked with garlic, crushed chilli, spring onions, fresh cream in the chef’s special Nepalese sauce" },
+          { name: "Khasi Ko Masu", price: "14.50", labels: ["GF", "spice-2"], desc: "A rich and flavoursome slow cooked goat on the bone/off the bone with unique blend of Nepalese spices.", star: true },
+          { name: "Rara King Prawn", price: "15.00", desc: "King prawn cooked in coconut based medium sauce with blend of Nepalese spices, tarmind and mustard.", star: true, badges: [{ text: "Signature", type: "gold" }] },
+          { name: "Sherpali Chicken", price: "14.00", labels: ["GF"], badges: [{ text: "New", type: "gold" }], desc: "A warming Nepalese chicken curry finished with aromatic spices and chef's special herbs." },
+          { name: "Akabare Chicken", price: "14.00", labels: ["GF", "spice-3"], badges: [{ text: "New", type: "gold" }], desc: "Chicken cooked with fiery akabare chilli, bold Nepalese spices and a hot warming finish." }
+        ],
+        clayOven: [
+          { name: "Kathmandu Tikka", price: "13.00", labels: ["GF", "dry"], desc: "Succulent chicken breast cubes marinated in cheese and cream with a hint of crushed black peppers." },
+          { name: "Rack of Lamb", price: "15.00", labels: ["GF", "dry"], star: true, badges: [{ text: "Signature", type: "gold" }], desc: "Lamb chops marinated overnight to give extra softness and tender, cooked in tandoor" },
+          { name: "Paneer Saslick", price: "13.00", labels: ["veg", "GF", "dry"], desc: "Soft cheese cooked in tandoor oven served in sizzler with onion and peppers." }
+        ],
+        biryani: [
+          { name: "Veggie Biryani", price: "13.00", labels: ["veg"] },
+          { name: "Chicken Biryani", price: "14.00" },
+          { name: "Lamb Biryani", price: "15.00" }
+        ],
+        mixedGrills: [
+          { name: "Veg Grill", price: "11.00", desc: "Onion bhaji, mogo, samosa and paneer", labels: ["veg"] },
+          { name: "Small Mixed Grill", price: "12.00", desc: "Chicken wings, tikka, sheekh kebab, pakora" },
+          { name: "Regular Mixed Grill", price: "15.00", desc: "Small grill plus lamb chops" },
+          { name: "Large Mixed Grill", price: "18.00", desc: "Regular grill plus Kathmandu Tikka and fish pakora", badges: [{ text: "Popular", type: "gold" }] }
+        ],
+        curries: {
+          classic: [
+            { name: "Veg", price: "10.00", labels: ["veg", "GF"] },
+            { name: "Chicken", price: "11.00", labels: ["GF"] },
+            { name: "Lamb", price: "12.00", labels: ["GF"] },
+            { name: "King Prawn", price: "13.00", labels: ["GF"] }
+          ],
+          kormaMasala: [
+            { name: "Veg", price: "11.00", labels: ["veg", "GF"] },
+            { name: "Chicken", price: "12.00", labels: ["GF"] },
+            { name: "Lamb", price: "13.00", labels: ["GF"] },
+            { name: "King Prawn", price: "14.00", labels: ["GF"] }
+          ],
+          baltiPans: [
+            { name: "Veg", price: "11.00", labels: ["veg", "GF"] },
+            { name: "Chicken", price: "12.00", labels: ["GF"] },
+            { name: "Lamb", price: "13.00", labels: ["GF"] },
+            { name: "King Prawn", price: "14.00", labels: ["GF"] }
+          ]
+        },
+        rice: [
+          { name: "Boiled Rice", price: "4.00" },
+          { name: "Pilau Rice", price: "4.50" },
+          { name: "Special Rice", price: "5.50" }
+        ],
+        naan: [
+          { name: "Plain Naan", price: "3.75", labels: ["veg"] },
+          { name: "Garlic Naan", price: "4.25", labels: ["veg"] },
+          { name: "Signature Naan", price: "5.25", labels: ["veg"], star: true }
+        ],
+        sides: [
+          { name: "Tadka Daal", price: "6.00", labels: ["veg"] },
+          { name: "Gurkha Aalo", price: "6.00", desc: "Dry potato in Nepalese herbs", labels: ["veg"] },
+          { name: "Saag Paneer", price: "6.50", desc: "Fresh spinach and cottage cheese", labels: ["veg"] }
+        ],
+        chips: [
+          { name: "Chips", price: "3.50", labels: ["veg"] },
+          { name: "Peri-Peri Chips", price: "3.75", labels: ["veg", "spice-2"] },
+          { name: "Loaded Chips", price: "7.25", labels: ["veg"] }
+        ],
+        chowmein: [
+          { name: "Chowmein Veg", price: "12.00", labels: ["veg"] },
+          { name: "Chowmein Chicken", price: "14.00" },
+          { name: "Chowmein Prawn", price: "15.00" }
+        ],
+        pubGrub: [
+          { name: "Cheesy Chips Wrap", price: "8.00", labels: ["veg"] },
+          { name: "Chicken Tikka Wrap", price: "9.50" },
+          { name: "Special Wrap (Mix)", price: "10.75" }
+        ],
+        pubClassic: [
+          { name: "Fish & Chips", price: "12.00", desc: "Battered cod with tartar sauce", badges: [{ text: "Classic", type: "dark" }] },
+          { name: "Chicken Burger & Chips", price: "10.00" },
+          { name: "Chicken Strips with Chips", price: "9.00" }
+        ],
+        salad: [{ name: "Chicken Seasoning Salad", price: "7.50" }],
+        kids: [
+          { name: "Nuggets", price: "6.00" },
+          { name: "Scampi", price: "6.00" },
+          { name: "CTM / Korma", price: "7.50" }
+        ],
+        desserts: [
+          { name: "Gulab Jamun", price: "4.50", labels: ["veg"] },
+          { name: "Nepalese Rice Pudding", price: "4.50", desc: "Kheer", labels: ["veg"] },
+          { name: "Chocolate Fondant", price: "4.50", desc: "Chocolate sponge with liquid center", labels: ["veg"], star: true }
+        ],
+        sisterPubsSpecials: [
+          { pub: "The Queen Elizabeth", dish: "Chicken Sekuwa" },
+          { pub: "The Old Crown", dish: "Karara" },
+          { pub: "The White Horse", dish: "Buff Chowmein" },
+          { pub: "The Corner House", dish: "Special Veggie Tarkari" },
+          { pub: "The Prince of Wales", dish: "Farsi Chiken / Lamb / Veg" },
+          { pub: "The Bell", dish: "Methi Chicken / Lamb / Veg" },
+          { pub: "The Barley Mow", dish: "Babari Chicken / Lamb / Veg" },
+          { pub: "The Old School House", dish: "Achari Chicken / Lamb / Veg" }
+        ]
+      };
+
+      const menuData = window.ELEGANT_MENU_DATA || fallbackMenuData;
+      window.ELEGANT_MENU_DATA = menuData;
+      const socialHandle = menuData.venue.socialHandle || "@oldschoolhousestony";
+      const venueWebsite = menuData.venue.website || "oldschoolhousestony.co.uk";
+      const venueWebsiteLabel = venueWebsite.replace(/^https?:\/\//i, "").replace(/\/$/, "");
+      const digitalMenuUrl = /^https?:\/\//i.test(venueWebsite)
+        ? venueWebsite
+        : `https://${venueWebsite}`;
+
+      const mixedPlatter =
+        menuData.starters.find((item) => /mixed platter/i.test(item.name)) || menuData.starters[0];
+      const vegPlatter =
+        menuData.starters.find(
+          (item) => item !== mixedPlatter && item.labels && item.labels.includes("veg")
+        ) ||
+        menuData.starters.find((item) => item !== mixedPlatter) ||
+        mixedPlatter;
+      const featuredStarters = new Set([mixedPlatter, vegPlatter].filter(Boolean));
+      const combinedStarters = menuData.starters
+        .filter((item) => !featuredStarters.has(item))
+        .concat(menuData.crisp || []);
+      const chickenMomo = combinedStarters.find((item) =>
+        /chicken momo|momo \(chicken\)/i.test(item.name)
+      );
+      const startersWithoutChickenMomo = combinedStarters.filter(
+        (item) => !/chicken momo|momo \(chicken\)/i.test(item.name)
+      );
+      const midStarters = Math.ceil(startersWithoutChickenMomo.length / 2);
+      const startersCol1 = startersWithoutChickenMomo.slice(0, midStarters);
+      const startersCol2 = chickenMomo
+        ? [chickenMomo].concat(startersWithoutChickenMomo.slice(midStarters))
+        : startersWithoutChickenMomo.slice(midStarters);
+      const chefSpecialsMid = Math.ceil(menuData.chefSelection.length / 2);
+      const chefSpecialsCol1 = menuData.chefSelection.slice(0, chefSpecialsMid);
+      const chefSpecialsCol2 = menuData.chefSelection.slice(chefSpecialsMid);
+
+      function getCurriesMatrixConfig(curries) {
+        if (curries.curry) {
+          return [
+            { title: "Curry", items: curries.curry },
+            { title: "Korma", items: curries.korma || [] },
+            { title: "Masala", items: curries.masala || [] },
+            {
+              title: "Balti · Karahi · Bhuna · Saag · Dhansak · Jalfrezi · Madras · Vindaloo · Phaal",
+              items: curries.baltiKarahiBhunaSaagDhansakJalfreziMadrasVindalooPhaal || []
+            }
+          ];
+        }
+
+        return [
+          { title: "Classic", items: curries.classic || [] },
+          { title: "Korma / Masala", items: curries.kormaMasala || [] },
+          {
+            title: "Balti · Karahi · Bhuna · Saag · Dhansak · Jalfrezi · Madras · Vindaloo · Phaal",
+            items: curries.baltiPans || []
+          }
+        ];
+      }
+
+      const curriesMatrixConfig = getCurriesMatrixConfig(menuData.curries);
+
+      const escapeHtml = (value) =>
+        String(value)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+
+      const iconLeaf = () => `
+        <span class="icon-inline icon-leaf" title="Vegetarian" aria-label="Vegetarian">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none">
+            <path d="M6 19c8-8 12-11 15-12-1 4-4 12-12 15-2 .7-3 0-3-3Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 16c2-2 4-4 8-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </span>
+      `;
+
+      const iconFlame = (toneClass) => `
+        <span class="icon-inline icon-flame ${toneClass}">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 3c1 4-2 4-2 8 0 2 1 3 2 3 2 0 3-2 3-4 2 2 4 4 4 7a7 7 0 1 1-14 0c0-4 3-6 7-14Z" fill="currentColor"/>
+          </svg>
+        </span>
+      `;
+
+      function renderLabels(labels) {
+        if (!labels || !labels.length) return "";
+
+        const bits = [];
+
+        if (labels.includes("veg")) {
+          bits.push(iconLeaf());
+        }
+
+        if (labels.includes("GF")) {
+          bits.push('<span class="label-chip" title="Gluten Free">GF</span>');
+        }
+
+        if (labels.includes("dry")) {
+          bits.push('<span class="label-chip dry" title="Dry Dish">DRY</span>');
+        }
+
+        if (labels.includes("spice-1")) {
+          bits.push(iconFlame("mild"));
+        }
+
+        if (labels.includes("spice-2")) {
+          bits.push(`
+            <span class="icon-flame-stack" title="Medium">
+              ${iconFlame("medium")}
+              ${iconFlame("medium")}
+            </span>
+          `);
+        }
+
+        if (labels.includes("spice-3")) {
+          bits.push(`
+            <span class="icon-flame-stack" title="Hot">
+              ${iconFlame("hot")}
+              ${iconFlame("hot")}
+              ${iconFlame("hot")}
+            </span>
+          `);
+        }
+
+        return bits.length ? `<span class="label-group">${bits.join("")}</span>` : "";
+      }
+
+      function renderBadges(badges, inDarkBox) {
+        if (!badges || !badges.length) return "";
+
+        return badges
+          .map((badge) => {
+            const cls = badge.type === "gold" ? "gold" : "dark";
+            return `<span class="badge ${cls}">${escapeHtml(badge.text)}</span>`;
+          })
+          .join("");
+      }
+
+      function renderMenuItem(item, options = {}) {
+        const isDark = Boolean(options.isDark);
+        const compact = Boolean(options.compact);
+        const labelsHtml = renderLabels(item.labels);
+        const badgesHtml = renderBadges(item.badges, isDark);
+        const classes = [
+          "menu-item",
+          isDark ? "dark" : "",
+          compact ? "compact" : "",
+          item.star ? "starred" : ""
+        ]
+          .filter(Boolean)
+          .join(" ");
+
+        return `
+          <article class="${classes}">
+            <div class="menu-item-head">
+              <div class="menu-item-name">
+                <div class="menu-item-title-row">
+                  <div class="menu-item-title">${escapeHtml(item.name)}</div>
+                  ${labelsHtml}
+                  ${badgesHtml}
+                </div>
+              </div>
+              <div class="menu-item-price">${escapeHtml(item.price)}</div>
+            </div>
+            ${item.desc ? `<div class="menu-item-desc">${escapeHtml(item.desc)}</div>` : ""}
+          </article>
+        `;
+      }
+
+      function renderSectionHeader(title, subtitle, dark) {
+        return `
+          <header class="section-header${dark ? " dark" : ""}">
+            <h2 class="section-title">${escapeHtml(title)}</h2>
+            ${subtitle ? `<div class="section-subtitle">${escapeHtml(subtitle)}</div>` : ""}
+            <div class="section-rule" aria-hidden="true">
+              <span class="section-rule-line"></span>
+              <span class="section-rule-diamond"></span>
+              <span class="section-rule-line"></span>
+            </div>
+          </header>
+        `;
+      }
+
+      function renderPairedFeatureCard(options) {
+        return `
+          <section class="paired-feature-card ${escapeHtml(options.theme)}">
+            <div class="paired-feature-header">
+              <div class="paired-feature-kicker">${escapeHtml(options.kicker)}</div>
+              <h3 class="paired-feature-title">${escapeHtml(options.title)}</h3>
+              <div class="paired-feature-subtitle">${escapeHtml(options.subtitle)}</div>
+            </div>
+            <div class="paired-feature-list">
+              ${options.items
+                .map(
+                  (item) => `
+                    <div class="paired-feature-item">
+                      <div class="paired-feature-name">${escapeHtml(options.formatName(item.name))}</div>
+                      <div class="paired-feature-price">${escapeHtml(item.price)}</div>
+                    </div>
+                  `
+                )
+                .join("")}
+            </div>
+          </section>
+        `;
+      }
+
+      function renderBiryaniMatrix(items, subtitle) {
+        return renderPairedFeatureCard({
+          title: "Dum Biryani",
+          kicker: "Fragrant Layers",
+          subtitle: subtitle || "Slow layered basmati rice",
+          theme: "biryani-theme",
+          items,
+          formatName: (name) => name.replace(/\s+Biryani$/i, "")
+        });
+      }
+
+      function renderChowmeinMatrix(items) {
+        return renderPairedFeatureCard({
+          title: "Chowmein",
+          kicker: "Wok Tossed",
+          subtitle: "Nepalese-style noodles to order",
+          theme: "noodle-theme",
+          items,
+          formatName: (name) => name.replace(/^Chowmein\s+/i, "")
+        });
+      }
+
+      function renderCurriesMatrix(curries, intro) {
+        const columns = getCurriesMatrixConfig(curries);
+        const rowCount = Math.max(...columns.map((column) => column.items.length));
+
+        return `
+          <section class="plain-card matrix-card">
+            ${renderSectionHeader(
+              "Authentic Curries",
+              intro || "Served Fresh to Order - Choose your protein & style"
+            )}
+            <div class="matrix-inner">
+              <div class="matrix-head" style="--matrix-column-count: ${columns.length};">
+                <div class="matrix-protein"></div>
+                ${columns
+                  .map(
+                    (column) => `
+                      <div class="${column.title.length > 18 ? "matrix-wide long" : "matrix-col"}">
+                        ${escapeHtml(column.title)}
+                      </div>
+                    `
+                  )
+                  .join("")}
+              </div>
+
+              ${Array.from({ length: rowCount }, (_, index) => {
+                const protein = columns[0].items[index];
+
+                if (!protein) {
+                  return "";
+                }
+
+                return `
+                  <div class="matrix-row" style="--matrix-column-count: ${columns.length};">
+                    <div class="matrix-protein">
+                      ${escapeHtml(protein.name)}
+                      ${renderLabels(protein.labels)}
+                    </div>
+                    ${columns
+                      .map((column) => {
+                        const item = column.items[index];
+                        return `<div class="${column.title.length > 18 ? "matrix-wide" : "matrix-col"}">${escapeHtml(
+                          item ? item.price : "-"
+                        )}</div>`;
+                      })
+                      .join("")}
+                  </div>
+                `;
+              }).join("")}
+            </div>
+          </section>
+        `;
+      }
+
+      function renderSubHeader(title) {
+        return `<h3 class="subheader">${escapeHtml(title)}</h3>`;
+      }
+
+      function renderMenuList(items, options = {}) {
+        return `<div class="menu-list${options.isDark ? " dark-context" : ""}">${items
+          .map((item) => renderMenuItem(item, options))
+          .join("")}</div>`;
+      }
+
+      function renderMenuColumns(items, columns, options = {}) {
+        const count = Math.max(1, columns || 1);
+        const perColumn = Math.ceil(items.length / count);
+        const chunks = Array.from({ length: count }, (_, index) =>
+          items.slice(index * perColumn, index * perColumn + perColumn)
+        ).filter((chunk) => chunk.length > 0);
+
+        return `
+          <div class="accompaniment-columns">
+            ${chunks.map((chunk) => renderMenuList(chunk, options)).join("")}
+          </div>
+        `;
+      }
+
+      function renderAccompanimentPanel(title, items, panelClass, columns = 1) {
+        return `
+          <section class="accompaniment-panel ${panelClass}">
+            <h3 class="accompaniment-title">${escapeHtml(title)}</h3>
+            ${columns > 1
+              ? renderMenuColumns(items, columns, { compact: true })
+              : renderMenuList(items, { compact: true })}
+          </section>
+        `;
+      }
+
+      function renderHoursColumn(title, items) {
+        return `
+          <section>
+            <h4 class="hours-column-title">${escapeHtml(title)}</h4>
+            <ul class="hours-list">
+              ${items
+                .map(
+                  (entry) => `
+                    <li>
+                      <span class="hours-day">${escapeHtml(entry.day)}</span>
+                      <span class="hours-time">${escapeHtml(entry.hours)}</span>
+                    </li>
+                  `
+                )
+                .join("")}
+            </ul>
+          </section>
+        `;
+      }
+
+      function renderCoverServiceCard(title, items) {
+        return `
+          <section class="cover-service-card">
+            <h3 class="cover-service-title">${escapeHtml(title)}</h3>
+            <div class="cover-service-list">
+              ${items
+                .map(
+                  (entry) => `
+                    <div class="cover-service-row">
+                      <div class="cover-service-day">${escapeHtml(entry.day)}</div>
+                      <div class="cover-service-time">${escapeHtml(entry.hours)}</div>
+                    </div>
+                  `
+                )
+                .join("")}
+            </div>
+          </section>
+        `;
+      }
+
+      function renderSisterPubsSpecials(items) {
+        return `
+          <div class="sister-grid">
+            ${items
+              .map(
+                (entry) => `
+                  <div class="sister-item">
+                    <div class="sister-pub">${escapeHtml(entry.pub)}</div>
+                    <div class="sister-dish">${escapeHtml(entry.dish)}</div>
+                  </div>
+                `
+              )
+              .join("")}
+          </div>
+        `;
+      }
+
+      function renderContactFooter() {
+        return `
+          <div class="page-contact-footer">
+            <div class="page-contact-footer-item"><strong>${escapeHtml(
+              menuData.venue.phone || "01908 561936"
+            )}</strong></div>
+            <div class="page-contact-footer-dot"></div>
+            <div class="page-contact-footer-item">${escapeHtml(
+              menuData.venue.address || "London Rd, Stony Stratford, Milton Keynes MK11 1JA"
+            )}</div>
+            <div class="page-contact-footer-dot"></div>
+            <div class="page-contact-footer-item"><strong>${escapeHtml(
+              venueWebsiteLabel
+            )}</strong></div>
+          </div>
+        `;
+      }
+
+      function getCoverChefSpotlightItem() {
+        return (
+          menuData.chefSelection.find((item) => /rara king prawn/i.test(item.name)) ||
+          menuData.chefSelection.find((item) => /himali lamb/i.test(item.name)) ||
+          menuData.chefSelection[0]
+        );
+      }
+
+      function renderCoverPage() {
+        const locals = menuData.venue.locals || "Stony Stratford";
+        const address = menuData.venue.address || "London Rd, Stony Stratford, Milton Keynes MK11 1JA";
+        const phone = menuData.venue.phone || "01908 561936";
+        const spotlightItem = getCoverChefSpotlightItem();
+
+        return `
+          <section class="sheet">
+            <div class="sheet-frame">
+              <div class="sheet-border">
+                <div class="sheet-panel">
+                  <div class="page cover-page">
+                    <div class="cover-core">
+                      <section class="cover-focus-stage">
+                        <section class="cover-brand-stage">
+                          <div class="cover-brand-topline">${escapeHtml(locals)} Local</div>
+                          <div class="cover-brand-lockup">
+                            <img class="cover-brand-logo" src="./assets/theoldschoolhouse_logo.png" alt="The Old School House logo">
+                            <div>
+                              <h1 class="cover-brand-name">${escapeHtml(menuData.venue.name)}</h1>
+                              <div class="cover-brand-subtitle">${escapeHtml(menuData.venue.subtitle)}</div>
+                              <div class="cover-brand-social">Follow ${escapeHtml(socialHandle)}</div>
+                            </div>
+                          </div>
+                          <div class="cover-brand-message">A Stony Stratford local serving pub warmth, sizzling grills, and Himalayan kitchen flavour.</div>
+                        </section>
+
+                        <a class="cover-qr-hero" href="${escapeHtml(digitalMenuUrl)}" aria-label="Open digital menu">
+                          <div class="cover-qr-hero-kicker">Scan Menu</div>
+                          <img class="cover-qr-hero-image" src="./assets/theoldschoolhouse_qrcode.png" alt="QR code for The Old School House digital menu">
+                          <div class="cover-qr-hero-url">${escapeHtml(venueWebsite.replace(/^https?:\/\//i, ""))}</div>
+                          <div class="cover-qr-hero-note">Digital menu, bar updates, and specials</div>
+                        </a>
+                      </section>
+
+                      <section class="cover-story-strip">
+                        <div class="cover-story-kicker">Welcome</div>
+                        <div class="cover-story-title">Pub Comfort, Himalayan Kitchen</div>
+                        <div class="cover-story-body">${escapeHtml(menuData.venue.description)}</div>
+                      </section>
+                    </div>
+
+                    <div class="cover-support">
+                      <section class="cover-facts-grid">
+                        <section class="cover-fact-card">
+                          <div class="cover-fact-label">Address</div>
+                          <div class="cover-fact-value">${escapeHtml(address)}</div>
+                        </section>
+                        <section class="cover-fact-card">
+                          <div class="cover-fact-label">Phone</div>
+                          <div class="cover-fact-value">${escapeHtml(phone)}</div>
+                        </section>
+                        <section class="cover-fact-card">
+                          <div class="cover-fact-label">Website</div>
+                          <div class="cover-fact-value">${escapeHtml(venueWebsite.replace(/^https?:\/\//i, ""))}</div>
+                        </section>
+                        <section class="cover-fact-card">
+                          <div class="cover-fact-label">Locals</div>
+                          <div class="cover-fact-value">${escapeHtml(locals)}</div>
+                        </section>
+                      </section>
+
+                      <section class="cover-service-grid">
+                        ${renderCoverServiceCard("Kitchen Hours", menuData.venue.openingHours.kitchen)}
+                        ${renderCoverServiceCard("Bar Hours", menuData.venue.openingHours.bar)}
+                      </section>
+
+                      <section class="cover-foot-grid">
+                        <section class="cover-foot-card">
+                          <div class="cover-foot-title">
+                            ${iconLeaf()}
+                            <span>Allergy Notice</span>
+                          </div>
+                          <div class="cover-foot-body">${escapeHtml(menuData.venue.allergyNote)}</div>
+                        </section>
+
+                        <section class="cover-foot-card">
+                          <div class="cover-foot-title">
+                            ${iconFlame("medium")}
+                            <span>Spice & Info</span>
+                          </div>
+                          <div class="cover-foot-body">VEG and GF labels are marked throughout the menu. ${escapeHtml(menuData.venue.spiceNote)}</div>
+                        </section>
+                      </section>
+
+                      <div class="cover-bottom-line">
+                        <div class="drinks-note">${escapeHtml(menuData.venue.drinksNote)}</div>
+                      </div>
+
+                      ${spotlightItem
+                        ? `
+                          <section class="cover-chef-spotlight">
+                            <div class="cover-chef-spotlight-top-rule">
+                              <span class="cover-chef-spotlight-rule-line"></span>
+                              <span class="cover-chef-spotlight-rule-diamond"></span>
+                              <span class="cover-chef-spotlight-rule-line"></span>
+                            </div>
+                            <div class="cover-chef-spotlight-kicker">Old School House Chef's Spotlight</div>
+                            <div class="cover-chef-spotlight-flame">
+                              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3c1 4-2 4-2 8 0 2 1 3 2 3 2 0 3-2 3-4 2 2 4 4 4 7a7 7 0 1 1-14 0c0-4 3-6 7-14Z" fill="currentColor"/></svg>
+                              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3c1 4-2 4-2 8 0 2 1 3 2 3 2 0 3-2 3-4 2 2 4 4 4 7a7 7 0 1 1-14 0c0-4 3-6 7-14Z" fill="currentColor"/></svg>
+                              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3c1 4-2 4-2 8 0 2 1 3 2 3 2 0 3-2 3-4 2 2 4 4 4 7a7 7 0 1 1-14 0c0-4 3-6 7-14Z" fill="currentColor"/></svg>
+                            </div>
+                            <div class="cover-chef-spotlight-name">${escapeHtml(spotlightItem.name)}</div>
+                            <div class="cover-chef-spotlight-desc">${escapeHtml(spotlightItem.desc || "Ask the team about this signature Nepalese favourite.")}</div>
+                            <div class="cover-chef-spotlight-price-row">
+                              <span class="cover-chef-spotlight-price-line"></span>
+                              <span class="cover-chef-spotlight-price">${escapeHtml(spotlightItem.price)}</span>
+                              <span class="cover-chef-spotlight-price-line right"></span>
+                            </div>
+                          </section>
+                        `
+                        : ""}
+
+                      ${renderContactFooter()}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        `;
+      }
+
+      function renderPageTwo() {
+        return `
+          <section class="sheet">
+            <div class="sheet-frame">
+              <div class="sheet-border">
+                <div class="sheet-panel">
+                  <div class="page page-two-layout">
+                      <div class="page-two-content">
+                        <section>
+                          ${renderSectionHeader("Appetisers", "Sharers, Snacks, and Nepalese Favourites")}
+                          <div class="two-col">
+                            ${renderMenuList(startersCol1, { compact: true })}
+                            ${renderMenuList(startersCol2, { compact: true })}
+                          </div>
+                        </section>
+
+                        <section class="split-platter-card">
+                          <div class="split-platter-bg-left" aria-hidden="true"></div>
+                          <div class="split-platter-bg-right" aria-hidden="true"></div>
+                          <div class="split-platter-grid">
+                            <div class="split-platter-pane left">
+                              <div class="split-platter-kicker">Signature Sharer</div>
+                              <h3 class="split-platter-title">${escapeHtml(mixedPlatter.name)}</h3>
+                              <div class="split-platter-meta">${escapeHtml(mixedPlatter.desc || "Perfect for sharing at the table.")}</div>
+                              <div class="split-platter-price">${escapeHtml(mixedPlatter.price)}</div>
+                            </div>
+                            <div class="split-platter-pane right">
+                              <div class="split-platter-kicker">${vegPlatter.labels && vegPlatter.labels.includes("veg") ? "Vegetarian Pick" : "House Pick"}</div>
+                              <h3 class="split-platter-title">${escapeHtml(vegPlatter.name)}</h3>
+                              <div class="split-platter-meta">${escapeHtml(
+                                vegPlatter.desc ||
+                                  (vegPlatter.labels && vegPlatter.labels.includes("veg")
+                                    ? "A meat-free favourite from our starters."
+                                    : "A customer favourite from our starters.")
+                              )}</div>
+                              <div class="split-platter-price">${escapeHtml(vegPlatter.price)}</div>
+                            </div>
+                          </div>
+                        </section>
+
+                        <section class="highlight-card chef-card">
+                          <div class="chef-star" aria-hidden="true">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="m12 2.5 2.9 5.88 6.49.95-4.69 4.58 1.1 6.47L12 17.27l-5.8 3.11 1.1-6.47L2.61 9.33l6.49-.95L12 2.5Z"/>
+                            </svg>
+                          </div>
+                          <div class="chef-inner dark-context">
+                            ${renderSectionHeader("Chef's Specials", "Our signature Himalayan creations", true)}
+                            <div class="two-col">
+                              ${renderMenuList(chefSpecialsCol1, { compact: true, isDark: true })}
+                              ${renderMenuList(chefSpecialsCol2, { compact: true, isDark: true })}
+                            </div>
+                          </div>
+                        </section>
+
+                        <section class="page-two-bottom-row">
+                          <section class="plain-card compact-card">
+                            ${renderSectionHeader("From The Clay Oven", "Sizzling Dry Tandoori Dishes")}
+                            ${renderMenuColumns(menuData.clayOven, 2, { compact: true })}
+                          </section>
+                        </section>
+                      </div>
+
+                      ${renderContactFooter()}
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        `;
+      }
+
+      function renderPageThree() {
+        return `
+          <section class="sheet">
+            <div class="sheet-frame">
+              <div class="sheet-border">
+                <div class="sheet-panel">
+                  <div class="page page-three-layout">
+                    <div class="top-grid-page-three">
+                      <div class="paired-matrix-row">
+                        ${renderBiryaniMatrix(menuData.biryani, menuData.biryaniIntro)}
+                        ${renderChowmeinMatrix(menuData.chowmein)}
+                      </div>
+
+                      <section class="dark-card dark-context mixed-grills-card">
+                        ${renderSectionHeader(
+                          "Our Mixed Grills",
+                          menuData.mixedGrillsIntro || "Sizzling Sharing Platters",
+                          true
+                        )}
+                        <div class="two-col">
+                          ${renderMenuList(menuData.mixedGrills.slice(0, 3), { isDark: true })}
+                          ${renderMenuList(menuData.mixedGrills.slice(3), { isDark: true })}
+                        </div>
+                      </section>
+                    </div>
+
+                    ${renderCurriesMatrix(menuData.curries, menuData.curriesIntro)}
+
+                    <section class="accompaniments">
+                      <div class="accompaniments-shell">
+                        <div class="accompaniments-header">
+                          <h2 class="accompaniments-heading">Kitchen Companions</h2>
+                        </div>
+
+                        <div class="accompaniments-grid">
+                          <div class="accompaniment-stack">
+                            ${renderAccompanimentPanel(
+                              "Rice",
+                              menuData.rice,
+                              "rice"
+                            )}
+                            ${renderAccompanimentPanel(
+                              "Naan Breads",
+                              menuData.naan,
+                              "bread"
+                            )}
+                          </div>
+                          <div class="accompaniment-stack">
+                            ${renderAccompanimentPanel(
+                              "Sides",
+                              menuData.sides,
+                              "side"
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+
+                    ${renderContactFooter()}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        `;
+      }
+
+      function renderPageFour() {
+        return `
+          <section class="sheet">
+            <div class="sheet-frame">
+              <div class="sheet-border">
+                <div class="sheet-panel">
+                  <div class="page page-four-layout">
+                    <section class="plain-card pub-hero">
+                      <div class="pub-hero-inner">
+                        ${renderSectionHeader("Pub Favourites", "Proper pub classics & fresh wraps")}
+                        <div class="two-col pub-hero-grid">
+                          <div>
+                            ${renderSubHeader("Pub Classics")}
+                            <div class="pub-classics-list">${renderMenuList(menuData.pubClassic)}</div>
+                          </div>
+                          <div>
+                            ${renderSubHeader("Wraps")}
+                            <div class="wrap-note">${escapeHtml(menuData.pubGrubIntro || "Served with chips, salad & sweet chilli")}</div>
+                            ${renderMenuList(menuData.pubGrub)}
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+
+                    <div class="chips-band">
+                      <section class="band-section">
+                        ${renderSectionHeader("Chips & Fries")}
+                        <div class="two-col chips-band-list">
+                          ${renderMenuList(menuData.chips.slice(0, 3), { compact: true })}
+                          ${renderMenuList(menuData.chips.slice(3), { compact: true })}
+                        </div>
+                      </section>
+
+                      <section class="band-section salad-band">
+                        ${renderSectionHeader("Salad")}
+                        <div class="salad-list">
+                          ${renderMenuList(menuData.salad, { compact: true })}
+                        </div>
+                      </section>
+                    </div>
+
+                    <div class="bottom-split">
+                      <section class="kids-card">
+                        <div class="kids-label">Kids Plates</div>
+                        <div class="kids-note">${escapeHtml(menuData.kidsIntro || "Choose chips or rice")}</div>
+                        ${renderMenuList(menuData.kids, { compact: true })}
+                      </section>
+
+                      <section class="dessert-card dark-context">
+                        ${renderSectionHeader("Sweet Finish", "", true)}
+                        <div class="dessert-list">${renderMenuList(menuData.desserts, { compact: true, isDark: true })}</div>
+                      </section>
+                    </div>
+
+                    ${(menuData.sisterPubsSpecials || []).length
+                      ? `
+                        <section class="sister-pubs">
+                          <div class="sister-kicker">Across Our Sister Pubs</div>
+                          <h2 class="sister-title">Chef's Specials Brought To Your Table</h2>
+                          <div class="sister-intro">We bring our sister pubs' chef's special dishes right here to your table at The Old School House. Let us know what you're craving and we'll take care of the rest.</div>
+                          ${renderSisterPubsSpecials(menuData.sisterPubsSpecials)}
+                        </section>
+                      `
+                      : ""}
+
+                    ${renderContactFooter()}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        `;
+      }
+
+      function renderApp() {
+        document.getElementById("app").innerHTML = [
+          renderCoverPage(),
+          renderPageTwo(),
+          renderPageThree(),
+          renderPageFour()
+        ].join("");
+      }
+
+      document.getElementById("print-button").addEventListener("click", () => {
+        window.print();
+      });
+
+      renderApp();
+    </script>
+  </body>
+</html>

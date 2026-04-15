@@ -9,22 +9,22 @@ export const menuInformationHeroCopy = {
   title:
     "If you are checking allergies, dietary needs, or which menu to use, this is the easiest place to start.",
   description:
-    "Use this page if you are choosing for the table, deciding between the live menu and the PDF, or want to ask a food question before you visit.",
+    "Use this page if you are choosing between the lunch menu, the full dinner menu, the full English, or Sunday roast, checking dietary needs, or want to ask a food question before you visit.",
   primaryActionLabel: "Browse the live menu",
-  secondaryActionLabel: "Download PDF menu",
+  secondaryActionLabel: "Download dinner PDF",
 }
 
 export const menuInformationStartSectionCopy = {
   eyebrow: "Start here",
   title: "How to check allergens, dietary needs, and the right menu format.",
   description:
-    "Browse the live menu for the latest version, use the PDF when you want something printable, and call the pub if the answer matters to today’s visit.",
+    "Browse the live menu page for the lunch menu, the full dinner menu, the full English, and Sunday roast, open the standalone dinner view when you want the print-style layout, and call the pub if the answer matters to today’s visit.",
   liveMenuLabel: "View HTML menu",
-  pdfLabel: "Download PDF",
+  pdfLabel: "Download dinner PDF",
   callLabel: "Call the pub",
   quickAnswerPrefix: "If you want a quick answer, ring",
   quickAnswerSuffix:
-    "The website menu is best for browsing on your phone. The PDF is best for printing, sharing, or keeping a copy to hand.",
+    "The website menu is best for browsing on your phone because it shows the lunch menu, the full English, Sunday roast, and the wider full menu in one place. The standalone lunch and dinner views keep the fuller print-style layout when you want a menu page of its own.",
 }
 
 export const menuInformationFaqs = [
@@ -39,9 +39,9 @@ export const menuInformationFaqs = [
       "Yes, in many cases. We are happy to talk through dishes if you want something milder, meat-free, or simply easier for the table to agree on.",
   },
   {
-    title: "Use the website menu for browsing. Use the PDF for sharing.",
+    title: "Use the website menu for browsing. Use the standalone views for the print layout.",
     description:
-      "The website menu is the clearest and most up to date. The PDF is there if you want something printable or easy to send to someone else.",
+      "The website menu is the clearest starting point because it shows the full English, lunch menu, Sunday roast, and the wider menu in one place. The standalone lunch and dinner views keep the designed menu layout when you want to open one on its own.",
   },
   {
     title: "Need a quick answer today?",

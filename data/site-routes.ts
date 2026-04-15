@@ -4,8 +4,8 @@ import {
   bookingHref,
   directionsHref,
   featureFlags,
+  siteDinnerMenuPdfHref,
   siteEmailHref,
-  siteMenuPdfHref,
   siteName,
   sitePhoneHref,
 } from "@/data/site"
@@ -20,7 +20,7 @@ export const routeConfigs: RouteConfig[] = [
     meta: {
       title: "Pub in Stony Stratford with Nepalese Kitchen",
       description:
-        "Visit a recently refurbished traditional pub on London Road in Stony Stratford with a Nepalese kitchen, live sport, outdoor seating, and easy table booking.",
+        "Visit a recently refurbished traditional pub on London Road in Stony Stratford with a Nepalese kitchen, full English lunch plates, Sunday roast, live sport, outdoor seating, and easy table booking.",
       canonical: "/",
     },
     hero: {
@@ -28,7 +28,7 @@ export const routeConfigs: RouteConfig[] = [
       title:
         "A traditional pub in Stony Stratford with a Nepalese kitchen worth discovering.",
       description:
-        "Come for the familiar pub comfort, stay for the momo, curries, grills, and the kind of welcome that makes a second visit easy.",
+        "Come for the familiar pub comfort, stay for the full English, momo, curries, roasts, and the kind of welcome that makes a second visit easy.",
       primaryAction: { href: bookOnlineHref, label: "Book a table" },
       secondaryAction: { href: "/menu", label: "View menu" },
     },
@@ -89,14 +89,14 @@ export const routeConfigs: RouteConfig[] = [
     meta: {
       title: "Stony Stratford Pub Menu and Nepalese Food",
       description:
-        "Browse the live pub menu for Nepalese dishes, pub classics, Sunday roast favourites, desserts, sides, and drinks at The Old School House in Stony Stratford.",
+        "Browse the live pub menu for the full English, lunch menu favourites, Nepalese dishes, pub classics, Sunday roast, desserts, sides, and drinks at The Old School House in Stony Stratford.",
       canonical: "/menu",
     },
     hero: {
       eyebrow: "Food and drink",
       title: "Pub favourites and Nepalese dishes on one menu.",
       description:
-        "Browse the live menu, start with the signatures, and book when you are ready to turn a look into a table.",
+        "Browse the live menu for the full English, lunch menu, Sunday roast, and the wider evening offer, then book when you are ready to turn a look into a table.",
       primaryAction: { href: bookOnlineHref, label: "Book a table" },
       secondaryAction: { href: sitePhoneHref, label: "Call 01908 561936" },
     },
@@ -113,14 +113,14 @@ export const routeConfigs: RouteConfig[] = [
     meta: {
       title: "Book a Table at Our Stony Stratford Pub",
       description:
-        "Book a table at The Old School House for pub drinks, Nepalese food, Sunday roast, and group dining in Stony Stratford.",
+        "Book a table at The Old School House for a full English, lunch, Nepalese food, Sunday roast, and group dining in Stony Stratford.",
       canonical: "/book",
     },
     hero: {
       eyebrow: "Book a table",
       title: "Book a table for a proper pub visit on London Road.",
       description:
-        "Use the online booking route first, then call or email us if you are planning something more specific.",
+        "Use the online booking route first for a full English, lunch, dinner, or Sunday roast, then call or email us if you are planning something more specific.",
       primaryAction: { href: bookingHref, label: "Book online" },
       secondaryAction: { href: sitePhoneHref, label: "Call the pub" },
     },
@@ -144,7 +144,7 @@ export const routeConfigs: RouteConfig[] = [
       eyebrow: "What’s on",
       title: "More reasons to come back than just the first pint.",
       description:
-        "Match days, themed evenings, tastings, and community-led plans all have a place here, with food and space strong enough to make a longer stay feel easy.",
+        "Match days, themed evenings, tastings, and community-led plans all have a place here, with food and space strong enough to make a longer stay feel easy once the full menu is part of the plan.",
       primaryAction: { href: bookOnlineHref, label: "Book for an event night" },
       secondaryAction: {
         href: "/private-hire",
@@ -523,9 +523,8 @@ export const routeConfigs: RouteConfig[] = [
         "Use this page for dietary guidance, menu-format help, and the quickest route to asking the pub directly when something matters to today.",
       primaryAction: { href: "/menu", label: "Browse the live menu" },
       secondaryAction: {
-        href: siteMenuPdfHref,
-        label: "Download PDF menu",
-        download: true,
+        href: siteDinnerMenuPdfHref,
+        label: "Download dinner PDF",
       },
     },
     schema: { faq: true },
@@ -549,9 +548,8 @@ export const routeConfigs: RouteConfig[] = [
       description:
         "Collection-only takeaway stays simple when you browse first, call second, and use the live menu if you want the quickest route through the dishes.",
       primaryAction: {
-        href: siteMenuPdfHref,
-        label: "Download PDF menu",
-        download: true,
+        href: siteDinnerMenuPdfHref,
+        label: "Download dinner PDF",
       },
       secondaryAction: { href: sitePhoneHref, label: "Call the pub" },
     },

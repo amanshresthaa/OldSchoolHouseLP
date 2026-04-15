@@ -14,13 +14,13 @@ describe("menu helpers", () => {
     expect(menuCategories).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          slug: "starters",
+          slug: "main-starters",
           title: "Starters",
           intro: expect.stringContaining("Nepalese"),
           items: expect.any(Array),
         }),
         expect.objectContaining({
-          slug: "pub-classic",
+          slug: "main-pub-classics",
           title: "Pub Classics",
         }),
       ])
@@ -29,22 +29,33 @@ describe("menu helpers", () => {
 
   it("keeps the expected preview and featured menu selections", () => {
     expect(menuPreviewCategories.map((category) => category.slug)).toEqual([
-      "starters",
-      "speciality-dishes",
-      "pub-classic",
-      "desserts",
+      "main-starters",
+      "main-chef-selection",
+      "main-pub-classics",
+      "main-desserts",
     ])
 
     expect(featuredMenuItems).toHaveLength(4)
     expect(featuredMenuItems).toEqual(
       expect.arrayContaining([
-        expect.objectContaining({ name: expect.any(String) }),
+        expect.objectContaining({ name: "Chicken Momo (Steam / Chilli)" }),
+        expect.objectContaining({ name: "Large Mixed Grill" }),
+        expect.objectContaining({ name: "Fish & Chips" }),
       ])
     )
   })
 
   it("formats prices for pounds sterling", () => {
-    expect(formatPrice({ amount: 12.5, currency: "GBP" })).toBe("£12.50")
+    expect(formatPrice({ amount: 12.5, currency: "GBP", display: "" })).toBe(
+      "£12.50"
+    )
+    expect(
+      formatPrice({
+        amount: 13,
+        currency: "GBP",
+        display: "£13.00 / £14.00",
+      })
+    ).toBe("£13.00 / £14.00")
   })
 
   it("maps supported menu badges", () => {

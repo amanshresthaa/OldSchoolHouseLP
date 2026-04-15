@@ -140,7 +140,14 @@ export const socialLinks = [
   "https://www.facebook.com/OldSchoolHouseStony/",
   "https://www.instagram.com/oldschoolhousestony/",
 ]
-export const siteMenuPdfHref = "/downloads/old-school-house-menu.pdf"
+export const siteDinnerMenuHref =
+  "/menus/theoldschoolhousemenu-standalone/index.html"
+export const siteLunchMenuHref =
+  "/menus/theoldschoolhousemenu-standalone/lunch-menu.html"
+export const siteDinnerMenuPdfHref =
+  "/menus/theoldschoolhousemenu-standalone/dinner-menu.pdf"
+export const siteLunchMenuPdfHref =
+  "/menus/theoldschoolhousemenu-standalone/lunch-menu.pdf"
 export const siteOrganizationId = `${siteUrl}/#organization`
 export const siteWebsiteId = `${siteUrl}/#website`
 export const siteRestaurantId = `${siteUrl}/#restaurant`
@@ -377,19 +384,19 @@ export const aboutLocationHighlights: HighlightItem[] = [
 
 export const homeMenuHighlights: HighlightItem[] = [
   {
-    title: "Start with the momo",
+    title: "Start with the service that fits the visit",
     description:
-      "The easiest first order if you want to see why the Nepalese kitchen stands out.",
+      "Use the lunch menu for a full English or lighter daytime meal, keep Sunday roast in mind for the weekend, and use the full menu when dinner is the plan.",
   },
   {
-    title: "Keep the familiar pub comfort in play",
+    title: "Keep familiar pub comfort in play",
     description:
-      "Pub classics and crowd-pleasers keep the menu easy for mixed tables.",
+      "Pub classics, baguettes, wraps, and roasts keep the menu easy for mixed tables before anyone stretches into the Nepalese side.",
   },
   {
-    title: "Order across both sides of the offer",
+    title: "Use the full menu when the table wants range",
     description:
-      "That mix is what makes the menu feel stronger than a standard pub stop.",
+      "That is where the grills, curries, momo, and crowd-pleasers all sit together and make the visit feel stronger than a standard pub stop.",
   },
 ]
 

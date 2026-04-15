@@ -206,7 +206,7 @@ export function SiteFooter() {
         <div className="surface-divider h-px" />
 
         <div className="flex flex-col items-center justify-between gap-3 px-0 pt-5 text-center sm:flex-row sm:text-left">
-          <p className="text-[0.72rem] tracking-[0.16em] text-on-surface/70 uppercase">
+          <p className="text-[0.72rem] tracking-[0.16em] text-on-surface/80 uppercase">
             © {new Date().getFullYear()} {siteName} · Stony Stratford
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
@@ -214,7 +214,7 @@ export function SiteFooter() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-[0.72rem] tracking-[0.16em] text-on-surface/70 uppercase transition hover:text-secondary"
+                className="text-[0.72rem] tracking-[0.16em] text-on-surface/80 uppercase transition hover:text-secondary"
               >
                 {item.label}
               </Link>

@@ -64,7 +64,6 @@ export function MenuInteractive({ categories }: MenuInteractiveProps) {
   const [dietaryFilters, setDietaryFilters] = useState<Set<DietaryFilter>>(
     () => new Set()
   )
-  const [searchOpen, setSearchOpen] = useState(false)
   const [isTransitioning, setIsTransitioning] = useState(false)
   const [isStuck, setIsStuck] = useState(false)
   const [showBackToTop, setShowBackToTop] = useState(false)
@@ -77,7 +76,10 @@ export function MenuInteractive({ categories }: MenuInteractiveProps) {
   const handleCategoryClick = useCallback((slug: string | null) => {
     setIsTransitioning(true)
     setActiveCategory(slug)
-    window.history.replaceState(null, "", slug ? `#${slug}` : " ")
+    const nextUrl = slug
+      ? `${window.location.pathname}${window.location.search}#${slug}`
+      : `${window.location.pathname}${window.location.search}`
+    window.history.replaceState(null, "", nextUrl)
 
     requestAnimationFrame(() => {
       contentRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
@@ -131,10 +133,15 @@ export function MenuInteractive({ categories }: MenuInteractiveProps) {
     [visibleCategories]
   )
 
+  const activeCategoryTitle =
+    activeCategory === null
+      ? "All sections"
+      : (categories.find((category) => category.slug === activeCategory)
+          ?.title ?? "Selected section")
+
   const clearAllFilters = useCallback(() => {
     setSearchTerm("")
     setDietaryFilters(new Set())
-    setSearchOpen(false)
   }, [])
 
   useEffect(() => {
@@ -160,27 +167,102 @@ export function MenuInteractive({ categories }: MenuInteractiveProps) {
   }, [])
 
   return (
-    <div>
-      {/* Sticky sentinel */}
+    <div className="relative">
       <div ref={stickySentinelRef} className="h-0" />
-
-      {/* Sticky Category Navigation */}
       <div
         className={cn(
-          "sticky top-[4.5rem] z-30 bg-[var(--color-surface)]/85 backdrop-blur-[20px] transition-shadow duration-[var(--duration-transition)] ease-[var(--easing-standard)]",
-          isStuck && "shadow-[var(--shadow-card)]"
+          "sticky top-[4.25rem] z-30 border-b border-[rgba(196,189,181,0.18)] bg-[var(--color-surface)]/94 backdrop-blur-[18px]"
         )}
       >
-        <div className="section-shell">
-          <div className="flex items-center gap-2 py-3">
-            <div className="relative min-w-0 flex-1">
-              <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-[var(--color-surface)]/85 to-transparent lg:hidden" />
-              <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-[var(--color-surface)]/85 to-transparent lg:hidden" />
+        <div className="px-2 py-2 md:px-5 md:py-3">
+          <div
+            className={cn(
+              "overflow-hidden rounded-[1.1rem] border border-[rgba(196,189,181,0.22)] bg-[linear-gradient(180deg,var(--color-surface-lowest)_0%,#f5efe5_100%)] transition-shadow duration-[var(--duration-transition)] ease-[var(--easing-standard)]",
+              isStuck && "shadow-[0_16px_34px_rgba(27,28,28,0.08)]"
+            )}
+          >
+            <div className="grid gap-2 border-b border-[rgba(196,189,181,0.18)] p-2.5 md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:p-3">
+              <label className="block min-w-0">
+                <span className="sr-only">Search dishes</span>
+                <div className="flex items-center gap-2 rounded-[0.95rem] border border-[rgba(196,189,181,0.24)] bg-white/88 px-3 py-2.5">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    className="size-4 shrink-0 text-on-surface/45"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <input
+                    type="text"
+                    value={searchTerm}
+                    onChange={(event) => setSearchTerm(event.target.value)}
+                    placeholder="Search menu"
+                    aria-label="Search dishes"
+                    className="w-full bg-transparent text-sm text-on-background outline-none placeholder:text-on-surface/50"
+                  />
+                </div>
+              </label>
+
+              <div className="flex items-center justify-between gap-2 md:justify-end">
+                <p className="rounded-full bg-[var(--color-surface-low)] px-3 py-1.5 text-[0.68rem] font-semibold tracking-[0.14em] text-secondary uppercase">
+                  {activeCategoryTitle}
+                </p>
+                <p className="text-[0.72rem] font-semibold tracking-[0.08em] text-on-surface/72 uppercase">
+                  {totalFilteredItems} item
+                  {totalFilteredItems === 1 ? "" : "s"}
+                </p>
+                {hasActiveFilters ? (
+                  <button
+                    type="button"
+                    onClick={clearAllFilters}
+                    className="shrink-0 rounded-full border border-[rgba(196,189,181,0.24)] bg-white/70 px-3 py-1.5 text-[0.68rem] font-semibold tracking-[0.14em] text-secondary uppercase transition-colors duration-[var(--duration-micro)] ease-[var(--easing-standard)] hover:bg-white"
+                  >
+                    Clear
+                  </button>
+                ) : null}
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-1.5 border-b border-[rgba(196,189,181,0.16)] px-2.5 py-2">
+              <span className="mr-1 text-[0.68rem] font-semibold tracking-[0.16em] text-secondary uppercase">
+                Filters
+              </span>
+              {DIETARY_FILTERS.map((filter) => {
+                const badge = getMenuBadge(filter)
+                const isActive = dietaryFilters.has(filter)
+                return (
+                  <button
+                    key={filter}
+                    type="button"
+                    onClick={() => toggleDietaryFilter(filter)}
+                    className={cn(
+                      "rounded-full px-3 py-1.5 text-[0.68rem] font-semibold tracking-[0.14em] uppercase transition-all duration-[var(--duration-micro)] ease-[var(--easing-standard)]",
+                      isActive && badge
+                        ? badge.className
+                        : "bg-[var(--color-surface-low)] text-on-surface hover:bg-[var(--color-surface-highest)]",
+                      isActive && "ring-1 ring-[rgba(175,43,62,0.16)]"
+                    )}
+                  >
+                    {filter}
+                  </button>
+                )
+              })}
+            </div>
+
+            <div className="relative px-2.5 py-2">
+              <div className="pointer-events-none absolute inset-y-0 left-2.5 z-10 w-6 bg-gradient-to-r from-[#f5efe5] to-transparent lg:hidden" />
+              <div className="pointer-events-none absolute inset-y-0 right-2.5 z-10 w-6 bg-gradient-to-l from-[#f5efe5] to-transparent lg:hidden" />
               <div
                 ref={scrollContainerRef}
                 role="toolbar"
                 aria-label="Menu categories"
-                className="hide-scrollbar flex gap-2 overflow-x-auto"
+                className="hide-scrollbar flex gap-1.5 overflow-x-auto"
               >
                 <button
                   type="button"
@@ -188,9 +270,9 @@ export function MenuInteractive({ categories }: MenuInteractiveProps) {
                   aria-pressed={activeCategory === null}
                   onClick={() => handleCategoryClick(null)}
                   className={cn(
-                    "shrink-0 rounded-full px-4 py-2 text-xs font-semibold tracking-wide whitespace-nowrap transition-colors duration-[var(--duration-micro)] ease-[var(--easing-standard)]",
+                    "shrink-0 rounded-full px-3 py-2 text-[0.72rem] font-semibold tracking-[0.08em] whitespace-nowrap transition-colors duration-[var(--duration-micro)] ease-[var(--easing-standard)]",
                     activeCategory === null
-                      ? "bg-[var(--color-tertiary-container)] text-[var(--color-on-tertiary-container)]"
+                      ? "bg-secondary text-white"
                       : "bg-[var(--color-surface-low)] text-on-surface hover:bg-[var(--color-surface-highest)]"
                   )}
                 >
@@ -206,14 +288,14 @@ export function MenuInteractive({ categories }: MenuInteractiveProps) {
                       aria-pressed={isActive}
                       onClick={() => handleCategoryClick(category.slug)}
                       className={cn(
-                        "shrink-0 rounded-full px-4 py-2 text-xs font-semibold tracking-wide whitespace-nowrap transition-colors duration-[var(--duration-micro)] ease-[var(--easing-standard)]",
+                        "shrink-0 rounded-full px-3 py-2 text-[0.72rem] font-semibold tracking-[0.08em] whitespace-nowrap transition-colors duration-[var(--duration-micro)] ease-[var(--easing-standard)]",
                         isActive
-                          ? "bg-[var(--color-tertiary-container)] text-[var(--color-on-tertiary-container)]"
+                          ? "bg-secondary text-white"
                           : "bg-[var(--color-surface-low)] text-on-surface hover:bg-[var(--color-surface-highest)]"
                       )}
                     >
                       {category.title}
-                      <span className="ml-1.5 text-[0.65rem] opacity-60">
+                      <span className="ml-1.5 text-[0.62rem] opacity-65">
                         {category.items.length}
                       </span>
                     </button>
@@ -221,118 +303,25 @@ export function MenuInteractive({ categories }: MenuInteractiveProps) {
                 })}
               </div>
             </div>
-
-            {/* Search toggle */}
-            <button
-              type="button"
-              onClick={() => setSearchOpen((prev) => !prev)}
-              className={cn(
-                "shrink-0 rounded-full p-2.5 transition-colors duration-[var(--duration-micro)] ease-[var(--easing-standard)]",
-                searchOpen
-                  ? "bg-[var(--color-tertiary-container)] text-[var(--color-on-tertiary-container)]"
-                  : "bg-[var(--color-surface-low)] text-on-surface hover:bg-[var(--color-surface-highest)]"
-              )}
-              aria-label={searchOpen ? "Close search" : "Search menu"}
-            >
-              {searchOpen ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  className="size-4"
-                >
-                  <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
-                </svg>
-              ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  className="size-4"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              )}
-            </button>
-          </div>
-        </div>
-
-        {/* Search/Filter Panel */}
-        <div
-          className={cn(
-            "overflow-hidden transition-all duration-[var(--duration-transition)] ease-[var(--easing-standard)]",
-            searchOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
-          )}
-        >
-          <div className="section-shell pb-4">
-            <div className="space-y-3">
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Search dishes…"
-                aria-label="Search dishes"
-                className="w-full rounded-xl border-transparent bg-[var(--color-surface-highest)] px-4 py-2.5 text-sm text-on-background transition-colors duration-[var(--duration-micro)] ease-[var(--easing-standard)] outline-none placeholder:text-on-surface/50 focus:border-[var(--color-outline-variant)] focus:bg-[var(--color-surface-lowest)]"
-              />
-              <div className="flex flex-wrap items-center gap-2">
-                {DIETARY_FILTERS.map((filter) => {
-                  const badge = getMenuBadge(filter)
-                  const isActive = dietaryFilters.has(filter)
-                  return (
-                    <button
-                      key={filter}
-                      type="button"
-                      onClick={() => toggleDietaryFilter(filter)}
-                      className={cn(
-                        "rounded-full px-3.5 py-1.5 text-[0.72rem] font-semibold tracking-[0.14em] uppercase transition-all duration-[var(--duration-micro)] ease-[var(--easing-standard)]",
-                        isActive && badge
-                          ? badge.className
-                          : "bg-[var(--color-surface-low)] text-on-surface hover:bg-[var(--color-surface-highest)]",
-                        isActive && "ring-1 ring-[var(--color-outline-variant)]"
-                      )}
-                    >
-                      {filter}
-                    </button>
-                  )
-                })}
-                {hasActiveFilters ? (
-                  <>
-                    <span className="ml-1 text-xs text-on-surface/60">
-                      {totalFilteredItems} result
-                      {totalFilteredItems !== 1 ? "s" : ""}
-                    </span>
-                    <button
-                      type="button"
-                      onClick={clearAllFilters}
-                      className="text-xs font-semibold text-secondary transition-colors hover:text-secondary/80"
-                    >
-                      Clear all
-                    </button>
-                  </>
-                ) : null}
-              </div>
-            </div>
           </div>
         </div>
       </div>
 
-      {/* Menu Content */}
       <div ref={backToTopSentinelRef} className="h-0" />
-      <div ref={contentRef} className="section-shell scroll-mt-40 py-8">
+      <div
+        ref={contentRef}
+        className="scroll-mt-36 px-2 pt-2 pb-4 md:px-5 md:py-5"
+      >
         <div
           className={cn(
-            "space-y-8 transition-all duration-[var(--duration-transition)] ease-[var(--easing-standard)]",
+            "transition-all duration-[var(--duration-transition)] ease-[var(--easing-standard)]",
             isTransitioning
               ? "translate-y-2 opacity-0"
               : "translate-y-0 opacity-100"
           )}
         >
           {visibleCategories.length === 0 ? (
-            <div className="py-16 text-center">
+            <div className="rounded-[1.1rem] border border-[rgba(196,189,181,0.18)] bg-[var(--color-surface-lowest)] px-5 py-12 text-center">
               <p className="font-heading text-lg text-on-surface">
                 No dishes found
               </p>
@@ -341,31 +330,34 @@ export function MenuInteractive({ categories }: MenuInteractiveProps) {
               </p>
             </div>
           ) : (
-            visibleCategories.map((category, index) => (
-              <MenuCategoryPanel
-                key={`${category.slug}-${activeCategory}-${searchTerm}-${[...dietaryFilters].join()}`}
-                category={category}
-                searchTerm={searchTerm}
-                animationDelayMs={index * 60}
-                className="hero-entrance surface-frame scroll-mt-40"
-              />
-            ))
+            <div className="overflow-hidden rounded-[1.2rem] border border-[rgba(196,189,181,0.18)] bg-[var(--color-surface-lowest)] shadow-[0_14px_34px_rgba(27,28,28,0.04)]">
+              <div className="divide-y divide-[rgba(196,189,181,0.16)]">
+                {visibleCategories.map((category, index) => (
+                  <MenuCategoryPanel
+                    key={`${category.slug}-${activeCategory}-${searchTerm}-${[...dietaryFilters].join()}`}
+                    category={category}
+                    searchTerm={searchTerm}
+                    animationDelayMs={index * 60}
+                    className="hero-entrance scroll-mt-36"
+                  />
+                ))}
+              </div>
+            </div>
           )}
         </div>
       </div>
 
-      {/* Back to top */}
       <button
         type="button"
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         className={cn(
-          "fixed right-6 bottom-6 z-40 rounded-full bg-[var(--color-tertiary-container)] px-4 py-2.5 text-xs font-semibold tracking-wide text-[var(--color-on-tertiary-container)] shadow-lg transition-all duration-[var(--duration-transition)] ease-[var(--easing-standard)]",
+          "fixed right-5 bottom-5 z-40 rounded-full bg-[var(--color-tertiary-container)] px-3.5 py-2 text-xs font-semibold tracking-wide text-[var(--color-on-tertiary-container)] shadow-lg transition-all duration-[var(--duration-transition)] ease-[var(--easing-standard)] md:right-6 md:bottom-6",
           showBackToTop
             ? "translate-y-0 opacity-100"
             : "pointer-events-none translate-y-4 opacity-0"
         )}
       >
-        ↑ Back to top
+        Top
       </button>
     </div>
   )

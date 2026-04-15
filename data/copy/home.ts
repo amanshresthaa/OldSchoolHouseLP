@@ -8,21 +8,21 @@ export const homeMenuShowcase = [
   {
     title: "Momo",
     description:
-      "Steamed dumplings with a delicate wrapper, juicy filling, and a bright chutney on the side — the plate that gets passed around once and ordered again on the next visit.",
+      "Steamed dumplings with a delicate wrapper, juicy filling, and a bright chutney on the side. They still give the menu its standout moment, even when the table first came in for lunch or a broader pub meal.",
     alt: "Steamed momo dumplings with chutney served at The Old School House in Stony Stratford.",
     ctaLabel: "Browse the menu",
   },
   {
     title: "Mixed grill",
     description:
-      "Sizzling, smoky, and made for the middle of the table, with charred edges and enough spice to keep the next round of pints moving.",
+      "Sizzling, smoky, and made for the middle of the table, with charred edges and enough spice to turn a simple lunch or evening booking into something with more range.",
     alt: "Mixed grill platter from the menu at The Old School House in Stony Stratford.",
     ctaLabel: "See menu highlights",
   },
   {
     title: "Pub classics",
     description:
-      "Pub classics keep mixed tables comfortable, while the Nepalese side of the kitchen gives the meal its talking point.",
+      "Pub classics keep mixed tables comfortable, while the wider offer now stretches from full English plates and lunch favourites to Sunday roasts and the full menu later on.",
     alt: "Pub classics served at The Old School House in Stony Stratford.",
     ctaLabel: "Book a table",
   },
@@ -30,9 +30,10 @@ export const homeMenuShowcase = [
 
 export const homeMenuSectionCopy = {
   eyebrow: "Menu highlights",
-  title: "Pub comfort and Nepalese dishes should both feel easy to order.",
+  title:
+    "From the full English to Sunday roasts, the menu should feel easy to choose.",
   description:
-    "Start with the signatures, then use the full menu to build the table around the kind of visit you want.",
+    "Come in for a full English on the lunch menu, a quick weekday bite, a Sunday roast, or a longer dinner and use the full menu to build the table around the kind of visit you want.",
   guidanceLabel: "How to order",
   primaryCtaLabel: "See full menu",
   primaryCtaHref: "/menu",
@@ -51,7 +52,7 @@ export const homeStoryFeature = {
 export const homeProofBarSectionCopy = {
   eyebrow: "At a glance",
   title:
-    "A pub visit that works for lunch, dinner, match nights, and longer stays.",
+    "A pub visit that works for a full English, lunch, dinner, Sunday plans, and longer stays.",
   description:
     "The Old School House pairs a familiar pub feel with practical reasons to choose it again, from flexible seating to a food offer that gives the table more range.",
   highlightLabel: "Capacity",
@@ -74,7 +75,7 @@ export const homeProofBarItems = [
   {
     title: "Pub classics + Nepalese kitchen",
     description:
-      "The offer is built around honest British pub comfort alongside momo, curries, and Nepalese signatures that give the table a stronger talking point.",
+      "The offer now runs from full English plates and pub classics through to momo, curries, grills, and Sunday roast, giving the table a stronger talking point at every service.",
   },
   {
     title: "Front garden, courtyard, and small car park",
@@ -158,7 +159,8 @@ export const homeEventsSectionCopy = {
 
 export const homeVisitSectionCopy = {
   eyebrow: "Visit us",
-  title: "Easy to reach for lunch, dinner, or a later round on London Road.",
+  title:
+    "Easy to reach for a full English, lunch, dinner, or a later round on London Road.",
   description:
     "A short walk from Stony Stratford High Street, open daily from 10:00 to 00:30, with straightforward parking and quick route planning when you are on the move.",
   addressLabel: "Address",
@@ -184,7 +186,7 @@ export const homeVisitSectionCopy = {
 export const homeInlineCtaCopy = {
   title: "Ready to plan the visit?",
   description:
-    "Book for dinner, Sunday lunch, or the next night you want the table sorted before you arrive.",
+    "Book for a full English, lunch, Sunday roast, or the next dinner you want sorted before you arrive.",
 }
 
 export const homeFaqSectionCopy = {

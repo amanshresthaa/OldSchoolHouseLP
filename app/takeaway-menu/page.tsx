@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { DownloadSimple, Phone } from "@phosphor-icons/react/dist/ssr"
+import { Phone } from "@phosphor-icons/react/dist/ssr"
 
 import {
   CompactHighlightGrid,
@@ -19,7 +19,7 @@ import {
   takeawayOrderSectionCopy,
   takeawaySteps,
 } from "@/data/copy"
-import { siteMenuPdfHref, sitePhone, sitePhoneHref } from "@/data/site"
+import { siteDinnerMenuPdfHref, sitePhone, sitePhoneHref } from "@/data/site"
 import { getRouteConfig } from "@/data/site-routes"
 import { buildPageMetadata } from "@/lib/metadata"
 import { getSectionBandClass } from "@/lib/section-bands"
@@ -43,9 +43,8 @@ export default function TakeawayMenuPage() {
         title={takeawayHeroCopy.title}
         description={takeawayHeroCopy.description}
         primaryAction={{
-          href: siteMenuPdfHref,
+          href: siteDinnerMenuPdfHref,
           label: takeawayHeroCopy.primaryActionLabel,
-          download: true,
         }}
         secondaryAction={{
           href: sitePhoneHref,
@@ -64,10 +63,8 @@ export default function TakeawayMenuPage() {
               <SiteActionCard
                 actions={[
                   {
-                    href: siteMenuPdfHref,
+                    href: siteDinnerMenuPdfHref,
                     label: takeawayOrderSectionCopy.pdfLabel,
-                    download: true,
-                    icon: <DownloadSimple className="size-4" />,
                   },
                   {
                     href: sitePhoneHref,

@@ -58,7 +58,7 @@ export const sundayRoastChecklist = {
   eyebrow: "Sunday roast choices",
   title: "The current Sunday offer at a glance.",
   description:
-    "Use this as the quick version before you head to the full menu or book the table.",
+    "Use this as the quick version before you head to the full menu, compare it with the lunch offer, or book the table.",
   items: [
     "Roast topside of beef — £17.49",
     "Roast loin of pork — £15.49",
@@ -92,7 +92,7 @@ export const sundayRoastFaqSection = {
     {
       question: "Can I see the wider menu as well?",
       answer:
-        "Yes. If you want to browse beyond the roast options, head to the full menu and then book once the table feels right.",
+        "Yes. If you want to browse beyond the roast options, head to the full menu where you can also compare the lunch menu and full English before you book.",
     },
   ],
 }
@@ -106,5 +106,5 @@ export const sundayRoastInlineCtaCopy = {
 export const sundayRoastSignoffCopy = {
   eyebrow: "Keep planning",
   title: "Get Sunday sorted, then see what else is on the menu.",
-  body: "Sunday lunch is one of the strongest reasons to head into town and settle in for a proper pub meal. Get the table sorted first, then browse the wider menu if you want a bit more choice around it.",
+  body: "Sunday lunch is one of the strongest reasons to head into town and settle in for a proper pub meal. Get the table sorted first, then browse the wider menu if you want to compare it with the lunch menu, the full English, or a later full-menu visit.",
 }

@@ -9,7 +9,7 @@ export const takeawayHeroCopy = {
   title: "Browse at home, order by phone, collect from the pub.",
   description:
     "Our takeaway is collection only — browse the menu, give us a ring to order, and pick it up when it is ready.",
-  primaryActionLabel: "Download PDF menu",
+  primaryActionLabel: "Download dinner PDF",
   secondaryActionLabel: "Call the pub",
 }
 
@@ -18,16 +18,16 @@ export const takeawayOrderSectionCopy = {
   title: "How takeaway collection works at our Stony Stratford pub.",
   description:
     "Browse first, call second, and use the live menu if you want the quickest route through starters, curries, grills, sides, and desserts.",
-  pdfLabel: "Download PDF",
+  pdfLabel: "Download dinner PDF",
   liveMenuLabel: "Browse live menu",
   collectionStepsLabel: "Collection steps",
 }
 
 export const takeawayCards = [
   {
-    title: "Start with the PDF, then give us a ring",
+    title: "Start with the dinner menu, then give us a ring",
     description:
-      "The PDF is handy if you are browsing from home, but a call is still the easiest way to check collection timing, ask about dishes, and see what is available that day.",
+      "The standalone dinner menu is handy if you want the full print-style layout, but a call is still the easiest way to check collection timing, ask about dishes, and see what is available that day.",
   },
   {
     title: "Prefer to browse on your phone?",
@@ -42,7 +42,7 @@ export const takeawayCards = [
 ]
 
 export const takeawaySteps = [
-  "Pick a few dishes from the PDF or the live menu.",
+  "Pick a few dishes from the dinner menu or the live menu.",
   "Call the pub to place the order and check timing.",
   "Tell us about allergies or anything you want to double-check.",
   "Collect once the team gives you a ready time.",
@@ -52,7 +52,7 @@ export const takeawayComparisonCards = [
   {
     title: "Best if you want to share the menu",
     description:
-      "The downloadable menu is useful when you want to compare a few options, sit with the choice for a bit, or send it to someone else before ordering.",
+      "The standalone dinner menu is useful when you want to compare a few options, sit with the choice for a bit, or open the full print-style layout in one place before ordering.",
   },
   {
     title: "Best if you want to browse quickly",

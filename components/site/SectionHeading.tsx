@@ -1,8 +1,7 @@
-import type { ComponentProps } from "react"
-
 import { cn } from "@/lib/utils"
 
-interface SectionHeadingProps extends ComponentProps<"div"> {
+interface SectionHeadingProps {
+  className?: string
   eyebrow?: string
   title: string
   titleId?: string
@@ -17,7 +16,6 @@ export function SectionHeading({
   titleId,
   description,
   invert = false,
-  ...props
 }: SectionHeadingProps) {
   return (
     <div
@@ -26,7 +24,6 @@ export function SectionHeading({
         invert && "text-white",
         className
       )}
-      {...props}
     >
       {eyebrow ? (
         <div className="eyebrow-row">
@@ -40,9 +37,7 @@ export function SectionHeading({
           <p
             className={cn(
               "eyebrow",
-              invert
-                ? "text-[var(--color-on-tertiary-container)]"
-                : "text-[var(--color-tertiary)]"
+              invert ? "text-white/82" : "text-[var(--color-tertiary)]"
             )}
           >
             {eyebrow}
