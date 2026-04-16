@@ -15,12 +15,7 @@ import { ArrowRight } from "@phosphor-icons/react/dist/ssr"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { footerBrandCopy } from "@/data/copy"
-import {
-  bookingHref,
-  openingHours,
-  proofPoints,
-  type ProofPoint,
-} from "@/data/site"
+import { bookingHref, proofPoints, type ProofPoint } from "@/data/site"
 import momoImage from "@/images/food/chicken-momo-and-veg-momo.png"
 import beerOnTapImage from "@/images/indoor/old-school-house-pub-stony-stratford-mk-beer-on-tap.jpeg"
 import indoorSeatingImage from "@/images/indoor/old-school-house-pub-stony-stratford-mk-indoor-seating-area-1.jpeg"
@@ -33,6 +28,8 @@ interface HeroSlide extends ProofPoint {
   image: StaticImageData
   alt: string
   eyebrow: string
+  eyebrowClassName?: string
+  eyebrowLineClassName?: string
   signals: string[]
   kenBurnsOrigin: string
 }
@@ -72,6 +69,9 @@ const heroSlides: HeroSlide[] = [
     image: indoorSeatingImage,
     alt: "Indoor seating area at The Old School House showing the room layout and pub atmosphere.",
     eyebrow: "Space for every occasion",
+    eyebrowClassName:
+      "rounded-full bg-[rgba(245,208,107,0.16)] px-3 py-1 text-[var(--color-on-tertiary-container)]",
+    eyebrowLineClassName: "bg-[var(--color-on-tertiary-container)]/60",
     signals: ["65 covers inside", "60 outside", "Lunches to group tables"],
     kenBurnsOrigin: "bottom left",
   },
@@ -141,7 +141,6 @@ const heroLayoutVars = {
   "--hero-copy-zone": "clamp(10.75rem, 25vw, 14.75rem)",
   "--hero-signals-zone": "clamp(2.75rem, 7vw, 4rem)",
   "--hero-cta-zone": "clamp(3rem, 7vw, 4.25rem)",
-  "--hero-hours-size": "clamp(0.56rem, 0.54rem + 0.1vw, 0.64rem)",
   "--hero-cta-gap": "clamp(0.25rem, 0.35vw, 0.45rem)",
   "--hero-cta-offset": "clamp(0.25rem, 0.5vw, 0.65rem)",
   "--hero-cta-height": "clamp(2.5rem, 2.2rem + 0.9vw, 3.5rem)",
@@ -170,10 +169,6 @@ const heroBodyStyle = {
 
 const heroMetaStyle = {
   maxWidth: "var(--hero-meta-width)",
-} as CSSProperties
-
-const heroHoursStyle = {
-  fontSize: "calc(var(--hero-hours-size) * var(--hero-fit-scale))",
 } as CSSProperties
 
 const heroSignalsStyle = {
@@ -244,7 +239,6 @@ function getHeroContentVars(slide: HeroSlide): CSSProperties {
   const signalPadY = 0.36 - density * 0.04
 
   const metaGap = 0.5 - density * 0.06
-  const hoursSize = 0.6 - density * 0.03
   const ctaOffset = 0.45 - density * 0.08
   const ctaGap = 0.32 - density * 0.05
   const copyZone = 15.2 - density * 1
@@ -269,7 +263,6 @@ function getHeroContentVars(slide: HeroSlide): CSSProperties {
     "--hero-signal-pad-x": `${signalPadX.toFixed(3)}rem`,
     "--hero-signal-pad-y": `${signalPadY.toFixed(3)}rem`,
     "--hero-meta-gap": `${metaGap.toFixed(3)}rem`,
-    "--hero-hours-size": `${hoursSize.toFixed(3)}rem`,
     "--hero-copy-zone": `clamp(9.75rem, 26vw, ${copyZone.toFixed(3)}rem)`,
     "--hero-signals-zone": `clamp(2.75rem, 8vw, ${signalsZone.toFixed(3)}rem)`,
     "--hero-cta-offset": `${Math.max(ctaOffset, 0.45).toFixed(3)}rem`,
@@ -577,18 +570,20 @@ export function HomeHeroSlideshow() {
               <div className="eyebrow-row justify-center">
                 <span
                   aria-hidden="true"
-                  className="eyebrow-line bg-[var(--color-on-tertiary-container)]"
+                  className={cn(
+                    "eyebrow-line bg-[var(--color-on-tertiary-container)]",
+                    activeSlide.eyebrowLineClassName
+                  )}
                 />
-                <span className="eyebrow text-[var(--color-on-tertiary-container)]">
+                <span
+                  className={cn(
+                    "eyebrow text-[var(--color-on-tertiary-container)]",
+                    activeSlide.eyebrowClassName
+                  )}
+                >
                   {activeSlide.eyebrow}
                 </span>
               </div>
-              <p
-                className="font-semibold tracking-[0.18em] text-[var(--color-on-tertiary-container)]/86 uppercase"
-                style={heroHoursStyle}
-              >
-                Hours {openingHours[0].hours}
-              </p>
             </div>
 
             <div

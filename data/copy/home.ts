@@ -162,7 +162,7 @@ export const homeVisitSectionCopy = {
   title:
     "Easy to reach for a full English, lunch, dinner, or a later round on London Road.",
   description:
-    "A short walk from Stony Stratford High Street, open daily from 10:00 to 00:30, with straightforward parking and quick route planning when you are on the move.",
+    "A short walk from Stony Stratford High Street, with midday-to-late bar hours, straightforward parking, and quick route planning when you are on the move.",
   addressLabel: "Address",
   visitSignals: [
     {

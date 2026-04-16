@@ -59,12 +59,12 @@ export const menuVenueDetails: MenuVenueDetails = {
   phone: "01908 561936",
   website: "oldschoolhousestony.co.uk",
   kitchenHours: [
-    { day: "Mon - Fri", hours: "12 pm - 3 pm / 5 pm - 10 pm" },
+    { day: "Monday - Friday", hours: "12 pm - 3 pm / 5 pm - 10 pm" },
     { day: "Saturday", hours: "12 pm - 10 pm" },
     { day: "Sunday", hours: "12 pm - 9 pm" },
   ],
   barHours: [
-    { day: "Mon - Sat", hours: "12 pm - 11 pm" },
+    { day: "Monday - Saturday", hours: "12 pm - 11 pm" },
     { day: "Sunday", hours: "12 pm - 10 pm" },
   ],
 }
@@ -757,8 +757,7 @@ export const lunchMenuSource: SourceMenuCategory[] = [
   {
     slug: "lunch-naan",
     title: "Naan",
-    intro:
-      "Core bread choices to support the smaller daytime curry selection.",
+    intro: "Core bread choices to support the smaller daytime curry selection.",
     items: [
       { name: "Plain Naan", price: "3.75", labels: ["veg"] },
       { name: "Garlic Naan", price: "4.25", labels: ["veg"] },
@@ -786,8 +785,7 @@ export const lunchMenuSource: SourceMenuCategory[] = [
   {
     slug: "lunch-kids",
     title: "Kids Menu",
-    intro:
-      "Short lunch-friendly kids choices that keep family ordering easy.",
+    intro: "Short lunch-friendly kids choices that keep family ordering easy.",
     items: [
       { name: "Nuggets", price: "7.00" },
       { name: "Scampi", price: "7.00" },

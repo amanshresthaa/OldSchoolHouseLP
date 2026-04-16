@@ -37,7 +37,9 @@ export function SectionHeading({
           <p
             className={cn(
               "eyebrow",
-              invert ? "text-white/82" : "text-[var(--color-tertiary)]"
+              invert
+                ? "text-[var(--color-on-tertiary-container)]"
+                : "text-[var(--color-tertiary)]"
             )}
           >
             {eyebrow}

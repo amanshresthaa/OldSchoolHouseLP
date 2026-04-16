@@ -62,8 +62,8 @@ describe("site data exports", () => {
     expect(siteAddress).toContain("Stony Stratford")
     expect(openingHours).toEqual([
       {
-        label: "Licensed hours",
-        hours: "10:00 - 00:30",
+        label: "Bar hours",
+        hours: "Mon - Sat 12 pm - 11 pm · Sun 12 pm - 10 pm",
       },
     ])
     expect(localBusinessSchema).toEqual(
@@ -73,12 +73,25 @@ describe("site data exports", () => {
         address: expect.objectContaining({
           postalCode: "MK11 1JA",
         }),
-        openingHoursSpecification: [
+        openingHoursSpecification: expect.arrayContaining([
           expect.objectContaining({
-            opens: "10:00",
-            closes: "00:30",
+            dayOfWeek: [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+            ],
+            opens: "12:00",
+            closes: "23:00",
           }),
-        ],
+          expect.objectContaining({
+            dayOfWeek: ["Sunday"],
+            opens: "12:00",
+            closes: "22:00",
+          }),
+        ]),
       })
     )
     expect(featureFlags.hoursConfirmed).toBe(true)

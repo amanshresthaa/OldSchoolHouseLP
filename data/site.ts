@@ -40,9 +40,11 @@ export interface GuestReview {
 interface OpeningHoursSource {
   label: string
   display: string
-  opens: string
-  closes: string
-  days: string[]
+  groups: {
+    days: string[]
+    opens: string
+    closes: string
+  }[]
   note: string
 }
 
@@ -300,7 +302,7 @@ export const organizationFactSheet: StructuredValue[] = [
   { label: "Registered venue address", value: siteAddress },
   { label: "Primary phone number", value: sitePhone },
   {
-    label: "Standard licensed opening hours",
+    label: "Bar hours",
     value: standardOpeningHours.display,
   },
 ]
@@ -544,7 +546,7 @@ export const accessibilityNotes = [
 
 export const openingHours: OpeningHoursItem[] = [
   {
-    label: "Licensed hours",
+    label: standardOpeningHours.label,
     hours: standardOpeningHours.display,
   },
 ]
@@ -566,14 +568,12 @@ const postalAddressSchema = {
   addressCountry: "GB",
 }
 
-const openingHoursSpecification = [
-  {
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: standardOpeningHours.days,
-    opens: standardOpeningHours.opens,
-    closes: standardOpeningHours.closes,
-  },
-]
+const openingHoursSpecification = standardOpeningHours.groups.map((group) => ({
+  "@type": "OpeningHoursSpecification",
+  dayOfWeek: group.days,
+  opens: group.opens,
+  closes: group.closes,
+}))
 
 export const organizationSchema = {
   "@context": "https://schema.org",
