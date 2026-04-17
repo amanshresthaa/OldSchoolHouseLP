@@ -5,13 +5,13 @@
 // ── Shared component copy ──────────────────────────────────────────────────
 
 export const footerTagline =
-  "A recently refreshed Stony Stratford pub for pints, momo, roasts, match nights, and longer stays."
+  "A recently refreshed Stony Stratford pub for pints, live sport, and longer stays."
 
 export const footerBrandCopy = {
   eyebrow: "The Old School House",
-  description: "Traditional pub and Nepalese kitchen",
-  primaryActionLabel: "Book a table",
-  secondaryActionLabel: "View menu",
+  description: "Traditional pub on London Road",
+  primaryActionLabel: "Plan a visit",
+  secondaryActionLabel: "See menu preview",
   directionsActionLabel: "Get directions",
   contactLabels: {
     hours: "Hours",
@@ -32,10 +32,18 @@ export const siteHeaderCopy = {
   closeNavigationLabel: "Close navigation menu",
 }
 
+export const siteServiceNoticeCopy = {
+  eyebrow: "Notice",
+  title: "Open for drinks only for now.",
+  description: "Food service is paused while the kitchen offer gets ready.",
+  actionLabel: "Call the pub",
+}
+
 export const inlineBookingCtaFixedCopy = {
-  eyebrow: "Book ahead",
-  primaryActionLabel: "Book a table",
-  supportingTextSuffix: "Prefer to speak first? Give the pub a ring.",
+  eyebrow: "Plan ahead",
+  primaryActionLabel: "Plan a visit",
+  supportingTextSuffix:
+    "Need the latest service update first? Give the pub a ring.",
 }
 
 export const stickyBookingBarCopy = {

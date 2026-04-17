@@ -159,7 +159,7 @@ export const sanjogGautamPageUrl = `${siteUrl}${sanjogGautamPagePath}`
 export const sanjogGautamId = `${sanjogGautamPageUrl}#person`
 
 export const siteDescription =
-  "A recently refurbished traditional pub on London Road in Stony Stratford with a Nepalese kitchen, live sport, private hire, and room to book inside and out."
+  "A recently refurbished traditional pub on London Road in Stony Stratford with live sport, outdoor space, and a Nepalese kitchen menu due to return soon."
 
 export const heroSignals = [
   "Traditional pub on London Road",
@@ -169,9 +169,10 @@ export const heroSignals = [
 
 export const proofPoints: ProofPoint[] = [
   {
-    title: "Traditional pub warmth with a standout Nepalese kitchen",
+    title:
+      "Traditional pub warmth with drinks ready and the kitchen still to come",
     description:
-      "The Old School House stands out on London Road with the look and feel of a proper local, then gives the visit more identity once the Nepalese kitchen comes into play.",
+      "The Old School House stands out on London Road with the look and feel of a proper local, serving drinks now while the Nepalese kitchen offer gets ready behind the scenes.",
   },
   {
     title: "Recently invested in, inside and out",
@@ -181,12 +182,12 @@ export const proofPoints: ProofPoint[] = [
   {
     title: "125 covers across the pub, front garden, and courtyard",
     description:
-      "With 65 covers inside and 60 outside, the venue can handle everyday meals, larger tables, sport-led nights, and longer stays with ease.",
+      "With 65 covers inside and 60 outside, the venue can handle everyday drinks, larger tables, sport-led nights, and longer stays with ease.",
   },
   {
     title: "Front garden, private courtyard, and small car park",
     description:
-      "Outdoor drinks and dining have more than one setting here, and the arrival side stays easier thanks to the small car park and visible roadside plot.",
+      "Outdoor drinks have more than one setting here, and the arrival side stays easier thanks to the small car park and visible roadside plot.",
   },
   {
     title: "Sky Sports, TNT Sports, and local reasons to return",
@@ -204,7 +205,7 @@ export const homeReasons: HighlightItem[] = [
   {
     title: "Keep the local alive",
     description:
-      "The offer is built around the rituals that make a proper local matter: sport, quiz-led nights, community gatherings, and a room that still works for a casual pint as well as dinner.",
+      "The offer is built around the rituals that make a proper local matter: sport, quiz-led nights, community gatherings, and a room that still works for a casual pint and a longer catch-up.",
   },
   {
     title: "Nepalese hospitality in a pub setting",
@@ -217,9 +218,9 @@ export const homeReasons: HighlightItem[] = [
       "The venue is designed to work for daytime regulars, families, sports teams, relaxed dinners, and mixed groups who want value, comfort, and room to settle in.",
   },
   {
-    title: "Honest plates and pints",
+    title: "Pints now, food menu to follow",
     description:
-      "Pub classics, Sunday roasts, momo, curries, and grills give tables a clear choice between familiar comfort and Nepalese signatures without compromising on quality or value.",
+      "The drinks offer is ready now, and the planned food menu still stretches from pub classics and Sunday roasts to momo, curries, and grills once service returns.",
   },
 ]
 

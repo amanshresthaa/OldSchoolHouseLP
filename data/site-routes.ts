@@ -20,17 +20,17 @@ export const routeConfigs: RouteConfig[] = [
     meta: {
       title: "Pub in Stony Stratford with Nepalese Kitchen",
       description:
-        "Visit a recently refurbished traditional pub on London Road in Stony Stratford with a Nepalese kitchen, full English lunch plates, Sunday roast, live sport, outdoor seating, and easy table booking.",
+        "Visit a recently refurbished traditional pub on London Road in Stony Stratford with drinks, live sport, outdoor seating, and a Nepalese kitchen menu planned to return soon.",
       canonical: "/",
     },
     hero: {
       eyebrow: siteName,
       title:
-        "A traditional pub in Stony Stratford with a Nepalese kitchen worth discovering.",
+        "A traditional pub in Stony Stratford that is open for drinks only for now.",
       description:
-        "Come for the familiar pub comfort, stay for the full English, momo, curries, roasts, and the kind of welcome that makes a second visit easy.",
-      primaryAction: { href: bookOnlineHref, label: "Book a table" },
-      secondaryAction: { href: "/our-menus", label: "View menu" },
+        "Come for the familiar pub comfort, stay for the pints, live sport, and warm local atmosphere, then keep an eye on the kitchen menu preview for what is coming back soon.",
+      primaryAction: { href: bookOnlineHref, label: "Plan a visit" },
+      secondaryAction: { href: "/our-menus", label: "See menu preview" },
     },
     schema: { localBusiness: true, faq: true },
     stickySecondaryAction: { href: "/our-menus", label: "Menu" },
@@ -89,15 +89,15 @@ export const routeConfigs: RouteConfig[] = [
     meta: {
       title: "Stony Stratford Pub Menu and Nepalese Food",
       description:
-        "Browse the live pub menu for the full English, lunch menu favourites, Nepalese dishes, pub classics, Sunday roast, desserts, sides, and drinks at The Old School House in Stony Stratford.",
+        "Preview the planned pub and Nepalese food menu at The Old School House in Stony Stratford while the pub is serving drinks only for now.",
       canonical: "/our-menus",
     },
     hero: {
       eyebrow: "Food and drink",
-      title: "Pub favourites and Nepalese dishes on one menu.",
+      title: "A preview of the food menu while we serve drinks only for now.",
       description:
-        "Browse the live menu for the full English, lunch menu, Sunday roast, and the wider evening offer, then book when you are ready to turn a look into a table.",
-      primaryAction: { href: bookOnlineHref, label: "Book a table" },
+        "Browse the dishes planned for the full kitchen offer, from pub favourites to Nepalese signatures, and call the pub if you want the latest service update before you come over.",
+      primaryAction: { href: bookOnlineHref, label: "Plan a visit" },
       secondaryAction: { href: sitePhoneHref, label: "Call 01908 561936" },
     },
     schema: { menu: true, localBusiness: true },
@@ -113,15 +113,15 @@ export const routeConfigs: RouteConfig[] = [
     meta: {
       title: "Book a Table at Our Stony Stratford Pub",
       description:
-        "Book a table at The Old School House for a full English, lunch, Nepalese food, Sunday roast, and group dining in Stony Stratford.",
+        "Plan a visit to The Old School House in Stony Stratford and contact the pub for the latest drinks-only service update.",
       canonical: "/book",
     },
     hero: {
-      eyebrow: "Book a table",
-      title: "Book a table for a proper pub visit on London Road.",
+      eyebrow: "Plan your visit",
+      title: "Planning to head over while we are serving drinks only for now?",
       description:
-        "Use the online booking route first for a full English, lunch, dinner, or Sunday roast, then call or email us if you are planning something more specific.",
-      primaryAction: { href: bookingHref, label: "Book online" },
+        "Use the call or online route that suits your plans best, and check with the pub directly first if the current service matters to your visit.",
+      primaryAction: { href: bookingHref, label: "Plan online" },
       secondaryAction: { href: sitePhoneHref, label: "Call the pub" },
     },
     schema: { localBusiness: true, faq: true },

@@ -124,28 +124,28 @@ export default function MenuPage() {
                 <p className="eyebrow text-[var(--color-tertiary)]">Service</p>
               </div>
               <p className="max-w-2xl text-sm leading-7 text-on-surface md:text-base">
-                Switch between the lunch menu and the full evening menu below.
-                The lunch side includes the full English, Sunday roast stays
-                clearly signposted, and each version still has its own PDF.
+                We are serving drinks only for now. Use the lunch and evening
+                menus below as a preview of the dishes planned for the fuller
+                kitchen offer once food service returns.
               </p>
               <div className="flex flex-wrap gap-2.5">
                 <Badge
                   variant="pill"
                   className="border-[rgba(196,189,181,0.28)] bg-[var(--color-surface-lowest)] px-3 py-1 text-[0.72rem] tracking-[0.12em] text-secondary uppercase"
                 >
-                  Full English: {lunchMenuService.lunchHours}
+                  Drinks only for now
                 </Badge>
                 <Badge
                   variant="pill"
                   className="border-[rgba(196,189,181,0.28)] bg-[var(--color-surface-lowest)] px-3 py-1 text-[0.72rem] tracking-[0.12em] text-secondary uppercase"
                 >
-                  Lunch: {lunchMenuService.lunchHours}
+                  Menu preview available
                 </Badge>
                 <Badge
                   variant="pill"
                   className="border-[rgba(196,189,181,0.28)] bg-[var(--color-surface-lowest)] px-3 py-1 text-[0.72rem] tracking-[0.12em] text-secondary uppercase"
                 >
-                  Sunday roast: {lunchMenuService.sundayRoastHours}
+                  Call for the latest update
                 </Badge>
               </div>
               <div className="flex flex-wrap gap-2">
@@ -191,9 +191,9 @@ export default function MenuPage() {
                   kind: "dinner",
                   label: "Dinner",
                   shortLabel: "Dinner",
-                  serviceLine: "5 pm onwards",
+                  serviceLine: "Preview menu",
                   summary:
-                    "The full evening menu with starters, grills, curries, pub classics, sides, and desserts.",
+                    "A preview of the full evening menu, including starters, grills, curries, pub classics, sides, and desserts.",
                   renderedHint: "",
                   renderedCategories: dinnerMenuCategories,
                   pdfHref: siteDinnerMenuPdfHref,
@@ -202,9 +202,9 @@ export default function MenuPage() {
                   kind: "lunch",
                   label: "Lunch",
                   shortLabel: "Lunch",
-                  serviceLine: lunchMenuService.lunchHours,
+                  serviceLine: "Preview menu",
                   summary:
-                    "Full English, grills, wraps, curries, pub classics, baguettes, jackets, and Sunday roast.",
+                    "A preview of the lunch-side offer, including full English plates, grills, wraps, curries, pub classics, and Sunday roast.",
                   renderedHint: "",
                   renderedCategories: lunchMenuCategories,
                   pdfHref: siteLunchMenuPdfHref,

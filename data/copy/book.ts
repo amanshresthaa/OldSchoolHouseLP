@@ -5,25 +5,25 @@
 // ── Book page ──────────────────────────────────────────────────────────────
 
 export const bookOnlineSectionCopy = {
-  eyebrow: "Book online",
-  title: "The fastest way to book is the online booking link.",
+  eyebrow: "Plan ahead",
+  title: "Check the current service picture first, then plan the visit.",
   description:
-    "If you are booking a standard table, start online first. Use the phone or email if your plans need more context than a simple table reservation. If the pub is full when you look, call us to check for later availability or move to the full menu, Sunday roast, and private hire pages for another way to plan the visit.",
+    "The pub is open for drinks only for now. Use the phone or email first if the current service matters to your plans, and use the online route when you still want to get the visit moving.",
 }
 
 export const bookActionCardCopy = {
   phoneLabelPrefix: "Call",
   emailLabelPrefix: "Email",
   supportingTextSuffix:
-    "If your booking depends on a specific service time, please contact the pub directly.",
+    "If your visit depends on the current service update, please contact the pub directly.",
 }
 
 export const bookReserveCardCopy = {
-  eyebrow: "Reserve your table",
+  eyebrow: "Plan the visit",
   description:
-    "Online booking is still the fastest route for planned meals, while the call and email options stay visible when your booking needs a real person to sanity-check the timing.",
-  primaryActionLabel: "Book online",
-  secondaryActionLabel: "View menu first",
+    "The online route is still there for planned visits, while the call and email options stay visible when you want a real person to confirm the latest drinks-only position first.",
+  primaryActionLabel: "Plan online",
+  secondaryActionLabel: "See menu preview",
 }
 
 export const bookBookingSteps = [
@@ -39,17 +39,17 @@ export const bookBookingSteps = [
 ]
 
 export const bookBeforeSection = {
-  eyebrow: "Before you book",
+  eyebrow: "Before you visit",
   title:
-    "The pub, the service, and the menu should all feel clear before you commit.",
+    "The pub, the current service, and the route over should all feel clear before you commit.",
   description:
-    "A fast decision is easier when the site explains whether you are coming for a full English, lunch, Sunday roast, or the wider full menu, and where you are going.",
+    "A fast decision is easier when you know the pub is serving drinks only for now, where you are heading, and what is planned for the fuller menu later on.",
 }
 
 export const bookSundayCard = {
-  title: "Booking for Sunday?",
+  title: "Waiting on the food return?",
   description:
-    "Start with the Sunday roast page if the weekend visit is the main plan, then use the full menu if the table wants more than the roast alone.",
+    "Use the menu preview if you want a feel for the dishes planned to return once the kitchen is back on.",
 }
 
 export const bookPrivateHireCard = {
@@ -66,15 +66,15 @@ export const bookFindUsCard = {
 
 export const bookFaqSectionCopy = {
   eyebrow: "Booking help",
-  title: "A few things you usually want to know before you reserve.",
+  title: "A few things you usually want to know before you plan the visit.",
   description:
-    "Keep the booking journey simple, then use a quick call for anything that needs confirming on the day.",
+    "Keep the planning simple, then use a quick call for anything that needs confirming on the day.",
 }
 
 export const bookSignoffCopy = {
   eyebrow: "Next step",
-  title: "Book first, then let the menu do the persuading.",
-  body: "The Old School House works best when the table is sorted and you already know whether the visit is about a full English, lunch, Sunday roast, or a longer full-menu meal.",
-  primaryActionLabel: "Book online",
-  secondaryActionLabel: "View menu",
+  title: "Sort the visit first, then keep an eye on the food menu returning.",
+  body: "The Old School House is serving drinks only for now, so the easiest plan is to check the latest update first and then decide whether you want to head over straight away.",
+  primaryActionLabel: "Plan online",
+  secondaryActionLabel: "See menu preview",
 }

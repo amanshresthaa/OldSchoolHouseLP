@@ -2,7 +2,6 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import {
   ArrowRight,
-  CalendarDots,
   EnvelopeSimple,
   Phone,
   UsersThree,
@@ -136,14 +135,14 @@ export default function BookPage() {
           </ScrollReveal>
           <ScrollReveal delayMs={120} className="grid gap-4 md:grid-cols-3">
             <Link
-              href="/sunday-lunch"
+              href="/our-menus"
               className="surface-frame block h-full rounded-2xl py-0 transition hover:-translate-y-0.5"
             >
               <EditorialLinkCardContent
                 title={bookSundayCard.title}
                 description={bookSundayCard.description}
                 className="surface-pane"
-                icon={<CalendarDots className="size-5" />}
+                icon={<ArrowRight className="size-5" />}
               />
             </Link>
             <Link

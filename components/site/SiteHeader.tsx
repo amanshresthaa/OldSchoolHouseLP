@@ -8,13 +8,14 @@ import { List, X } from "@phosphor-icons/react"
 
 import logo from "@/images/logos/old-school-house-pub-stony-stratford-mk-logo.png"
 import { Button } from "@/components/ui/button"
-import { siteHeaderCopy } from "@/data/copy"
+import { siteHeaderCopy, siteServiceNoticeCopy } from "@/data/copy"
 import {
   bookOnlineHref,
   bookingHref,
   siteDescriptor,
   siteLocation,
   siteName,
+  sitePhoneHref,
   type NavItem,
 } from "@/data/site"
 import { siteNav } from "@/data/site-routes"
@@ -140,6 +141,41 @@ export function SiteHeader() {
         className="sticky top-0 z-40 bg-background/85 backdrop-blur-xl"
         style={{ paddingTop: "env(safe-area-inset-top)" }}
       >
+        <aside className="border-b border-[rgba(175,43,62,0.16)] bg-[linear-gradient(180deg,rgba(246,242,237,0.98),rgba(238,231,223,0.94))]">
+          <div
+            className="mx-auto max-w-7xl px-5 py-2 sm:px-6 md:px-8"
+            style={{
+              paddingLeft:
+                "max(1.25rem, calc(env(safe-area-inset-left) + 0.75rem))",
+              paddingRight:
+                "max(1.25rem, calc(env(safe-area-inset-right) + 0.75rem))",
+            }}
+          >
+            <div className="flex flex-col gap-1.5 md:flex-row md:items-center md:justify-between md:gap-4">
+              <div className="flex min-w-0 flex-wrap items-center gap-x-3 gap-y-1">
+                <span className="inline-flex rounded-full bg-secondary px-2.5 py-1 text-[0.62rem] font-semibold tracking-[0.18em] text-white uppercase">
+                  {siteServiceNoticeCopy.eyebrow}
+                </span>
+                <p className="text-sm leading-6 text-on-background">
+                  <span className="font-semibold">
+                    {siteServiceNoticeCopy.title}
+                  </span>{" "}
+                  <span className="text-on-surface">
+                    {siteServiceNoticeCopy.description}
+                  </span>
+                </p>
+              </div>
+              <div className="shrink-0">
+                <a
+                  href={sitePhoneHref}
+                  className="inline-flex items-center justify-center text-sm font-semibold text-secondary underline decoration-secondary/45 underline-offset-4 transition hover:text-primary"
+                >
+                  {siteServiceNoticeCopy.actionLabel}
+                </a>
+              </div>
+            </div>
+          </div>
+        </aside>
         <div
           className="mx-auto max-w-7xl px-5 py-3 sm:px-6 md:px-8"
           style={{

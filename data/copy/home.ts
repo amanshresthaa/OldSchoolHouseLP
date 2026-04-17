@@ -8,53 +8,53 @@ export const homeMenuShowcase = [
   {
     title: "Momo",
     description:
-      "Steamed dumplings with a delicate wrapper, juicy filling, and a bright chutney on the side. They still give the menu its standout moment, even when the table first came in for lunch or a broader pub meal.",
+      "One of the signature dishes planned for the full kitchen offer, with steamed dumplings, juicy filling, and bright chutney that should still give the menu a standout moment once food service returns.",
     alt: "Steamed momo dumplings with chutney served at The Old School House in Stony Stratford.",
-    ctaLabel: "Browse the menu",
+    ctaLabel: "See menu preview",
   },
   {
     title: "Mixed grill",
     description:
-      "Sizzling, smoky, and made for the middle of the table, with charred edges and enough spice to turn a simple lunch or evening booking into something with more range.",
+      "A big-sharing favourite lined up for the kitchen menu, built around smoky char, sizzling plates, and the sort of centre-table order that gives the visit more range.",
     alt: "Mixed grill platter from the menu at The Old School House in Stony Stratford.",
-    ctaLabel: "See menu highlights",
+    ctaLabel: "Preview what is coming",
   },
   {
     title: "Pub classics",
     description:
-      "Pub classics keep mixed tables comfortable, while the wider offer now stretches from full English plates and lunch favourites to Sunday roasts and the full menu later on.",
+      "The wider food plan still runs from pub classics to Nepalese dishes, so you can get a feel for what is coming back once the kitchen is serving again.",
     alt: "Pub classics served at The Old School House in Stony Stratford.",
-    ctaLabel: "Book a table",
+    ctaLabel: "Plan a return visit",
   },
 ]
 
 export const homeMenuSectionCopy = {
-  eyebrow: "Menu highlights",
+  eyebrow: "Food menu preview",
   title:
-    "From the full English to Sunday roasts, the menu should feel easy to choose.",
+    "We are serving drinks only for now while the kitchen menu gets ready.",
   description:
-    "Come in for a full English on the lunch menu, a quick weekday bite, a Sunday roast, or a longer dinner and use the full menu to build the table around the kind of visit you want.",
+    "Use this preview to get a feel for the pub classics, Nepalese favourites, and house dishes planned for the full menu once food service returns.",
   guidanceLabel: "How to order",
-  primaryCtaLabel: "See full menu",
+  primaryCtaLabel: "See menu preview",
   primaryCtaHref: "/our-menus",
-  secondaryCtaLabel: "Book a table",
-  secondaryCtaHref: "/book",
+  secondaryCtaLabel: "Plan your visit",
+  secondaryCtaHref: "/contact-us",
 }
 
 export const homeStoryFeature = {
   eyebrow: "Why choose us",
   title: "Traditional pub first. Nepalese kitchen as the standout difference.",
   description:
-    "You can settle into a proper pub straight away, then discover the Nepalese kitchen once the first drinks are on the table and the team starts guiding the order.",
+    "You can settle into a proper pub straight away for a round, live sport, and a warm local atmosphere, with the Nepalese kitchen still the standout difference that is set to return soon.",
   alt: "Pints being poured at the bar inside The Old School House pub in Stony Stratford.",
 }
 
 export const homeProofBarSectionCopy = {
   eyebrow: "At a glance",
   title:
-    "A pub visit that works for a full English, lunch, dinner, Sunday plans, and longer stays.",
+    "A pub visit that already works for drinks, match days, and longer stays.",
   description:
-    "The Old School House pairs a familiar pub feel with practical reasons to choose it again, from flexible seating to a food offer that gives the table more range.",
+    "The Old School House pairs a familiar pub feel with practical reasons to choose it right now, from flexible seating to outdoor space and a full food offer still to come.",
   highlightLabel: "Capacity",
   highlightValue: "125 covers",
   highlightNote:
@@ -70,12 +70,12 @@ export const homeProofBarItems = [
   {
     title: "125 covers in total",
     description:
-      "With 65 covers inside and 60 outside, the venue works for quieter meals, bigger tables, and sport-led nights that roll into dinner.",
+      "With 65 covers inside and 60 outside, the venue works for quieter drinks, bigger tables, and sport-led nights that can roll on comfortably.",
   },
   {
-    title: "Pub classics + Nepalese kitchen",
+    title: "Food menu returning soon",
     description:
-      "The offer now runs from full English plates and pub classics through to momo, curries, grills, and Sunday roast, giving the table a stronger talking point at every service.",
+      "The planned offer still runs from pub classics through to momo, curries, grills, and Sunday roast, giving people plenty to look forward to once the kitchen is back on.",
   },
   {
     title: "Front garden, courtyard, and small car park",
@@ -99,11 +99,11 @@ export const homeReasonsSectionCopy = {
   title:
     "A proper pub atmosphere first, then food that gives the table a reason to come back.",
   description:
-    "The room feels familiar from the first drink, while the food gives the visit more identity than the average pub stop.",
+    "The room already feels familiar from the first drink, and the food offer is set up to give the visit even more identity once service returns.",
   primaryCtaLabel: "Browse the menu",
   primaryCtaHref: "/our-menus",
-  secondaryCtaLabel: "Book a table",
-  secondaryCtaHref: "/book",
+  secondaryCtaLabel: "Plan a visit",
+  secondaryCtaHref: "/contact-us",
 }
 
 export const homeAtmosphereTiles = [
@@ -118,7 +118,8 @@ export const homeAtmosphereTiles = [
     href: "/beer-garden-stony-stratford",
     eyebrow: "Outdoor spaces",
     title: "Front garden and courtyard",
-    description: "Explore the outside seating for drinks and dining.",
+    description:
+      "Explore the outside seating for pints, catch-ups, and sunny rounds.",
     alt: "Exterior of The Old School House pub on London Road in Stony Stratford.",
   },
   {
@@ -160,7 +161,7 @@ export const homeEventsSectionCopy = {
 export const homeVisitSectionCopy = {
   eyebrow: "Visit us",
   title:
-    "Easy to reach for a full English, lunch, dinner, or a later round on London Road.",
+    "Easy to reach for an after-work pint, a match-day round, or a later catch-up on London Road.",
   description:
     "A short walk from Stony Stratford High Street, with midday-to-late bar hours, straightforward parking, and quick route planning when you are on the move.",
   addressLabel: "Address",
@@ -184,14 +185,14 @@ export const homeVisitSectionCopy = {
 }
 
 export const homeInlineCtaCopy = {
-  title: "Ready to plan the visit?",
+  title: "Ready for a round?",
   description:
-    "Book for a full English, lunch, Sunday roast, or the next dinner you want sorted before you arrive.",
+    "Head over for drinks now, then keep an eye out for the full kitchen offer returning soon.",
 }
 
 export const homeFaqSectionCopy = {
   eyebrow: "Before you visit",
-  title: "A few quick answers before you book or head over.",
+  title: "A few quick answers before you head over.",
   description:
-    "The quick questions you usually want settled before booking, calling, or making your way over.",
+    "The quick questions you usually want settled before calling, dropping in, or making your way over.",
 }
