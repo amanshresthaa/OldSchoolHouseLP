@@ -283,7 +283,7 @@ export function GrandOpeningPoster({
             <div className="flex flex-col gap-[1px] text-right sm:gap-0.5">
               <span className="flex items-center justify-end gap-0.5 sm:gap-1">
                 <Phone className="h-2 w-2 text-[#af2b3e] sm:h-2.5 sm:w-2.5" />
-                +44 1908 561936
+                +44 7588 864819
               </span>
               <span className="flex items-center justify-end gap-0.5 sm:gap-1">
                 <Globe className="h-2 w-2 text-[#af2b3e] sm:h-2.5 sm:w-2.5" />

@@ -46,7 +46,7 @@ export const openingPosterCopy: OpeningPosterCopy = {
   ctaLabel: "Book Your Table Now",
   closing: "– San & Lapen Inns team",
   signature: "The Old School House, London Rd, Stony Stratford",
-  phone: "+44 1908 561936",
+  phone: "+44 7588 864819",
   websiteHref: "https://www.oldschoolhousestony.co.uk/",
   websiteLabel: "oldschoolhousestony.co.uk",
   addressShort: "London Rd, Stony Stratford",

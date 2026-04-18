@@ -98,7 +98,7 @@ export const routeConfigs: RouteConfig[] = [
       description:
         "Browse the dishes planned for the full kitchen offer, from pub favourites to Nepalese signatures, and call the pub if you want the latest service update before you come over.",
       primaryAction: { href: bookOnlineHref, label: "Plan a visit" },
-      secondaryAction: { href: sitePhoneHref, label: "Call 01908 561936" },
+      secondaryAction: { href: sitePhoneHref, label: "Call 07588 864819" },
     },
     schema: { menu: true, localBusiness: true },
     stickySecondaryAction: { href: sitePhoneHref, label: "Call" },

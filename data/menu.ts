@@ -56,7 +56,7 @@ export const menuVenueDetails: MenuVenueDetails = {
     "Please see our drinks menu for exclusive drinks, seasonal pours, and bar specials.",
   socialHandle: "@oldschoolhousestony",
   address: "London Rd, Stony Stratford, Milton Keynes MK11 1JA",
-  phone: "01908 561936",
+  phone: "07588 864819",
   website: "oldschoolhousestony.co.uk",
   kitchenHours: [
     { day: "Monday - Friday", hours: "12 pm - 3 pm / 5 pm - 10 pm" },
