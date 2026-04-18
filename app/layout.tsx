@@ -7,6 +7,7 @@ import { CookieBanner } from "@/components/site/CookieBanner"
 import { SiteFooter } from "@/components/site/SiteFooter"
 import { SiteHeader } from "@/components/site/SiteHeader"
 import { StickyBookingBar } from "@/components/site/StickyBookingBar"
+import { WebMcpProvider } from "@/components/site/WebMcpProvider"
 import { ThemeProvider } from "@/components/theme-provider"
 import {
   siteDescription,
@@ -142,6 +143,7 @@ export default function RootLayout({
         />
         <ThemeProvider>
           <div className="relative min-h-svh pb-28 md:pb-0">
+            <WebMcpProvider />
             <SiteHeader />
             {children}
             <SiteFooter />
